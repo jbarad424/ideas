@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CB IP Monitor — How We Built an AI Patent Watchdog</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060b14;--surface:#0d1424;--surface2:#131d30;--border:#1a2744;
+  --text:#e2e8f0;--dim:#7a8ba8;--accent:#f97316;--accent2:#fb923c;
+  --blue:#3b82f6;--green:#22c55e;--red:#ef4444;
+}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(6,11,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 24px}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.nav-links{display:flex;gap:20px}
+.nav-links a{font-size:13px;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.back-link{font-size:13px;color:var(--dim);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.back-link:hover{color:var(--accent)}
+
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+
+/* HERO */
+.hero{padding:80px 0 60px;position:relative}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border:1px solid var(--border);border-radius:100px;font-size:12px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:28px;font-family:'JetBrains Mono',monospace}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:800;line-height:1.08;margin-bottom:20px;letter-spacing:-.02em}
+h1 .hl{background:linear-gradient(135deg,var(--accent),#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--dim);font-size:1.1rem;font-weight:300;line-height:1.7;max-width:680px;margin-bottom:48px}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:16px;overflow:hidden;margin-bottom:56px}
+.stat-card{background:var(--surface);padding:28px 20px;text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-size:.78rem;color:var(--dim);margin-top:8px;font-weight:400}
+
+/* QUOTE */
+.quote-block{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:64px;position:relative}
+.quote-block::before{content:'\201C';position:absolute;top:16px;left:24px;font-size:4rem;color:var(--accent);opacity:.2;line-height:1;font-family:Georgia,serif}
+.quote-text{font-size:1rem;color:var(--dim);line-height:1.8;padding-left:24px;font-style:italic}
+.quote-text strong{color:var(--text);font-style:normal}
+.quote-attr{margin-top:16px;padding-left:24px;font-size:.85rem;font-weight:600;color:var(--text)}
+.quote-attr span{color:var(--dim);font-weight:400}
+
+/* SECTIONS */
+.section{margin-bottom:72px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+h2{font-size:clamp(1.6rem,3vw,2rem);font-weight:700;line-height:1.15;margin-bottom:20px;letter-spacing:-.01em}
+.section-desc{color:var(--dim);font-size:.95rem;line-height:1.8;max-width:680px;margin-bottom:32px}
+
+/* STEP CARDS */
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:640px){.steps{grid-template-columns:1fr}}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 24px;transition:all .25s}
+.step:hover{border-color:rgba(249,115,22,.25);transform:translateY(-2px)}
+.step-icon{font-size:1.6rem;margin-bottom:12px}
+.step h4{font-size:1rem;font-weight:600;margin-bottom:8px}
+.step p{font-size:.85rem;color:var(--dim);line-height:1.6}
+.step-metric{display:inline-block;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--green);background:rgba(34,197,94,.1);padding:3px 10px;border-radius:20px}
+
+/* FEATURE CARDS */
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:640px){.features{grid-template-columns:1fr}}
+.feature{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px}
+.feature-icon{font-size:1.4rem;margin-bottom:10px}
+.feature h4{font-size:.95rem;font-weight:600;margin-bottom:8px}
+.feature p{font-size:.83rem;color:var(--dim);line-height:1.6}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;margin:24px 0;border-radius:12px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{background:var(--surface2);padding:12px 16px;text-align:left;font-weight:600;color:var(--dim);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+td{padding:12px 16px;border-bottom:1px solid rgba(26,39,68,.5)}
+tr:last-child td{border-bottom:none}
+td:first-child{color:var(--dim);font-weight:500}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:28px}
+.tl-item::before{content:'';position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--surface2);border:2px solid var(--accent);z-index:1}
+.tl-item.milestone::before{background:var(--accent)}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);margin-bottom:4px}
+.tl-item p{font-size:.9rem;color:var(--dim);line-height:1.6}
+.tl-item p strong{color:var(--text)}
+
+/* COST CARDS */
+.cost-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:16px;overflow:hidden}
+@media(max-width:640px){.cost-grid{grid-template-columns:repeat(2,1fr)}}
+.cost-card{background:var(--surface);padding:28px 16px;text-align:center}
+.cost-num{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--green)}
+.cost-label{font-size:.78rem;color:var(--dim);margin-top:6px}
+
+/* STACK PILLS */
+.stack-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:.82rem;font-weight:500;color:var(--text)}
+
+/* SERVICE */
+.service-callout{background:linear-gradient(135deg,var(--surface),rgba(249,115,22,.05));border:1px solid rgba(249,115,22,.2);border-radius:16px;padding:40px 32px;margin:32px 0}
+.service-callout h3{font-size:1.3rem;font-weight:700;margin-bottom:12px}
+.service-callout p{color:var(--dim);font-size:.92rem;line-height:1.7}
+
+/* FOOTER */
+.footer{text-align:center;padding:48px 0;border-top:1px solid var(--border);margin-top:80px}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.footer p{font-size:.82rem;color:var(--dim)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+<div class="nav-inner">
+<a href="index.html" class="back-link">&larr; Ideas Lab</a>
+<div class="nav-links">
+<a href="#problem">Problem</a>
+<a href="#solution">How It Works</a>
+<a href="#features">Features</a>
+<a href="#build">Build Log</a>
+<a href="#cost">Cost</a>
+<a href="#stack">Stack</a>
+<a href="#service">Service</a>
+</div>
+</div>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+<div class="hero-tag">CB IP Monitor</div>
+<h1>We Built an AI <span class="hl">Patent Watchdog</span></h1>
+<p class="hero-sub">An automated system that scans Amazon every day for products infringing our patents, analyzes product images with AI, and delivers actionable reports so we can file complaints in seconds.</p>
+
+<div class="stats-row">
+<div class="stat-card"><div class="stat-num">170+</div><div class="stat-label">Listings Scanned Daily</div></div>
+<div class="stat-card"><div class="stat-num">2</div><div class="stat-label">Patents Protected</div></div>
+<div class="stat-card"><div class="stat-num">&lt;2min</div><div class="stat-label">Full Scan Time</div></div>
+<div class="stat-card"><div class="stat-num">~$2</div><div class="stat-label">Per Month to Run</div></div>
+</div>
+
+<div class="quote-block">
+<div class="quote-text">We started Chubby Buttons about eight years ago, went on Shark Tank (Season 14), and sell on Amazon and Shopify. We invested in a patent portfolio early on, which was one of the best decisions we made, because people started copying us almost immediately. We've filed dozens of complaints by hand over the years, but knockoffs kept popping up faster than we could find them.<br><br>I'm not a developer, but I've gotten good at using Claude (Anthropic's AI) and I knew exactly what I wanted. <strong>Two weeks and about $200 later, I had a system that scans Amazon every day, analyzes product photos with AI, and lets me file a complaint in 10 seconds.</strong></div>
+<div class="quote-attr">Justin Barad <span>/ Co-Founder, Chubby Buttons</span></div>
+</div>
+</div>
+
+<!-- PROBLEM -->
+<div class="section" id="problem">
+<div class="section-label">The Problem</div>
+<h2>We Were Doing This by Hand</h2>
+<p class="section-desc">We've filed dozens of infringement complaints through Amazon by hand over the years. Each one meant searching Amazon, scrolling through hundreds of results, eyeballing each listing, and filling out complaint forms. It took 15 to 30 minutes per complaint, and we were still missing knockoffs that popped up between searches.</p>
+<p class="section-desc">Some sellers started putting "NOT Wearable" in their titles to avoid showing up in our searches, even though their product clearly fits on a wrist. We needed something that checks every day and can't be tricked by a misleading title.</p>
+</div>
+
+<!-- SOLUTION -->
+<div class="section" id="solution">
+<div class="section-label">The Solution</div>
+<h2>A Daily AI Scan That Runs Itself</h2>
+<p class="section-desc">Every morning, automatically, no one has to touch anything:</p>
+
+<div class="steps">
+<div class="step">
+<div class="step-icon">&#x1F50D;</div>
+<h4>Search Amazon's Entire Catalog</h4>
+<p>16 keyword searches across both patents. Handles pagination, rate limiting, and remembers everything it's already seen.</p>
+<div class="step-metric">170+ listings found per scan</div>
+</div>
+<div class="step">
+<div class="step-icon">&#x26A1;</div>
+<h4>AI Quick Screen</h4>
+<p>Claude screens every listing by title and metadata alone, filtering out obvious non-infringers like TV remotes, smartwatches, and speakers. This narrows 170+ listings down to roughly 5 candidates worth a closer look.</p>
+<div class="step-metric">170 &rarr; ~5 shortlisted</div>
+</div>
+<div class="step">
+<div class="step-icon">&#x1F441;</div>
+<h4>AI Image Analysis</h4>
+<p>Only shortlisted candidates move to vision analysis. Claude examines actual product photos against our patented features: button layout, form factor, mounting mechanism, and wearability. Each product gets a risk level with written reasoning.</p>
+<div class="step-metric">Vision AI on real product photos</div>
+</div>
+<div class="step">
+<div class="step-icon">&#x1F4E7;</div>
+<h4>Email Report + One-Click Filing</h4>
+<p>Every HIGH and MEDIUM result is logged to Notion for tracking. A formatted email report follows with product images, the AI's reasoning, and a direct link to Amazon Brand Registry with patent details pre-filled.</p>
+<div class="step-metric">10 seconds to file a complaint</div>
+</div>
+</div>
+</div>
+
+<!-- FEATURES -->
+<div class="section" id="features">
+<div class="section-label">The Smart Part</div>
+<h2>It Gets Better the More We Use It</h2>
+
+<div class="features">
+<div class="feature">
+<div class="feature-icon">&#x1F9E0;</div>
+<h4>Learns From Our Reviews</h4>
+<p>When we mark a missed product as "Should Have Flagged" in Notion, the next scan incorporates that correction. Every review makes the filter more accurate.</p>
+</div>
+<div class="feature">
+<div class="feature-icon">&#x1F3AF;</div>
+<h4>Tracks Known Bad Actors</h4>
+<p>Brands we've caught before are automatically flagged for deep analysis no matter what they put in their title. They can't sneak back without us knowing.</p>
+</div>
+<div class="feature">
+<div class="feature-icon">&#x1F6E1;</div>
+<h4>Can't Be Fooled</h4>
+<p>Some sellers add "NOT Wearable" to their titles to dodge detection. The system ignores self-labeling entirely and evaluates the actual product form factor from images.</p>
+</div>
+<div class="feature">
+<div class="feature-icon">&#x1F4EC;</div>
+<h4>Only Emails When It Matters</h4>
+<p>No new findings and no pending reviews? No email. Reports only go out when there's something actionable, or when flagged items are still awaiting review.</p>
+</div>
+</div>
+
+<div class="table-wrap" style="margin-top:32px">
+<table>
+<tr><th></th><th>Before</th><th>Now</th></tr>
+<tr><td>How often we check</td><td>When we remember</td><td>Every single day, automatically</td></tr>
+<tr><td>Listings reviewed</td><td>Whatever we find</td><td>170+ per scan</td></tr>
+<tr><td>How it spots infringers</td><td>Eyeballing it</td><td>AI analyzes product images</td></tr>
+<tr><td>Remembers past decisions</td><td>Nope</td><td>Learns from every review</td></tr>
+<tr><td>Catches seller tricks</td><td>Easy to miss</td><td>Ignores fake labels, checks photos</td></tr>
+<tr><td>Time to file complaint</td><td>15 to 30 min</td><td>10 seconds</td></tr>
+</table>
+</div>
+</div>
+
+<!-- BUILD LOG -->
+<div class="section" id="build">
+<div class="section-label">How It Got Built</div>
+<h2>Two Weeks of Figuring It Out</h2>
+<p class="section-desc">There were a few false starts along the way. Here's how it actually went:</p>
+
+<div class="timeline">
+<div class="tl-item"><div class="tl-date">Mar 11-14</div><p><strong>Tried building it no-code.</strong> Ran it 7 times, got 7 errors. Amazon's data was too messy. Scrapped it and switched to Python.</p></div>
+<div class="tl-item"><div class="tl-date">Mar 14-18</div><p><strong>Applied for Amazon's API access.</strong> AWS credentials, developer app registration, then waited for Amazon to approve. Approved March 18.</p></div>
+<div class="tl-item"><div class="tl-date">Mar 18</div><p><strong>Every API call returned "Access Denied."</strong> Hours of debugging. The problem? A single missing letter in a 13-character ID. One letter. That kind of day.</p></div>
+<div class="tl-item"><div class="tl-date">Mar 18-20</div><p><strong>First working version.</strong> Could search Amazon and analyze results, but pretty limited. One keyword, 10 results, no images, no memory.</p></div>
+<div class="tl-item"><div class="tl-date">Mar 20</div><p><strong>Emails going straight to spam.</strong> First email provider killed their free plan. Switched providers, then had to set up domain verification before emails stopped getting flagged.</p></div>
+<div class="tl-item"><div class="tl-date">Mar 20-21</div><p><strong>Tuned the AI's judgment.</strong> It was flagging TV remotes and TikTok rings as infringers. Rewrote the detection rules to match our actual patents.</p></div>
+<div class="tl-item"><div class="tl-date">Mar 21</div><p><strong>Full code audit found 10 problems.</strong> Only seeing page 1 of results, no rate limiting, both patents using the same rules. Rebuilt everything. Added image analysis. Cut costs 90% by screening with text first.</p></div>
+<div class="tl-item milestone"><div class="tl-date">Mar 21</div><p><strong>Deployed to production. First real catch on day one.</strong></p></div>
+<div class="tl-item"><div class="tl-date">Mar 27</div><p><strong>A known infringer slipped through</strong> by putting "NOT Wearable" in their title. Added anti-evasion rules and a brand watchlist. Caught on the next scan.</p></div>
+<div class="tl-item"><div class="tl-date">Mar 27</div><p><strong>Upgraded report formatting.</strong> Full image cards for MEDIUM risk items, thumbnails in pending review section. Replaced the generic complaint button with a direct Brand Registry link and a pre-written complaint template.</p></div>
+</div>
+</div>
+
+<!-- COST -->
+<div class="section" id="cost">
+<div class="section-label">What It Cost</div>
+<h2>About $200 to Build. $2 a Month to Run.</h2>
+
+<div class="cost-grid">
+<div class="cost-card"><div class="cost-num">~$200</div><div class="cost-label">Total build cost</div></div>
+<div class="cost-card"><div class="cost-num">~$2/mo</div><div class="cost-label">Ongoing cost (daily AI scans)</div></div>
+<div class="cost-card"><div class="cost-num">$0</div><div class="cost-label">Hosting + email (free tiers)</div></div>
+<div class="cost-card"><div class="cost-num">10 sec</div><div class="cost-label">To file a complaint</div></div>
+</div>
+
+<p class="section-desc" style="margin-top:24px">Every day a knockoff sits on Amazon, it's potentially taking sales from us. If this catches even one infringer a month that we would've missed, it's worth it. And it checks every single day.</p>
+</div>
+
+<!-- STACK -->
+<div class="section" id="stack">
+<div class="section-label">Under the Hood</div>
+<h2>The Stack</h2>
+
+<div class="stack-row">
+<span class="pill">Python</span>
+<span class="pill">Amazon SP-API</span>
+<span class="pill">Claude AI</span>
+<span class="pill">Claude Vision</span>
+<span class="pill">Notion API</span>
+<span class="pill">Resend</span>
+<span class="pill">Railway</span>
+<span class="pill">GitHub</span>
+<span class="pill">AWS</span>
+</div>
+
+<p class="section-desc">The whole thing is one Python file. No frameworks, no complicated infrastructure. It deploys automatically every time we push code to GitHub.</p>
+<p class="section-desc">The cost trick is the two-phase approach: we use a cheap, fast AI model to screen all 170+ listings by text alone. Only the ~5 that look suspicious get sent to Claude Vision for actual image analysis. So we're not burning tokens analyzing photos of TV remotes and Bluetooth speakers. Vision only runs when it matters. This cut our AI costs by about 90%.</p>
+</div>
+
+<!-- SERVICE -->
+<div class="section" id="service">
+<div class="section-label">Bigger Picture</div>
+<h2>This Could Be a Service</h2>
+
+<p class="section-desc">The companies that do this professionally charge a lot of money. Red Points, BrandShield, Corsearch, MarkMonitor are the big names in brand protection and IP monitoring. Red Points alone charges $35,000 to $70,000 per year. That's $3,000 to $6,000 a month.</p>
+<p class="section-desc">Those platforms are built for Fortune 500 companies with massive patent portfolios across dozens of marketplaces and countries. They're enterprise software with enterprise pricing.</p>
+<p class="section-desc">But there are thousands of small companies like us. A few patents, selling on Amazon, dealing with knockoffs, and definitely not paying $6K/month for monitoring software. Right now their options are: do it by hand, hire a paralegal, or just hope for the best.</p>
+
+<div class="service-callout">
+<h3>I could offer this as a managed service.</h3>
+<p>I'd configure and maintain a daily patent monitoring system for your brand. You'd get the same AI-powered scanning, image analysis, and one-click complaint filing that we use, tuned to your specific patents. Daily reports, ongoing tuning as we learn what your infringers look like, and support when you need it. A fraction of what the enterprise platforms charge, without the enterprise sales process.</p>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr><th></th><th>Enterprise (Red Points, etc.)</th><th>This Service</th></tr>
+<tr><td>Monthly cost</td><td>$3,000 - $6,000+</td><td>$500 - $700/mo, or one-time setup fee</td></tr>
+<tr><td>Built for</td><td>Fortune 500, huge portfolios</td><td>Small brands, 1-5 patents</td></tr>
+<tr><td>Amazon scanning</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>AI image analysis</td><td>Varies</td><td>Claude Vision</td></tr>
+<tr><td>Self-improving</td><td>Usually not</td><td>Learns from every review you make</td></tr>
+<tr><td>Time to start</td><td>Weeks of onboarding</td><td>Days</td></tr>
+<tr><td>Support</td><td>Account manager, maybe</td><td>I built it, I maintain it, I tune it</td></tr>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+<div class="footer-brand">CB IP Monitor</div>
+<p>Built by Justin Barad with Claude AI &middot; Chubby Buttons LLC</p>
+<p>Protecting Patents 10,674,006 &amp; 11,212,385</p>
+</div>
+
+</body>
+</html>
