@@ -161,30 +161,48 @@ function tBadge(t){return t?'<span class="badge b-'+t+'">'+esc(t)+'</span>':''}
 function sBadge(s){return s?'<span class="badge b-'+s+'">'+esc(s)+'</span>':''}
 // PROMPT REFINEMENT ENGINE
 function analyzeRatings(){const local=getLocal();const rated=imgs.filter(i=>local[i.imageId]&&local[i.imageId].rating);if(!rated.length)return null;
-const likes=[],dislikes=[],mixed=[];const posTags=[],negTags=[];const goodScenes=[],badScenes=[];
+const likes=[],dislikes=[],mixed=[];const posTags=[],negTags=[];const goodScenes=[],badScenes=[];const textNotes=[];
 rated.forEach(img=>{const r=local[img.imageId];const fb=tryParse(r.feedbackText);const tags=tryParse(r.feedbackTags)||[];
+// Extract written text feedback
+if(fb&&fb.text&&fb.text.trim())textNotes.push(fb.text.trim());
 if(r.rating==='like'){likes.push(img);tags.forEach(t=>posTags.push(t));if(img.shotType)goodScenes.push(img.shotType)}
 else if(r.rating==='dislike'){dislikes.push(img);tags.forEach(t=>negTags.push(t));if(img.shotType)badScenes.push(img.shotType)}
-else{mixed.push(img);tags.forEach(t=>{if(PRODUCT_UP.includes(t)||SCENE_UP.includes(t))posTags.push(t);else negTags.push(t)})}});
-const posCount={},negCount={};posTags.forEach(t=>{posCount[t]=(posCount[t]||0)+1});negTags.forEach(t=>{negCount[t]=(negCount[t]||0)+1});
+else{mixed.push(img);tags.forEach(t=>{if(PRODUCT_UP.includes(t)||SCENE_UP.includes(t))posTags.push(t);else negTags.push(t)});if(fb&&fb.text&&fb.text.trim())negTags.push('_text_')}});
+const posCount={},negCount={};posTags.forEach(t=>{posCount[t]=(posCount[t]||0)+1});negTags.forEach(t=>{if(t!=='_text_')negCount[t]=(negCount[t]||0)+1});
 const topPos=Object.entries(posCount).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
 const topNeg=Object.entries(negCount).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
 const likedModels={};likes.forEach(i=>{likedModels[i.model]=(likedModels[i.model]||0)+1});
 const bestModel=Object.entries(likedModels).sort((a,b)=>b[1]-a[1])[0];
-return{total:rated.length,likes:likes.length,dislikes:dislikes.length,mixed:mixed.length,topPos,topNeg,bestModel:bestModel?bestModel[0]:null,goodScenes:[...new Set(goodScenes)],badScenes:[...new Set(badScenes)]}}
+// Parse text notes into prompt-ready instructions
+const textInsights=extractTextInsights(textNotes);
+return{total:rated.length,likes:likes.length,dislikes:dislikes.length,mixed:mixed.length,topPos,topNeg,bestModel:bestModel?bestModel[0]:null,goodScenes:[...new Set(goodScenes)],badScenes:[...new Set(badScenes)],textNotes,textInsights}}
+// Extract actionable prompt instructions from free-text feedback
+function extractTextInsights(notes){if(!notes.length)return'';
+const issues=[];const keywords={band:0,arm:0,float:0,bare:0,strap:0,product:0,snow:0,sleeve:0};
+notes.forEach(n=>{const l=n.toLowerCase();
+if(l.includes('band')||l.includes('strap')||l.includes('armband'))keywords.band++;
+if(l.includes('arm')&&(l.includes('bare')||l.includes('correctly')||l.includes('floating')))keywords.arm++;
+if(l.includes('float'))keywords.float++;
+if(l.includes('bare arm')||l.includes('bare skin'))keywords.bare++;
+if(l.includes('not our product')||l.includes('doesnt look like')||l.includes('wrong'))keywords.product++;
+if(l.includes('sleeve')||l.includes('jacket')||l.includes('gear'))keywords.sleeve++;});
+if(keywords.band>0||keywords.float>0)issues.push('CB2 armband must be snugly strapped over jacket sleeve or gear, with realistic fabric interaction and visible velcro closure, not floating or loose');
+if(keywords.bare>0)issues.push('person must be wearing appropriate clothing for the activity (jacket, gloves, gear), never bare arms in winter sports');
+if(keywords.arm>0)issues.push('device must sit naturally on the forearm, flush against the sleeve, with the armband wrapped around and secured');
+if(keywords.product>0)issues.push('the generated product must exactly match the CB2 reference photo - same shape, same 5 buttons, same colorway');
+if(!issues.length&&notes.length)issues.push('user noted: '+notes[notes.length-1].substring(0,80));
+return issues.join('. ')}
 function tryParse(s){try{return JSON.parse(s)}catch(e){return null}}
 // FROZEN PRODUCT BLOCKS (never change - research: 5-layer prompt template)
 const CB2_PRODUCT={tron:'The Chubby Buttons CB2 Tron is a compact rounded rectangular wearable Bluetooth remote with a black matte silicone body featuring 5 large raised tactile silicone buttons with green icons, CB2 logo on front, adjustable elastic armband.',hunter:'The Chubby Buttons CB2 Hunter is a compact rounded rectangular wearable Bluetooth remote with a green matte silicone body featuring 5 large raised tactile silicone buttons with yellow icons, CB2 logo on front, adjustable elastic armband.',patriot:'The Chubby Buttons CB2 Patriot is a compact rounded rectangular wearable Bluetooth remote with a red white and blue matte silicone body featuring 5 large raised tactile silicone buttons, CB2 logo on front, adjustable elastic armband.'};
 // Positive inversion maps (research: FLUX has no negative prompts, use positive opposites)
 const POS_INVERSION={'Doesnt look like CB2':'maintaining the exact same product proportions, button count, button layout, color, logo placement, and surface texture from the reference image','Product floating/detached':'product resting naturally and grounded in the scene with realistic shadow and physical contact','Weird hands/fingers':'natural hand position with anatomically correct fingers','AI artifacts visible':'clean sharp details throughout with photorealistic rendering and no visual anomalies','Unrealistic/uncanny':'natural authentic scene with realistic physics and materials','Boring/generic setting':'dramatic visually striking environment with depth and atmosphere','Bad lighting':'professional cinematic lighting with natural light interaction on the product surface','Scene too busy/cluttered':'clean focused composition with the product as clear focal point'};
 const REINFORCE={'Product looks accurate':'preserving the exact product appearance, all 5 buttons clearly visible','Natural placement on arm':'device naturally strapped to forearm with realistic fabric and strap interaction','Love the lighting/mood':'dramatic professional lighting with warm color grading','Epic scenery':'breathtaking landscape backdrop with sense of scale and grandeur','Great composition':'strong composition following rule of thirds with product as focal point','On-brand energy':'high-energy aspirational lifestyle moment, the viewer should feel they want to be there','Would use this in an ad':'commercial advertising hero shot quality, magazine-ready'};
-function buildRefinedPrompts(scene,colorway){const ins=analyzeRatings();let preserve='';let quality='';if(ins){if(ins.topNeg.length)preserve=ins.topNeg.map(t=>POS_INVERSION[t]||'').filter(Boolean).join('. ');if(ins.topPos.length)quality=ins.topPos.map(t=>REINFORCE[t]||'').filter(Boolean).join('. ');}
+function buildRefinedPrompts(scene,colorway){const ins=analyzeRatings();let preserve='';let quality='';let textFix='';if(ins){if(ins.topNeg.length)preserve=ins.topNeg.map(t=>POS_INVERSION[t]||'').filter(Boolean).join('. ');if(ins.topPos.length)quality=ins.topPos.map(t=>REINFORCE[t]||'').filter(Boolean).join('. ');if(ins.textInsights)textFix=ins.textInsights;}
 const tech='Shot with 85mm lens at f/2.8, shallow depth of field with product in tack-sharp focus. ';const mood='Adventurous energetic atmosphere, premium outdoor lifestyle brand aesthetic. ';
-const pBlock=CB2_PRODUCT[colorway];const pres=preserve?' '+preserve+'. ':'';const qual=quality?' '+quality+'. ':'';
-// FLUX Kontext: preservation language is critical (research: explicit preservation clause)
-const fluxPrompt='Place this exact CB2 remote on the forearm in this scene: '+scene+'. '+tech+mood+qual+pres+'Maintaining the exact same product proportions, button layout, color, and surface texture. Professional commercial photography, photorealistic, 4K.';
-// Recraft: full 5-layer template (research: natural language > keyword stacking)
-const recraftPrompt='Professional commercial product photography. '+pBlock+' '+scene+'. '+tech+mood+qual+pres+'Clean precise product details with photorealistic rendering.';
+const pBlock=CB2_PRODUCT[colorway];const pres=preserve?' '+preserve+'. ':'';const qual=quality?' '+quality+'. ':'';const txt=textFix?' '+textFix+'. ':'';
+const fluxPrompt='Place this exact CB2 remote on the forearm in this scene: '+scene+'. '+tech+mood+qual+pres+txt+'Maintaining the exact same product proportions, button layout, color, and surface texture. Professional commercial photography, photorealistic, 4K.';
+const recraftPrompt='Professional commercial product photography. '+pBlock+' '+scene+'. '+tech+mood+qual+pres+txt+'Clean precise product details with photorealistic rendering.';
 // Sanitize: strip quotes/apostrophes that break Make.com JSON templates
 const clean=s=>s.replace(/['"]/g,'');
 return{fluxPrompt:clean(fluxPrompt),recraftPrompt:clean(recraftPrompt),insights:ins}}
@@ -216,7 +234,9 @@ async function generateMore(){const btn=document.getElementById('genMoreBtn');if
 document.getElementById('genOverlay').classList.add('open');document.getElementById('genEngines').innerHTML='';document.getElementById('genCloseBtn').style.display='none';document.getElementById('genCounter').style.display='none';genDoneCount=0;
 const insights=analyzeRatings();
 if(!insights||insights.total<1){document.getElementById('genSub').textContent='Rate at least 1 image first!';document.getElementById('genCloseBtn').style.display='inline-block';return}
-document.getElementById('genSub').textContent='Building smarter prompts from '+insights.total+' ratings...';
+const hasTxt=insights.textInsights&&insights.textInsights.length>0;
+document.getElementById('genSub').textContent='Building smarter prompts from '+insights.total+' ratings'+(hasTxt?' + your written feedback':'')+'...';
+if(hasTxt){addEngCard('learn','L','sync','Learned from your notes',insights.textInsights.substring(0,80)+'...');setEngStatus('learn','ok','Applied to all prompts')}
 const nudge=document.getElementById('nudgeInput')?.value?.trim()||'';
 const AS=['Skier carving powder on dramatic mountain, golden hour','Snowboarder mid-air jump, powder spray, blue sky','Mountain biker racing steep forest trail, dappled sunlight'];
 const PS=['CB2 on dark slate, dramatic studio lighting, product photo','Flat lay on rustic wood: CB2 with goggles, earbuds, coffee, editorial'];
