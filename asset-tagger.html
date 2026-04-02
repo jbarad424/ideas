@@ -76,12 +76,16 @@
 .gen-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:150;flex-direction:column;align-items:center;justify-content:center;padding:2rem}.gen-overlay.open{display:flex}
 .gen-card{background:#141414;border-radius:16px;padding:1.5rem;max-width:400px;width:100%;text-align:center}
 .gen-card h3{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
-.gen-card .gen-sub{font-size:.8rem;color:#888;margin-bottom:.8rem}
-.gen-log{text-align:left;max-height:200px;overflow-y:auto}
-.gen-log-item{padding:.3rem 0;border-bottom:1px solid #1a1a1a;display:flex;gap:.4rem;align-items:center;font-size:.8rem;color:#bbb}
-.gen-log-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.gen-log-dot.pending{background:#f59e0b}.gen-log-dot.done{background:#22c55e}.gen-log-dot.err{background:#ef4444}.gen-log-dot.sync{background:#3b82f6}
-.gen-close-btn{margin-top:.8rem;background:linear-gradient(135deg,#a855f7,#3b82f6);color:#fff;border:none;border-radius:10px;font-size:.9rem;font-weight:700;padding:.5rem 1.5rem;cursor:pointer;display:none}
+.gen-card .gen-sub{font-size:.85rem;color:#999;margin-bottom:1rem}
+.gen-engines{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.8rem}
+.gen-eng{display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:#1a1a1a;border-radius:10px}
+.gen-eng-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0}
+.gen-eng-icon.flux{background:#1a1a3a;color:#818cf8}.gen-eng-icon.recraft{background:#1a2a1a;color:#4ade80}.gen-eng-icon.runway{background:#2a1a2a;color:#f472b6}.gen-eng-icon.sync{background:#0a1a2a;color:#3b82f6}
+.gen-eng-info{flex:1;text-align:left}.gen-eng-name{font-size:.8rem;font-weight:700;color:#ddd}.gen-eng-status{font-size:.7rem;color:#888;margin-top:.1rem}
+.gen-eng-badge{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:6px}
+.gen-eng-badge.wait{background:#1a1a0a;color:#f59e0b;border:1px solid #332200}.gen-eng-badge.ok{background:#0a1a0a;color:#22c55e;border:1px solid #113311}.gen-eng-badge.fail{background:#1a0a0a;color:#ef4444;border:1px solid #331111}
+.gen-counter{font-size:1.5rem;font-weight:800;color:#22c55e;margin:.5rem 0}.gen-counter span{color:#555;font-weight:400;font-size:.9rem}
+.gen-close-btn{margin-top:.5rem;background:linear-gradient(135deg,#a855f7,#3b82f6);color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:700;padding:.6rem 2rem;cursor:pointer;display:none}
 .nudge-input{width:100%;max-width:400px;background:#141414;border:1.5px solid #333;border-radius:10px;color:#fff;padding:.5rem .7rem;font-size:.85rem;resize:none;outline:none;min-height:50px;font-family:inherit;margin:.5rem auto}.nudge-input:focus{border-color:#a855f7}.nudge-input::placeholder{color:#555}
 .nudge-pills{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;max-width:400px;margin:.3rem auto}.nudge-pill{background:#1a1a1a;border:1px solid #333;color:#888;padding:.25rem .5rem;border-radius:8px;font-size:.7rem;cursor:pointer}.nudge-pill:hover{border-color:#a855f7;color:#a855f7}
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#113311;color:#22c55e;padding:.6rem 1.2rem;border-radius:10px;font-size:.85rem;font-weight:600;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}.toast.show{opacity:1}
@@ -105,7 +109,7 @@
 <div class="fb-back" id="fbBack" onclick="closePop()"></div>
 <div class="fb-pop" id="fbPop"><h3 id="popTitle">Details</h3><div class="fb-hint" id="popHint">Select all that apply</div><div class="fb-pills" id="popPills"></div><button class="fb-done-btn" onclick="closePop()">Done</button></div>
 <div class="lb" id="lb"><button class="lb-close" onclick="closeLb()">&times;</button><img id="lbImg" style="display:none"><video id="lbVid" style="display:none" controls playsinline></video><div class="lb-info"><span id="lbBadges"></span><div class="lb-prompt" id="lbPrompt"></div><div class="lb-actions"><button class="lb-action-btn" onclick="lbChangeRating()">Change Rating</button></div></div></div>
-<div class="gen-overlay" id="genOverlay"><div class="gen-card"><h3>Generating New Assets</h3><div class="gen-sub" id="genSub">Analyzing your ratings to build better prompts...</div><div class="gen-log" id="genLog"></div><button class="gen-close-btn" id="genCloseBtn" onclick="closeGen()">View New Assets</button></div></div>
+<div class="gen-overlay" id="genOverlay"><div class="gen-card"><h3>Generating New Assets</h3><div class="gen-sub" id="genSub">Analyzing your ratings...</div><div class="gen-counter" id="genCounter" style="display:none"><span id="genDone">0</span> <span>assets created</span></div><div class="gen-engines" id="genEngines"></div><button class="gen-close-btn" id="genCloseBtn" onclick="closeGen()">View New Assets</button></div></div>
 <div class="toast" id="toast"></div>
 <script>
 const DATA_URL='https://jbarad424.github.io/ideas/cb-ai-lab.json';
@@ -170,7 +174,7 @@ const bestModel=Object.entries(likedModels).sort((a,b)=>b[1]-a[1])[0];
 return{total:rated.length,likes:likes.length,dislikes:dislikes.length,mixed:mixed.length,topPos,topNeg,bestModel:bestModel?bestModel[0]:null,goodScenes:[...new Set(goodScenes)],badScenes:[...new Set(badScenes)]}}
 function tryParse(s){try{return JSON.parse(s)}catch(e){return null}}
 // FROZEN PRODUCT BLOCKS (never change - research: 5-layer prompt template)
-const CB2_PRODUCT={tron:'The Chubby Buttons CB2 Tron is a compact rounded rectangular wearable Bluetooth remote with a black matte silicone body featuring 5 large raised tactile silicone buttons with green icons. The device has the CB2 logo on the front and attaches via an adjustable elastic armband.',hunter:'The Chubby Buttons CB2 Hunter is a compact rounded rectangular wearable Bluetooth remote with a green matte silicone body featuring 5 large raised tactile silicone buttons with yellow icons. The device has the CB2 logo on the front and attaches via an adjustable elastic armband.',patriot:'The Chubby Buttons CB2 Patriot is a compact rounded rectangular wearable Bluetooth remote with a red, white and blue matte silicone body featuring 5 large raised tactile silicone buttons. The device has the CB2 logo on the front and attaches via an adjustable elastic armband.'};
+const CB2_PRODUCT={tron:'The Chubby Buttons CB2 Tron is a compact rounded rectangular wearable Bluetooth remote with a black matte silicone body featuring 5 large raised tactile silicone buttons with green icons, CB2 logo on front, adjustable elastic armband.',hunter:'The Chubby Buttons CB2 Hunter is a compact rounded rectangular wearable Bluetooth remote with a green matte silicone body featuring 5 large raised tactile silicone buttons with yellow icons, CB2 logo on front, adjustable elastic armband.',patriot:'The Chubby Buttons CB2 Patriot is a compact rounded rectangular wearable Bluetooth remote with a red white and blue matte silicone body featuring 5 large raised tactile silicone buttons, CB2 logo on front, adjustable elastic armband.'};
 // Positive inversion maps (research: FLUX has no negative prompts, use positive opposites)
 const POS_INVERSION={'Doesnt look like CB2':'maintaining the exact same product proportions, button count, button layout, color, logo placement, and surface texture from the reference image','Product floating/detached':'product resting naturally and grounded in the scene with realistic shadow and physical contact','Weird hands/fingers':'natural hand position with anatomically correct fingers','AI artifacts visible':'clean sharp details throughout with photorealistic rendering and no visual anomalies','Unrealistic/uncanny':'natural authentic scene with realistic physics and materials','Boring/generic setting':'dramatic visually striking environment with depth and atmosphere','Bad lighting':'professional cinematic lighting with natural light interaction on the product surface','Scene too busy/cluttered':'clean focused composition with the product as clear focal point'};
 const REINFORCE={'Product looks accurate':'preserving the exact product appearance, all 5 buttons clearly visible','Natural placement on arm':'device naturally strapped to forearm with realistic fabric and strap interaction','Love the lighting/mood':'dramatic professional lighting with warm color grading','Epic scenery':'breathtaking landscape backdrop with sense of scale and grandeur','Great composition':'strong composition following rule of thirds with product as focal point','On-brand energy':'high-energy aspirational lifestyle moment, the viewer should feel they want to be there','Would use this in an ad':'commercial advertising hero shot quality, magazine-ready'};
@@ -178,10 +182,12 @@ function buildRefinedPrompts(scene,colorway){const ins=analyzeRatings();let pres
 const tech='Shot with 85mm lens at f/2.8, shallow depth of field with product in tack-sharp focus. ';const mood='Adventurous energetic atmosphere, premium outdoor lifestyle brand aesthetic. ';
 const pBlock=CB2_PRODUCT[colorway];const pres=preserve?' '+preserve+'. ':'';const qual=quality?' '+quality+'. ':'';
 // FLUX Kontext: preservation language is critical (research: explicit preservation clause)
-const fluxPrompt='Place this exact CB2 remote on the person\'s forearm in this scene: '+scene+'. '+tech+mood+qual+pres+'Maintaining the exact same product proportions, button layout, color, and surface texture. Professional commercial photography, photorealistic, 4K.';
+const fluxPrompt='Place this exact CB2 remote on the forearm in this scene: '+scene+'. '+tech+mood+qual+pres+'Maintaining the exact same product proportions, button layout, color, and surface texture. Professional commercial photography, photorealistic, 4K.';
 // Recraft: full 5-layer template (research: natural language > keyword stacking)
 const recraftPrompt='Professional commercial product photography. '+pBlock+' '+scene+'. '+tech+mood+qual+pres+'Clean precise product details with photorealistic rendering.';
-return{fluxPrompt,recraftPrompt,insights:ins}}
+// Sanitize: strip quotes/apostrophes that break Make.com JSON templates
+const clean=s=>s.replace(/['"]/g,'');
+return{fluxPrompt:clean(fluxPrompt),recraftPrompt:clean(recraftPrompt),insights:ins}}
 function renderInsights(){const insights=analyzeRatings();if(!insights||insights.total<2)return'';
 let html='<div class="insights-box"><div class="insights-title">What your ratings taught us</div>';
 html+='<div class="insights-row"><span class="insights-icon">&#128200;</span> <span>'+insights.total+' rated: '+insights.likes+' liked, '+insights.dislikes+' disliked, '+insights.mixed+' mixed</span></div>';
@@ -203,60 +209,51 @@ function openLb(idx,fromGrid){const f=fromGrid?gridFiltered():filtered();if(idx<
 function closeLb(){document.getElementById('lb').classList.remove('open');document.getElementById('lbVid').pause();lbIdx=-1}
 function lbChangeRating(){const f=window._lbFromGrid?gridFiltered():filtered();if(lbIdx<0||lbIdx>=f.length)return;const img=f[lbIdx];img.rating='';img.feedbackTags='';img.feedbackText='';img.ratedAt='';saveLocal(img.imageId,{rating:'',feedbackTags:'',feedbackText:'',ratedAt:''});fetch(RATE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageId:img.imageId,rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',ratedBy:userName})}).catch(()=>{});closeLb();updStats();filt='unrated';document.querySelectorAll('.filt-b').forEach(b=>{b.classList.toggle('active',b.dataset.f==='unrated')});setMode('swipe');const newF=filtered();const newIdx=newF.findIndex(i=>i.imageId===img.imageId);if(newIdx>=0)ci=newIdx;render();showToast('Rating cleared — rate it again!')}
 // GENERATE MORE
-function addGenLog(text,status){const log=document.getElementById('genLog');const d=document.createElement('div');d.className='gen-log-item';d.innerHTML='<div class="gen-log-dot '+status+'"></div><span>'+esc(text)+'</span>';log.appendChild(d);log.scrollTop=log.scrollHeight}
+let genDoneCount=0;
+function setEngStatus(id,status,detail){const el=document.getElementById('eng-'+id);if(!el)return;const badge=el.querySelector('.gen-eng-badge');const info=el.querySelector('.gen-eng-status');if(status==='wait'){badge.className='gen-eng-badge wait';badge.textContent='Working...';info.textContent=detail||'Sending to API...'}else if(status==='ok'){badge.className='gen-eng-badge ok';badge.textContent='Done';info.textContent=detail||'Asset created';genDoneCount++;document.getElementById('genDone').textContent=genDoneCount}else{badge.className='gen-eng-badge fail';badge.textContent='Failed';info.textContent=detail||'Error'}}
+function addEngCard(id,icon,iconCls,name,detail){const c=document.getElementById('genEngines');c.innerHTML+='<div class="gen-eng" id="eng-'+id+'"><div class="gen-eng-icon '+iconCls+'">'+icon+'</div><div class="gen-eng-info"><div class="gen-eng-name">'+name+'</div><div class="gen-eng-status">'+detail+'</div></div><div class="gen-eng-badge wait">Queued</div></div>'}
 async function generateMore(){const btn=document.getElementById('genMoreBtn');if(btn)btn.disabled=true;
-const overlay=document.getElementById('genOverlay');overlay.classList.add('open');document.getElementById('genLog').innerHTML='';document.getElementById('genCloseBtn').style.display='none';
-// 1. Analyze ratings
-addGenLog('Analyzing your ratings...','pending');const insights=analyzeRatings();
-if(!insights||insights.total<1){addGenLog('Need at least 1 rating to generate. Rate some images first!','err');document.getElementById('genCloseBtn').style.display='inline-block';return}
-addGenLog('Found '+insights.total+' ratings: '+insights.likes+' liked, '+insights.dislikes+' disliked','done');
-if(insights.topPos.length)addGenLog('Reinforcing: '+insights.topPos.join(', '),'done');
-if(insights.topNeg.length)addGenLog('Avoiding: '+insights.topNeg.join(', '),'done');
-// 2. Read nudge direction
+document.getElementById('genOverlay').classList.add('open');document.getElementById('genEngines').innerHTML='';document.getElementById('genCloseBtn').style.display='none';document.getElementById('genCounter').style.display='none';genDoneCount=0;
+const insights=analyzeRatings();
+if(!insights||insights.total<1){document.getElementById('genSub').textContent='Rate at least 1 image first!';document.getElementById('genCloseBtn').style.display='inline-block';return}
+document.getElementById('genSub').textContent='Building smarter prompts from '+insights.total+' ratings...';
 const nudge=document.getElementById('nudgeInput')?.value?.trim()||'';
-if(nudge)addGenLog('Direction: '+nudge,'done');
-// Scene arrays
-const ACTION_SCENES=['Skier carving through fresh powder on a dramatic mountain, golden hour, the viewer should feel "damn I wish that were me"','Snowboarder mid-air jump with powder spray, bright blue sky, peak action moment','Mountain biker racing down a steep forest trail with dappled sunlight, motion and energy'];
-const PRODUCT_SCENES=['CB2 device on a clean dark slate surface with dramatic studio side lighting, premium product photography','Flat lay on rustic weathered wood: CB2 device with ski goggles, premium earbuds, and coffee, warm overhead natural lighting, editorial style'];
-let actionScenes=[...ACTION_SCENES];
-let productScenes=[...PRODUCT_SCENES];
-if(nudge){actionScenes.push(nudge+', dramatic professional action sports photography, the viewer should feel "damn I wish that were me"')}
-// 3. Colorway selection — nudge override or rotate to least-used
-let colorway='tron';
-if(nudge.toLowerCase().includes('hunter'))colorway='hunter';
-else if(nudge.toLowerCase().includes('patriot'))colorway='patriot';
-else{const styles=imgs.filter(i=>i.style).map(i=>i.style);const counts={};styles.forEach(s=>{counts[s]=(counts[s]||0)+1});const least=Object.entries(counts).sort((a,b)=>a[1]-b[1])[0];colorway=least?least[0]:'tron'}
-addGenLog('Colorway: '+colorway,'done');
-const totalGen=actionScenes.length*2+productScenes.length*2+1;
-document.getElementById('genSub').textContent='Generating ~'+totalGen+' assets (images + video) with refined prompts...';
-const batchId='auto-'+Date.now();const newImgs=[];const promises=[];
-// ACTION scenes — FLUX Kontext + Recraft
-for(const scene of actionScenes){const refined=buildRefinedPrompts(scene,colorway);
-addGenLog('FLUX Action: '+scene.substring(0,40)+'...','pending');
-promises.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-kontext-pro',body:{prompt:refined.fluxPrompt,input_image:REF_IMAGES[colorway],output_format:'jpeg',safety_tolerance:2},shotType:'action',style:colorway,batchId:batchId,model:'flux-kontext-pro',prompt:refined.fluxPrompt})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('FLUX Action done: '+d.imageId,'done');newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:refined.fluxPrompt,shotType:'action',style:colorway,batchId:batchId,model:'flux-kontext-pro',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('FLUX Action error','err')}).catch(e=>{addGenLog('FLUX Action failed: '+e.message,'err')}));
-addGenLog('Recraft Action: '+scene.substring(0,40)+'...','pending');
-promises.push(fetch(RECRAFT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:refined.recraftPrompt,shotType:'action',style:colorway,batchId:batchId})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('Recraft Action done: '+d.imageId,'done');newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:refined.recraftPrompt,shotType:'action',style:colorway,batchId:batchId,model:'recraft-v3',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('Recraft Action error','err')}).catch(e=>{addGenLog('Recraft Action failed: '+e.message,'err')}));}
-// PRODUCT scenes — FLUX text-to-image (no ref image) + Recraft
-for(const scene of productScenes){const refined=buildRefinedPrompts(scene,colorway);
-addGenLog('FLUX Product: '+scene.substring(0,40)+'...','pending');
-promises.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-pro-1.1',body:{prompt:refined.recraftPrompt,width:1024,height:768,output_format:'jpeg',safety_tolerance:2},shotType:'product',style:colorway,batchId:batchId,model:'flux-pro-1.1',prompt:refined.recraftPrompt})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('FLUX Product done: '+d.imageId,'done');newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:refined.recraftPrompt,shotType:'product',style:colorway,batchId:batchId,model:'flux-pro-1.1',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('FLUX Product error','err')}).catch(e=>{addGenLog('FLUX Product failed: '+e.message,'err')}));
-addGenLog('Recraft Product: '+scene.substring(0,40)+'...','pending');
-promises.push(fetch(RECRAFT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:refined.recraftPrompt,shotType:'product',style:colorway,batchId:batchId})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('Recraft Product done: '+d.imageId,'done');newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:refined.recraftPrompt,shotType:'product',style:colorway,batchId:batchId,model:'recraft-v3',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('Recraft Product error','err')}).catch(e=>{addGenLog('Recraft Product failed: '+e.message,'err')}));}
-// RUNWAY VIDEO — 1 video from first action scene
-addGenLog('Runway Video: generating (takes ~2min)...','pending');
-const runScene=actionScenes[0];
-const runPrompt='The person with the wearable remote '+runScene+', cinematic slow motion, professional sports videography';
-promises.push(fetch(RUNWAY_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:runPrompt,image_url:REF_IMAGES[colorway],shotType:'action',style:colorway,batchId:batchId})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('Runway Video done!','done');newImgs.push({imageId:d.imageId||('vid-'+Date.now()),driveFileId:d.driveFileId||d.videoUrl||'',prompt:runPrompt,shotType:'action',style:colorway,batchId,model:'runway',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('Runway error','err')}).catch(e=>{addGenLog('Runway failed: '+e.message,'err')}));
-await Promise.allSettled(promises);
-// 3. Add new images to local array + localStorage pending
-if(newImgs.length){newImgs.forEach(ni=>{if(!imgs.find(i=>i.imageId===ni.imageId))imgs.push(ni)});
-const pending=JSON.parse(localStorage.getItem('cb_pending_imgs')||'[]');newImgs.forEach(ni=>pending.push(ni));localStorage.setItem('cb_pending_imgs',JSON.stringify(pending));
-addGenLog('Added '+newImgs.length+' new assets to your queue!','done');
-// 4. Sync to GitHub so everyone sees them
-addGenLog('Syncing to GitHub for all users...','sync');
-const jsonContent=JSON.stringify({images:imgs.map(i=>({imageId:i.imageId,driveFileId:i.driveFileId,prompt:i.prompt,shotType:i.shotType,style:i.style,batchId:i.batchId,model:i.model,rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:i.generatedAt}))});
-try{const sr=await fetch(SYNC_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonContent})});const sd=await sr.json();if(sd.success)addGenLog('Synced! Everyone can see new assets now.','done');else addGenLog('Sync warning: '+JSON.stringify(sd),'err')}catch(e){addGenLog('Sync failed (assets still saved locally): '+e.message,'err')}}else{addGenLog('No new assets generated. Try again later.','err')}
-updStats();document.getElementById('genCloseBtn').style.display='inline-block';document.getElementById('genSub').textContent='Generation complete!'}
+const AS=['Skier carving powder on dramatic mountain, golden hour','Snowboarder mid-air jump, powder spray, blue sky','Mountain biker racing steep forest trail, dappled sunlight'];
+const PS=['CB2 on dark slate, dramatic studio lighting, product photo','Flat lay on rustic wood: CB2 with goggles, earbuds, coffee, editorial'];
+if(nudge)AS.push(nudge+', dramatic sports photography, aspirational');
+let cw='tron';if(nudge.toLowerCase().includes('hunter'))cw='hunter';else if(nudge.toLowerCase().includes('patriot'))cw='patriot';else{const st={};imgs.filter(i=>i.style).forEach(i=>{st[i.style]=(st[i.style]||0)+1});const l=Object.entries(st).sort((a,b)=>a[1]-b[1])[0];if(l)cw=l[0]}
+// Build engine cards
+const bid='auto-'+Date.now();let eIdx=0;
+addEngCard('flux','F','flux','FLUX Kontext',AS.length+' action shots');
+addEngCard('fluxp','F','flux','FLUX Pro',PS.length+' product shots');
+addEngCard('rc','R','recraft','Recraft',AS.length+PS.length+' images');
+addEngCard('run','V','runway','Runway','1 video (~2 min)');
+addEngCard('sync','S','sync','Sync','Share with team');
+const tot=AS.length*2+PS.length*2+1;document.getElementById('genSub').textContent='Creating '+tot+' assets using '+cw+' colorway...';document.getElementById('genCounter').style.display='block';
+const newImgs=[];const P=[];
+// FLUX Kontext action
+setEngStatus('flux','wait','Generating '+AS.length+' action shots...');
+for(const s of AS){const r=buildRefinedPrompts(s,cw);P.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-kontext-pro',body:{prompt:r.fluxPrompt,input_image:REF_IMAGES[cw],output_format:'jpeg',safety_tolerance:2},shotType:'action',style:cw,batchId:bid,model:'flux-kontext-pro',prompt:r.fluxPrompt})}).then(x=>x.json()).then(d=>{if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.fluxPrompt,shotType:'action',style:cw,batchId:bid,model:'flux-kontext-pro',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}).catch(()=>{}))}
+Promise.allSettled(P.slice(0,AS.length)).then(()=>{const n=newImgs.filter(i=>i.model==='flux-kontext-pro').length;setEngStatus('flux',n>0?'ok':'fail',n+'/'+AS.length+' created')});
+// FLUX Pro product
+setEngStatus('fluxp','wait','Generating '+PS.length+' product shots...');
+for(const s of PS){const r=buildRefinedPrompts(s,cw);P.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-pro-1.1',body:{prompt:r.recraftPrompt,width:1024,height:768,output_format:'jpeg',safety_tolerance:2},shotType:'product',style:cw,batchId:bid,model:'flux-pro-1.1',prompt:r.recraftPrompt})}).then(x=>x.json()).then(d=>{if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.recraftPrompt,shotType:'product',style:cw,batchId:bid,model:'flux-pro-1.1',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}).catch(()=>{}))}
+// Recraft all scenes
+setEngStatus('rc','wait','Generating '+(AS.length+PS.length)+' images...');
+for(const s of [...AS,...PS]){const r=buildRefinedPrompts(s,cw);const st=PS.includes(s)?'product':'action';P.push(fetch(RECRAFT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:r.recraftPrompt,shotType:st,style:cw,batchId:bid})}).then(x=>x.json()).then(d=>{if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.recraftPrompt,shotType:st,style:cw,batchId:bid,model:'recraft-v3',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}).catch(()=>{}))}
+// Runway video
+setEngStatus('run','wait','Generating video (takes ~2 min)...');
+const rs=AS[0];P.push(fetch(RUNWAY_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:'Person with CB2 remote '+rs+', cinematic slow motion',image_url:REF_IMAGES[cw],shotType:'action',style:cw,batchId:bid})}).then(x=>x.json()).then(d=>{if(d.success){newImgs.push({imageId:d.imageId||('vid-'+Date.now()),driveFileId:d.driveFileId||'',prompt:rs,shotType:'action',style:cw,batchId:bid,model:'runway',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()});setEngStatus('run','ok','Video created')}else setEngStatus('run','fail','Generation failed')}).catch(()=>setEngStatus('run','fail','Connection error')));
+await Promise.allSettled(P);
+// Update engine statuses
+const fcnt=newImgs.filter(i=>i.model==='flux-kontext-pro').length;setEngStatus('flux',fcnt>0?'ok':'fail',fcnt+'/'+AS.length+' action shots');
+const fpcnt=newImgs.filter(i=>i.model==='flux-pro-1.1').length;setEngStatus('fluxp',fpcnt>0?'ok':'fail',fpcnt+'/'+PS.length+' product shots');
+const rcnt=newImgs.filter(i=>i.model==='recraft-v3').length;setEngStatus('rc',rcnt>0?'ok':'fail',rcnt+'/'+(AS.length+PS.length)+' images');
+genDoneCount=newImgs.length;document.getElementById('genDone').textContent=genDoneCount;
+if(newImgs.length){newImgs.forEach(x=>{if(!imgs.find(i=>i.imageId===x.imageId))imgs.push(x)});const p=JSON.parse(localStorage.getItem('cb_pending_imgs')||'[]');newImgs.forEach(x=>p.push(x));localStorage.setItem('cb_pending_imgs',JSON.stringify(p));
+setEngStatus('sync','wait','Pushing to GitHub...');
+try{const jc=JSON.stringify({images:imgs.map(i=>({imageId:i.imageId,driveFileId:i.driveFileId,prompt:i.prompt,shotType:i.shotType,style:i.style,batchId:i.batchId,model:i.model,rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:i.generatedAt}))});const s=await fetch(SYNC_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonContent:jc})});const d=await s.json();setEngStatus('sync',d.success?'ok':'fail',d.success?'Everyone can see new assets':'Sync issue — saved locally')}catch(e){setEngStatus('sync','fail','Saved locally only')}}
+updStats();document.getElementById('genSub').textContent=newImgs.length?newImgs.length+' new assets ready to rate!':'Generation complete';document.getElementById('genCloseBtn').style.display='inline-block'}
 function fillNudge(el){document.getElementById('nudgeInput').value=el.textContent}
 function closeGen(){document.getElementById('genOverlay').classList.remove('open');filt='unrated';document.querySelectorAll('.filt-b').forEach(b=>{b.classList.toggle('active',b.dataset.f==='unrated')});render()}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
