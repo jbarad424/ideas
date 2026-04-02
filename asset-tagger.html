@@ -5,137 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>CB Asset Tagger</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0a0a0a; color: #fff; min-height: 100vh; overflow-x: hidden;
-  }
-  #onboarding {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    min-height: 100vh; padding: 2rem; text-align: center;
-  }
-  #onboarding h1 {
-    font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #ff6b35, #f7c948);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  #onboarding p { color: #888; margin-bottom: 2rem; font-size: 0.95rem; }
-  #onboarding input {
-    background: #1a1a1a; border: 2px solid #333; border-radius: 12px; color: #fff;
-    font-size: 1.1rem; padding: 1rem 1.5rem; width: 100%; max-width: 320px;
-    text-align: center; outline: none; transition: border-color 0.2s;
-  }
-  #onboarding input:focus { border-color: #ff6b35; }
-  #onboarding button {
-    margin-top: 1.5rem; background: linear-gradient(135deg, #ff6b35, #e85d2a);
-    color: #fff; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700;
-    padding: 1rem 3rem; cursor: pointer; transition: transform 0.15s, opacity 0.15s;
-  }
-  #onboarding button:active { transform: scale(0.96); }
-  #onboarding button:disabled { opacity: 0.4; cursor: not-allowed; }
-  #app { display: none; flex-direction: column; min-height: 100vh; }
-  .header {
-    padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid #1a1a1a;
-  }
-  .header-left h2 {
-    font-size: 1rem; font-weight: 700;
-    background: linear-gradient(135deg, #ff6b35, #f7c948);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .header-left span { font-size: 0.75rem; color: #666; }
-  .stats { display: flex; gap: 1rem; font-size: 0.8rem; }
-  .stat { text-align: center; }
-  .stat-num { font-weight: 800; font-size: 1.1rem; }
-  .stat-label { color: #666; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; }
-  .stat-good .stat-num { color: #22c55e; }
-  .stat-bad .stat-num { color: #ef4444; }
-  .stat-left .stat-num { color: #888; }
-  .progress-wrap { padding: 0 1.25rem; padding-top: 0.75rem; }
-  .progress-bar { height: 6px; background: #1a1a1a; border-radius: 3px; overflow: hidden; }
-  .progress-fill {
-    height: 100%; background: linear-gradient(90deg, #ff6b35, #f7c948);
-    border-radius: 3px; transition: width 0.4s ease;
-  }
-  .progress-text { text-align: center; font-size: 0.75rem; color: #666; margin-top: 0.35rem; }
-  .card-area {
-    flex: 1; display: flex; align-items: center; justify-content: center;
-    padding: 1rem; position: relative; overflow: hidden;
-  }
-  .card {
-    width: 100%; max-width: 500px; background: #141414; border-radius: 16px;
-    overflow: hidden; position: relative; transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-  .card.swipe-left { transform: translateX(-120%) rotate(-15deg); opacity: 0; }
-  .card.swipe-right { transform: translateX(120%) rotate(15deg); opacity: 0; }
-  .card-image-wrap {
-    width: 100%; aspect-ratio: 4/3; background: #0a0a0a;
-    display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
-  }
-  .card-image-wrap img { width: 100%; height: 100%; object-fit: contain; }
-  .card-image-wrap .placeholder { color: #333; font-size: 3rem; }
-  .card-overlay {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    font-size: 5rem; font-weight: 900; opacity: 0; transition: opacity 0.2s;
-    pointer-events: none; text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-  }
-  .card-overlay.show-good { opacity: 1; color: #22c55e; }
-  .card-overlay.show-bad { opacity: 1; color: #ef4444; }
-  .card-info { padding: 1rem 1.25rem; }
-  .card-info h3 {
-    font-size: 0.9rem; font-weight: 600; white-space: nowrap;
-    overflow: hidden; text-overflow: ellipsis;
-  }
-  .card-info .card-meta { font-size: 0.75rem; color: #666; margin-top: 0.25rem; }
-  .actions { padding: 1rem 1.25rem 2rem; display: flex; gap: 1rem; justify-content: center; }
-  .btn {
-    flex: 1; max-width: 200px; padding: 1rem; border: none; border-radius: 16px;
-    font-size: 1.1rem; font-weight: 800; cursor: pointer;
-    transition: transform 0.12s, box-shadow 0.12s;
-    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-  }
-  .btn:active { transform: scale(0.94); }
-  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
-  .btn-bad { background: #1a0a0a; color: #ef4444; border: 2px solid #331111; }
-  .btn-bad:hover:not(:disabled) { background: #2a0f0f; box-shadow: 0 0 30px rgba(239,68,68,0.15); }
-  .btn-good { background: #0a1a0a; color: #22c55e; border: 2px solid #113311; }
-  .btn-good:hover:not(:disabled) { background: #0f2a0f; box-shadow: 0 0 30px rgba(34,197,94,0.15); }
-  .btn-skip {
-    flex: 0; min-width: 60px; background: #1a1a1a; color: #666;
-    border: 2px solid #222; font-size: 0.85rem; padding: 0.75rem;
-  }
-  .keyboard-hints {
-    text-align: center; padding-bottom: 0.75rem; font-size: 0.7rem; color: #444;
-  }
-  .keyboard-hints kbd {
-    background: #1a1a1a; border: 1px solid #333; border-radius: 4px;
-    padding: 2px 6px; font-family: inherit; font-size: 0.65rem;
-  }
-  #done {
-    display: none; flex-direction: column; align-items: center; justify-content: center;
-    min-height: 80vh; padding: 2rem; text-align: center;
-  }
-  #done h2 { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
-  #done .done-stats { display: flex; gap: 2rem; margin: 1.5rem 0; }
-  #done .done-stat { text-align: center; }
-  #done .done-stat-num { font-size: 2.5rem; font-weight: 900; }
-  #done .done-stat-label { font-size: 0.8rem; color: #666; text-transform: uppercase; }
-  .toast {
-    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-    background: #1a1a1a; color: #aaa; padding: 0.75rem 1.5rem; border-radius: 12px;
-    font-size: 0.85rem; z-index: 100; opacity: 0; transition: opacity 0.3s; pointer-events: none;
-  }
-  .toast.show { opacity: 1; }
-  .badge-video {
-    position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.7);
-    color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;overflow-x:hidden}
+#onboarding{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center}
+#onboarding h1{font-size:2rem;font-weight:800;margin-bottom:0.5rem;background:linear-gradient(135deg,#ff6b35,#f7c948);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#onboarding p{color:#888;margin-bottom:2rem;font-size:0.95rem;max-width:340px;line-height:1.5}
+#onboarding input{background:#1a1a1a;border:2px solid #333;border-radius:12px;color:#fff;font-size:1.1rem;padding:1rem 1.5rem;width:100%;max-width:320px;text-align:center;outline:none;transition:border-color 0.2s}
+#onboarding input:focus{border-color:#ff6b35}
+#onboarding button{margin-top:1.5rem;background:linear-gradient(135deg,#ff6b35,#e85d2a);color:#fff;border:none;border-radius:12px;font-size:1.1rem;font-weight:700;padding:1rem 3rem;cursor:pointer;transition:transform 0.15s,opacity 0.15s}
+#onboarding button:active{transform:scale(0.96)}
+#onboarding button:disabled{opacity:0.4;cursor:not-allowed}
+#app{display:none;flex-direction:column;min-height:100vh}
+.header{padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1a1a1a}
+.header-left h2{font-size:1rem;font-weight:700;background:linear-gradient(135deg,#ff6b35,#f7c948);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-left span{font-size:0.75rem;color:#666}
+.stats{display:flex;gap:0.75rem;font-size:0.8rem}
+.stat{text-align:center}
+.stat-num{font-weight:800;font-size:1rem}
+.stat-label{color:#666;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.5px}
+.stat-action .stat-num{color:#3b82f6}
+.stat-product .stat-num{color:#a855f7}
+.stat-bad .stat-num{color:#ef4444}
+.stat-left .stat-num{color:#888}
+.progress-wrap{padding:0 1.25rem;padding-top:0.75rem}
+.progress-bar{height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#ff6b35,#f7c948);border-radius:3px;transition:width 0.4s ease}
+.progress-text{text-align:center;font-size:0.75rem;color:#666;margin-top:0.35rem}
+.card-area{flex:1;display:flex;align-items:center;justify-content:center;padding:1rem;position:relative;overflow:hidden}
+.card{width:100%;max-width:500px;background:#141414;border-radius:16px;overflow:hidden;position:relative;transition:transform 0.3s ease,opacity 0.3s ease}
+.card.swipe-left{transform:translateX(-120%) rotate(-15deg);opacity:0}
+.card.swipe-right{transform:translateX(120%) rotate(15deg);opacity:0}
+.card.swipe-up{transform:translateY(-120%);opacity:0}
+.card-image-wrap{width:100%;aspect-ratio:4/3;background:#0a0a0a;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.card-image-wrap img{width:100%;height:100%;object-fit:contain}
+.card-image-wrap .placeholder{color:#333;font-size:3rem}
+.card-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3.5rem;font-weight:900;opacity:0;transition:opacity 0.2s;pointer-events:none;text-shadow:0 2px 20px rgba(0,0,0,0.5);text-align:center;line-height:1.2}
+.card-overlay.show-action{opacity:1;color:#3b82f6}
+.card-overlay.show-product{opacity:1;color:#a855f7}
+.card-overlay.show-bad{opacity:1;color:#ef4444}
+.card-info{padding:1rem 1.25rem}
+.card-info h3{font-size:0.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-info .card-meta{font-size:0.75rem;color:#666;margin-top:0.25rem}
+.actions{padding:0.75rem 1rem 1.5rem;display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap}
+.btn{padding:0.85rem 1rem;border:none;border-radius:14px;font-size:0.95rem;font-weight:800;cursor:pointer;transition:transform 0.12s,box-shadow 0.12s;display:flex;align-items:center;justify-content:center;gap:0.4rem;min-width:0;flex:1}
+.btn:active{transform:scale(0.94)}
+.btn:disabled{opacity:0.3;cursor:not-allowed}
+.btn-bad{background:#1a0a0a;color:#ef4444;border:2px solid #331111;max-width:100px}
+.btn-bad:hover:not(:disabled){background:#2a0f0f;box-shadow:0 0 20px rgba(239,68,68,0.15)}
+.btn-action{background:#0a0f1a;color:#3b82f6;border:2px solid #112244}
+.btn-action:hover:not(:disabled){background:#0f1a2f;box-shadow:0 0 20px rgba(59,130,246,0.15)}
+.btn-product{background:#120a1a;color:#a855f7;border:2px solid #221144}
+.btn-product:hover:not(:disabled){background:#1a0f2a;box-shadow:0 0 20px rgba(168,85,247,0.15)}
+.btn-skip{flex:0;min-width:55px;max-width:55px;background:#1a1a1a;color:#666;border:2px solid #222;font-size:0.75rem;padding:0.7rem 0.5rem}
+.keyboard-hints{text-align:center;padding-bottom:0.75rem;font-size:0.65rem;color:#444}
+.keyboard-hints kbd{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:2px 5px;font-family:inherit;font-size:0.6rem}
+#done{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;padding:2rem;text-align:center}
+#done h2{font-size:2rem;font-weight:800;margin-bottom:1rem}
+#done .done-stats{display:flex;gap:2rem;margin:1.5rem 0}
+#done .done-stat{text-align:center}
+#done .done-stat-num{font-size:2.5rem;font-weight:900}
+#done .done-stat-label{font-size:0.8rem;color:#666;text-transform:uppercase}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#aaa;padding:0.75rem 1.5rem;border-radius:12px;font-size:0.85rem;z-index:100;opacity:0;transition:opacity 0.3s;pointer-events:none}
+.toast.show{opacity:1}
 </style>
 </head>
 <body>
 <div id="onboarding">
   <h1>CB Asset Tagger</h1>
-  <p>Rate your Google Drive assets for the training pool</p>
+  <p>Rate Chubby Buttons images from Google Drive. Tag them as Action shots, Product shots, or skip.</p>
   <input type="text" id="userName" placeholder="Enter your name" autocomplete="off">
   <button id="startBtn" onclick="startApp()" disabled>Let's Go</button>
 </div>
@@ -146,7 +83,8 @@
       <span id="userLabel"></span>
     </div>
     <div class="stats">
-      <div class="stat stat-good"><div class="stat-num" id="goodCount">0</div><div class="stat-label">Good</div></div>
+      <div class="stat stat-action"><div class="stat-num" id="actionCount">0</div><div class="stat-label">Action</div></div>
+      <div class="stat stat-product"><div class="stat-num" id="productCount">0</div><div class="stat-label">Product</div></div>
       <div class="stat stat-bad"><div class="stat-num" id="badCount">0</div><div class="stat-label">Bad</div></div>
       <div class="stat stat-left"><div class="stat-num" id="leftCount">0</div><div class="stat-label">Left</div></div>
     </div>
@@ -157,110 +95,203 @@
   </div>
   <div class="card-area" id="cardArea"></div>
   <div class="actions" id="actions" style="display:none">
-    <button class="btn btn-bad" id="btnBad" onclick="rate('bad')"><span style="font-size:1.3rem">&#x2717;</span> BAD</button>
+    <button class="btn btn-bad" id="btnBad" onclick="rate('bad')">&#x2717; BAD</button>
+    <button class="btn btn-action" id="btnAction" onclick="rate('action')">&#x1F3BF; ACTION</button>
+    <button class="btn btn-product" id="btnProduct" onclick="rate('product')">&#x1F4F7; PRODUCT</button>
     <button class="btn btn-skip" onclick="skip()">SKIP</button>
-    <button class="btn btn-good" id="btnGood" onclick="rate('good')"><span style="font-size:1.3rem">&#x2713;</span> GOOD</button>
   </div>
   <div class="keyboard-hints" id="keyHints" style="display:none">
-    <kbd>&larr;</kbd> Bad &middot; <kbd>&rarr;</kbd> Good &middot; <kbd>&darr;</kbd> Skip
+    <kbd>&larr;</kbd> Bad &middot; <kbd>&uarr;</kbd> Action &middot; <kbd>&rarr;</kbd> Product &middot; <kbd>&darr;</kbd> Skip
   </div>
 </div>
 <div id="done">
   <h2>All Done!</h2>
-  <p style="color:#888">You've rated every asset.</p>
+  <p style="color:#888">You've rated every image in this batch.</p>
   <div class="done-stats">
-    <div class="done-stat"><div class="done-stat-num" style="color:#22c55e" id="finalGood">0</div><div class="done-stat-label">Good</div></div>
+    <div class="done-stat"><div class="done-stat-num" style="color:#3b82f6" id="finalAction">0</div><div class="done-stat-label">Action</div></div>
+    <div class="done-stat"><div class="done-stat-num" style="color:#a855f7" id="finalProduct">0</div><div class="done-stat-label">Product</div></div>
     <div class="done-stat"><div class="done-stat-num" style="color:#ef4444" id="finalBad">0</div><div class="done-stat-label">Bad</div></div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
 const API_RATE='https://hook.us1.make.com/3hgk43nm1yj3wjie2dajags96veta66f';
-const STORAGE_KEY='cb_tagger_ratings';
-const ASSETS=[{"f":"10CI24LEWgYE12migYl7phG6Ot9X7iBAa","n":"Chubby Buttons - Shark Tank Audition Video.mp4","t":"video/mp4"},{"f":"1dg_zZZpRG8rqP6srV_VYoVm5X2hzxVP5","n":"BMW Moto - Video w Tunes.mp4","t":"video/mp4"},{"f":"19xXkkAnSnc7Gqg6RMXoxYJX30vo8oM7n","n":"CBXST on TikTok.mp4","t":"video/mp4"},{"f":"1ewizmouLG4psL29pEh_wuoK26OQ-Xlxe","n":"Hunter-_Yellow_Skinz.jpg","t":"image/jpeg"},{"f":"1c6QNsRgjQa9tswFDlQSGFhwhLVmTYQ6_","n":"Tron-_Green_Skinz.jpg","t":"image/jpeg"},{"f":"1xEEyes9ljtiRfjLgGupBzC_pfExrKvOF","n":"1732331362777.jpg","t":"image/jpeg"},{"f":"166fq8GhPKgj8sh9dLxel3YxUpdGjG6BU","n":"Chubby Buttons ARM UP .mov","t":"video/quicktime"},{"f":"1GgY4NIcMNEiBqMdQKsJo4Rt-9LVZzRst","n":"Chubby Button Video On Lift .mov","t":"video/quicktime"},{"f":"144gyFsToGIZAB5tmwto0h-X7WTQu7L_H","n":"Chubby Buttons 4.jpeg","t":"image/jpeg"},{"f":"1L9SIG9F8slhfPrruPvLAMKn3-sDDtdbj","n":"Chubby Buttons 3.jpeg","t":"image/jpeg"},{"f":"16RLgFvGKYCnBRTKvplOY79OD5I7txqck","n":"chubby Buttons 2.jpeg","t":"image/jpeg"},{"f":"1Zuj3MVMqsFXRFD8HcEIumUrxVBUpLwLZ","n":"Chubby Buttons 1.jpeg","t":"image/jpeg"},{"f":"17nHxgOXaJQsbmOZuVQWMlD1WUealPATE","n":"Start Your Someday - Chubby Buttons AD 2 .mp4","t":"video/mp4"},{"f":"1G31i87aTjI8apty9C-1YnmUgoSVe7lb0","n":"Start Your Someday -Chubby Button AD.jpg","t":"image/jpeg"},{"f":"18UnKpXl8ud2Z3nptFRWdKiurPEj2vigd","n":"Start Your Someday Chubby Buttons movie 1.mov","t":"video/quicktime"},{"f":"1uj-MZWuGmmP440xWSiDynVIAHGrHLhm8","n":"Start Your Someday Movie 2 .MOV","t":"video/quicktime"},{"f":"14e0xTjvUu0R-XmKe_tnlbMSZukGGE97M","n":"Start Your Someday Movie 3 .MOV","t":"video/quicktime"},{"f":"1MM9XYub8yoEj6Yc7ulv5FKnOohZ9VXvL","n":"Start Your Someday Movie 4.MOV","t":"video/quicktime"},{"f":"1kgL0MQ5iWbdkqHRvxPgU_rzhFpn3--qb","n":"Founders Call - 2025/01/27 11:13 PST - Recording","t":"video/mp4"},{"f":"1kP5x_YIA4ys9JcYrWJpWW7pQRfNuXudd","n":"Tron- Green Skinz.jpg","t":"image/jpeg"},{"f":"1XE8OKc4A3CcDvjTMgPe6H1G_4iPnujAt","n":"Hunter- Yellow Skinz.jpg","t":"image/jpeg"},{"f":"1EUIc-w7qB0bl9gFnRQgtScK5wUoQQ07c","n":"SkinYellow- Blk Bkgd.jpg","t":"image/jpeg"},{"f":"1FdoSXqGwzGAwq4iZzHWfoKLjztCqR_XZ","n":"SkinGreen- Blk Bkgd.jpg","t":"image/jpeg"},{"f":"1sqYApm0XFxd2Vj5YJ8hqR41e--eL2Ott","n":"SkinGreen- Blk Bkgd.png","t":"image/png"},{"f":"1rNDgrIzijTBg7LY8hy6YHP8BGDMo59_w","n":"SkinGreen.png","t":"image/png"},{"f":"1yLFtnjPBvkvFjt5rsTUt5WOKFXOEcxml","n":"SkinYellow- Blk Bkgd.png","t":"image/png"},{"f":"1edrdvJsLoi7wybPSvA8pfcjoHxmpHPIA","n":"SkinYellow023.jpg","t":"image/jpeg"},{"f":"1nMaGu4yuB_eWCifkx69bsHNfxmUx93Mi","n":"ChubbyButtonsGreen042.jpg","t":"image/jpeg"},{"f":"1ZeRwjTdQWqD1jYLhprqit7kjhr_F-E0v","n":"ChubbyButtonsBlack041.jpg","t":"image/jpeg"},{"f":"16y848FiQqaj60R1jk1AS1yIwbz5Ybx4U","n":"SkinPair024.jpg","t":"image/jpeg"},{"f":"1Hf_eHivbiaKEzMVdMk8UYaDu0V_xKQYv","n":"SkinGreen025.jpg","t":"image/jpeg"},{"f":"10DI_sB3znldaN9PIiCrsbtQqvkM1fPZW","n":"ChubbyButtonsPair040.jpg","t":"image/jpeg"},{"f":"1TZJb30yt4yLMgKzgtR72yezQtJiZSors","n":"ChubbyButtonsPair039.jpg","t":"image/jpeg"},{"f":"1IeW6pSeVrjfEI534B4AOHTFi9Qn2DfqW","n":"Vertical Pair.png","t":"image/png"},{"f":"16mX7Y3Mpi3mzOII4B_Z5fimZkBMJWN3E","n":"Tron- GreenSleeve763.jpg","t":"image/jpeg"},{"f":"1xTqWb4OHWDxGuj9cN6c-TtwOSxZni4-z","n":"Hunter- YellowSleeve.png","t":"image/png"},{"f":"1XzXW82QLsQtSccJuNXO4oB7NWdKSmtf6","n":"Tron- GreenSleeve.png","t":"image/png"},{"f":"1oMtvCu-NcwR4u8OxzXpUUbOP1EhQjaFo","n":"Horizontal Pair.png","t":"image/png"},{"f":"1ohQofD6RYW_NGBLgeSxhnh5AD6BOp7Un","n":"Horiztonal Pair- 765.jpg","t":"image/jpeg"},{"f":"1vS5WP0vzTYkQiAjn2FTLzHf1grTyqgVd","n":"Hunter- YellowSleeve762.jpg","t":"image/jpeg"},{"f":"1TZvvulWd4e38ti4tNWIgfA5-xok3W9cB","n":"Vertical Pair 764.jpg","t":"image/jpeg"},{"f":"1WBAdZ2i9RcWSuLAi14cBCMGNazyppuv8","n":"220WaterIHG(208).MOV","t":"video/quicktime"},{"f":"1mFUEza80hrjU8QSie37wpsGrJTH8048t","n":"Debt to Jordan- end of 2023.png","t":"image/png"},{"f":"1v8tWEQOkDcdTSUfBuYNOwZvWOr9VI0dE","n":"Transfers btwn Jordan and Chubby.png","t":"image/png"},{"f":"1UBJi13KV378dYMVSmHrDWyg_d_Yp5aZv","n":"66Water3D.MOV","t":"video/quicktime"},{"f":"1s_rXjq93VpOKFszS3gub0ozFEtD1bGea","n":"Certificate.JPG","t":"image/jpeg"},{"f":"1xgMUElbt6PppjO5XQPqZSzVuuOMUD-7n","n":"Chubby Buttons - Shark Tank Recording.mkv","t":"video/x-matroska"},{"f":"1wxtjmehPgOSu5NFB_hK031cQXIr7ccyh","n":"Chubby Buttons - Shark Tank Recording.mkv","t":"video/x-matroska"},{"f":"18GxkESEaLsi8KEfS8Z1z13j9vI4OWY6C","n":"IMG_7327.jpg","t":"image/jpeg"},{"f":"12Vf4OiHVDkUiyDxGutKz19yeaiOB3k-6","n":"IMG_7328.jpg","t":"image/jpeg"},{"f":"1qx1yHoObpBz_PvkaWYIWt_tS07vXrW3i","n":"IMG_7330.jpg","t":"image/jpeg"},{"f":"15ajEYetxc_ADSDB7bN3P5MiZkZ0TV5Je","n":"IMG_7329.jpg","t":"image/jpeg"},{"f":"1ENMcFwSU3BsRXKrMJu3YWHQ14KtJ2POE","n":"How much Chubby owed Jordan throughout 2022.png","t":"image/png"},{"f":"1hgfKGwlO35TX6OqTubd8d576OKTjMfwK","n":"Transfers to and from Jordan's Accounts (9603 and 3681).png","t":"image/png"},{"f":"1DJ_kF4mt3o8nYO6sSvqE5BBhjBisYCOG","n":"CBxST META Announcement.mp4","t":"video/mp4"},{"f":"1ZjvE74XE3YnaLuf7gPp5Ps8UbMOAMgDg","n":"Dune Buggy - Alan Maccini.jpg","t":"image/jpeg"},{"f":"1Q1mDVl6g_u4pAuicnRh1N1uIcMHy-ThV","n":"Mike Anderson 3.JPG","t":"image/jpeg"},{"f":"1VYYuE6dxHbFAcdX5sVCmiaklXJ7TPAXS","n":"Mike Anderson 2.JPG","t":"image/jpeg"},{"f":"1uZXxrbAj44n-5MLZqASi2PCpfmHS1xKZ","n":"Mike Anderson 1.JPG","t":"image/jpeg"},{"f":"1azgucdAvLh4ChxUNxN9x8NeOdpPDFIWg","n":"20230110-195739-607.MP4","t":"video/mp4"},{"f":"1VI1gHKPrG76RAHaXY9mJ4GG6Sjiv42jW","n":"4b973cadd0b044bc9bb412c5be088b91.MOV","t":"video/quicktime"},{"f":"1620NVxvsPjlrA4FZWsYMWUI4nudAToL8","n":"50b12cf6-0fad-44c5-90f2-35d3d05ae4ba.JPG","t":"image/jpeg"},{"f":"181kKXEevve9ECRB3gwizUIlgtyflPzYb","n":"d19ee4a4-0fea-4f2d-92cf-9bc332d78ec6.JPG","t":"image/jpeg"},{"f":"10bXZU7Gp1i8JXRaqSgmD--U4TH1QKLVi","n":"Cole Conderman 2.jpg","t":"image/jpeg"},{"f":"10ZCqxOcOBOWcPT30MoLa7taH5VQ0QR7V","n":"Cole Conderman 1.jpg","t":"image/jpeg"},{"f":"10Y4WacamPtARkEkJa7zhwHK4X5iqFpMP","n":"Thomas Warden 2.jpg","t":"image/jpeg"},{"f":"1GruyG-KYx1mhEB8svQUO742HpKKt82pK","n":"Thomas Warden.jpg","t":"image/jpeg"},{"f":"10Kgkp8k2ydsFdI26koqFATge0lzUo-G2","n":"DudeShopping2.jpg","t":"image/jpeg"},{"f":"10IPsn_AfOc37fXgj5p7gxKvZE5DiGJGZ","n":"DudeShopping1.jpg","t":"image/jpeg"},{"f":"10Fy5imxyP6tlW5vmCGhu16_2K-LRs3gV","n":"Kitty Basslines- happycorekitty.jpg","t":"image/jpeg"},{"f":"1AEDaRp4biFkEE0DqgL5Nr1TSPoatmueJ","n":"alec pulvidente","t":"video/mp4"},{"f":"1Mh8zMqgHmMiN4E6Xx6VcmryBH-K9joNq","n":"WhatsApp Image 2023-01-24 at 3.11.49 PM.jpeg","t":"image/jpeg"},{"f":"16YXjmR3J-8JUUkLbqUghxQgyn0QK6W60","n":"WhatsApp Image 2023-01-24 at 3.11.49 PM.jpeg","t":"image/jpeg"},{"f":"18-lmkYy4a35mhaCyooCy35636sbtuE2c","n":"WhatsApp Image 2023-01-24 at 3.11.48 PM.jpeg","t":"image/jpeg"},{"f":"1oAAMh9xMdeKAXnKl4ZZsZHNC8Thn4RZc","n":"WhatsApp Image 2023-01-24 at 3.11.48 PM.jpeg","t":"image/jpeg"},{"f":"1O6dUppM7q6JPzxgrbM5wwE9CfRw_UrWh","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (1).jpeg","t":"image/jpeg"},{"f":"1TSOtvEwTiBQ1-cFqsBhqoVB-uj-4Ect2","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (1).jpeg","t":"image/jpeg"},{"f":"1WUKCIESvK-mz8X4WVcmpIqAzMRUU6EPZ","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM.jpeg","t":"image/jpeg"},{"f":"1RtGB_SiFjj_DBXsAVlyqxFzUW06WAcvS","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM.jpeg","t":"image/jpeg"},{"f":"1sdwBfPyNmM6fipERZYzgzBetY6PoZ5FU","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (1).jpeg","t":"image/jpeg"},{"f":"1f06V0AxDrVbqk0vE6DV8eUfkHhY2A9bZ","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (1).jpeg","t":"image/jpeg"},{"f":"1YjkkCWRxhigYS5jjw2Ak0PsatdwQO0dy","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM.jpeg","t":"image/jpeg"},{"f":"1wgVT-RhpZpeLaQjKyPINFgE5TF10so-L","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM.jpeg","t":"image/jpeg"},{"f":"1KYNifk_A9p_oP2tPz83q8kC0uMl0lu7r","n":"WhatsApp Image 2023-01-24 at 3.11.45 PM.jpeg","t":"image/jpeg"},{"f":"1v1VmULtTe2h85E1AgZ1zT8KLLHQc2aNx","n":"WhatsApp Image 2023-01-24 at 3.11.45 PM.jpeg","t":"image/jpeg"},{"f":"1lzKSQkwGieGPybV_e_PLhO0XEA6g0y8s","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (1).jpeg","t":"image/jpeg"},{"f":"1U-6ZJej5SMlTXctBs8jH3Des6ybcHJMW","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (1).jpeg","t":"image/jpeg"},{"f":"1d-DHrFXb4ZA4jb7_DZjvLx3ZJXfsRgrR","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM.jpeg","t":"image/jpeg"},{"f":"1ZrDK2XAd_uSKSsdXxVQOZEbYkt-K3vJH","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM.jpeg","t":"image/jpeg"},{"f":"1s_p7UalfT3etToy4PWn_mXfEAcEqxxyq","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (1).jpeg","t":"image/jpeg"},{"f":"1LmlOXBUoI_Hu3up-X_PtSxX7ZSw3v7Ko","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (1).jpeg","t":"image/jpeg"},{"f":"1TTiwuPHt0e61IHNCCXjHWplY5-Jb7p1I","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM.jpeg","t":"image/jpeg"},{"f":"1ZSQDs0MuEc65Qlof5PKfnDid8yRgZS8p","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM.jpeg","t":"image/jpeg"},{"f":"1eWf8e-QRABi76e9RHh6vM9Lf-rnaJw0T","n":"WhatsApp Image 2023-01-24 at 3.11.42 PM.jpeg","t":"image/jpeg"},{"f":"1nM4KnqTgRh0y4Kyr5pBuWNBZgiiq86zt","n":"WhatsApp Image 2023-01-24 at 3.11.42 PM.jpeg","t":"image/jpeg"},{"f":"1LNOoGMVrDzB9K-uo3HJrBLlXEZNnXiBi","n":"WhatsApp Image 2023-01-24 at 3.10.08 PM.jpeg","t":"image/jpeg"},{"f":"1VWf8gvQ9LCtPDDy1CjGy_U1I9-Yw0hO5","n":"WhatsApp Image 2023-01-24 at 3.10.08 PM.jpeg","t":"image/jpeg"},{"f":"1PgN3NThixizrEVPYL_8IolPx9wfUnD1J","n":"WhatsApp Image 2023-01-24 at 3.10.07 PM.jpeg","t":"image/jpeg"},{"f":"1hyN11usdRV32iycFUS6wnyYQGS51uCua","n":"WhatsApp Image 2023-01-24 at 3.10.07 PM.jpeg","t":"image/jpeg"},{"f":"1uyygotPrT5mZWrD1AGVpWlW5WnTWOcas","n":"WhatsApp Image 2023-01-24 at 3.10.06 PM (1).jpeg","t":"image/jpeg"}];
-let currentIndex=0,userName='',goodCount=0,badCount=0,isRating=false,ratings={};
-const nameInput=document.getElementById('userName'),startBtn=document.getElementById('startBtn');
-const saved=localStorage.getItem('cb_tagger_name');
-if(saved){nameInput.value=saved;startBtn.disabled=false;}
-nameInput.addEventListener('input',()=>{startBtn.disabled=!nameInput.value.trim();});
-nameInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&nameInput.value.trim())startApp();});
+const STORAGE_KEY='cb_tagger_ratings_v2';
+const ASSETS=[
+{"f":"1ewizmouLG4psL29pEh_wuoK26OQ-Xlxe","n":"Hunter-_Yellow_Skinz.jpg"},
+{"f":"1c6QNsRgjQa9tswFDlQSGFhwhLVmTYQ6_","n":"Tron-_Green_Skinz.jpg"},
+{"f":"1xEEyes9ljtiRfjLgGupBzC_pfExrKvOF","n":"1732331362777.jpg"},
+{"f":"144gyFsToGIZAB5tmwto0h-X7WTQu7L_H","n":"Chubby Buttons 4.jpeg"},
+{"f":"1L9SIG9F8slhfPrruPvLAMKn3-sDDtdbj","n":"Chubby Buttons 3.jpeg"},
+{"f":"16RLgFvGKYCnBRTKvplOY79OD5I7txqck","n":"chubby Buttons 2.jpeg"},
+{"f":"1Zuj3MVMqsFXRFD8HcEIumUrxVBUpLwLZ","n":"Chubby Buttons 1.jpeg"},
+{"f":"1G31i87aTjI8apty9C-1YnmUgoSVe7lb0","n":"Start Your Someday -Chubby Button AD.jpg"},
+{"f":"1kP5x_YIA4ys9JcYrWJpWW7pQRfNuXudd","n":"Tron- Green Skinz.jpg"},
+{"f":"1XE8OKc4A3CcDvjTMgPe6H1G_4iPnujAt","n":"Hunter- Yellow Skinz.jpg"},
+{"f":"1EUIc-w7qB0bl9gFnRQgtScK5wUoQQ07c","n":"SkinYellow- Blk Bkgd.jpg"},
+{"f":"1FdoSXqGwzGAwq4iZzHWfoKLjztCqR_XZ","n":"SkinGreen- Blk Bkgd.jpg"},
+{"f":"1sqYApm0XFxd2Vj5YJ8hqR41e--eL2Ott","n":"SkinGreen- Blk Bkgd.png"},
+{"f":"1rNDgrIzijTBg7LY8hy6YHP8BGDMo59_w","n":"SkinGreen.png"},
+{"f":"1yLFtnjPBvkvFjt5rsTUt5WOKFXOEcxml","n":"SkinYellow- Blk Bkgd.png"},
+{"f":"1edrdvJsLoi7wybPSvA8pfcjoHxmpHPIA","n":"SkinYellow023.jpg"},
+{"f":"1nMaGu4yuB_eWCifkx69bsHNfxmUx93Mi","n":"ChubbyButtonsGreen042.jpg"},
+{"f":"1ZeRwjTdQWqD1jYLhprqit7kjhr_F-E0v","n":"ChubbyButtonsBlack041.jpg"},
+{"f":"16y848FiQqaj60R1jk1AS1yIwbz5Ybx4U","n":"SkinPair024.jpg"},
+{"f":"1Hf_eHivbiaKEzMVdMk8UYaDu0V_xKQYv","n":"SkinGreen025.jpg"},
+{"f":"10DI_sB3znldaN9PIiCrsbtQqvkM1fPZW","n":"ChubbyButtonsPair040.jpg"},
+{"f":"1TZJb30yt4yLMgKzgtR72yezQtJiZSors","n":"ChubbyButtonsPair039.jpg"},
+{"f":"1IeW6pSeVrjfEI534B4AOHTFi9Qn2DfqW","n":"Vertical Pair.png"},
+{"f":"16mX7Y3Mpi3mzOII4B_Z5fimZkBMJWN3E","n":"Tron- GreenSleeve763.jpg"},
+{"f":"1xTqWb4OHWDxGuj9cN6c-TtwOSxZni4-z","n":"Hunter- YellowSleeve.png"},
+{"f":"1XzXW82QLsQtSccJuNXO4oB7NWdKSmtf6","n":"Tron- GreenSleeve.png"},
+{"f":"1oMtvCu-NcwR4u8OxzXpUUbOP1EhQjaFo","n":"Horizontal Pair.png"},
+{"f":"1ohQofD6RYW_NGBLgeSxhnh5AD6BOp7Un","n":"Horiztonal Pair- 765.jpg"},
+{"f":"1vS5WP0vzTYkQiAjn2FTLzHf1grTyqgVd","n":"Hunter- YellowSleeve762.jpg"},
+{"f":"1TZvvulWd4e38ti4tNWIgfA5-xok3W9cB","n":"Vertical Pair 764.jpg"},
+{"f":"1mFUEza80hrjU8QSie37wpsGrJTH8048t","n":"Debt to Jordan- end of 2023.png"},
+{"f":"1v8tWEQOkDcdTSUfBuYNOwZvWOr9VI0dE","n":"Transfers btwn Jordan and Chubby.png"},
+{"f":"1s_rXjq93VpOKFszS3gub0ozFEtD1bGea","n":"Certificate.JPG"},
+{"f":"18GxkESEaLsi8KEfS8Z1z13j9vI4OWY6C","n":"IMG_7327.jpg"},
+{"f":"12Vf4OiHVDkUiyDxGutKz19yeaiOB3k-6","n":"IMG_7328.jpg"},
+{"f":"1qx1yHoObpBz_PvkaWYIWt_tS07vXrW3i","n":"IMG_7330.jpg"},
+{"f":"15ajEYetxc_ADSDB7bN3P5MiZkZ0TV5Je","n":"IMG_7329.jpg"},
+{"f":"1ENMcFwSU3BsRXKrMJu3YWHQ14KtJ2POE","n":"How much Chubby owed Jordan throughout 2022.png"},
+{"f":"1hgfKGwlO35TX6OqTubd8d576OKTjMfwK","n":"Transfers to and from Jordan's Accounts.png"},
+{"f":"1ZjvE74XE3YnaLuf7gPp5Ps8UbMOAMgDg","n":"Dune Buggy - Alan Maccini.jpg"},
+{"f":"1Q1mDVl6g_u4pAuicnRh1N1uIcMHy-ThV","n":"Mike Anderson 3.JPG"},
+{"f":"1VYYuE6dxHbFAcdX5sVCmiaklXJ7TPAXS","n":"Mike Anderson 2.JPG"},
+{"f":"1uZXxrbAj44n-5MLZqASi2PCpfmHS1xKZ","n":"Mike Anderson 1.JPG"},
+{"f":"1620NVxvsPjlrA4FZWsYMWUI4nudAToL8","n":"50b12cf6-0fad-44c5-90f2-35d3d05ae4ba.JPG"},
+{"f":"181kKXEevve9ECRB3gwizUIlgtyflPzYb","n":"d19ee4a4-0fea-4f2d-92cf-9bc332d78ec6.JPG"},
+{"f":"10bXZU7Gp1i8JXRaqSgmD--U4TH1QKLVi","n":"Cole Conderman 2.jpg"},
+{"f":"10ZCqxOcOBOWcPT30MoLa7taH5VQ0QR7V","n":"Cole Conderman 1.jpg"},
+{"f":"10Y4WacamPtARkEkJa7zhwHK4X5iqFpMP","n":"Thomas Warden 2.jpg"},
+{"f":"1GruyG-KYx1mhEB8svQUO742HpKKt82pK","n":"Thomas Warden.jpg"},
+{"f":"10Kgkp8k2ydsFdI26koqFATge0lzUo-G2","n":"DudeShopping2.jpg"},
+{"f":"10IPsn_AfOc37fXgj5p7gxKvZE5DiGJGZ","n":"DudeShopping1.jpg"},
+{"f":"10Fy5imxyP6tlW5vmCGhu16_2K-LRs3gV","n":"Kitty Basslines- happycorekitty.jpg"},
+{"f":"1Mh8zMqgHmMiN4E6Xx6VcmryBH-K9joNq","n":"WhatsApp Image 2023-01-24 at 3.11.49 PM.jpeg"},
+{"f":"16YXjmR3J-8JUUkLbqUghxQgyn0QK6W60","n":"WhatsApp Image 2023-01-24 at 3.11.49 PM (2).jpeg"},
+{"f":"18-lmkYy4a35mhaCyooCy35636sbtuE2c","n":"WhatsApp Image 2023-01-24 at 3.11.48 PM.jpeg"},
+{"f":"1oAAMh9xMdeKAXnKl4ZZsZHNC8Thn4RZc","n":"WhatsApp Image 2023-01-24 at 3.11.48 PM (2).jpeg"},
+{"f":"1O6dUppM7q6JPzxgrbM5wwE9CfRw_UrWh","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (1).jpeg"},
+{"f":"1TSOtvEwTiBQ1-cFqsBhqoVB-uj-4Ect2","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (2).jpeg"},
+{"f":"1WUKCIESvK-mz8X4WVcmpIqAzMRUU6EPZ","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM.jpeg"},
+{"f":"1RtGB_SiFjj_DBXsAVlyqxFzUW06WAcvS","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (3).jpeg"},
+{"f":"1sdwBfPyNmM6fipERZYzgzBetY6PoZ5FU","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (1).jpeg"},
+{"f":"1f06V0AxDrVbqk0vE6DV8eUfkHhY2A9bZ","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (2).jpeg"},
+{"f":"1YjkkCWRxhigYS5jjw2Ak0PsatdwQO0dy","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM.jpeg"},
+{"f":"1wgVT-RhpZpeLaQjKyPINFgE5TF10so-L","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (3).jpeg"},
+{"f":"1KYNifk_A9p_oP2tPz83q8kC0uMl0lu7r","n":"WhatsApp Image 2023-01-24 at 3.11.45 PM.jpeg"},
+{"f":"1v1VmULtTe2h85E1AgZ1zT8KLLHQc2aNx","n":"WhatsApp Image 2023-01-24 at 3.11.45 PM (2).jpeg"},
+{"f":"1lzKSQkwGieGPybV_e_PLhO0XEA6g0y8s","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (1).jpeg"},
+{"f":"1U-6ZJej5SMlTXctBs8jH3Des6ybcHJMW","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (2).jpeg"},
+{"f":"1d-DHrFXb4ZA4jb7_DZjvLx3ZJXfsRgrR","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM.jpeg"},
+{"f":"1ZrDK2XAd_uSKSsdXxVQOZEbYkt-K3vJH","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (3).jpeg"},
+{"f":"1s_p7UalfT3etToy4PWn_mXfEAcEqxxyq","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (1).jpeg"},
+{"f":"1LmlOXBUoI_Hu3up-X_PtSxX7ZSw3v7Ko","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (2).jpeg"},
+{"f":"1TTiwuPHt0e61IHNCCXjHWplY5-Jb7p1I","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM.jpeg"},
+{"f":"1ZSQDs0MuEc65Qlof5PKfnDid8yRgZS8p","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (3).jpeg"},
+{"f":"1eWf8e-QRABi76e9RHh6vM9Lf-rnaJw0T","n":"WhatsApp Image 2023-01-24 at 3.11.42 PM.jpeg"},
+{"f":"1nM4KnqTgRh0y4Kyr5pBuWNBZgiiq86zt","n":"WhatsApp Image 2023-01-24 at 3.11.42 PM (2).jpeg"},
+{"f":"1LNOoGMVrDzB9K-uo3HJrBLlXEZNnXiBi","n":"WhatsApp Image 2023-01-24 at 3.10.08 PM.jpeg"},
+{"f":"1VWf8gvQ9LCtPDDy1CjGy_U1I9-Yw0hO5","n":"WhatsApp Image 2023-01-24 at 3.10.08 PM (2).jpeg"},
+{"f":"1PgN3NThixizrEVPYL_8IolPx9wfUnD1J","n":"WhatsApp Image 2023-01-24 at 3.10.07 PM.jpeg"},
+{"f":"1hyN11usdRV32iycFUS6wnyYQGS51uCua","n":"WhatsApp Image 2023-01-24 at 3.10.07 PM (2).jpeg"},
+{"f":"1uyygotPrT5mZWrD1AGVpWlW5WnTWOcas","n":"WhatsApp Image 2023-01-24 at 3.10.06 PM (1).jpeg"}
+];
+let ci=0,userName='',actionCount=0,productCount=0,badCount=0,isRating=false,ratings={};
+const ni=document.getElementById('userName'),sb=document.getElementById('startBtn');
+const sv=localStorage.getItem('cb_tagger_name');
+if(sv){ni.value=sv;sb.disabled=false;}
+ni.addEventListener('input',()=>{sb.disabled=!ni.value.trim();});
+ni.addEventListener('keydown',e=>{if(e.key==='Enter'&&ni.value.trim())startApp();});
 function startApp(){
-  userName=nameInput.value.trim();if(!userName)return;
+  userName=ni.value.trim();if(!userName)return;
   localStorage.setItem('cb_tagger_name',userName);
   ratings=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
-  goodCount=Object.values(ratings).filter(r=>r==='good').length;
+  actionCount=Object.values(ratings).filter(r=>r==='action').length;
+  productCount=Object.values(ratings).filter(r=>r==='product').length;
   badCount=Object.values(ratings).filter(r=>r==='bad').length;
-  currentIndex=ASSETS.findIndex(a=>!ratings[a.f]);
-  if(currentIndex===-1)currentIndex=ASSETS.length;
+  ci=ASSETS.findIndex(a=>!ratings[a.f]);
+  if(ci===-1)ci=ASSETS.length;
   document.getElementById('onboarding').style.display='none';
   document.getElementById('app').style.display='flex';
   document.getElementById('userLabel').textContent=userName;
   document.getElementById('actions').style.display='flex';
   document.getElementById('keyHints').style.display='block';
-  updateStats();showCurrentCard();
+  updateStats();showCard();
 }
 function updateStats(){
-  const total=ASSETS.length,rated=goodCount+badCount,pct=total?Math.round(rated/total*100):0;
-  document.getElementById('goodCount').textContent=goodCount;
+  const total=ASSETS.length,rated=actionCount+productCount+badCount,pct=total?Math.round(rated/total*100):0;
+  document.getElementById('actionCount').textContent=actionCount;
+  document.getElementById('productCount').textContent=productCount;
   document.getElementById('badCount').textContent=badCount;
   document.getElementById('leftCount').textContent=total-rated;
   document.getElementById('progressFill').style.width=pct+'%';
   document.getElementById('progressText').textContent=rated+' of '+total+' rated ('+pct+'%)';
 }
-function showCurrentCard(){
-  while(currentIndex<ASSETS.length&&ratings[ASSETS[currentIndex].f])currentIndex++;
-  if(currentIndex>=ASSETS.length){showDone();return;}
-  const a=ASSETS[currentIndex],isV=a.t&&a.t.startsWith('video/');
+function showCard(){
+  while(ci<ASSETS.length&&ratings[ASSETS[ci].f])ci++;
+  if(ci>=ASSETS.length){showDone();return;}
+  const a=ASSETS[ci];
   const thumb='https://drive.google.com/thumbnail?id='+a.f+'&sz=w800';
-  const driveUrl='https://drive.google.com/file/d/'+a.f+'/view';
+  const url='https://drive.google.com/file/d/'+a.f+'/view';
   document.getElementById('cardArea').innerHTML=
-    '<div class="card" id="currentCard">'+
-    '<div class="card-image-wrap"><img src="'+thumb+'" alt="'+esc(a.n)+'" onerror="this.parentElement.innerHTML=\'<div class=placeholder>'+(isV?'&#x1f3ac;':'&#x1f5bc;')+'</div>\'">'+
-    (isV?'<div class="badge-video">VIDEO</div>':'')+
-    '</div><div class="card-overlay" id="cardOverlay"></div>'+
+    '<div class="card" id="card">'+
+    '<div class="card-image-wrap"><img src="'+thumb+'" alt="'+esc(a.n)+'" onerror="this.parentElement.innerHTML=\'<div class=placeholder>&#x1f5bc;</div>\'"></div>'+
+    '<div class="card-overlay" id="overlay"></div>'+
     '<div class="card-info"><h3>'+esc(a.n)+'</h3>'+
-    '<div class="card-meta"><a href="'+driveUrl+'" target="_blank" rel="noopener" style="color:#ff6b35;text-decoration:none">Open in Drive &rarr;</a></div></div></div>';
-  document.getElementById('btnBad').disabled=false;
-  document.getElementById('btnGood').disabled=false;
+    '<div class="card-meta"><a href="'+url+'" target="_blank" rel="noopener" style="color:#ff6b35;text-decoration:none">Open in Drive &rarr;</a></div></div></div>';
+  ['btnBad','btnAction','btnProduct'].forEach(id=>{document.getElementById(id).disabled=false;});
 }
 function rate(r){
-  if(isRating||currentIndex>=ASSETS.length)return;isRating=true;
-  const a=ASSETS[currentIndex],card=document.getElementById('currentCard'),ov=document.getElementById('cardOverlay');
-  ov.textContent=r==='good'?'GOOD':'NOPE';
-  ov.className='card-overlay '+(r==='good'?'show-good':'show-bad');
-  document.getElementById('btnBad').disabled=true;document.getElementById('btnGood').disabled=true;
-  setTimeout(()=>{card.classList.add(r==='good'?'swipe-right':'swipe-left');},200);
+  if(isRating||ci>=ASSETS.length)return;isRating=true;
+  const a=ASSETS[ci],card=document.getElementById('card'),ov=document.getElementById('overlay');
+  const labels={action:'ACTION',product:'PRODUCT',bad:'NOPE'};
+  ov.textContent=labels[r];
+  ov.className='card-overlay show-'+r;
+  ['btnBad','btnAction','btnProduct'].forEach(id=>{document.getElementById(id).disabled=true;});
+  const anim={bad:'swipe-left',action:'swipe-up',product:'swipe-right'};
+  setTimeout(()=>{card.classList.add(anim[r]);},200);
   ratings[a.f]=r;localStorage.setItem(STORAGE_KEY,JSON.stringify(ratings));
-  if(r==='good')goodCount++;else badCount++;updateStats();
+  if(r==='action')actionCount++;else if(r==='product')productCount++;else badCount++;
+  updateStats();
   fetch(API_RATE,{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({fileId:a.f,rating:r,ratedBy:userName,ratedAt:new Date().toISOString()})
-  }).catch(e=>console.error('Sync failed:',e));
-  setTimeout(()=>{currentIndex++;showCurrentCard();isRating=false;},450);
+  }).catch(()=>{});
+  setTimeout(()=>{ci++;showCard();isRating=false;},450);
 }
 function skip(){
-  if(isRating||currentIndex>=ASSETS.length)return;isRating=true;
-  const card=document.getElementById('currentCard');
-  if(card){card.style.transition='transform 0.3s,opacity 0.3s';card.style.transform='translateY(100px)';card.style.opacity='0';}
-  setTimeout(()=>{currentIndex++;showCurrentCard();isRating=false;},300);
+  if(isRating||ci>=ASSETS.length)return;isRating=true;
+  const card=document.getElementById('card');
+  if(card){card.style.transition='transform 0.3s,opacity 0.3s';card.style.transform='scale(0.8)';card.style.opacity='0';}
+  setTimeout(()=>{ci++;showCard();isRating=false;},300);
 }
 function showDone(){
   document.getElementById('app').style.display='none';
   document.getElementById('done').style.display='flex';
-  document.getElementById('finalGood').textContent=goodCount;
+  document.getElementById('finalAction').textContent=actionCount;
+  document.getElementById('finalProduct').textContent=productCount;
   document.getElementById('finalBad').textContent=badCount;
 }
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 document.addEventListener('keydown',e=>{
   if(document.getElementById('app').style.display!=='flex')return;
-  if(e.key==='ArrowLeft')rate('bad');else if(e.key==='ArrowRight')rate('good');else if(e.key==='ArrowDown')skip();
+  if(e.key==='ArrowLeft')rate('bad');
+  else if(e.key==='ArrowUp')rate('action');
+  else if(e.key==='ArrowRight')rate('product');
+  else if(e.key==='ArrowDown')skip();
 });
 let tx=0,ty=0;
 document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
 document.addEventListener('touchend',e=>{
   if(document.getElementById('app').style.display!=='flex')return;
   const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
-  if(Math.abs(dx)<60||Math.abs(dy)>Math.abs(dx))return;
-  dx>0?rate('good'):rate('bad');
+  const ax=Math.abs(dx),ay=Math.abs(dy);
+  if(ax<50&&ay<50)return;
+  if(ay>ax&&dy<0){rate('action');return;}
+  if(ax>ay){dx>0?rate('product'):rate('bad');}
 },{passive:true});
 </script>
 </body>
