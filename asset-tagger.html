@@ -146,7 +146,7 @@ function updStats(){document.getElementById('nDone').textContent=imgs.filter(i=>
 function setMode(m){mode=m;document.querySelectorAll('.mode-b').forEach(b=>b.classList.remove('active'));document.getElementById(m==='swipe'?'mSwipe':m==='grid'?'mGrid':'mCreate').classList.add('active');document.getElementById('swipeArea').style.display=m==='swipe'?'block':'none';document.getElementById('gridWrap').style.display=m==='grid'?'block':'none';document.getElementById('comingSoonWrap').style.display=m==='create'?'block':'none';document.getElementById('rateSection').style.display=m==='create'?'none':'block';ci=0;if(m!=='create')render()}
 function setFilt(el){document.querySelectorAll('.filt-b').forEach(b=>b.classList.remove('active'));el.classList.add('active');filt=el.dataset.f;ci=0;render()}
 function render(){mode==='swipe'?renderSwipe():mode==='grid'?renderGrid():null}
-function mBadge(m){if(!m)return'';if(m.includes('recraft'))return'<span class="badge b-recraft">Recraft</span>';if(m==='runway')return'<span class="badge b-runway">Runway</span>';return'<span class="badge b-flux">FLUX</span>'}
+function mBadge(m){if(!m)return'';if(m.includes('recraft'))return'<span class="badge b-recraft">Recraft</span>';if(m==='runway')return'<span class="badge b-runway">Runway</span>';if(m==='flux-kontext-pro')return'<span class="badge b-flux">FLUX Kontext</span>';if(m==='flux-pro-1.1')return'<span class="badge b-flux">FLUX Pro</span>';return'<span class="badge b-flux">FLUX</span>'}
 function tBadge(t){return t?'<span class="badge b-'+t+'">'+esc(t)+'</span>':''}
 function sBadge(s){return s?'<span class="badge b-'+s+'">'+esc(s)+'</span>':''}
 // PROMPT REFINEMENT ENGINE
