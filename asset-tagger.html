@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>CB Asset Tagger</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Onboarding */
+  #onboarding {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  #onboarding h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #ff6b35, #f7c948);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  #onboarding p {
+    color: #888;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+  #onboarding input {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  #onboarding input:focus {
+    border-color: #ff6b35;
+  }
+
+  #onboarding button {
+    margin-top: 1.5rem;
+    background: linear-gradient(135deg, #ff6b35, #e85d2a);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+  }
+
+  #onboarding button:active { transform: scale(0.96); }
+  #onboarding button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Main App */
+  #app {
+    display: none;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .header-left h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b35, #f7c948);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header-left span {
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  .stats {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+
+  .stat-label {
+    color: #666;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .stat-good .stat-num { color: #22c55e; }
+  .stat-bad .stat-num { color: #ef4444; }
+  .stat-left .stat-num { color: #888; }
+
+  /* Progress Bar */
+  .progress-wrap {
+    padding: 0 1.25rem;
+    padding-top: 0.75rem;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b35, #f7c948);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-text {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 0.35rem;
+  }
+
+  /* Card Area */
+  .card-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 500px;
+    background: #141414;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .card.swipe-left {
+    transform: translateX(-120%) rotate(-15deg);
+    opacity: 0;
+  }
+
+  .card.swipe-right {
+    transform: translateX(120%) rotate(15deg);
+    opacity: 0;
+  }
+
+  .card-image-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .card-image-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .card-image-wrap .placeholder {
+    color: #333;
+    font-size: 3rem;
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-weight: 900;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  .card-overlay.show-good {
+    opacity: 1;
+    color: #22c55e;
+  }
+
+  .card-overlay.show-bad {
+    opacity: 1;
+    color: #ef4444;
+  }
+
+  .card-info {
+    padding: 1rem 1.25rem;
+  }
+
+  .card-info h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-info .card-meta {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 0.25rem;
+  }
+
+  /* Buttons */
+  .actions {
+    padding: 1rem 1.25rem 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .btn {
+    flex: 1;
+    max-width: 200px;
+    padding: 1rem;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .btn:active { transform: scale(0.94); }
+  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .btn-bad {
+    background: #1a0a0a;
+    color: #ef4444;
+    border: 2px solid #331111;
+  }
+
+  .btn-bad:hover:not(:disabled) {
+    background: #2a0f0f;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.15);
+  }
+
+  .btn-good {
+    background: #0a1a0a;
+    color: #22c55e;
+    border: 2px solid #113311;
+  }
+
+  .btn-good:hover:not(:disabled) {
+    background: #0f2a0f;
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.15);
+  }
+
+  .btn-skip {
+    flex: 0;
+    min-width: 60px;
+    background: #1a1a1a;
+    color: #666;
+    border: 2px solid #222;
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+
+  /* Loading */
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 1rem;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #222;
+    border-top-color: #ff6b35;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading p { color: #666; font-size: 0.9rem; }
+
+  /* Done screen */
+  #done {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  #done h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  #done .done-stats {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0;
+  }
+
+  #done .done-stat {
+    text-align: center;
+  }
+
+  #done .done-stat-num {
+    font-size: 2.5rem;
+    font-weight: 900;
+  }
+
+  #done .done-stat-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+  }
+
+  /* Keyboard hints */
+  .keyboard-hints {
+    text-align: center;
+    padding-bottom: 0.75rem;
+    font-size: 0.7rem;
+    color: #444;
+  }
+
+  .keyboard-hints kbd {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: inherit;
+    font-size: 0.65rem;
+  }
+
+  /* Error toast */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #331111;
+    color: #ef4444;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- Onboarding -->
+<div id="onboarding">
+  <h1>CB Asset Tagger</h1>
+  <p>Rate your Google Drive assets for the training pool</p>
+  <input type="text" id="userName" placeholder="Enter your name" autocomplete="off">
+  <button id="startBtn" onclick="startApp()" disabled>Let's Go</button>
+</div>
+
+<!-- Main App -->
+<div id="app">
+  <div class="header">
+    <div class="header-left">
+      <h2>CB Asset Tagger</h2>
+      <span id="userLabel"></span>
+    </div>
+    <div class="stats">
+      <div class="stat stat-good">
+        <div class="stat-num" id="goodCount">0</div>
+        <div class="stat-label">Good</div>
+      </div>
+      <div class="stat stat-bad">
+        <div class="stat-num" id="badCount">0</div>
+        <div class="stat-label">Bad</div>
+      </div>
+      <div class="stat stat-left">
+        <div class="stat-num" id="leftCount">0</div>
+        <div class="stat-label">Left</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+    <div class="progress-text" id="progressText">Loading assets...</div>
+  </div>
+
+  <div class="card-area" id="cardArea">
+    <div class="loading" id="loadingState">
+      <div class="spinner"></div>
+      <p>Loading assets from Google Drive...</p>
+    </div>
+  </div>
+
+  <div class="actions" id="actions" style="display:none">
+    <button class="btn btn-bad" id="btnBad" onclick="rate('bad')">
+      <span style="font-size:1.3rem">&#x2717;</span> BAD
+    </button>
+    <button class="btn btn-skip" onclick="skip()">SKIP</button>
+    <button class="btn btn-good" id="btnGood" onclick="rate('good')">
+      <span style="font-size:1.3rem">&#x2713;</span> GOOD
+    </button>
+  </div>
+
+  <div class="keyboard-hints" id="keyHints" style="display:none">
+    <kbd>&larr;</kbd> Bad &nbsp;&middot;&nbsp; <kbd>&rarr;</kbd> Good &nbsp;&middot;&nbsp; <kbd>&darr;</kbd> Skip
+  </div>
+</div>
+
+<!-- Done Screen -->
+<div id="done">
+  <h2>All Done!</h2>
+  <p style="color:#888;">You've rated every asset in the Drive.</p>
+  <div class="done-stats">
+    <div class="done-stat">
+      <div class="done-stat-num" style="color:#22c55e" id="finalGood">0</div>
+      <div class="done-stat-label">Good</div>
+    </div>
+    <div class="done-stat">
+      <div class="done-stat-num" style="color:#ef4444" id="finalBad">0</div>
+      <div class="done-stat-label">Bad</div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+const API_GET = 'https://hook.us1.make.com/bjh9fp7qrqjrhyfaqslj9kbk8lqh7ken';
+const API_RATE = 'https://hook.us1.make.com/3hgk43nm1yj3wjie2dajags96veta66f';
+
+let assets = [];
+let currentIndex = 0;
+let userName = '';
+let goodCount = 0;
+let badCount = 0;
+let isRating = false;
+
+// Onboarding
+const nameInput = document.getElementById('userName');
+const startBtn = document.getElementById('startBtn');
+
+// Restore name from localStorage
+const savedName = localStorage.getItem('cb_tagger_name');
+if (savedName) {
+  nameInput.value = savedName;
+  startBtn.disabled = false;
+}
+
+nameInput.addEventListener('input', () => {
+  startBtn.disabled = nameInput.value.trim().length === 0;
+});
+
+nameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && nameInput.value.trim()) startApp();
+});
+
+function startApp() {
+  userName = nameInput.value.trim();
+  if (!userName) return;
+  localStorage.setItem('cb_tagger_name', userName);
+  
+  document.getElementById('onboarding').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('userLabel').textContent = userName;
+  
+  loadAssets();
+}
+
+async function loadAssets() {
+  try {
+    const res = await fetch(API_GET, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+    const data = await res.json();
+    
+    assets = (Array.isArray(data) ? data : []).map(item => ({
+      key: item.key || item.fileId,
+      fileId: item.fileId || item.key,
+      fileName: item.fileName || 'Unknown',
+      mimeType: item.mimeType || '',
+      rating: item.rating || '',
+      ratedBy: item.ratedBy || '',
+    }));
+
+    // Count already-rated
+    goodCount = assets.filter(a => a.rating === 'good').length;
+    badCount = assets.filter(a => a.rating === 'bad').length;
+
+    // Find first unrated asset
+    currentIndex = assets.findIndex(a => !a.rating);
+    if (currentIndex === -1) currentIndex = assets.length;
+
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('actions').style.display = 'flex';
+    document.getElementById('keyHints').style.display = 'block';
+    
+    updateStats();
+    showCurrentCard();
+  } catch (err) {
+    document.getElementById('loadingState').innerHTML = '<p style="color:#ef4444">Failed to load assets. Check the Make.com scenario is active.</p>';
+    console.error(err);
+  }
+}
+
+function updateStats() {
+  const total = assets.length;
+  const rated = goodCount + badCount;
+  const remaining = total - rated;
+  const pct = total > 0 ? Math.round((rated / total) * 100) : 0;
+
+  document.getElementById('goodCount').textContent = goodCount;
+  document.getElementById('badCount').textContent = badCount;
+  document.getElementById('leftCount').textContent = remaining;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${rated} of ${total} rated (${pct}%)`;
+}
+
+function showCurrentCard() {
+  const cardArea = document.getElementById('cardArea');
+  
+  // Find next unrated
+  while (currentIndex < assets.length && assets[currentIndex].rating) {
+    currentIndex++;
+  }
+
+  if (currentIndex >= assets.length) {
+    showDone();
+    return;
+  }
+
+  const asset = assets[currentIndex];
+  const isVideo = asset.mimeType && asset.mimeType.startsWith('video/');
+  const thumbUrl = `https://drive.google.com/thumbnail?id=${asset.fileId}&sz=w800`;
+  const driveUrl = `https://drive.google.com/file/d/${asset.fileId}/view`;
+
+  let mediaHtml;
+  if (isVideo) {
+    mediaHtml = `
+      <div class="card-image-wrap">
+        <img src="${thumbUrl}" alt="${asset.fileName}" onerror="this.parentElement.innerHTML='<div class=placeholder>&#x1f3ac;</div>'">
+        <div style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.7);color:#fff;padding:4px 10px;border-radius:6px;font-size:0.7rem;font-weight:600;">VIDEO</div>
+      </div>`;
+  } else {
+    mediaHtml = `
+      <div class="card-image-wrap">
+        <img src="${thumbUrl}" alt="${asset.fileName}" onerror="this.parentElement.innerHTML='<div class=placeholder>&#x1f5bc;</div>'">
+      </div>`;
+  }
+
+  cardArea.innerHTML = `
+    <div class="card" id="currentCard">
+      ${mediaHtml}
+      <div class="card-overlay" id="cardOverlay"></div>
+      <div class="card-info">
+        <h3>${escapeHtml(asset.fileName)}</h3>
+        <div class="card-meta">
+          <a href="${driveUrl}" target="_blank" rel="noopener" style="color:#ff6b35;text-decoration:none;">Open in Drive &rarr;</a>
+        </div>
+      </div>
+    </div>`;
+    
+  document.getElementById('btnBad').disabled = false;
+  document.getElementById('btnGood').disabled = false;
+}
+
+async function rate(rating) {
+  if (isRating || currentIndex >= assets.length) return;
+  isRating = true;
+
+  const asset = assets[currentIndex];
+  const card = document.getElementById('currentCard');
+  const overlay = document.getElementById('cardOverlay');
+
+  // Show overlay
+  overlay.textContent = rating === 'good' ? 'GOOD' : 'NOPE';
+  overlay.className = 'card-overlay ' + (rating === 'good' ? 'show-good' : 'show-bad');
+
+  // Disable buttons
+  document.getElementById('btnBad').disabled = true;
+  document.getElementById('btnGood').disabled = true;
+
+  // Animate card out
+  setTimeout(() => {
+    card.classList.add(rating === 'good' ? 'swipe-right' : 'swipe-left');
+  }, 200);
+
+  // Update local state
+  asset.rating = rating;
+  asset.ratedBy = userName;
+  if (rating === 'good') goodCount++;
+  else badCount++;
+  updateStats();
+
+  // Save to backend (fire and forget with retry)
+  saveRating(asset.fileId, rating);
+
+  // Show next card
+  setTimeout(() => {
+    currentIndex++;
+    showCurrentCard();
+    isRating = false;
+  }, 450);
+}
+
+function skip() {
+  if (isRating || currentIndex >= assets.length) return;
+  isRating = true;
+
+  const card = document.getElementById('currentCard');
+  if (card) {
+    card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    card.style.transform = 'translateY(100px)';
+    card.style.opacity = '0';
+  }
+
+  setTimeout(() => {
+    currentIndex++;
+    showCurrentCard();
+    isRating = false;
+  }, 300);
+}
+
+async function saveRating(fileId, rating) {
+  const now = new Date().toISOString();
+  try {
+    await fetch(API_RATE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fileId, rating, ratedBy: userName, ratedAt: now })
+    });
+  } catch (err) {
+    console.error('Failed to save rating:', err);
+    showToast('Rating saved locally but failed to sync. Will retry.');
+  }
+}
+
+function showDone() {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('done').style.display = 'flex';
+  document.getElementById('finalGood').textContent = goodCount;
+  document.getElementById('finalBad').textContent = badCount;
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('app').style.display !== 'flex') return;
+  if (e.key === 'ArrowLeft') rate('bad');
+  else if (e.key === 'ArrowRight') rate('good');
+  else if (e.key === 'ArrowDown') skip();
+});
+
+// Touch swipe support
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+  if (document.getElementById('app').style.display !== 'flex') return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx)) return;
+  if (dx > 0) rate('good');
+  else rate('bad');
+}, { passive: true });
+</script>
+</body>
+</html>
