@@ -124,17 +124,20 @@ const REF_IMAGES={tron:'https://www.chubbybuttons.io/cdn/shop/products/GreenSnow
 function isVideo(img){return img.model==='runway'||/\.(mp4|webm)/i.test(img.driveFileId||'')}
 function thumbUrl(img){if(isVideo(img))return'';return'https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w800'}
 function vidUrl(img){return img.driveFileId}
+// NAME
 const ni=document.getElementById('nameInput'),nb=document.getElementById('nameBtn');
 const savedName=localStorage.getItem(LNAME);
 if(savedName){ni.value=savedName;nb.disabled=false}
 ni.addEventListener('input',()=>{nb.disabled=!ni.value.trim()});
 ni.addEventListener('keydown',e=>{if(e.key==='Enter'&&ni.value.trim())startApp()});
 function quickName(n){ni.value=n;nb.disabled=false;startApp()}
-function startApp(){userName=ni.value.trim();if(!userName)return;
+function startApp(){userName=ni.value.trim();if(!userName)return;// Normalize: capitalize first letter
 userName=userName.charAt(0).toUpperCase()+userName.slice(1).toLowerCase();localStorage.setItem(LNAME,userName);document.getElementById('nameScreen').style.display='none';document.getElementById('mainApp').style.display='block';document.getElementById('userTag').textContent=userName;init()}
+// LOCAL RATINGS (per-user)
 function getLocal(){try{return JSON.parse(localStorage.getItem(lsk())||'{}')}catch(e){return{}}}
 function saveLocal(id,data){const r=getLocal();r[id]=data;localStorage.setItem(lsk(),JSON.stringify(r))}
-async function init(){try{const r=await fetch(DATA_URL+'?t='+Date.now());const d=await r.json();imgs=d.images||d||[]}catch(e){imgs=[]}
+// MAIN
+async function init(){try{const r=await fetch(DATA_URL+'?t='+Date.now());const d=await r.json();imgs=d.images||d||[]}catch(e){imgs=[]}// Also load any pending locally-generated images
 try{const p=JSON.parse(localStorage.getItem('cb_pending_imgs')||'[]');if(p.length){p.forEach(pi=>{if(!imgs.find(i=>i.imageId===pi.imageId))imgs.push(pi)})}}catch(e){}
 const local=getLocal();imgs.forEach(img=>{if(local[img.imageId]&&local[img.imageId].rating){img.rating=local[img.imageId].rating;img.feedbackTags=local[img.imageId].feedbackTags||'';img.feedbackText=local[img.imageId].feedbackText||'';img.ratedAt=local[img.imageId].ratedAt||''}});updStats();render()}
 function filtered(){let f=imgs;if(filt==='unrated')f=f.filter(i=>!i.rating);else if(filt==='rated')f=f.filter(i=>i.rating);return f}
@@ -146,6 +149,7 @@ function render(){mode==='swipe'?renderSwipe():mode==='grid'?renderGrid():null}
 function mBadge(m){if(!m)return'';if(m.includes('recraft'))return'<span class="badge b-recraft">Recraft</span>';if(m==='runway')return'<span class="badge b-runway">Runway</span>';return'<span class="badge b-flux">FLUX</span>'}
 function tBadge(t){return t?'<span class="badge b-'+t+'">'+esc(t)+'</span>':''}
 function sBadge(s){return s?'<span class="badge b-'+s+'">'+esc(s)+'</span>':''}
+// PROMPT REFINEMENT ENGINE
 function analyzeRatings(){const local=getLocal();const rated=imgs.filter(i=>local[i.imageId]&&local[i.imageId].rating);if(!rated.length)return null;
 const likes=[],dislikes=[],mixed=[];const posTags=[],negTags=[];const goodScenes=[],badScenes=[];
 rated.forEach(img=>{const r=local[img.imageId];const fb=tryParse(r.feedbackText);const tags=tryParse(r.feedbackTags)||[];
@@ -161,14 +165,14 @@ return{total:rated.length,likes:likes.length,dislikes:dislikes.length,mixed:mixe
 function tryParse(s){try{return JSON.parse(s)}catch(e){return null}}
 function buildRefinedPrompts(scene,colorway){const insights=analyzeRatings();const colorDesc={tron:'black body with green button icons (CB2 Tron)',hunter:'green body with yellow button icons (CB2 Hunter)',patriot:'red white and blue (CB2 Patriot)'};
 let avoid='';let emphasize='';
-if(insights){if(insights.topNeg.length){const avoidMap={'Doesnt look like CB2':'match reference exactly','Product floating/detached':'strap firmly to forearm','Weird hands/fingers':'natural hands','AI artifacts visible':'no AI artifacts','Unrealistic/uncanny':'natural authentic','Boring/generic setting':'dramatic setting','Bad lighting':'cinematic lighting','Scene too busy/cluttered':'clean composition'};
+if(insights){if(insights.topNeg.length){const avoidMap={'Doesnt look like CB2':'make the wearable remote look exactly like the reference product photo','Product floating/detached':'ensure the device is firmly strapped to the forearm, not floating','Weird hands/fingers':'keep hands natural and realistic','AI artifacts visible':'avoid any AI artifacts, aim for photorealistic quality','Unrealistic/uncanny':'make the scene feel natural and authentic','Boring/generic setting':'make the environment dramatic and visually striking','Bad lighting':'use professional cinematic lighting','Scene too busy/cluttered':'keep the composition clean and focused'};
 avoid=insights.topNeg.map(t=>avoidMap[t]||'').filter(Boolean).join('. ')}
-if(insights.topPos.length){const empMap={'Product looks accurate':'match reference','Natural placement on arm':'natural placement','Love the lighting/mood':'dramatic lighting','Epic scenery':'epic landscape','Great composition':'strong composition','On-brand energy':'high-energy lifestyle','Would use this in an ad':'commercial hero shot'};
+if(insights.topPos.length){const empMap={'Product looks accurate':'keep the product looking exactly like the reference','Natural placement on arm':'maintain natural placement on forearm','Love the lighting/mood':'emphasize dramatic professional lighting','Epic scenery':'create breathtaking landscape backdrop','Great composition':'maintain strong composition with rule of thirds','On-brand energy':'capture high-energy active lifestyle feeling','Would use this in an ad':'commercial advertising quality, hero shot'};
 emphasize=insights.topPos.map(t=>empMap[t]||'').filter(Boolean).join('. ')}}
-const base=scene+'. '+colorDesc[colorway]+' CB2 remote on forearm.';
-const quality=' Pro sports photography, photorealistic, 4K, commercial.';
+const base=scene+'. Person wearing a compact '+colorDesc[colorway]+' wearable remote with 5 round buttons on their forearm armband.';
+const quality=' Professional action sports photography, photorealistic, 4K, commercial advertising quality.';
 const refinements=(emphasize?' '+emphasize+'.':'')+(avoid?' Avoid: '+avoid+'.':'');
-return{fluxPrompt:'Place the '+colorDesc[colorway]+' CB2 on forearm: '+scene+'.'+refinements+quality,recraftPrompt:base+refinements+quality,insights}}
+return{fluxPrompt:'Place this exact '+colorDesc[colorway]+' wearable remote on the person\'s forearm in this scene: '+scene+'.'+refinements+quality,recraftPrompt:base+refinements+quality,insights}}
 function renderInsights(){const insights=analyzeRatings();if(!insights||insights.total<2)return'';
 let html='<div class="insights-box"><div class="insights-title">What your ratings taught us</div>';
 html+='<div class="insights-row"><span class="insights-icon">&#128200;</span> <span>'+insights.total+' rated: '+insights.likes+' liked, '+insights.dislikes+' disliked, '+insights.mixed+' mixed</span></div>';
@@ -189,21 +193,26 @@ function setGridType(t){gridType=t;renderGrid()}
 function openLb(idx,fromGrid){const f=fromGrid?gridFiltered():filtered();if(idx<0||idx>=f.length)return;lbIdx=idx;window._lbFromGrid=!!fromGrid;const img=f[idx];const lbI=document.getElementById('lbImg'),lbV=document.getElementById('lbVid');if(isVideo(img)){lbI.style.display='none';lbV.style.display='block';lbV.src=vidUrl(img);lbV.play().catch(()=>{})}else{lbV.style.display='none';lbV.pause();lbI.style.display='block';lbI.src='https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w1200'}document.getElementById('lbBadges').innerHTML=mBadge(img.model)+tBadge(img.shotType)+sBadge(img.style);document.getElementById('lbPrompt').textContent=img.prompt||'';document.getElementById('lb').classList.add('open')}
 function closeLb(){document.getElementById('lb').classList.remove('open');document.getElementById('lbVid').pause();lbIdx=-1}
 function lbChangeRating(){const f=window._lbFromGrid?gridFiltered():filtered();if(lbIdx<0||lbIdx>=f.length)return;const img=f[lbIdx];img.rating='';img.feedbackTags='';img.feedbackText='';img.ratedAt='';saveLocal(img.imageId,{rating:'',feedbackTags:'',feedbackText:'',ratedAt:''});fetch(RATE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageId:img.imageId,rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',ratedBy:userName})}).catch(()=>{});closeLb();updStats();filt='unrated';document.querySelectorAll('.filt-b').forEach(b=>{b.classList.toggle('active',b.dataset.f==='unrated')});setMode('swipe');const newF=filtered();const newIdx=newF.findIndex(i=>i.imageId===img.imageId);if(newIdx>=0)ci=newIdx;render();showToast('Rating cleared — rate it again!')}
+// GENERATE MORE
 function addGenLog(text,status){const log=document.getElementById('genLog');const d=document.createElement('div');d.className='gen-log-item';d.innerHTML='<div class="gen-log-dot '+status+'"></div><span>'+esc(text)+'</span>';log.appendChild(d);log.scrollTop=log.scrollHeight}
 async function generateMore(){const btn=document.getElementById('genMoreBtn');if(btn)btn.disabled=true;
 const overlay=document.getElementById('genOverlay');overlay.classList.add('open');document.getElementById('genLog').innerHTML='';document.getElementById('genCloseBtn').style.display='none';
+// 1. Analyze ratings
 addGenLog('Analyzing your ratings...','pending');const insights=analyzeRatings();
 if(!insights||insights.total<1){addGenLog('Need at least 1 rating to generate. Rate some images first!','err');document.getElementById('genCloseBtn').style.display='inline-block';return}
 addGenLog('Found '+insights.total+' ratings: '+insights.likes+' liked, '+insights.dislikes+' disliked','done');
 if(insights.topPos.length)addGenLog('Reinforcing: '+insights.topPos.join(', '),'done');
 if(insights.topNeg.length)addGenLog('Avoiding: '+insights.topNeg.join(', '),'done');
+// 2. Read nudge direction
 const nudge=document.getElementById('nudgeInput')?.value?.trim()||'';
 if(nudge)addGenLog('Direction: '+nudge,'done');
-const ACTION_SCENES=['Skier carving powder, dramatic mountain, golden hour','Snowboarder mid-air, powder spray, blue sky','Mountain biker, steep forest trail, dappled sunlight'];
-const PRODUCT_SCENES=['CB2 on dark slate, studio lighting, product photo','Flat lay: CB2 with goggles, earbuds, coffee on rustic wood'];
+// Scene arrays
+const ACTION_SCENES=['Skier carving through fresh powder on a dramatic mountain, golden hour, the viewer should feel "damn I wish that were me"','Snowboarder mid-air jump with powder spray, bright blue sky, peak action moment','Mountain biker racing down a steep forest trail with dappled sunlight, motion and energy'];
+const PRODUCT_SCENES=['CB2 device on a clean dark slate surface with dramatic studio side lighting, premium product photography','Flat lay on rustic weathered wood: CB2 device with ski goggles, premium earbuds, and coffee, warm overhead natural lighting, editorial style'];
 let actionScenes=[...ACTION_SCENES];
 let productScenes=[...PRODUCT_SCENES];
-if(nudge){actionScenes.push(nudge+', dramatic sports photography, aspirational')}
+if(nudge){actionScenes.push(nudge+', dramatic professional action sports photography, the viewer should feel "damn I wish that were me"')}
+// 3. Colorway selection — nudge override or rotate to least-used
 let colorway='tron';
 if(nudge.toLowerCase().includes('hunter'))colorway='hunter';
 else if(nudge.toLowerCase().includes('patriot'))colorway='patriot';
@@ -212,24 +221,29 @@ addGenLog('Colorway: '+colorway,'done');
 const totalGen=actionScenes.length*2+productScenes.length*2+1;
 document.getElementById('genSub').textContent='Generating ~'+totalGen+' assets (images + video) with refined prompts...';
 const batchId='auto-'+Date.now();const newImgs=[];const promises=[];
+// ACTION scenes — FLUX Kontext + Recraft
 for(const scene of actionScenes){const refined=buildRefinedPrompts(scene,colorway);
 addGenLog('FLUX Action: '+scene.substring(0,40)+'...','pending');
 promises.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-kontext-pro',body:{prompt:refined.fluxPrompt,input_image:REF_IMAGES[colorway],output_format:'jpeg',safety_tolerance:2},shotType:'action',style:colorway,batchId:batchId,model:'flux-kontext-pro',prompt:refined.fluxPrompt})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('FLUX Action done: '+d.imageId,'done');newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:refined.fluxPrompt,shotType:'action',style:colorway,batchId:batchId,model:'flux-kontext-pro',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('FLUX Action error','err')}).catch(e=>{addGenLog('FLUX Action failed: '+e.message,'err')}));
 addGenLog('Recraft Action: '+scene.substring(0,40)+'...','pending');
 promises.push(fetch(RECRAFT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:refined.recraftPrompt,shotType:'action',style:colorway,batchId:batchId})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('Recraft Action done: '+d.imageId,'done');newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:refined.recraftPrompt,shotType:'action',style:colorway,batchId:batchId,model:'recraft-v3',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('Recraft Action error','err')}).catch(e=>{addGenLog('Recraft Action failed: '+e.message,'err')}));}
+// PRODUCT scenes — FLUX text-to-image (no ref image) + Recraft
 for(const scene of productScenes){const refined=buildRefinedPrompts(scene,colorway);
 addGenLog('FLUX Product: '+scene.substring(0,40)+'...','pending');
 promises.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-pro-1.1',body:{prompt:refined.recraftPrompt,width:1024,height:768,output_format:'jpeg',safety_tolerance:2},shotType:'product',style:colorway,batchId:batchId,model:'flux-pro-1.1',prompt:refined.recraftPrompt})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('FLUX Product done: '+d.imageId,'done');newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:refined.recraftPrompt,shotType:'product',style:colorway,batchId:batchId,model:'flux-pro-1.1',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('FLUX Product error','err')}).catch(e=>{addGenLog('FLUX Product failed: '+e.message,'err')}));
 addGenLog('Recraft Product: '+scene.substring(0,40)+'...','pending');
 promises.push(fetch(RECRAFT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:refined.recraftPrompt,shotType:'product',style:colorway,batchId:batchId})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('Recraft Product done: '+d.imageId,'done');newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:refined.recraftPrompt,shotType:'product',style:colorway,batchId:batchId,model:'recraft-v3',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('Recraft Product error','err')}).catch(e=>{addGenLog('Recraft Product failed: '+e.message,'err')}));}
+// RUNWAY VIDEO — 1 video from first action scene
 addGenLog('Runway Video: generating (takes ~2min)...','pending');
 const runScene=actionScenes[0];
 const runPrompt='The person with the wearable remote '+runScene+', cinematic slow motion, professional sports videography';
 promises.push(fetch(RUNWAY_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:runPrompt,image_url:REF_IMAGES[colorway],shotType:'action',style:colorway,batchId:batchId})}).then(r=>r.json()).then(d=>{if(d.success){addGenLog('Runway Video done!','done');newImgs.push({imageId:d.imageId||('vid-'+Date.now()),driveFileId:d.driveFileId||d.videoUrl||'',prompt:runPrompt,shotType:'action',style:colorway,batchId,model:'runway',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}else addGenLog('Runway error','err')}).catch(e=>{addGenLog('Runway failed: '+e.message,'err')}));
 await Promise.allSettled(promises);
+// 3. Add new images to local array + localStorage pending
 if(newImgs.length){newImgs.forEach(ni=>{if(!imgs.find(i=>i.imageId===ni.imageId))imgs.push(ni)});
 const pending=JSON.parse(localStorage.getItem('cb_pending_imgs')||'[]');newImgs.forEach(ni=>pending.push(ni));localStorage.setItem('cb_pending_imgs',JSON.stringify(pending));
 addGenLog('Added '+newImgs.length+' new assets to your queue!','done');
+// 4. Sync to GitHub so everyone sees them
 addGenLog('Syncing to GitHub for all users...','sync');
 const jsonContent=JSON.stringify({images:imgs.map(i=>({imageId:i.imageId,driveFileId:i.driveFileId,prompt:i.prompt,shotType:i.shotType,style:i.style,batchId:i.batchId,model:i.model,rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:i.generatedAt}))});
 try{const sr=await fetch(SYNC_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonContent})});const sd=await sr.json();if(sd.success)addGenLog('Synced! Everyone can see new assets now.','done');else addGenLog('Sync warning: '+JSON.stringify(sd),'err')}catch(e){addGenLog('Sync failed (assets still saved locally): '+e.message,'err')}}else{addGenLog('No new assets generated. Try again later.','err')}
