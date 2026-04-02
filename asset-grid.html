@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CB Asset Grid</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh}
+.top-bar{position:sticky;top:0;z-index:10;background:#0a0a0ae0;backdrop-filter:blur(12px);padding:1rem 1.5rem;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem}
+.top-bar h1{font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#ff6b35,#f7c948);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top-bar .count{font-size:0.85rem;color:#888}
+.filters{display:flex;gap:0.5rem;flex-wrap:wrap}
+.filters button{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:0.4rem 0.8rem;border-radius:8px;font-size:0.75rem;cursor:pointer;transition:all 0.2s}
+.filters button.active{border-color:#ff6b35;color:#ff6b35;background:#1a0f0a}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px;padding:4px}
+@media(max-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}
+.cell{position:relative;aspect-ratio:1;background:#111;overflow:hidden;cursor:pointer;transition:transform 0.15s}
+.cell:hover{transform:scale(1.02);z-index:2}
+.cell img{width:100%;height:100%;object-fit:cover;transition:opacity 0.3s}
+.cell img.loading{opacity:0}
+.cell .name{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));padding:0.5rem 0.4rem 0.3rem;font-size:0.6rem;color:#ccc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity 0.2s}
+.cell:hover .name{opacity:1}
+.cell .tag{position:absolute;top:6px;right:6px;padding:2px 6px;border-radius:4px;font-size:0.55rem;font-weight:700;text-transform:uppercase;opacity:0.9}
+.tag-action{background:#1d4ed8;color:#fff}
+.tag-product{background:#7c3aed;color:#fff}
+.tag-bad{background:#991b1b;color:#fff}
+.lightbox{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.95);flex-direction:column;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:70vh;object-fit:contain;border-radius:8px}
+.lightbox .lb-name{color:#aaa;font-size:0.9rem;margin-top:1rem;text-align:center;max-width:80vw}
+.lightbox .lb-actions{display:flex;gap:0.75rem;margin-top:1.5rem}
+.lightbox .lb-btn{padding:0.7rem 1.5rem;border:none;border-radius:12px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:transform 0.12s}
+.lightbox .lb-btn:active{transform:scale(0.94)}
+.lb-bad{background:#1a0a0a;color:#ef4444;border:2px solid #331111}
+.lb-action{background:#0a0f1a;color:#3b82f6;border:2px solid #112244}
+.lb-product{background:#120a1a;color:#a855f7;border:2px solid #221144}
+.lb-close{position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:#666;font-size:2rem;cursor:pointer}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.5rem;padding:1rem 0.75rem;cursor:pointer;border-radius:8px}
+.lb-nav:hover{background:rgba(255,255,255,0.2)}
+.lb-prev{left:1rem}
+.lb-next{right:1rem}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div>
+    <h1>CB Asset Grid</h1>
+    <span class="count" id="countLabel">Loading...</span>
+  </div>
+  <div class="filters">
+    <button class="active" onclick="filterGrid('all')">All</button>
+    <button onclick="filterGrid('unrated')">Unrated</button>
+    <button onclick="filterGrid('action')">Action</button>
+    <button onclick="filterGrid('product')">Product</button>
+    <button onclick="filterGrid('bad')">Bad</button>
+  </div>
+</div>
+<div class="grid" id="grid"></div>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLB()">&times;</button>
+  <button class="lb-nav lb-prev" onclick="navLB(-1)">&larr;</button>
+  <button class="lb-nav lb-next" onclick="navLB(1)">&rarr;</button>
+  <img id="lbImg" src="">
+  <div class="lb-name" id="lbName"></div>
+  <div class="lb-actions">
+    <button class="lb-btn lb-bad" onclick="tagFromLB('bad')">&#x2717; BAD</button>
+    <button class="lb-btn lb-action" onclick="tagFromLB('action')">&#x1F3BF; ACTION</button>
+    <button class="lb-btn lb-product" onclick="tagFromLB('product')">&#x1F4F7; PRODUCT</button>
+  </div>
+</div>
+<script>
+const API_RATE='https://hook.us1.make.com/3hgk43nm1yj3wjie2dajags96veta66f';
+const SK='cb_tagger_ratings_v2';
+const ASSETS=[
+{"f":"1ewizmouLG4psL29pEh_wuoK26OQ-Xlxe","n":"Hunter-_Yellow_Skinz.jpg"},
+{"f":"1c6QNsRgjQa9tswFDlQSGFhwhLVmTYQ6_","n":"Tron-_Green_Skinz.jpg"},
+{"f":"1xEEyes9ljtiRfjLgGupBzC_pfExrKvOF","n":"1732331362777.jpg"},
+{"f":"144gyFsToGIZAB5tmwto0h-X7WTQu7L_H","n":"Chubby Buttons 4.jpeg"},
+{"f":"1L9SIG9F8slhfPrruPvLAMKn3-sDDtdbj","n":"Chubby Buttons 3.jpeg"},
+{"f":"16RLgFvGKYCnBRTKvplOY79OD5I7txqck","n":"chubby Buttons 2.jpeg"},
+{"f":"1Zuj3MVMqsFXRFD8HcEIumUrxVBUpLwLZ","n":"Chubby Buttons 1.jpeg"},
+{"f":"1G31i87aTjI8apty9C-1YnmUgoSVe7lb0","n":"Start Your Someday -Chubby Button AD.jpg"},
+{"f":"1kP5x_YIA4ys9JcYrWJpWW7pQRfNuXudd","n":"Tron- Green Skinz.jpg"},
+{"f":"1XE8OKc4A3CcDvjTMgPe6H1G_4iPnujAt","n":"Hunter- Yellow Skinz.jpg"},
+{"f":"1EUIc-w7qB0bl9gFnRQgtScK5wUoQQ07c","n":"SkinYellow- Blk Bkgd.jpg"},
+{"f":"1FdoSXqGwzGAwq4iZzHWfoKLjztCqR_XZ","n":"SkinGreen- Blk Bkgd.jpg"},
+{"f":"1sqYApm0XFxd2Vj5YJ8hqR41e--eL2Ott","n":"SkinGreen- Blk Bkgd.png"},
+{"f":"1rNDgrIzijTBg7LY8hy6YHP8BGDMo59_w","n":"SkinGreen.png"},
+{"f":"1yLFtnjPBvkvFjt5rsTUt5WOKFXOEcxml","n":"SkinYellow- Blk Bkgd.png"},
+{"f":"1edrdvJsLoi7wybPSvA8pfcjoHxmpHPIA","n":"SkinYellow023.jpg"},
+{"f":"1nMaGu4yuB_eWCifkx69bsHNfxmUx93Mi","n":"ChubbyButtonsGreen042.jpg"},
+{"f":"1ZeRwjTdQWqD1jYLhprqit7kjhr_F-E0v","n":"ChubbyButtonsBlack041.jpg"},
+{"f":"16y848FiQqaj60R1jk1AS1yIwbz5Ybx4U","n":"SkinPair024.jpg"},
+{"f":"1Hf_eHivbiaKEzMVdMk8UYaDu0V_xKQYv","n":"SkinGreen025.jpg"},
+{"f":"10DI_sB3znldaN9PIiCrsbtQqvkM1fPZW","n":"ChubbyButtonsPair040.jpg"},
+{"f":"1TZJb30yt4yLMgKzgtR72yezQtJiZSors","n":"ChubbyButtonsPair039.jpg"},
+{"f":"1IeW6pSeVrjfEI534B4AOHTFi9Qn2DfqW","n":"Vertical Pair.png"},
+{"f":"16mX7Y3Mpi3mzOII4B_Z5fimZkBMJWN3E","n":"Tron- GreenSleeve763.jpg"},
+{"f":"1xTqWb4OHWDxGuj9cN6c-TtwOSxZni4-z","n":"Hunter- YellowSleeve.png"},
+{"f":"1XzXW82QLsQtSccJuNXO4oB7NWdKSmtf6","n":"Tron- GreenSleeve.png"},
+{"f":"1oMtvCu-NcwR4u8OxzXpUUbOP1EhQjaFo","n":"Horizontal Pair.png"},
+{"f":"1ohQofD6RYW_NGBLgeSxhnh5AD6BOp7Un","n":"Horiztonal Pair- 765.jpg"},
+{"f":"1vS5WP0vzTYkQiAjn2FTLzHf1grTyqgVd","n":"Hunter- YellowSleeve762.jpg"},
+{"f":"1TZvvulWd4e38ti4tNWIgfA5-xok3W9cB","n":"Vertical Pair 764.jpg"},
+{"f":"1mFUEza80hrjU8QSie37wpsGrJTH8048t","n":"Debt to Jordan- end of 2023.png"},
+{"f":"1v8tWEQOkDcdTSUfBuYNOwZvWOr9VI0dE","n":"Transfers btwn Jordan and Chubby.png"},
+{"f":"1s_rXjq93VpOKFszS3gub0ozFEtD1bGea","n":"Certificate.JPG"},
+{"f":"18GxkESEaLsi8KEfS8Z1z13j9vI4OWY6C","n":"IMG_7327.jpg"},
+{"f":"12Vf4OiHVDkUiyDxGutKz19yeaiOB3k-6","n":"IMG_7328.jpg"},
+{"f":"1qx1yHoObpBz_PvkaWYIWt_tS07vXrW3i","n":"IMG_7330.jpg"},
+{"f":"15ajEYetxc_ADSDB7bN3P5MiZkZ0TV5Je","n":"IMG_7329.jpg"},
+{"f":"1ENMcFwSU3BsRXKrMJu3YWHQ14KtJ2POE","n":"How much Chubby owed Jordan throughout 2022.png"},
+{"f":"1hgfKGwlO35TX6OqTubd8d576OKTjMfwK","n":"Transfers to and from Jordans Accounts.png"},
+{"f":"1ZjvE74XE3YnaLuf7gPp5Ps8UbMOAMgDg","n":"Dune Buggy - Alan Maccini.jpg"},
+{"f":"1Q1mDVl6g_u4pAuicnRh1N1uIcMHy-ThV","n":"Mike Anderson 3.JPG"},
+{"f":"1VYYuE6dxHbFAcdX5sVCmiaklXJ7TPAXS","n":"Mike Anderson 2.JPG"},
+{"f":"1uZXxrbAj44n-5MLZqASi2PCpfmHS1xKZ","n":"Mike Anderson 1.JPG"},
+{"f":"1620NVxvsPjlrA4FZWsYMWUI4nudAToL8","n":"50b12cf6.JPG"},
+{"f":"181kKXEevve9ECRB3gwizUIlgtyflPzYb","n":"d19ee4a4.JPG"},
+{"f":"10bXZU7Gp1i8JXRaqSgmD--U4TH1QKLVi","n":"Cole Conderman 2.jpg"},
+{"f":"10ZCqxOcOBOWcPT30MoLa7taH5VQ0QR7V","n":"Cole Conderman 1.jpg"},
+{"f":"10Y4WacamPtARkEkJa7zhwHK4X5iqFpMP","n":"Thomas Warden 2.jpg"},
+{"f":"1GruyG-KYx1mhEB8svQUO742HpKKt82pK","n":"Thomas Warden.jpg"},
+{"f":"10Kgkp8k2ydsFdI26koqFATge0lzUo-G2","n":"DudeShopping2.jpg"},
+{"f":"10IPsn_AfOc37fXgj5p7gxKvZE5DiGJGZ","n":"DudeShopping1.jpg"},
+{"f":"10Fy5imxyP6tlW5vmCGhu16_2K-LRs3gV","n":"Kitty Basslines- happycorekitty.jpg"},
+{"f":"1Mh8zMqgHmMiN4E6Xx6VcmryBH-K9joNq","n":"WhatsApp Image 2023-01-24 at 3.11.49 PM.jpeg"},
+{"f":"16YXjmR3J-8JUUkLbqUghxQgyn0QK6W60","n":"WhatsApp Image 2023-01-24 3.11.49 PM (2).jpeg"},
+{"f":"18-lmkYy4a35mhaCyooCy35636sbtuE2c","n":"WhatsApp Image 2023-01-24 at 3.11.48 PM.jpeg"},
+{"f":"1oAAMh9xMdeKAXnKl4ZZsZHNC8Thn4RZc","n":"WhatsApp Image 2023-01-24 3.11.48 PM (2).jpeg"},
+{"f":"1O6dUppM7q6JPzxgrbM5wwE9CfRw_UrWh","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (1).jpeg"},
+{"f":"1TSOtvEwTiBQ1-cFqsBhqoVB-uj-4Ect2","n":"WhatsApp Image 2023-01-24 3.11.47 PM (2).jpeg"},
+{"f":"1WUKCIESvK-mz8X4WVcmpIqAzMRUU6EPZ","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM.jpeg"},
+{"f":"1RtGB_SiFjj_DBXsAVlyqxFzUW06WAcvS","n":"WhatsApp Image 2023-01-24 3.11.47 PM (3).jpeg"},
+{"f":"1sdwBfPyNmM6fipERZYzgzBetY6PoZ5FU","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (1).jpeg"},
+{"f":"1f06V0AxDrVbqk0vE6DV8eUfkHhY2A9bZ","n":"WhatsApp Image 2023-01-24 3.11.46 PM (2).jpeg"},
+{"f":"1YjkkCWRxhigYS5jjw2Ak0PsatdwQO0dy","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM.jpeg"},
+{"f":"1wgVT-RhpZpeLaQjKyPINFgE5TF10so-L","n":"WhatsApp Image 2023-01-24 3.11.46 PM (3).jpeg"},
+{"f":"1KYNifk_A9p_oP2tPz83q8kC0uMl0lu7r","n":"WhatsApp Image 2023-01-24 at 3.11.45 PM.jpeg"},
+{"f":"1v1VmULtTe2h85E1AgZ1zT8KLLHQc2aNx","n":"WhatsApp Image 2023-01-24 3.11.45 PM (2).jpeg"},
+{"f":"1lzKSQkwGieGPybV_e_PLhO0XEA6g0y8s","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (1).jpeg"},
+{"f":"1U-6ZJej5SMlTXctBs8jH3Des6ybcHJMW","n":"WhatsApp Image 2023-01-24 3.11.44 PM (2).jpeg"},
+{"f":"1d-DHrFXb4ZA4jb7_DZjvLx3ZJXfsRgrR","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM.jpeg"},
+{"f":"1ZrDK2XAd_uSKSsdXxVQOZEbYkt-K3vJH","n":"WhatsApp Image 2023-01-24 3.11.44 PM (3).jpeg"},
+{"f":"1s_p7UalfT3etToy4PWn_mXfEAcEqxxyq","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (1).jpeg"},
+{"f":"1LmlOXBUoI_Hu3up-X_PtSxX7ZSw3v7Ko","n":"WhatsApp Image 2023-01-24 3.11.43 PM (2).jpeg"},
+{"f":"1TTiwuPHt0e61IHNCCXjHWplY5-Jb7p1I","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM.jpeg"},
+{"f":"1ZSQDs0MuEc65Qlof5PKfnDid8yRgZS8p","n":"WhatsApp Image 2023-01-24 3.11.43 PM (3).jpeg"},
+{"f":"1eWf8e-QRABi76e9RHh6vM9Lf-rnaJw0T","n":"WhatsApp Image 2023-01-24 at 3.11.42 PM.jpeg"},
+{"f":"1nM4KnqTgRh0y4Kyr5pBuWNBZgiiq86zt","n":"WhatsApp Image 2023-01-24 3.11.42 PM (2).jpeg"},
+{"f":"1LNOoGMVrDzB9K-uo3HJrBLlXEZNnXiBi","n":"WhatsApp Image 2023-01-24 at 3.10.08 PM.jpeg"},
+{"f":"1VWf8gvQ9LCtPDDy1CjGy_U1I9-Yw0hO5","n":"WhatsApp Image 2023-01-24 3.10.08 PM (2).jpeg"},
+{"f":"1PgN3NThixizrEVPYL_8IolPx9wfUnD1J","n":"WhatsApp Image 2023-01-24 at 3.10.07 PM.jpeg"},
+{"f":"1hyN11usdRV32iycFUS6wnyYQGS51uCua","n":"WhatsApp Image 2023-01-24 3.10.07 PM (2).jpeg"},
+{"f":"1uyygotPrT5mZWrD1AGVpWlW5WnTWOcas","n":"WhatsApp Image 2023-01-24 at 3.10.06 PM (1).jpeg"}
+];
+let ratings=JSON.parse(localStorage.getItem(SK)||'{}');
+let currentFilter='all';
+let lbIndex=-1;
+let filtered=[];
+function getUser(){return localStorage.getItem('cb_tagger_name')||'anonymous';}
+function render(){
+  filtered=ASSETS.filter(a=>{
+    const r=ratings[a.f];
+    if(currentFilter==='all')return true;
+    if(currentFilter==='unrated')return !r;
+    return r===currentFilter;
+  });
+  const ac=Object.values(ratings).filter(r=>r==='action').length;
+  const pc=Object.values(ratings).filter(r=>r==='product').length;
+  const bc=Object.values(ratings).filter(r=>r==='bad').length;
+  const un=ASSETS.length-ac-pc-bc;
+  document.getElementById('countLabel').textContent=filtered.length+' shown | '+ac+' action, '+pc+' product, '+bc+' bad, '+un+' unrated';
+  const g=document.getElementById('grid');
+  g.innerHTML=filtered.map((a,i)=>{
+    const r=ratings[a.f];
+    const tag=r?'<div class="tag tag-'+r+'">'+r+'</div>':'';
+    return '<div class="cell" onclick="openLB('+i+')"><img src="https://drive.google.com/thumbnail?id='+a.f+'&sz=w300" loading="lazy" onload="this.classList.remove(\'loading\')" class="loading" onerror="this.src=\'data:image/svg+xml,<svg xmlns=http://www.w3.org/2000/svg viewBox=0%200%201%201><rect fill=%23222 width=1 height=1/></svg>\'">'+tag+'<div class="name">'+esc(a.n)+'</div></div>';
+  }).join('');
+}
+function filterGrid(f){
+  currentFilter=f;
+  document.querySelectorAll('.filters button').forEach(b=>{b.classList.toggle('active',b.textContent.toLowerCase()===f||(f==='all'&&b.textContent==='All'));});
+  render();
+}
+function openLB(i){
+  lbIndex=i;
+  const a=filtered[i];
+  document.getElementById('lbImg').src='https://drive.google.com/thumbnail?id='+a.f+'&sz=w1200';
+  document.getElementById('lbName').textContent=a.n;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');lbIndex=-1;}
+function navLB(d){
+  if(lbIndex<0)return;
+  lbIndex=(lbIndex+d+filtered.length)%filtered.length;
+  openLB(lbIndex);
+}
+function tagFromLB(r){
+  if(lbIndex<0)return;
+  const a=filtered[lbIndex];
+  ratings[a.f]=r;
+  localStorage.setItem(SK,JSON.stringify(ratings));
+  fetch(API_RATE,{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({fileId:a.f,rating:r,ratedBy:getUser(),ratedAt:new Date().toISOString()})
+  }).catch(()=>{});
+  navLB(1);
+  render();
+}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lightbox').classList.contains('open'))return;
+  if(e.key==='Escape')closeLB();
+  else if(e.key==='ArrowLeft')navLB(-1);
+  else if(e.key==='ArrowRight')navLB(1);
+  else if(e.key==='1')tagFromLB('bad');
+  else if(e.key==='2')tagFromLB('action');
+  else if(e.key==='3')tagFromLB('product');
+});
+render();
+</script>
+</body>
+</html>
