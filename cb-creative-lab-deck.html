@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CB Creative Lab — Founder Deck</title><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.6}
+.hero{padding:4rem 2rem;text-align:center;background:linear-gradient(135deg,#0a0a2a 0%,#1a0a2a 50%,#0a1a2a 100%);border-bottom:1px solid #1a1a3a}
+.hero h1{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,#a855f7,#3b82f6,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+.hero .tagline{font-size:1.1rem;color:#888;max-width:600px;margin:0 auto .8rem}
+.hero .cta{display:inline-block;background:linear-gradient(135deg,#a855f7,#3b82f6);color:#fff;padding:.7rem 2rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:.95rem;margin-top:1rem}
+.section{max-width:800px;margin:0 auto;padding:3rem 1.5rem}
+.section h2{font-size:1.6rem;font-weight:800;margin-bottom:1rem;background:linear-gradient(135deg,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section h3{font-size:1.1rem;font-weight:700;color:#ccc;margin:1.5rem 0 .5rem}
+.section p{color:#999;margin-bottom:1rem;font-size:.95rem}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.5rem 0}
+.card{background:#141414;border:1px solid #222;border-radius:12px;padding:1.2rem;transition:border-color .2s}
+.card:hover{border-color:#a855f7}
+.card .icon{font-size:1.8rem;margin-bottom:.5rem}
+.card h4{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.card p{font-size:.8rem;color:#888;margin:0}
+.flow{display:flex;flex-direction:column;gap:.8rem;margin:1.5rem 0}
+.flow-step{display:flex;gap:1rem;align-items:flex-start;background:#141414;border-radius:10px;padding:1rem;border-left:3px solid #a855f7}
+.flow-num{font-size:1.4rem;font-weight:900;color:#a855f7;min-width:30px}
+.flow-text h4{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:.2rem}
+.flow-text p{font-size:.8rem;color:#888;margin:0}
+.engines{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.5rem 0}
+@media(max-width:600px){.engines{grid-template-columns:1fr}}
+.engine{background:#141414;border-radius:10px;padding:1rem;text-align:center;border:1px solid #222}
+.engine h4{font-size:.85rem;font-weight:700;margin:.3rem 0}
+.engine .type{font-size:.65rem;color:#555;text-transform:uppercase;letter-spacing:1px}
+.engine p{font-size:.75rem;color:#888;margin-top:.3rem}
+.e-flux h4{color:#818cf8}.e-recraft h4{color:#4ade80}.e-runway h4{color:#f87171}
+.vision{background:linear-gradient(135deg,#0a0a2a,#1a0a2a);border-radius:14px;padding:2rem;margin:1.5rem 0;border:1px solid #222}
+.vision h3{color:#fff;font-size:1.1rem;margin-bottom:.8rem}
+.vision-list{list-style:none}
+.vision-list li{padding:.4rem 0;font-size:.85rem;color:#999;border-bottom:1px solid #1a1a1a;display:flex;gap:.5rem}
+.vision-list li:last-child{border:none}
+.vision-list .check{color:#22c55e}
+.vision-list .soon{color:#f59e0b}
+.market{background:#141414;border-radius:14px;padding:2rem;margin:1.5rem 0;border:1px solid #222}
+.market h3{color:#fff;font-size:1rem;margin-bottom:.6rem}
+.market p{font-size:.85rem;color:#888}
+.footer{text-align:center;padding:2rem;color:#333;font-size:.7rem;border-top:1px solid #111}
+</style></head><body>
+
+<div class="hero">
+<h1>CB Creative Lab</h1>
+<p class="tagline">AI-powered marketing asset generation for Chubby Buttons. Generate product photos, action shots, and video — trained on your brand's unique style.</p>
+<a href="https://jbarad424.github.io/ideas/asset-tagger.html" class="cta">Open the Lab</a>
+</div>
+
+<div class="section">
+<h2>What We're Building</h2>
+<p>CB Creative Lab is an internal tool that uses multiple AI image and video generation engines to create marketing assets for Chubby Buttons. Instead of expensive photo shoots or generic stock imagery, we generate custom content trained on what <em>we</em> like — then iterate until it's ad-ready.</p>
+
+<h3>The Problem</h3>
+<p>We need a constant stream of fresh marketing visuals — product shots, action sports photography, lifestyle content, and video — but professional shoots are expensive and stock photos don't feature our actual product. AI generation is powerful but generic. It doesn't know what Chubby Buttons looks like or what our brand aesthetic is.</p>
+
+<h3>The Solution</h3>
+<p>We feed AI engines actual CB2 product photos as reference, generate content across multiple engines, and then rate the results. The structured feedback loops back into better prompts. Over time, we discover and save "styles" that work — and generation becomes one-tap.</p>
+</div>
+
+<div class="section">
+<h2>How It Works</h2>
+<div class="flow">
+<div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><h4>Generate</h4><p>Claude sends prompts + CB2 reference photos to FLUX, Recraft, and Runway. Each engine produces different styles. Images and video land in Google Drive automatically.</p></div></div>
+<div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><h4>Rate</h4><p>Founders open the CB Creative Lab app and rate each image on two dimensions: <strong>product accuracy</strong> (does it look like real CB2?) and <strong>scene/vibe</strong> (is the composition, lighting, and setting right?). Structured feedback with specific reasons.</p></div></div>
+<div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><h4>Learn</h4><p>Claude analyzes the ratings — which prompts worked, which engines performed best, which scenes resonated. Each batch gets progressively better as the system learns what "on-brand" means for CB.</p></div></div>
+<div class="flow-step"><div class="flow-num">4</div><div class="flow-text"><h4>Save Styles</h4><p>When a winning combination emerges (lighting + scene + angle that everyone loves), it gets saved as a named "style" — like "Epic Winter Action" or "Clean Studio Product." Future generation starts from these proven templates.</p></div></div>
+<div class="flow-step"><div class="flow-num">5</div><div class="flow-text"><h4>One-Tap Create</h4><p>Eventually: pick a colorway (Tron/Hunter/Patriot), pick a saved style, describe the scene briefly, and get back a batch of polished images + video. No prompt engineering needed.</p></div></div>
+</div>
+</div>
+
+<div class="section">
+<h2>The Engines</h2>
+<div class="engines">
+<div class="engine e-flux"><div class="type">Images</div><h4>FLUX</h4><p>Black Forest Labs. Best for photorealistic action shots and product placement using reference photos.</p></div>
+<div class="engine e-recraft"><div class="type">Images</div><h4>Recraft</h4><p>Purpose-built for commercial imagery. Clean product shots, editorial layouts, and marketing-ready visuals.</p></div>
+<div class="engine e-runway"><div class="type">Video</div><h4>Runway</h4><p>Industry-standard AI video. Takes a still image and brings it to life — 5-second cinematic clips from a single photo.</p></div>
+</div>
+<p style="font-size:.8rem;color:#555;text-align:center">Same prompt goes to multiple engines. You rate which output you prefer. The best engine for each style emerges naturally.</p>
+</div>
+
+<div class="section">
+<h2>The Three Colorways</h2>
+<div class="card-grid">
+<div class="card"><div class="icon" style="color:#22c55e">&#9679;</div><h4>Tron</h4><p>Black body with green icons. The flagship. Sleek and premium.</p></div>
+<div class="card"><div class="icon" style="color:#4ade80">&#9679;</div><h4>Hunter</h4><p>Green body with yellow accents on black buttons. Nature-inspired.</p></div>
+<div class="card"><div class="icon" style="color:#ef4444">&#9679;</div><h4>Patriot</h4><p>Red, white, and blue. Bold and American.</p></div>
+</div>
+<p style="font-size:.85rem;color:#888">The generation dashboard will let you pick which colorway to feature in each batch — so you can build a focused asset library for each variant.</p>
+</div>
+
+<div class="section">
+<h2>Roadmap</h2>
+<div class="vision">
+<h3>Where we are and where we're going</h3>
+<ul class="vision-list">
+<li><span class="check">&#10003;</span> Asset tagger with 985 existing CB images rated</li>
+<li><span class="check">&#10003;</span> AI generation pipeline (FLUX + Recraft + Runway)</li>
+<li><span class="check">&#10003;</span> CB Creative Lab rating app with structured feedback</li>
+<li><span class="check">&#10003;</span> Image-to-image generation using real CB2 product photos</li>
+<li><span class="check">&#10003;</span> Per-user rating tracking (Justin, Jordan, Michael, Slava)</li>
+<li><span class="soon">&#9679;</span> Video generation and playback in the app</li>
+<li><span class="soon">&#9679;</span> Generation dashboard (pick colorway + describe scene + generate)</li>
+<li><span class="soon">&#9679;</span> Saved styles from rating patterns</li>
+<li><span class="soon">&#9679;</span> One-tap batch generation (images + video per style)</li>
+<li><span class="soon">&#9679;</span> White-label version for other brands</li>
+</ul>
+</div>
+</div>
+
+<div class="section">
+<h2>The Bigger Picture</h2>
+<div class="market">
+<h3>For Chubby Buttons</h3>
+<p>Unlimited on-brand marketing assets at a fraction of the cost of photo shoots. Fresh content for social media, Amazon listings, ads, and pitch decks — generated in minutes, not weeks. Every image features the actual CB2 product because the AI uses our real product photos as reference.</p>
+</div>
+<div class="market">
+<h3>For Other Brands</h3>
+<p>This same system works for any physical product company. Dump your product photos in, rate what you like, and the system learns your brand aesthetic. We're building the tool we wish existed — a style discovery engine that makes AI generation actually useful for marketing teams. If it works for CB, it works for everyone.</p>
+</div>
+<div class="market">
+<h3>What We're Investing</h3>
+<p>FLUX ($10 credits) + Recraft ($25/mo) + Runway ($35/mo) = $70/month. That's less than a single hour of professional photography — and it generates unlimited assets, learns your brand over time, and never needs to be scheduled.</p>
+</div>
+</div>
+
+<div class="section" style="text-align:center">
+<h2>Try It Now</h2>
+<p>Open the CB Creative Lab, enter your name, and start rating. Your feedback directly improves the next batch.</p>
+<a href="https://jbarad424.github.io/ideas/asset-tagger.html" class="hero cta" style="padding:.6rem 1.5rem;font-size:.9rem;display:inline-block;margin-top:.5rem">Open CB Creative Lab</a>
+</div>
+
+<div class="footer">CB Creative Lab — Built with Claude Code, FLUX, Recraft, Runway, and Make.com<br>Chubby Buttons Inc. &copy; 2026</div>
+</body></html>
