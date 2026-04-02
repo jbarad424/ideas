@@ -1,101 +1,81 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>CB Creative Lab</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;overflow-x:hidden}
 .top-bar{padding:.8rem 1rem;text-align:center;border-bottom:1px solid #1a1a1a}.top-bar h1{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline}.top-bar .sub{font-size:.6rem;color:#555;margin-top:.15rem}
-.mode-bar{display:flex;gap:.4rem;padding:.5rem 1rem;justify-content:center;flex-wrap:wrap}
-.mode-b{background:none;border:1px solid #222;color:#555;padding:.25rem .7rem;border-radius:6px;font-size:.65rem;cursor:pointer}.mode-b.active{border-color:#a855f7;color:#a855f7}
-.stats-bar{display:flex;justify-content:center;gap:1.5rem;padding:.4rem 1rem}.st{text-align:center}.st-n{font-weight:800;font-size:.95rem}.st-l{font-size:.5rem;color:#555;text-transform:uppercase}.st-like .st-n{color:#22c55e}.st-nope .st-n{color:#ef4444}.st-left .st-n{color:#666}
-.filt-bar{display:flex;gap:.3rem;padding:.3rem 1rem;justify-content:center;flex-wrap:wrap}
-.filt-b{background:none;border:1px solid #1a1a1a;color:#444;padding:.2rem .5rem;border-radius:5px;font-size:.6rem;cursor:pointer}.filt-b.active{border-color:#a855f7;color:#a855f7}
-/* SWIPE MODE */
-.swipe-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:1rem;min-height:60vh}
-.s-card{width:100%;max-width:480px;background:#141414;border-radius:14px;overflow:hidden;position:relative;transition:transform .3s,opacity .3s}
-.s-card.out-l{transform:translateX(-120%) rotate(-12deg);opacity:0}.s-card.out-r{transform:translateX(120%) rotate(12deg);opacity:0}
+.mode-bar{display:flex;gap:.4rem;padding:.5rem 1rem;justify-content:center;flex-wrap:wrap}.mode-b{background:none;border:1px solid #222;color:#555;padding:.25rem .7rem;border-radius:6px;font-size:.65rem;cursor:pointer}.mode-b.active{border-color:#a855f7;color:#a855f7}
+.stats-bar{display:flex;justify-content:center;gap:1.5rem;padding:.4rem 1rem}.st{text-align:center}.st-n{font-weight:800;font-size:.95rem}.st-l{font-size:.5rem;color:#555;text-transform:uppercase}.st-done .st-n{color:#22c55e}.st-left .st-n{color:#666}
+.filt-bar{display:flex;gap:.3rem;padding:.3rem 1rem;justify-content:center;flex-wrap:wrap}.filt-b{background:none;border:1px solid #1a1a1a;color:#444;padding:.2rem .5rem;border-radius:5px;font-size:.6rem;cursor:pointer}.filt-b.active{border-color:#a855f7;color:#a855f7}
+.swipe-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:.8rem;min-height:55vh}
+.s-card{width:100%;max-width:480px;background:#141414;border-radius:14px;overflow:hidden;position:relative;transition:transform .3s,opacity .3s}.s-card.out-l{transform:translateX(-120%) rotate(-12deg);opacity:0}.s-card.out-r{transform:translateX(120%) rotate(12deg);opacity:0}
 .s-card-img{width:100%;aspect-ratio:4/3;background:#0a0a0a;overflow:hidden}.s-card-img img{width:100%;height:100%;object-fit:contain}
 .s-card-meta{padding:.5rem .8rem;display:flex;gap:.3rem;flex-wrap:wrap;align-items:center}
 .badge{font-size:.5rem;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase}
-.b-flux{background:#1a1a3a;color:#818cf8;border:1px solid #2a2a5a}.b-kontext{background:#0a1a2a;color:#38bdf8;border:1px solid #112244}.b-recraft{background:#1a2a1a;color:#4ade80;border:1px solid #2a4a2a}
+.b-flux{background:#1a1a3a;color:#818cf8;border:1px solid #2a2a5a}.b-recraft{background:#1a2a1a;color:#4ade80;border:1px solid #2a4a2a}.b-runway{background:#2a1a1a;color:#f87171;border:1px solid #4a2a2a}
 .b-action{background:#0a1a2a;color:#3b82f6;border:1px solid #112244}.b-product{background:#1a0a2a;color:#a855f7;border:1px solid #221144}.b-lifestyle{background:#2a1a0a;color:#f59e0b;border:1px solid #443311}
 .b-tron{background:#0a1a0a;color:#22c55e;border:1px solid #114411}.b-hunter{background:#0a1a0a;color:#4ade80;border:1px solid #114411}.b-patriot{background:#1a0a0a;color:#ef4444;border:1px solid #331111}
 .s-card-prompt{padding:0 .8rem .5rem;font-size:.6rem;color:#444;line-height:1.4;cursor:pointer;max-height:2.5em;overflow:hidden}.s-card-prompt.exp{max-height:none}
-.rate-btns{padding:.5rem 1rem 1rem;display:flex;gap:.5rem;max-width:500px;margin:0 auto}
-.r-btn{flex:1;padding:.7rem;border:none;border-radius:10px;font-size:.85rem;font-weight:800;cursor:pointer;transition:transform .1s}.r-btn:active{transform:scale(.94)}
-.r-love{background:#0a1a0a;color:#22c55e;border:2px solid #114411}.r-nope{background:#1a0a0a;color:#ef4444;border:2px solid #331111}
+/* RATING PANEL - 2x2 */
+.rate-panel{max-width:500px;margin:0 auto;padding:0 1rem .8rem}
+.rate-dim{background:#141414;border-radius:10px;padding:.6rem;margin-bottom:.5rem}
+.rate-dim-title{font-size:.65rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center}
+.rate-dim-btns{display:flex;gap:.4rem;margin-bottom:.4rem}
+.rd-btn{flex:1;padding:.45rem;border:none;border-radius:8px;font-size:.7rem;font-weight:700;cursor:pointer;transition:all .15s;opacity:.6}
+.rd-btn:active{transform:scale(.95)}.rd-btn.picked{opacity:1;transform:scale(1.02)}
+.rd-up{background:#0a1a0a;color:#22c55e;border:2px solid #1a331a}.rd-up.picked{border-color:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.2)}
+.rd-dn{background:#1a0a0a;color:#ef4444;border:2px solid #331a1a}.rd-dn.picked{border-color:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.2)}
+.rd-pills{display:none;flex-wrap:wrap;gap:.3rem;margin-top:.4rem}.rd-pills.open{display:flex}
+.rd-pill{background:#1a1a1a;border:1px solid #333;color:#666;padding:.25rem .5rem;border-radius:15px;font-size:.55rem;cursor:pointer;transition:all .15s}
+.rd-pill.sel{border-color:#a855f7;color:#a855f7;background:#1a0a2a}
+.rate-text{width:100%;background:#1a1a1a;border:1px solid #222;border-radius:8px;color:#fff;padding:.5rem;font-size:.65rem;resize:none;outline:none;min-height:40px;font-family:inherit;margin-bottom:.5rem}.rate-text:focus{border-color:#a855f7}
+.rate-actions{display:flex;gap:.4rem}
+.ra-btn{flex:1;padding:.55rem;border:none;border-radius:8px;font-size:.75rem;font-weight:700;cursor:pointer}
+.ra-save{background:linear-gradient(135deg,#a855f7,#3b82f6);color:#fff}
+.ra-skip{background:#1a1a1a;color:#555;border:1px solid #222}
 .empty-state{text-align:center;padding:4rem 1rem;color:#444}.empty-state h3{font-size:1.3rem;color:#555;margin-bottom:.5rem}
 .done-state{text-align:center;padding:3rem 1rem}.done-state h3{font-size:1.3rem;font-weight:800;margin-bottom:.5rem;color:#22c55e}
-/* GRID MODE */
-.grid-wrap{display:none;padding:.5rem}
-.g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px}
-@media(max-width:500px){.g-grid{grid-template-columns:repeat(2,1fr)}}
-.g-card{position:relative;aspect-ratio:1;background:#111;overflow:hidden;cursor:pointer;border-radius:8px;transition:transform .15s}.g-card:hover{transform:scale(1.03)}
-.g-card img{width:100%;height:100%;object-fit:cover}
+.grid-wrap{display:none;padding:.5rem}.g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px}@media(max-width:500px){.g-grid{grid-template-columns:repeat(2,1fr)}}
+.g-card{position:relative;aspect-ratio:1;background:#111;overflow:hidden;cursor:pointer;border-radius:8px;transition:transform .15s}.g-card:hover{transform:scale(1.03)}.g-card img{width:100%;height:100%;object-fit:cover}
 .g-tag{position:absolute;top:4px;right:4px;font-size:.45rem;font-weight:700;padding:1px 5px;border-radius:3px;text-transform:uppercase}
-.g-rated{position:absolute;top:4px;left:4px;font-size:.45rem;font-weight:700;padding:1px 5px;border-radius:3px}
-.g-r-like{background:#0a1a0a;color:#22c55e;border:1px solid #114411}.g-r-nope{background:#1a0a0a;color:#ef4444;border:1px solid #331111}
-/* FEEDBACK OVERLAY */
-.fb-back{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:80}.fb-back.open{display:block}
-.fb-panel{display:none;position:fixed;bottom:0;left:0;right:0;background:#141414;border-top-left-radius:20px;border-top-right-radius:20px;padding:1.2rem;z-index:90;max-height:75vh;overflow-y:auto;box-shadow:0 -4px 20px rgba(0,0,0,.5)}.fb-panel.open{display:block}
-.fb-panel h3{font-size:.85rem;font-weight:700;margin-bottom:.6rem;text-align:center}
-.fb-section{margin-bottom:.8rem}.fb-section-title{font-size:.65rem;font-weight:700;color:#888;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.5px}
-.fb-pills{display:flex;flex-wrap:wrap;gap:.35rem}.fb-hint{font-size:.5rem;color:#444;text-align:center;margin-bottom:.5rem}
-.fb-pill{background:#1a1a1a;border:1px solid #333;color:#888;padding:.3rem .6rem;border-radius:20px;font-size:.6rem;cursor:pointer;transition:all .15s}
-.fb-pill.sel{border-color:#a855f7;color:#a855f7;background:#1a0a2a}
-.fb-text{width:100%;background:#1a1a1a;border:1px solid #333;border-radius:10px;color:#fff;padding:.5rem;font-size:.7rem;resize:none;outline:none;min-height:50px;margin-top:.5rem;font-family:inherit}.fb-text:focus{border-color:#a855f7}
-.fb-done{width:100%;padding:.65rem;background:linear-gradient(135deg,#a855f7,#3b82f6);color:#fff;border:none;border-radius:10px;font-size:.85rem;font-weight:700;cursor:pointer;margin-top:.8rem}
-/* LIGHTBOX */
-.lb{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.95);flex-direction:column;align-items:center;justify-content:center}.lb.open{display:flex}
-.lb img{max-width:92vw;max-height:55vh;object-fit:contain;border-radius:8px}
-.lb-meta{padding:.5rem;text-align:center;color:#888;font-size:.7rem;max-width:90vw}
-.lb-prompt{font-size:.6rem;color:#555;margin-top:.3rem;line-height:1.3}
-.lb-btns{display:flex;gap:.5rem;margin-top:.6rem}
-.lb-btn{padding:.5rem 1.2rem;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer}
+.g-rated{position:absolute;top:4px;left:4px;font-size:.45rem;font-weight:700;padding:1px 5px;border-radius:3px}.g-r-done{background:#0a1a0a;color:#22c55e;border:1px solid #114411}
+.lb{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.95);flex-direction:column;align-items:center;justify-content:center}.lb.open{display:flex}.lb img{max-width:92vw;max-height:50vh;object-fit:contain;border-radius:8px}
+.lb-meta{padding:.5rem;text-align:center;color:#888;font-size:.7rem;max-width:90vw}.lb-prompt{font-size:.6rem;color:#555;margin-top:.3rem;line-height:1.3}
 .lb-close{position:absolute;top:.5rem;right:.8rem;background:none;border:none;color:#444;font-size:1.5rem;cursor:pointer}
-.lb-change{font-size:.55rem;color:#555;margin-top:.4rem;cursor:pointer;text-decoration:underline}
+.lb-change{font-size:.55rem;color:#555;margin-top:.5rem;cursor:pointer;text-decoration:underline}
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#113311;color:#22c55e;padding:.5rem 1rem;border-radius:8px;font-size:.75rem;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}.toast.show{opacity:1}
 </style></head><body>
 <div class="top-bar"><h1>CB Creative Lab</h1><div class="sub">AI-powered marketing asset studio</div></div>
 <div class="mode-bar"><button class="mode-b active" id="mSwipe" onclick="setMode('swipe')">Swipe</button><button class="mode-b" id="mGrid" onclick="setMode('grid')">Grid</button></div>
-<div class="stats-bar"><div class="st st-like"><div class="st-n" id="nLike">0</div><div class="st-l">Liked</div></div><div class="st st-nope"><div class="st-n" id="nNope">0</div><div class="st-l">Nope</div></div><div class="st st-left"><div class="st-n" id="nLeft">0</div><div class="st-l">Unrated</div></div></div>
-<div class="filt-bar"><button class="filt-b active" data-f="unrated" onclick="setFilt(this)">Unrated</button><button class="filt-b" data-f="all" onclick="setFilt(this)">All</button><button class="filt-b" data-f="like" onclick="setFilt(this)">Liked</button><button class="filt-b" data-f="dislike" onclick="setFilt(this)">Nope</button></div>
+<div class="stats-bar"><div class="st st-done"><div class="st-n" id="nDone">0</div><div class="st-l">Rated</div></div><div class="st st-left"><div class="st-n" id="nLeft">0</div><div class="st-l">Unrated</div></div></div>
+<div class="filt-bar"><button class="filt-b active" data-f="unrated" onclick="setFilt(this)">Unrated</button><button class="filt-b" data-f="all" onclick="setFilt(this)">All</button><button class="filt-b" data-f="rated" onclick="setFilt(this)">Rated</button></div>
 <div class="swipe-wrap" id="swipeWrap"></div>
-<div class="rate-btns" id="rateBtns"><button class="r-btn r-love" onclick="doRate('like')">LOVE IT</button><button class="r-btn r-nope" onclick="doRate('dislike')">NOT QUITE</button></div>
-<div class="grid-wrap" id="gridWrap"></div>
-<!-- Lightbox -->
-<div class="lb" id="lb"><button class="lb-close" onclick="closeLb()">&times;</button><img id="lbImg"><div class="lb-meta"><span id="lbBadges"></span><div class="lb-prompt" id="lbPrompt"></div><div class="lb-btns" id="lbBtns"></div><div class="lb-change" id="lbChange" onclick="changeVote()" style="display:none">Change rating</div></div></div>
-<!-- Feedback -->
-<div class="fb-back" id="fbBack" onclick="closeFb()"></div>
-<div class="fb-panel" id="fbPanel">
-<h3 id="fbTitle">Feedback</h3>
-<div class="fb-hint">Select all that apply</div>
-<div class="fb-section"><div class="fb-section-title">Product</div><div class="fb-pills" id="fbProduct"></div></div>
-<div class="fb-section"><div class="fb-section-title">Scene &amp; Vibe</div><div class="fb-pills" id="fbScene"></div></div>
-<div class="fb-section"><div class="fb-section-title">Notes (optional)</div><textarea class="fb-text" id="fbText" placeholder="Anything else?"></textarea></div>
-<button class="fb-done" onclick="submitFb()">Done</button>
+<div class="rate-panel" id="ratePanel" style="display:none">
+<div class="rate-dim" id="dimProduct"><div class="rate-dim-title">Product Accuracy</div><div class="rate-dim-btns"><button class="rd-btn rd-up" onclick="pickDim('product','up',this)">Looks right</button><button class="rd-btn rd-dn" onclick="pickDim('product','down',this)">Needs work</button></div><div class="rd-pills" id="pillsProductUp"><div class="rd-pill" onclick="this.classList.toggle('sel')">Product looks great</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Accurate to CB2</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Good placement</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Band looks right</div></div><div class="rd-pills" id="pillsProductDn"><div class="rd-pill" onclick="this.classList.toggle('sel')">Doesn't look like CB2</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Product floating</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Product missing</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Band looks wrong</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Wrong colorway</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Weird hands near product</div></div></div>
+<div class="rate-dim" id="dimScene"><div class="rate-dim-title">Scene &amp; Vibe</div><div class="rate-dim-btns"><button class="rd-btn rd-up" onclick="pickDim('scene','up',this)">Love it</button><button class="rd-btn rd-dn" onclick="pickDim('scene','down',this)">Not quite</button></div><div class="rd-pills" id="pillsSceneUp"><div class="rd-pill" onclick="this.classList.toggle('sel')">Great composition</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Love the lighting</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Perfect setting</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Aspirational</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Ad-ready</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Social media ready</div></div><div class="rd-pills" id="pillsSceneDn"><div class="rd-pill" onclick="this.classList.toggle('sel')">AI artifacts / uncanny</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Unrealistic scene</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Boring setting</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Bad lighting</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Wrong vibe</div><div class="rd-pill" onclick="this.classList.toggle('sel')">Too busy</div></div></div>
+<textarea class="rate-text" id="rateText" placeholder="Any other notes? (optional)"></textarea>
+<div class="rate-actions"><button class="ra-btn ra-skip" onclick="doSkip()">Skip</button><button class="ra-btn ra-save" onclick="doSave()">Save</button></div>
 </div>
+<div class="grid-wrap" id="gridWrap"></div>
+<div class="lb" id="lb"><button class="lb-close" onclick="closeLb()">&times;</button><img id="lbImg"><div class="lb-meta"><span id="lbBadges"></span><div class="lb-prompt" id="lbPrompt"></div><div class="lb-change" id="lbChange" onclick="changeVote()">Change rating</div></div></div>
 <div class="toast" id="toast"></div>
 <script>
-const DATA_URL='https://jbarad424.github.io/ideas/cb-ai-lab.json';
-const RATE_API='https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
-let imgs=[],loaded=false,mode='swipe',filt='unrated',ci=0,fbId=null,fbRat=null,lbIdx=-1;
-const PRODUCT_TAGS=['Product looks accurate','Product needs work','Product missing','Product floating/misplaced','Band looks wrong','Wrong colorway'];
-const SCENE_LIKE=['Great composition','Love the lighting','Perfect setting','Aspirational vibe','Ad-ready','Social media ready','On-brand for CB','Authentic action feel'];
-const SCENE_NOPE=['AI artifacts','Weird hands/anatomy','Boring setting','Unrealistic scene','Bad lighting','Too busy','Wrong style/vibe','Low quality'];
-async function init(){try{const r=await fetch(DATA_URL+'?t='+Date.now());const d=await r.json();imgs=d.images||d||[]}catch(e){imgs=[]}loaded=true;updStats();render()}
-function filtered(){let f=imgs;if(filt==='unrated')f=imgs.filter(i=>!i.rating);else if(filt==='like')f=imgs.filter(i=>i.rating==='like');else if(filt==='dislike')f=imgs.filter(i=>i.rating==='dislike'||i.rating==='mixed');return f}
-function updStats(){const lk=imgs.filter(i=>i.rating==='like').length,np=imgs.filter(i=>i.rating==='dislike'||i.rating==='mixed').length,ur=imgs.filter(i=>!i.rating).length;document.getElementById('nLike').textContent=lk;document.getElementById('nNope').textContent=np;document.getElementById('nLeft').textContent=ur}
-function setMode(m){mode=m;document.getElementById('mSwipe').classList.toggle('active',m==='swipe');document.getElementById('mGrid').classList.toggle('active',m==='grid');document.getElementById('swipeWrap').style.display=m==='swipe'?'flex':'none';document.getElementById('rateBtns').style.display=m==='swipe'?'flex':'none';document.getElementById('gridWrap').style.display=m==='grid'?'block':'none';ci=0;render()}
+const DATA_URL='https://jbarad424.github.io/ideas/cb-ai-lab.json',RATE_API='https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
+let imgs=[],mode='swipe',filt='unrated',ci=0,curImg=null,dims={product:null,scene:null},lbIdx=-1;
+async function init(){try{const r=await fetch(DATA_URL+'?t='+Date.now());const d=await r.json();imgs=d.images||d||[]}catch(e){imgs=[]}updStats();render()}
+function filtered(){if(filt==='unrated')return imgs.filter(i=>!i.rating);if(filt==='rated')return imgs.filter(i=>i.rating);return imgs}
+function updStats(){const done=imgs.filter(i=>i.rating).length,left=imgs.filter(i=>!i.rating).length;document.getElementById('nDone').textContent=done;document.getElementById('nLeft').textContent=left}
+function setMode(m){mode=m;document.getElementById('mSwipe').classList.toggle('active',m==='swipe');document.getElementById('mGrid').classList.toggle('active',m==='grid');document.getElementById('swipeWrap').style.display=m==='swipe'?'flex':'none';document.getElementById('ratePanel').style.display=m==='swipe'&&curImg?'block':'none';document.getElementById('gridWrap').style.display=m==='grid'?'block':'none';ci=0;render()}
 function setFilt(el){document.querySelectorAll('.filt-b').forEach(b=>b.classList.remove('active'));el.classList.add('active');filt=el.dataset.f;ci=0;render()}
 function render(){if(mode==='swipe')renderSwipe();else renderGrid()}
-function modelBadge(m){if(!m)return'';if(m.includes('kontext'))return'<span class="badge b-kontext">Kontext</span>';if(m.includes('recraft'))return'<span class="badge b-recraft">Recraft</span>';return'<span class="badge b-flux">FLUX</span>'}
-function typeBadge(t){if(!t)return'';return'<span class="badge b-'+t+'">'+esc(t)+'</span>'}
-function styleBadge(s){if(!s)return'';return'<span class="badge b-'+s+'">'+esc(s)+'</span>'}
-function renderSwipe(){const f=filtered();const w=document.getElementById('swipeWrap');const b=document.getElementById('rateBtns');if(!f.length){w.innerHTML=filt==='unrated'?'<div class="done-state"><h3>All rated!</h3><p style="color:#555;font-size:.8rem">Switch to All or Grid to review.</p></div>':'<div class="empty-state"><h3>No images</h3><p style="color:#444;font-size:.8rem">Nothing matches this filter.</p></div>';b.style.display='none';return}if(ci>=f.length)ci=0;const img=f[ci];const th='https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w800';b.style.display=img.rating?'none':'flex';w.innerHTML='<div class="s-card" id="sCard"><div class="s-card-img"><img src="'+th+'" onerror="this.src=\'\'"></div><div class="s-card-meta">'+modelBadge(img.model)+typeBadge(img.shotType)+styleBadge(img.style)+'</div><div class="s-card-prompt" onclick="this.classList.toggle(\'exp\')">'+esc(img.prompt||'')+'</div></div>'}
-function doRate(r){const f=filtered();if(!f.length||ci>=f.length)return;fbId=f[ci].imageId;fbRat=r;openFb()}
-function openFb(){const isLike=fbRat==='like';document.getElementById('fbTitle').textContent=isLike?'What works?':'What needs improvement?';const pp=document.getElementById('fbProduct');pp.innerHTML=PRODUCT_TAGS.map(t=>'<button class="fb-pill" onclick="this.classList.toggle(\'sel\')">'+esc(t)+'</button>').join('');const sp=document.getElementById('fbScene');const sceneTags=isLike?SCENE_LIKE:SCENE_NOPE;sp.innerHTML=sceneTags.map(t=>'<button class="fb-pill" onclick="this.classList.toggle(\'sel\')">'+esc(t)+'</button>').join('');document.getElementById('fbText').value='';document.getElementById('fbBack').classList.add('open');document.getElementById('fbPanel').classList.add('open')}
-function closeFb(){document.getElementById('fbBack').classList.remove('open');document.getElementById('fbPanel').classList.remove('open')}
-function submitFb(){const allPills=document.querySelectorAll('#fbProduct .fb-pill.sel, #fbScene .fb-pill.sel');const tags=Array.from(allPills).map(p=>p.textContent);const text=document.getElementById('fbText').value.trim();const img=imgs.find(i=>i.imageId===fbId);if(img){img.rating=fbRat;img.feedbackTags=JSON.stringify(tags);img.feedbackText=text;img.ratedAt=new Date().toISOString()}fetch(RATE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageId:fbId,rating:fbRat,feedbackTags:JSON.stringify(tags),feedbackText:text,ratedAt:new Date().toISOString()})}).catch(()=>{});closeFb();const card=document.getElementById('sCard');if(card){card.classList.add(fbRat==='like'?'out-r':'out-l');setTimeout(()=>{ci++;updStats();render()},350)}else{updStats();render()}showToast(fbRat==='like'?'Loved! Saved.':'Noted! Saved.')}
-function renderGrid(){const f=filtered();const w=document.getElementById('gridWrap');if(!f.length){w.innerHTML='<div class="empty-state"><h3>No images</h3></div>';return}let h='<div class="g-grid">';f.forEach((img,i)=>{const th='https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w400';const rt=img.rating==='like'?'<div class="g-rated g-r-like">Liked</div>':img.rating?'<div class="g-rated g-r-nope">Nope</div>':'';const mb=img.model&&img.model.includes('kontext')?'<div class="g-tag b-kontext">Kontext</div>':img.model&&img.model.includes('recraft')?'<div class="g-tag b-recraft">Recraft</div>':'<div class="g-tag b-flux">FLUX</div>';h+='<div class="g-card" onclick="openLb('+i+')"><img src="'+th+'" loading="lazy">'+mb+rt+'</div>'});h+='</div>';w.innerHTML=h}
-function openLb(idx){const f=filtered();if(idx<0||idx>=f.length)return;lbIdx=idx;const img=f[idx];document.getElementById('lbImg').src='https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w1200';document.getElementById('lbBadges').innerHTML=modelBadge(img.model)+typeBadge(img.shotType)+styleBadge(img.style);document.getElementById('lbPrompt').textContent=img.prompt||'';const btns=document.getElementById('lbBtns');const ch=document.getElementById('lbChange');if(img.rating){btns.innerHTML='<span style="color:'+(img.rating==='like'?'#22c55e':'#ef4444')+';font-weight:700;font-size:.8rem">'+(img.rating==='like'?'Liked':'Not quite')+'</span>';ch.style.display='block'}else{btns.innerHTML='<button class="lb-btn r-love" onclick="lbRate(\'like\')">LOVE IT</button><button class="lb-btn r-nope" onclick="lbRate(\'dislike\')">NOT QUITE</button>';ch.style.display='none'}document.getElementById('lb').classList.add('open')}
+function mBadge(m){if(!m)return'';if(m.includes('recraft'))return'<span class="badge b-recraft">Recraft</span>';if(m.includes('runway'))return'<span class="badge b-runway">Runway</span>';return'<span class="badge b-flux">FLUX</span>'}
+function tBadge(t){return t?'<span class="badge b-'+t+'">'+esc(t)+'</span>':''}
+function sBadge(s){return s?'<span class="badge b-'+s+'">'+esc(s)+'</span>':''}
+function renderSwipe(){const f=filtered(),w=document.getElementById('swipeWrap'),p=document.getElementById('ratePanel');if(!f.length){w.innerHTML=filt==='unrated'?'<div class="done-state"><h3>All rated!</h3><p style="color:#555;font-size:.8rem">Switch filter to review.</p></div>':'<div class="empty-state"><h3>No images</h3></div>';p.style.display='none';curImg=null;return}if(ci>=f.length)ci=0;curImg=f[ci];const th='https://drive.google.com/thumbnail?id='+curImg.driveFileId+'&sz=w800';const rated=!!curImg.rating;w.innerHTML='<div class="s-card" id="sCard"><div class="s-card-img"><img src="'+th+'" onerror="this.src=\'\'"></div><div class="s-card-meta">'+mBadge(curImg.model)+tBadge(curImg.shotType)+sBadge(curImg.style)+'</div><div class="s-card-prompt" onclick="this.classList.toggle(\'exp\')">'+esc(curImg.prompt||'')+'</div></div>';if(!rated){p.style.display='block';resetDims()}else{p.style.display='none'}}
+function resetDims(){dims={product:null,scene:null};document.querySelectorAll('.rd-btn').forEach(b=>b.classList.remove('picked'));document.querySelectorAll('.rd-pills').forEach(p=>{p.classList.remove('open');p.querySelectorAll('.rd-pill').forEach(pl=>pl.classList.remove('sel'))});document.getElementById('rateText').value=''}
+function pickDim(dim,dir,btn){dims[dim]=dir;const parent=btn.parentElement;parent.querySelectorAll('.rd-btn').forEach(b=>b.classList.remove('picked'));btn.classList.add('picked');const upP=document.getElementById('pills'+cap(dim)+'Up'),dnP=document.getElementById('pills'+cap(dim)+'Dn');upP.classList.toggle('open',dir==='up');dnP.classList.toggle('open',dir==='down')}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function doSave(){if(!curImg)return;const tags=[];document.querySelectorAll('.rd-pills.open .rd-pill.sel').forEach(p=>tags.push(p.textContent));const text=document.getElementById('rateText').value.trim();const rating=dims.product==='up'&&dims.scene==='up'?'like':dims.product==='down'&&dims.scene==='down'?'dislike':'mixed';const fb={productVote:dims.product||'skip',sceneVote:dims.scene||'skip',tags:tags,text:text};curImg.rating=rating;curImg.feedbackTags=JSON.stringify(fb.tags);curImg.feedbackText=JSON.stringify({productVote:fb.productVote,sceneVote:fb.sceneVote,text:fb.text});curImg.ratedAt=new Date().toISOString();fetch(RATE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageId:curImg.imageId,rating:rating,feedbackTags:curImg.feedbackTags,feedbackText:curImg.feedbackText,ratedAt:curImg.ratedAt})}).catch(()=>{});const card=document.getElementById('sCard');if(card){card.classList.add(rating==='like'?'out-r':'out-l');setTimeout(()=>{ci++;updStats();render()},300)}else{ci++;updStats();render()}showToast('Saved!')}
+function doSkip(){const card=document.getElementById('sCard');if(card){card.style.transition='transform .3s,opacity .3s';card.style.transform='scale(.85)';card.style.opacity='0'}setTimeout(()=>{ci++;render()},250)}
+function renderGrid(){const f=filtered(),w=document.getElementById('gridWrap');if(!f.length){w.innerHTML='<div class="empty-state"><h3>No images</h3></div>';return}let h='<div class="g-grid">';f.forEach((img,i)=>{const th='https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w400';const rt=img.rating?'<div class="g-rated g-r-done">Rated</div>':'';const mb=img.model&&img.model.includes('recraft')?'<div class="g-tag b-recraft">Recraft</div>':'<div class="g-tag b-flux">FLUX</div>';h+='<div class="g-card" onclick="openLb('+i+')"><img src="'+th+'" loading="lazy">'+mb+rt+'</div>'});h+='</div>';w.innerHTML=h}
+function openLb(idx){const f=filtered();if(idx<0||idx>=f.length)return;lbIdx=idx;const img=f[idx];document.getElementById('lbImg').src='https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w1200';document.getElementById('lbBadges').innerHTML=mBadge(img.model)+tBadge(img.shotType)+sBadge(img.style);document.getElementById('lbPrompt').textContent=img.prompt||'';document.getElementById('lbChange').style.display=img.rating?'block':'none';document.getElementById('lb').classList.add('open')}
 function closeLb(){document.getElementById('lb').classList.remove('open');lbIdx=-1;render()}
-function lbRate(r){const f=filtered();if(lbIdx<0)return;fbId=f[lbIdx].imageId;fbRat=r;closeLb();setTimeout(()=>openFb(),200)}
 function changeVote(){const f=filtered();if(lbIdx<0)return;const img=f[lbIdx];img.rating='';img.feedbackTags='';img.feedbackText='';img.ratedAt='';fetch(RATE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageId:img.imageId,rating:'',feedbackTags:'',feedbackText:'',ratedAt:''})}).catch(()=>{});closeLb();updStats();render();showToast('Rating cleared')}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
