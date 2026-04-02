@@ -45,7 +45,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .card-overlay.show-bad{opacity:1;color:#ef4444}
 .card-info{padding:1rem 1.25rem}
 .card-info h3{font-size:0.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-info .card-meta{font-size:0.75rem;color:#666;margin-top:0.25rem}
+.card-info .card-meta{font-size:0.75rem;color:#666;margin-top:0.25rem;display:flex;justify-content:space-between}
+.card-info .card-group{font-size:0.65rem;color:#555;background:#1a1a1a;padding:2px 8px;border-radius:4px;display:inline-block}
 .actions{padding:0.75rem 1rem 1.5rem;display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap}
 .btn{padding:0.85rem 1rem;border:none;border-radius:14px;font-size:0.95rem;font-weight:800;cursor:pointer;transition:transform 0.12s,box-shadow 0.12s;display:flex;align-items:center;justify-content:center;gap:0.4rem;min-width:0;flex:1}
 .btn:active{transform:scale(0.94)}
@@ -65,14 +66,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 #done .done-stat{text-align:center}
 #done .done-stat-num{font-size:2.5rem;font-weight:900}
 #done .done-stat-label{font-size:0.8rem;color:#666;text-transform:uppercase}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#aaa;padding:0.75rem 1.5rem;border-radius:12px;font-size:0.85rem;z-index:100;opacity:0;transition:opacity 0.3s;pointer-events:none}
-.toast.show{opacity:1}
+#done .grid-link{margin-top:2rem;color:#ff6b35;text-decoration:none;font-size:0.9rem}
 </style>
 </head>
 <body>
 <div id="onboarding">
   <h1>CB Asset Tagger</h1>
-  <p>Rate Chubby Buttons images from Google Drive. Tag them as Action shots, Product shots, or skip.</p>
+  <p>Rate Chubby Buttons images from Google Drive. Tag as Action shots, Product shots, or skip.</p>
   <input type="text" id="userName" placeholder="Enter your name" autocomplete="off">
   <button id="startBtn" onclick="startApp()" disabled>Let's Go</button>
 </div>
@@ -96,8 +96,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="card-area" id="cardArea"></div>
   <div class="actions" id="actions" style="display:none">
     <button class="btn btn-bad" id="btnBad" onclick="rate('bad')">&#x2717; BAD</button>
-    <button class="btn btn-action" id="btnAction" onclick="rate('action')">&#x1F3BF; ACTION</button>
-    <button class="btn btn-product" id="btnProduct" onclick="rate('product')">&#x1F4F7; PRODUCT</button>
+    <button class="btn btn-action" id="btnAction" onclick="rate('action')">ACTION</button>
+    <button class="btn btn-product" id="btnProduct" onclick="rate('product')">PRODUCT</button>
     <button class="btn btn-skip" onclick="skip()">SKIP</button>
   </div>
   <div class="keyboard-hints" id="keyHints" style="display:none">
@@ -106,114 +106,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 <div id="done">
   <h2>All Done!</h2>
-  <p style="color:#888">You've rated every image in this batch.</p>
+  <p style="color:#888">You've rated every image.</p>
   <div class="done-stats">
     <div class="done-stat"><div class="done-stat-num" style="color:#3b82f6" id="finalAction">0</div><div class="done-stat-label">Action</div></div>
     <div class="done-stat"><div class="done-stat-num" style="color:#a855f7" id="finalProduct">0</div><div class="done-stat-label">Product</div></div>
     <div class="done-stat"><div class="done-stat-num" style="color:#ef4444" id="finalBad">0</div><div class="done-stat-label">Bad</div></div>
   </div>
+  <a class="grid-link" href="asset-grid.html">View all rated images in grid &rarr;</a>
 </div>
-<div class="toast" id="toast"></div>
 <script>
-const API_RATE='https://hook.us1.make.com/3hgk43nm1yj3wjie2dajags96veta66f';
-const STORAGE_KEY='cb_tagger_ratings_v2';
-const ASSETS=[
-{"f":"1ewizmouLG4psL29pEh_wuoK26OQ-Xlxe","n":"Hunter-_Yellow_Skinz.jpg"},
-{"f":"1c6QNsRgjQa9tswFDlQSGFhwhLVmTYQ6_","n":"Tron-_Green_Skinz.jpg"},
-{"f":"1xEEyes9ljtiRfjLgGupBzC_pfExrKvOF","n":"1732331362777.jpg"},
-{"f":"144gyFsToGIZAB5tmwto0h-X7WTQu7L_H","n":"Chubby Buttons 4.jpeg"},
-{"f":"1L9SIG9F8slhfPrruPvLAMKn3-sDDtdbj","n":"Chubby Buttons 3.jpeg"},
-{"f":"16RLgFvGKYCnBRTKvplOY79OD5I7txqck","n":"chubby Buttons 2.jpeg"},
-{"f":"1Zuj3MVMqsFXRFD8HcEIumUrxVBUpLwLZ","n":"Chubby Buttons 1.jpeg"},
-{"f":"1G31i87aTjI8apty9C-1YnmUgoSVe7lb0","n":"Start Your Someday -Chubby Button AD.jpg"},
-{"f":"1kP5x_YIA4ys9JcYrWJpWW7pQRfNuXudd","n":"Tron- Green Skinz.jpg"},
-{"f":"1XE8OKc4A3CcDvjTMgPe6H1G_4iPnujAt","n":"Hunter- Yellow Skinz.jpg"},
-{"f":"1EUIc-w7qB0bl9gFnRQgtScK5wUoQQ07c","n":"SkinYellow- Blk Bkgd.jpg"},
-{"f":"1FdoSXqGwzGAwq4iZzHWfoKLjztCqR_XZ","n":"SkinGreen- Blk Bkgd.jpg"},
-{"f":"1sqYApm0XFxd2Vj5YJ8hqR41e--eL2Ott","n":"SkinGreen- Blk Bkgd.png"},
-{"f":"1rNDgrIzijTBg7LY8hy6YHP8BGDMo59_w","n":"SkinGreen.png"},
-{"f":"1yLFtnjPBvkvFjt5rsTUt5WOKFXOEcxml","n":"SkinYellow- Blk Bkgd.png"},
-{"f":"1edrdvJsLoi7wybPSvA8pfcjoHxmpHPIA","n":"SkinYellow023.jpg"},
-{"f":"1nMaGu4yuB_eWCifkx69bsHNfxmUx93Mi","n":"ChubbyButtonsGreen042.jpg"},
-{"f":"1ZeRwjTdQWqD1jYLhprqit7kjhr_F-E0v","n":"ChubbyButtonsBlack041.jpg"},
-{"f":"16y848FiQqaj60R1jk1AS1yIwbz5Ybx4U","n":"SkinPair024.jpg"},
-{"f":"1Hf_eHivbiaKEzMVdMk8UYaDu0V_xKQYv","n":"SkinGreen025.jpg"},
-{"f":"10DI_sB3znldaN9PIiCrsbtQqvkM1fPZW","n":"ChubbyButtonsPair040.jpg"},
-{"f":"1TZJb30yt4yLMgKzgtR72yezQtJiZSors","n":"ChubbyButtonsPair039.jpg"},
-{"f":"1IeW6pSeVrjfEI534B4AOHTFi9Qn2DfqW","n":"Vertical Pair.png"},
-{"f":"16mX7Y3Mpi3mzOII4B_Z5fimZkBMJWN3E","n":"Tron- GreenSleeve763.jpg"},
-{"f":"1xTqWb4OHWDxGuj9cN6c-TtwOSxZni4-z","n":"Hunter- YellowSleeve.png"},
-{"f":"1XzXW82QLsQtSccJuNXO4oB7NWdKSmtf6","n":"Tron- GreenSleeve.png"},
-{"f":"1oMtvCu-NcwR4u8OxzXpUUbOP1EhQjaFo","n":"Horizontal Pair.png"},
-{"f":"1ohQofD6RYW_NGBLgeSxhnh5AD6BOp7Un","n":"Horiztonal Pair- 765.jpg"},
-{"f":"1vS5WP0vzTYkQiAjn2FTLzHf1grTyqgVd","n":"Hunter- YellowSleeve762.jpg"},
-{"f":"1TZvvulWd4e38ti4tNWIgfA5-xok3W9cB","n":"Vertical Pair 764.jpg"},
-{"f":"1mFUEza80hrjU8QSie37wpsGrJTH8048t","n":"Debt to Jordan- end of 2023.png"},
-{"f":"1v8tWEQOkDcdTSUfBuYNOwZvWOr9VI0dE","n":"Transfers btwn Jordan and Chubby.png"},
-{"f":"1s_rXjq93VpOKFszS3gub0ozFEtD1bGea","n":"Certificate.JPG"},
-{"f":"18GxkESEaLsi8KEfS8Z1z13j9vI4OWY6C","n":"IMG_7327.jpg"},
-{"f":"12Vf4OiHVDkUiyDxGutKz19yeaiOB3k-6","n":"IMG_7328.jpg"},
-{"f":"1qx1yHoObpBz_PvkaWYIWt_tS07vXrW3i","n":"IMG_7330.jpg"},
-{"f":"15ajEYetxc_ADSDB7bN3P5MiZkZ0TV5Je","n":"IMG_7329.jpg"},
-{"f":"1ENMcFwSU3BsRXKrMJu3YWHQ14KtJ2POE","n":"How much Chubby owed Jordan throughout 2022.png"},
-{"f":"1hgfKGwlO35TX6OqTubd8d576OKTjMfwK","n":"Transfers to and from Jordan's Accounts.png"},
-{"f":"1ZjvE74XE3YnaLuf7gPp5Ps8UbMOAMgDg","n":"Dune Buggy - Alan Maccini.jpg"},
-{"f":"1Q1mDVl6g_u4pAuicnRh1N1uIcMHy-ThV","n":"Mike Anderson 3.JPG"},
-{"f":"1VYYuE6dxHbFAcdX5sVCmiaklXJ7TPAXS","n":"Mike Anderson 2.JPG"},
-{"f":"1uZXxrbAj44n-5MLZqASi2PCpfmHS1xKZ","n":"Mike Anderson 1.JPG"},
-{"f":"1620NVxvsPjlrA4FZWsYMWUI4nudAToL8","n":"50b12cf6-0fad-44c5-90f2-35d3d05ae4ba.JPG"},
-{"f":"181kKXEevve9ECRB3gwizUIlgtyflPzYb","n":"d19ee4a4-0fea-4f2d-92cf-9bc332d78ec6.JPG"},
-{"f":"10bXZU7Gp1i8JXRaqSgmD--U4TH1QKLVi","n":"Cole Conderman 2.jpg"},
-{"f":"10ZCqxOcOBOWcPT30MoLa7taH5VQ0QR7V","n":"Cole Conderman 1.jpg"},
-{"f":"10Y4WacamPtARkEkJa7zhwHK4X5iqFpMP","n":"Thomas Warden 2.jpg"},
-{"f":"1GruyG-KYx1mhEB8svQUO742HpKKt82pK","n":"Thomas Warden.jpg"},
-{"f":"10Kgkp8k2ydsFdI26koqFATge0lzUo-G2","n":"DudeShopping2.jpg"},
-{"f":"10IPsn_AfOc37fXgj5p7gxKvZE5DiGJGZ","n":"DudeShopping1.jpg"},
-{"f":"10Fy5imxyP6tlW5vmCGhu16_2K-LRs3gV","n":"Kitty Basslines- happycorekitty.jpg"},
-{"f":"1Mh8zMqgHmMiN4E6Xx6VcmryBH-K9joNq","n":"WhatsApp Image 2023-01-24 at 3.11.49 PM.jpeg"},
-{"f":"16YXjmR3J-8JUUkLbqUghxQgyn0QK6W60","n":"WhatsApp Image 2023-01-24 at 3.11.49 PM (2).jpeg"},
-{"f":"18-lmkYy4a35mhaCyooCy35636sbtuE2c","n":"WhatsApp Image 2023-01-24 at 3.11.48 PM.jpeg"},
-{"f":"1oAAMh9xMdeKAXnKl4ZZsZHNC8Thn4RZc","n":"WhatsApp Image 2023-01-24 at 3.11.48 PM (2).jpeg"},
-{"f":"1O6dUppM7q6JPzxgrbM5wwE9CfRw_UrWh","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (1).jpeg"},
-{"f":"1TSOtvEwTiBQ1-cFqsBhqoVB-uj-4Ect2","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (2).jpeg"},
-{"f":"1WUKCIESvK-mz8X4WVcmpIqAzMRUU6EPZ","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM.jpeg"},
-{"f":"1RtGB_SiFjj_DBXsAVlyqxFzUW06WAcvS","n":"WhatsApp Image 2023-01-24 at 3.11.47 PM (3).jpeg"},
-{"f":"1sdwBfPyNmM6fipERZYzgzBetY6PoZ5FU","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (1).jpeg"},
-{"f":"1f06V0AxDrVbqk0vE6DV8eUfkHhY2A9bZ","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (2).jpeg"},
-{"f":"1YjkkCWRxhigYS5jjw2Ak0PsatdwQO0dy","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM.jpeg"},
-{"f":"1wgVT-RhpZpeLaQjKyPINFgE5TF10so-L","n":"WhatsApp Image 2023-01-24 at 3.11.46 PM (3).jpeg"},
-{"f":"1KYNifk_A9p_oP2tPz83q8kC0uMl0lu7r","n":"WhatsApp Image 2023-01-24 at 3.11.45 PM.jpeg"},
-{"f":"1v1VmULtTe2h85E1AgZ1zT8KLLHQc2aNx","n":"WhatsApp Image 2023-01-24 at 3.11.45 PM (2).jpeg"},
-{"f":"1lzKSQkwGieGPybV_e_PLhO0XEA6g0y8s","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (1).jpeg"},
-{"f":"1U-6ZJej5SMlTXctBs8jH3Des6ybcHJMW","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (2).jpeg"},
-{"f":"1d-DHrFXb4ZA4jb7_DZjvLx3ZJXfsRgrR","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM.jpeg"},
-{"f":"1ZrDK2XAd_uSKSsdXxVQOZEbYkt-K3vJH","n":"WhatsApp Image 2023-01-24 at 3.11.44 PM (3).jpeg"},
-{"f":"1s_p7UalfT3etToy4PWn_mXfEAcEqxxyq","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (1).jpeg"},
-{"f":"1LmlOXBUoI_Hu3up-X_PtSxX7ZSw3v7Ko","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (2).jpeg"},
-{"f":"1TTiwuPHt0e61IHNCCXjHWplY5-Jb7p1I","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM.jpeg"},
-{"f":"1ZSQDs0MuEc65Qlof5PKfnDid8yRgZS8p","n":"WhatsApp Image 2023-01-24 at 3.11.43 PM (3).jpeg"},
-{"f":"1eWf8e-QRABi76e9RHh6vM9Lf-rnaJw0T","n":"WhatsApp Image 2023-01-24 at 3.11.42 PM.jpeg"},
-{"f":"1nM4KnqTgRh0y4Kyr5pBuWNBZgiiq86zt","n":"WhatsApp Image 2023-01-24 at 3.11.42 PM (2).jpeg"},
-{"f":"1LNOoGMVrDzB9K-uo3HJrBLlXEZNnXiBi","n":"WhatsApp Image 2023-01-24 at 3.10.08 PM.jpeg"},
-{"f":"1VWf8gvQ9LCtPDDy1CjGy_U1I9-Yw0hO5","n":"WhatsApp Image 2023-01-24 at 3.10.08 PM (2).jpeg"},
-{"f":"1PgN3NThixizrEVPYL_8IolPx9wfUnD1J","n":"WhatsApp Image 2023-01-24 at 3.10.07 PM.jpeg"},
-{"f":"1hyN11usdRV32iycFUS6wnyYQGS51uCua","n":"WhatsApp Image 2023-01-24 at 3.10.07 PM (2).jpeg"},
-{"f":"1uyygotPrT5mZWrD1AGVpWlW5WnTWOcas","n":"WhatsApp Image 2023-01-24 at 3.10.06 PM (1).jpeg"}
-];
-let ci=0,userName='',actionCount=0,productCount=0,badCount=0,isRating=false,ratings={};
+const API='https://hook.us1.make.com/3hgk43nm1yj3wjie2dajags96veta66f';
+const RATINGS_URL='https://jbarad424.github.io/ideas/cb-ratings.json';
+const SK='cb_tagger_ratings_v3';
+const ASSETS=[{"f":"1gYdF_3hsZiuW1t7hgtWYvdaNkyOJVKNM","n":"Assembly_r2_B.78 reflection.jpg","g":"3D Renders"},{"f":"1GYPCmgNEWWgpkRJyklUystXNjCQu1zib","n":"Assembly_r2_B.78(clear).png","g":"3D Renders"},{"f":"1ZPg9TB733iW5qDfxVa1kBAyRJR_NcrTL","n":"CB w Glove.jpg","g":"3D Renders"},{"f":"1sZlSvLp_X-ekz7oExcHrVwNLznxQ60bA","n":"CB_Reflection.jpg","g":"3D Renders"},{"f":"1wVHwuetnSe-idOlt6zTakmd48w0yB25v","n":"ChubbySchematic.001.jpeg","g":"3D Renders"},{"f":"1QBJPqVgczz_SVhuBKKNrrs2USvlpsNK_","n":"Exploded View.jpg","g":"3D Renders"},{"f":"192PwKs0_7xw1LZ9SIQ32oQ6sDg2Ef4B1","n":"Glove with Button_r2.jpg","g":"3D Renders"},{"f":"1FO1qg65vFt6yLv5RN1RZLbeXy3L8HtV_","n":"Head On - Tilt.jpg","g":"3D Renders"},{"f":"1irBKGcirQlDqoDz4DTxOYAlnyozauFgC","n":"Head On.png","g":"3D Renders"},{"f":"1tiDE5SbjMApBat15OlBx3KUrlaEZuU8K","n":"Main Product Image.jpg","g":"3D Renders"},{"f":"1ZK2Y7FWcIHYBx5GTSPBjTbq0ecFt_1iw","n":"Shower View.jpg","g":"3D Renders"},{"f":"1gYMHEvqQ8q4YTqc2boakhPxOLfmTuCX5","n":"Shower-Angle.jpg","g":"3D Renders"},{"f":"1Jz2Uy7-7I3t8-i7T1C-34Xp-y96TIFca","n":"Shower-HeadOn.jpg","g":"3D Renders"},{"f":"1Zi2Fs8RVGGrgGsYa05khfjg0DHhf8Ur4","n":"Straight On.jpg","g":"3D Renders"},{"f":"1oyRToZ-eH0TVrp54IFpCyPKNDnjzcynZ","n":"Tilt.png","g":"3D Renders"},{"f":"1R_LHY5KGOqfo7MDDp8vsq21lzhAWxtiG","n":"Tilted.png","g":"3D Renders"},{"f":"1ffvyAyZ8ANbGNFUriXNOrGPElDATt_mi","n":"Wear it (black band).png","g":"3D Renders"},{"f":"1YdTuCwISjdi_iQDpN39sxdfDakAkC34a","n":"Wear It (texture).png","g":"3D Renders"},{"f":"1lDs0zN6zR2UQ0o-9DzeOJL0lzTQStbmH","n":"Wear It Back.jpg","g":"3D Renders"},{"f":"1PHG_CfdKWtHU1oXaMVXvl1zWoOCOVWAe","n":"Wear it Back.png","g":"3D Renders"},{"f":"1ajzoWitFuiPnReq_tDzgEotpCk3149KO","n":"Wear it Front.png","g":"3D Renders"},{"f":"1v6WyqWOjgOr_JHvrBYolEhvtYYeZ_QlA","n":"On and Off the Trail (1).png","g":"Trail"},{"f":"13MfDxwY3uSnAcC9G50Ic7Wu4eCgr6Mez","n":"On and Off the Trail-2nd.png","g":"Trail"},{"f":"1dhsbWYLc1R78BKcE4X1uAKe_8TlpgwvX","n":"On and Off the Trail.png","g":"Trail"},{"f":"1Y7W71BrBr2870NdmZEskW4UZbUumDIwr","n":"Arm & Jacket.jpg","g":"Lightbox"},{"f":"1vk8T6aVWABDrSTWcFMEyqR4EZxxyV7mm","n":"Black Cans Blurry.jpg","g":"Lightbox"},{"f":"102xSkuFgWiLNDQb-RoBbaj_dECnv8wVJ","n":"Black Headphones Above.jpg","g":"Lightbox"},{"f":"137dzxgk77iUh4PxIxnJoN9oU4U2nw_AZ","n":"Box.jpg","g":"Lightbox"},{"f":"1qn53zGAYrRAGC3zkAmmqLlLY6qOrIdOw","n":"Close Up Water.jpg","g":"Lightbox"},{"f":"1xePncZwX9uT9i44NGZJqq2lcIM5hKxYG","n":"Goggles & Snow Blurry.jpg","g":"Lightbox"},{"f":"1lg2NIgnvqpHMV4yEo30eEmBUrjumV7HC","n":"Goggles & Snow.jpg","g":"Lightbox"},{"f":"1qi9Ib2-YFcxb4N8jhvvPixRcAYx7_fDF","n":"Phone & Goggles Blurry.jpg","g":"Lightbox"},{"f":"19_YSBnzS5YHj4EFWRnLwUzmCBuPFdKD0","n":"Snow Box.jpg","g":"Lightbox"},{"f":"1HQ1Ceuqa-uX-fcofH5r-lOcrHU-O9u0a","n":"Snow Gloves.jpg","g":"Lightbox"},{"f":"1cDjgzr1EwOurfP8H4oABZpvR5P_q9rn7","n":"White Soap.jpg","g":"Lightbox"},{"f":"1ygyu1CaJGsL-AwGUGu2G45tpHqN8Z2Rj","n":"Arm_Finger.jpg","g":"Lightbox Clean"},{"f":"1PjpF9E1QETYkrDXDn4CwOrnL6UlU-dL4","n":"Arm_no_finger.jpg","g":"Lightbox Clean"},{"f":"1XqpkeXWD30gCs5hR9gqCEJJ5Q3fhSmJP","n":"BlackShower.jpg","g":"Lightbox Clean"},{"f":"1dWBosX3aSTX0tD4wTtjP3Nnq6-OF1Rkl","n":"BlueGoggles.jpg","g":"Lightbox Clean"},{"f":"1hTJfpxXlExATB2pq4eN7gNLEU3hE85Zs","n":"Box&Snow.jpg","g":"Lightbox Clean"},{"f":"1-w1_hdccoku1N5m6BrGNr_VBOpAEUoJ0","n":"Box.jpg","g":"Lightbox Clean"},{"f":"1W9D3l4AXJRiA_G49LOwqoTCL0SxbECpr","n":"Goggles&Snow.jpg","g":"Lightbox Clean"},{"f":"1_px5hbqJ0d2xpibnJPuxPRPBK9_wjPPp","n":"Goggles&Snow1080.jpg","g":"Lightbox Clean"},{"f":"1pAjnQS6V43BHX2607uNK_4mPyE2WYynC","n":"iPhone.jpg","g":"Lightbox Clean"},{"f":"1HRFfvzZ4egSZAe3FZ62ct9EAD9e2_gGT","n":"Solo.jpg","g":"Lightbox Clean"},{"f":"1CYooF5E7K9idmOAS0kGAWE7hV_FPCsMl","n":"BlackShower Circle.png","g":"Amazon Circular"},{"f":"1Bln1Wp8oW9dxIwEa-seshLa7zUD03kgH","n":"Boxer Circle.png","g":"Amazon Circular"},{"f":"1499vHB8er4sjhNDXhDuA7CaD9KXGl8r0","n":"Car Circle.png","g":"Amazon Circular"},{"f":"1lFHw4OLvogftkE98aZcmueLOw7oMNW72","n":"Car.jpg","g":"Amazon Circular"},{"f":"1RwjfbCkKPh_sYu26Fh0vuuJJc5XkjIu-","n":"Crossfit.png","g":"Amazon Circular"},{"f":"1k6HoMXcaUp2E6age59zDyryEzrCxogEP","n":"Dancer Circle.png","g":"Amazon Circular"},{"f":"1LISR0BIrvZaFDf9fbeQ2tsEH4AYVcjDQ","n":"DeskPortrait Circle.png","g":"Amazon Circular"},{"f":"1hhmghdyJROPm0Mp7ysyoZ_6uz4z6Cw3R","n":"Glass Circle.png","g":"Amazon Circular"},{"f":"1UstTS7uTjycKBPgj0ZXxtRDEJfoU14j7","n":"Kitchen Circle.png","g":"Amazon Circular"},{"f":"1J2RL6FJ2svvtGCSllhOn0n19w1e9wOym","n":"Lightbox Shower Bright.png","g":"Amazon Circular"},{"f":"1mi9VGXGqOZe67Yc_13B33En7ASUPxlJA","n":"Lightbox Shower Circle.jpg","g":"Amazon Circular"},{"f":"136sBRIeCZc0vGbv6ni8EBBAjtubJT28Z","n":"Lightbox Shower.png","g":"Amazon Circular"},{"f":"1tLm_9Bxxt0aVa65jWpfktJ5e3EPIKEXq","n":"Motorcycle Circle.png","g":"Amazon Circular"},{"f":"1o2nplQrgN7EVWqwHOaKvYpnQqb3wTYD2","n":"Nanosuction Circle.png","g":"Amazon Circular"},{"f":"1bcL3IYTxJMAa__mtGqKrnVbBqyJzPIYO","n":"Snowboarder Circle.png","g":"Amazon Circular"},{"f":"1-B48e7agw0YHvZZkAHS-Ci7PwXLrGBP5","n":"Social.png","g":"Amazon Circular"},{"f":"1DoibypzSKF6KESpZWNoztNO_d07-vr-q","n":"Speed Turn.png","g":"Amazon Circular"},{"f":"1g5gnru8PDpPPn-tFIAjM5FrUI9D0gqMc","n":"Srdjn shower.png","g":"Amazon Circular"},{"f":"1gdAYAiV0cvTrQWLEkepijQ1lFsuytBeG","n":"Wet White Circle.png","g":"Amazon Circular"},{"f":"1RyDFQyyPQKp3wI6eiisk-v5XgPFI9YZY","n":"Baker.jpg","g":"Olympians"},{"f":"1UtTOm04_-sUDFGBJQ_attGd-Pv_Lxx-P","n":"Gear Bottom.png","g":"Olympians"},{"f":"111Y8Xq4ocvGYIJvJg8mliLOOtaTUPKhc","n":"GearShot.jpg","g":"Olympians"},{"f":"1qubqMoM6DaP4gBJFZzABEKd9Qc3bLxM1","n":"Tee Shoot 1.jpg","g":"Tee Shoot"},{"f":"1Mz3Jm4PHKnxCvVr3nhSzUMHuwFsUwAuQ","n":"Tee Shoot 2.jpg","g":"Tee Shoot"},{"f":"17Udo1c7wXffvDrlLXCUw-dyidYm3CIe9","n":"Tee Shoot 3.jpg","g":"Tee Shoot"},{"f":"1lKw8mudr9WrXKsqw7xDgTQDvwYVR2U_-","n":"IMG_9473.jpg","g":"Tee Shoot"},{"f":"1wlD0NS8N5lTy_kQWwnU79st5eUvlWiad","n":"IMG_9474.jpg","g":"Tee Shoot"},{"f":"1gdhogr_NUO6gtgusWdmW6ugSCqbF8APb","n":"IMG_9475.jpg","g":"Tee Shoot"},{"f":"1xFjOWlijvdho933TbA43SGy7OGd60BLV","n":"IMG_9476.jpg","g":"Tee Shoot"},{"f":"1Fgbp3_l6kfZ4w-w4zvRmSMnflTXWUw4x","n":"IMG_9477.jpg","g":"Tee Shoot"},{"f":"1NBbRi7q_4VsPov1v-YEaj0u6TMzV7Slh","n":"IMG_9478.jpg","g":"Tee Shoot"},{"f":"1NWzTZhVsl-MyN9EJ9TB4WVzh3yga-b9c","n":"IMG_9479.jpg","g":"Tee Shoot"},{"f":"12fG2wHX7z1_kiLx8yVmrpR2EenitbQjq","n":"IMG_9480.jpg","g":"Tee Shoot"},{"f":"1PvIP_pdKuM1zbiCt-bWkwpCJ4XjRl41Q","n":"IMG_9481.jpg","g":"Tee Shoot"},{"f":"176N8pMzl5UXRaXnBkSJAAXN68A9zmC_I","n":"IMG_9482.jpg","g":"Tee Shoot"},{"f":"1CZoUVm3oaVwT0nyg3cFuooxCPexz-jU2","n":"IMG_9483.jpg","g":"Tee Shoot"},{"f":"18KnzqvdTwsSK54RP1g0lK3A2nbyUsSba","n":"IMG_9484.jpg","g":"Tee Shoot"},{"f":"1lHr5NtaXo-7IczUUSvy7OFvsYag-9ToL","n":"IMG_9485.jpg","g":"Tee Shoot"},{"f":"1i5Es5vVNAIKutv89n7JK1cTRQkzaipAI","n":"IMG_9486.jpg","g":"Tee Shoot"},{"f":"1mw2uiV6RImAwtY-P9GGx3wYL2knl96U1","n":"IMG_9487.jpg","g":"Tee Shoot"},{"f":"1eZxaG4i6uaBm98ql5EneYtErNSO673jy","n":"IMG_9488.jpg","g":"Tee Shoot"},{"f":"1tAX6iKQx_sQg6_9WjtqppuUR2YYe44Xw","n":"IMG_9489.jpg","g":"Tee Shoot"},{"f":"1IBPvc1XgIEINIOPp-oAIByczhRS89dMV","n":"IMG_9490.jpg","g":"Tee Shoot"},{"f":"1s2OFPeawm8cEG5bn8UZlq14rCmko4P2S","n":"IMG_9491.jpg","g":"Tee Shoot"},{"f":"1lHVnM0AiEVbjpKcIA9g7dA_ZaNjClcGe","n":"IMG_9492.jpg","g":"Tee Shoot"},{"f":"12dXpKST-uZNAcQ6jlFs6Vy80bRpLVhrO","n":"IMG_9497.jpg","g":"Tee Shoot"},{"f":"1XSw2y-lzxi06GOGd3IlXcRnHnP-lrUFt","n":"IMG_9498.jpg","g":"Tee Shoot"},{"f":"1CIgAphitEJcNnBq2CJdJjk0es1ZUqJ63","n":"IMG_9499.jpg","g":"Tee Shoot"},{"f":"1dmPwX9xFyjQo4yBEJ-0RQLPhpQclXB4v","n":"IMG_9500.jpg","g":"Tee Shoot"},{"f":"1SZejqb_NOml6okHsJFP4A6UY_T-wzYAs","n":"IMG_9501.jpg","g":"Tee Shoot"},{"f":"1a1TLAgKzvkiSGdAo_6zWnNvUEHVaw_V5","n":"IMG_9502.jpg","g":"Tee Shoot"},{"f":"1HeAWr3zkygI0phoAn__wytYxfA-GFd2C","n":"IMG_9503.jpg","g":"Tee Shoot"},{"f":"1gw3jKWcxjAkxNl_0EQIbj-aq_Ud6mghE","n":"IMG_9504.jpg","g":"Tee Shoot"},{"f":"1UhQBcoS35P7ePbJGRitCN0pcdNHRej3-","n":"IMG_9505.jpg","g":"Tee Shoot"},{"f":"1LlFAzQw4YaOSgWEZMPidbZMYcehjqi6o","n":"IMG_9506.jpg","g":"Tee Shoot"},{"f":"1ubWGOoEvzbOktw1DwgRgKfKsJzEh45Qm","n":"IMG_9507.jpg","g":"Tee Shoot"},{"f":"1nY6c5GhfheIBq9hU5NyecXH10Oa8777K","n":"IMG_9508.jpg","g":"Tee Shoot"},{"f":"1Z3MbokWDEg3ZQYhUoa5njYkBbTYS5-2O","n":"IMG_9509.jpg","g":"Tee Shoot"},{"f":"1hljWXLPrcxwLu0sBKf-3JXx0mniJlcZB","n":"IMG_9510.jpg","g":"Tee Shoot"},{"f":"1Fq7ZaWdx0Dwje6z8ecBV1DnBoOzVdJsp","n":"IMG_9511.jpg","g":"Tee Shoot"},{"f":"1RbfhG3KxlZO3ZQB2R7BQnQcOVJzKFFdR","n":"IMG_9512.jpg","g":"Tee Shoot"},{"f":"1uox59XhXTu0A42P2A4Eg_Sv57CKzDOD1","n":"IMG_9513.jpg","g":"Tee Shoot"},{"f":"1QrbBLO0eBCPN2h8yeQXzG1p7J1LyOTIK","n":"IMG_9514.jpg","g":"Tee Shoot"},{"f":"1l-Dene2DITXn5zbIS71823QSg4jsWYs1","n":"IMG_9515.jpg","g":"Tee Shoot"},{"f":"15CquCxkWF4jofWBtUGaI6YUdQQ_zCDbd","n":"IMG_9516.jpg","g":"Tee Shoot"},{"f":"1GWlW4LGASMFYuteDLsqY3jM4t-bqrr68","n":"IMG_9517.jpg","g":"Tee Shoot"},{"f":"1H23-NZHypclrq1pCu20rO-3h291ih_TO","n":"IMG_9518.jpg","g":"Tee Shoot"},{"f":"16c7JTDPCrIZZaGGJLKv6bbfzjku6RCfF","n":"Arm_Finger.jpg","g":"Shopify"},{"f":"1HGsYfFVSQK4MdCLpjfrWGwhPpbKLxMu3","n":"CB w Glove.jpg","g":"Shopify"},{"f":"1EMd42zGYuRzv9nxCzgK2htJUqCyxzt8q","n":"Shower-Angle.jpg","g":"Shopify"},{"f":"13QB5CHIdRJolUOPzKGja4h4ooRDMx9Ow","n":"skier-kid-4.jpg","g":"Shopify"},{"f":"1w9vKyl7Tg1lzhB5pfx4u7FIQ8haxM-sJ","n":"Boxer.png","g":"Lifestyle"},{"f":"1gTyFHsNW5_KK0CKnwVF39mR37ZboBFe3","n":"Car.png","g":"Lifestyle"},{"f":"19DIONVEGFSyNKhf6aAKDERXHC-eJ4UbN","n":"Coffee Table.png","g":"Lifestyle"},{"f":"1OduBcohkINtGmo7TOvRXpgZRRJTdtqai","n":"Crossfit.jpg","g":"Lifestyle"},{"f":"1MDu1WxuwV9ZHLsDjIIxS5lEWgNGOtLHv","n":"Dancer.png","g":"Lifestyle"},{"f":"1TGOC5vtuBr2GFssMmQwdUTKHF_FFbQYv","n":"DeskPortrait.png","g":"Lifestyle"},{"f":"1xOwzVz7S7xu4XrF_-rhHTHf8b8EglR1Q","n":"Green Snowboarder.png","g":"Lifestyle"},{"f":"1e8bWJw9Z6o1b9deYBqVkb9GDwN30xXDY","n":"Kitchen.png","g":"Lifestyle"},{"f":"1cXsNIBssFqaUprC3ybxZY5BLQybkWEgJ","n":"Motorcycle.png","g":"Lifestyle"},{"f":"1IXkw7l0Edkl2YUjIGz4D8ANKoJ_c4iwC","n":"Motorcycle Wide.png","g":"Lifestyle"},{"f":"1o3eGHGhGNsoJDK1zmJEwVkjVO9YrAkmo","n":"Mountain Biker 2.png","g":"Lifestyle"},{"f":"1Pchl5AhDcVPMog78vvF6I_RECsAKwWOO","n":"Mountain Biker.png","g":"Lifestyle"},{"f":"1WJz4CDmYOGPY29OzVlXDvqEf8lSCm_Se","n":"Nanosuction Blue.jpg","g":"Lifestyle"},{"f":"1qcduklOas6P1mrrVnhonTejtQ_gJgnFC","n":"Shower Angle.png","g":"Lifestyle"},{"f":"1--ATZmg_f99B378IsgJhV-jbLDfUWlUj","n":"Speed Turn.png","g":"Lifestyle"},{"f":"1e4TOV_-hp7KoiDAyC44Dl5jRG8BRu0zd","n":"SRDJN.png","g":"Lifestyle"},{"f":"1T68-RFfiUI3OIrhrTghcW9gdyCH7OnJ9","n":"Wear It Wide.png","g":"Lifestyle"},{"f":"1x7prPKmvuDZh1ZzdFTIE_8mzgp8l5U-g","n":"Yoga.png","g":"Lifestyle"},{"f":"1SYnB217pNZBXBq6bfrbdQKricNH4EREH","n":"Yoga-1.jpg","g":"Lifestyle"},{"f":"1ww_ckiTs923YpvW8UnkSemIEXE3hcr9I","n":"Summer Product 1.png","g":"Summer Product"},{"f":"1b6ofMBnY4aMi6v1k93_KAGccpwiszRHP","n":"Summer Logo Tweak1.png","g":"Summer Product"},{"f":"1pu_pyCWk7TkkL4-VSTpSWCbsV85Ln3IJ","n":"Summer Logo Tweak2.png","g":"Summer Product"},{"f":"1UlN6VpLLHr7gaakv4PkT_VL805AXXWDG","n":"Summer Product 5.png","g":"Summer Product"},{"f":"1JS0VAkc5Jyk-hf_9WUYVRY55ALQtmCWX","n":"Product Shot Summer.png","g":"Summer Product"},{"f":"1UeVHmmAEAPyQJUMTgZfovlabg6g0IS-d","n":"Cross Country Skier.jpg","g":"Olympians"}];
+let ci=0,userName='',actionCount=0,productCount=0,badCount=0,isRating=false,R={};
 const ni=document.getElementById('userName'),sb=document.getElementById('startBtn');
 const sv=localStorage.getItem('cb_tagger_name');
 if(sv){ni.value=sv;sb.disabled=false;}
 ni.addEventListener('input',()=>{sb.disabled=!ni.value.trim();});
 ni.addEventListener('keydown',e=>{if(e.key==='Enter'&&ni.value.trim())startApp();});
-function startApp(){
+async function startApp(){
   userName=ni.value.trim();if(!userName)return;
   localStorage.setItem('cb_tagger_name',userName);
-  ratings=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
-  actionCount=Object.values(ratings).filter(r=>r==='action').length;
-  productCount=Object.values(ratings).filter(r=>r==='product').length;
-  badCount=Object.values(ratings).filter(r=>r==='bad').length;
-  ci=ASSETS.findIndex(a=>!ratings[a.f]);
+  // Load shared ratings first, then merge with local
+  try{
+    const res=await fetch(RATINGS_URL+'?t='+Date.now());
+    const shared=await res.json();
+    const local=JSON.parse(localStorage.getItem(SK)||'{}');
+    R={...shared,...local};
+  }catch(e){R=JSON.parse(localStorage.getItem(SK)||'{}');}
+  localStorage.setItem(SK,JSON.stringify(R));
+  actionCount=Object.values(R).filter(r=>r==='action').length;
+  productCount=Object.values(R).filter(r=>r==='product').length;
+  badCount=Object.values(R).filter(r=>r==='bad').length;
+  ci=ASSETS.findIndex(a=>!R[a.f]);
   if(ci===-1)ci=ASSETS.length;
   document.getElementById('onboarding').style.display='none';
   document.getElementById('app').style.display='flex';
@@ -232,7 +158,7 @@ function updateStats(){
   document.getElementById('progressText').textContent=rated+' of '+total+' rated ('+pct+'%)';
 }
 function showCard(){
-  while(ci<ASSETS.length&&ratings[ASSETS[ci].f])ci++;
+  while(ci<ASSETS.length&&R[ASSETS[ci].f])ci++;
   if(ci>=ASSETS.length){showDone();return;}
   const a=ASSETS[ci];
   const thumb='https://drive.google.com/thumbnail?id='+a.f+'&sz=w800';
@@ -242,22 +168,22 @@ function showCard(){
     '<div class="card-image-wrap"><img src="'+thumb+'" alt="'+esc(a.n)+'" onerror="this.parentElement.innerHTML=\'<div class=placeholder>&#x1f5bc;</div>\'"></div>'+
     '<div class="card-overlay" id="overlay"></div>'+
     '<div class="card-info"><h3>'+esc(a.n)+'</h3>'+
-    '<div class="card-meta"><a href="'+url+'" target="_blank" rel="noopener" style="color:#ff6b35;text-decoration:none">Open in Drive &rarr;</a></div></div></div>';
+    '<div class="card-meta"><a href="'+url+'" target="_blank" rel="noopener" style="color:#ff6b35;text-decoration:none">Open in Drive &rarr;</a>'+
+    '<span class="card-group">'+esc(a.g||'')+'</span></div></div></div>';
   ['btnBad','btnAction','btnProduct'].forEach(id=>{document.getElementById(id).disabled=false;});
 }
 function rate(r){
   if(isRating||ci>=ASSETS.length)return;isRating=true;
   const a=ASSETS[ci],card=document.getElementById('card'),ov=document.getElementById('overlay');
   const labels={action:'ACTION',product:'PRODUCT',bad:'NOPE'};
-  ov.textContent=labels[r];
-  ov.className='card-overlay show-'+r;
+  ov.textContent=labels[r];ov.className='card-overlay show-'+r;
   ['btnBad','btnAction','btnProduct'].forEach(id=>{document.getElementById(id).disabled=true;});
   const anim={bad:'swipe-left',action:'swipe-up',product:'swipe-right'};
   setTimeout(()=>{card.classList.add(anim[r]);},200);
-  ratings[a.f]=r;localStorage.setItem(STORAGE_KEY,JSON.stringify(ratings));
+  R[a.f]=r;localStorage.setItem(SK,JSON.stringify(R));
   if(r==='action')actionCount++;else if(r==='product')productCount++;else badCount++;
   updateStats();
-  fetch(API_RATE,{method:'POST',headers:{'Content-Type':'application/json'},
+  fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({fileId:a.f,rating:r,ratedBy:userName,ratedAt:new Date().toISOString()})
   }).catch(()=>{});
   setTimeout(()=>{ci++;showCard();isRating=false;},450);
