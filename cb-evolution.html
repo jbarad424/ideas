@@ -108,6 +108,17 @@ a:hover{color:#c4b5fd}
 .modal-ai{margin-top:.8rem;font-size:.8rem;color:#666;line-height:1.5;border-top:1px solid #1a1a1a;padding-top:.6rem}
 .modal-ai strong{color:#888;font-weight:600}
 
+/* Batch story narrative */
+.batch-story{background:#111;border-left:2px solid #a855f7;padding:.8rem;margin-top:.75rem;border-radius:0 6px 6px 0;font-size:.8rem;line-height:1.6;color:#999}
+.batch-story .story-section{margin-bottom:.6rem}
+.batch-story .story-section:last-child{margin-bottom:0}
+.batch-story .story-label{font-size:.7rem;font-weight:700;color:#a78bfa;text-transform:uppercase;letter-spacing:.4px;margin-bottom:.15rem}
+.batch-story .story-text{color:#888;font-size:.78rem}
+.batch-story .story-quote{color:#666;font-style:italic;font-size:.75rem;margin-left:.5rem}
+.batch-story .story-scores{color:#60a5fa;font-size:.75rem}
+.batch-story .story-insight{color:#fbbf24;font-size:.78rem}
+.batch-story .story-arrow{color:#4ade80;font-size:.78rem}
+
 /* Empty state */
 .empty{text-align:center;padding:4rem 1rem;color:#333;font-size:.9rem}
 </style>
@@ -279,6 +290,163 @@ function renderStats() {
   document.getElementById('statsBar').innerHTML = html;
 }
 
+/* Build batch story narrative */
+function buildBatchStory(batch, idx, allBatches) {
+  // --- What was tried ---
+  const repPrompt = batch.images[0] ? batch.images[0].prompt : '';
+  const truncPrompt = repPrompt.length > 100 ? repPrompt.slice(0, 100) + '...' : repPrompt;
+  const model = engineName(batch.images[0] ? batch.images[0].model : '');
+
+  // --- Human feedback ---
+  let humanLines = [];
+  batch.images.forEach(img => {
+    if (img.feedbackText) {
+      try {
+        const fb = typeof img.feedbackText === 'string' && img.feedbackText.startsWith('{')
+          ? JSON.parse(img.feedbackText) : null;
+        if (fb && fb.ratedBy && fb.text) {
+          humanLines.push(esc(fb.ratedBy) + ': "' + esc(fb.text) + '"');
+        } else if (typeof img.feedbackText === 'string' && img.feedbackText.trim()) {
+          humanLines.push(esc(img.feedbackText));
+        }
+      } catch {
+        if (img.feedbackText.trim()) humanLines.push(esc(img.feedbackText));
+      }
+    }
+    if (img.feedbackTags) {
+      const tags = Array.isArray(img.feedbackTags) ? img.feedbackTags : (img.feedbackTags ? [img.feedbackTags] : []);
+      if (tags.length > 0) humanLines.push('Tags: ' + esc(tags.join(', ')));
+    }
+  });
+  const rated = batch.images.filter(i => i.rating).length;
+  const likes = batch.images.filter(i => i.rating === 'like').length;
+  const dislikes = batch.images.filter(i => i.rating === 'dislike').length;
+  const mixed = batch.images.filter(i => i.rating === 'mixed').length;
+  if (rated > 0 && humanLines.length === 0) {
+    let parts = [];
+    if (likes) parts.push(likes + ' liked');
+    if (dislikes) parts.push(dislikes + ' disliked');
+    if (mixed) parts.push(mixed + ' mixed');
+    humanLines.push(parts.join(', ') + ' (no written feedback)');
+  }
+  if (humanLines.length === 0) humanLines.push('No ratings yet');
+
+  // --- AI Vision analysis ---
+  const aiImgs = batch.images.filter(i => i.aiAnalysis);
+  let aiHtml = '';
+  if (aiImgs.length > 0) {
+    const avgP = (aiImgs.reduce((s,i) => s + i.aiAnalysis.productScore, 0) / aiImgs.length).toFixed(1);
+    const avgS = (aiImgs.reduce((s,i) => s + i.aiAnalysis.sceneScore, 0) / aiImgs.length).toFixed(1);
+    const avgB = (aiImgs.reduce((s,i) => s + i.aiAnalysis.brandScore, 0) / aiImgs.length).toFixed(1);
+    aiHtml += '<span class="story-scores">Avg scores: Product ' + avgP + ', Scene ' + avgS + ', Brand ' + avgB + '</span><br>';
+    // Key issues: collect unique summaries with low product scores
+    const issues = [];
+    aiImgs.forEach(i => {
+      if (i.aiAnalysis.productScore <= 2 && i.aiAnalysis.summary) {
+        const short = i.aiAnalysis.summary.split('.')[0];
+        if (!issues.includes(short)) issues.push(short);
+      }
+    });
+    if (issues.length > 0) {
+      aiHtml += 'Key issues: ' + esc(issues.slice(0, 3).join('; '));
+    } else {
+      // Show strengths
+      const strengths = [];
+      aiImgs.forEach(i => {
+        if (i.aiAnalysis.productScore >= 4 && i.aiAnalysis.summary) {
+          const short = i.aiAnalysis.summary.split('.')[0];
+          if (!strengths.includes(short)) strengths.push(short);
+        }
+      });
+      if (strengths.length > 0) aiHtml += 'Strengths: ' + esc(strengths.slice(0, 3).join('; '));
+    }
+  } else {
+    aiHtml = 'No AI analysis available for this batch';
+  }
+
+  // --- Takeaway ---
+  let takeaway = '';
+  if (aiImgs.length > 0) {
+    const avgProduct = aiImgs.reduce((s,i) => s + i.aiAnalysis.productScore, 0) / aiImgs.length;
+    const avgScene = aiImgs.reduce((s,i) => s + i.aiAnalysis.sceneScore, 0) / aiImgs.length;
+    const avgBrand = aiImgs.reduce((s,i) => s + i.aiAnalysis.brandScore, 0) / aiImgs.length;
+    const missingCount = aiImgs.filter(i => i.aiAnalysis.productScore <= 1).length;
+    const wrongForm = aiImgs.filter(i => i.aiAnalysis.productScore === 2).length;
+
+    if (avgProduct <= 2 && avgScene >= 4) {
+      if (missingCount > wrongForm) {
+        takeaway = 'Product disappears in complex scenes. Text-to-image cannot reliably place specific products.';
+      } else {
+        takeaway = 'Text-to-image generates wrong product form factor. Need reference photos to guide product accuracy.';
+      }
+    } else if (avgProduct >= 4 && avgBrand <= 2) {
+      takeaway = 'Product accuracy is strong but scenes lack lifestyle energy. Need to combine accurate product with action settings.';
+    } else if (avgProduct >= 4 && avgBrand >= 4 && avgScene >= 4) {
+      takeaway = 'Strong results across all dimensions. This approach is working well.';
+    } else if (avgProduct >= 3 && missingCount > 0) {
+      takeaway = 'Mixed results: some images nail the product, others lose it entirely. Inconsistent preservation.';
+    } else {
+      takeaway = 'Incremental progress. Scores suggest further iteration needed on product accuracy.';
+    }
+  } else {
+    takeaway = 'No AI analysis to derive insights.';
+  }
+
+  // --- What changed next ---
+  let changedNext = '';
+  const nextBatch = idx < allBatches.length - 1 ? allBatches[idx + 1] : null;
+  if (nextBatch) {
+    const curModel = (batch.images[0] && batch.images[0].model) || '';
+    const nextModel = (nextBatch.images[0] && nextBatch.images[0].model) || '';
+    const curUsesKontext = curModel.toLowerCase().includes('kontext');
+    const nextUsesKontext = nextModel.toLowerCase().includes('kontext');
+    const curUsesRecraft = curModel.toLowerCase().includes('recraft');
+    const nextUsesRecraft = nextModel.toLowerCase().includes('recraft');
+    const nextUsesRunway = nextModel.toLowerCase().includes('runway');
+    const curPrompt = (batch.images[0] && batch.images[0].prompt) || '';
+    const nextPrompt = (nextBatch.images[0] && nextBatch.images[0].prompt) || '';
+
+    let changes = [];
+    if (!curUsesKontext && nextUsesKontext) {
+      changes.push('Switched to FLUX Kontext (image-to-image with reference photos)');
+    }
+    if (curUsesKontext && nextUsesKontext && curModel === nextModel) {
+      // Compare prompts for preservation language
+      const nextHasArrow = nextPrompt.includes('->');
+      const curHasArrow = curPrompt.includes('->');
+      if (!curHasArrow && nextHasArrow) {
+        changes.push('Added scene transformation syntax (reference -> scene)');
+      } else if (curHasArrow && nextHasArrow) {
+        changes.push('Refined prompts with different scene compositions');
+      }
+    }
+    if (!curUsesRecraft && nextUsesRecraft) {
+      changes.push('Tried Recraft v3 as alternative model');
+    }
+    if (nextUsesRunway) {
+      changes.push('Moved to video generation with Runway');
+    }
+    if (nextPrompt.toLowerCase().includes('cb2') && !curPrompt.toLowerCase().includes('cb2')) {
+      changes.push('Added explicit CB2 product name in prompts');
+    }
+    if (changes.length === 0) {
+      changes.push('Continued iterating with ' + engineName(nextModel));
+    }
+    changedNext = changes.join('. ') + '.';
+  } else {
+    changedNext = 'This is the latest batch.';
+  }
+
+  return '<div class="batch-story">' +
+    '<div style="font-size:.7rem;font-weight:700;color:#a78bfa;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.5px">Batch Story</div>' +
+    '<div class="story-section"><div class="story-label">What was tried</div><div class="story-text">' + esc(model) + ': "' + esc(truncPrompt) + '"</div></div>' +
+    '<div class="story-section"><div class="story-label">Human feedback</div><div class="story-text">' + humanLines.map(l => '<div class="story-quote">' + l + '</div>').join('') + '</div></div>' +
+    '<div class="story-section"><div class="story-label">AI Vision analysis</div><div class="story-text">' + aiHtml + '</div></div>' +
+    '<div class="story-section"><div class="story-label">Takeaway</div><div class="story-text story-insight">' + esc(takeaway) + '</div></div>' +
+    '<div class="story-section"><div class="story-label">What changed next</div><div class="story-text story-arrow">' + esc(changedNext) + '</div></div>' +
+  '</div>';
+}
+
 function renderBatches() {
   const batches = getBatches();
   const container = document.getElementById('batchList');
@@ -339,6 +507,9 @@ function renderBatches() {
       '</div>';
     }).join('');
 
+    // Batch story narrative
+    const storyHtml = buildBatchStory(batch, idx, batches);
+
     return '<div class="batch-row" id="batch-' + idx + '">' +
       '<div class="batch-header" onclick="toggleBatch(' + idx + ')">' +
         '<span class="chevron">&#9656;</span>' +
@@ -348,6 +519,7 @@ function renderBatches() {
       '<div class="batch-body">' +
         (summaryHtml ? '<div class="batch-summary">' + summaryHtml + '</div>' : '') +
         '<div class="thumb-grid">' + thumbsHtml + '</div>' +
+        storyHtml +
       '</div>' +
     '</div>';
   }).join('');
