@@ -89,7 +89,8 @@
 <div id="nameScreen"><h1>CB Creative Lab</h1><p>Rate AI-generated marketing assets for Chubby Buttons</p>
 <div class="name-btns"><button class="name-quick" onclick="quickName('Justin')">Justin</button><button class="name-quick" onclick="quickName('Jordan')">Jordan</button><button class="name-quick" onclick="quickName('Michael')">Michael</button><button class="name-quick" onclick="quickName('Slava')">Slava</button></div>
 <input type="text" id="nameInput" placeholder="Or type your name" autocomplete="off" style="margin-top:.8rem">
-<button class="name-go" id="nameBtn" onclick="startApp()" disabled>Let's Go</button></div>
+<div id="pinWrap" style="display:none;margin-top:.6rem"><input type="tel" id="pinInput" maxlength="6" placeholder="6-digit code" autocomplete="off" style="background:#1a1a1a;border:2px solid #333;border-radius:12px;color:#fff;font-size:1.2rem;padding:.7rem 1rem;width:160px;text-align:center;outline:none;letter-spacing:.3rem"><p id="pinErr" style="color:#ef4444;font-size:.75rem;margin-top:.3rem;display:none">Wrong code</p></div>
+<button class="name-go" id="nameBtn" onclick="checkPin()" disabled>Let's Go</button></div>
 <div id="mainApp">
 <div class="top-bar"><h1>CB Creative Lab</h1><a href="cb-evolution.html" style="font-size:.65rem;color:#a855f7;text-decoration:none;font-weight:600">Evolution</a><span class="user-tag" id="userTag"></span></div>
 <div class="mode-bar"><button class="mode-b active" id="mSwipe" onclick="setMode('swipe')">Swipe</button><button class="mode-b" id="mGrid" onclick="setMode('grid')">Grid</button><button class="mode-b" id="mCreate" onclick="setMode('create')">Create</button></div>
@@ -129,9 +130,14 @@ const ni=document.getElementById('nameInput'),nb=document.getElementById('nameBt
 const savedName=localStorage.getItem(LNAME);
 if(savedName){ni.value=savedName;nb.disabled=false}
 ni.addEventListener('input',()=>{nb.disabled=!ni.value.trim()});
-ni.addEventListener('keydown',e=>{if(e.key==='Enter'&&ni.value.trim())startApp()});
-function quickName(n){ni.value=n;nb.disabled=false;startApp()}
-function startApp(){userName=ni.value.trim();if(!userName)return;// Normalize: capitalize first letter
+ni.addEventListener('keydown',e=>{if(e.key==='Enter'&&ni.value.trim())showPin()});
+const PINS={justin:'482916',jordan:'731504',michael:'295837',slava:'614280'};
+function quickName(n){ni.value=n;nb.disabled=false;showPin()}
+function showPin(){if(!ni.value.trim())return;document.getElementById('pinWrap').style.display='block';document.getElementById('pinInput').focus();document.getElementById('pinErr').style.display='none'}
+ni.addEventListener('blur',()=>{if(ni.value.trim())showPin()});
+document.getElementById('pinInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkPin()});
+function checkPin(){const name=ni.value.trim().toLowerCase();if(!name)return;const pin=document.getElementById('pinInput').value.trim();const expected=PINS[name];if(expected){if(pin!==expected){document.getElementById('pinErr').style.display='block';return}}else{if(pin.length!==6){document.getElementById('pinErr').textContent='Enter a 6-digit code';document.getElementById('pinErr').style.display='block';return}}startApp()}
+function startApp(){userName=ni.value.trim();if(!userName)return;
 userName=userName.charAt(0).toUpperCase()+userName.slice(1).toLowerCase();localStorage.setItem(LNAME,userName);document.getElementById('nameScreen').style.display='none';document.getElementById('mainApp').style.display='block';document.getElementById('userTag').textContent=userName;init()}
 // LOCAL RATINGS (per-user)
 function getLocal(){try{return JSON.parse(localStorage.getItem(lsk())||'{}')}catch(e){return{}}}
