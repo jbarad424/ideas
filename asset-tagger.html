@@ -142,7 +142,9 @@ ni.addEventListener('blur',()=>{if(ni.value.trim())showPin()});
 document.getElementById('pinInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkPin()});
 function checkPin(){const name=ni.value.trim().toLowerCase();if(!name)return;const pin=document.getElementById('pinInput').value.trim();const expected=PINS[name];if(expected){if(pin!==expected){document.getElementById('pinErr').style.display='block';return}}else{if(pin.length!==6){document.getElementById('pinErr').textContent='Enter a 6-digit code';document.getElementById('pinErr').style.display='block';return}}startApp()}
 function startApp(){userName=ni.value.trim();if(!userName)return;
-userName=userName.charAt(0).toUpperCase()+userName.slice(1).toLowerCase();localStorage.setItem(LNAME,userName);document.getElementById('nameScreen').style.display='none';document.getElementById('mainApp').style.display='block';document.getElementById('userTag').textContent=userName;init()}
+userName=userName.charAt(0).toUpperCase()+userName.slice(1).toLowerCase();localStorage.setItem(LNAME,userName);migrateOldRatings();document.getElementById('nameScreen').style.display='none';document.getElementById('mainApp').style.display='block';document.getElementById('userTag').textContent=userName;init()}
+// MIGRATE: old ratings stored under generic key → copy to per-user key
+function migrateOldRatings(){const oldKey='cb_ailab_ratings';const newKey=lsk();try{const old=JSON.parse(localStorage.getItem(oldKey)||'{}');const cur=JSON.parse(localStorage.getItem(newKey)||'{}');if(Object.keys(old).length&&!Object.keys(cur).length){localStorage.setItem(newKey,JSON.stringify(old));}else if(Object.keys(old).length){Object.keys(old).forEach(id=>{if(!cur[id]||!cur[id].rating)cur[id]=old[id]});localStorage.setItem(newKey,JSON.stringify(cur))}}catch(e){}}
 // LOCAL RATINGS (per-user)
 function getLocal(){try{return JSON.parse(localStorage.getItem(lsk())||'{}')}catch(e){return{}}}
 function saveLocal(id,data){const r=getLocal();r[id]=data;localStorage.setItem(lsk(),JSON.stringify(r))}
