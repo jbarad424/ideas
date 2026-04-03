@@ -258,39 +258,38 @@ const PS=['CB2 on dark slate, dramatic studio lighting, product photo','Flat lay
 let AS;
 if(nudge){const base=nudge.replace(/hunter|patriot|tron/gi,'').trim();AS=[base+', dramatic action photography, aspirational',base+', epic wide angle, golden hour',base+', close-up action moment, intense energy',base+', lifestyle editorial, premium outdoor brand']}else{AS=[...defaultAS]}
 let cw='tron';if(nudge.toLowerCase().includes('hunter'))cw='hunter';else if(nudge.toLowerCase().includes('patriot'))cw='patriot';else{const st={};imgs.filter(i=>i.style).forEach(i=>{st[i.style]=(st[i.style]||0)+1});const l=Object.entries(st).sort((a,b)=>a[1]-b[1])[0];if(l)cw=l[0]}
-// Build engine cards
-const bid='auto-'+Date.now();let eIdx=0;
-addEngCard('flux','F','flux','FLUX Kontext',AS.length+' action shots');
-addEngCard('fluxp','F','flux','FLUX Pro',PS.length+' product shots');
-addEngCard('rc','R','recraft','Recraft',AS.length+PS.length+' images');
+// Build engine cards — ALL image-to-image now (text-only can't make CB2 accurate)
+const bid='auto-'+Date.now();
+const actionCount=AS.length;const productCount=PS.length;const total=actionCount+productCount+1;
+addEngCard('flux','F','flux','FLUX Kontext',actionCount+' action + '+productCount+' product shots');
+addEngCard('rc','R','recraft','Recraft',actionCount+' action shots (img-to-img)');
 addEngCard('run','V','runway','Runway','1 video (~2 min)');
+addEngCard('vision','A','flux','AI Analysis','Will rate all new images');
 addEngCard('sync','S','sync','Sync','Share with team');
-const tot=AS.length*2+PS.length*2+1;document.getElementById('genSub').textContent='Creating '+tot+' assets using '+cw+' colorway...';document.getElementById('genCounter').style.display='block';
+document.getElementById('genSub').textContent='Creating ~'+total+' assets using '+cw+' colorway...';document.getElementById('genCounter').style.display='block';
 const newImgs=[];const P=[];
-// FLUX Kontext action
-setEngStatus('flux','wait','Generating '+AS.length+' action shots...');
+// ALL KONTEXT — action shots AND product shots (only engine that can see the reference)
+setEngStatus('flux','wait','Generating '+actionCount+' action + '+productCount+' product shots...');
 for(const s of AS){const r=buildRefinedPrompts(s,cw);P.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-kontext-pro',body:{prompt:r.fluxPrompt,input_image:REF_IMAGES[cw],output_format:'jpeg',safety_tolerance:2},shotType:'action',style:cw,batchId:bid,model:'flux-kontext-pro',prompt:r.fluxPrompt})}).then(x=>x.json()).then(d=>{if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.fluxPrompt,shotType:'action',style:cw,batchId:bid,model:'flux-kontext-pro',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}).catch(()=>{}))}
-Promise.allSettled(P.slice(0,AS.length)).then(()=>{const n=newImgs.filter(i=>i.model==='flux-kontext-pro').length;setEngStatus('flux',n>0?'ok':'fail',n+'/'+AS.length+' created')});
-// FLUX Pro product
-setEngStatus('fluxp','wait','Generating '+PS.length+' product shots...');
-for(const s of PS){const r=buildRefinedPrompts(s,cw);P.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-pro-1.1',body:{prompt:r.recraftPrompt,width:1024,height:768,output_format:'jpeg',safety_tolerance:2},shotType:'product',style:cw,batchId:bid,model:'flux-pro-1.1',prompt:r.recraftPrompt})}).then(x=>x.json()).then(d=>{if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.recraftPrompt,shotType:'product',style:cw,batchId:bid,model:'flux-pro-1.1',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}).catch(()=>{}))}
-// Recraft all scenes
-setEngStatus('rc','wait','Generating '+(AS.length+PS.length)+' images...');
-for(const s of [...AS,...PS]){const r=buildRefinedPrompts(s,cw);const st=PS.includes(s)?'product':'action';P.push(fetch(RECRAFT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:r.recraftPrompt,shotType:st,style:cw,batchId:bid})}).then(x=>x.json()).then(d=>{if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.recraftPrompt,shotType:st,style:cw,batchId:bid,model:'recraft-v3',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}).catch(()=>{}))}
+// Product shots ALSO via Kontext (not FLUX Pro — text-only scores 1.8/5 avg)
+for(const s of PS){const r=buildRefinedPrompts(s,cw);P.push(fetch(FLUX_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'flux-kontext-pro',body:{prompt:'Show this exact product: '+r.recraftPrompt+' Keep the product exactly as shown in the reference.',input_image:REF_IMAGES[cw],output_format:'jpeg',safety_tolerance:2},shotType:'product',style:cw,batchId:bid,model:'flux-kontext-pro',prompt:r.recraftPrompt})}).then(x=>x.json()).then(d=>{if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.recraftPrompt,shotType:'product',style:cw,batchId:bid,model:'flux-kontext-pro',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}).catch(()=>{}))}
+// Recraft — image-to-image for action shots only (text-only scored 1.7/5)
+setEngStatus('rc','wait','Generating '+actionCount+' action shots...');
+for(const s of AS){const r=buildRefinedPrompts(s,cw);P.push(fetch(RECRAFT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:r.recraftPrompt,shotType:'action',style:cw,batchId:bid,referenceUrl:REF_IMAGES[cw]})}).then(x=>x.json()).then(d=>{if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.recraftPrompt,shotType:'action',style:cw,batchId:bid,model:'recraft-v3',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()})}).catch(()=>{}))}
 // Runway video
 setEngStatus('run','wait','Generating video (takes ~2 min)...');
 const rs=AS[0];P.push(fetch(RUNWAY_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({promptText:'Person with CB2 remote '+rs+', cinematic slow motion',promptImage:REF_IMAGES[cw],shotType:'action',style:cw,batchId:bid})}).then(x=>x.json()).then(d=>{if(d.success){newImgs.push({imageId:d.imageId||('vid-'+Date.now()),driveFileId:d.driveFileId||'',prompt:rs,shotType:'action',style:cw,batchId:bid,model:'runway',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()});setEngStatus('run','ok','Video created')}else setEngStatus('run','fail','Generation failed')}).catch(()=>setEngStatus('run','fail','Connection error')));
 await Promise.allSettled(P);
 // Update engine statuses
-const fcnt=newImgs.filter(i=>i.model==='flux-kontext-pro').length;setEngStatus('flux',fcnt>0?'ok':'fail',fcnt+'/'+AS.length+' action shots');
-const fpcnt=newImgs.filter(i=>i.model==='flux-pro-1.1').length;setEngStatus('fluxp',fpcnt>0?'ok':'fail',fpcnt+'/'+PS.length+' product shots');
-const rcnt=newImgs.filter(i=>i.model==='recraft-v3').length;setEngStatus('rc',rcnt>0?'ok':'fail',rcnt+'/'+(AS.length+PS.length)+' images');
+const fcnt=newImgs.filter(i=>i.model==='flux-kontext-pro').length;setEngStatus('flux',fcnt>0?'ok':'fail',fcnt+'/'+(actionCount+productCount)+' shots');
+const rcnt=newImgs.filter(i=>i.model==='recraft-v3').length;setEngStatus('rc',rcnt>0?'ok':'fail',rcnt+'/'+actionCount+' images');
 genDoneCount=newImgs.length;document.getElementById('genDone').textContent=genDoneCount;
 if(newImgs.length){newImgs.forEach(x=>{if(!imgs.find(i=>i.imageId===x.imageId))imgs.push(x)});const p=JSON.parse(localStorage.getItem('cb_pending_imgs')||'[]');newImgs.forEach(x=>p.push(x));localStorage.setItem('cb_pending_imgs',JSON.stringify(p));
+// AI ANALYSIS FIRST — before sync so scores are in the JSON
+const imageImgs=newImgs.filter(i=>i.model!=='runway'&&i.driveFileId);if(imageImgs.length){setEngStatus('vision','wait','Claude Vision analyzing '+imageImgs.length+' images...');let aiDone=0;const aiP=imageImgs.map(img=>fetch(VISION_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageId:img.imageId,driveFileId:img.driveFileId,referenceUrl:REF_IMAGES[img.style||'tron']})}).then(x=>x.json()).then(d=>{if(d&&d.aiProductScore){img.aiProductScore=d.aiProductScore;img.aiSceneScore=d.aiSceneScore;img.aiBrandScore=d.aiBrandScore;img.aiAnalysis=d.aiAnalysis||'';const mi=imgs.find(i=>i.imageId===img.imageId);if(mi){mi.aiProductScore=d.aiProductScore;mi.aiSceneScore=d.aiSceneScore;mi.aiBrandScore=d.aiBrandScore;mi.aiAnalysis=d.aiAnalysis||''}}aiDone++;setEngStatus('vision','wait',aiDone+'/'+imageImgs.length+' analyzed')}).catch(()=>{aiDone++}));await Promise.allSettled(aiP);setEngStatus('vision',aiDone>0?'ok':'fail',aiDone+'/'+imageImgs.length+' analyzed')}
+// NOW sync with AI scores included
 setEngStatus('sync','wait','Pushing to GitHub...');
 try{const jc=JSON.stringify({images:imgs.map(i=>({imageId:i.imageId,driveFileId:i.driveFileId,prompt:i.prompt,shotType:i.shotType,style:i.style,batchId:i.batchId,model:i.model,rating:i.rating||'',feedbackTags:i.feedbackTags||'',feedbackText:i.feedbackText||'',ratedAt:i.ratedAt||'',generatedAt:i.generatedAt,aiProductScore:i.aiProductScore||'',aiSceneScore:i.aiSceneScore||'',aiBrandScore:i.aiBrandScore||'',aiAnalysis:i.aiAnalysis||''}))});const s=await fetch(SYNC_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonContent:jc})});const d=await s.json();setEngStatus('sync',d.success?'ok':'fail',d.success?'Everyone can see new assets':'Sync issue — saved locally')}catch(e){setEngStatus('sync','fail','Saved locally only')}}
-// AUTO AI RATING — Vision Co-Rater analyzes each new image
-if(newImgs.length){const imageImgs=newImgs.filter(i=>i.model!=='runway'&&i.driveFileId);if(imageImgs.length){addEngCard('vision','A','flux','AI Analysis','Rating '+imageImgs.length+' images...');setEngStatus('vision','wait','Claude Vision analyzing...');let aiDone=0;const aiP=imageImgs.map(img=>fetch(VISION_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageId:img.imageId,driveFileId:img.driveFileId,referenceUrl:REF_IMAGES[img.style||'tron']})}).then(x=>x.json()).then(d=>{if(d&&d.aiProductScore){img.aiProductScore=d.aiProductScore;img.aiSceneScore=d.aiSceneScore;img.aiBrandScore=d.aiBrandScore;img.aiAnalysis=d.aiAnalysis||'';const mi=imgs.find(i=>i.imageId===img.imageId);if(mi){mi.aiProductScore=d.aiProductScore;mi.aiSceneScore=d.aiSceneScore;mi.aiBrandScore=d.aiBrandScore;mi.aiAnalysis=d.aiAnalysis||''}}aiDone++;setEngStatus('vision','wait',aiDone+'/'+imageImgs.length+' analyzed')}).catch(()=>{aiDone++}));await Promise.allSettled(aiP);setEngStatus('vision',aiDone>0?'ok':'fail',aiDone+'/'+imageImgs.length+' analyzed')}}
 updStats();document.getElementById('genSub').textContent=newImgs.length?newImgs.length+' new assets ready to rate!':'Generation complete';document.getElementById('genCloseBtn').style.display='inline-block'}
 function fillNudge(el){document.getElementById('nudgeInput').value=el.textContent}
 function closeGen(){document.getElementById('genOverlay').classList.remove('open');filt='unrated';document.querySelectorAll('.filt-b').forEach(b=>{b.classList.toggle('active',b.dataset.f==='unrated')});render()}
