@@ -560,7 +560,7 @@ function openLb(idx){
 function closeLb(){document.getElementById('lb').classList.remove('open');document.getElementById('lbVid').pause()}
 
 // ===== LORA GENERATION (via Make.com proxy to Replicate) =====
-const LORA_API='https://hook.us1.make.com/LORA_WEBHOOK_PLACEHOLDER'; // Will create this webhook
+const LORA_API='https://hook.us1.make.com/32urtvvoi5x5wfpzjgm0vnfxzlehre1w';
 async function generateViaLora(prompt, colorway, shotType, batchId){
   const resp=await fetch(LORA_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     prompt:prompt,shotType:shotType,style:colorway,batchId:batchId,model:'flux-lora'
