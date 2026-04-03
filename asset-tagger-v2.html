@@ -108,6 +108,14 @@ body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Se
 /* Coming soon */
 .coming-soon-wrap{display:none;text-align:center;padding:3rem 1rem}
 .coming-soon-badge{display:inline-block;background:#1a1030;color:#a855f7;border:1px solid #2d1a4e;padding:.3rem .8rem;border-radius:8px;font-size:.8rem;font-weight:600;margin-top:.5rem}
+/* Training status banner */
+.training-banner{background:linear-gradient(135deg,#1a1030,#0a0a2a);border:1px solid #2d1a4e;border-radius:12px;margin:.8rem 1rem;padding:1rem;text-align:center}
+.training-banner h3{color:#a855f7;font-size:1rem;margin-bottom:.4rem}
+.training-banner p{color:#999;font-size:.8rem;line-height:1.5;margin-bottom:.3rem}
+.training-banner .tb-status{display:inline-block;background:#1a1a0a;color:#f59e0b;border:1px solid #332200;padding:.2rem .6rem;border-radius:6px;font-size:.7rem;font-weight:700;margin-top:.4rem}
+.training-banner .tb-lessons{text-align:left;margin-top:.6rem;padding-top:.6rem;border-top:1px solid #222}
+.training-banner .tb-lesson{display:flex;gap:.4rem;padding:.2rem 0;font-size:.75rem;color:#ccc}
+.training-banner .tb-num{color:#a855f7;font-weight:700;min-width:1.2rem}
 /* Insights */
 .insights-card{background:#111;border:1px solid #222;border-radius:10px;margin:.5rem auto;padding:.5rem;max-width:380px;font-size:.75rem}
 .insights-row{display:flex;align-items:start;gap:.3rem;padding:.2rem 0;color:#ccc}
@@ -159,15 +167,19 @@ body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Se
 // ===== CONFIG =====
 const DATA_URL='https://jbarad424.github.io/ideas/cb-ai-lab.json';
 const RATE_API='https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
-const RECRAFT_API='https://hook.us1.make.com/vzybkkhoi0powa0np6t2wr8m2pjr3dxu';
 const SYNC_API='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
-const RUNWAY_API='https://hook.us1.make.com/ayflnfwjqehyblmvwnosatlbogwyil90';
-const FLUX_API='https://hook.us1.make.com/e95rfn1iz88bnhtejhqhadqtvblnp128';
-const REPLICATE_TOKEN=''; // Proxied through Make.com — token stored server-side
-const REPLICATE_MODEL='jbarad424/cb2-lora';
-let REPLICATE_VERSION=''; // Set by Make.com proxy
-const ANTHROPIC_KEY=''; // Vision scoring via Make.com webhook
 const VISION_WEBHOOK='https://hook.us1.make.com/bffoci5zxq1uy28bc6l5e0rm73kgj9av';
+
+// === TRAINING GATE ===
+// Set to false when v4 LoRA model is trained and ready
+const MODEL_TRAINING_IN_PROGRESS=true;
+const TRAINING_STATUS='Collecting close-up product photos for v4 training data';
+const LESSONS_LEARNED=[
+  'v1-v3b models learned outdoor vibes but not the actual product (scored 5-6/100)',
+  'Training data was 80% wide-angle action shots — product was tiny/invisible',
+  'v4 needs 60-70% close-up product shots to learn what CB2 actually looks like',
+  'Band attachment and contextual realism (no bare arms in snow) are key issues'
+];
 const LNAME='cb_ailab_v2_name';
 function lsk(){return'cb_ailab_v2_ratings_'+(userName||'').toLowerCase().trim()}
 
@@ -261,7 +273,7 @@ function isVideo(img){return img.model==='runway'||/\.(mp4|webm)/i.test(img.driv
 function thumbUrl(img){if(isVideo(img))return'';return'https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w800'}
 function vidUrl(img){return img.driveFileId}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function mBadge(m){if(!m)return'';if(m.includes('recraft'))return'<span class="badge b-recraft">Recraft</span>';if(m==='runway')return'<span class="badge b-runway">Runway</span>';if(m==='flux-kontext-pro'||m==='flux-lora')return'<span class="badge b-flux">FLUX LoRA</span>';if(m==='flux-pro-1.1')return'<span class="badge b-flux">FLUX Pro</span>';return'<span class="badge b-flux">FLUX</span>'}
+function mBadge(m){if(!m)return'';if(m==='flux-lora')return'<span class="badge b-flux">LoRA v4</span>';if(m.includes('recraft'))return'<span class="badge b-recraft">Legacy</span>';if(m==='runway')return'<span class="badge b-runway">Legacy</span>';if(m==='flux-kontext-pro')return'<span class="badge b-flux">Legacy</span>';if(m==='flux-pro-1.1')return'<span class="badge b-flux">Legacy</span>';return'<span class="badge b-flux">FLUX</span>'}
 function tBadge(t){return t?'<span class="badge b-'+t+'">'+esc(t)+'</span>':''}
 function sBadge(s){return s?'<span class="badge" style="background:#1a1a1a;color:#888;border:1px solid #333">'+esc(s)+'</span>':''}
 function scoreClass(v){return v>=4?'high':v>=3?'mid':'low'}
@@ -273,20 +285,26 @@ function renderSwipe(){
   if(!f.length){
     const allRated=filt==='unrated'&&imgs.length>0;
     if(allRated){
-      w.innerHTML='<div style="text-align:center;padding:2rem 1rem"><h3 style="font-size:1.2rem;margin-bottom:.3rem">All rated!</h3><p style="color:#888;font-size:.85rem">Nice work, '+esc(userName)+'!</p>'+
-        '<button class="gen-more-btn" onclick="generateMore()">Generate More Assets</button>'+
-        '<p style="margin-top:.4rem;font-size:.7rem;color:#666">AI-powered generation with feedback loop</p>'+
-        '<textarea class="nudge-input" id="nudgeInput" placeholder="What do you want to see next? e.g. more ski shots, try surfing..."></textarea>'+
-        '<div class="nudge-pills">'+
-        '<span class="nudge-pill" onclick="fillNudge(this)">More skiing</span>'+
-        '<span class="nudge-pill" onclick="fillNudge(this)">Try surfing</span>'+
-        '<span class="nudge-pill" onclick="fillNudge(this)">Beach vibes</span>'+
-        '<span class="nudge-pill" onclick="fillNudge(this)">Mountain biking</span>'+
-        '<span class="nudge-pill" onclick="fillNudge(this)">Motorcycle</span>'+
-        '<span class="nudge-pill" onclick="fillNudge(this)">Product close-ups</span>'+
-        '<span class="nudge-pill" onclick="fillNudge(this)">Hunter colorway</span>'+
-        '<span class="nudge-pill" onclick="fillNudge(this)">Patriot colorway</span>'+
-        '</div>'+renderInsights()+'</div>';
+      let genHtml='';
+      if(MODEL_TRAINING_IN_PROGRESS){
+        genHtml=renderTrainingBanner();
+      }else{
+        genHtml='<button class="gen-more-btn" onclick="generateMore()">Generate More Assets</button>'+
+          '<p style="margin-top:.4rem;font-size:.7rem;color:#666">AI-powered LoRA generation with feedback loop</p>'+
+          '<textarea class="nudge-input" id="nudgeInput" placeholder="What do you want to see next? e.g. more ski shots, try surfing..."></textarea>'+
+          '<div class="nudge-pills">'+
+          '<span class="nudge-pill" onclick="fillNudge(this)">More skiing</span>'+
+          '<span class="nudge-pill" onclick="fillNudge(this)">Try surfing</span>'+
+          '<span class="nudge-pill" onclick="fillNudge(this)">Mountain biking</span>'+
+          '<span class="nudge-pill" onclick="fillNudge(this)">Motorcycle</span>'+
+          '<span class="nudge-pill" onclick="fillNudge(this)">Product close-ups</span>'+
+          '<span class="nudge-pill" onclick="fillNudge(this)">Hunter colorway</span>'+
+          '<span class="nudge-pill" onclick="fillNudge(this)">Patriot colorway</span>'+
+          '</div>';
+      }
+      w.innerHTML='<div style="text-align:center;padding:2rem 1rem"><h3 style="font-size:1.2rem;margin-bottom:.3rem">All rated!</h3><p style="color:#888;font-size:.85rem">Nice work, '+esc(userName)+'!</p>'+genHtml+renderInsights()+'</div>';
+    }else if(imgs.length===0){
+      w.innerHTML=renderTrainingBanner();
     }else{
       w.innerHTML='<div style="text-align:center;padding:3rem"><h3 style="color:#666">No images</h3></div>';
     }
@@ -503,10 +521,7 @@ function buildRefinedPrompts(scene,colorway){
   // LoRA prompt — uses trigger word CB2REMOTE
   const loraPrompt='A person wearing CB2REMOTE on their forearm in this scene: '+scene+'. '+pBlock+' '+tech+mood+fixes+'Professional commercial photography, photorealistic, 4K.';
 
-  // Recraft prompt (no trigger word, uses reference image)
-  const recraftPrompt='Professional commercial product photography. '+pBlock+' '+scene+'. '+tech+mood+fixes+'Clean precise product details with photorealistic rendering.';
-
-  return{loraPrompt,recraftPrompt};
+  return{loraPrompt};
 }
 
 // ===== INSIGHTS DISPLAY =====
@@ -576,6 +591,11 @@ function setEngStatus(id,status,detail){const el=document.getElementById('eng-'+
 function addEngCard(id,icon,iconCls,name,detail){const c=document.getElementById('genEngines');c.innerHTML+='<div class="gen-eng" id="eng-'+id+'"><div class="gen-eng-icon '+iconCls+'">'+icon+'</div><div class="gen-eng-info"><div class="gen-eng-name">'+name+'</div><div class="gen-eng-status">'+detail+'</div></div><div class="gen-eng-badge wait">Queued</div></div>'}
 
 async function generateMore(){
+  if(MODEL_TRAINING_IN_PROGRESS){
+    showToast('Generation paused — model training in progress');
+    return;
+  }
+
   document.getElementById('genOverlay').classList.add('open');
   document.getElementById('genEngines').innerHTML='';
   document.getElementById('genCloseBtn').style.display='none';
@@ -585,7 +605,7 @@ async function generateMore(){
   const insights=analyzeRatings();
   const nudge=document.getElementById('nudgeInput')?.value?.trim()||'';
 
-  document.getElementById('genSub').textContent=insights?'Building smarter prompts from '+insights.total+' ratings...':'Generating first batch...';
+  document.getElementById('genSub').textContent=insights?'Building smarter prompts from '+insights.total+' ratings...':'Generating first batch with v4 LoRA...';
 
   // Determine colorway rotation
   let cw='tron';
@@ -601,13 +621,11 @@ async function generateMore(){
     scenes=['Skier carving powder on dramatic mountain, golden hour','Snowboarder mid-air jump, powder spray, blue sky','Mountain biker racing steep forest trail, dappled sunlight'];
   }
 
-  const bid='v2-'+Date.now();
+  const bid='v4-'+Date.now();
 
-  // Engine cards
-  addEngCard('lora','L','flux','FLUX LoRA',scenes.length+' action shots via CB2REMOTE');
-  addEngCard('rc','R','recraft','Recraft',scenes.length+' action shots');
+  // Engine cards — LoRA only (Recraft and Runway removed: both failed, waste of credits)
+  addEngCard('lora','L','flux','FLUX LoRA',scenes.length+' shots via CB2REMOTE');
   addEngCard('ai','A','ai','AI Scoring','Auto-rating every image');
-  addEngCard('run','V','runway','Runway','1 video');
   addEngCard('sync','S','sync','Sync','Share with team');
   document.getElementById('genCounter').style.display='block';
 
@@ -622,39 +640,17 @@ async function generateMore(){
     }).catch(e=>{console.error('LoRA gen failed:',e)}));
   }
 
-  // Recraft
-  setEngStatus('rc','wait','Generating '+scenes.length+' images...');
-  for(const s of scenes){
-    const r=buildRefinedPrompts(s,cw);
-    P.push(fetch(RECRAFT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      prompt:r.recraftPrompt,shotType:'action',style:cw,batchId:bid
-    })}).then(x=>x.json()).then(d=>{
-      if(d.success)newImgs.push({imageId:d.imageId,driveFileId:d.driveFileId,prompt:r.recraftPrompt,shotType:'action',style:cw,batchId:bid,model:'recraft-v3',rating:'',feedbackTags:'',feedbackText:'',ratedAt:'',generatedAt:new Date().toISOString()});
-    }).catch(()=>{}));
-  }
-
-  // Runway video
-  setEngStatus('run','wait','Generating video...');
-  P.push(fetch(RUNWAY_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-    prompt:'Person wearing CB2REMOTE on forearm, '+scenes[0]+', cinematic slow motion',
-    image_url:REF_IMAGES[cw],shotType:'action',style:cw,batchId:bid
-  })}).then(x=>x.json()).then(d=>{
-    if(d.success){newImgs.push({imageId:d.imageId||('vid-'+Date.now()),driveFileId:d.driveFileId||'',prompt:scenes[0],shotType:'action',style:cw,batchId:bid,model:'runway',rating:'',generatedAt:new Date().toISOString()});setEngStatus('run','ok','Video created')}else setEngStatus('run','fail','Failed')
-  }).catch(()=>setEngStatus('run','fail','Error')));
-
   await Promise.allSettled(P);
 
-  // Update status cards
+  // Update LoRA status
   const loraCnt=newImgs.filter(i=>i.model==='flux-lora').length;
   setEngStatus('lora',loraCnt>0?'ok':'fail',loraCnt+'/'+scenes.length+' created');
-  const rcCnt=newImgs.filter(i=>i.model==='recraft-v3').length;
-  setEngStatus('rc',rcCnt>0?'ok':'fail',rcCnt+'/'+scenes.length+' created');
   genDoneCount=newImgs.length;document.getElementById('genDone').textContent=genDoneCount;
 
   // AI SCORING — score every new image before sync
   if(newImgs.length){
-    setEngStatus('ai','wait','Scoring '+newImgs.filter(i=>i.model!=='runway'&&i.driveFileId).length+' images...');
-    const imageImgs=newImgs.filter(i=>i.model!=='runway'&&i.driveFileId);
+    setEngStatus('ai','wait','Scoring '+newImgs.filter(i=>i.driveFileId).length+' images...');
+    const imageImgs=newImgs.filter(i=>i.driveFileId);
     let aiDone=0;
     const aiP=imageImgs.map(img=>
       fetch(VISION_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
@@ -663,7 +659,6 @@ async function generateMore(){
         if(d.aiProductScore){
           img.aiProductScore=d.aiProductScore;img.aiSceneScore=d.aiSceneScore;img.aiBrandScore=d.aiBrandScore;
           img.aiAnalysis=d.aiAnalysis;img.aiNotes=d.aiAnalysis?.summary||'';img.aiScoredAt=new Date().toISOString();
-          // Also update in main array
           const main=imgs.find(i=>i.imageId===img.imageId);
           if(main){main.aiProductScore=img.aiProductScore;main.aiSceneScore=img.aiSceneScore;main.aiBrandScore=img.aiBrandScore;main.aiAnalysis=img.aiAnalysis;main.aiNotes=img.aiNotes}
         }
@@ -676,7 +671,7 @@ async function generateMore(){
     // Add to main array
     newImgs.forEach(x=>{if(!imgs.find(i=>i.imageId===x.imageId))imgs.push(x)});
 
-    // SYNC — includes AI scores
+    // SYNC
     setEngStatus('sync','wait','Pushing to GitHub...');
     try{
       const syncData=imgs.map(i=>({imageId:i.imageId,driveFileId:i.driveFileId,prompt:i.prompt,shotType:i.shotType,style:i.style,batchId:i.batchId,model:i.model,rating:i.rating||'',feedbackTags:i.feedbackTags||'',feedbackText:i.feedbackText||'',ratedAt:i.ratedAt||'',generatedAt:i.generatedAt,aiProductScore:i.aiProductScore||'',aiSceneScore:i.aiSceneScore||'',aiBrandScore:i.aiBrandScore||'',aiAnalysis:i.aiAnalysis||'',aiNotes:i.aiNotes||'',aiScoredAt:i.aiScoredAt||''}));
@@ -689,6 +684,16 @@ async function generateMore(){
   updStats();
   document.getElementById('genSub').textContent=newImgs.length?newImgs.length+' new assets ready!':'Generation complete';
   document.getElementById('genCloseBtn').style.display='inline-block';
+}
+
+function renderTrainingBanner(){
+  let html='<div class="training-banner"><h3>Model Training in Progress</h3>'+
+    '<p>'+esc(TRAINING_STATUS)+'</p>'+
+    '<div class="tb-status">Paused — No credits being spent</div>'+
+    '<div class="tb-lessons"><div style="font-size:.7rem;color:#a855f7;font-weight:700;margin-bottom:.3rem">What we learned from 32 test images:</div>';
+  LESSONS_LEARNED.forEach((l,i)=>{html+='<div class="tb-lesson"><span class="tb-num">'+(i+1)+'.</span><span>'+esc(l)+'</span></div>'});
+  html+='</div></div>';
+  return html;
 }
 
 function fillNudge(el){document.getElementById('nudgeInput').value=el.textContent}
