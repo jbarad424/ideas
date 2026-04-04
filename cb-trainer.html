@@ -279,7 +279,14 @@ a{color:var(--purple);text-decoration:none}
 const DATA_URL = 'https://jbarad424.github.io/ideas/cb-ai-lab.json';
 const RATE_API = 'https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
 const SYNC_API = 'https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
-const FLUX2_API = 'https://hook.us1.make.com/otxpq9jc4vwqjqlbda5n6h0jhkkgmht9';
+const FLUX_GEN_API = 'https://hook.us1.make.com/e95rfn1iz88bnhtejhqhadqtvblnp128';
+
+// Reference images per colorway (uploaded to fal.ai CDN)
+const REF_IMAGES = {
+  tron: 'https://v3b.fal.media/files/b/0a94d8dc/vhUF5u93KjoM4-XVpmfnu_cb2-ref-standing-vertical-front.jpeg',
+  hunter: 'https://v3b.fal.media/files/b/0a94d8dc/vhUF5u93KjoM4-XVpmfnu_cb2-ref-standing-vertical-front.jpeg',
+  patriot: 'https://v3b.fal.media/files/b/0a94d8dc/vhUF5u93KjoM4-XVpmfnu_cb2-ref-standing-vertical-front.jpeg'
+};
 const LS_NAME = 'cb_trainer_name';
 function lsRatings(){ return 'cb_trainer_ratings_' + (userName||'').toLowerCase().trim(); }
 
@@ -638,50 +645,89 @@ async function generateImages() {
   // Construct final prompt
   let prompt = '';
   if (userPrompt) {
-    // User's natural language takes priority
     prompt = userPrompt + '. ' + productDesc + ' ' + shot + '. ' + vibe + '.';
   } else {
     prompt = 'Place this exact ' + productDesc + ' ' + shot + ' in this scene: ' + scene + '. ' + vibe + '.';
   }
 
-  // Append feedback-derived fixes
   if (feedbackFixes) {
     prompt += ' IMPORTANT: ' + feedbackFixes;
   }
 
   prompt += ' Professional commercial photography, photorealistic, high resolution.';
 
-  document.getElementById('genMsg').textContent = 'Sending to FLUX.2 (' + genCount + ' images)...';
+  const batchId = 'trainer-' + Date.now();
+  const refImage = REF_IMAGES[colorway] || REF_IMAGES.tron;
 
-  try {
-    const resp = await fetch(FLUX2_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        prompt: prompt,
-        colorway: colorway,
-        count: genCount,
-        shotType: createOpts.shot,
-        style: createOpts.sport,
-        requestedBy: userName,
-        feedbackApplied: feedbackFixes ? true : false
+  // BFL API body for flux-kontext-pro
+  const bflBody = JSON.stringify({
+    prompt: prompt,
+    input_image: refImage,
+    aspect_ratio: '4:3',
+    output_format: 'jpeg'
+  });
+
+  document.getElementById('genMsg').textContent = 'Sending ' + genCount + ' image(s) to Kontext Pro...';
+
+  let completed = 0, failed = 0;
+
+  // Fire all requests in parallel (one per image)
+  const promises = [];
+  for (let i = 0; i < genCount; i++) {
+    promises.push(
+      fetch(FLUX_GEN_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          endpoint: 'flux-kontext-pro',
+          body: bflBody,
+          prompt: prompt,
+          shotType: createOpts.shot,
+          style: colorway,
+          batchId: batchId,
+          model: 'flux-kontext-pro'
+        })
+      }).then(async r => {
+        const data = await r.json().catch(() => ({}));
+        if (r.ok && data.success) {
+          completed++;
+        } else {
+          failed++;
+        }
+        document.getElementById('genMsg').textContent =
+          completed + '/' + genCount + ' done' + (failed ? ', ' + failed + ' failed' : '') + '...';
+      }).catch(() => {
+        failed++;
+        document.getElementById('genMsg').textContent =
+          completed + '/' + genCount + ' done, ' + failed + ' failed...';
       })
-    });
-
-    if (resp.ok) {
-      document.getElementById('genMsg').textContent = 'Generation started! Images will appear in Review tab once ready. This takes 30-60 seconds per image.';
-      setTimeout(() => {
-        status.classList.remove('active');
-        btn.disabled = false;
-      }, 5000);
-    } else {
-      document.getElementById('genMsg').textContent = 'Error: ' + resp.status + '. Try again.';
-      btn.disabled = false;
-    }
-  } catch(e) {
-    document.getElementById('genMsg').textContent = 'Network error. Check your connection.';
-    btn.disabled = false;
+    );
   }
+
+  await Promise.all(promises);
+
+  if (completed > 0) {
+    document.getElementById('genMsg').textContent =
+      completed + ' image(s) generated! Syncing to JSON...';
+    // Trigger JSON sync so new images appear in Review tab
+    try {
+      await fetch(SYNC_API, { method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ trigger: 'trainer', batchId: batchId })
+      });
+      document.getElementById('genMsg').textContent =
+        completed + ' image(s) generated! Refresh the page in ~30s to see them in Review.';
+    } catch(e) {
+      document.getElementById('genMsg').textContent =
+        completed + ' image(s) generated! JSON sync may need manual trigger.';
+    }
+  } else {
+    document.getElementById('genMsg').textContent =
+      'All ' + genCount + ' requests failed. Check Make.com scenario logs.';
+  }
+
+  status.classList.remove('active');
+  btn.disabled = false;
 }
 
 // ===== FEEDBACK LOOP ENGINE =====
