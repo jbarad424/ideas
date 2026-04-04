@@ -2,6 +2,36 @@
 **Date:** April 3, 2026
 **Last edit:** ~11:00 PM EST (Session 4 — FLUX.2 pipeline LIVE, end-to-end working)
 
+## HONEST STATUS OF EVERY COMPONENT
+
+### WORKING (verified):
+- ✅ FLUX.2 generation via fal.ai (produces images, reference-conditioned)
+- ✅ Make.com scenario 4656584 generates + uploads to Drive + saves to data store
+- ✅ Vision Co-Rater v2 scores images (catches duplicate devices + wrong button count)
+- ✅ Vision scoring is chained into generation scenario (auto-scores after generation)
+- ✅ AI scores display as colored dots with X/5 labels in swipe view
+- ✅ Human-friendly captions instead of raw prompts
+
+### BROKEN (not verified, may not work):
+- ❌ Grid click → jump to swipe for rating (code pushed twice, Justin says still not working — NOT VERIFIED)
+- ❌ User text input/notes saving to data store (unverified if rating webhook actually stores feedback)
+- ❌ "Generate More" prompt customization (user types "full body cyclist" but prompt may be hardcoded, input likely goes nowhere)
+- ❌ Re-rating previously rated images (code pushed but NOT VERIFIED)
+- ❌ JSON auto-sync after generation (currently manual — I have to trigger sync separately)
+
+### DOES NOT EXIST (was described as working but never built):
+- ❌ Feedback loop: ratings → improved prompts → better next batch (the flywheel was a design doc, not implementation)
+- ❌ Generate More with user preferences (count, colorway, shot type, full body vs close-up)
+- ❌ Automatic JSON sync after each generation (manual process disguised as automated)
+
+### NEXT SESSION PRIORITIES:
+1. Open Chrome, verify every "fixed" feature actually works
+2. Fix grid click → rating (for real this time, verified)
+3. Wire up "Generate More" to actually use the user's text input as the prompt
+4. Add generation controls: count selector, colorway, shot type, full body option
+5. Wire up JSON auto-sync so images appear on website without manual intervention
+6. Start investigating Make.com replacement with direct API calls
+
 ## LATEST: FLUX.2 Pipeline Working End-to-End
 - **Make.com Scenario:** 4656584 (FLUX.2 Generate Reference-First)
 - **Webhook:** `https://hook.us1.make.com/otxpq9jc4vwqjqlbda5n6h0jhkkgmht9`
@@ -301,6 +331,9 @@ Test images saved at:
 4. "Am I giving conflicting advice?" — pick one direction and commit
 5. "What would Justin ask me about this?" — answer it proactively
 6. "Is this wasting credits/money?" — if the approach has a known limitation, say so upfront
+
+### Verify Before Claiming Fixed
+Never tell Justin something is "fixed" or "working" without personally verifying it in Chrome or through a real end-to-end test. Push code → check it actually works → THEN tell Justin. The pattern of pushing code and saying "fixed" without verification destroyed trust.
 
 ### Never Manage Justin's Time
 Do not suggest when to stop, when to go to bed, when to take a break, or comment on how long the session has been. Justin knows when he's done. Any time management suggestions are patronizing and unwanted.
