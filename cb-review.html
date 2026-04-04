@@ -2,7 +2,7 @@
 <title>CB2 Image Review</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding-bottom:3rem}
+body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center}
 .header{padding:1rem;text-align:center;width:100%}
 .header h1{font-size:1.1rem;color:#a855f7;margin-bottom:.2rem}
 .header .sub{font-size:.75rem;color:#666}
@@ -12,7 +12,6 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .meta{padding:.5rem .8rem;display:flex;gap:.4rem;flex-wrap:wrap}
 .tag{font-size:.6rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;background:#1a1030;color:#a855f7;border:1px solid #2d1a4e}
 .tag.model{background:#0a1a1a;color:#06b6d4;border-color:#0d2a2a}
-.tag.fail{background:#2a0a0a;color:#ef4444;border-color:#3a1515}
 .feedback-area{width:100%;max-width:600px;margin:.8rem auto;padding:0 .5rem}
 .feedback-area textarea{width:100%;min-height:120px;background:#111;border:2px solid #222;border-radius:10px;color:#fff;font-size:.95rem;padding:.8rem;resize:vertical;font-family:inherit;line-height:1.5}
 .feedback-area textarea:focus{outline:none;border-color:#a855f7}
@@ -22,11 +21,6 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .nav button{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.6rem 1.5rem;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .15s;flex:1;max-width:120px}
 .nav button:hover{border-color:#a855f7;background:#1a1030}
 .nav button:disabled{opacity:.3;cursor:default}
-.dots{display:flex;gap:.4rem;justify-content:center;padding:.3rem 0}
-.dot{width:8px;height:8px;border-radius:50%;background:#333;cursor:pointer;transition:all .15s}
-.dot.active{background:#a855f7;transform:scale(1.3)}
-.dot.has-feedback{background:#22c55e}
-.dot.has-feedback.active{background:#a855f7;box-shadow:0 0 0 2px #22c55e}
 .export-btn{background:none;border:1px solid #333;color:#888;padding:.4rem .8rem;border-radius:8px;font-size:.7rem;cursor:pointer;margin-top:1rem}
 .export-btn:hover{border-color:#a855f7;color:#a855f7}
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:99}
@@ -40,7 +34,6 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 </div>
 
 <div class="counter" id="counter">-</div>
-<div class="dots" id="dots"></div>
 
 <div class="img-wrap" id="imgWrap">
   <img id="mainImg" src="" alt="Loading...">
@@ -53,108 +46,95 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 </div>
 
 <div class="nav">
-  <button id="prevBtn" onclick="go(-1)">&larr; Prev</button>
-  <button id="nextBtn" onclick="go(1)">Next &rarr;</button>
+  <button id="prevBtn" onclick="go(-1)">&#8592; Prev</button>
+  <button id="nextBtn" onclick="go(1)">Next &#8594;</button>
 </div>
 
-<button class="export-btn" onclick="exportAll()">Copy All Feedback</button>
+<div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
+  <button class="export-btn" onclick="submitAll()" style="background:#a855f7;color:#fff;border-color:#a855f7;font-size:.8rem;padding:.5rem 1.2rem">Submit All Feedback</button>
+  <button class="export-btn" onclick="exportAll()">Copy to Clipboard</button>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const IMAGES = [
+var IMAGES = [
+  {
+    id: 'r2-skiing-pov',
+    url: 'https://files.catbox.moe/9jmhu5.jpg',
+    model: 'flux-2-pro-preview',
+    prompt: 'This exact black remote with 5 buttons on skiers forearm over ski glove, elastic armband with velcro closure strap visible, snowy mountain slopes with fresh powder, first person POV, bright winter sunlight',
+    label: 'R2: Skiing POV - velcro strap fix'
+  },
+  {
+    id: 'r2-hiking-summit',
+    url: 'https://files.catbox.moe/1vxain.jpg',
+    model: 'flux-2-pro-preview',
+    prompt: 'This exact black remote with 5 buttons strapped to hikers forearm with elastic velcro armband visible, mountain summit overlooking dramatic valley at golden hour, warm natural lighting',
+    label: 'R2: Hiking summit - velcro strap fix'
+  },
   {
     id: 'flux2-hiking-multiref',
     url: 'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200',
     model: 'flux2-pro-multiref',
     prompt: 'This exact black remote control with 5 buttons worn on a hikers forearm, mountain trail with scenic valley views in background, golden hour warm natural lighting',
-    label: 'Hiking - golden hour ridge'
+    label: 'R1: Hiking - golden hour ridge'
   },
   {
     id: 'flux2-skiing-multiref',
     url: 'https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200',
     model: 'flux2-pro-multiref',
     prompt: 'Place this exact black remote control with 5 buttons on a skiers forearm over a ski glove, snowy mountain slopes, bright winter sunlight, preserve exact product design',
-    label: 'Skiing - powder POV'
+    label: 'R1: Skiing - powder slopes'
   },
   {
     id: 'flux2-snowboard-multiref',
     url: 'https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200',
     model: 'flux2-pro-multiref',
     prompt: 'This exact black remote control with 5 buttons worn on a snowboarders forearm, halfpipe in background, bright winter day',
-    label: 'Snowboard - halfpipe'
+    label: 'R1: Snowboard - halfpipe'
   },
   {
     id: 'kontext-tron-skiing',
     url: 'https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200',
     model: 'flux-kontext-pro',
     prompt: 'Place this exact Chubby Buttons CB2 Tron, 5 large raised tactile buttons with green LED icons, worn on athlete forearm, skier carving powder, bright winter sunlight',
-    label: 'Skiing - tron close-up (Kontext)'
-  },
-  {
-    id: 'v4-flux2-skiing',
-    url: 'https://drive.google.com/thumbnail?id=1NF7Sc4oLgr3wBgxgJZ15ecZ00u0B-hFP&sz=w1200',
-    model: 'flux2-pro-multiref',
-    prompt: 'Place this exact black remote on a skiers forearm, snowy mountain slopes, action sports photography, bright winter sunlight',
-    label: 'Skiing - v4 variant'
-  },
-  {
-    id: 'lora-hiking-fail',
-    url: 'https://drive.google.com/thumbnail?id=1xSlkjBPZSbwqnSGE6SA8CkpK1g5Bfztw&sz=w1200',
-    model: 'flux-lora (FAILED)',
-    prompt: 'A hiker on a mountain trail at sunrise, CB2REMOTE strapped on their forearm - PRODUCT NOT VISIBLE IN OUTPUT',
-    label: 'LoRA attempt - no product visible'
+    label: 'R1: Skiing - tron close-up (Kontext)'
   }
 ];
 
-const LS_KEY = 'cb2_review_feedback';
-let ci = 0;
+var LS_KEY = 'cb2_review_feedback';
+var ci = 0;
 
 function getFeedback() {
-  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; }
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch(e) { return {}; }
 }
 
 function saveFeedback() {
-  const img = IMAGES[ci];
-  const text = document.getElementById('feedback').value.trim();
-  const all = getFeedback();
+  var img = IMAGES[ci];
+  var text = document.getElementById('feedback').value.trim();
+  var all = getFeedback();
   if (text) {
-    all[img.id] = { text, updatedAt: new Date().toISOString(), label: img.label };
+    all[img.id] = { text: text, updatedAt: new Date().toISOString(), label: img.label };
   } else {
     delete all[img.id];
   }
   localStorage.setItem(LS_KEY, JSON.stringify(all));
-  document.getElementById('savedMsg').textContent = text ? 'Auto-saved' : '';
-  renderDots();
-}
-
-function renderDots() {
-  const all = getFeedback();
-  document.getElementById('dots').innerHTML = IMAGES.map((img, i) => {
-    const hasFb = all[img.id] ? ' has-feedback' : '';
-    const active = i === ci ? ' active' : '';
-    return '<div class="dot' + hasFb + active + '" onclick="jumpTo(' + i + ')"></div>';
-  }).join('');
+  document.getElementById('savedMsg').textContent = text ? 'Auto-saved ✓' : '';
 }
 
 function render() {
-  const img = IMAGES[ci];
+  var img = IMAGES[ci];
   document.getElementById('mainImg').src = img.url;
-  document.getElementById('counter').textContent = (ci + 1) + ' / ' + IMAGES.length + '  -  ' + img.label;
-  
-  const isFail = img.model.includes('FAIL');
+  document.getElementById('counter').textContent = (ci + 1) + ' / ' + IMAGES.length + '  —  ' + img.label;
   document.getElementById('meta').innerHTML =
-    '<span class="tag model' + (isFail ? ' fail' : '') + '">' + img.model + '</span>' +
-    '<span class="tag">' + img.prompt.slice(0, 90) + '...</span>';
-
-  const saved = getFeedback()[img.id];
+    '<span class="tag model">' + img.model + '</span>' +
+    '<span class="tag">' + img.prompt.slice(0, 80) + '…</span>';
+  var saved = getFeedback()[img.id];
   document.getElementById('feedback').value = saved ? saved.text : '';
   document.getElementById('savedMsg').textContent = saved ? 'Saved ' + new Date(saved.updatedAt).toLocaleTimeString() : '';
-
   document.getElementById('prevBtn').disabled = ci === 0;
   document.getElementById('nextBtn').disabled = ci === IMAGES.length - 1;
-
-  renderDots();
   window.scrollTo(0, 0);
 }
 
@@ -164,36 +144,55 @@ function go(dir) {
   render();
 }
 
-function jumpTo(i) {
+function submitAll() {
   saveFeedback();
-  ci = i;
-  render();
+  var all = getFeedback();
+  var payload = {
+    submittedAt: new Date().toISOString(),
+    images: IMAGES.map(function(img) {
+      return {
+        id: img.id, label: img.label, model: img.model,
+        prompt: img.prompt, feedback: all[img.id] ? all[img.id].text : null
+      };
+    })
+  };
+  var lines = IMAGES.map(function(img) {
+    var fb = all[img.id];
+    return '## ' + img.label + '\nModel: ' + img.model + '\nPrompt: ' + img.prompt + '\nFeedback: ' + (fb ? fb.text : '(none)') + '\n';
+  }).join('\n');
+  navigator.clipboard.writeText(lines).then(function() {
+    localStorage.setItem('cb2_last_submit', JSON.stringify(payload));
+    showToast('Feedback submitted and copied!');
+  });
 }
 
 function exportAll() {
-  const all = getFeedback();
-  const lines = IMAGES.map(img => {
-    const fb = all[img.id];
-    return '## ' + img.label + '\nModel: ' + img.model + '\nPrompt: ' + img.prompt + '\nFeedback: ' + (fb ? fb.text : '(none)') + '\n';
+  var all = getFeedback();
+  var lines = IMAGES.map(function(img) {
+    var fb = all[img.id];
+    return '## ' + img.label + '\n' +
+           'Model: ' + img.model + '\n' +
+           'Prompt: ' + img.prompt + '\n' +
+           'Feedback: ' + (fb ? fb.text : '(none)') + '\n';
   }).join('\n');
-  navigator.clipboard.writeText(lines).then(() => showToast('Copied all feedback!'));
+  navigator.clipboard.writeText(lines).then(function() { showToast('Copied all feedback!'); });
 }
 
 function showToast(msg) {
-  const t = document.getElementById('toast');
+  var t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
+  setTimeout(function() { t.classList.remove('show'); }, 2000);
 }
 
-let saveTimer;
-document.getElementById('feedback').addEventListener('input', () => {
+var saveTimer;
+document.getElementById('feedback').addEventListener('input', function() {
   clearTimeout(saveTimer);
   document.getElementById('savedMsg').textContent = 'typing...';
   saveTimer = setTimeout(saveFeedback, 800);
 });
 
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', function(e) {
   if (e.target.tagName === 'TEXTAREA') return;
   if (e.key === 'ArrowLeft') go(-1);
   if (e.key === 'ArrowRight') go(1);
