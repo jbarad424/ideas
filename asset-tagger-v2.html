@@ -335,23 +335,25 @@ function renderSwipe(){
   const notes=curImg.aiNotes||parsedAi?.summary||'';
 
   if(ps||ss||bs){
-    aiHtml='<div class="ai-assess"><div class="ai-scores">'+
-      '<div class="ai-score"><div class="ai-score-val '+scoreClass(ps)+'">'+(ps||'?')+'</div><div class="ai-score-lbl">Product</div></div>'+
-      '<div class="ai-score"><div class="ai-score-val '+scoreClass(ss)+'">'+(ss||'?')+'</div><div class="ai-score-lbl">Scene</div></div>'+
-      '<div class="ai-score"><div class="ai-score-val '+scoreClass(bs)+'">'+(bs||'?')+'</div><div class="ai-score-lbl">Brand</div></div>'+
+    function scoreDots(v){let d='';for(let i=1;i<=5;i++)d+='<span style="display:inline-block;width:10px;height:10px;border-radius:50%;margin:0 2px;background:'+(i<=v?(v>=4?'#22c55e':v>=3?'#f59e0b':'#ef4444'):'#333')+'"></span>';return d}
+    aiHtml='<div class="ai-assess"><div style="text-align:center;font-size:.7rem;color:#888;margin-bottom:.3rem">AI VISION ASSESSMENT</div><div class="ai-scores">'+
+      '<div class="ai-score"><div class="ai-score-val">'+scoreDots(ps)+'</div><div class="ai-score-lbl">Product '+(ps||'?')+'/5</div></div>'+
+      '<div class="ai-score"><div class="ai-score-val">'+scoreDots(ss)+'</div><div class="ai-score-lbl">Scene '+(ss||'?')+'/5</div></div>'+
+      '<div class="ai-score"><div class="ai-score-val">'+scoreDots(bs)+'</div><div class="ai-score-lbl">Brand '+(bs||'?')+'/5</div></div>'+
       '</div>'+(notes?'<div class="ai-notes">'+esc(typeof notes==='string'?notes:JSON.stringify(notes))+'</div>':'')+'</div>';
   }else{
     aiHtml='<div class="ai-assess"><div class="ai-none">AI analysis pending...</div></div>';
   }
 
   const rated=!!curImg.rating;
+  const ratedBanner=rated?'<div style="text-align:center;padding:.3rem;color:#888;font-size:.75rem;background:#111;border-radius:6px;margin-bottom:.3rem">Previously rated: <strong style="color:'+(curImg.rating==='like'?'#22c55e':curImg.rating==='dislike'?'#ef4444':'#f59e0b')+'">'+curImg.rating+'</strong> — tap below to re-rate</div>':'';
   w.innerHTML='<div class="s-card" id="sCard"><div class="s-card-img">'+media+'</div>'+
     '<div class="s-card-meta">'+mBadge(curImg.model)+tBadge(curImg.shotType)+sBadge(curImg.style)+'</div>'+
     '<div class="s-card-prompt" onclick="this.classList.toggle(\'exp\')">'+esc(friendlyCaption(curImg))+'</div>'+
-    aiHtml+'</div>'+
-    (rated?'':'<div class="ad-row"><button class="ad-btn ad-agree" onclick="handleAgree()">Agree</button><button class="ad-btn ad-disagree" onclick="handleDisagree()">Disagree</button></div>'+
+    aiHtml+'</div>'+ratedBanner+
+    '<div class="ad-row"><button class="ad-btn ad-agree" onclick="handleAgree()">Agree</button><button class="ad-btn ad-disagree" onclick="handleDisagree()">Disagree</button></div>'+
     '<div class="rate-notes"><textarea class="rate-text" id="rateText" placeholder="What do you think? Add your notes..."></textarea></div>'+
-    '<div class="rate-nav"><button class="rn-btn rn-skip" onclick="doSkip()">Skip</button><button class="rn-btn rn-next" onclick="doNext()">Next</button></div>');
+    '<div class="rate-nav"><button class="rn-btn rn-skip" onclick="doSkip()">Skip</button><button class="rn-btn rn-next" onclick="doNext()">Next</button></div>';
 }
 
 // ===== AGREE / DISAGREE =====
@@ -588,9 +590,21 @@ function openLb(idx){
 }
 function closeLb(){document.getElementById('lb').classList.remove('open');document.getElementById('lbVid').pause()}
 function jumpToSwipe(imageId){
-  const f=filtered();
-  const idx=f.findIndex(i=>i.imageId===imageId);
-  if(idx>=0){ci=idx;mode='swipe';document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));document.querySelector('.mode-btn').classList.add('active');render()}
+  // Show ALL images (not just unrated) when jumping from grid
+  const allImgs=imgs.filter(i=>i.model==='flux2-pro-multiref'||i.model==='flux-lora'||i.model==='flux-lora-v4');
+  const idx=allImgs.findIndex(i=>i.imageId===imageId);
+  if(idx>=0){
+    // Temporarily switch filter to 'all' so rated images are visible
+    const filterBtns=document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(b=>{b.classList.remove('active');if(b.textContent==='All')b.classList.add('active')});
+    filterMode='all';
+    ci=filtered().findIndex(i=>i.imageId===imageId);
+    if(ci<0)ci=0;
+    mode='swipe';
+    document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelector('.mode-btn').classList.add('active');
+    render();
+  }
 }
 
 // ===== FLUX.2 GENERATION (via Make.com proxy to fal.ai) =====
