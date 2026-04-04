@@ -21,22 +21,16 @@ a{color:var(--purple);text-decoration:none}
 .tab:hover{border-color:#555}
 .review-wrap{padding:.5rem}
 .review-stats{display:flex;gap:1.5rem;justify-content:center;padding:.5rem 0}
-.stat{text-align:center}
-.stat-num{font-size:1.2rem;font-weight:700}
-.stat-num.done{color:var(--purple)}
-.stat-num.left{color:var(--dim)}
-.stat-lbl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.stat{text-align:center}.stat-num{font-size:1.2rem;font-weight:700}.stat-num.done{color:var(--purple)}.stat-num.left{color:var(--dim)}.stat-lbl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 .review-filters{display:flex;gap:.3rem;justify-content:center;padding:.3rem 1rem .5rem}
 .filt{background:none;border:1px solid #333;color:var(--muted);padding:.25rem .7rem;border-radius:8px;font-size:.75rem;cursor:pointer;transition:all .15s}
 .filt.active{border-color:var(--purple);color:var(--purple)}
 .img-card{background:var(--card);border-radius:12px;margin:0 .5rem;overflow:hidden}
-.img-wrap{width:100%;max-height:40vh;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden}
-.img-wrap img{width:100%;height:100%;max-height:40vh;object-fit:contain}
+.img-wrap{width:100%;max-height:38vh;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden}
+.img-wrap img{width:100%;height:100%;max-height:38vh;object-fit:contain}
 .img-meta{padding:.5rem .7rem .3rem;display:flex;gap:.3rem;flex-wrap:wrap;align-items:center}
 .badge{font-size:.6rem;padding:.15rem .4rem;border-radius:5px;font-weight:600;text-transform:uppercase}
-.b-model{background:#1a1030;color:var(--purple);border:1px solid #2d1a4e}
-.b-shot{background:#2a1a0a;color:var(--yellow);border:1px solid #3a2a0a}
-.b-style{background:#1a1a1a;color:#ccc;border:1px solid #333}
+.b-model{background:#1a1030;color:var(--purple);border:1px solid #2d1a4e}.b-shot{background:#2a1a0a;color:var(--yellow);border:1px solid #3a2a0a}.b-style{background:#1a1a1a;color:#ccc;border:1px solid #333}
 .img-caption{font-size:.75rem;color:var(--muted);padding:0 .7rem .4rem}
 .ai-panel{margin:.4rem .7rem;padding:.5rem;background:#0d0d0d;border-radius:10px;border:1px solid var(--border)}
 .ai-title{font-size:.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:.3rem}
@@ -62,174 +56,71 @@ a{color:var(--purple);text-decoration:none}
 .star.active.s5{border-color:var(--green);background:#0a1a0a;color:var(--green)}
 .rating-val{font-size:.7rem;color:var(--dim);width:24px;text-align:center}
 .notes-field{width:100%;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-size:.8rem;padding:.4rem .5rem;resize:none;height:2.5rem;margin-top:.4rem;font-family:inherit}
-.notes-field::placeholder{color:#444}
-.notes-field:focus{outline:none;border-color:var(--purple)}
+.notes-field::placeholder{color:#444}.notes-field:focus{outline:none;border-color:var(--purple)}
 .save-row{display:flex;gap:.4rem;padding:.5rem .7rem .7rem}
 .save-btn{flex:1;padding:.6rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
-.btn-skip{background:#1a1a1a;color:var(--muted)}
-.btn-skip:hover{background:#222}
-.btn-save{background:linear-gradient(135deg,#7c3aed,var(--purple));color:#fff}
-.btn-save:hover{opacity:.9}
-.btn-save:disabled{opacity:.4;cursor:not-allowed}
+.btn-skip{background:#1a1a1a;color:var(--muted)}.btn-skip:hover{background:#222}
+.btn-save{background:linear-gradient(135deg,#7c3aed,var(--purple));color:#fff}.btn-save:hover{opacity:.9}.btn-save:disabled{opacity:.4;cursor:not-allowed}
 .grid-toggle{display:flex;justify-content:center;padding:.3rem}
 .grid-toggle button{background:none;border:none;color:var(--purple);font-size:.75rem;cursor:pointer;text-decoration:underline}
 .mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:4px;padding:.3rem .7rem}
 .mini-thumb{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent}
 .mini-thumb img{width:100%;height:100%;object-fit:cover}
-.mini-thumb.current{border-color:var(--purple)}
-.mini-thumb.rated{opacity:.6}
+.mini-thumb.current{border-color:var(--purple)}.mini-thumb.rated{opacity:.6}
 .mini-thumb .mini-dot{position:absolute;bottom:3px;right:3px;width:8px;height:8px;border-radius:50%}
-.empty{text-align:center;padding:3rem 1rem;color:var(--dim)}
-.empty h3{color:var(--muted);margin-bottom:.3rem}
+.empty{text-align:center;padding:3rem 1rem;color:var(--dim)}.empty h3{color:var(--muted);margin-bottom:.3rem}
 .create-wrap{display:none;padding:1rem;max-width:500px;margin:0 auto}
-.create-wrap h2{font-size:1.1rem;margin-bottom:.2rem}
-.create-wrap .sub{color:var(--muted);font-size:.8rem;margin-bottom:1rem}
-.form-group{margin-bottom:1rem}
-.form-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem;display:block}
+.create-wrap h2{font-size:1.1rem;margin-bottom:.2rem}.create-wrap .sub{color:var(--muted);font-size:.8rem;margin-bottom:1rem}
+.form-group{margin-bottom:1rem}.form-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem;display:block}
 .option-grid{display:flex;gap:.4rem;flex-wrap:wrap}
 .opt{background:#1a1a1a;border:2px solid #333;color:#ccc;padding:.4rem .8rem;border-radius:10px;font-size:.8rem;font-weight:500;cursor:pointer;transition:all .15s}
-.opt:hover{border-color:#555}
-.opt.active{border-color:var(--purple);color:var(--purple);background:#1a1030}
+.opt:hover{border-color:#555}.opt.active{border-color:var(--purple);color:var(--purple);background:#1a1030}
 .opt.colorway{padding:.3rem .6rem;display:flex;align-items:center;gap:.3rem}
 .color-dot{width:14px;height:14px;border-radius:50%;border:1px solid #555}
-.cd-tron{background:#1a1a1a;border-color:#4ade80}
-.cd-patriot{background:linear-gradient(135deg,#ef4444,#fff,#3b82f6)}
-.cd-hunter{background:#166534}
+.cd-tron{background:#1a1a1a;border-color:#4ade80}.cd-patriot{background:linear-gradient(135deg,#ef4444,#fff,#3b82f6)}.cd-hunter{background:#166534}
 .text-input{width:100%;background:#111;border:1px solid #333;border-radius:10px;color:#fff;font-size:.85rem;padding:.6rem .7rem;font-family:inherit;resize:none;height:4rem}
-.text-input::placeholder{color:#444}
-.text-input:focus{outline:none;border-color:var(--purple)}
+.text-input::placeholder{color:#444}.text-input:focus{outline:none;border-color:var(--purple)}
 .count-row{display:flex;gap:.3rem;align-items:center}
-.count-btn{width:36px;height:36px;border-radius:8px;border:2px solid #333;background:#1a1a1a;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.count-btn:hover{border-color:#555}
+.count-btn{width:36px;height:36px;border-radius:8px;border:2px solid #333;background:#1a1a1a;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}.count-btn:hover{border-color:#555}
 .count-val{font-size:1.1rem;font-weight:700;width:40px;text-align:center}
 .generate-btn{width:100%;padding:.8rem;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#7c3aed,var(--purple));color:#fff;margin-top:.5rem;transition:all .2s}
-.generate-btn:hover{opacity:.9}
-.generate-btn:disabled{opacity:.4;cursor:not-allowed}
-.gen-status{text-align:center;padding:1rem;color:var(--muted);font-size:.85rem;display:none}
-.gen-status.active{display:block}
+.generate-btn:hover{opacity:.9}.generate-btn:disabled{opacity:.4;cursor:not-allowed}
+.gen-status{text-align:center;padding:1rem;color:var(--muted);font-size:.85rem;display:none}.gen-status.active{display:block}
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--purple);border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;margin-right:.3rem;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 .insights-wrap{display:none;padding:1rem;max-width:500px;margin:0 auto}
 .insight-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.7rem;margin-bottom:.5rem}
 .insight-title{font-size:.7rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem}
-.insight-val{font-size:1.5rem;font-weight:700;color:var(--purple)}
-.insight-row{display:flex;gap:.5rem;align-items:center;padding:.2rem 0;font-size:.8rem;color:#ccc}
-.insight-icon{font-size:1rem}
+.insight-row{display:flex;gap:.5rem;align-items:center;padding:.2rem 0;font-size:.8rem;color:#ccc}.insight-icon{font-size:1rem}
 .prompt-preview{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:.5rem;font-size:.75rem;color:var(--muted);line-height:1.5;margin-top:.3rem;white-space:pre-wrap}
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--purple);color:#fff;padding:.5rem 1.2rem;border-radius:10px;font-size:.85rem;font-weight:600;z-index:200;transition:transform .3s;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0)}
-@media(min-width:600px){.img-wrap{max-height:60vh}.rating-stars{gap:6px}.star{width:38px;height:38px;font-size:.9rem}}
-</style>
-</head><body>
-<div id="nameScreen">
-  <h1>CB Creative Lab Trainer</h1>
-  <p>Rate, refine, and generate CB2 marketing assets</p>
-  <div class="name-btns">
-    <button class="name-btn" onclick="startApp('Justin')">Justin</button>
-    <button class="name-btn" onclick="startApp('Jordan')">Jordan</button>
-  </div>
-</div>
-<div id="mainApp">
-  <div class="topbar">
-    <h1>CB Creative Lab Trainer</h1>
-    <span class="topbar-user" id="userTag"></span>
-  </div>
-  <div class="tabs">
-    <button class="tab active" onclick="setTab('review')" id="tabReview">Review</button>
-    <button class="tab" onclick="setTab('create')" id="tabCreate">Create</button>
-    <button class="tab" onclick="setTab('insights')" id="tabInsights">Insights</button>
-  </div>
-  <div class="review-wrap" id="reviewWrap">
-    <div class="review-stats">
-      <div class="stat"><div class="stat-num done" id="nRated">0</div><div class="stat-lbl">Rated</div></div>
-      <div class="stat"><div class="stat-num left" id="nUnrated">0</div><div class="stat-lbl">Unrated</div></div>
-    </div>
-    <div class="review-filters">
-      <button class="filt active" onclick="setFilter('unrated')">Unrated</button>
-      <button class="filt" onclick="setFilter('all')">All</button>
-      <button class="filt" onclick="setFilter('rated')">Rated</button>
-    </div>
-    <div class="grid-toggle"><button onclick="toggleMiniGrid()" id="gridBtn">Show Grid</button></div>
-    <div class="mini-grid" id="miniGrid" style="display:none"></div>
-    <div id="cardArea"></div>
-  </div>
-  <div class="create-wrap" id="createWrap">
-    <h2>Generate New Assets</h2>
-    <p class="sub">Pick your options, describe the shot, and let FLUX.2 create it.</p>
-    <div class="form-group">
-      <label class="form-label">Colorway</label>
-      <div class="option-grid" id="colorwayOpts">
-        <button class="opt colorway active" onclick="pickOpt('colorway','tron',this)"><span class="color-dot cd-tron"></span>Tron (Black)</button>
-        <button class="opt colorway" onclick="pickOpt('colorway','patriot',this)"><span class="color-dot cd-patriot"></span>Patriot</button>
-        <button class="opt colorway" onclick="pickOpt('colorway','hunter',this)"><span class="color-dot cd-hunter"></span>Hunter (Green)</button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Sport / Activity</label>
-      <div class="option-grid" id="sportOpts">
-        <button class="opt active" onclick="pickOpt('sport','skiing',this)">Skiing</button>
-        <button class="opt" onclick="pickOpt('sport','snowboarding',this)">Snowboarding</button>
-        <button class="opt" onclick="pickOpt('sport','motorcycle',this)">Motorcycle</button>
-        <button class="opt" onclick="pickOpt('sport','hiking',this)">Hiking</button>
-        <button class="opt" onclick="pickOpt('sport','mountain-bike',this)">Mountain Bike</button>
-        <button class="opt" onclick="pickOpt('sport','running',this)">Running</button>
-        <button class="opt" onclick="pickOpt('sport','studio',this)">Studio / Product</button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Shot Type</label>
-      <div class="option-grid" id="shotOpts">
-        <button class="opt active" onclick="pickOpt('shot','action',this)">Action (on athlete)</button>
-        <button class="opt" onclick="pickOpt('shot','product',this)">Product (close-up)</button>
-        <button class="opt" onclick="pickOpt('shot','lifestyle',this)">Lifestyle</button>
-        <button class="opt" onclick="pickOpt('shot','wide',this)">Wide / Environmental</button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Vibe</label>
-      <div class="option-grid" id="vibeOpts">
-        <button class="opt active" onclick="pickOpt('vibe','epic',this)">Epic / Dramatic</button>
-        <button class="opt" onclick="pickOpt('vibe','chill',this)">Chill / Lifestyle</button>
-        <button class="opt" onclick="pickOpt('vibe','professional',this)">Professional / Clean</button>
-        <button class="opt" onclick="pickOpt('vibe','gritty',this)">Gritty / Raw</button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Describe Your Vision (optional)</label>
-      <textarea class="text-input" id="createPrompt" placeholder="e.g. Full body shot of a cyclist bombing down a mountain trail at sunset, device clearly visible on forearm..."></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label">How Many</label>
-      <div class="count-row">
-        <button class="count-btn" onclick="adjustCount(-1)">-</button>
-        <span class="count-val" id="countVal">3</span>
-        <button class="count-btn" onclick="adjustCount(1)">+</button>
-      </div>
-    </div>
-    <button class="generate-btn" id="genBtn" onclick="generateImages()">Generate Images</button>
-    <div class="gen-status" id="genStatus"><span class="spinner"></span><span id="genMsg">Generating...</span></div>
-  </div>
-  <div class="insights-wrap" id="insightsWrap">
-    <div id="insightsContent"></div>
-  </div>
-</div>
+@media(min-width:600px){.img-wrap{max-height:42vh}.rating-stars{gap:6px}.star{width:38px;height:38px;font-size:.9rem}}
+</style></head><body>
+<div id="nameScreen"><h1>CB Creative Lab Trainer</h1><p>Rate, refine, and generate CB2 marketing assets</p><div class="name-btns"><button class="name-btn" onclick="startApp('Justin')">Justin</button><button class="name-btn" onclick="startApp('Jordan')">Jordan</button></div></div>
+<div id="mainApp"><div class="topbar"><h1>CB Creative Lab Trainer</h1><span class="topbar-user" id="userTag"></span></div>
+<div class="tabs"><button class="tab active" onclick="setTab('review')" id="tabReview">Review</button><button class="tab" onclick="setTab('create')" id="tabCreate">Create</button><button class="tab" onclick="setTab('insights')" id="tabInsights">Insights</button></div>
+<div class="review-wrap" id="reviewWrap"><div class="review-stats"><div class="stat"><div class="stat-num done" id="nRated">0</div><div class="stat-lbl">Rated</div></div><div class="stat"><div class="stat-num left" id="nUnrated">0</div><div class="stat-lbl">Unrated</div></div></div>
+<div class="review-filters"><button class="filt active" onclick="setFilter('unrated')">Unrated</button><button class="filt" onclick="setFilter('all')">All</button><button class="filt" onclick="setFilter('rated')">Rated</button></div>
+<div class="grid-toggle"><button onclick="toggleMiniGrid()" id="gridBtn">Show Grid</button></div><div class="mini-grid" id="miniGrid" style="display:none"></div><div id="cardArea"></div></div>
+<div class="create-wrap" id="createWrap"><h2>Generate New Assets</h2><p class="sub">Pick your options, describe the shot, and let FLUX.2 create it.</p>
+<div class="form-group"><label class="form-label">Colorway</label><div class="option-grid" id="colorwayOpts"><button class="opt colorway active" onclick="pickOpt('colorway','tron',this)"><span class="color-dot cd-tron"></span>Tron (Black)</button><button class="opt colorway" onclick="pickOpt('colorway','patriot',this)"><span class="color-dot cd-patriot"></span>Patriot</button><button class="opt colorway" onclick="pickOpt('colorway','hunter',this)"><span class="color-dot cd-hunter"></span>Hunter (Green)</button></div></div>
+<div class="form-group"><label class="form-label">Sport / Activity</label><div class="option-grid" id="sportOpts"><button class="opt active" onclick="pickOpt('sport','skiing',this)">Skiing</button><button class="opt" onclick="pickOpt('sport','snowboarding',this)">Snowboarding</button><button class="opt" onclick="pickOpt('sport','motorcycle',this)">Motorcycle</button><button class="opt" onclick="pickOpt('sport','hiking',this)">Hiking</button><button class="opt" onclick="pickOpt('sport','mountain-bike',this)">Mountain Bike</button><button class="opt" onclick="pickOpt('sport','running',this)">Running</button><button class="opt" onclick="pickOpt('sport','studio',this)">Studio / Product</button></div></div>
+<div class="form-group"><label class="form-label">Shot Type</label><div class="option-grid" id="shotOpts"><button class="opt active" onclick="pickOpt('shot','action',this)">Action (on athlete)</button><button class="opt" onclick="pickOpt('shot','product',this)">Product (close-up)</button><button class="opt" onclick="pickOpt('shot','lifestyle',this)">Lifestyle</button><button class="opt" onclick="pickOpt('shot','wide',this)">Wide / Environmental</button></div></div>
+<div class="form-group"><label class="form-label">Vibe</label><div class="option-grid" id="vibeOpts"><button class="opt active" onclick="pickOpt('vibe','epic',this)">Epic / Dramatic</button><button class="opt" onclick="pickOpt('vibe','chill',this)">Chill / Lifestyle</button><button class="opt" onclick="pickOpt('vibe','professional',this)">Professional / Clean</button><button class="opt" onclick="pickOpt('vibe','gritty',this)">Gritty / Raw</button></div></div>
+<div class="form-group"><label class="form-label">Describe Your Vision (optional)</label><textarea class="text-input" id="createPrompt" placeholder="e.g. Full body shot of a cyclist bombing down a mountain trail at sunset, device clearly visible on forearm..."></textarea></div>
+<div class="form-group"><label class="form-label">How Many</label><div class="count-row"><button class="count-btn" onclick="adjustCount(-1)">-</button><span class="count-val" id="countVal">3</span><button class="count-btn" onclick="adjustCount(1)">+</button></div></div>
+<button class="generate-btn" id="genBtn" onclick="generateImages()">Generate Images</button><div class="gen-status" id="genStatus"><span class="spinner"></span><span id="genMsg">Generating...</span></div></div>
+<div class="insights-wrap" id="insightsWrap"><div id="insightsContent"></div></div></div>
 <div class="toast" id="toast"></div>
 <script>
-const DATA_URL='https://jbarad424.github.io/ideas/cb-ai-lab.json';
-const RATE_API='https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
-const SYNC_API='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
-const FLUX2_API='https://hook.us1.make.com/otxpq9jc4vwqjqlbda5n6h0jhkkgmht9';
-const LS_NAME='cb_trainer_name';
-function lsRatings(){return 'cb_trainer_ratings_'+(userName||'').toLowerCase().trim()}
+const DATA_URL='https://jbarad424.github.io/ideas/cb-ai-lab.json';const RATE_API='https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';const SYNC_API='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';const FLUX2_API='https://hook.us1.make.com/otxpq9jc4vwqjqlbda5n6h0jhkkgmht9';const LS_NAME='cb_trainer_name';function lsRatings(){return'cb_trainer_ratings_'+(userName||'').toLowerCase().trim()}
 const CB2_DESC={tron:'Chubby Buttons CB2 Tron — compact black matte silicone Bluetooth remote, 5 large raised tactile buttons with green LED icons (minus, back, play/pause, forward, plus), small Bluetooth and camera side buttons, CB2 logo on front, adjustable elastic armband with velcro closure.',hunter:'Chubby Buttons CB2 Hunter — compact green matte silicone Bluetooth remote, 5 large raised tactile buttons with yellow/gold icons, CB2 logo on front, adjustable elastic armband with velcro closure.',patriot:'Chubby Buttons CB2 Patriot — compact red/white/blue matte silicone Bluetooth remote, 5 large raised tactile buttons, CB2 logo on front, adjustable elastic armband with velcro closure.'};
 const SCENES={skiing:'skier carving down a pristine powder slope, snowy mountain peaks in background, bright winter sunlight',snowboarding:'snowboarder riding through fresh powder, mountain terrain park, dramatic winter sky',motorcycle:'motorcyclist on a forest trail, POV-style action shot, adventure riding',hiking:'hiker on a mountain trail with scenic valley views, golden hour lighting, outdoor adventure','mountain-bike':'mountain biker bombing down a trail, dirt and motion blur, adrenaline-filled action',running:'trail runner on a scenic coastal path, morning light, athletic energy',studio:'clean product photography on dark surface, dramatic studio lighting, premium feel'};
 const SHOTS={action:'worn on athlete forearm over jacket/glove, action sports photography, device clearly visible',product:'close-up product shot, device as hero subject, shallow depth of field',lifestyle:'lifestyle photography, device naturally incorporated, aspirational setting',wide:'wide environmental shot, full athlete visible in dramatic landscape, device on forearm'};
 const VIBES={epic:'cinematic dramatic lighting, high energy, hero moment, wide dynamic range',chill:'relaxed natural lighting, casual confidence, warm tones',professional:'clean sharp studio quality, neutral background, commercial product photography',gritty:'raw authentic feel, natural imperfections, photojournalistic style'};
-let imgs=[],userName='',tab='review',filter='unrated',ci=0,genCount=3;
-let createOpts={colorway:'tron',sport:'skiing',shot:'action',vibe:'epic'};
-let showGrid=false;
-const saved=localStorage.getItem(LS_NAME);
-if(saved)startApp(saved);
+let imgs=[],userName='',tab='review',filter='unrated',ci=0,genCount=3;let createOpts={colorway:'tron',sport:'skiing',shot:'action',vibe:'epic'};let showGrid=false;
+const saved=localStorage.getItem(LS_NAME);if(saved)startApp(saved);
 function startApp(name){userName=name.charAt(0).toUpperCase()+name.slice(1).toLowerCase();localStorage.setItem(LS_NAME,userName);document.getElementById('nameScreen').style.display='none';document.getElementById('mainApp').style.display='block';document.getElementById('userTag').textContent=userName;loadData()}
 async function loadData(){try{const r=await fetch(DATA_URL+'?t='+Date.now());const d=await r.json();imgs=d.images||d||[]}catch(e){imgs=[]}const local=getLocal();imgs.forEach(img=>{const l=local[img.imageId];if(l)Object.assign(img,l)});updateStats();render()}
 function getLocal(){try{return JSON.parse(localStorage.getItem(lsRatings())||'{}')}catch(e){return{}}}
@@ -238,7 +129,7 @@ function filtered(){if(filter==='unrated')return imgs.filter(i=>!getLocal()[i.im
 function updateStats(){const local=getLocal();const rated=imgs.filter(i=>local[i.imageId]?.humanProduct).length;document.getElementById('nRated').textContent=rated;document.getElementById('nUnrated').textContent=imgs.length-rated}
 function setTab(t){tab=t;document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');document.getElementById('reviewWrap').style.display=t==='review'?'':'none';document.getElementById('createWrap').style.display=t==='create'?'':'none';document.getElementById('insightsWrap').style.display=t==='insights'?'':'none';if(t==='insights')renderInsights()}
 function setFilter(f){filter=f;ci=0;document.querySelectorAll('.filt').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');render()}
-function render(){const f=filtered();const area=document.getElementById('cardArea');if(!f.length){area.innerHTML='<div class="empty"><h3>'+(filter==='unrated'?'All rated!':'No images yet')+'</h3><p>'+(filter==='unrated'?'Switch to "All" to re-rate, or generate more.':'Go to Create to generate some.')+'</p></div>';updateStats();renderMiniGrid();return}if(ci>=f.length)ci=0;const img=f[ci];const local=getLocal()[img.imageId]||{};const driveUrl=img.driveFileId?'https://lh3.googleusercontent.com/d/'+img.driveFileId+'=w1200':'';let ai=null;if(img.aiAnalysis){try{ai=typeof img.aiAnalysis==='string'?JSON.parse(img.aiAnalysis):img.aiAnalysis}catch(e){}}const caption=img.shotType&&img.style?img.shotType.charAt(0).toUpperCase()+img.shotType.slice(1)+' — '+img.style.charAt(0).toUpperCase()+img.style.slice(1):img.prompt?img.prompt.substring(0,80)+'...':'';let html='<div class="img-card">';html+='<div class="img-wrap"><img src="'+driveUrl+'" alt="CB2 generated image" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23111%22 width=%22400%22 height=%22300%22/><text fill=%22%23555%22 x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22>Image unavailable</text></svg>\'"></div>';html+='<div class="img-meta">';html+='<span class="badge b-model">'+(img.model||'FLUX.2')+'</span>';if(img.shotType)html+='<span class="badge b-shot">'+img.shotType+'</span>';if(img.style)html+='<span class="badge b-style">'+img.style+'</span>';html+='</div>';html+='<div class="img-caption">'+caption+'</div>';if(ai){html+='<div class="ai-panel"><div class="ai-title">AI Vision Assessment</div><div class="ai-scores">';html+=renderAiScore('Product',ai.productScore);html+=renderAiScore('Scene',ai.sceneScore);html+=renderAiScore('Brand',ai.brandScore);html+='</div>';if(ai.summary)html+='<div class="ai-summary">'+ai.summary+'</div>';html+='</div>'}html+='<div class="human-panel"><div class="human-title">Your Rating</div>';html+=renderRatingRow('Product','humanProduct','Does the CB2 look accurate?',local.humanProduct||0);html+=renderRatingRow('Scene','humanScene','Is the scene compelling?',local.humanScene||0);html+=renderRatingRow('Brand','humanBrand','Does this feel like CB?',local.humanBrand||0);html+=renderRatingRow('Impact','humanImpact','"I want that" factor',local.humanImpact||0);html+='<textarea class="notes-field" id="rateNotes" placeholder="Optional notes — what would make this better?">'+(local.notes||'')+'</textarea>';html+='</div></div>';html+='<div class="save-row">';html+='<button class="save-btn btn-skip" onclick="skipImage()">Skip</button>';html+='<button class="save-btn btn-save" id="saveBtn" onclick="saveRating()">Save & Next</button>';html+='</div>';area.innerHTML=html;updateStats();renderMiniGrid()}
+function render(){const f=filtered();const area=document.getElementById('cardArea');if(!f.length){area.innerHTML='<div class="empty"><h3>'+(filter==='unrated'?'All rated!':'No images yet')+'</h3><p>'+(filter==='unrated'?'Switch to "All" to re-rate, or generate more.':'Go to Create to generate some.')+'</p></div>';updateStats();renderMiniGrid();return}if(ci>=f.length)ci=0;const img=f[ci];const local=getLocal()[img.imageId]||{};const driveUrl=img.driveFileId?'https://lh3.googleusercontent.com/d/'+img.driveFileId+'=w1200':'';let ai=null;if(img.aiAnalysis){try{ai=typeof img.aiAnalysis==='string'?JSON.parse(img.aiAnalysis):img.aiAnalysis}catch(e){}}const caption=img.shotType&&img.style?img.shotType.charAt(0).toUpperCase()+img.shotType.slice(1)+' — '+img.style.charAt(0).toUpperCase()+img.style.slice(1):img.prompt?img.prompt.substring(0,80)+'...':'';let html='<div class="img-card">';html+='<div class="img-wrap"><img src="'+driveUrl+'" alt="CB2 generated image"></div>';html+='<div class="img-meta">';html+='<span class="badge b-model">'+(img.model||'FLUX.2')+'</span>';if(img.shotType)html+='<span class="badge b-shot">'+img.shotType+'</span>';if(img.style)html+='<span class="badge b-style">'+img.style+'</span>';html+='</div>';html+='<div class="img-caption">'+caption+'</div>';if(ai){html+='<div class="ai-panel"><div class="ai-title">AI Vision Assessment</div><div class="ai-scores">';html+=renderAiScore('Product',ai.productScore);html+=renderAiScore('Scene',ai.sceneScore);html+=renderAiScore('Brand',ai.brandScore);html+='</div>';if(ai.summary)html+='<div class="ai-summary">'+ai.summary+'</div>';html+='</div>'}html+='<div class="human-panel"><div class="human-title">Your Rating</div>';html+=renderRatingRow('Product','humanProduct','Does the CB2 look accurate?',local.humanProduct||0);html+=renderRatingRow('Scene','humanScene','Is the scene compelling?',local.humanScene||0);html+=renderRatingRow('Brand','humanBrand','Does this feel like CB?',local.humanBrand||0);html+=renderRatingRow('Impact','humanImpact','"I want that" factor',local.humanImpact||0);html+='<textarea class="notes-field" id="rateNotes" placeholder="Optional notes — what would make this better?">'+(local.notes||'')+'</textarea>';html+='</div></div>';html+='<div class="save-row">';html+='<button class="save-btn btn-skip" onclick="skipImage()">Skip</button>';html+='<button class="save-btn btn-save" id="saveBtn" onclick="saveRating()">Save & Next</button>';html+='</div>';area.innerHTML=html;updateStats();renderMiniGrid()}
 function renderAiScore(label,score){if(!score)return'';const level=score>=4?'high':score>=3?'mid':'low';let dots='';for(let i=1;i<=5;i++){dots+='<div class="ai-dot'+(i<=score?' filled '+level:'')+'"></div>'}return'<div class="ai-score"><div class="ai-dots">'+dots+'</div><div class="ai-lbl">'+label+' '+score+'/5</div></div>'}
 function renderRatingRow(label,key,hint,val){let html='<div class="rating-row">';html+='<div class="rating-label" title="'+hint+'">'+label+'</div>';html+='<div class="rating-stars">';for(let i=1;i<=5;i++){html+='<div class="star'+(i<=val?' active s'+i:'')+'" onclick="setRating(\''+key+'\','+i+')" data-key="'+key+'" data-val="'+i+'">'+i+'</div>'}html+='</div>';html+='<div class="rating-val">'+(val?val+'/5':'')+'</div>';html+='</div>';return html}
 function setRating(key,val){const f=filtered();const img=f[ci];const local=getLocal()[img.imageId]||{};const current=local[key]||0;const newVal=current===val?0:val;saveLocal(img.imageId,{[key]:newVal});document.querySelectorAll('.star[data-key="'+key+'"]').forEach(s=>{const sv=parseInt(s.dataset.val);s.className='star'+(sv<=newVal?' active s'+sv:'')});const row=document.querySelector('.star[data-key="'+key+'"]').parentElement.parentElement;row.querySelector('.rating-val').textContent=newVal?newVal+'/5':''}
@@ -254,5 +145,4 @@ function buildFeedbackFixes(){const local=getLocal();const rated=imgs.filter(i=>
 function renderInsights(){const local=getLocal();const rated=imgs.filter(i=>local[i.imageId]?.humanProduct);const content=document.getElementById('insightsContent');if(!rated.length){content.innerHTML='<div class="empty"><h3>No ratings yet</h3><p>Rate some images in the Review tab to see insights and feedback patterns.</p></div>';return}let avgProduct=0,avgScene=0,avgBrand=0,avgImpact=0;const notes=[];rated.forEach(img=>{const r=local[img.imageId];avgProduct+=(r.humanProduct||0);avgScene+=(r.humanScene||0);avgBrand+=(r.humanBrand||0);avgImpact+=(r.humanImpact||0);if(r.notes)notes.push(r.notes)});const n=rated.length;avgProduct=(avgProduct/n).toFixed(1);avgScene=(avgScene/n).toFixed(1);avgBrand=(avgBrand/n).toFixed(1);avgImpact=(avgImpact/n).toFixed(1);let html='';html+='<div class="insight-card"><div class="insight-title">Rating Summary ('+n+' images rated)</div>';html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.3rem">';html+=insightBox('Product',avgProduct);html+=insightBox('Scene',avgScene);html+=insightBox('Brand',avgBrand);html+=insightBox('Impact',avgImpact);html+='</div></div>';const fixes=buildFeedbackFixes();if(fixes){html+='<div class="insight-card"><div class="insight-title">What your feedback is fixing in the next batch</div>';fixes.split('. ').filter(Boolean).forEach(fix=>{html+='<div class="insight-row"><span class="insight-icon" style="color:var(--green)">&#10003;</span> '+fix+'</div>'});html+='</div>'}if(notes.length){html+='<div class="insight-card"><div class="insight-title">Your Notes ('+notes.length+')</div>';notes.forEach(note=>{html+='<div class="insight-row" style="font-style:italic;color:#999">"'+note+'"</div>'});html+='</div>'}if(fixes){html+='<div class="insight-card"><div class="insight-title">Preview: How Next Prompt Will Change</div>';html+='<div class="prompt-preview">Base prompt + your feedback:\n\n...IMPORTANT: '+fixes+'</div>';html+='</div>'}content.innerHTML=html}
 function insightBox(label,avg){const color=avg>=4?'var(--green)':avg>=3?'var(--yellow)':'var(--red)';return'<div style="text-align:center;padding:.5rem;background:#0d0d0d;border-radius:8px"><div style="font-size:1.4rem;font-weight:700;color:'+color+'">'+avg+'</div><div style="font-size:.65rem;color:var(--muted);text-transform:uppercase">'+label+'</div></div>'}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1500)}
-</script>
-</body></html>
+</script></body></html>
