@@ -89,15 +89,18 @@ a{color:var(--purple);text-decoration:none}
 .btn-save:hover{opacity:.9}
 .btn-save:disabled{opacity:.4;cursor:not-allowed}
 
-/* Grid overlay */
-.grid-toggle{display:flex;justify-content:center;padding:.3rem}
+/* Thumbnail strip (horizontal scroll) */
+.grid-toggle{display:flex;justify-content:center;padding:.3rem;gap:.8rem;align-items:center}
 .grid-toggle button{background:none;border:none;color:var(--purple);font-size:.75rem;cursor:pointer;text-decoration:underline}
-.mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:4px;padding:.3rem .7rem}
-.mini-thumb{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent}
+.grid-toggle .clear-btn{color:var(--red);font-size:.65rem}
+.mini-grid{display:flex;gap:4px;padding:.3rem .7rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.mini-grid::-webkit-scrollbar{height:4px}.mini-grid::-webkit-scrollbar-track{background:#111}.mini-grid::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+.mini-thumb{position:relative;width:56px;height:56px;min-width:56px;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;scroll-snap-align:center}
 .mini-thumb img{width:100%;height:100%;object-fit:cover}
 .mini-thumb.current{border-color:var(--purple)}
 .mini-thumb.rated{opacity:.6}
 .mini-thumb .mini-dot{position:absolute;bottom:3px;right:3px;width:8px;height:8px;border-radius:50%}
+.mini-thumb .mini-idx{position:absolute;top:1px;left:3px;font-size:.5rem;color:#fff;text-shadow:0 0 3px #000}
 
 /* Empty state */
 .empty{text-align:center;padding:3rem 1rem;color:var(--dim)}
@@ -195,7 +198,10 @@ a{color:var(--purple);text-decoration:none}
       <button class="filt" onclick="setFilter('rated')">Rated</button>
     </div>
 
-    <div class="grid-toggle"><button onclick="toggleMiniGrid()" id="gridBtn">Show Grid</button></div>
+    <div class="grid-toggle">
+      <button onclick="toggleMiniGrid()" id="gridBtn">Show Thumbnails</button>
+      <button class="clear-btn" onclick="clearAllRatings()">Clear My Ratings</button>
+    </div>
     <div class="mini-grid" id="miniGrid" style="display:none"></div>
 
     <div id="cardArea"></div>
@@ -340,6 +346,7 @@ const POS_INVERSION = {
 let imgs = [], userName = '', tab = 'review', filter = 'unrated', ci = 0, genCount = 3;
 let createOpts = { colorway: 'tron', sport: 'skiing', shot: 'action', vibe: 'epic' };
 let showGrid = false;
+let currentImg = null; // CRITICAL: stable reference for saveRating — never re-filter to find current image
 
 // ===== STARTUP =====
 const saved = localStorage.getItem(LS_NAME);
@@ -423,6 +430,7 @@ function render() {
 
   if (ci >= f.length) ci = 0;
   const img = f[ci];
+  currentImg = img; // Lock reference so saveRating can't target wrong image
   const local = getLocal()[img.imageId] || {};
   const driveUrl = img.driveFileId ? 'https://lh3.googleusercontent.com/d/' + img.driveFileId + '=w1200' : '';
 
@@ -454,6 +462,7 @@ function render() {
     html += renderAiScore('Product', ai.productScore);
     html += renderAiScore('Scene', ai.sceneScore);
     html += renderAiScore('Brand', ai.brandScore);
+    if (ai.marketingScore) html += renderAiScore('Usable', ai.marketingScore);
     html += '</div>';
     if (ai.summary) html += '<div class="ai-summary">' + ai.summary + '</div>';
     html += '</div>';
@@ -473,12 +482,15 @@ function render() {
   // Nav buttons
   html += '<div class="save-row">';
   html += '<button class="save-btn btn-skip" onclick="skipImage()">Skip</button>';
+  html += '<span style="font-size:.7rem;color:var(--dim);align-self:center">' + (ci + 1) + ' / ' + f.length + '</span>';
   html += '<button class="save-btn btn-save" id="saveBtn" onclick="saveRating()">Save & Next</button>';
   html += '</div>';
 
   area.innerHTML = html;
   updateStats();
   renderMiniGrid();
+  // Scroll to top of card on each image change
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderAiScore(label, score) {
@@ -506,8 +518,8 @@ function renderRatingRow(label, key, hint, val) {
 
 function setRating(key, val) {
   // Toggle: clicking same value clears it
-  const f = filtered();
-  const img = f[ci];
+  const img = currentImg;
+  if (!img) return;
   const local = getLocal()[img.imageId] || {};
   const current = local[key] || 0;
   const newVal = current === val ? 0 : val;
@@ -525,17 +537,18 @@ function setRating(key, val) {
 }
 
 function saveRating() {
-  const f = filtered();
-  if (!f.length) return;
-  const img = f[ci];
+  // Use the locked reference — never re-filter, or we'll target the wrong image
+  const img = currentImg;
+  if (!img) return;
   const local = getLocal()[img.imageId] || {};
 
-  // Get notes
+  // Get notes and save them to the CORRECT image
   const notes = document.getElementById('rateNotes')?.value || '';
   if (notes) saveLocal(img.imageId, { notes });
 
-  // Need at least one dimension rated
-  if (!local.humanProduct && !local.humanScene && !local.humanBrand && !local.humanImpact) {
+  // Need at least one dimension rated (re-read after notes save)
+  const freshLocal = getLocal()[img.imageId] || {};
+  if (!freshLocal.humanProduct && !freshLocal.humanScene && !freshLocal.humanBrand && !freshLocal.humanImpact) {
     showToast('Rate at least one dimension');
     return;
   }
@@ -563,9 +576,8 @@ function saveRating() {
 
   showToast('Saved!');
 
-  // Advance
+  // Advance — for unrated filter, re-filter and stay at same ci (next unrated slides in)
   if (filter === 'unrated') {
-    // Stay at same index (next unrated slides in)
     render();
   } else {
     ci++;
@@ -581,8 +593,8 @@ function skipImage() {
 // ===== MINI GRID =====
 function toggleMiniGrid() {
   showGrid = !showGrid;
-  document.getElementById('miniGrid').style.display = showGrid ? 'grid' : 'none';
-  document.getElementById('gridBtn').textContent = showGrid ? 'Hide Grid' : 'Show Grid';
+  document.getElementById('miniGrid').style.display = showGrid ? 'flex' : 'none';
+  document.getElementById('gridBtn').textContent = showGrid ? 'Hide Thumbnails' : 'Show Thumbnails';
   if (showGrid) renderMiniGrid();
 }
 
@@ -592,10 +604,9 @@ function renderMiniGrid() {
   const local = getLocal();
   let html = '';
   f.forEach((img, i) => {
-    const driveUrl = img.driveFileId ? 'https://lh3.googleusercontent.com/d/' + img.driveFileId + '=w200' : '';
+    const driveUrl = img.driveFileId ? 'https://lh3.googleusercontent.com/d/' + img.driveFileId + '=w120' : '';
     const rated = local[img.imageId]?.humanProduct;
     const isCurrent = i === ci;
-    // Score dot color
     let dotColor = '#333';
     if (rated) {
       const impact = local[img.imageId].humanImpact || 0;
@@ -603,15 +614,30 @@ function renderMiniGrid() {
     }
     html += '<div class="mini-thumb' + (isCurrent ? ' current' : '') + (rated ? ' rated' : '') + '" onclick="jumpTo(' + i + ')">';
     html += '<img src="' + driveUrl + '" loading="lazy">';
+    html += '<span class="mini-idx">' + (i + 1) + '</span>';
     if (rated) html += '<div class="mini-dot" style="background:' + dotColor + '"></div>';
     html += '</div>';
   });
   document.getElementById('miniGrid').innerHTML = html;
+
+  // Scroll the current thumbnail into view
+  setTimeout(() => {
+    const current = document.querySelector('.mini-thumb.current');
+    if (current) current.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }, 50);
 }
 
 function jumpTo(i) {
   ci = i;
   render();
+}
+
+function clearAllRatings() {
+  if (!confirm('Clear ALL your ratings? This resets your local data so you can start fresh.')) return;
+  localStorage.removeItem(lsRatings());
+  ci = 0;
+  render();
+  showToast('Ratings cleared');
 }
 
 // ===== CREATE =====
