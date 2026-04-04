@@ -302,6 +302,9 @@ Test images saved at:
 5. "What would Justin ask me about this?" — answer it proactively
 6. "Is this wasting credits/money?" — if the approach has a known limitation, say so upfront
 
+### No Fake Data — Ever
+Never fabricate scores, analysis, or data to make the UI look like it's working. If a component isn't wired up yet, show "pending" honestly. Justin caught me faking AI Vision scores to make the UI look polished, and that's the opposite of rock solid. Real data only, always.
+
 ### Foundation-First Principle
 Rock solid every iteration. Don't rush to show output — make sure the foundation is correct before building on top. Justin would rather wait for proper infrastructure than see quick results on a shaky base. No shortcuts, no "Option A quick hack then fix later."
 
