@@ -371,8 +371,9 @@ function saveLocal(id, data) { const l = getLocal(); l[id] = { ...l[id], ...data
 
 // ===== FILTERING =====
 function filtered() {
-  if (filter === 'unrated') return imgs.filter(i => !i.humanProduct);
-  if (filter === 'rated') return imgs.filter(i => i.humanProduct);
+  const local = getLocal();
+  if (filter === 'unrated') return imgs.filter(i => !local[i.imageId]?.humanProduct);
+  if (filter === 'rated') return imgs.filter(i => local[i.imageId]?.humanProduct);
   return imgs;
 }
 
