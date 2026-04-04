@@ -1,63 +1,23 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CB2 Image Review</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center}
-.header{padding:1rem;text-align:center;width:100%}
-.header h1{font-size:1.1rem;color:#a855f7;margin-bottom:.2rem}
-.header .sub{font-size:.75rem;color:#666}
-.tabs{display:flex;gap:0;width:100%;max-width:600px;margin:.5rem auto 0;padding:0 .5rem}
-.tab{flex:1;padding:.6rem;text-align:center;font-size:.8rem;font-weight:700;cursor:pointer;border:2px solid #222;transition:all .15s;border-radius:0}
-.tab:first-child{border-radius:8px 0 0 8px}
-.tab:last-child{border-radius:0 8px 8px 0}
-.tab.active-new{background:#1a1030;border-color:#a855f7;color:#a855f7}
-.tab.active-done{background:#0a1a0a;border-color:#22c55e;color:#22c55e}
-.tab:not([class*="active-"]){background:#111;color:#666}
-.counter{font-size:.8rem;color:#888;margin:.5rem 0}
-.status-badge{display:inline-block;font-size:.6rem;padding:.15rem .5rem;border-radius:4px;font-weight:700;margin-left:.4rem;vertical-align:middle}
-.badge-new{background:#a855f7;color:#fff}
-.badge-done{background:#22c55e;color:#000}
-.img-wrap{width:100%;max-width:600px;background:#111;border-radius:12px;overflow:hidden;margin:0 auto}
-.img-wrap img{width:100%;display:block}
-.meta{padding:.5rem .8rem;display:flex;gap:.4rem;flex-wrap:wrap}
-.tag{font-size:.6rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;background:#1a1030;color:#a855f7;border:1px solid #2d1a4e}
-.tag.model{background:#0a1a1a;color:#06b6d4;border-color:#0d2a2a}
-.feedback-area{width:100%;max-width:600px;margin:.8rem auto;padding:0 .5rem}
-.feedback-area textarea{width:100%;min-height:120px;background:#111;border:2px solid #222;border-radius:10px;color:#fff;font-size:.95rem;padding:.8rem;resize:vertical;font-family:inherit;line-height:1.5}
-.feedback-area textarea:focus{outline:none;border-color:#a855f7}
-.feedback-area textarea::placeholder{color:#555}
-.saved-indicator{font-size:.7rem;color:#22c55e;margin-top:.3rem;min-height:1rem;text-align:right;padding-right:.3rem}
-.nav{display:flex;gap:.5rem;padding:.8rem;justify-content:center;align-items:center;width:100%;max-width:600px}
-.nav button{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.6rem 1rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s;flex:1;max-width:100px}
-.nav button:hover{border-color:#a855f7;background:#1a1030}
-.nav button:disabled{opacity:.3;cursor:default}
-.empty-state{text-align:center;padding:3rem 1rem;color:#555;font-size:.9rem}
-.btn-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;padding-bottom:2rem}
-.export-btn{background:none;border:1px solid #333;color:#888;padding:.4rem .8rem;border-radius:8px;font-size:.7rem;cursor:pointer}
-.export-btn:hover{border-color:#a855f7;color:#a855f7}
-.export-btn.primary{background:#a855f7;color:#fff;border-color:#a855f7;font-size:.8rem;padding:.5rem 1.2rem}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:99}
-.toast.show{opacity:1}
+*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center}.header{padding:1rem;text-align:center;width:100%}.header h1{font-size:1.1rem;color:#a855f7;margin-bottom:.2rem}.header .sub{font-size:.75rem;color:#666}.tabs{display:flex;gap:0;width:100%;max-width:600px;margin:.5rem auto 0;padding:0 .5rem}.tab{flex:1;padding:.6rem;text-align:center;font-size:.8rem;font-weight:700;cursor:pointer;border:2px solid #222;transition:all .15s;border-radius:0}.tab:first-child{border-radius:8px 0 0 8px}.tab:last-child{border-radius:0 8px 8px 0}.tab.active-new{background:#1a1030;border-color:#a855f7;color:#a855f7}.tab.active-done{background:#0a1a0a;border-color:#22c55e;color:#22c55e}.tab:not([class*="active-"]){background:#111;color:#666}.counter{font-size:.8rem;color:#888;margin:.5rem 0}.status-badge{display:inline-block;font-size:.6rem;padding:.15rem .5rem;border-radius:4px;font-weight:700;margin-left:.4rem;vertical-align:middle}.badge-new{background:#a855f7;color:#fff}.badge-done{background:#22c55e;color:#000}.img-wrap{width:100%;max-width:600px;background:#111;border-radius:12px;overflow:hidden;margin:0 auto}.img-wrap img{width:100%;display:block}.meta{padding:.5rem .8rem;display:flex;gap:.4rem;flex-wrap:wrap}.tag{font-size:.6rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;background:#1a1030;color:#a855f7;border:1px solid #2d1a4e}.tag.model{background:#0a1a1a;color:#06b6d4;border-color:#0d2a2a}.feedback-area{width:100%;max-width:600px;margin:.8rem auto;padding:0 .5rem}.feedback-area textarea{width:100%;min-height:120px;background:#111;border:2px solid #222;border-radius:10px;color:#fff;font-size:.95rem;padding:.8rem;resize:vertical;font-family:inherit;line-height:1.5}.feedback-area textarea:focus{outline:none;border-color:#a855f7}.feedback-area textarea::placeholder{color:#555}.saved-indicator{font-size:.7rem;color:#22c55e;margin-top:.3rem;min-height:1rem;text-align:right;padding-right:.3rem}.nav{display:flex;gap:.5rem;padding:.8rem;justify-content:center;align-items:center;width:100%;max-width:600px}.nav button{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.6rem 1rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s;flex:1;max-width:100px}.nav button:hover{border-color:#a855f7;background:#1a1030}.nav button:disabled{opacity:.3;cursor:default}.empty-state{text-align:center;padding:3rem 1rem;color:#555;font-size:.9rem}.btn-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;padding-bottom:2rem}.export-btn{background:none;border:1px solid #333;color:#888;padding:.4rem .8rem;border-radius:8px;font-size:.7rem;cursor:pointer}.export-btn:hover{border-color:#a855f7;color:#a855f7}.export-btn.primary{background:#a855f7;color:#fff;border-color:#a855f7;font-size:.8rem;padding:.5rem 1.2rem}.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:99}.toast.show{opacity:1}
 </style>
 </head><body>
 <div class="header"><h1>CB2 Image Review</h1><div class="sub">Dictate your thoughts. That's it.</div></div>
 <div class="tabs"><div class="tab" id="tabNew" onclick="switchTab('new')">TO REVIEW (<span id="newCount">0</span>)</div><div class="tab" id="tabDone" onclick="switchTab('done')">REVIEWED (<span id="doneCount">0</span>)</div></div>
 <div class="counter" id="counter">-</div>
-<div id="contentArea">
-<div class="img-wrap" id="imgWrap"><img id="mainImg" src="" alt="Loading..."><div class="meta" id="meta"></div></div>
-<div class="feedback-area"><textarea id="feedback" placeholder="Tap the mic and say what you see. What's right, what's wrong, what needs to change."></textarea><div class="saved-indicator" id="savedMsg"></div></div>
-<div class="nav"><button id="prevBtn" onclick="go(-1)">&#8592; Prev</button><button id="nextBtn" onclick="go(1)">Next &#8594;</button></div>
-</div>
+<div id="contentArea"><div class="img-wrap" id="imgWrap"><img id="mainImg" src="" alt="Loading..."><div class="meta" id="meta"></div></div><div class="feedback-area"><textarea id="feedback" placeholder="Tap the mic and say what you see. What's right, what's wrong, what needs to change."></textarea><div class="saved-indicator" id="savedMsg"></div></div><div class="nav"><button id="prevBtn" onclick="go(-1)">&#8592; Prev</button><button id="nextBtn" onclick="go(1)">Next &#8594;</button></div></div>
 <div id="emptyState" class="empty-state" style="display:none"></div>
 <div class="btn-row"><button class="export-btn primary" onclick="submitAll()">Submit All Feedback</button><button class="export-btn" onclick="exportAll()">Copy to Clipboard</button></div>
 <div class="toast" id="toast"></div>
 <script>
 var ALL_IMAGES=[
-{id:'r3-mtb',url:'https://files.catbox.moe/ccbtv5.jpg',model:'flux-2-pro-preview',prompt:'Full body shot of mountain biker on a rugged trail, this exact black remote control with 5 buttons and Chubby Buttons logo strapped to forearm with elastic velcro armband, dusty trail with pine trees, bright natural sunlight',label:'R3: Mountain Biker - full body'},
-{id:'r3-skier',url:'https://files.catbox.moe/hdxf7u.jpg',model:'flux-2-pro-preview',prompt:'Full body skier at top of snowy mountain, this exact black remote control with 5 buttons on forearm over ski jacket, elastic velcro armband with closure strap visible, mountain panorama, crisp winter light',label:'R3: Skier - mountain panorama'},
-{id:'r3-hiker',url:'https://files.catbox.moe/dpmv1p.jpg',model:'flux-2-pro-preview',prompt:'Full body hiker at mountain overlook arms raised, this exact black remote with 5 buttons and Chubby Buttons logo on forearm, elastic velcro armband with closure strap, golden hour, lifestyle photography',label:'R3: Hiker - overlook full body'},
-{id:'r3-runner',url:'https://files.catbox.moe/somwrl.jpg',model:'flux-2-pro-preview',prompt:'Trail runner on mountain path full body in motion, this exact black remote with 5 buttons on mid-forearm with elastic velcro armband, alpine meadow with wildflowers, bright daylight, sports lifestyle photo',label:'R3: Trail Runner - alpine meadow'},
-{id:'r3-snowboard',url:'https://files.catbox.moe/e5ma63.jpg',model:'flux-2-pro-preview',prompt:'Full body snowboarder on snowy ridge holding board, this exact black remote with 5 buttons on forearm, elastic velcro armband with closure strap visible, pristine snow and blue sky, winter sports photography',label:'R3: Snowboarder - ridge full body'},
+{id:'r3m-hiker',url:'https://drive.google.com/thumbnail?id=1BxuJ2cbcjabyw84iAURt-bJ95OlxuHIE&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body hiker at mountain overlook arms raised, this exact black remote with 5 buttons and Chubby Buttons logo on forearm, elastic velcro armband with closure strap, golden hour, lifestyle photography',label:'R3: Hiker overlook - multiref full body'},
+{id:'r3m-mtb',url:'https://drive.google.com/thumbnail?id=1jjeHvhEuyZdLykDJ8MDfYMWdpnowjvMr&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body mountain biker on rugged trail, this exact black remote with 5 buttons strapped to forearm with elastic velcro armband, dusty trail with pine trees, bright natural sunlight',label:'R3: Mountain Biker - multiref full body'},
+{id:'r3m-skier',url:'https://drive.google.com/thumbnail?id=18ok5ZBJSD8mHPsR8t5vGEBzD8zLbU3nm&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body skier at top of snowy mountain, this exact black remote with 5 buttons on forearm over ski jacket, elastic velcro armband with closure strap visible, mountain panorama, crisp winter light',label:'R3: Skier panorama - multiref'},
+{id:'r3m-runner',url:'https://drive.google.com/thumbnail?id=1vePZlpyrIfMsVz1jTl5hCymnB_4G4Ybp&sz=w1200',model:'flux2-pro-multiref',prompt:'Trail runner on mountain path full body in motion, this exact black remote with 5 buttons on mid-forearm with elastic velcro armband, alpine meadow with wildflowers, bright daylight',label:'R3: Trail Runner - multiref full body'},
+{id:'r3m-snowboard',url:'https://drive.google.com/thumbnail?id=1MZYtDBuKNjRzSPrg0u2Hj3eOzXzO3zRE&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body snowboarder on snowy ridge holding board, this exact black remote with 5 buttons on forearm, elastic velcro armband with closure strap visible, pristine snow and blue sky',label:'R3: Snowboarder - multiref full body'},
 {id:'r2-skiing-pov',url:'https://files.catbox.moe/9jmhu5.jpg',model:'flux-2-pro-preview',prompt:'This exact black remote with 5 buttons on skiers forearm over ski glove, elastic armband with velcro closure strap visible, snowy mountain slopes with fresh powder, first person POV, bright winter sunlight',label:'R2: Skiing POV - velcro strap fix'},
 {id:'r2-hiking-summit',url:'https://files.catbox.moe/1vxain.jpg',model:'flux-2-pro-preview',prompt:'This exact black remote with 5 buttons strapped to hikers forearm with elastic velcro armband visible, mountain summit overlooking dramatic valley at golden hour, warm natural lighting',label:'R2: Hiking summit - velcro strap fix'},
 {id:'flux2-hiking-multiref',url:'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200',model:'flux2-pro-multiref',prompt:'This exact black remote control with 5 buttons worn on a hikers forearm, mountain trail with scenic valley views in background, golden hour warm natural lighting',label:'R1: Hiking - golden hour ridge'},
