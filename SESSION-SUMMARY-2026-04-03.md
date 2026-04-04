@@ -1,204 +1,267 @@
-# CB Creative Lab — Session 3 Summary
+# CB Creative Lab — Session 3+4 Summary
 **Date:** April 3, 2026
-**Last edit:** ~10:00 AM EST
+**Last edit:** ~6:15 PM EST (Session 4 — post-ChatGPT research analysis)
 **Secret phrase:** go hang a salami, I'm a lasagna hog
+
+---
+
+## CRITICAL STRATEGIC PIVOT: Reference-First, Not LoRA-First
+
+### What We Learned (Confirmed by ChatGPT Deep Research + Our Testing)
+1. **LoRA alone cannot count to 5.** This is an architectural limitation of diffusion models (exact accuracy < 23%). Our v4 tests confirmed: great texture/accents, wrong button count every time.
+2. **The correct architecture is: reference-first editing → automated scoring → LoRA only as fallback → then video.**
+3. **We built the LoRA layer first when we should have built the reference layer first.** LoRA work is NOT wasted — it becomes the fallback layer.
+
+### The Revised Architecture (Merging Our Findings + ChatGPT Research)
+
+```
+TIER 1: Reference-First Editing (test all three, compare)
+├── FLUX.2 Multi-Reference (up to 8-10 input images → maintains identity)
+├── FLUX.1 Kontext (text+image editing, consistency)
+└── ControlNet Canny + LoRA (edge map locks structure, LoRA adds style)
+
+TIER 2: Scoring Pipeline (already built)
+├── AI Vision co-rater (product/scene/brand 1-5)
+├── Human agree/disagree
+└── Feedback → prompt refinement
+
+TIER 3: LoRA Fallback (already trained)
+├── v4: 38 close-ups (Tron/black) — hash c9c25899
+├── v4b: 50 photos (all colorways) — training complete, get hash
+└── v5 combined: 88 images — zip ready, not yet trained
+
+TIER 4: Video Expansion (future)
+├── Higgsfield (scene integration from approved stills)
+└── Runway (reference-based video)
+```
+
+### Next Session: Test All Three Reference Approaches
+1. **FLUX.2 multi-reference** on fal.ai — feed 5-8 CB2 photos as references + scene prompt
+2. **FLUX.1 Kontext** on Replicate — single reference photo + edit prompt
+3. **ControlNet Canny + LoRA** on fal.ai — edge map from real photo + our trained LoRA
+4. **Compare all three** on identical scenes. Let Justin score.
+5. The winner becomes the primary generation engine.
+
+### Key Insight from ChatGPT Report
+> "The main failure mode is not bad aesthetics. It is pretty counterfeit."
+
+This is exactly what happened with our v4 tests. Beautiful images, wrong button count. The fix is to PRESERVE the real product (reference-first) rather than GENERATE it (LoRA-first).
+
+### API Endpoints to Test
+- **fal.ai FLUX Canny + LoRA:** `fal-ai/flux-lora-canny` — $0.035/megapixel
+- **fal.ai FLUX.2:** check availability — $0.03-0.045/image
+- **fal.ai FLUX Kontext:** `fal-ai/flux-general/image-to-image` — check pricing
+- **Replicate FLUX Kontext:** check model availability
+- **fal.ai API key:** already in `.env`
+- **BFL direct API:** FLUX.2 Pro at $0.045/image editing
+
+### Where ChatGPT Report Was Right vs Where We Add Value
+| ChatGPT Got Right | We Add From Experience |
+|---|---|
+| Reference-first > LoRA-first | We know WHY Kontext failed in session 2 (product vanishes at small scale in action shots) |
+| "Pretty counterfeit" is the main risk | We have 4 test images proving exactly this |
+| Router + editor + scorer architecture | We already built the scorer (agree/disagree + AI Vision) |
+| LoRA as fallback not foundation | We have trained LoRAs ready as fallback |
+| FLUX.2 multi-reference is the game changer | We haven't tested this yet — #1 priority |
+| Photoroom/Pebblely for catalog shots | These won't work for small wearables in action scenes |
+| Don't address counting problem specifically | Our ControlNet Canny discovery is more precise for structural fidelity |
+
+---
+
+## Version Hashes (Replicate)
+
+| Version | Hash (short) | Full Hash | Training | Status |
+|---------|-------------|-----------|----------|--------|
+| **v4** | `c9c25899` | `c9c25899512aa52890bfc042d68377321f06564f898185fcd0d88b7f1ea9d455` | 38 close-up photos (mostly Tron/black) | ✅ Complete, tested |
+| **v4b** | TBD | TBD | 50 photos (28 Patriot, 20 Hunter, 2 Tron) | 🔄 Training in progress |
+| v3b | `3e92d342` | `3e92d342cd202cca741396e2588b9f43b6719ceea73cdf4876ef00070a2376fe` | 37 images (old dataset) | Archived |
+
+**Make.com scenario 4655593 currently points to: v4 (`c9c25899...`)**
+
+---
+
+## v4 Test Results (Honest Assessment)
+
+Generated 4 test images with v4 LoRA. Honest results:
+
+| Shot | Button Count | Form Factor | Accents | Icons | Verdict |
+|------|-------------|-------------|---------|-------|---------|
+| Close-up studio | **6** (wrong) | ✅ Correct | ✅ Green/teal | ✅ Mostly correct | Better than v3b but wrong count |
+| Standing vertical | **8** in double column (wrong) | ❌ Too tall | ✅ Green/teal | ✅ Correct | Logo on strap was good |
+| Skiing on-arm | **~10** in 2 rows (very wrong) | ❌ | ✅ | Partial | Scene was great, product wrong |
+| Motorcycle POV | **4** (close, missing one) | ✅ Close | ✅ Green on + | ✅ Correct icons | Best action shot, closest to Higgsfield |
+
+**Summary:** v4 learned CB2's LOOK (texture, color, accents, form factor, strap, icons) but CANNOT reliably count to 5. This is not a training data problem — it's a diffusion model architecture limitation. The fix is ControlNet Canny (see above).
+
+Test images saved at:
+- `/tmp/cb2-v4-test-closeup.webp`
+- `/tmp/cb2-v4-test-standing.webp`
+- `/tmp/cb2-v4-test-skiing.webp`
+- `/tmp/cb2-v4-test-motorcycle.webp`
 
 ---
 
 ## Live URLs
 - **App v1:** https://jbarad424.github.io/ideas/asset-tagger.html
-- **App v2 (NEW, not fully ready):** https://jbarad424.github.io/ideas/asset-tagger-v2.html
+- **App v2:** https://jbarad424.github.io/ideas/asset-tagger-v2.html
+  - Training gate: `MODEL_TRAINING_IN_PROGRESS=true` (NEEDS to be flipped to false — edit failed due to validation error, needs retry)
 - **Evolution Dashboard:** https://jbarad424.github.io/ideas/cb-evolution.html
-- **JSON Data:** https://jbarad424.github.io/ideas/cb-ai-lab.json
+- **JSON Data:** https://jbarad424.github.io/ideas/cb-ai-lab.json (clean slate, 0 new v4 images — test generations were done via direct API, not through pipeline)
 - **Replicate LoRA Model:** https://replicate.com/jbarad424/cb2-lora (private)
 - **GitHub Repos:** jbarad424/ideas (app) + jbarad424/cb-creative-studio (notes/training data, private)
+- **Consulting Playbook:** `CB-CREATIVE-LAB-PLAYBOOK.md` in ideas repo (~6,000 words)
 
 ---
 
-## What Happened in Session 3
+## What Happened in Session 4
 
-### The Pivot
-Analyzed all 31 scored images from sessions 1-2. Found image-to-image (FLUX Kontext) had a fundamental ceiling:
-- Product score 5 = boring flat-lay copies of reference photo
-- Creative action shots = product vanishes 75% of the time
-- Only 3 out of 14 action shots had product score 4+
-- AI analysis notes: "Outstanding scene, product completely missing" over and over
+### Close-Up Photos Received & Processed
+- **Justin's 38 photos:** https://drive.google.com/drive/folders/1nZvgFmI_kXqURDBZx_WSMFvSc9lfLW-k
+  - 11 on-arm, 8 close-up, 6 multi-device, 4 standing, 4 lifestyle, 2 accessory, 2 back, 1 side
+  - 35 of 38 show all 5 buttons
+  - All categorized at `/tmp/cb2-training-v4/photo-categories.md`
+  - All captioned with CB2REMOTE trigger word + exact product details
+  - Training zip: `/tmp/cb2-training-v4/cb2-training-v4.zip` (5.3MB, 76 files)
 
-**Decision:** Pivot from image-to-image editing to FLUX LoRA fine-tuning. Jordan's suggestion to fine-tune was correct — we used FLUX instead of Stable Diffusion because better photorealistic output.
+- **Jordan's 50 photos:** https://drive.google.com/drive/folders/180Tt__GCl79ydP5IvD7_ITYdWB44NmYP
+  - 28 Patriot (red-white-blue), 20 Hunter (green), 2 Tron (black)
+  - 30 on-arm, 16 standing, 2 side, 2 back
+  - Hunter icons: same shapes as Tron/Patriot, but yellow/gold color accents
+  - All captioned with CB2REMOTE + colorway-specific details
+  - Training zip: `/tmp/cb2-training-v4b/cb2-training-v4b.zip` (9.2MB, 100 files)
+  - Categorization at `/tmp/cb2-training-v4b/photo-categories.md`
 
-### LoRA Training Experiments
+- **Combined v5 zip:** `/tmp/cb2-training-v5/cb2-training-v5-combined.zip` (14.2MB, 176 files = 88 images + 88 captions, all 3 colorways) — NOT YET TRAINED
 
-| Run | Images | Rank | Steps | LR | Result | Justin's Score |
-|-----|--------|------|-------|----|--------|----------------|
-| v1 | 13 (Drive only, auto-caption) | 16 | 1500 | 0.0004 | Product visible but wrong button count (7 not 5) | Not shown |
-| v2 | 28 (Drive + manual captions) | 16 | 2000 | 0.0004 | Product at realistic size, 4 buttons instead of 5 | Not shown |
-| v3a | 37 (+ 9 website product shots, manual captions) | 16 | 2000 | 0.0004 | 5 buttons consistent in close-ups, motorcycle medium shot had device on forearm | Better but not there |
-| **v3b** | **37 (same data)** | **32** | **2500** | **0.0003** | **Best detail on buttons/icons, lower training loss (0.31)** | **Wired into pipeline** |
+### LoRA Training Runs
+- **v4 training:** ID `y140pgcx2xrmr0cxambsqrb02r` — ✅ COMPLETE
+  - 38 images, rank 32, 2500 steps, LR 0.0003
+  - Version hash: `c9c25899512aa52890bfc042d68377321f06564f898185fcd0d88b7f1ea9d455`
+  - First canceled run `pmtq1q9gzxrmw0cxam9t801h6g` (uploaded raw photos without captions — caught and canceled)
 
-**Training data sources:**
-- PIC folder (Google Drive): 10 action shots with CB2 on arm
-- Hunter Product Launch folder: 3 product/on-arm shots
-- InstaPosts-CB2 folder: 11 diverse (moto, fitness, snow, yoga)
-- Tahoe Media folder: 4 lifestyle shots
-- chubbybuttons.io website: 9 clean product shots (all 3 colorways)
-- All manually captioned with "5 large raised tactile buttons" in every caption
+- **v4b training:** In progress on Replicate
+  - 50 images (all 3 colorways), rank 32, 2500 steps, LR 0.0003
+  - Check status at Replicate dashboard
 
-**Training zips on GitHub (ideas repo):**
-- cb2-training.zip (v1, 13 images)
-- cb2-training-v2.zip (v2, 28 images + captions)
-- cb2-training-v3a.zip (v3a/v3b, 37 images + captions)
+### Make.com Scenario Fixed
+- **Old:** Blind sleep(60) + sleep(15) with no status checking
+- **New (deployed):** `Prefer: wait=60` header + Router with status checks + 2 fallback polls + graceful timeout
+- Scenario renamed: "CB AI Lab: LoRA Generate Image v2 (Smart Polling)"
+- Version updated to v4 hash
+- Data store records tagged as `flux-lora-v4`
 
-### Winning Model
-- **Replicate version:** `3e92d342cd202cca741396e2588b9f43b6719ceea73cdf4876ef00070a2376fe`
-- **Trigger word:** CB2REMOTE
-- **Cost:** ~$16 total across 4 training runs + test generations
+### Pipeline Issue Found During Testing
+- The 4 webhook-fired test generations completed with only 2 operations each (webhook + Replicate POST) but didn't produce images
+- Root cause: v4 model cold start — Replicate needed time to boot the new model, and the Router branches didn't match the intermediate response
+- Direct API testing worked fine after model warmed up (predictions completing in ~10s)
+- **Fix needed:** The Make.com scenario may need adjustment for cold start scenarios, or we need to ensure the model stays warm
 
----
+### Research Completed
 
-## HONEST Assessment of Current Quality (Justin's Feedback)
+#### Button Count = Architectural Limitation
+- Academic paper: exact counting accuracy < 23% across ALL dataset configurations
+- Scaling data/training doesn't fix it — it's inherent to diffusion architecture
+- Same as the "AI hands with 6 fingers" problem
+- **Solution: LoRA for style + ControlNet Canny for structure**
 
-**Justin scored the best outputs at 5-6 out of 100.** The model learned "outdoor action sports vibes" and "some kind of rectangular thing with buttons" but did NOT learn what CB2 actually looks like. Specific issues:
+#### ControlNet Canny + LoRA Pipeline
+- **fal.ai model:** `fal-ai/flux-lora-canny` — accepts BOTH custom LoRA URL AND Canny edge image
+- Feed Canny edges from real CB2 photo → locks in exact 5-button layout
+- LoRA provides learned style/texture/accents
+- Prompt describes scene context
+- Cost: $0.035/megapixel (~$0.04/image)
+- fal.ai API key already exists in `.env`
 
-- Close-up "Tron motorcycle" shot: Has 4 buttons (not 5), wrong proportions, no logo, wrong icon style, wrong body shape. Looks like *a* remote, not *their* remote. Justin: "looks nothing like our product"
-- "Hiker with buttons on back": Buttons somewhat recognizable but on the BACK not the forearm. Justin: "1 out of 100"
-- Skier scene: Gorgeous stock photo, zero product visible. Justin: "really bad, big fail"
-- Squirrel on branch: Pipeline timing bug returned wrong image entirely. Waste of credits.
+#### Make.com vs Alternatives
+- Make.com is architecturally weak for async polling but adequate with the Prefer:wait fix
+- Cloudflare Workers is the better long-term option ($5/mo) but not urgent
+- **Decision: Stay on Make.com for now, consider migration later**
 
-**Root cause:** Training dataset was ~80% wide-angle action shots where CB2 is tiny/distant, ~20% product close-ups. The model learned the vibe but not the product details. Need to flip this ratio to ~60-70% close-up product shots.
+#### Higgsfield.ai
+- Compositing approach, NOT fine-tuning — uses 1 reference photo per generation
+- Good for larger/simpler products, concerning for CB2's fine details
+- Jordan's motorcycle shot looked good but may not maintain exact details at all angles
+- **Decision: Test alongside our pipeline, use as downstream scene integration tool**
 
-**I (Claude) was grading on a curve** — celebrating "the model generated something vaguely remote-shaped" when the bar is "this looks like OUR product and I'd put it on our website." Those are completely different standards. Justin was right to call this out.
+#### Subscription Audit
+| Service | Monthly Cost | Recommendation |
+|---------|-------------|----------------|
+| **Runway Gen-3** | $65/mo | 🔴 CANCEL — unused, scenario failed |
+| **Recraft V3** | $25/mo | 🔴 CANCEL — unused, pivoted to LoRA |
+| **FLUX Pro (BFL)** | $10/mo | 🟡 CANCEL/PAUSE — using Replicate instead |
+| Replicate | Pay-as-you-go | 🟢 KEEP |
+| fal.ai | Pay-as-you-go | 🟢 KEEP — needed for ControlNet pipeline |
+| Make.com | $34/mo | 🟢 KEEP |
+| Claude Max | $200/mo | 🟢 KEEP |
+| Render.com | $14.25/mo | 🟢 KEEP |
+| **Potential savings** | **$90-100/mo** | |
 
----
-
-## Pipeline Architecture (Working but Needs Reliability Fix)
-
-### Make.com Scenarios
-
-| Scenario | ID | Webhook | Status |
-|----------|-----|---------|--------|
-| **LoRA Generate (NEW)** | 4655593 | 32urtvvoi5x5wfpzjgm0vnfxzlehre1w | Active but has timing bug |
-| FLUX Generate (legacy v1) | 4653737 | e95rfn1iz88bnhtejhqhadqtvblnp128 | Active |
-| Recraft Generate | 4653740 | vzybkkhoi0powa0np6t2wr8m2pjr3dxu | Active but FAILED during batch test |
-| Runway Video | 4653901 | ayflnfwjqehyblmvwnosatlbogwyil90 | Active but FAILED during batch test |
-| Rate Image | 4653738 | b4l7shwxqblbeq5t36ttse62bivls9y3 | Active |
-| Sync JSON | 4654266 | p3bt4ga6npqjs3608t9aou45qq1m5amh | Active |
-| Vision Co-Rater | 4654454 | bffoci5zxq1uy28bc6l5e0rm73kgj9av | Active |
-
-### LoRA Pipeline Flow
-```
-App (Generate More button)
-  → LORA_API webhook (Make.com scenario 4655593)
-    → POST to Replicate API (token server-side in Make.com, NOT in client HTML)
-    → Sleep 60s → Poll Replicate → Sleep 15s → Poll again (double-poll)
-    → Download generated image
-    → Create batch subfolder in Drive (AI Creative Lab folder)
-    → Upload image to Drive subfolder
-    → Save to data store (CB AI Lab, ID 84188)
-    → Return {success, imageId, driveFileId} to app
-  → App shows image for rating
-  → Vision Co-Rater scores image (product/scene/brand 1-5)
-  → User sees AI scores → Agree or Disagree
-  → Feedback feeds into next batch prompts
-```
-
-### Known Pipeline Bug: Make.com Polling Timing
-The sleep(60) + sleep(15) double-poll sometimes isn't enough. Replicate occasionally takes longer, and when the poll happens before the prediction is done, it downloads a placeholder/wrong image (the squirrel, the nature photos). Hit rate through pipeline: ~40-50%. When calling Replicate directly via curl: ~70%.
-
-**Fix needed:** Replace sleep+poll with a proper repeater loop that checks status every 10s until "succeeded", or use Replicate's webhook callback feature to notify Make.com when done.
+### Documents Created
+- **Consulting Playbook:** `CB-CREATIVE-LAB-PLAYBOOK.md` (~6,000 words, complete process documentation for selling as consulting service)
+- **Photo categorizations:** `/tmp/cb2-training-v4/photo-categories.md` and `/tmp/cb2-training-v4b/photo-categories.md`
 
 ---
 
 ## API Keys & Credentials
-
-### Stored in .env (cb-creative-studio repo, gitignored)
-- `FAL_KEY=REDACTED`
-- `REPLICATE_API_TOKEN=REDACTED`
 
 ### Stored in Make.com (server-side)
 - Replicate token: hardcoded in LoRA scenario 4655593 HTTP headers
 - Anthropic API key: hardcoded in Vision Co-Rater scenario 4654454
 - BFL API key (FLUX): hardcoded in FLUX scenario 4653737
 
+### Stored in .env / Notion
+- fal.ai key: `REDACTED_SEE_ENV_FILE`
+- Replicate: `REDACTED_SEE_MAKE_SCENARIO`
+
 ### Google Connections in Make.com
 - Google Drive: connection ID 4724749 (justin@chubbybuttons.io)
-- Google Photos: connection ID 4728111 (authorized but missing Photos API scope — albums list returns empty)
 
 ### Replicate Account
 - Username: jbarad424
 - Model: jbarad424/cb2-lora (private)
-- **Credits likely low** — ~$16 spent on training + tests. Free tier started with ~$5. Need to add credits at https://replicate.com/account/billing ($25-50 recommended)
+- **Credits remaining:** ~$9.44 (after v4 training, before v4b)
 
 ---
 
-## v2 App (asset-tagger-v2.html)
+## Make.com Scenarios
 
-### What's New vs v1
-- **Agree/Disagree** replaces product/scene up/down buttons
-- **AI assessment panel** on every swipe card (product/scene/brand scores + notes)
-- **LoRA generation** via Make.com proxy to Replicate (no API tokens in client HTML)
-- **`analyzeRatings()`** reads BOTH human ratings AND AI scores to improve prompts
-- **`convertAiNotesToPromptLanguage()`** turns AI critique into positive prompt fixes
-- **AI scoring runs before sync** so scores persist in JSON
-- **Grid view** shows colored dots (green/yellow/red) for AI product score
-- **No passcode** — just tap your name
-- **CB2REMOTE trigger word** in every FLUX prompt
-- **Filters to only show LoRA-generated images** (old v1 images hidden)
-
-### What's NOT Working Yet
-- LoRA generation quality is not good enough (5-6/100 per Justin)
-- Recraft and Runway scenarios failed during batch test
-- Make.com polling has timing bug causing wrong images
-- App needs QA before showing to team
+| Scenario | ID | Status | Notes |
+|----------|-----|--------|-------|
+| **LoRA Generate v2 (Smart Polling)** | 4655593 | Active | v4 hash, Prefer:wait + status checks |
+| FLUX Generate (legacy v1) | 4653737 | Active | Not used |
+| Recraft Generate | 4653740 | Active but FAILED | CANCEL subscription |
+| Runway Video | 4653901 | Active but FAILED | CANCEL subscription |
+| Rate Image | 4653738 | Active | |
+| Sync JSON | 4654266 | Active | |
+| Vision Co-Rater | 4654454 | Active | |
 
 ---
 
-## The Feedback Flywheel (Design, Not Yet Fully Working)
-```
-LoRA generates images (knows what CB2 looks like — BUT NEEDS BETTER TRAINING DATA)
-    ↓
-Claude Vision auto-scores (product/scene/brand 1-5)
-    ↓
-Low scores → specific diagnosis → prompt fixes
-    ↓
-Human sees pre-scored images → Agrees or Disagrees
-    ↓
-Human disagreements calibrate the system
-    ↓
-Everything compounds → next batch is better
-```
-
----
-
-## Google Photos Album (NOT YET ACCESSED)
-Justin shared a Google Photos album with close-up product shots:
-- **URL:** https://photos.app.goo.gl/RQgg7PV2RJhkzLDh8
-- **Account:** justin@chubbybuttons.io
-- **Status:** Created a credential request for Google Photos API access but the connection doesn't have the right scope. Albums list returns empty.
-- **Workaround:** Justin needs to download photos to a local folder or a Drive folder we can access.
-- **Why it matters:** These close-ups are the #1 thing blocking better LoRA training. Current dataset is too heavy on wide-angle action shots where the product is tiny.
-
----
-
-## Training Data on Disk (cb-creative-studio repo)
+## Training Data on Disk
 
 ```
-training-images/          # Original full-res downloads from Drive (13 images)
-training-images-resized/  # Resized to 1024px + .txt captions (28 images)
-training-v3a/             # v3a/v3b training set (37 images + captions)
-website-product-shots/    # 9 product shots from chubbybuttons.io
-lora-test/                # All test generation outputs
-  v2-skier-1.webp         # v2 test: action (no product)
-  v2-product-1.webp       # v2 test: product visible but wrong details
-  v3a-action.webp         # v3a test: snowboarder (no product)
-  v3a-medium.webp         # v3a test: motorcycle with device on arm
-  v3a-closeup.webp        # v3a test: 5 buttons, green body, on blue jacket
-  v3b-action.webp         # v3b test: snowboarder (product on wrist area)
-  v3b-medium.webp         # v3b test: motorcycle guy (editorial, no jacket)
-  v3b-closeup.webp        # v3b test: 5 buttons detailed, held up to camera
-  pipeline-test.webp      # First successful pipeline image (CB2 on blue jacket)
-  doublepoll-test.webp    # Double-poll fix test (3 buttons visible, strap)
-  batch1-*.webp           # First batch (mostly wrong images due to timing)
-  final-*.webp            # Final batch (2 OK, 2 wrong, 1 redirect)
+/tmp/cb2-training-v4/                  # Session 4 — Justin's photos
+  originals/                            # 38 photos (1024px thumbnails from Drive)
+  captions/                             # 38 .txt caption files
+  training-set/                         # Paired images + captions
+  cb2-training-v4.zip                   # 76 files, 5.3MB — USED FOR v4 TRAINING
+  photo-categories.md                   # Full categorization
+
+/tmp/cb2-training-v4b/                 # Session 4 — Jordan's photos
+  originals/                            # 50 photos (1024px thumbnails from Drive)
+  captions/                             # 50 .txt caption files
+  training-set/                         # Paired images + captions
+  cb2-training-v4b.zip                  # 100 files, 9.2MB — USED FOR v4b TRAINING
+  photo-categories.md                   # Full categorization
+
+/tmp/cb2-training-v5/                  # Combined
+  training-set/                         # 88 images + 88 captions (merged v4 + v4b)
+  cb2-training-v5-combined.zip          # 176 files, 14.2MB — NOT YET TRAINED
+
+/tmp/cb2-v4-test-closeup.webp          # v4 test: 6 buttons (wrong), good form factor
+/tmp/cb2-v4-test-standing.webp         # v4 test: 8 buttons (wrong), logo on strap good
+/tmp/cb2-v4-test-skiing.webp           # v4 test: ~10 buttons (very wrong), great scene
+/tmp/cb2-v4-test-motorcycle.webp       # v4 test: 4 buttons (close), best action shot
 ```
 
 ---
@@ -207,64 +270,113 @@ lora-test/                # All test generation outputs
 
 | Item | Cost |
 |------|------|
-| Replicate LoRA training (4 runs: v1, v2, v3a, v3b) | ~$16 |
-| Replicate test generations (~20 images) | ~$1.50 |
+| Replicate LoRA training (v1, v2, v3a, v3b) | ~$16 |
+| Replicate v4 training | ~$2.50 |
+| Replicate v4b training (in progress) | ~$2.50 (est) |
+| Replicate test generations (~25 images) | ~$2 |
 | fal.ai (1 test queue) | ~$0.02 |
-| Make.com operations (all scenarios) | Included in plan |
-| Previous image-to-image generation (sessions 1-2) | ~$2 |
-| **Total invested** | **~$20** |
-| **Budget remaining** | **~$50 (if credits added)** |
+| Make.com operations | Included in plan |
+| Previous image-to-image (sessions 1-2) | ~$2 |
+| **Total invested** | **~$25** |
+| **Replicate credits remaining** | **~$9.44** |
 
 ---
 
-## Memory/Preferences (from .claude project memory)
+## Proactive Operating Directives
 
-- **UI text sizing:** Team needs bigger/brighter text, not spring chickens
-- **Positive feedback popups:** Capture what's good too, not just what's wrong
-- **Create tab on hold:** Coming Soon until rating workflow is solid
-- **Generate More flow:** Per-user recursive loop, new assets go to everyone
-- **Action shot north star:** "Damn, I wish that were me" is the bar for action shots
-- **Push back and lead:** Don't be a yes man — recommend the smarter path, push back confidently. Say "here's what I'd do if I were 100x smarter than you." Don't assume Justin knows what he's talking about.
-- **LoRA pivot:** Switched from image-to-image to FLUX LoRA fine-tuning, Replicate model jbarad424/cb2-lora
+### "Justin Agent" — Self-Questioning Protocol
+1. "Would Justin put this on chubbybuttons.io?" — if no, don't celebrate it
+2. "Am I grading on a curve?" — compare to the ACTUAL bar, not "better than last time"
+3. "Is there a simpler/cheaper way?" — always check
+4. "Am I giving conflicting advice?" — pick one direction and commit
+5. "What would Justin ask me about this?" — answer it proactively
+6. "Is this wasting credits/money?" — if the approach has a known limitation, say so upfront
+
+### Foundation-First Principle
+Rock solid every iteration. Don't rush to show output — make sure the foundation is correct before building on top. Justin would rather wait for proper infrastructure than see quick results on a shaky base. No shortcuts, no "Option A quick hack then fix later."
+
+### Error Self-Correction Protocol
+1. Don't just fix the immediate symptom
+2. Research the ROOT CAUSE (is it architectural? platform limitation? config issue?)
+3. Check if this is a RECURRING pattern
+4. Present the fix AND the strategic recommendation together
+5. Don't wait for Justin to catch the pattern — catch it first
+
+### Always Update Session Summary
+- Before ending ANY session, update this file
+- Include: what was done, what's pending, credentials, costs, version hashes
+- Never lose context between sessions
 
 ---
 
 ## What's Next (Priority Order)
 
-### BLOCKER: Get close-up product photos for v4 training
-1. **Download Google Photos album** to a local folder (Justin needs to do this — Photos API scope isn't working)
-2. OR: Justin drops photos into a Google Drive folder we can access
-3. Need 15-20 close-ups showing: all angles, all 3 colorways, 5 buttons visible, on-arm + off-arm, logo visible
+### 1. COMPARATIVE TEST: Three Reference-First Approaches (THE BIG ONE)
+Test all three on the SAME prompts/scenes and let Justin score:
 
-### Then: Train v4 LoRA
-4. Build training set with 60-70% close-up product shots, 30-40% lifestyle/action
-5. Manual captions emphasizing exact product details (5 buttons, specific icon layout, colorway names)
-6. Train on Replicate with rank 32, 2500+ steps
-7. Test with the SAME prompts we've been using so we can compare apples to apples
+**A. FLUX.2 Multi-Reference** (fal.ai or BFL direct)
+- Feed 5-8 CB2 reference photos + scene prompt
+- FLUX.2 maintains product identity across variations
+- $0.03-0.045/image
+- This is what the ChatGPT report recommends as primary engine
 
-### Then: Fix Pipeline Reliability
-8. Replace Make.com sleep+poll with proper retry loop or Replicate webhook callback
-9. Fix Recraft and Runway scenarios (both failed during batch test)
-10. Add error handling in app for failed generations
+**B. FLUX.1 Kontext** (Replicate or fal.ai)
+- Single reference photo + edit/scene prompt
+- We tried this in Session 2 but with wrong approach (style transfer vs reference conditioning)
+- $0.04/image (Pro), $0.08/image (Max)
 
-### Then: Polish v2 App
-11. Only show LoRA-generated images that pass a quality threshold
-12. Run AI scoring on all images before showing to team
-13. QA the agree/disagree flow end-to-end
-14. Deploy clean version for team to test
+**C. ControlNet Canny + LoRA** (fal.ai `fal-ai/flux-lora-canny`)
+- Canny edge map from real CB2 photo locks structure
+- Our trained LoRA adds style/texture
+- $0.035/megapixel
+- Need to figure out: how to pass Replicate-hosted LoRA weights to fal.ai
 
-### Then: WhatsApp Team Update
-15. Draft message is in the conversation — search for "Hey team"
-16. Don't send until we have at least a few images Justin would score 50+/100
+**Test scenes (same for all three):**
+1. Close-up product on dark surface
+2. On-arm over ski glove, mountain background
+3. Motorcycle POV, forest trail
+4. Standing product with headphones
+
+### 2. CHECK: v4b Training Completion
+- Get version hash when done
+- v4b has all 3 colorways (Patriot, Hunter, Tron)
+
+### 3. FIX: App Training Gate
+- `MODEL_TRAINING_IN_PROGRESS=true` needs to be flipped to `false`
+- The edit tool kept failing with validation errors — try different approach
+
+### 4. FIX: Make.com Cold Start Issue
+- First-time predictions on new model version cause cold starts
+- Scenario Router didn't handle intermediate "starting" response
+- Add handling for "starting" status or longer initial wait
+
+### 5. CANCEL: Unused Subscriptions (save $90-100/mo)
+- Runway Gen-3 ($65/mo) — unused
+- Recraft V3 ($25/mo) — unused
+- Optionally FLUX Pro/BFL ($10/mo) — using Replicate/fal instead
+
+### 6. UPDATE: Consulting Playbook
+- Revise `CB-CREATIVE-LAB-PLAYBOOK.md` with reference-first architecture
+- Incorporate ChatGPT research findings
+- Document the router + editor + scorer pattern
+- Add cost comparisons across approaches
+
+### 7. OPTIONAL: Train v5 Combined (88 images)
+- Only if LoRA is needed as fallback after reference-first testing
+- Zip ready at `/tmp/cb2-training-v5/cb2-training-v5-combined.zip`
 
 ---
 
 ## Pickup Instructions
-1. Say "lets continue CB Creative Lab"
-2. Read `SESSION-SUMMARY-2026-04-03.md` for complete state
-3. The secret phrase is: **go hang a salami, I'm a lasagna hog**
-4. **First thing to do:** Ask Justin if the Google Photos close-ups are downloaded yet
-5. If yes → build v4 training set (60-70% close-ups) and retrain
-6. If no → help get the photos downloaded, that's the blocker
-7. Don't generate more images until training data improves — every bad image wastes Replicate credits
-8. Don't celebrate incremental progress that's still nowhere near usable — Justin's standard is "would I put this on our website" not "does it vaguely resemble a remote"
+1. Read `SESSION-SUMMARY-2026-04-03.md` for complete state
+2. The secret phrase is: **go hang a salami, I'm a lasagna hog**
+3. **STRATEGIC CONTEXT:** We pivoted from LoRA-first to reference-first architecture. ChatGPT deep research confirmed this is the right approach. LoRA is now the fallback, not the foundation.
+4. **First thing:** Run the comparative test — FLUX.2 multi-reference vs Kontext vs ControlNet Canny+LoRA on identical scenes
+5. Check v4b training status on Replicate (get version hash)
+6. Flip the app training gate to false
+7. **Do NOT generate more LoRA-only images** — the button count problem is architectural (diffusion models can't count)
+8. The principle: PRESERVE the real product (reference-first) rather than GENERATE it (LoRA-first)
+9. fal.ai API key is in `.env` — use it for FLUX.2 and Canny+LoRA tests
+10. ChatGPT deep research PDF is at `/Users/justinbarad/Downloads/Deep research on product-trained generative marketing images.pdf`
+11. Consulting playbook needs updating with revised architecture
+12. Always update this summary before ending

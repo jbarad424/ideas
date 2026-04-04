@@ -173,7 +173,7 @@ const VISION_WEBHOOK='https://hook.us1.make.com/bffoci5zxq1uy28bc6l5e0rm73kgj9av
 // === TRAINING GATE ===
 // Set to false when v4 LoRA model is trained and ready
 const MODEL_TRAINING_IN_PROGRESS=false;
-const TRAINING_STATUS='v4 LoRA model LIVE — trained on 38 close-up product photos with manual captions';
+const TRAINING_STATUS='FLUX.2 Multi-Reference LIVE — reference-first generation preserving exact product identity';
 const LESSONS_LEARNED=[
   'v1-v3b models learned outdoor vibes but not the actual product (scored 5-6/100)',
   'Training data was 80% wide-angle action shots — product was tiny/invisible',
@@ -273,7 +273,7 @@ function isVideo(img){return img.model==='runway'||/\.(mp4|webm)/i.test(img.driv
 function thumbUrl(img){if(isVideo(img))return'';return'https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w800'}
 function vidUrl(img){return img.driveFileId}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function mBadge(m){if(!m)return'';if(m==='flux-lora')return'<span class="badge b-flux">LoRA v4</span>';if(m.includes('recraft'))return'<span class="badge b-recraft">Legacy</span>';if(m==='runway')return'<span class="badge b-runway">Legacy</span>';if(m==='flux-kontext-pro')return'<span class="badge b-flux">Legacy</span>';if(m==='flux-pro-1.1')return'<span class="badge b-flux">Legacy</span>';return'<span class="badge b-flux">FLUX</span>'}
+function mBadge(m){if(!m)return'';if(m==='flux2-pro-multiref')return'<span class="badge b-flux">FLUX.2 Pro</span>';if(m==='flux-lora'||m==='flux-lora-v4')return'<span class="badge b-flux">LoRA v4</span>';if(m.includes('recraft'))return'<span class="badge b-recraft">Legacy</span>';if(m==='runway')return'<span class="badge b-runway">Legacy</span>';if(m==='flux-kontext-pro')return'<span class="badge b-flux">Legacy</span>';if(m==='flux-pro-1.1')return'<span class="badge b-flux">Legacy</span>';return'<span class="badge b-flux">FLUX</span>'}
 function tBadge(t){return t?'<span class="badge b-'+t+'">'+esc(t)+'</span>':''}
 function sBadge(s){return s?'<span class="badge" style="background:#1a1a1a;color:#888;border:1px solid #333">'+esc(s)+'</span>':''}
 function scoreClass(v){return v>=4?'high':v>=3?'mid':'low'}
@@ -574,15 +574,15 @@ function openLb(idx){
 }
 function closeLb(){document.getElementById('lb').classList.remove('open');document.getElementById('lbVid').pause()}
 
-// ===== LORA GENERATION (via Make.com proxy to Replicate) =====
-const LORA_API='https://hook.us1.make.com/32urtvvoi5x5wfpzjgm0vnfxzlehre1w';
+// ===== FLUX.2 GENERATION (via Make.com proxy to fal.ai) =====
+const FLUX2_API='https://hook.us1.make.com/otxpq9jc4vwqjqlbda5n6h0jhkkgmht9';
 async function generateViaLora(prompt, colorway, shotType, batchId){
-  const resp=await fetch(LORA_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-    prompt:prompt,shotType:shotType,style:colorway,batchId:batchId,model:'flux-lora'
+  const resp=await fetch(FLUX2_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    prompt:prompt,shotType:shotType,style:colorway,batchId:batchId,model:'flux2-pro-multiref'
   })});
   const d=await resp.json();
-  if(d.success)return{imageId:d.imageId,driveFileId:d.driveFileId,prompt,shotType,style:colorway,batchId,model:'flux-lora'};
-  throw new Error(d.error||'LoRA generation failed');
+  if(d.success)return{imageId:d.imageId,driveFileId:d.driveFileId,prompt,shotType,style:colorway,batchId,model:'flux2-pro-multiref'};
+  throw new Error(d.error||'FLUX.2 generation failed');
 }
 
 // ===== GENERATE MORE =====
@@ -643,7 +643,7 @@ async function generateMore(){
   await Promise.allSettled(P);
 
   // Update LoRA status
-  const loraCnt=newImgs.filter(i=>i.model==='flux-lora').length;
+  const loraCnt=newImgs.filter(i=>i.model==='flux2-pro-multiref'||i.model==='flux-lora').length;
   setEngStatus('lora',loraCnt>0?'ok':'fail',loraCnt+'/'+scenes.length+' created');
   genDoneCount=newImgs.length;document.getElementById('genDone').textContent=genDoneCount;
 
