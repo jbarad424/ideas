@@ -6,7 +6,17 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .header{padding:1rem;text-align:center;width:100%}
 .header h1{font-size:1.1rem;color:#a855f7;margin-bottom:.2rem}
 .header .sub{font-size:.75rem;color:#666}
+.tabs{display:flex;gap:0;width:100%;max-width:600px;margin:.5rem auto 0;padding:0 .5rem}
+.tab{flex:1;padding:.6rem;text-align:center;font-size:.8rem;font-weight:700;cursor:pointer;border:2px solid #222;transition:all .15s;border-radius:0}
+.tab:first-child{border-radius:8px 0 0 8px}
+.tab:last-child{border-radius:0 8px 8px 0}
+.tab.active-new{background:#1a1030;border-color:#a855f7;color:#a855f7}
+.tab.active-done{background:#0a1a0a;border-color:#22c55e;color:#22c55e}
+.tab:not([class*="active-"]){background:#111;color:#666}
 .counter{font-size:.8rem;color:#888;margin:.5rem 0}
+.status-badge{display:inline-block;font-size:.6rem;padding:.15rem .5rem;border-radius:4px;font-weight:700;margin-left:.4rem;vertical-align:middle}
+.badge-new{background:#a855f7;color:#fff}
+.badge-done{background:#22c55e;color:#000}
 .img-wrap{width:100%;max-width:600px;background:#111;border-radius:12px;overflow:hidden;margin:0 auto}
 .img-wrap img{width:100%;display:block}
 .meta{padding:.5rem .8rem;display:flex;gap:.4rem;flex-wrap:wrap}
@@ -17,187 +27,72 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .feedback-area textarea:focus{outline:none;border-color:#a855f7}
 .feedback-area textarea::placeholder{color:#555}
 .saved-indicator{font-size:.7rem;color:#22c55e;margin-top:.3rem;min-height:1rem;text-align:right;padding-right:.3rem}
-.nav{display:flex;gap:.6rem;padding:.8rem;justify-content:center;align-items:center;width:100%;max-width:600px}
-.nav button{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.6rem 1.5rem;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .15s;flex:1;max-width:120px}
+.nav{display:flex;gap:.5rem;padding:.8rem;justify-content:center;align-items:center;width:100%;max-width:600px}
+.nav button{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.6rem 1rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s;flex:1;max-width:100px}
 .nav button:hover{border-color:#a855f7;background:#1a1030}
 .nav button:disabled{opacity:.3;cursor:default}
-.export-btn{background:none;border:1px solid #333;color:#888;padding:.4rem .8rem;border-radius:8px;font-size:.7rem;cursor:pointer;margin-top:1rem}
+.empty-state{text-align:center;padding:3rem 1rem;color:#555;font-size:.9rem}
+.btn-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;padding-bottom:2rem}
+.export-btn{background:none;border:1px solid #333;color:#888;padding:.4rem .8rem;border-radius:8px;font-size:.7rem;cursor:pointer}
 .export-btn:hover{border-color:#a855f7;color:#a855f7}
+.export-btn.primary{background:#a855f7;color:#fff;border-color:#a855f7;font-size:.8rem;padding:.5rem 1.2rem}
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:99}
 .toast.show{opacity:1}
 </style>
 </head><body>
-
 <div class="header">
   <h1>CB2 Image Review</h1>
   <div class="sub">Dictate your thoughts. That's it.</div>
 </div>
-
+<div class="tabs">
+  <div class="tab" id="tabNew" onclick="switchTab('new')">TO REVIEW (<span id="newCount">0</span>)</div>
+  <div class="tab" id="tabDone" onclick="switchTab('done')">REVIEWED (<span id="doneCount">0</span>)</div>
+</div>
 <div class="counter" id="counter">-</div>
-
-<div class="img-wrap" id="imgWrap">
-  <img id="mainImg" src="" alt="Loading...">
-  <div class="meta" id="meta"></div>
+<div id="contentArea">
+  <div class="img-wrap" id="imgWrap">
+    <img id="mainImg" src="" alt="Loading...">
+    <div class="meta" id="meta"></div>
+  </div>
+  <div class="feedback-area">
+    <textarea id="feedback" placeholder="Tap the mic and say what you see. What's right, what's wrong, what needs to change."></textarea>
+    <div class="saved-indicator" id="savedMsg"></div>
+  </div>
+  <div class="nav">
+    <button id="prevBtn" onclick="go(-1)">&#8592; Prev</button>
+    <button id="nextBtn" onclick="go(1)">Next &#8594;</button>
+  </div>
 </div>
-
-<div class="feedback-area">
-  <textarea id="feedback" placeholder="Tap the mic and say what you see. What's right, what's wrong, what needs to change."></textarea>
-  <div class="saved-indicator" id="savedMsg"></div>
-</div>
-
-<div class="nav">
-  <button id="prevBtn" onclick="go(-1)">&#8592; Prev</button>
-  <button id="nextBtn" onclick="go(1)">Next &#8594;</button>
-</div>
-
-<div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
-  <button class="export-btn" onclick="submitAll()" style="background:#a855f7;color:#fff;border-color:#a855f7;font-size:.8rem;padding:.5rem 1.2rem">Submit All Feedback</button>
+<div id="emptyState" class="empty-state" style="display:none"></div>
+<div class="btn-row">
+  <button class="export-btn primary" onclick="submitAll()">Submit All Feedback</button>
   <button class="export-btn" onclick="exportAll()">Copy to Clipboard</button>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <script>
-var IMAGES = [
-  {
-    id: 'r2-skiing-pov',
-    url: 'https://files.catbox.moe/9jmhu5.jpg',
-    model: 'flux-2-pro-preview',
-    prompt: 'This exact black remote with 5 buttons on skiers forearm over ski glove, elastic armband with velcro closure strap visible, snowy mountain slopes with fresh powder, first person POV, bright winter sunlight',
-    label: 'R2: Skiing POV - velcro strap fix'
-  },
-  {
-    id: 'r2-hiking-summit',
-    url: 'https://files.catbox.moe/1vxain.jpg',
-    model: 'flux-2-pro-preview',
-    prompt: 'This exact black remote with 5 buttons strapped to hikers forearm with elastic velcro armband visible, mountain summit overlooking dramatic valley at golden hour, warm natural lighting',
-    label: 'R2: Hiking summit - velcro strap fix'
-  },
-  {
-    id: 'flux2-hiking-multiref',
-    url: 'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200',
-    model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a hikers forearm, mountain trail with scenic valley views in background, golden hour warm natural lighting',
-    label: 'R1: Hiking - golden hour ridge'
-  },
-  {
-    id: 'flux2-skiing-multiref',
-    url: 'https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200',
-    model: 'flux2-pro-multiref',
-    prompt: 'Place this exact black remote control with 5 buttons on a skiers forearm over a ski glove, snowy mountain slopes, bright winter sunlight, preserve exact product design',
-    label: 'R1: Skiing - powder slopes'
-  },
-  {
-    id: 'flux2-snowboard-multiref',
-    url: 'https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200',
-    model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a snowboarders forearm, halfpipe in background, bright winter day',
-    label: 'R1: Snowboard - halfpipe'
-  },
-  {
-    id: 'kontext-tron-skiing',
-    url: 'https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200',
-    model: 'flux-kontext-pro',
-    prompt: 'Place this exact Chubby Buttons CB2 Tron, 5 large raised tactile buttons with green LED icons, worn on athlete forearm, skier carving powder, bright winter sunlight',
-    label: 'R1: Skiing - tron close-up (Kontext)'
-  }
+var ALL_IMAGES = [
+  {id:'r2-skiing-pov',url:'https://files.catbox.moe/9jmhu5.jpg',model:'flux-2-pro-preview',prompt:'This exact black remote with 5 buttons on skiers forearm over ski glove, elastic armband with velcro closure strap visible, snowy mountain slopes with fresh powder, first person POV, bright winter sunlight',label:'R2: Skiing POV - velcro strap fix'},
+  {id:'r2-hiking-summit',url:'https://files.catbox.moe/1vxain.jpg',model:'flux-2-pro-preview',prompt:'This exact black remote with 5 buttons strapped to hikers forearm with elastic velcro armband visible, mountain summit overlooking dramatic valley at golden hour, warm natural lighting',label:'R2: Hiking summit - velcro strap fix'},
+  {id:'flux2-hiking-multiref',url:'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200',model:'flux2-pro-multiref',prompt:'This exact black remote control with 5 buttons worn on a hikers forearm, mountain trail with scenic valley views in background, golden hour warm natural lighting',label:'R1: Hiking - golden hour ridge'},
+  {id:'flux2-skiing-multiref',url:'https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200',model:'flux2-pro-multiref',prompt:'Place this exact black remote control with 5 buttons on a skiers forearm over a ski glove, snowy mountain slopes, bright winter sunlight, preserve exact product design',label:'R1: Skiing - powder slopes'},
+  {id:'flux2-snowboard-multiref',url:'https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200',model:'flux2-pro-multiref',prompt:'This exact black remote control with 5 buttons worn on a snowboarders forearm, halfpipe in background, bright winter day',label:'R1: Snowboard - halfpipe'},
+  {id:'kontext-tron-skiing',url:'https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200',model:'flux-kontext-pro',prompt:'Place this exact Chubby Buttons CB2 Tron, 5 large raised tactile buttons with green LED icons, worn on athlete forearm, skier carving powder, bright winter sunlight',label:'R1: Skiing - tron close-up (Kontext)'}
 ];
-
-var LS_KEY = 'cb2_review_feedback';
-var ci = 0;
-
-function getFeedback() {
-  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch(e) { return {}; }
-}
-
-function saveFeedback() {
-  var img = IMAGES[ci];
-  var text = document.getElementById('feedback').value.trim();
-  var all = getFeedback();
-  if (text) {
-    all[img.id] = { text: text, updatedAt: new Date().toISOString(), label: img.label };
-  } else {
-    delete all[img.id];
-  }
-  localStorage.setItem(LS_KEY, JSON.stringify(all));
-  document.getElementById('savedMsg').textContent = text ? 'Auto-saved ✓' : '';
-}
-
-function render() {
-  var img = IMAGES[ci];
-  document.getElementById('mainImg').src = img.url;
-  document.getElementById('counter').textContent = (ci + 1) + ' / ' + IMAGES.length + '  —  ' + img.label;
-  document.getElementById('meta').innerHTML =
-    '<span class="tag model">' + img.model + '</span>' +
-    '<span class="tag">' + img.prompt.slice(0, 80) + '…</span>';
-  var saved = getFeedback()[img.id];
-  document.getElementById('feedback').value = saved ? saved.text : '';
-  document.getElementById('savedMsg').textContent = saved ? 'Saved ' + new Date(saved.updatedAt).toLocaleTimeString() : '';
-  document.getElementById('prevBtn').disabled = ci === 0;
-  document.getElementById('nextBtn').disabled = ci === IMAGES.length - 1;
-  window.scrollTo(0, 0);
-}
-
-function go(dir) {
-  saveFeedback();
-  ci = Math.max(0, Math.min(IMAGES.length - 1, ci + dir));
-  render();
-}
-
-function submitAll() {
-  saveFeedback();
-  var all = getFeedback();
-  var payload = {
-    submittedAt: new Date().toISOString(),
-    images: IMAGES.map(function(img) {
-      return {
-        id: img.id, label: img.label, model: img.model,
-        prompt: img.prompt, feedback: all[img.id] ? all[img.id].text : null
-      };
-    })
-  };
-  var lines = IMAGES.map(function(img) {
-    var fb = all[img.id];
-    return '## ' + img.label + '\nModel: ' + img.model + '\nPrompt: ' + img.prompt + '\nFeedback: ' + (fb ? fb.text : '(none)') + '\n';
-  }).join('\n');
-  navigator.clipboard.writeText(lines).then(function() {
-    localStorage.setItem('cb2_last_submit', JSON.stringify(payload));
-    showToast('Feedback submitted and copied!');
-  });
-}
-
-function exportAll() {
-  var all = getFeedback();
-  var lines = IMAGES.map(function(img) {
-    var fb = all[img.id];
-    return '## ' + img.label + '\n' +
-           'Model: ' + img.model + '\n' +
-           'Prompt: ' + img.prompt + '\n' +
-           'Feedback: ' + (fb ? fb.text : '(none)') + '\n';
-  }).join('\n');
-  navigator.clipboard.writeText(lines).then(function() { showToast('Copied all feedback!'); });
-}
-
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 2000);
-}
-
-var saveTimer;
-document.getElementById('feedback').addEventListener('input', function() {
-  clearTimeout(saveTimer);
-  document.getElementById('savedMsg').textContent = 'typing...';
-  saveTimer = setTimeout(saveFeedback, 800);
-});
-
-document.addEventListener('keydown', function(e) {
-  if (e.target.tagName === 'TEXTAREA') return;
-  if (e.key === 'ArrowLeft') go(-1);
-  if (e.key === 'ArrowRight') go(1);
-});
-
-render();
+var LS_KEY='cb2_review_feedback';var currentTab='new';var filtered=[];var ci=0;
+function getFeedback(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}');}catch(e){return {};}}
+function isReviewed(img){var fb=getFeedback()[img.id];return fb&&fb.text&&fb.text.trim().length>0;}
+function updateCounts(){var n=ALL_IMAGES.filter(function(i){return !isReviewed(i);}).length;var d=ALL_IMAGES.filter(function(i){return isReviewed(i);}).length;document.getElementById('newCount').textContent=n;document.getElementById('doneCount').textContent=d;}
+function switchTab(tab){saveFeedback();currentTab=tab;ci=0;updateFiltered();updateTabStyles();renderCurrent();}
+function updateFiltered(){if(currentTab==='new'){filtered=ALL_IMAGES.filter(function(i){return !isReviewed(i);});}else{filtered=ALL_IMAGES.filter(function(i){return isReviewed(i);});}}
+function updateTabStyles(){document.getElementById('tabNew').className='tab'+(currentTab==='new'?' active-new':'');document.getElementById('tabDone').className='tab'+(currentTab==='done'?' active-done':'');}
+function saveFeedback(){if(filtered.length===0)return;var img=filtered[ci];if(!img)return;var text=document.getElementById('feedback').value.trim();var all=getFeedback();if(text){all[img.id]={text:text,updatedAt:new Date().toISOString(),label:img.label};}else{delete all[img.id];}localStorage.setItem(LS_KEY,JSON.stringify(all));document.getElementById('savedMsg').textContent=text?'Auto-saved ✓':'';updateCounts();}
+function renderCurrent(){if(filtered.length===0){document.getElementById('contentArea').style.display='none';document.getElementById('emptyState').style.display='block';document.getElementById('emptyState').textContent=currentTab==='new'?'All images reviewed! Switch to Reviewed tab.':'No reviewed images yet.';document.getElementById('counter').textContent='0 / 0';return;}document.getElementById('contentArea').style.display='block';document.getElementById('emptyState').style.display='none';var img=filtered[ci];document.getElementById('mainImg').src=img.url;var badge=currentTab==='done'?'<span class="status-badge badge-done">REVIEWED</span>':'<span class="status-badge badge-new">NEW</span>';document.getElementById('counter').innerHTML=(ci+1)+' / '+filtered.length+'  —  '+img.label+' '+badge;document.getElementById('meta').innerHTML='<span class="tag model">'+img.model+'</span><span class="tag">'+img.prompt.slice(0,80)+'…</span>';var saved=getFeedback()[img.id];document.getElementById('feedback').value=saved?saved.text:'';document.getElementById('savedMsg').textContent=saved?'Saved '+new Date(saved.updatedAt).toLocaleTimeString():'';document.getElementById('prevBtn').disabled=ci===0;document.getElementById('nextBtn').disabled=ci===filtered.length-1;window.scrollTo(0,0);}
+function go(dir){saveFeedback();var prevId=filtered[ci]?filtered[ci].id:null;updateFiltered();if(dir===1){var idx=filtered.findIndex(function(i){return i.id===prevId;});if(idx===-1){ci=Math.min(ci,filtered.length-1);}else{ci=Math.min(idx+1,filtered.length-1);}}else{ci=Math.max(0,ci-1);}renderCurrent();}
+function submitAll(){saveFeedback();var all=getFeedback();var lines=ALL_IMAGES.map(function(img){var fb=all[img.id];return '## '+img.label+'\nModel: '+img.model+'\nPrompt: '+img.prompt+'\nFeedback: '+(fb?fb.text:'(none)')+'\n';}).join('\n');navigator.clipboard.writeText(lines).then(function(){localStorage.setItem('cb2_last_submit',JSON.stringify({submittedAt:new Date().toISOString(),images:ALL_IMAGES.map(function(img){return {id:img.id,label:img.label,model:img.model,prompt:img.prompt,feedback:all[img.id]?all[img.id].text:null};})}));showToast('Feedback submitted & copied!');});}
+function exportAll(){var all=getFeedback();var lines=ALL_IMAGES.map(function(img){var fb=all[img.id];return '## '+img.label+'\nModel: '+img.model+'\nPrompt: '+img.prompt+'\nFeedback: '+(fb?fb.text:'(none)')+'\n';}).join('\n');navigator.clipboard.writeText(lines).then(function(){showToast('Copied all feedback!');});}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2000);}
+var saveTimer;document.getElementById('feedback').addEventListener('input',function(){clearTimeout(saveTimer);document.getElementById('savedMsg').textContent='typing...';saveTimer=setTimeout(saveFeedback,800);});
+document.addEventListener('keydown',function(e){if(e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);});
+updateCounts();var newImgs=ALL_IMAGES.filter(function(i){return !isReviewed(i);});if(newImgs.length===0&&ALL_IMAGES.some(function(i){return isReviewed(i);})){currentTab='done';}updateFiltered();updateTabStyles();renderCurrent();
 </script>
 </body></html>
