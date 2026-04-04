@@ -1,1 +1,25 @@
-ewogICJfbWV0YSI6IHsKICAgICJ2ZXJzaW9uIjogInY0LXJlYWR5IiwKICAgICJsYXN0UmVzZXQiOiAiMjAyNi0wNC0wMyIsCiAgICAibm90ZSI6ICJDbGVhbiBzbGF0ZS4gMzIgbGVnYWN5IGltYWdlcyBhcmNoaXZlZCB0byBjYi1haS1sYWItbGVnYWN5Lmpzb24uIFdhaXRpbmcgZm9yIHY0IExvUkEgbW9kZWwgdHJhaW5lZCBvbiBjbG9zZS11cCBwcm9kdWN0IHBob3Rvcy4iCiAgfSwKICAiaW1hZ2VzIjogW10KfQ==
+{
+  "_meta": {
+    "version": "v5-flux2",
+    "lastReset": "2026-04-03",
+    "note": "FLUX.2 Multi-Reference pipeline LIVE. Reference-first generation with 3 product photos."
+  },
+  "images": [
+    {
+      "imageId": "20260403225012499",
+      "driveFileId": "1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy",
+      "prompt": "Place this exact black remote control with 5 buttons on a skier's forearm over a ski glove, snowy mountain slopes, action sports photography, bright winter sunlight, preserve exact product design",
+      "shotType": "action",
+      "style": "skiing",
+      "batchId": "flux2-e2e-v2",
+      "model": "flux2-pro-multiref",
+      "rating": "",
+      "feedbackTags": "",
+      "feedbackText": "",
+      "ratedAt": "",
+      "generatedAt": "2026-04-03T22:50:12Z",
+      "aiAnalysis": "",
+      "aiAnalyzedAt": ""
+    }
+  ]
+}
