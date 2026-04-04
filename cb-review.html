@@ -40,59 +40,46 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .toast.show{opacity:1}
 </style>
 </head><body>
-<div class="header">
-  <h1>CB2 Image Review</h1>
-  <div class="sub">Dictate your thoughts. That's it.</div>
-</div>
-<div class="tabs">
-  <div class="tab" id="tabNew" onclick="switchTab('new')">TO REVIEW (<span id="newCount">0</span>)</div>
-  <div class="tab" id="tabDone" onclick="switchTab('done')">REVIEWED (<span id="doneCount">0</span>)</div>
-</div>
+<div class="header"><h1>CB2 Image Review</h1><div class="sub">Dictate your thoughts. That's it.</div></div>
+<div class="tabs"><div class="tab" id="tabNew" onclick="switchTab('new')">TO REVIEW (<span id="newCount">0</span>)</div><div class="tab" id="tabDone" onclick="switchTab('done')">REVIEWED (<span id="doneCount">0</span>)</div></div>
 <div class="counter" id="counter">-</div>
 <div id="contentArea">
-  <div class="img-wrap" id="imgWrap">
-    <img id="mainImg" src="" alt="Loading...">
-    <div class="meta" id="meta"></div>
-  </div>
-  <div class="feedback-area">
-    <textarea id="feedback" placeholder="Tap the mic and say what you see. What's right, what's wrong, what needs to change."></textarea>
-    <div class="saved-indicator" id="savedMsg"></div>
-  </div>
-  <div class="nav">
-    <button id="prevBtn" onclick="go(-1)">&#8592; Prev</button>
-    <button id="nextBtn" onclick="go(1)">Next &#8594;</button>
-  </div>
+<div class="img-wrap" id="imgWrap"><img id="mainImg" src="" alt="Loading..."><div class="meta" id="meta"></div></div>
+<div class="feedback-area"><textarea id="feedback" placeholder="Tap the mic and say what you see. What's right, what's wrong, what needs to change."></textarea><div class="saved-indicator" id="savedMsg"></div></div>
+<div class="nav"><button id="prevBtn" onclick="go(-1)">&#8592; Prev</button><button id="nextBtn" onclick="go(1)">Next &#8594;</button></div>
 </div>
 <div id="emptyState" class="empty-state" style="display:none"></div>
-<div class="btn-row">
-  <button class="export-btn primary" onclick="submitAll()">Submit All Feedback</button>
-  <button class="export-btn" onclick="exportAll()">Copy to Clipboard</button>
-</div>
+<div class="btn-row"><button class="export-btn primary" onclick="submitAll()">Submit All Feedback</button><button class="export-btn" onclick="exportAll()">Copy to Clipboard</button></div>
 <div class="toast" id="toast"></div>
 <script>
-var ALL_IMAGES = [
-  {id:'r2-skiing-pov',url:'https://files.catbox.moe/9jmhu5.jpg',model:'flux-2-pro-preview',prompt:'This exact black remote with 5 buttons on skiers forearm over ski glove, elastic armband with velcro closure strap visible, snowy mountain slopes with fresh powder, first person POV, bright winter sunlight',label:'R2: Skiing POV - velcro strap fix'},
-  {id:'r2-hiking-summit',url:'https://files.catbox.moe/1vxain.jpg',model:'flux-2-pro-preview',prompt:'This exact black remote with 5 buttons strapped to hikers forearm with elastic velcro armband visible, mountain summit overlooking dramatic valley at golden hour, warm natural lighting',label:'R2: Hiking summit - velcro strap fix'},
-  {id:'flux2-hiking-multiref',url:'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200',model:'flux2-pro-multiref',prompt:'This exact black remote control with 5 buttons worn on a hikers forearm, mountain trail with scenic valley views in background, golden hour warm natural lighting',label:'R1: Hiking - golden hour ridge'},
-  {id:'flux2-skiing-multiref',url:'https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200',model:'flux2-pro-multiref',prompt:'Place this exact black remote control with 5 buttons on a skiers forearm over a ski glove, snowy mountain slopes, bright winter sunlight, preserve exact product design',label:'R1: Skiing - powder slopes'},
-  {id:'flux2-snowboard-multiref',url:'https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200',model:'flux2-pro-multiref',prompt:'This exact black remote control with 5 buttons worn on a snowboarders forearm, halfpipe in background, bright winter day',label:'R1: Snowboard - halfpipe'},
-  {id:'kontext-tron-skiing',url:'https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200',model:'flux-kontext-pro',prompt:'Place this exact Chubby Buttons CB2 Tron, 5 large raised tactile buttons with green LED icons, worn on athlete forearm, skier carving powder, bright winter sunlight',label:'R1: Skiing - tron close-up (Kontext)'}
+var ALL_IMAGES=[
+{id:'r3-mtb',url:'https://files.catbox.moe/ccbtv5.jpg',model:'flux-2-pro-preview',prompt:'Full body shot of mountain biker on a rugged trail, this exact black remote control with 5 buttons and Chubby Buttons logo strapped to forearm with elastic velcro armband, dusty trail with pine trees, bright natural sunlight',label:'R3: Mountain Biker - full body'},
+{id:'r3-skier',url:'https://files.catbox.moe/hdxf7u.jpg',model:'flux-2-pro-preview',prompt:'Full body skier at top of snowy mountain, this exact black remote control with 5 buttons on forearm over ski jacket, elastic velcro armband with closure strap visible, mountain panorama, crisp winter light',label:'R3: Skier - mountain panorama'},
+{id:'r3-hiker',url:'https://files.catbox.moe/dpmv1p.jpg',model:'flux-2-pro-preview',prompt:'Full body hiker at mountain overlook arms raised, this exact black remote with 5 buttons and Chubby Buttons logo on forearm, elastic velcro armband with closure strap, golden hour, lifestyle photography',label:'R3: Hiker - overlook full body'},
+{id:'r3-runner',url:'https://files.catbox.moe/somwrl.jpg',model:'flux-2-pro-preview',prompt:'Trail runner on mountain path full body in motion, this exact black remote with 5 buttons on mid-forearm with elastic velcro armband, alpine meadow with wildflowers, bright daylight, sports lifestyle photo',label:'R3: Trail Runner - alpine meadow'},
+{id:'r3-snowboard',url:'https://files.catbox.moe/e5ma63.jpg',model:'flux-2-pro-preview',prompt:'Full body snowboarder on snowy ridge holding board, this exact black remote with 5 buttons on forearm, elastic velcro armband with closure strap visible, pristine snow and blue sky, winter sports photography',label:'R3: Snowboarder - ridge full body'},
+{id:'r2-skiing-pov',url:'https://files.catbox.moe/9jmhu5.jpg',model:'flux-2-pro-preview',prompt:'This exact black remote with 5 buttons on skiers forearm over ski glove, elastic armband with velcro closure strap visible, snowy mountain slopes with fresh powder, first person POV, bright winter sunlight',label:'R2: Skiing POV - velcro strap fix'},
+{id:'r2-hiking-summit',url:'https://files.catbox.moe/1vxain.jpg',model:'flux-2-pro-preview',prompt:'This exact black remote with 5 buttons strapped to hikers forearm with elastic velcro armband visible, mountain summit overlooking dramatic valley at golden hour, warm natural lighting',label:'R2: Hiking summit - velcro strap fix'},
+{id:'flux2-hiking-multiref',url:'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200',model:'flux2-pro-multiref',prompt:'This exact black remote control with 5 buttons worn on a hikers forearm, mountain trail with scenic valley views in background, golden hour warm natural lighting',label:'R1: Hiking - golden hour ridge'},
+{id:'flux2-skiing-multiref',url:'https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200',model:'flux2-pro-multiref',prompt:'Place this exact black remote control with 5 buttons on a skiers forearm over a ski glove, snowy mountain slopes, bright winter sunlight, preserve exact product design',label:'R1: Skiing - powder slopes'},
+{id:'flux2-snowboard-multiref',url:'https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200',model:'flux2-pro-multiref',prompt:'This exact black remote control with 5 buttons worn on a snowboarders forearm, halfpipe in background, bright winter day',label:'R1: Snowboard - halfpipe'},
+{id:'kontext-tron-skiing',url:'https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200',model:'flux-kontext-pro',prompt:'Place this exact Chubby Buttons CB2 Tron, 5 large raised tactile buttons with green LED icons, worn on athlete forearm, skier carving powder, bright winter sunlight',label:'R1: Skiing - tron close-up (Kontext)'}
 ];
 var LS_KEY='cb2_review_feedback';var currentTab='new';var filtered=[];var ci=0;
 function getFeedback(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}');}catch(e){return {};}}
 function isReviewed(img){var fb=getFeedback()[img.id];return fb&&fb.text&&fb.text.trim().length>0;}
-function updateCounts(){var n=ALL_IMAGES.filter(function(i){return !isReviewed(i);}).length;var d=ALL_IMAGES.filter(function(i){return isReviewed(i);}).length;document.getElementById('newCount').textContent=n;document.getElementById('doneCount').textContent=d;}
+function updateCounts(){document.getElementById('newCount').textContent=ALL_IMAGES.filter(function(i){return !isReviewed(i);}).length;document.getElementById('doneCount').textContent=ALL_IMAGES.filter(function(i){return isReviewed(i);}).length;}
 function switchTab(tab){saveFeedback();currentTab=tab;ci=0;updateFiltered();updateTabStyles();renderCurrent();}
 function updateFiltered(){if(currentTab==='new'){filtered=ALL_IMAGES.filter(function(i){return !isReviewed(i);});}else{filtered=ALL_IMAGES.filter(function(i){return isReviewed(i);});}}
 function updateTabStyles(){document.getElementById('tabNew').className='tab'+(currentTab==='new'?' active-new':'');document.getElementById('tabDone').className='tab'+(currentTab==='done'?' active-done':'');}
 function saveFeedback(){if(filtered.length===0)return;var img=filtered[ci];if(!img)return;var text=document.getElementById('feedback').value.trim();var all=getFeedback();if(text){all[img.id]={text:text,updatedAt:new Date().toISOString(),label:img.label};}else{delete all[img.id];}localStorage.setItem(LS_KEY,JSON.stringify(all));document.getElementById('savedMsg').textContent=text?'Auto-saved ✓':'';updateCounts();}
 function renderCurrent(){if(filtered.length===0){document.getElementById('contentArea').style.display='none';document.getElementById('emptyState').style.display='block';document.getElementById('emptyState').textContent=currentTab==='new'?'All images reviewed! Switch to Reviewed tab.':'No reviewed images yet.';document.getElementById('counter').textContent='0 / 0';return;}document.getElementById('contentArea').style.display='block';document.getElementById('emptyState').style.display='none';var img=filtered[ci];document.getElementById('mainImg').src=img.url;var badge=currentTab==='done'?'<span class="status-badge badge-done">REVIEWED</span>':'<span class="status-badge badge-new">NEW</span>';document.getElementById('counter').innerHTML=(ci+1)+' / '+filtered.length+'  —  '+img.label+' '+badge;document.getElementById('meta').innerHTML='<span class="tag model">'+img.model+'</span><span class="tag">'+img.prompt.slice(0,80)+'…</span>';var saved=getFeedback()[img.id];document.getElementById('feedback').value=saved?saved.text:'';document.getElementById('savedMsg').textContent=saved?'Saved '+new Date(saved.updatedAt).toLocaleTimeString():'';document.getElementById('prevBtn').disabled=ci===0;document.getElementById('nextBtn').disabled=ci===filtered.length-1;window.scrollTo(0,0);}
-function go(dir){saveFeedback();var prevId=filtered[ci]?filtered[ci].id:null;updateFiltered();if(dir===1){var idx=filtered.findIndex(function(i){return i.id===prevId;});if(idx===-1){ci=Math.min(ci,filtered.length-1);}else{ci=Math.min(idx+1,filtered.length-1);}}else{ci=Math.max(0,ci-1);}renderCurrent();}
+function go(dir){saveFeedback();var prevId=filtered[ci]?filtered[ci].id:null;updateFiltered();if(dir===1){var idx=-1;for(var i=0;i<filtered.length;i++){if(filtered[i].id===prevId){idx=i;break;}}if(idx===-1){ci=Math.min(ci,filtered.length-1);}else{ci=Math.min(idx+1,filtered.length-1);}}else{ci=Math.max(0,ci-1);}renderCurrent();}
 function submitAll(){saveFeedback();var all=getFeedback();var lines=ALL_IMAGES.map(function(img){var fb=all[img.id];return '## '+img.label+'\nModel: '+img.model+'\nPrompt: '+img.prompt+'\nFeedback: '+(fb?fb.text:'(none)')+'\n';}).join('\n');navigator.clipboard.writeText(lines).then(function(){localStorage.setItem('cb2_last_submit',JSON.stringify({submittedAt:new Date().toISOString(),images:ALL_IMAGES.map(function(img){return {id:img.id,label:img.label,model:img.model,prompt:img.prompt,feedback:all[img.id]?all[img.id].text:null};})}));showToast('Feedback submitted & copied!');});}
 function exportAll(){var all=getFeedback();var lines=ALL_IMAGES.map(function(img){var fb=all[img.id];return '## '+img.label+'\nModel: '+img.model+'\nPrompt: '+img.prompt+'\nFeedback: '+(fb?fb.text:'(none)')+'\n';}).join('\n');navigator.clipboard.writeText(lines).then(function(){showToast('Copied all feedback!');});}
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2000);}
 var saveTimer;document.getElementById('feedback').addEventListener('input',function(){clearTimeout(saveTimer);document.getElementById('savedMsg').textContent='typing...';saveTimer=setTimeout(saveFeedback,800);});
 document.addEventListener('keydown',function(e){if(e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);});
-updateCounts();var newImgs=ALL_IMAGES.filter(function(i){return !isReviewed(i);});if(newImgs.length===0&&ALL_IMAGES.some(function(i){return isReviewed(i);})){currentTab='done';}updateFiltered();updateTabStyles();renderCurrent();
+updateCounts();if(ALL_IMAGES.filter(function(i){return !isReviewed(i);}).length===0&&ALL_IMAGES.some(function(i){return isReviewed(i);})){currentTab='done';}updateFiltered();updateTabStyles();renderCurrent();
 </script>
 </body></html>
