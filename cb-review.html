@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CB2 Image Review</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.header{padding:1rem;text-align:center;width:100%}
+.header h1{font-size:1.1rem;color:#a855f7;margin-bottom:.2rem}
+.header .sub{font-size:.75rem;color:#666}
+.counter{font-size:.8rem;color:#888;margin:.5rem 0}
+.img-wrap{width:100%;max-width:600px;background:#111;border-radius:12px;overflow:hidden;margin:0 auto}
+.img-wrap img{width:100%;display:block}
+.meta{padding:.5rem .8rem;display:flex;gap:.4rem;flex-wrap:wrap}
+.tag{font-size:.6rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;background:#1a1030;color:#a855f7;border:1px solid #2d1a4e}
+.tag.model{background:#0a1a1a;color:#06b6d4;border-color:#0d2a2a}
+.feedback-area{width:100%;max-width:600px;margin:.8rem auto;padding:0 .5rem}
+.feedback-area textarea{width:100%;min-height:120px;background:#111;border:2px solid #222;border-radius:10px;color:#fff;font-size:.95rem;padding:.8rem;resize:vertical;font-family:inherit;line-height:1.5}
+.feedback-area textarea:focus{outline:none;border-color:#a855f7}
+.feedback-area textarea::placeholder{color:#555}
+.saved-indicator{font-size:.7rem;color:#22c55e;margin-top:.3rem;min-height:1rem;text-align:right;padding-right:.3rem}
+.nav{display:flex;gap:.6rem;padding:.8rem;justify-content:center;align-items:center;width:100%;max-width:600px}
+.nav button{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.6rem 1.5rem;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .15s;flex:1;max-width:120px}
+.nav button:hover{border-color:#a855f7;background:#1a1030}
+.nav button:disabled{opacity:.3;cursor:default}
+.export-btn{background:none;border:1px solid #333;color:#888;padding:.4rem .8rem;border-radius:8px;font-size:.7rem;cursor:pointer;margin-top:1rem}
+.export-btn:hover{border-color:#a855f7;color:#a855f7}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:99}
+.toast.show{opacity:1}
+</style>
+</head><body>
+
+<div class="header">
+  <h1>CB2 Image Review</h1>
+  <div class="sub">Dictate your thoughts. That's it.</div>
+</div>
+
+<div class="counter" id="counter">-</div>
+
+<div class="img-wrap" id="imgWrap">
+  <img id="mainImg" src="" alt="Loading...">
+  <div class="meta" id="meta"></div>
+</div>
+
+<div class="feedback-area">
+  <textarea id="feedback" placeholder="Tap the mic and say what you see. What's right, what's wrong, what needs to change."></textarea>
+  <div class="saved-indicator" id="savedMsg"></div>
+</div>
+
+<div class="nav">
+  <button id="prevBtn" onclick="go(-1)">&larr; Prev</button>
+  <button id="nextBtn" onclick="go(1)">Next &rarr;</button>
+</div>
+
+<button class="export-btn" onclick="exportAll()">Copy All Feedback</button>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// === IMAGE DATA ===
+// Each entry: { id, url, model, prompt, label }
+const IMAGES = [
+  {
+    id: 'flux2-hiking-multiref',
+    url: 'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200',
+    model: 'flux2-pro-multiref',
+    prompt: 'This exact black remote control with 5 buttons worn on a hikers forearm, mountain trail with scenic valley views in background, outdoor adventure lifestyle photography, golden hour warm natural lighting',
+    label: 'Hiking - golden hour ridge (FLUX2 multiref)'
+  },
+  {
+    id: 'flux2-skiing-multiref',
+    url: 'https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200',
+    model: 'flux2-pro-multiref',
+    prompt: 'Place this exact black remote control with 5 buttons on a skiers forearm over a ski glove, snowy mountain slopes, action sports photography, bright winter sunlight, preserve exact product design',
+    label: 'Skiing - powder slopes (FLUX2 multiref)'
+  },
+  {
+    id: 'flux2-snowboard-multiref',
+    url: 'https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200',
+    model: 'flux2-pro-multiref',
+    prompt: 'This exact black remote control with 5 buttons worn on a snowboarders forearm, halfpipe in background, action sports photography, bright winter day',
+    label: 'Snowboard - halfpipe (FLUX2 multiref)'
+  },
+  {
+    id: 'kontext-tron-skiing',
+    url: 'https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200',
+    model: 'flux-kontext-pro',
+    prompt: 'Place this exact Chubby Buttons CB2 Tron, 5 large raised tactile buttons with green LED icons, worn on athlete forearm, skier carving powder, snowy mountain peaks, bright winter sunlight',
+    label: 'Skiing - tron forearm close-up (Kontext Pro)'
+  }
+];
+
+const LS_KEY = 'cb2_review_feedback';
+let ci = 0;
+
+function getFeedback() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; }
+}
+
+function saveFeedback() {
+  const img = IMAGES[ci];
+  const text = document.getElementById('feedback').value.trim();
+  const all = getFeedback();
+  if (text) {
+    all[img.id] = { text, updatedAt: new Date().toISOString(), label: img.label };
+  } else {
+    delete all[img.id];
+  }
+  localStorage.setItem(LS_KEY, JSON.stringify(all));
+  document.getElementById('savedMsg').textContent = text ? 'Auto-saved ✓' : '';
+}
+
+function render() {
+  const img = IMAGES[ci];
+  document.getElementById('mainImg').src = img.url;
+  document.getElementById('counter').textContent = (ci + 1) + ' / ' + IMAGES.length + '  -  ' + img.label;
+  document.getElementById('meta').innerHTML =
+    '<span class="tag model">' + img.model + '</span>' +
+    '<span class="tag">' + img.prompt.slice(0, 80) + '...</span>';
+
+  // Load saved feedback
+  const saved = getFeedback()[img.id];
+  document.getElementById('feedback').value = saved ? saved.text : '';
+  document.getElementById('savedMsg').textContent = saved ? 'Saved ' + new Date(saved.updatedAt).toLocaleTimeString() : '';
+
+  document.getElementById('prevBtn').disabled = ci === 0;
+  document.getElementById('nextBtn').disabled = ci === IMAGES.length - 1;
+
+  window.scrollTo(0, 0);
+}
+
+function go(dir) {
+  saveFeedback();
+  ci = Math.max(0, Math.min(IMAGES.length - 1, ci + dir));
+  render();
+}
+
+function exportAll() {
+  const all = getFeedback();
+  const lines = IMAGES.map(img => {
+    const fb = all[img.id];
+    return '## ' + img.label + '\n' +
+           'Model: ' + img.model + '\n' +
+           'Prompt: ' + img.prompt + '\n' +
+           'Feedback: ' + (fb ? fb.text : '(none)') + '\n';
+  }).join('\n');
+  navigator.clipboard.writeText(lines).then(() => showToast('Copied all feedback!'));
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// Auto-save on typing (debounced)
+let saveTimer;
+document.getElementById('feedback').addEventListener('input', () => {
+  clearTimeout(saveTimer);
+  document.getElementById('savedMsg').textContent = 'typing...';
+  saveTimer = setTimeout(saveFeedback, 800);
+});
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'ArrowLeft') go(-1);
+  if (e.key === 'ArrowRight') go(1);
+});
+
+render();
+</script>
+</body></html>
