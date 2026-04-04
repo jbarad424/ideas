@@ -1,6 +1,16 @@
 # CB Creative Lab — Session 3+4 Summary
 **Date:** April 3, 2026
-**Last edit:** ~6:15 PM EST (Session 4 — post-ChatGPT research analysis)
+**Last edit:** ~11:00 PM EST (Session 4 — FLUX.2 pipeline LIVE, end-to-end working)
+
+## LATEST: FLUX.2 Pipeline Working End-to-End
+- **Make.com Scenario:** 4656584 (FLUX.2 Generate Reference-First)
+- **Webhook:** `https://hook.us1.make.com/otxpq9jc4vwqjqlbda5n6h0jhkkgmht9`
+- **First successful E2E image:** Drive ID `1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy`, Data Store key `20260403225012499`
+- **Result:** 5 correct buttons, correct icons, on ski glove, mountain scene, Chubby Buttons logo visible
+- **App updated:** asset-tagger-v2.html now wired to FLUX.2 webhook, training gate live
+- **v4b training:** COMPLETE — version hash `f937e501`
+- **fal.ai reference images uploaded** to permanent storage (6 images)
+- **Still needed:** JSON sync to show images on website portal, AI Vision scoring integration
 **Secret phrase:** go hang a salami, I'm a lasagna hog
 
 ---

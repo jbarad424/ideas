@@ -277,6 +277,13 @@ function mBadge(m){if(!m)return'';if(m==='flux2-pro-multiref')return'<span class
 function tBadge(t){return t?'<span class="badge b-'+t+'">'+esc(t)+'</span>':''}
 function sBadge(s){return s?'<span class="badge" style="background:#1a1a1a;color:#888;border:1px solid #333">'+esc(s)+'</span>':''}
 function scoreClass(v){return v>=4?'high':v>=3?'mid':'low'}
+function friendlyCaption(img){
+  const s=img.shotType||'';const st=img.style||'';const m=img.model||'';
+  let scene=st.charAt(0).toUpperCase()+st.slice(1);
+  let type=s==='action'?'Action shot':s==='product'?'Product shot':s==='medium'?'Medium shot':s==='lifestyle'?'Lifestyle':'Shot';
+  if(scene&&scene!=='undefined')return type+' — '+scene+' ('+m.replace('flux2-pro-multiref','FLUX.2 Multi-Ref').replace('flux-lora-v4','LoRA v4')+')';
+  return type+' ('+m.replace('flux2-pro-multiref','FLUX.2 Multi-Ref').replace('flux-lora-v4','LoRA v4')+')';
+}
 function tryParse(s){try{return JSON.parse(s)}catch(e){return null}}
 
 // ===== SWIPE RENDER =====
@@ -314,12 +321,18 @@ function renderSwipe(){
   curImg=f[ci];
   const media=isVideo(curImg)?'<video src="'+esc(vidUrl(curImg))+'" playsinline controls autoplay muted loop style="width:100%;height:100%;object-fit:contain"></video>':'<img src="'+thumbUrl(curImg)+'">';
 
-  // AI Assessment
+  // AI Assessment — parse aiAnalysis JSON string if needed
   let aiHtml='';
-  const ps=curImg.aiProductScore||curImg.aiScores?.product;
-  const ss=curImg.aiSceneScore||curImg.aiScores?.scene;
-  const bs=curImg.aiBrandScore||curImg.aiScores?.brand;
-  const notes=curImg.aiNotes||curImg.aiAnalysis?.summary||'';
+  let parsedAi=null;
+  if(curImg.aiAnalysis&&typeof curImg.aiAnalysis==='string'&&curImg.aiAnalysis.startsWith('{')){
+    try{parsedAi=JSON.parse(curImg.aiAnalysis)}catch(e){}
+  }else if(curImg.aiAnalysis&&typeof curImg.aiAnalysis==='object'){
+    parsedAi=curImg.aiAnalysis;
+  }
+  const ps=curImg.aiProductScore||parsedAi?.productScore;
+  const ss=curImg.aiSceneScore||parsedAi?.sceneScore;
+  const bs=curImg.aiBrandScore||parsedAi?.brandScore;
+  const notes=curImg.aiNotes||parsedAi?.summary||'';
 
   if(ps||ss||bs){
     aiHtml='<div class="ai-assess"><div class="ai-scores">'+
@@ -334,7 +347,7 @@ function renderSwipe(){
   const rated=!!curImg.rating;
   w.innerHTML='<div class="s-card" id="sCard"><div class="s-card-img">'+media+'</div>'+
     '<div class="s-card-meta">'+mBadge(curImg.model)+tBadge(curImg.shotType)+sBadge(curImg.style)+'</div>'+
-    '<div class="s-card-prompt" onclick="this.classList.toggle(\'exp\')">'+esc(curImg.prompt||'')+'</div>'+
+    '<div class="s-card-prompt" onclick="this.classList.toggle(\'exp\')">'+esc(friendlyCaption(curImg))+'</div>'+
     aiHtml+'</div>'+
     (rated?'':'<div class="ad-row"><button class="ad-btn ad-agree" onclick="handleAgree()">Agree</button><button class="ad-btn ad-disagree" onclick="handleDisagree()">Disagree</button></div>'+
     '<div class="rate-notes"><textarea class="rate-text" id="rateText" placeholder="What do you think? Add your notes..."></textarea></div>'+
@@ -548,13 +561,14 @@ function renderGrid(){
   let h=typeBar+'<div class="g-grid">';
   f.forEach((img,i)=>{
     const rt=img.rating?'<div class="g-rated">Rated</div>':'';
-    const mb=img.model==='runway'?'<div class="g-tag b-runway">Video</div>':img.model&&img.model.includes('recraft')?'<div class="g-tag b-recraft">Recraft</div>':'<div class="g-tag b-flux">FLUX</div>';
-    // AI score dot
-    const ps=img.aiProductScore||img.aiScores?.product||0;
+    const mb=img.model==='runway'?'<div class="g-tag b-runway">Video</div>':img.model==='flux2-pro-multiref'?'<div class="g-tag b-flux">FLUX.2</div>':img.model&&img.model.includes('recraft')?'<div class="g-tag b-recraft">Recraft</div>':'<div class="g-tag b-flux">FLUX</div>';
+    // AI score dot — parse aiAnalysis JSON string if needed
+    let gAi=null;if(img.aiAnalysis&&typeof img.aiAnalysis==='string'&&img.aiAnalysis.startsWith('{')){try{gAi=JSON.parse(img.aiAnalysis)}catch(e){}}
+    const ps=img.aiProductScore||gAi?.productScore||img.aiScores?.product||0;
     const dotColor=ps>=4?'#22c55e':ps>=3?'#f59e0b':ps>=1?'#ef4444':'#333';
     const dot='<div class="g-ai-dot" style="background:'+dotColor+'"></div>';
     if(isVideo(img)){h+='<div class="g-card" onclick="openLb('+i+')"><video src="'+esc(vidUrl(img))+'" muted playsinline preload="metadata" style="pointer-events:none"></video>'+mb+rt+'</div>'}
-    else{h+='<div class="g-card" onclick="openLb('+i+')"><img src="https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w400" loading="lazy">'+mb+rt+dot+'</div>'}
+    else{h+='<div class="g-card" onclick="jumpToSwipe(\''+img.imageId+'\')"><img src="https://drive.google.com/thumbnail?id='+img.driveFileId+'&sz=w400" loading="lazy">'+mb+rt+dot+'</div>'}
   });
   h+='</div>';w.innerHTML=h;
 }
@@ -573,6 +587,11 @@ function openLb(idx){
   document.getElementById('lb').classList.add('open');
 }
 function closeLb(){document.getElementById('lb').classList.remove('open');document.getElementById('lbVid').pause()}
+function jumpToSwipe(imageId){
+  const f=filtered();
+  const idx=f.findIndex(i=>i.imageId===imageId);
+  if(idx>=0){ci=idx;mode='swipe';document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));document.querySelector('.mode-btn').classList.add('active');render()}
+}
 
 // ===== FLUX.2 GENERATION (via Make.com proxy to fal.ai) =====
 const FLUX2_API='https://hook.us1.make.com/otxpq9jc4vwqjqlbda5n6h0jhkkgmht9';
