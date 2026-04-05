@@ -292,7 +292,27 @@ const SEED_COMMENTS={
   'r3m-mtb':[{text:"Looks horrible. Floating above the arm, not even on it. Superimposed, as if copy-pasting an image on top of an arm. Bad.",time:'2026-04-05T00:05:00Z',num:1}],
   'r3m-skier':[{text:"Two different remotes stacked on top of each other. Remotes look OK but there's two of them and that's weird.",time:'2026-04-05T00:06:00Z',num:1}],
   'r3m-runner':[{text:"Two remotes — one upper arm, one lower. Symbols look too bright. That's like 80% there, maybe 70.",time:'2026-04-05T00:07:00Z',num:1}],
-  'r3m-snowboard':[{text:"Pretty gnarly. One thing on the bottom that doesn't look like us, one on top that does but not secured correctly. Remote looks OK but it's on the upper arm.",time:'2026-04-05T00:08:00Z',num:1}]
+  'r3m-snowboard':[{text:"Pretty gnarly. One thing on the bottom that doesn't look like us, one on top that does but not secured correctly. Remote looks OK but it's on the upper arm.",time:'2026-04-05T00:08:00Z',num:1}],
+  'combo-editorial':[{text:"This image is nice. The symbols are a little too bright and it's placed a little too low on the arm. But the lighting is cool. Don't know why it looks like he's wearing the same ski jacket from our modeling photo when he's hiking.",time:'2026-04-05T10:00:00Z',num:1}],
+  'combo-anatomical':[{text:"Way too small, arm looks humongous. The remote is physically accurate though. It's just way too small.",time:'2026-04-05T10:01:00Z',num:1}],
+  'combo-negative':[{text:"Way too chunky, much bigger than it should be, placed too close to the wrist. The armband looks inaccurate as well.",time:'2026-04-05T10:02:00Z',num:1}],
+  'combo-twopass-base':[{text:"Remote looks pretty good. Sizing looks OK, maybe 5% too large. Almost correct on placement, just a little too close to the wrist. Remote looks really nice and the lighting is really nice.",time:'2026-04-05T10:03:00Z',num:1}],
+  'combo-twopass-refined':[{text:"Getting better. The symbols are only legible to the viewer of the image but they should be legible to the person wearing it — flipped 180 degrees.",time:'2026-04-05T10:04:00Z',num:1}],
+  'combo-seed1':[{text:"Actually isn't that bad. The size looks OK. It's on a bare arm and the symbols are visible to the viewer of the photo, not to the hiker.",time:'2026-04-05T10:05:00Z',num:1}],
+  'combo-seed2':[{text:"Pretty accurate in terms of the remote but again that's a guy wearing a ski jacket when he's hiking, which is strange.",time:'2026-04-05T10:06:00Z',num:1}],
+  'combo-seed3':[{text:"Same issue — looks like our modeling photos where I was wearing my ski jacket, just superimposed over a hiker. Clothing needs to change but lighting is good and remote is accurate and placement is OK.",time:'2026-04-05T10:07:00Z',num:1}],
+  'combo-seed4':[{text:"This is pretty damn close. I would say this is like a 98 out of 100.",time:'2026-04-05T10:08:00Z',num:1}],
+  'combo-seed5':[{text:"This is great, I like it. But again ski jacket and a hiker — not good.",time:'2026-04-05T10:09:00Z',num:1}],
+  'lora-v4b-hiker':[{text:"Zero visibility of the remote anywhere. Zero out of 100.",time:'2026-04-05T10:10:00Z',num:1}],
+  'lora-v4b-skier':[{text:"Another F. Zero out of 100, no remote visible.",time:'2026-04-05T10:11:00Z',num:1}],
+  'lora-v4b-mtb':[{text:"This looks like a nightmare. I don't know what went wrong here. Your remote just says CB2. Total fail.",time:'2026-04-05T10:12:00Z',num:1}],
+  'lora-v4b-snowboard':[{text:"This makes me want to vomit. Really bad, no remote and the person looks not even like a real person or an arm. Total fail.",time:'2026-04-05T10:13:00Z',num:1}],
+  'lora-v4b-runner':[{text:"The guy looks like he's holding a piece of rubber that has some symbols on it. Not even close to us. Total fail.",time:'2026-04-05T10:14:00Z',num:1}],
+  'r5-hiker':[{text:"The lighting and accuracy of the remote is pretty good. The symbols should be facing the wearer, not visible to the viewer — should be flipped 180 degrees. If I'm being nitpicky, just a little bit further down the forearm closer to the wrist.",time:'2026-04-05T10:15:00Z',num:1}],
+  'r5-mtb':[{text:"It's a biker, that's nice, but there's no visible remote anywhere. Not good. I don't see it at all. Total fail.",time:'2026-04-05T10:16:00Z',num:1}],
+  'r5-snowboard':[{text:"Pretty cool. I see the remote. The symbols could be a little clearer, it's a little fuzzy, but placement is cool and the guy's got a dope vibe. 80 out of 100.",time:'2026-04-05T10:17:00Z',num:1}],
+  'r5-skier':[{text:"This is a real slam dunk. Great job.",time:'2026-04-05T10:18:00Z',num:1}],
+  'r5-festival':[{text:"The way that it appears and the guy's skin looks a little strange. Also why is he at a concert venue? The size is probably 90% of what it should be, just a little too small. But generally physically looks pretty nice in terms of accuracy of the remote.",time:'2026-04-05T10:19:00Z',num:1}]
 };
 
 const LS='cb2_review_v3';
@@ -303,7 +323,7 @@ function S(d){localStorage.setItem(LS,JSON.stringify(d))}
 
 // Merge seed comments on first load
 function seedOnce(){
-  if(localStorage.getItem('cb2_seeded_v3'))return;
+  if(localStorage.getItem('cb2_seeded_v4'))return;
   const d=D();
   for(const[id,comments]of Object.entries(SEED_COMMENTS)){
     if(!d[id])d[id]={comments:[],label:''};
@@ -312,7 +332,7 @@ function seedOnce(){
     d[id].comments=comments;
   }
   S(d);
-  localStorage.setItem('cb2_seeded_v3','1');
+  localStorage.setItem('cb2_seeded_v4','1');
 }
 seedOnce();
 
