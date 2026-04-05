@@ -1,7 +1,161 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-05T18:46:49.505Z",
+  "syncedAt": "2026-04-05T19:08:56.189Z",
   "images": [
+    {
+      "id": "r7-skier-action1",
+      "label": "R7: Skier action A (mid-turn, side angle)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle, dramatic mountain backdrop",
+      "context": "R6 skiers were excellent but all looked like the same modeling photo. R7 pushes for dynamic mid-action poses and different camera angles to break the reference photo repetition.",
+      "comments": [
+        {
+          "text": "Looks good but again this is still very similar to the model photos. I mean, I know I'm being picky here now, but as it relates to this type of image in this frame, great work well the LED is illuminated in yellow for some reason.",
+          "time": "2026-04-05T19:03:46.207Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-skier-action2",
+      "label": "R7: Skier action B (mid-turn)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle",
+      "context": "Same action prompt, different seed. Cherry-pick best.",
+      "comments": [
+        {
+          "text": "This somewhat deviates in a good way from the typical arm thing, but the guy's arm looks like it's fallen off his body but the placement of the remote looks great. I just don't know exactly what he's doing in this image is he just wiping the snow but good job of zooming the camera a little bit. I just want to see a person that's actually like enjoying skiing. I don't really know what I'm seeing.",
+          "time": "2026-04-05T19:04:22.872Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-skier-action3",
+      "label": "R7: Skier action C (mid-turn)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle",
+      "context": "Same action prompt, different seed.",
+      "comments": [
+        {
+          "text": "Again, cool idea but the guy looks like he's really uncomfortable like you. It looks like he's deep in the snow. This doesn't really mean much context from me. I wouldn't use this on my on my brand also like the arm looks strange and again looks very much just like my ski jacket. I'm looking for more of like a full body situation.",
+          "time": "2026-04-05T19:04:59.856Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-snow-action1",
+      "label": "R7: Snowboard mid-air A (from below)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Snowboarder mid-air grabbing board during a jump, remote on lower forearm, shot from below looking up, blue sky",
+      "context": "Testing dynamic mid-air pose + upward camera angle. Something the reference photos could never produce.",
+      "comments": [
+        {
+          "text": "I got great work here. I'll see what I said it again like remote looks good. Lighting looks good. Everything looks nice but again just looks like the jacket that we used just super imposed over another cool photo but it is. It is cool. I'm I'm not gonna lie I'm just being nitpicky because I'm trying to train you to maybe be a little more versatile.",
+          "time": "2026-04-05T19:05:33.476Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-snow-action2",
+      "label": "R7: Snowboard mid-air B",
+      "model": "flux2-pro-multiref",
+      "prompt": "Snowboarder mid-air grabbing board during a jump, remote on lower forearm, shot from below looking up",
+      "context": "Same mid-air prompt, different seed.",
+      "comments": [
+        {
+          "text": "Again, same same feedback looks cool although I don't know what that snowboarder is doing like jumping 80 feet up in the air the guy but again like it looks good. It looks really good you nailed you nailed the remote really good. I just wanna move on from this type of situation because all I see is half a glove and half an arm.",
+          "time": "2026-04-05T19:06:04.673Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-hiker-full1",
+      "label": "R7: Hiker full body A (from behind)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Full body hiker walking along dramatic mountain ridge trail, lightweight hiking clothes, remote on lower forearm, shot from behind following the hiker, golden hour",
+      "context": "Justin asked repeatedly for \"that full body action shot, that real aspirational action shot.\" Testing full body from behind — a completely different angle than all previous close-ups.",
+      "comments": [
+        {
+          "text": "This is bad. I don't see any remote at all. I just see a guy wearing a wristwatch, but it does look like a cool photo of a guy hiking. I'll give you that and it's interesting lighting. Looks a little AI.",
+          "time": "2026-04-05T19:06:31.355Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-hiker-full2",
+      "label": "R7: Hiker full body B (from behind)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Full body hiker walking along dramatic mountain ridge trail, shot from behind following the hiker, golden hour",
+      "context": "Same full-body-from-behind prompt, different seed.",
+      "comments": [
+        {
+          "text": "No remote visible and just a guy with a ponytail hiking wearing a wristwatch that looks nothing like our remote",
+          "time": "2026-04-05T19:06:51.073Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-mtb-action1",
+      "label": "R7: MTB action A (panning shot)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Mountain biker riding aggressively down dusty singletrack, leaning into turn, cycling jersey helmet gloves, remote on lower forearm, panning shot",
+      "context": "MTB has been inconsistent (R5 MTB was total fail, R6 MTB A was 95%). Testing aggressive riding pose + panning shot style.",
+      "comments": [
+        {
+          "text": "This is a cool image of a guy in a bike, but it looks like there's something in his arm, but it's about I'd say a five out of 100. It looks like something strap on his arm, but it's not a chubby buttons you have the best I give you a five out of 100 on that but for the but looks like that's a cool picture of a bike if the remote was cool and the remote was accurate on this one I'd give you a high five.",
+          "time": "2026-04-05T19:07:30.254Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-mtb-action2",
+      "label": "R7: MTB action B (panning)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Mountain biker riding aggressively down dusty singletrack, leaning into turn, panning shot",
+      "context": "Same action prompt, different seed.",
+      "comments": [
+        {
+          "text": "Oh, OK. Well, this looks strange. The guy has a bunch of things strapped on his arms got some arm pads. The chubby button is perpendicular on his upper arm. It should be below the elbow. You should know where it's placed by now and then there's another chubby buttons that looks like it's Photoshop on his other arm and also face the wrong w. Yeah I get this like a 10 out of 100 mainly only because it looks like our remote but it's placed in all the wrong places and it looks a little Photoshop.",
+          "time": "2026-04-05T19:08:09.958Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-festival",
+      "label": "R7: Festival (arms raised, evening)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Person at outdoor music festival arms raised enjoying music, casual t-shirt, remote on lower forearm, colorful stage lights and crowd, evening",
+      "context": "Testing non-sport use case. CB2 is used at concerts/festivals. Previous festival attempt (R5) had skin artifacts. Trying evening atmosphere + arms raised pose.",
+      "comments": [
+        {
+          "text": "Is it just a guy to concert with chubby buttons on his shoulder which is totally wrong.",
+          "time": "2026-04-05T19:08:28.838Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r7-runner",
+      "label": "R7: Trail runner (mid-stride)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Trail runner mid-stride on mountain path, running shorts and lightweight performance top, remote on lower forearm, morning light, action sports photography",
+      "context": "Testing running as a use case. Running shorts + performance top should prevent ski jacket bleed completely.",
+      "comments": [
+        {
+          "text": "This is the guy running and he looks cool. The lighting looks interesting. Definitely looks like he was made by AI and there's something strapped on his arm, but it's absolutely not our unit and I give us so one out of 100.",
+          "time": "2026-04-05T19:08:53.462Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "r6-hiker1",
       "label": "R6: Hiker A (symbol fix + trail clothes)",
