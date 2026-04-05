@@ -1,7 +1,189 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-05T20:16:42.943Z",
+  "syncedAt": "2026-04-05T21:05:29.503Z",
   "images": [
+    {
+      "id": "pipeD-motoc",
+      "label": "PIPE D: Motorcycle close-up (spring!)",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Motorcycle rider close-up, leather jacket, product from image 1 on lower forearm, spring road with cherry blossoms",
+      "context": "MOTORCYCLE IS SPRING PRIORITY. Pipeline A @image with product-only ref. Cherry blossoms = spring. This is the template we need for the seasonal push.",
+      "comments": [
+        {
+          "text": "The remote is fine. It looks a little flatter than usual, but it's decently sized. The strap looks little strange, but it's also all the way on his hand and it's not on his forearm where it should be, but the iconography is slipped in the right direction I give this like a like a 80 out of hundred",
+          "time": "2026-04-05T21:01:34.198Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD-moto-waist",
+      "label": "PIPE D: Motorcycle waist-up (spring)",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Waist-up motorcycle rider at scenic overlook, leather jacket, product from image 1 on forearm, mountain vista, spring golden hour",
+      "context": "Motorcycle waist-up template. Product on forearm with \"Chubby Buttons\" visible. Mountain vista, golden hour.",
+      "comments": [
+        {
+          "text": "It needs to be flipped. The echography is a little too big little too long, but the logo looks good and it's but it's also way too high upon his upper arm. It should be on his lower arm near the zippers in this particular photograph.",
+          "time": "2026-04-05T21:01:56.512Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD-moto",
+      "label": "PIPE D: Motorcycle riding (spring)",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Motorcycle rider on winding mountain road, leather jacket, product from image 1 on forearm, green hills, golden hour",
+      "context": "Motorcycle on mountain road. Product on forearm area.",
+      "comments": [
+        {
+          "text": "This is flipped horizontally. The remote looks good but it's perpendicular the way it should be. It's not placed in the right direction but the remote itself looks accurate. I'll give you like 50 points for having the remote accurate but 50 out of 100 because it's not placed correctly if you just rotate at 90° it would be pretty damn good.",
+          "time": "2026-04-05T21:02:26.264Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD-moto-coast",
+      "label": "PIPE D: Motorcycle coastal (spring)",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Motorcycle rider cruising coastal highway, leather jacket, product from image 1 on forearm, ocean and cliffs, spring sunlight",
+      "context": "Coastal motorcycle ride. Different scene variety for motorcycle template.",
+      "comments": [
+        {
+          "text": "This is getting there. It's like looks like it's levitating a little bit on top of his jacket. If it was just sitting flushing the jacket it would be pretty damn cool lighting is good. I like the sunset yeah I mean I get this like a 89 out of 100 and the echography is flipped in the right direction to.",
+          "time": "2026-04-05T21:02:59.298Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD-snowmo",
+      "label": "PIPE D: Snowmobile POV",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Snowmobile rider POV, winter gear, product from image 1 on forearm, snowy trail, mountains",
+      "context": "Snowmobile with product ref. Key CB2 sport.",
+      "comments": [
+        {
+          "text": "This doesn't really look like a remote at all, but the logo is fine. I get this like a 20 out of 100 because it remotely looks a bit like it but generally does not.",
+          "time": "2026-04-05T21:03:22.497Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD-mtb",
+      "label": "PIPE D: MTB action",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "MTB rider on trail, cycling jersey, product from image 1 on forearm, pine trees, sunlight",
+      "context": "Mountain biking with product ref. Testing if @image works for non-winter sports.",
+      "comments": [
+        {
+          "text": "This looks like the form factor is familiar but all the symbols and buttons are gone. I get a second 20 out of 100.",
+          "time": "2026-04-05T21:03:41.481Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeE-motoc-hi",
+      "label": "PIPE E: Moto ref=0.8 (product took over)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "fill_image mask + reference_image_url at strength 0.8. Scene: motorcycle close-up.",
+      "context": "PIPELINE E: The holy grail — mask-based inpainting WITH product reference image. Uses fal-ai/flux-general with fill_image (mask) + reference_image_url (product). At ref_strength=0.8, the reference dominates and produces a product render instead of a scene. Product fidelity is AMAZING though.",
+      "comments": [
+        {
+          "text": "This just looks like a red redo of one of our shots from the photo box with none of the symbols there I don't know what this is meant to do, but it's it's pretty bad but thief plastic looks OK just none of the buttons are accurate",
+          "time": "2026-04-05T21:04:02.798Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeE-motoc-lo",
+      "label": "PIPE E: Moto ref=0.3 (scene preserved)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "fill_image mask + reference_image_url at strength 0.3. Scene: motorcycle close-up.",
+      "context": "Same Pipeline E but reference_strength lowered to 0.3. Scene survives! But is the product visible? The Goldilocks zone is somewhere between 0.3 and 0.8.",
+      "comments": [
+        {
+          "text": "This is a two out of 100. It's just a guy. The picture itself is dithered and I can't even see a remote.",
+          "time": "2026-04-05T21:04:15.481Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeE-motoc-mid",
+      "label": "PIPE E: Moto ref=0.4 (balanced attempt)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "fill_image mask + reference_image_url at strength 0.4, overall strength 0.5.",
+      "context": "Pipeline E at ref=0.4, strength=0.5. Trying to find the balance between product visibility and scene preservation.",
+      "comments": [
+        {
+          "text": "This is also a zero out of 100 bad picture of a motorcycle, but nothing reminiscent of a CB",
+          "time": "2026-04-05T21:04:29.166Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeC-motoc",
+      "label": "PIPE C: Motorcycle close-up (SAM→Fill)",
+      "model": "SAM3 + Fill Pro",
+      "prompt": "Step 1: BFL generated clean motorcycle close-up scene (spring, cherry blossoms). Step 2: SAM 3 detected arm region (\"arm in leather jacket sleeve\"). Step 3: Fill Pro inpainted CB2 into SAM-derived forearm mask.",
+      "context": "PIPELINE C TEST: 3-step automated pipeline. SAM 3 provides pixel-perfect forearm segmentation (no more crude rectangles). Fill Pro inpaints the product into precisely the right region. The question: does text-only inpainting (no product ref image) produce a recognizable CB2?",
+      "comments": [
+        {
+          "text": "Again another zero out of 100",
+          "time": "2026-04-05T21:04:36.948Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeC-moto",
+      "label": "PIPE C: Motorcycle riding (SAM→Fill)",
+      "model": "SAM3 + Fill Pro",
+      "prompt": "Clean motorcycle riding scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
+      "context": "Motorcycle on winding mountain road. SAM detected the rider arm. Fill Pro attempted to place CB2. Spring = motorcycle season, this is a priority use case.",
+      "comments": [
+        {
+          "text": "I give us a two out of 100 because you put a remote somewhere in the picture but pretty much a fail doesn't look anything like ours and it's on the upper arm and the picture itself sucks. It doesn't look like the way that AI actually could be.",
+          "time": "2026-04-05T21:04:56.352Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeC-snowmo",
+      "label": "PIPE C: Snowmobile POV (SAM→Fill)",
+      "model": "SAM3 + Fill Pro",
+      "prompt": "Clean snowmobile POV scene + SAM 3 forearm mask + Fill Pro CB2 inpaint",
+      "context": "Snowmobile POV with visible forearm. SAM detected the puffy jacket forearm area. Another key CB2 sport — gloves + cold weather = perfect use case.",
+      "comments": [
+        {
+          "text": "I would give this five out of now I give it two. It's a cool picture. Looks a little bit like a dream like and cartoon like but there's no remote there. It just looks like a Fitbit.",
+          "time": "2026-04-05T21:05:12.083Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeC-mtb",
+      "label": "PIPE C: MTB action (SAM→Fill)",
+      "model": "SAM3 + Fill Pro",
+      "prompt": "Clean MTB action scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
+      "context": "Full body mountain biker. SAM detected cyclist arm on handlebar. Testing if the 3-step pipeline can solve full-body product placement that all other approaches failed at.",
+      "comments": [
+        {
+          "text": "This is a two out of 100. The pictures is interesting. Looks a little bit too CGI and fake. The skin of the guy looks really strange and there's no remote visible at all.",
+          "time": "2026-04-05T21:05:27.215Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "r8-mtb1",
       "label": "R8: MTB 1 of 5 (Pipeline A)",
