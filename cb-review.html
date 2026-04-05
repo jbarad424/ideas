@@ -100,42 +100,50 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <div class="exp-result">Justin: "remote is perfect", "nailed it", "almost uncanny" — ~90% product accuracy on close-up/waist-up framing.</div>
   </div>
 
-  <div class="section-label">Experiments — What We're Testing</div>
+  <div class="section-label">Active Experiment — R6</div>
 
   <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Editorial prompting ("Canon 5D, f/2.8")</span><span class="exp-badge test">TESTING</span></div>
-    <div class="exp-desc">Camera-specific language triggers higher-fidelity detail rendering. First approach to produce green LED icons consistently.</div>
-    <div class="exp-result">Awaiting Justin's review. If confirmed, this becomes the default prompt style.</div>
+    <div class="exp-header"><span class="exp-name">R6: Symbol orientation + clothing fix</span><span class="exp-badge test">TESTING NOW</span></div>
+    <div class="exp-desc">11 new images targeting the two biggest issues: (1) "symbols face the wearer, appear upside-down to camera" and (2) activity-specific clothing instead of ski jacket. 3 per activity for cherry-picking.</div>
+    <div class="exp-result">Awaiting Justin's review. If symbols flip correctly, this solves the #1 remaining issue and we're at production quality.</div>
   </div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Anatomical placement ("3in above wrist")</span><span class="exp-badge test">TESTING</span></div>
-    <div class="exp-desc">Ultra-specific body part language to control where the product lands on the arm. Targeting the lower forearm placement issue.</div>
-    <div class="exp-result">Awaiting review. Extreme close-up — product detail is excellent but may be too zoomed.</div>
+  <div class="section-label">Completed Experiments</div>
+
+  <div class="exp-card">
+    <div class="exp-header"><span class="exp-name">Editorial prompting ("Canon 5D, f/2.8")</span><span class="exp-badge base">NICE LIGHTING</span></div>
+    <div class="exp-desc">Camera-specific language for better lighting.</div>
+    <div class="exp-result">Justin: "Lighting is cool, symbols too bright, placed too low." Not transformative over simple prompts.</div>
   </div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Negative prompts ("NOT upper arm")</span><span class="exp-badge test">TESTING</span></div>
-    <div class="exp-desc">Using exclusion language to prevent the model from placing the product on the wrong body part.</div>
-    <div class="exp-result">Awaiting review. Placement appears improved but needs your confirmation.</div>
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">Anatomical placement ("3in above wrist")</span><span class="exp-badge fail">OVERCORRECTED</span></div>
+    <div class="exp-desc">Ultra-specific body language for placement control.</div>
+    <div class="exp-result">Justin: "Way too small, arm looks humongous." Product accurate but scale was off.</div>
   </div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Seed variation (consistency test)</span><span class="exp-badge test">TESTING</span></div>
-    <div class="exp-desc">Same exact prompt run 5 times. Measures whether placement is prompt-controllable or random.</div>
-    <div class="exp-result">If placement varies wildly across seeds, prompt refinement alone can't solve positioning — we'd need a different approach (compositing/inpainting).</div>
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">Negative prompts ("NOT upper arm")</span><span class="exp-badge fail">OVERCORRECTED</span></div>
+    <div class="exp-desc">Exclusion language to prevent wrong placement.</div>
+    <div class="exp-result">Justin: "Way too chunky, much bigger than it should be, armband looks inaccurate." Negative language overcorrected.</div>
   </div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Two-pass (multiref → Kontext refinement)</span><span class="exp-badge test">TESTING</span></div>
-    <div class="exp-desc">Generate with multiref first (good product), then use Kontext Pro to move the product to the correct position.</div>
-    <div class="exp-result">Initial test shows minimal repositioning. Kontext preserves scene but doesn't actually move the product much.</div>
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Seed variation → Generate-and-filter</span><span class="exp-badge win">KEY FINDING</span></div>
+    <div class="exp-desc">Same prompt, 5 seeds: scores ranged from 70/100 to 98/100.</div>
+    <div class="exp-result">Seed 4: "98 out of 100" — our best ever. Proves the model CAN nail it, we just need to generate multiple and cherry-pick winners. This is now the strategy.</div>
   </div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">LoRA v4b (50 photos, all colorways)</span><span class="exp-badge test">TESTING</span></div>
-    <div class="exp-desc">First test of v4b model (Jordan's 50 photos: 28 Patriot, 20 Hunter, 2 Tron). Previous LoRA v4 used only 38 Tron photos.</div>
-    <div class="exp-result">Awaiting review. Claude thinks it learned text/concepts not product shape — but Justin's eyes are the judge.</div>
+  <div class="exp-card">
+    <div class="exp-header"><span class="exp-name">Two-pass (multiref → Kontext)</span><span class="exp-badge base">MARGINAL</span></div>
+    <div class="exp-desc">Kontext Pro tried to reposition product after multiref generation.</div>
+    <div class="exp-result">Justin: BASE was "really nice" but Kontext refinement "didn't help much — symbols still flipped." Kontext doesn't meaningfully reposition.</div>
+  </div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Ski jacket bleed identified</span><span class="exp-badge win">ROOT CAUSE FOUND</span></div>
+    <div class="exp-desc">On-arm reference photos show someone in a dark ski jacket. Model copies that clothing into ALL scenes.</div>
+    <div class="exp-result">Justin: "looks like our modeling photos just superimposed over a hiker." Fix: specify activity-appropriate clothing in prompt. Being tested in R6.</div>
   </div>
 
   <div class="section-label">Proven Findings</div>
@@ -168,8 +176,14 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
   <div class="exp-card failed">
     <div class="exp-header"><span class="exp-name">LoRA v4 (Tron-only, 38 photos)</span><span class="exp-badge fail">FAILED</span></div>
-    <div class="exp-desc">Earlier LoRA trained only on Tron/black colorway. Generated scenery with no visible product.</div>
-    <div class="exp-result">Product didn't appear in any generated images. Training may not have converged. v4b with 50 photos may perform better.</div>
+    <div class="exp-desc">LoRA trained only on Tron/black colorway.</div>
+    <div class="exp-result">Product didn't appear in generated images.</div>
+  </div>
+
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">LoRA v4b (all colorways, 50 photos)</span><span class="exp-badge fail">FAILED 0/100</span></div>
+    <div class="exp-desc">Jordan's 50 photos (28 Patriot, 20 Hunter, 2 Tron). Broader training data.</div>
+    <div class="exp-result">Justin: "Zero visibility of remote", "makes me want to vomit", "total fail." All 5 images scored 0/100. LoRA approach is conclusively dead for CB2.</div>
   </div>
 
   <div class="exp-card failed">
@@ -212,6 +226,19 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <script>
 const SYNC_URL='https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
 const ALL_IMAGES=[
+  // === R6: Symbol orientation fix + clothing bleed fix (3 per activity, cherry-pick best) ===
+  {id:'r6-hiker1',url:'https://files.catbox.moe/qdsl6x.jpg',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour',label:'R6: Hiker A (symbol fix + trail clothes)',context:'R5 feedback: symbols face camera not wearer. Ski jacket bleeding into non-ski scenes. Fix: "symbols face wearer, appear upside-down to camera" + specify "lightweight trail clothing."'},
+  {id:'r6-hiker2',url:'https://drive.google.com/thumbnail?id=1IMF89VqtHPQBFBLF3Z9tZfTnfxrxNe3r&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour',label:'R6: Hiker B (symbol fix + trail clothes)',context:'Same prompt as Hiker A — different seed for cherry-picking. Generate-and-filter strategy from seed variation test.'},
+  {id:'r6-skier1',url:'https://files.catbox.moe/jo84r6.jpg',model:'flux2-pro-multiref',prompt:'Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight',label:'R6: Skier A (symbol fix)',context:'Skier scenes can keep ski jacket. Only fixing symbol orientation.'},
+  {id:'r6-skier2',url:'https://drive.google.com/thumbnail?id=16kT-1nrQAqCXQ_7Cgt5Gkp-O6vDL3utz&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight',label:'R6: Skier B (symbol fix)',context:'Same prompt, different seed.'},
+  {id:'r6-skier3',url:'https://drive.google.com/thumbnail?id=1UWHPCeJ9Lv5HBIO7mvOiV3o5B6Pki05A&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight',label:'R6: Skier C (symbol fix)',context:'Same prompt, different seed.'},
+  {id:'r6-mtb1',url:'https://files.catbox.moe/7kqr2m.jpg',model:'flux2-pro-multiref',prompt:'Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees',label:'R6: MTB A (symbol fix + cycling clothes)',context:'Fixing ski jacket bleed by specifying "cycling jersey and helmet." Plus symbol orientation fix.'},
+  {id:'r6-mtb2',url:'https://drive.google.com/thumbnail?id=1leeind2i1_6uOFt4j5Pw51fOahUZ2E2Y&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees',label:'R6: MTB B (symbol fix + cycling clothes)',context:'Same prompt, different seed.'},
+  {id:'r6-mtb3',url:'https://drive.google.com/thumbnail?id=1WghIY5veIeSWMWzMm5o9onpqgWHiMrnH&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees',label:'R6: MTB C (symbol fix + cycling clothes)',context:'Same prompt, different seed.'},
+  {id:'r6-snow1',url:'https://files.catbox.moe/38zfzr.jpg',model:'flux2-pro-multiref',prompt:'Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky',label:'R6: Snowboard A (symbol fix)',context:'Symbol orientation fix + colorful snow gear instead of dark jacket.'},
+  {id:'r6-snow2',url:'https://drive.google.com/thumbnail?id=1WJs-vJ0ckVYdbd5_Udy6AB12rgbxjsvb&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky',label:'R6: Snowboard B (symbol fix)',context:'Same prompt, different seed.'},
+  {id:'r6-snow3',url:'https://drive.google.com/thumbnail?id=1zToWWgdsW49tcgbTOcyb4Rw-eJfZcDHz&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky',label:'R6: Snowboard C (symbol fix)',context:'Same prompt, different seed.'},
+  // === COMBO EXPERIMENTS ===
   {id:'combo-editorial',url:'https://files.catbox.moe/hnulh4.jpg',model:'flux2-pro-multiref',prompt:'Award-winning product photography, Canon 5D Mark IV, golden hour, shallow depth of field, f/2.8, green LED icons, elastic armband with velcro closure',label:'COMBO: Editorial (Canon 5D, f/2.8)',context:'Testing camera-specific language for better lighting and detail. First prompt to produce green LEDs consistently.'},
   {id:'combo-anatomical',url:'https://files.catbox.moe/slvawu.jpg',model:'flux2-pro-multiref',prompt:'Close up of hikers left arm, 3 inches above the wrist joint, elastic velcro armband wraps snugly',label:'COMBO: Anatomical (3in above wrist)',context:'R4 feedback: product kept going on upper arm. Testing ultra-specific anatomical placement language.'},
   {id:'combo-negative',url:'https://files.catbox.moe/e9v5wh.jpg',model:'flux2-pro-multiref',prompt:'LOWER forearm halfway between wrist and elbow, NOT on the upper arm, NOT on the wrist, NOT floating',label:'COMBO: Negative prompt (NOT upper arm)',context:'Testing exclusion language to prevent wrong placement. Does "NOT on upper arm" actually help?'},
