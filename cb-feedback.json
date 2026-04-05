@@ -1,7 +1,91 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-05T19:08:56.189Z",
+  "syncedAt": "2026-04-05T19:33:15.514Z",
   "images": [
+    {
+      "id": "pipeA-hiker",
+      "label": "PIPE A: Hiker full body (@image, 1 ref only)",
+      "model": "flux2-pro-multiref (@image)",
+      "prompt": "Place the product from image 1 on a hikers lower forearm. Lightweight trail clothes, mountain ridge, golden hour. Full body shot from the side.",
+      "context": "BREAKTHROUGH TEST. Using ONLY the product-front photo as reference (no on-arm ski jacket refs). The @image syntax tells the model \"place product from image 1 on the forearm.\" This should eliminate ski jacket bleed and enable variety.",
+      "comments": [
+        {
+          "text": "OK, this isn't bad. I like the lighting. I like the guy it looks aspirational. The symbols are a little unclear, but and it's just a little further down the arm, but but it's cool. I mean the suit this is definitely something to be proud of. I'd say like a 70 out of 100 we can also talk about whether this is really like on brand at all because like mainly chubby buttons for people that wear gloves but hikers do you love it as well but just letting you know that's another thing.",
+          "time": "2026-04-05T19:30:09.452Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeA-mtb",
+      "label": "PIPE A: MTB action (@image, 2 refs)",
+      "model": "flux2-pro-multiref (@image)",
+      "prompt": "Product from image 1 on bikers lower forearm, positioned like image 2. Cycling jersey. Action sports, dusty trail.",
+      "context": "Testing @image with 2 refs: product + arm placement guide. Explicit instruction: \"completely different clothing than reference images.\" Does the model respect this?",
+      "comments": [
+        {
+          "text": "So this is interesting wow I mean besides the fact that he's not worrying you know earbuds, which obviously is another element we can talk about but placement wise. I mean the symbols could be a little clear but given it's a full body shot and you probably wouldn't even get to get that clear in general fuck I mean I think I'd get this like a 89 or an 88 out of 100",
+          "time": "2026-04-05T19:30:58.533Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeA-snowboard",
+      "label": "PIPE A: Snowboard mid-air (@image, 1 ref)",
+      "model": "flux2-pro-multiref (@image)",
+      "prompt": "Product from image 1 on forearm. Snowboarder mid-air, colorful snow gear. From below looking up.",
+      "context": "Testing if product survives in a completely novel scene (mid-air, from below) with only 1 product reference. No on-arm refs = no ski jacket bleed.",
+      "comments": [
+        {
+          "text": "This is cool. The guy is the woman or whatever is doing a cool jump. It's correctly on the forearm, but the symbol autography looks look a little warped, but it's cool that you're able to get a zoom out I'd give this a yeah, and the strap is not that tight on the arm. I'd give it like a 65 out of 100.",
+          "time": "2026-04-05T19:31:47.730Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeA-festival",
+      "label": "PIPE A: Festival arms raised (@image, 1 ref)",
+      "model": "flux2-pro-multiref (@image)",
+      "prompt": "Product from image 1 on forearm. Person at music festival, arms raised, casual t-shirt, stage lights, evening.",
+      "context": "Non-sport use case with product-only ref. Previous festival attempts (R5, R7) had skin artifacts or wrong placement. Does @image syntax fix this?",
+      "comments": [
+        {
+          "text": "The iconography is interesting. The remote looks way too big and it's not facing the guy like it should be flipped 180° but I also don't know why he's at a concert. This is not on brand for us at all so I would probably not use these photos again, but it's also a little further down on his arm.",
+          "time": "2026-04-05T19:32:23.880Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeB-festival",
+      "label": "PIPE B: Festival inpaint (mask-based)",
+      "model": "flux-pro-fill (inpaint)",
+      "prompt": "Step 1: Generated clean festival scene. Step 2: Created forearm mask. Step 3: Inpainted CB2 via fal.ai Fill Pro.",
+      "context": "Pipeline B test: generate scene without product, then inpaint the CB2 into a masked forearm region. The mask was a rough rectangle — better segmentation would improve placement. Compare with Pipeline A festival which used @image referencing instead.",
+      "comments": [
+        {
+          "text": "This is a nice photo of the person that a concert but there's no remote visible so I give it a zero out of 100",
+          "time": "2026-04-05T19:32:38.580Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeB-hiker",
+      "label": "PIPE B: Hiker inpaint (mask-based)",
+      "model": "flux-pro-fill (inpaint)",
+      "prompt": "Step 1: Generated clean hiker scene (from behind, ridge trail). Step 2: Masked right forearm area. Step 3: Inpainted CB2.",
+      "context": "Pipeline B test with hiker scene. The mask was a rough ellipse placed where I estimated the forearm was. Inpainting produces something but mask precision is critical — better segmentation needed.",
+      "comments": [
+        {
+          "text": "This looks like you took a picture of a guy and then you took someone's old shitty television, remote that he made with the first version of AI and copy and paste it in Photoshop a -100 out of 100. This is worse than fail.",
+          "time": "2026-04-05T19:33:11.730Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "r7-skier-action1",
       "label": "R7: Skier action A (mid-turn, side angle)",
