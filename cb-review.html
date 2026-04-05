@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CB2 Image Review</title>
+<title>CB2 Creative Lab</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center}
@@ -7,28 +7,24 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .header h1{font-size:1.1rem;color:#a855f7;margin-bottom:.2rem}
 .header .sub{font-size:.75rem;color:#666}
 .tabs{display:flex;gap:0;width:100%;max-width:600px;margin:.5rem auto 0;padding:0 .5rem}
-.tab{flex:1;padding:.6rem;text-align:center;font-size:.8rem;font-weight:700;cursor:pointer;border:2px solid #222;transition:all .15s;border-radius:0}
+.tab{flex:1;padding:.5rem;text-align:center;font-size:.7rem;font-weight:700;cursor:pointer;border:2px solid #222;transition:all .15s}
 .tab:first-child{border-radius:8px 0 0 8px}
 .tab:last-child{border-radius:0 8px 8px 0}
-.tab.active-new{background:#1a1030;border-color:#a855f7;color:#a855f7}
-.tab.active-done{background:#0a1a0a;border-color:#22c55e;color:#22c55e}
-.tab:not([class*="active-"]){background:#111;color:#666}
+.tab.active{border-color:#a855f7;color:#a855f7;background:#1a1030}
+.tab:not(.active){background:#111;color:#666}
 .counter{font-size:.8rem;color:#888;margin:.5rem 0;padding:0 .5rem;text-align:center}
 .img-wrap{width:100%;max-width:600px;background:#111;border-radius:12px;overflow:hidden;margin:0 auto}
 .img-wrap img{width:100%;display:block}
 .meta{padding:.5rem .8rem;display:flex;gap:.4rem;flex-wrap:wrap}
 .tag{font-size:.6rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;background:#1a1030;color:#a855f7;border:1px solid #2d1a4e}
 .tag.model{background:#0a1a1a;color:#06b6d4;border-color:#0d2a2a}
-/* Context box - shows why this image was generated */
 .context-box{width:100%;max-width:600px;margin:.5rem auto;padding:0 .5rem}
 .context-inner{background:#0d1117;border:1px solid #1a3a2a;border-radius:8px;padding:.6rem .8rem;font-size:.75rem;line-height:1.5;color:#8b949e}
 .context-inner strong{color:#22c55e;font-size:.7rem;display:block;margin-bottom:.3rem}
-/* Comment trail */
 .comment-trail{width:100%;max-width:600px;margin:.3rem auto;padding:0 .5rem}
 .comment-entry{background:#111;border:1px solid #222;border-radius:8px;padding:.5rem .7rem;margin-bottom:.4rem;font-size:.8rem;line-height:1.4}
-.comment-entry .comment-time{font-size:.6rem;color:#666;margin-bottom:.2rem}
-.comment-entry .comment-text{color:#ccc}
-/* Input area */
+.comment-entry .ct{font-size:.6rem;color:#666;margin-bottom:.2rem}
+.comment-entry .cx{color:#ccc}
 .feedback-area{width:100%;max-width:600px;margin:.5rem auto;padding:0 .5rem}
 .feedback-area textarea{width:100%;min-height:80px;background:#111;border:2px solid #222;border-radius:10px;color:#fff;font-size:.95rem;padding:.8rem;resize:vertical;font-family:inherit;line-height:1.5}
 .feedback-area textarea:focus{outline:none;border-color:#a855f7}
@@ -36,15 +32,31 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .submit-row{display:flex;gap:.5rem;margin-top:.4rem}
 .submit-btn{flex:1;background:#a855f7;border:none;color:#fff;padding:.6rem;border-radius:8px;font-size:.85rem;font-weight:700;cursor:pointer}
 .submit-btn:hover{background:#9333ea}
-.submit-btn:disabled{opacity:.4;cursor:default}
-.nav{display:flex;gap:.5rem;padding:.5rem;justify-content:center;align-items:center;width:100%;max-width:600px}
-.nav button{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.5rem .8rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s;flex:1;max-width:100px}
+.nav{display:flex;gap:.5rem;padding:.5rem;justify-content:center;width:100%;max-width:600px}
+.nav button{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.5rem .8rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;flex:1;max-width:100px}
 .nav button:hover{border-color:#a855f7;background:#1a1030}
 .nav button:disabled{opacity:.3;cursor:default}
 .empty-state{text-align:center;padding:3rem 1rem;color:#555;font-size:.9rem}
 .btn-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem;padding-bottom:2rem}
 .export-btn{background:none;border:1px solid #333;color:#888;padding:.4rem .8rem;border-radius:8px;font-size:.7rem;cursor:pointer}
 .export-btn:hover{border-color:#a855f7;color:#a855f7}
+/* Progress tab styles */
+.progress-wrap{width:100%;max-width:600px;padding:.5rem;display:none}
+.exp-card{background:#111;border:1px solid #222;border-radius:10px;padding:.8rem;margin-bottom:.6rem}
+.exp-card.winner{border-color:#22c55e}
+.exp-card.failed{border-color:#ef4444;opacity:.7}
+.exp-card.testing{border-color:#f59e0b}
+.exp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+.exp-name{font-weight:700;font-size:.85rem}
+.exp-badge{font-size:.6rem;padding:.15rem .5rem;border-radius:4px;font-weight:700}
+.exp-badge.win{background:#22c55e;color:#000}
+.exp-badge.fail{background:#ef4444;color:#fff}
+.exp-badge.test{background:#f59e0b;color:#000}
+.exp-badge.base{background:#3b82f6;color:#fff}
+.exp-desc{font-size:.75rem;color:#999;line-height:1.4;margin-bottom:.3rem}
+.exp-result{font-size:.75rem;color:#ccc;line-height:1.4;font-style:italic}
+.exp-arrow{text-align:center;color:#555;font-size:1.2rem;margin:.2rem 0}
+.section-label{font-size:.7rem;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .4rem;padding-left:.2rem}
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:99}
 .toast.show{opacity:1}
 </style>
@@ -56,41 +68,139 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 </div>
 
 <div class="tabs">
-  <div class="tab" id="tabNew" onclick="switchTab('new')">TO REVIEW (<span id="newCount">0</span>)</div>
-  <div class="tab" id="tabDone" onclick="switchTab('done')">REVIEWED (<span id="doneCount">0</span>)</div>
+  <div class="tab" onclick="setTab('new')">TO REVIEW (<span id="cntNew">0</span>)</div>
+  <div class="tab" onclick="setTab('done')">REVIEWED (<span id="cntDone">0</span>)</div>
+  <div class="tab" onclick="setTab('progress')">PROGRESS</div>
 </div>
 
 <div class="counter" id="counter">-</div>
 
-<div id="contentArea">
-  <div class="img-wrap" id="imgWrap">
-    <img id="mainImg" src="" alt="Loading...">
-    <div class="meta" id="meta"></div>
-  </div>
-
-  <!-- Context: why this image was generated -->
-  <div class="context-box" id="contextBox" style="display:none">
-    <div class="context-inner" id="contextInner"></div>
-  </div>
-
-  <!-- Previous comments trail -->
-  <div class="comment-trail" id="commentTrail"></div>
-
-  <!-- New comment input -->
+<div id="reviewArea">
+  <div class="img-wrap"><img id="mainImg" src="" alt=""><div class="meta" id="meta"></div></div>
+  <div class="context-box" id="ctxBox" style="display:none"><div class="context-inner" id="ctxInner"></div></div>
+  <div class="comment-trail" id="trail"></div>
   <div class="feedback-area">
-    <textarea id="feedback" placeholder="Tap the mic and say what you see..."></textarea>
-    <div class="submit-row">
-      <button class="submit-btn" id="submitBtn" onclick="submitComment()">Submit Comment</button>
-    </div>
+    <textarea id="fb" placeholder="Tap mic and say what you see..."></textarea>
+    <div class="submit-row"><button class="submit-btn" onclick="submitComment()">Submit Comment</button></div>
   </div>
-
   <div class="nav">
-    <button id="prevBtn" onclick="go(-1)">&#8592; Prev</button>
-    <button id="nextBtn" onclick="go(1)">Next &#8594;</button>
+    <button id="prevBtn" onclick="go(-1)">&larr; Prev</button>
+    <button id="nextBtn" onclick="go(1)">Next &rarr;</button>
   </div>
 </div>
 
 <div id="emptyState" class="empty-state" style="display:none"></div>
+
+<!-- PROGRESS TAB -->
+<div class="progress-wrap" id="progressArea">
+  <div class="section-label">Current Best Approach</div>
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">flux2-pro-multiref (3 refs, fal.ai)</span><span class="exp-badge win">WINNER</span></div>
+    <div class="exp-desc">3 reference photos → fal.ai FLUX.2 Pro edit endpoint. Simple prompts outperform verbose ones.</div>
+    <div class="exp-result">Justin: "remote is perfect", "nailed it", "almost uncanny" — ~90% product accuracy on close-up/waist-up framing.</div>
+  </div>
+
+  <div class="section-label">Experiments — What We're Testing</div>
+
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">Editorial prompting ("Canon 5D, f/2.8")</span><span class="exp-badge test">TESTING</span></div>
+    <div class="exp-desc">Camera-specific language triggers higher-fidelity detail rendering. First approach to produce green LED icons consistently.</div>
+    <div class="exp-result">Awaiting Justin's review. If confirmed, this becomes the default prompt style.</div>
+  </div>
+
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">Anatomical placement ("3in above wrist")</span><span class="exp-badge test">TESTING</span></div>
+    <div class="exp-desc">Ultra-specific body part language to control where the product lands on the arm. Targeting the lower forearm placement issue.</div>
+    <div class="exp-result">Awaiting review. Extreme close-up — product detail is excellent but may be too zoomed.</div>
+  </div>
+
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">Negative prompts ("NOT upper arm")</span><span class="exp-badge test">TESTING</span></div>
+    <div class="exp-desc">Using exclusion language to prevent the model from placing the product on the wrong body part.</div>
+    <div class="exp-result">Awaiting review. Placement appears improved but needs your confirmation.</div>
+  </div>
+
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">Seed variation (consistency test)</span><span class="exp-badge test">TESTING</span></div>
+    <div class="exp-desc">Same exact prompt run 5 times. Measures whether placement is prompt-controllable or random.</div>
+    <div class="exp-result">If placement varies wildly across seeds, prompt refinement alone can't solve positioning — we'd need a different approach (compositing/inpainting).</div>
+  </div>
+
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">Two-pass (multiref → Kontext refinement)</span><span class="exp-badge test">TESTING</span></div>
+    <div class="exp-desc">Generate with multiref first (good product), then use Kontext Pro to move the product to the correct position.</div>
+    <div class="exp-result">Initial test shows minimal repositioning. Kontext preserves scene but doesn't actually move the product much.</div>
+  </div>
+
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">LoRA v4b (50 photos, all colorways)</span><span class="exp-badge test">TESTING</span></div>
+    <div class="exp-desc">First test of v4b model (Jordan's 50 photos: 28 Patriot, 20 Hunter, 2 Tron). Previous LoRA v4 used only 38 Tron photos.</div>
+    <div class="exp-result">Awaiting review. Claude thinks it learned text/concepts not product shape — but Justin's eyes are the judge.</div>
+  </div>
+
+  <div class="section-label">Proven Findings</div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Waist-up framing = sweet spot</span><span class="exp-badge win">CONFIRMED</span></div>
+    <div class="exp-desc">Full body loses product (too small, duplicates). Extreme close-up loses scene context. Waist-up/3/4 body is the right balance.</div>
+    <div class="exp-result">R3 full-body: "horrible, floating, superimposed." R4 waist-up: "product looks awesome", "pretty damn good."</div>
+  </div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">3 refs >>> 1 ref</span><span class="exp-badge win">CONFIRMED</span></div>
+    <div class="exp-desc">Multiref with 3 reference images dramatically outperforms single-reference approaches (Kontext, flux-2-pro-preview).</div>
+    <div class="exp-result">R1 multiref: "nailed it." R2 single-ref: "lighting fake, LEDs wrong direction, too close to wrist."</div>
+  </div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Simple prompts > verbose prompts</span><span class="exp-badge win">CONFIRMED</span></div>
+    <div class="exp-desc">"This exact black remote with 5 buttons on forearm" beats long detailed descriptions of every product feature.</div>
+    <div class="exp-result">The best-rated R1 images used the simplest prompts. Over-specification seems to confuse the model.</div>
+  </div>
+
+  <div class="section-label">Failed / Abandoned</div>
+
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">FLUX Fill Pro (inpainting)</span><span class="exp-badge fail">FAILED</span></div>
+    <div class="exp-desc">Pixel-preserving inpainting: compose product onto scene, then blend edges. Theory was sound (from research PDF).</div>
+    <div class="exp-result">API returned "Forbidden" on our key. One crude test produced product absorbed into ski pole. Approach abandoned.</div>
+  </div>
+
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">LoRA v4 (Tron-only, 38 photos)</span><span class="exp-badge fail">FAILED</span></div>
+    <div class="exp-desc">Earlier LoRA trained only on Tron/black colorway. Generated scenery with no visible product.</div>
+    <div class="exp-result">Product didn't appear in any generated images. Training may not have converged. v4b with 50 photos may perform better.</div>
+  </div>
+
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">AI Vision Co-Rater (1-5 scoring)</span><span class="exp-badge fail">ABANDONED</span></div>
+    <div class="exp-desc">Claude Sonnet scoring images 1-5 on product/scene/brand. Gave 5/5 to clearly wrong images (floating product, gray LEDs).</div>
+    <div class="exp-result">Justin: "product is literally sitting in front of this guy like the size of a person and AI says 5/5." Replaced with human natural-language feedback.</div>
+  </div>
+
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">Complex trainer app (cb-trainer.html)</span><span class="exp-badge fail">ABANDONED</span></div>
+    <div class="exp-desc">Star ratings, grid views, filter tabs, auto feedback loops, webhooks — too much infrastructure, not enough iteration.</div>
+    <div class="exp-result">Justin: "a lot of energy was wasted on the website itself." Replaced with simple review page + chat-based feedback.</div>
+  </div>
+
+  <div class="section-label">Remaining Issues to Solve</div>
+  <div class="exp-card">
+    <div class="exp-header"><span class="exp-name">Product placement</span><span class="exp-badge test">OPEN</span></div>
+    <div class="exp-desc">Product keeps landing on upper arm, wrist, or wrong orientation. Need it on lower forearm, 3in above wrist, buttons facing wearer.</div>
+    <div class="exp-result">Testing: anatomical prompts, negative prompts, seed variation, two-pass refinement. Pending review of combo experiments.</div>
+  </div>
+  <div class="exp-card">
+    <div class="exp-header"><span class="exp-name">Symbol orientation</span><span class="exp-badge test">OPEN</span></div>
+    <div class="exp-desc">Button icons sometimes face the camera instead of the wearer (rotated 180°).</div>
+    <div class="exp-result">R5 tested "FACING THE WEARER" language. Editorial prompt got green LEDs showing. Pending review.</div>
+  </div>
+  <div class="exp-card">
+    <div class="exp-header"><span class="exp-name">Velcro strap closure</span><span class="exp-badge test">OPEN</span></div>
+    <div class="exp-desc">The fold-over velcro closure is often missing or incomplete.</div>
+    <div class="exp-result">R2 and R5 explicitly mentioned "velcro closure strap visible." Mixed results — strap shows but sometimes has artifacts.</div>
+  </div>
+</div>
 
 <div class="btn-row">
   <button class="export-btn" onclick="syncFeedback()">Sync All to Claude</button>
@@ -100,439 +210,175 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <div class="toast" id="toast"></div>
 
 <script>
-const SYNC_URL = 'https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
-
-const ALL_IMAGES = [
-  // === COMBO EXPERIMENTS ===
-  {
-    id: 'combo-editorial',
-    url: 'https://files.catbox.moe/hnulh4.jpg',
-    model: 'flux2-pro-multiref',
-    prompt: 'Award-winning product photography, a real photograph showing a hiker wearing this exact black Chubby Buttons remote control on their lower forearm, the device has 5 raised tactile buttons with green LED icons, elastic armband with velcro closure, shot on Canon 5D Mark IV, golden hour mountain landscape, shallow depth of field, f/2.8',
-    label: 'COMBO: Editorial style (Canon 5D, f/2.8)',
-    context: 'Testing whether camera-specific language ("Canon 5D Mark IV, f/2.8, shallow depth of field") improves lighting quality and product detail. Previous rounds had "cheesy" lighting. This is the first prompt to produce green LED icons consistently.'
-  },
-  {
-    id: 'combo-anatomical',
-    url: 'https://files.catbox.moe/slvawu.jpg',
-    model: 'flux2-pro-multiref',
-    prompt: 'Close up of a hikers left arm, this exact black remote control with 5 buttons is attached to the outside of the forearm 3 inches above the wrist joint, the elastic velcro armband wraps snugly around the forearm, mountain trail in soft focus background, golden hour',
-    label: 'COMBO: Anatomical placement (3in above wrist)',
-    context: 'R4 feedback said product kept going on upper arm or wrist. Testing ultra-specific anatomical language ("3 inches above the wrist joint", "outside of the forearm") to control exact placement.'
-  },
-  {
-    id: 'combo-negative',
-    url: 'https://files.catbox.moe/e9v5wh.jpg',
-    model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons strapped to hikers LOWER forearm halfway between wrist and elbow, NOT on the upper arm, NOT on the wrist, NOT floating above the skin, mountain trail golden hour, lifestyle marketing photo',
-    label: 'COMBO: Negative prompt (NOT upper arm)',
-    context: 'Testing whether negative language ("NOT on the upper arm, NOT floating") helps prevent the placement issues seen in R3-R5 where the product kept ending up on the wrong part of the arm.'
-  },
-  {
-    id: 'combo-twopass-base',
-    url: 'https://files.catbox.moe/wgqdqv.jpg',
-    model: 'flux2-pro-multiref',
-    prompt: 'Waist-up hiker on mountain ridge, this exact black remote with 5 buttons on forearm with elastic velcro armband, golden hour valley views, lifestyle marketing photo',
-    label: 'COMBO: Two-pass BASE (before Kontext)',
-    context: 'Base image for the two-pass experiment. This gets generated first via multiref (good product accuracy), then Kontext Pro tries to refine the placement in a second pass. Compare with the REFINED version to see if two-pass helps.'
-  },
-  {
-    id: 'combo-twopass-refined',
-    url: 'https://files.catbox.moe/vxtc21.jpg',
-    model: 'flux2-pro-multiref + kontext-pro',
-    prompt: 'Two-pass: multiref base then Kontext Pro: "Move the black remote control device to the LOWER forearm, positioned 3 inches above the wrist"',
-    label: 'COMBO: Two-pass REFINED (after Kontext)',
-    context: 'Second pass via Kontext Pro attempting to reposition the product lower on the forearm. Compare with the BASE version to see if the refinement pass actually moved the device or just made subtle changes.'
-  },
-  {
-    id: 'combo-seed1',
-    url: 'https://files.catbox.moe/x7g3jp.jpg',
-    model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
-    label: 'SEED TEST: Variation 1 of 5',
-    context: 'Same exact prompt run 5 times to measure consistency. If the same prompt produces wildly different placement each time, that tells us placement is random, not prompt-controllable. Compare all 5 seed variations.'
-  },
-  {
-    id: 'combo-seed2', url: 'https://files.catbox.moe/9knsrn.jpg', model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
-    label: 'SEED TEST: Variation 2 of 5', context: 'Same prompt as Seed 1. Compare placement, size, and orientation to see model consistency.'
-  },
-  {
-    id: 'combo-seed3', url: 'https://files.catbox.moe/6p4k03.jpg', model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
-    label: 'SEED TEST: Variation 3 of 5', context: 'Same prompt as Seed 1. Compare placement, size, and orientation to see model consistency.'
-  },
-  {
-    id: 'combo-seed4', url: 'https://files.catbox.moe/ux8ep4.jpg', model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
-    label: 'SEED TEST: Variation 4 of 5', context: 'Same prompt as Seed 1. Compare placement, size, and orientation to see model consistency.'
-  },
-  {
-    id: 'combo-seed5', url: 'https://files.catbox.moe/a97dxy.jpg', model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
-    label: 'SEED TEST: Variation 5 of 5', context: 'Same prompt as Seed 1. Compare placement, size, and orientation to see model consistency.'
-  },
-  // === LORA V4B ===
-  {
-    id: 'lora-v4b-hiker', url: 'https://files.catbox.moe/obdhqf.jpg', model: 'flux-lora-v4b',
-    prompt: 'waist-up hiker on mountain trail at golden hour, CB2REMOTE strapped to lower forearm',
-    label: 'LoRA v4b: Hiker',
-    context: 'First-ever test of v4b LoRA (Jordan\'s 50 photos, all 3 colorways: 28 Patriot, 20 Hunter, 2 Tron). Previous LoRA tests used v4 (38 Tron-only photos). Testing if broader training data improves product learning.'
-  },
-  {
-    id: 'lora-v4b-skier', url: 'https://files.catbox.moe/twtjj9.jpg', model: 'flux-lora-v4b',
-    prompt: 'upper body skier carving powder, CB2REMOTE on forearm over ski jacket',
-    label: 'LoRA v4b: Skier',
-    context: 'LoRA v4b test. Does the model produce the actual CB2 product shape, or just text/approximations? Compare with multiref versions of similar scenes.'
-  },
-  {
-    id: 'lora-v4b-mtb', url: 'https://files.catbox.moe/pho0yb.jpg', model: 'flux-lora-v4b',
-    prompt: 'waist-up mountain biker on trail, CB2REMOTE on lower forearm',
-    label: 'LoRA v4b: MTB',
-    context: 'LoRA v4b test. Checking if the model learned the product form factor from 50 training photos across 3 colorways.'
-  },
-  {
-    id: 'lora-v4b-snowboard', url: 'https://files.catbox.moe/bhr32u.jpg', model: 'flux-lora-v4b',
-    prompt: 'upper body snowboarder on snowy peak, CB2REMOTE on forearm',
-    label: 'LoRA v4b: Snowboarder',
-    context: 'LoRA v4b test. This is the POV shot with "CC2" text visible — closest to actual product shape of the v4b batch.'
-  },
-  {
-    id: 'lora-v4b-runner', url: 'https://files.catbox.moe/zompfm.jpg', model: 'flux-lora-v4b',
-    prompt: 'waist-up trail runner on alpine path, CB2REMOTE on lower forearm',
-    label: 'LoRA v4b: Runner',
-    context: 'LoRA v4b test. Check if the trigger word CB2REMOTE produces the actual device or just text/approximations.'
-  },
-  // === R5 ===
-  {
-    id: 'r5-hiker', url: 'https://files.catbox.moe/ny3zg1.jpg', model: 'flux2-pro-multiref',
-    prompt: 'Close-up of hikers LOWER forearm near wrist showing this exact black remote with 5 buttons, buttons and symbols FACING THE WEARER not the camera, elastic velcro armband on lower forearm between wrist and elbow, golden hour mountain trail',
-    label: 'R5: Hiker lower forearm',
-    context: 'R4 feedback: "product looks decent, just move to lower forearm." Added explicit LOWER forearm + FACING THE WEARER language to fix placement and symbol orientation.'
-  },
-  {
-    id: 'r5-mtb', url: 'https://files.catbox.moe/4uqszy.jpg', model: 'flux2-pro-multiref',
-    prompt: 'Three-quarter body mountain biker on trail, this exact black remote with 5 buttons strapped to LOWER forearm near wrist, buttons and symbols FACING THE WEARER',
-    label: 'R5: MTB lower forearm',
-    context: 'R4 MTB feedback: "generally pretty great, move up an inch." Testing if explicit LOWER forearm language improves placement.'
-  },
-  {
-    id: 'r5-snowboard', url: 'https://files.catbox.moe/lzjy9c.jpg', model: 'flux2-pro-multiref',
-    prompt: 'Waist-up snowboarder on snowy peak, this exact black remote with 5 buttons on LOWER forearm near wrist, buttons and symbols FACING THE WEARER',
-    label: 'R5: Snowboarder lower forearm',
-    context: 'R4 snowboard feedback: "product looks awesome, just symbols are flipped 180 degrees." Added FACING THE WEARER instruction.'
-  },
-  {
-    id: 'r5-skier', url: 'https://files.catbox.moe/wbumgt.jpg', model: 'flux2-pro-multiref',
-    prompt: 'Close-up POV of skiers LOWER forearm near wrist with this exact black remote with 5 buttons, buttons and symbols FACING THE WEARER not camera',
-    label: 'R5: Skier POV lower forearm',
-    context: 'R4 skier feedback: "pretty damn good." Maintaining quality while testing lower-forearm-specific language.'
-  },
-  {
-    id: 'r5-festival', url: 'https://files.catbox.moe/2g5bgv.jpg', model: 'flux2-pro-multiref',
-    prompt: 'Person at outdoor music festival, this exact black remote with 5 buttons on LOWER forearm near wrist, buttons and symbols FACING THE WEARER, colorful stage lights',
-    label: 'R5: Festival - new use case',
-    context: 'NEW: Testing a non-outdoor-sport use case. CB2 is also used at festivals/concerts. Can multiref handle different contexts?'
-  },
-  // === R4 ===
-  {
-    id: 'r4-hiker', url: 'https://drive.google.com/thumbnail?id=1SKqdW2-IG_wIT1mXhpZlrxMGAwaFiiAZ&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Waist-up hiker on mountain ridge at golden hour, remote on left forearm with velcro armband, scenic valley behind',
-    label: 'R4: Hiker waist-up',
-    context: 'R3 full-body shots had floating/superimposed products. R4 switched to waist-up framing as a compromise — shows person + scene but keeps forearm large enough for product accuracy.'
-  },
-  {
-    id: 'r4-skier', url: 'https://drive.google.com/thumbnail?id=1dw1Ac3VZms1hazlTa11xp3Au9gWm_iwa&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Upper body skier on snowy mountain, remote on left forearm over ski jacket, velcro armband visible, mountain panorama',
-    label: 'R4: Skier close-up',
-    context: 'Waist-up framing test. Justin\'s feedback: "pretty damn good" — this validated waist-up as the sweet spot.'
-  },
-  {
-    id: 'r4-mtb', url: 'https://drive.google.com/thumbnail?id=1MaHVFBwrhMH6fOlhtR7FEsedw9ed957D&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Three-quarter body mountain biker paused on trail, remote on left forearm with velcro armband, pine trees, natural sunlight',
-    label: 'R4: MTB 3/4 body',
-    context: 'Justin\'s feedback: "generally pretty great — just move it up an inch." Product placement was slightly low but product accuracy was strong.'
-  },
-  {
-    id: 'r4-snowboard', url: 'https://drive.google.com/thumbnail?id=1bd71TfrC7dJPPvXrhiob9sPBKkLnVfNj&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Waist-up snowboarder on snowy peak holding board, remote on forearm with velcro armband, blue sky and snow',
-    label: 'R4: Snowboarder waist-up',
-    context: 'Justin\'s feedback: "product looks awesome — symbols just rotated 180 degrees." Product fidelity excellent, orientation issue identified.'
-  },
-  // === R3 MULTIREF ===
-  {
-    id: 'r3m-hiker', url: 'https://drive.google.com/thumbnail?id=1BxuJ2cbcjabyw84iAURt-bJ95OlxuHIE&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Full body hiker at mountain overlook arms raised, remote on forearm, velcro armband, golden hour',
-    label: 'R3: Hiker full body',
-    context: 'First full-body attempt with multiref pipeline. Testing if product survives when person fills less of the frame.'
-  },
-  {
-    id: 'r3m-mtb', url: 'https://drive.google.com/thumbnail?id=1jjeHvhEuyZdLykDJ8MDfYMWdpnowjvMr&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Full body mountain biker on rugged trail, remote strapped to forearm with velcro armband',
-    label: 'R3: MTB full body',
-    context: 'Full-body test. Justin\'s feedback: "looks horrible, floating above arm, superimposed." This proved full-body framing was too wide for reliable product placement.'
-  },
-  {
-    id: 'r3m-skier', url: 'https://drive.google.com/thumbnail?id=18ok5ZBJSD8mHPsR8t5vGEBzD8zLbU3nm&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Full body skier at top of snowy mountain, remote on forearm over ski jacket, velcro strap visible, mountain panorama',
-    label: 'R3: Skier full body',
-    context: 'Full-body test. Justin\'s feedback: "two different remotes stacked on each other." Model generated duplicate products in wider framing.'
-  },
-  {
-    id: 'r3m-runner', url: 'https://drive.google.com/thumbnail?id=1vePZlpyrIfMsVz1jTl5hCymnB_4G4Ybp&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Trail runner full body in motion, remote on mid-forearm with velcro armband, alpine meadow',
-    label: 'R3: Trail Runner full body',
-    context: 'Full-body test. Justin\'s feedback: "two remotes, one upper arm, one lower — symbols too bright, 70-80% there."'
-  },
-  {
-    id: 'r3m-snowboard', url: 'https://drive.google.com/thumbnail?id=1MZYtDBuKNjRzSPrg0u2Hj3eOzXzO3zRE&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Full body snowboarder on snowy ridge holding board, remote on forearm, velcro strap visible',
-    label: 'R3: Snowboarder full body',
-    context: 'Full-body test. Justin\'s feedback: "one on bottom doesn\'t look like us, one on top does but not secured correctly." Duplicate product issue in full-body framing.'
-  },
-  // === R2 ===
-  {
-    id: 'r2-skiing-pov', url: 'https://files.catbox.moe/9jmhu5.jpg', model: 'flux-2-pro-preview',
-    prompt: 'Remote on skiers forearm over ski glove, velcro closure strap visible, snowy slopes, first person POV',
-    label: 'R2: Skiing POV',
-    context: 'R2 used flux-2-pro-preview (BFL API, single reference) instead of multiref. Justin\'s feedback: "lighting fake, LEDs wrong direction, too close to wrist." Proved that 1-ref is worse than 3-ref.'
-  },
-  {
-    id: 'r2-hiking-summit', url: 'https://files.catbox.moe/1vxain.jpg', model: 'flux-2-pro-preview',
-    prompt: 'Remote strapped to hikers forearm with velcro armband, mountain summit at golden hour',
-    label: 'R2: Hiking summit',
-    context: 'Single-ref test. Justin: "way too small, too zoomed in, not on correct spot." Confirmed multiref (3 refs) >>> single ref.'
-  },
-  // === R1: Original best images ===
-  {
-    id: 'flux2-hiking-multiref', url: 'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a hikers forearm, mountain trail with scenic valley views, golden hour warm natural lighting',
-    label: 'R1: Hiking golden hour',
-    context: 'BASELINE. First multiref generation with simple prompts. Justin: "pretty damn good, remote is perfect." This set the quality bar everything else is measured against.'
-  },
-  {
-    id: 'flux2-skiing-multiref', url: 'https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'Place this exact black remote control with 5 buttons on a skiers forearm over a ski glove, snowy mountain slopes, bright winter sunlight',
-    label: 'R1: Skiing powder',
-    context: 'BASELINE. Justin: "nailed it, almost uncanny." Product accuracy ~95%. Scene had "early 2000s" lighting but product was excellent.'
-  },
-  {
-    id: 'flux2-snowboard-multiref', url: 'https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200', model: 'flux2-pro-multiref',
-    prompt: 'This exact black remote control with 5 buttons worn on a snowboarders forearm, halfpipe in background, bright winter day',
-    label: 'R1: Snowboard halfpipe',
-    context: 'BASELINE. Justin: "remote\'s great, looks almost as if the remote is there." Minor velcro strap issue but product was excellent.'
-  },
-  {
-    id: 'kontext-tron-skiing', url: 'https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200', model: 'flux-kontext-pro',
-    prompt: 'Place this exact Chubby Buttons CB2 Tron, 5 large raised tactile buttons with green LED icons, worn on athlete forearm, skier carving powder',
-    label: 'R1: Kontext tron close-up',
-    context: 'Kontext Pro (single ref, instruction-based) vs multiref comparison. Justin: "remote looks accurate, logo visible." Had a mysterious second patch artifact on back of arm.'
-  }
+const SYNC_URL='https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
+const ALL_IMAGES=[
+  {id:'combo-editorial',url:'https://files.catbox.moe/hnulh4.jpg',model:'flux2-pro-multiref',prompt:'Award-winning product photography, Canon 5D Mark IV, golden hour, shallow depth of field, f/2.8, green LED icons, elastic armband with velcro closure',label:'COMBO: Editorial (Canon 5D, f/2.8)',context:'Testing camera-specific language for better lighting and detail. First prompt to produce green LEDs consistently.'},
+  {id:'combo-anatomical',url:'https://files.catbox.moe/slvawu.jpg',model:'flux2-pro-multiref',prompt:'Close up of hikers left arm, 3 inches above the wrist joint, elastic velcro armband wraps snugly',label:'COMBO: Anatomical (3in above wrist)',context:'R4 feedback: product kept going on upper arm. Testing ultra-specific anatomical placement language.'},
+  {id:'combo-negative',url:'https://files.catbox.moe/e9v5wh.jpg',model:'flux2-pro-multiref',prompt:'LOWER forearm halfway between wrist and elbow, NOT on the upper arm, NOT on the wrist, NOT floating',label:'COMBO: Negative prompt (NOT upper arm)',context:'Testing exclusion language to prevent wrong placement. Does "NOT on upper arm" actually help?'},
+  {id:'combo-twopass-base',url:'https://files.catbox.moe/wgqdqv.jpg',model:'flux2-pro-multiref',prompt:'Waist-up hiker on mountain ridge, remote on forearm with velcro armband, golden hour',label:'COMBO: Two-pass BASE (before Kontext)',context:'Step 1 of two-pass experiment. Compare with REFINED version to see if Kontext Pro can reposition the product.'},
+  {id:'combo-twopass-refined',url:'https://files.catbox.moe/vxtc21.jpg',model:'multiref+kontext',prompt:'Kontext instruction: Move device to LOWER forearm, 3 inches above wrist',label:'COMBO: Two-pass REFINED (after Kontext)',context:'Step 2: Kontext Pro tried to move product lower. Did it actually change position vs the BASE?'},
+  {id:'combo-seed1',url:'https://files.catbox.moe/x7g3jp.jpg',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour',label:'SEED 1 of 5 (same prompt)',context:'Consistency test. 5 identical prompts — if placement varies wildly, the model is random, not prompt-controllable.'},
+  {id:'combo-seed2',url:'https://files.catbox.moe/9knsrn.jpg',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour',label:'SEED 2 of 5',context:'Same prompt as Seed 1. Compare placement.'},
+  {id:'combo-seed3',url:'https://files.catbox.moe/6p4k03.jpg',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour',label:'SEED 3 of 5',context:'Same prompt as Seed 1. Compare placement.'},
+  {id:'combo-seed4',url:'https://files.catbox.moe/ux8ep4.jpg',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour',label:'SEED 4 of 5',context:'Same prompt as Seed 1. Compare placement.'},
+  {id:'combo-seed5',url:'https://files.catbox.moe/a97dxy.jpg',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour',label:'SEED 5 of 5',context:'Same prompt as Seed 1. Compare placement.'},
+  {id:'lora-v4b-hiker',url:'https://files.catbox.moe/obdhqf.jpg',model:'flux-lora-v4b',prompt:'CB2REMOTE on lower forearm, hiker golden hour',label:'LoRA v4b: Hiker',context:'First-ever v4b test (Jordan\'s 50 photos, all 3 colorways). Does broader training data improve product learning?'},
+  {id:'lora-v4b-skier',url:'https://files.catbox.moe/twtjj9.jpg',model:'flux-lora-v4b',prompt:'CB2REMOTE on forearm, skier powder',label:'LoRA v4b: Skier',context:'v4b test. Does the model produce actual product shape or just text?'},
+  {id:'lora-v4b-mtb',url:'https://files.catbox.moe/pho0yb.jpg',model:'flux-lora-v4b',prompt:'CB2REMOTE on forearm, mountain biker',label:'LoRA v4b: MTB',context:'v4b test. Checking product form factor from 50 training photos.'},
+  {id:'lora-v4b-snowboard',url:'https://files.catbox.moe/bhr32u.jpg',model:'flux-lora-v4b',prompt:'CB2REMOTE on forearm, snowboarder',label:'LoRA v4b: Snowboarder',context:'v4b test. POV shot with "CC2" text — closest to actual product shape.'},
+  {id:'lora-v4b-runner',url:'https://files.catbox.moe/zompfm.jpg',model:'flux-lora-v4b',prompt:'CB2REMOTE on forearm, trail runner',label:'LoRA v4b: Runner',context:'v4b test. Does trigger word produce the device or just approximations?'},
+  {id:'r5-hiker',url:'https://files.catbox.moe/ny3zg1.jpg',model:'flux2-pro-multiref',prompt:'LOWER forearm near wrist, buttons FACING THE WEARER, golden hour mountain trail',label:'R5: Hiker lower forearm',context:'R4: "just move to lower forearm." Added explicit LOWER forearm + FACING THE WEARER.'},
+  {id:'r5-mtb',url:'https://files.catbox.moe/4uqszy.jpg',model:'flux2-pro-multiref',prompt:'LOWER forearm near wrist, buttons FACING THE WEARER, pine forest trail',label:'R5: MTB lower forearm',context:'R4 MTB: "generally pretty great, move up an inch." Testing LOWER forearm language.'},
+  {id:'r5-snowboard',url:'https://files.catbox.moe/lzjy9c.jpg',model:'flux2-pro-multiref',prompt:'LOWER forearm near wrist, buttons FACING THE WEARER, snowy peak',label:'R5: Snowboarder lower forearm',context:'R4 snowboard: "symbols flipped 180°." Added FACING THE WEARER.'},
+  {id:'r5-skier',url:'https://files.catbox.moe/wbumgt.jpg',model:'flux2-pro-multiref',prompt:'LOWER forearm near wrist, buttons FACING THE WEARER, mountain panorama',label:'R5: Skier POV lower forearm',context:'R4 skier was "pretty damn good." Maintaining quality + testing lower forearm.'},
+  {id:'r5-festival',url:'https://files.catbox.moe/2g5bgv.jpg',model:'flux2-pro-multiref',prompt:'LOWER forearm, FACING THE WEARER, outdoor music festival, stage lights',label:'R5: Festival (new use case)',context:'NEW: Testing non-sport context. CB2 is used at festivals/concerts too.'},
+  {id:'r4-hiker',url:'https://drive.google.com/thumbnail?id=1SKqdW2-IG_wIT1mXhpZlrxMGAwaFiiAZ&sz=w1200',model:'flux2-pro-multiref',prompt:'Waist-up hiker golden hour, remote on left forearm',label:'R4: Hiker waist-up',context:'R3 full-body had floating products. R4 switched to waist-up as compromise.'},
+  {id:'r4-skier',url:'https://drive.google.com/thumbnail?id=1dw1Ac3VZms1hazlTa11xp3Au9gWm_iwa&sz=w1200',model:'flux2-pro-multiref',prompt:'Upper body skier, remote on forearm, mountain panorama',label:'R4: Skier close-up',context:'Waist-up test. Validated sweet-spot framing.'},
+  {id:'r4-mtb',url:'https://drive.google.com/thumbnail?id=1MaHVFBwrhMH6fOlhtR7FEsedw9ed957D&sz=w1200',model:'flux2-pro-multiref',prompt:'3/4 body mountain biker, remote on forearm, pine trees',label:'R4: MTB 3/4 body',context:'3/4 body test. Product slightly low on arm but accuracy strong.'},
+  {id:'r4-snowboard',url:'https://drive.google.com/thumbnail?id=1bd71TfrC7dJPPvXrhiob9sPBKkLnVfNj&sz=w1200',model:'flux2-pro-multiref',prompt:'Waist-up snowboarder, remote on forearm, blue sky',label:'R4: Snowboarder waist-up',context:'Symbols were rotated 180°. Led to R5 "FACING THE WEARER" experiment.'},
+  {id:'r3m-hiker',url:'https://drive.google.com/thumbnail?id=1BxuJ2cbcjabyw84iAURt-bJ95OlxuHIE&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body hiker, remote on forearm, golden hour',label:'R3: Hiker full body',context:'First full-body attempt. Testing if product survives wider framing.'},
+  {id:'r3m-mtb',url:'https://drive.google.com/thumbnail?id=1jjeHvhEuyZdLykDJ8MDfYMWdpnowjvMr&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body mountain biker, remote on forearm',label:'R3: MTB full body',context:'Full-body test proved too wide for reliable placement.'},
+  {id:'r3m-skier',url:'https://drive.google.com/thumbnail?id=18ok5ZBJSD8mHPsR8t5vGEBzD8zLbU3nm&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body skier, remote on forearm, mountain panorama',label:'R3: Skier full body',context:'Full-body caused duplicate product generation.'},
+  {id:'r3m-runner',url:'https://drive.google.com/thumbnail?id=1vePZlpyrIfMsVz1jTl5hCymnB_4G4Ybp&sz=w1200',model:'flux2-pro-multiref',prompt:'Trail runner full body, remote on forearm',label:'R3: Runner full body',context:'Full-body: two remotes, symbols too bright.'},
+  {id:'r3m-snowboard',url:'https://drive.google.com/thumbnail?id=1MZYtDBuKNjRzSPrg0u2Hj3eOzXzO3zRE&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body snowboarder, remote on forearm',label:'R3: Snowboarder full body',context:'Full-body: duplicate products, incorrect securing.'},
+  {id:'r2-skiing-pov',url:'https://files.catbox.moe/9jmhu5.jpg',model:'flux-2-pro-preview',prompt:'Remote on forearm over ski glove, snowy slopes, POV',label:'R2: Skiing POV (single ref)',context:'Single-ref test via BFL API. Proved 3-ref multiref is much better.'},
+  {id:'r2-hiking-summit',url:'https://files.catbox.moe/1vxain.jpg',model:'flux-2-pro-preview',prompt:'Remote on forearm, mountain summit, golden hour',label:'R2: Hiking summit (single ref)',context:'Single-ref test. Confirmed multiref >>> single ref.'},
+  {id:'flux2-hiking-multiref',url:'https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on hikers forearm, mountain trail, golden hour',label:'R1: Hiking golden hour (BASELINE)',context:'BASELINE. First multiref, simple prompt. Set the quality bar.'},
+  {id:'flux2-skiing-multiref',url:'https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on skiers forearm, snowy slopes, bright sunlight',label:'R1: Skiing powder (BASELINE)',context:'BASELINE. Product accuracy ~95%.'},
+  {id:'flux2-snowboard-multiref',url:'https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on snowboarders forearm, halfpipe, bright winter day',label:'R1: Snowboard halfpipe (BASELINE)',context:'BASELINE. Minor velcro strap issue but product excellent.'},
+  {id:'kontext-tron-skiing',url:'https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200',model:'flux-kontext-pro',prompt:'CB2 Tron with green LEDs, skier carving powder',label:'R1: Kontext tron close-up',context:'Kontext Pro single-ref vs multiref comparison. Had mysterious artifact.'}
 ];
 
-// === FEEDBACK SYSTEM: Comment trail + sync ===
-const LS_KEY = 'cb2_review_v2';
-let currentTab = 'new';
-let filtered = [];
-let ci = 0;
+// Pre-seed Justin's existing feedback
+const SEED_COMMENTS={
+  'flux2-hiking-multiref':[{text:"This honestly looks pretty damn good. It's a little dreamlike but the remote is perfect and it's on the arm. Missing a bit of the strap velcro that goes over on top of the other side, but the logo is there and lighting is nice.",time:'2026-04-04T22:00:00Z',num:1}],
+  'flux2-skiing-multiref':[{text:"Interesting lighting, a little cheesy/early 2000s looking, but the remote really nailed it. It's on the arm, seam looks good, lighting looks good. Remote is almost uncanny.",time:'2026-04-04T22:01:00Z',num:1}],
+  'flux2-snowboard-multiref':[{text:"Remote's great. Top of the velcro is missing a little bit. Remote looks almost as if it's really there. Don't know why we're in a half pipe but it's good.",time:'2026-04-04T22:02:00Z',num:1}],
+  'kontext-tron-skiing':[{text:"Really cool, remote looks accurate. Strange square patch on back of arm. Remote itself is great, can see Chubby Buttons logo, but still looks a little strange.",time:'2026-04-04T22:03:00Z',num:1}],
+  'r2-skiing-pov':[{text:"Don't like the lighting — looks fake, too contrasted. Buttons don't look authentic, LEDs in wrong direction. Velcro looks OK but placed way too close to wrist.",time:'2026-04-04T22:04:00Z',num:1}],
+  'r2-hiking-summit':[{text:"Way too small, too zoomed in on arm. Looking for more full body people. Lighting is cool but product is small and not on correct spot. Strap looks great but has a thicker part at bottom that doesn't exist.",time:'2026-04-04T22:05:00Z',num:1}],
+  'r4-hiker':[{text:"Product looks actually fine. Just need to put it on the lower forearm, not the upper arm. Product looks decent, a little wobbly, but pretty good.",time:'2026-04-05T00:00:00Z',num:1}],
+  'r4-skier':[{text:"Product looks great, lighting is great. Pretty damn good.",time:'2026-04-05T00:01:00Z',num:1}],
+  'r4-mtb':[{text:"Product looks good, a little low on the arm but generally pretty great. Move it up an inch and it's a great success.",time:'2026-04-05T00:02:00Z',num:1}],
+  'r4-snowboard':[{text:"Pretty great, except symbols are flipped — viewer sees the play button instead of the wearer. Should be rotated 180°. Other than that, product looks awesome.",time:'2026-04-05T00:03:00Z',num:1}],
+  'r3m-hiker':[{text:"Two chubby buttons — one on left upper arm, one on right lower arm. The one on the right lower arm looks pretty good though.",time:'2026-04-05T00:04:00Z',num:1}],
+  'r3m-mtb':[{text:"Looks horrible. Floating above the arm, not even on it. Superimposed, as if copy-pasting an image on top of an arm. Bad.",time:'2026-04-05T00:05:00Z',num:1}],
+  'r3m-skier':[{text:"Two different remotes stacked on top of each other. Remotes look OK but there's two of them and that's weird.",time:'2026-04-05T00:06:00Z',num:1}],
+  'r3m-runner':[{text:"Two remotes — one upper arm, one lower. Symbols look too bright. That's like 80% there, maybe 70.",time:'2026-04-05T00:07:00Z',num:1}],
+  'r3m-snowboard':[{text:"Pretty gnarly. One thing on the bottom that doesn't look like us, one on top that does but not secured correctly. Remote looks OK but it's on the upper arm.",time:'2026-04-05T00:08:00Z',num:1}]
+};
 
-function getData() {
-  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; }
+const LS='cb2_review_v3';
+let tab='new',filt=[],ci=0;
+
+function D(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch{return {}}}
+function S(d){localStorage.setItem(LS,JSON.stringify(d))}
+
+// Merge seed comments on first load
+function seedOnce(){
+  if(localStorage.getItem('cb2_seeded_v3'))return;
+  const d=D();
+  for(const[id,comments]of Object.entries(SEED_COMMENTS)){
+    if(!d[id])d[id]={comments:[],label:''};
+    const img=ALL_IMAGES.find(i=>i.id===id);
+    d[id].label=img?img.label:'';
+    d[id].comments=comments;
+  }
+  S(d);
+  localStorage.setItem('cb2_seeded_v3','1');
 }
-function saveData(d) { localStorage.setItem(LS_KEY, JSON.stringify(d)); }
+seedOnce();
 
-function getComments(imgId) {
-  const d = getData();
-  return d[imgId]?.comments || [];
+function getC(id){return D()[id]?.comments||[]}
+function isR(img){return getC(img.id).length>0}
+
+function submitComment(){
+  const t=document.getElementById('fb').value.trim();
+  if(!t)return;
+  const img=filt[ci];if(!img)return;
+  const d=D();
+  if(!d[img.id])d[img.id]={comments:[],label:img.label};
+  d[img.id].comments.push({text:t,time:new Date().toISOString(),num:d[img.id].comments.length+1});
+  d[img.id].label=img.label;
+  S(d);
+  document.getElementById('fb').value='';
+  counts();render();
+  showToast('Comment #'+d[img.id].comments.length+' saved');
 }
 
-function isReviewed(img) {
-  return getComments(img.id).length > 0;
+function counts(){
+  document.getElementById('cntNew').textContent=ALL_IMAGES.filter(i=>!isR(i)).length;
+  document.getElementById('cntDone').textContent=ALL_IMAGES.filter(i=>isR(i)).length;
 }
 
-function submitComment() {
-  const text = document.getElementById('feedback').value.trim();
-  if (!text) return;
-  const img = filtered[ci];
-  if (!img) return;
-
-  const d = getData();
-  if (!d[img.id]) d[img.id] = { comments: [], label: img.label };
-  d[img.id].comments.push({
-    text,
-    time: new Date().toISOString(),
-    num: d[img.id].comments.length + 1
+function setTab(t){
+  tab=t;ci=0;
+  document.querySelectorAll('.tab').forEach((el,i)=>{
+    el.className='tab'+((['new','done','progress'][i]===t)?' active':'');
   });
-  d[img.id].label = img.label;
-  saveData(d);
-
-  // Clear textarea for next comment
-  document.getElementById('feedback').value = '';
-  document.getElementById('feedback').placeholder = 'Add another comment...';
-
-  updateCounts();
-  renderCurrent();
-  showToast('Comment #' + d[img.id].comments.length + ' saved');
+  document.getElementById('reviewArea').style.display=(t==='progress')?'none':'block';
+  document.getElementById('progressArea').style.display=(t==='progress')?'block':'none';
+  if(t!=='progress'){upFilt();render();}
+  else{document.getElementById('counter').textContent='Experiment Tracker';document.getElementById('emptyState').style.display='none';}
 }
 
-function updateCounts() {
-  document.getElementById('newCount').textContent = ALL_IMAGES.filter(i => !isReviewed(i)).length;
-  document.getElementById('doneCount').textContent = ALL_IMAGES.filter(i => isReviewed(i)).length;
-}
+function upFilt(){filt=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i))}
 
-function switchTab(tab) {
-  currentTab = tab;
-  ci = 0;
-  updateFiltered();
-  updateTabStyles();
-  renderCurrent();
-}
-
-function updateFiltered() {
-  filtered = currentTab === 'new'
-    ? ALL_IMAGES.filter(i => !isReviewed(i))
-    : ALL_IMAGES.filter(i => isReviewed(i));
-}
-
-function updateTabStyles() {
-  document.getElementById('tabNew').className = 'tab' + (currentTab === 'new' ? ' active-new' : '');
-  document.getElementById('tabDone').className = 'tab' + (currentTab === 'done' ? ' active-done' : '');
-}
-
-function renderCurrent() {
-  if (filtered.length === 0) {
-    document.getElementById('contentArea').style.display = 'none';
-    document.getElementById('emptyState').style.display = 'block';
-    document.getElementById('emptyState').textContent = currentTab === 'new'
-      ? 'All images reviewed! Switch to REVIEWED tab.'
-      : 'No reviewed images yet.';
-    document.getElementById('counter').textContent = '0 / 0';
-    return;
+function render(){
+  if(!filt.length){
+    document.getElementById('reviewArea').style.display='none';
+    document.getElementById('emptyState').style.display='block';
+    document.getElementById('emptyState').textContent=tab==='new'?'All reviewed! Switch to REVIEWED.':'No reviews yet.';
+    document.getElementById('counter').textContent='0 / 0';return;
   }
-  document.getElementById('contentArea').style.display = 'block';
-  document.getElementById('emptyState').style.display = 'none';
-
-  const img = filtered[ci];
-  document.getElementById('mainImg').src = img.url;
-
-  const badge = currentTab === 'done'
-    ? '<span style="background:#22c55e;color:#000;padding:2px 6px;border-radius:4px;font-size:.6rem;font-weight:700">REVIEWED</span>'
-    : '<span style="background:#a855f7;color:#fff;padding:2px 6px;border-radius:4px;font-size:.6rem;font-weight:700">NEW</span>';
-  document.getElementById('counter').innerHTML = (ci+1) + ' / ' + filtered.length + ' — ' + img.label + ' ' + badge;
-
-  document.getElementById('meta').innerHTML =
-    '<span class="tag model">' + img.model + '</span>' +
-    '<span class="tag">' + img.prompt.slice(0,80) + '...</span>';
-
-  // Context box
-  const ctxBox = document.getElementById('contextBox');
-  const ctxInner = document.getElementById('contextInner');
-  if (img.context) {
-    ctxBox.style.display = 'block';
-    ctxInner.innerHTML = '<strong>WHY THIS IMAGE:</strong>' + img.context;
-  } else {
-    ctxBox.style.display = 'none';
-  }
-
-  // Comment trail
-  const trail = document.getElementById('commentTrail');
-  const comments = getComments(img.id);
-  if (comments.length > 0) {
-    trail.innerHTML = comments.map(c => {
-      const t = new Date(c.time);
-      const timeStr = t.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' ' + t.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-      return '<div class="comment-entry">' +
-        '<div class="comment-time">Comment #' + c.num + ' — ' + timeStr + '</div>' +
-        '<div class="comment-text">' + c.text + '</div></div>';
-    }).join('');
-  } else {
-    trail.innerHTML = '';
-  }
-
-  // Reset textarea
-  document.getElementById('feedback').value = '';
-  document.getElementById('feedback').placeholder = comments.length > 0
-    ? 'Add another comment...'
-    : 'Tap the mic and say what you see...';
-
-  document.getElementById('prevBtn').disabled = ci === 0;
-  document.getElementById('nextBtn').disabled = ci === filtered.length - 1;
-  window.scrollTo(0, 0);
+  document.getElementById('reviewArea').style.display='block';
+  document.getElementById('emptyState').style.display='none';
+  const img=filt[ci];
+  document.getElementById('mainImg').src=img.url;
+  document.getElementById('counter').innerHTML=(ci+1)+' / '+filt.length+' — '+img.label;
+  document.getElementById('meta').innerHTML='<span class="tag model">'+img.model+'</span><span class="tag">'+img.prompt.slice(0,70)+'...</span>';
+  const cb=document.getElementById('ctxBox'),ci2=document.getElementById('ctxInner');
+  if(img.context){cb.style.display='block';ci2.innerHTML='<strong>WHY THIS IMAGE:</strong>'+img.context;}else cb.style.display='none';
+  const cs=getC(img.id),tr=document.getElementById('trail');
+  tr.innerHTML=cs.map(c=>{
+    const d=new Date(c.time);
+    return '<div class="comment-entry"><div class="ct">Comment #'+c.num+' — '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+'</div><div class="cx">'+c.text+'</div></div>';
+  }).join('');
+  document.getElementById('fb').value='';
+  document.getElementById('fb').placeholder=cs.length?'Add another comment...':'Tap mic and say what you see...';
+  document.getElementById('prevBtn').disabled=ci===0;
+  document.getElementById('nextBtn').disabled=ci===filt.length-1;
+  window.scrollTo(0,0);
 }
 
-function go(dir) {
-  const prevId = filtered[ci]?.id;
-  updateFiltered();
-  if (dir === 1) {
-    const still = filtered.findIndex(i => i.id === prevId);
-    ci = still === -1 ? Math.min(ci, filtered.length-1) : Math.min(still+1, filtered.length-1);
-  } else {
-    ci = Math.max(0, ci-1);
-  }
-  renderCurrent();
+function go(dir){
+  const pid=filt[ci]?.id;upFilt();
+  if(dir===1){const s=filt.findIndex(i=>i.id===pid);ci=s===-1?Math.min(ci,filt.length-1):Math.min(s+1,filt.length-1);}
+  else ci=Math.max(0,ci-1);
+  render();
 }
 
-function syncFeedback() {
-  const d = getData();
-  const payload = {
-    type: 'feedback_sync',
-    syncedAt: new Date().toISOString(),
-    images: ALL_IMAGES.map(img => ({
-      id: img.id, label: img.label, model: img.model, prompt: img.prompt,
-      context: img.context || null,
-      comments: d[img.id]?.comments || []
-    })).filter(i => i.comments.length > 0)
-  };
-
-  // POST to webhook
-  fetch(SYNC_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(payload)
-  }).then(r => {
-    if (r.ok) showToast('Synced ' + payload.images.length + ' images to Claude!');
-    else showToast('Sync sent (check webhook)');
-  }).catch(() => showToast('Sync sent (offline ok)'));
-
-  // Also save as deployable JSON to clipboard
-  navigator.clipboard.writeText(JSON.stringify(payload, null, 2))
-    .then(() => {})
-    .catch(() => {});
+function syncFeedback(){
+  const d=D();
+  const p={type:'feedback_sync',syncedAt:new Date().toISOString(),images:ALL_IMAGES.map(i=>({id:i.id,label:i.label,model:i.model,prompt:i.prompt,context:i.context||null,comments:d[i.id]?.comments||[]})).filter(i=>i.comments.length>0)};
+  fetch(SYNC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).then(()=>showToast('Synced '+p.images.length+' images!')).catch(()=>showToast('Sync sent'));
+  navigator.clipboard.writeText(JSON.stringify(p,null,2)).catch(()=>{});
 }
 
-function exportAll() {
-  const d = getData();
-  const lines = ALL_IMAGES.map(img => {
-    const comments = d[img.id]?.comments || [];
-    const fb = comments.map(c => 'Comment #' + c.num + ' (' + new Date(c.time).toLocaleString() + '): ' + c.text).join('\n');
-    return '## ' + img.label + '\nModel: ' + img.model + '\nPrompt: ' + img.prompt +
-      (img.context ? '\nContext: ' + img.context : '') +
-      '\nFeedback:\n' + (fb || '(none)') + '\n';
-  }).join('\n');
-  navigator.clipboard.writeText(lines).then(() => showToast('Copied all feedback!'));
+function exportAll(){
+  const d=D();
+  const l=ALL_IMAGES.map(i=>{const cs=d[i.id]?.comments||[];const fb=cs.map(c=>'#'+c.num+': '+c.text).join('\n');return i.label+'\n'+i.model+'\n'+(fb||'(none)')+'\n';}).join('\n---\n');
+  navigator.clipboard.writeText(l).then(()=>showToast('Copied!'));
 }
 
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
-}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 
-// Keyboard nav
-document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'TEXTAREA') return;
-  if (e.key === 'ArrowLeft') go(-1);
-  if (e.key === 'ArrowRight') go(1);
-});
+document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);});
 
-// Init
-updateCounts();
-if (ALL_IMAGES.filter(i => !isReviewed(i)).length === 0 && ALL_IMAGES.some(i => isReviewed(i))) {
-  currentTab = 'done';
-}
-updateFiltered();
-updateTabStyles();
-renderCurrent();
+counts();
+if(!ALL_IMAGES.filter(i=>!isR(i)).length&&ALL_IMAGES.some(i=>isR(i)))tab='done';
+upFilt();
+document.querySelectorAll('.tab').forEach((el,i)=>{el.className='tab'+((['new','done','progress'][i]===tab)?' active':'');});
+render();
 </script>
 </body></html>
