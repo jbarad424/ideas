@@ -1,7 +1,133 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-05T21:05:29.503Z",
+  "syncedAt": "2026-04-05T22:32:02.059Z",
   "images": [
+    {
+      "id": "E2-r50-s80",
+      "label": "PIPE E2: ref=0.50 str=0.80 (low ref)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Small product-sized mask + ref=0.50, strength=0.80",
+      "context": "Pipeline E REDO with proper small masks (product-sized, not whole-arm). Testing if lower reference strength preserves the scene while still generating the product. Compare across the full sweep.",
+      "comments": [
+        {
+          "text": "pretty bad. 0 out of 100",
+          "time": "2026-04-05T22:30:37.893Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "E2-r55-s75",
+      "label": "PIPE E2: ref=0.55 str=0.75",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Small product-sized mask + ref=0.55, strength=0.75",
+      "context": "Sweep point. Small mask + moderate reference.",
+      "comments": [
+        {
+          "text": "terrible, F-",
+          "time": "2026-04-05T22:30:45.409Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "E2-r60-s70",
+      "label": "PIPE E2: ref=0.60 str=0.70",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Small product-sized mask + ref=0.60, strength=0.70",
+      "context": "Sweep point. Increasing reference, decreasing strength.",
+      "comments": [
+        {
+          "text": "terrible. F- 0/100",
+          "time": "2026-04-05T22:30:53.812Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "E2-r60-s85",
+      "label": "PIPE E2: ref=0.60 str=0.85 (high strength)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Small product-sized mask + ref=0.60, strength=0.85",
+      "context": "Testing if high overall strength with moderate reference helps. The strength controls how much the image changes overall.",
+      "comments": [
+        {
+          "text": "terrible. gross hands too.",
+          "time": "2026-04-05T22:31:05.827Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "E2-r65-s75",
+      "label": "PIPE E2: ref=0.65 str=0.75 (baseline)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Small product-sized mask + ref=0.65, strength=0.75",
+      "context": "The first combo that showed promise — scene partially preserved with something on the wrist.",
+      "comments": [
+        {
+          "text": "a nightmare. terrible",
+          "time": "2026-04-05T22:31:15.060Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "E2-r70-s70",
+      "label": "PIPE E2: ref=0.70 str=0.70",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Small product-sized mask + ref=0.70, strength=0.70",
+      "context": "Higher reference. Does the product become more recognizable?",
+      "comments": [
+        {
+          "text": "wow, couldn't be more upset with this :) terrible",
+          "time": "2026-04-05T22:31:31.260Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "E2-r70-s80",
+      "label": "PIPE E2: ref=0.70 str=0.80 (high both)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Small product-sized mask + ref=0.70, strength=0.80",
+      "context": "Both reference and strength high. Risk: scene gets destroyed. Reward: product might be visible.",
+      "comments": [
+        {
+          "text": "nope!",
+          "time": "2026-04-05T22:31:36.626Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "E2-moto-r65s75",
+      "label": "PIPE E2: Moto riding (cross-scene test)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Motorcycle RIDING scene + ref=0.65, str=0.75",
+      "context": "Testing if the best combo (ref=0.65, str=0.75) works on a different scene. The motorcycle riding scene has the forearm in a different position.",
+      "comments": [
+        {
+          "text": "nightmare fuel. so bad!",
+          "time": "2026-04-05T22:31:47.397Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "E2-snowmo-r65s75",
+      "label": "PIPE E2: Snowmobile (cross-scene test)",
+      "model": "flux-general (mask+ref)",
+      "prompt": "Snowmobile scene + ref=0.65, str=0.75",
+      "context": "Same best combo on snowmobile POV. Testing cross-scene generalization.",
+      "comments": [
+        {
+          "text": "hahahhah. this is just.... water? or snow?",
+          "time": "2026-04-05T22:31:59.249Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "pipeD-motoc",
       "label": "PIPE D: Motorcycle close-up (spring!)",
