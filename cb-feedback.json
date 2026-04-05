@@ -1,7 +1,175 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-05T22:32:04.492Z",
+  "syncedAt": "2026-04-05T23:10:07.798Z",
   "images": [
+    {
+      "id": "pipeF-moto",
+      "label": "PIPE F: Motorcycle spring (Kontext scene-swap)",
+      "model": "kontext-pro (scene-swap)",
+      "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to motorcycle riding, cherry blossom road, gripping handlebars.\"",
+      "context": "PIPELINE F: Completely different approach. Instead of generating a scene and adding product, we START with the real product photo on the arm and tell Kontext to CHANGE THE SCENE around it. Product preservation is Kontext's strength.",
+      "comments": [
+        {
+          "text": "it's nice, but it looks just like the modeling photos. i'm worried this wont necessarily scale for different angles. but it def kept the fidelity of the remote. it just looks like a fancy photoshop job over a different background.",
+          "time": "2026-04-05T22:45:10.211Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeF-mtb",
+      "label": "PIPE F: MTB trail (Kontext scene-swap)",
+      "model": "kontext-pro (scene-swap)",
+      "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to MTB trail, gripping bike handlebars, pine forest.\"",
+      "context": "Same approach: real product photo → Kontext changes scene to mountain biking. Does the product survive AND does the scene change convincingly?",
+      "comments": [
+        {
+          "text": "same story here.. it's nice, but it looks just like the modeling photos. i'm worried this wont necessarily scale for different angles. but it def kept the fidelity of the remote. it just looks like a fancy photoshop job over a different background.",
+          "time": "2026-04-05T22:45:23.443Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeF-snowmo",
+      "label": "PIPE F: Snowmobile (Kontext scene-swap)",
+      "model": "kontext-pro (scene-swap)",
+      "prompt": "Horizontal arm ref → Kontext Pro: \"Keep product on forearm. Change to snowmobile rider, snowy trail, winter gear.\"",
+      "context": "Using the horizontal arm reference. Snowmobile is a key CB2 sport. Does Kontext preserve the product while creating a full-body snowmobile scene?",
+      "comments": [
+        {
+          "text": "no remote..",
+          "time": "2026-04-05T22:45:31.565Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeF-moto-product",
+      "label": "PIPE F: Motorcycle (product as input)",
+      "model": "kontext-pro (scene-swap)",
+      "prompt": "Product front photo → Kontext Pro: \"Show this product strapped to motorcycle riders forearm, gripping handlebars, cherry blossoms, all 5 buttons visible.\"",
+      "context": "Variation: using the standalone product photo as input instead of the on-arm photo. Different starting point, same scene-swap concept.",
+      "comments": [
+        {
+          "text": "80/100. remote looks decent, but really dusty. paced in right spot, but logo is all fucked up. also should be rotated 180 degrees",
+          "time": "2026-04-05T23:05:00.601Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD2-coast1",
+      "label": "PIPE D2: Moto coastal 1 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Motorcycle rider coastal highway, product flush against lower forearm, ocean cliffs, spring sunlight",
+      "context": "Cherry-picking batch: 5 seeds of the motorcycle coastal prompt that scored 89/100. Looking for the seed where product sits flush against the jacket.",
+      "comments": [
+        {
+          "text": "this is pretty dope. the only issue is the orientation of the remote. it should be flipped, but it's placed in the correct way, but the strap is also inaccurate. 89/100",
+          "time": "2026-04-05T23:06:05.234Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD2-coast2",
+      "label": "PIPE D2: Moto coastal 2 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same coastal prompt",
+      "context": "Different seed, same prompt. Cherry-pick best.",
+      "comments": [
+        {
+          "text": "should be rotated 180, a little further up the arm, but otherwise decent!",
+          "time": "2026-04-05T23:06:29.950Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD2-coast3",
+      "label": "PIPE D2: Moto coastal 3 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same coastal prompt",
+      "context": "Different seed.",
+      "comments": [
+        {
+          "text": "not bad... relaly not bad! just needs to be flipped 180 degrees, and it would be 100. outside of that, it's really really good!!",
+          "time": "2026-04-05T23:06:59.116Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD2-coast4",
+      "label": "PIPE D2: Moto coastal 4 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same coastal prompt",
+      "context": "Different seed.",
+      "comments": [
+        {
+          "text": "only 4 buttons... strange logo on band. 60/100",
+          "time": "2026-04-05T23:07:11.684Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD2-coast5",
+      "label": "PIPE D2: Moto coastal 5 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same coastal prompt",
+      "context": "Different seed.",
+      "comments": [
+        {
+          "text": "symbols are a little illegible.. should be flipped 180 also, and the motorcycle looks broken.. very warped and strange.",
+          "time": "2026-04-05T23:08:49.237Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD2-over1",
+      "label": "PIPE D2: Moto overlook 1 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Motorcycle rider at scenic mountain overlook, product on lower forearm, mountain vista, spring golden hour",
+      "context": "Motorcycle overlook template — rider stopped at scenic point. Helmet off, relaxed pose. 3 seeds for cherry-picking.",
+      "comments": [
+        {
+          "text": "ayyy! not bad! just a little closer to the wrist, and also more so that the motorcyclist can actually see the remote, but the symbols are in the correct orientation! 85/100",
+          "time": "2026-04-05T23:09:32.672Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD2-over2",
+      "label": "PIPE D2: Moto overlook 2 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same overlook prompt",
+      "context": "Different seed.",
+      "comments": [
+        {
+          "text": "0/100, no remote",
+          "time": "2026-04-05T23:09:41.831Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pipeD2-over3",
+      "label": "PIPE D2: Moto overlook 3 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same overlook prompt",
+      "context": "Different seed.",
+      "comments": [
+        {
+          "text": "should be flipped 180 degrees.. but other than that, pretty good!",
+          "time": "2026-04-05T23:10:05.115Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "E2-r50-s80",
       "label": "PIPE E2: ref=0.50 str=0.80 (low ref)",
