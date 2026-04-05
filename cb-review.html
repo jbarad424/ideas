@@ -83,6 +83,77 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <script>
 const ALL_IMAGES = [
+  // === COMBO EXPERIMENTS: Testing different prompt strategies ===
+  {
+    id: 'combo-editorial',
+    url: 'https://files.catbox.moe/hnulh4.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'Award-winning product photography, a real photograph showing a hiker wearing this exact black Chubby Buttons remote control on their lower forearm, the device has 5 raised tactile buttons with green LED icons, elastic armband with velcro closure, shot on Canon 5D Mark IV, golden hour mountain landscape, shallow depth of field, f/2.8',
+    label: 'COMBO: Editorial style (Canon 5D, f/2.8)'
+  },
+  {
+    id: 'combo-anatomical',
+    url: 'https://files.catbox.moe/slvawu.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'Close up of a hikers left arm, this exact black remote control with 5 buttons is attached to the outside of the forearm 3 inches above the wrist joint, the elastic velcro armband wraps snugly around the forearm, mountain trail in soft focus background, golden hour',
+    label: 'COMBO: Anatomical placement (3in above wrist)'
+  },
+  {
+    id: 'combo-negative',
+    url: 'https://files.catbox.moe/e9v5wh.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'This exact black remote control with 5 buttons strapped to hikers LOWER forearm halfway between wrist and elbow, NOT on the upper arm, NOT on the wrist, NOT floating above the skin, mountain trail golden hour, lifestyle marketing photo',
+    label: 'COMBO: Negative prompt (NOT upper arm)'
+  },
+  {
+    id: 'combo-twopass-base',
+    url: 'https://files.catbox.moe/wgqdqv.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'Waist-up hiker on mountain ridge, this exact black remote with 5 buttons on forearm with elastic velcro armband, golden hour valley views, lifestyle marketing photo',
+    label: 'COMBO: Two-pass BASE (before Kontext)'
+  },
+  {
+    id: 'combo-twopass-refined',
+    url: 'https://files.catbox.moe/vxtc21.jpg',
+    model: 'flux2-pro-multiref + kontext-pro',
+    prompt: 'Two-pass: multiref base → Kontext Pro instruction "Move the black remote control device to the LOWER forearm, positioned 3 inches above the wrist"',
+    label: 'COMBO: Two-pass REFINED (after Kontext)'
+  },
+  {
+    id: 'combo-seed1',
+    url: 'https://files.catbox.moe/x7g3jp.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
+    label: 'SEED TEST: Variation 1 of 5 (same prompt)'
+  },
+  {
+    id: 'combo-seed2',
+    url: 'https://files.catbox.moe/9knsrn.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
+    label: 'SEED TEST: Variation 2 of 5 (same prompt)'
+  },
+  {
+    id: 'combo-seed3',
+    url: 'https://files.catbox.moe/6p4k03.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
+    label: 'SEED TEST: Variation 3 of 5 (same prompt)'
+  },
+  {
+    id: 'combo-seed4',
+    url: 'https://files.catbox.moe/ux8ep4.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
+    label: 'SEED TEST: Variation 4 of 5 (same prompt)'
+  },
+  {
+    id: 'combo-seed5',
+    url: 'https://files.catbox.moe/a97dxy.jpg',
+    model: 'flux2-pro-multiref',
+    prompt: 'This exact black remote control with 5 buttons worn on a hikers lower forearm between wrist and elbow, mountain trail with scenic valley views, golden hour warm natural lighting',
+    label: 'SEED TEST: Variation 5 of 5 (same prompt)'
+  },
   // === LORA V4B: Testing v4b model (50 photos, all 3 colorways, Jordan's data) ===
   {
     id: 'lora-v4b-hiker',
