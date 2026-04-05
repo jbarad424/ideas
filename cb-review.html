@@ -108,14 +108,20 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <div class="exp-result">BROKE THE SKI JACKET BLEED. Hiker wears a t-shirt. MTB wears cycling jersey. Snowboarder has colorful gear. Festival person at a concert. Full body shots with variety. Product visible on festival image with 5 buttons. This is the architecture change we needed.</div>
   </div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Pipeline B: Scene → Mask → Inpaint (fal.ai Fill Pro)</span><span class="exp-badge test">NEEDS WORK</span></div>
-    <div class="exp-desc">Generate clean scene, create forearm mask, inpaint CB2 via fal.ai Fill Pro API. Gives full control over scene AND product placement.</div>
-    <div class="exp-result">API works on fal.ai (was blocked on BFL). But rough rectangle masks don't place the product accurately. Needs better forearm segmentation — could use AI segmentation (SAM, CLIPSeg) to auto-detect forearm regions.</div>
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">Pipeline B/C/E: All inpainting approaches</span><span class="exp-badge fail">ALL FAILED</span></div>
+    <div class="exp-desc">Tested 3 inpainting variants: crude masks (B), SAM 3 precise masks + text-only Fill Pro (C), SAM 3 masks + reference_image_url guided inpainting (E). None produced a recognizable CB2.</div>
+    <div class="exp-result">Pipeline B: -100/100 ("worse than fail"). Pipeline C: 0-5/100 (text-only can't generate CB2). Pipeline E: ref=0.8 destroys scene, ref=0.3 no product visible. The Goldilocks zone doesn't exist for this approach. Inpainting is dead for CB2.</div>
   </div>
 
   <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">R7: Action shots via standard multiref</span><span class="exp-badge test">REVIEWED</span></div>
+    <div class="exp-header"><span class="exp-name">Pipeline D: @image for motorcycle (spring priority)</span><span class="exp-badge win">89/100</span></div>
+    <div class="exp-desc">6 motorcycle images via Pipeline A @image. Motorcycle coastal scored 89/100 — "if it was flush against the jacket, pretty damn good."</div>
+    <div class="exp-result">Motorcycle coastal is the motorcycle template. Needs generate-and-filter to find a seed where product sits flush. This is the spring marketing priority.</div>
+  </div>
+
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">R7: Action shots via standard multiref</span><span class="exp-badge fail">FAILED</span></div>
     <div class="exp-desc">11 images: mid-turn skiing, mid-air snowboard, full-body hiker from behind, MTB panning, festival, trail runner.</div>
     <div class="exp-result">Skiing close-ups still excellent. But action/full-body/new-sports: product disappears (1-10/100 on MTB, runner, festival). Confirms multiref with 3 on-arm refs can't do variety — led to Pipeline A discovery.</div>
   </div>
@@ -224,26 +230,26 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <div class="exp-result">Justin: "a lot of energy was wasted on the website itself." Replaced with simple review page + chat-based feedback.</div>
   </div>
 
-  <div class="section-label">Remaining Issues to Solve</div>
-  <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Reference photo overfitting (#1)</span><span class="exp-badge test">R7 TESTING</span></div>
-    <div class="exp-desc">All outputs look like remixes of the same 3 reference photos. Justin: "one trick pony", "modeling photos superimposed." The model is reconstructing the refs, not creating new scenes.</div>
-    <div class="exp-result">R7 tests action poses, different camera angles, and non-standard framings to force the model out of its comfort zone.</div>
+  <div class="section-label">Current Status + Next Steps</div>
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Reference bleed SOLVED</span><span class="exp-badge win">FIXED</span></div>
+    <div class="exp-desc">Switching from 3-ref multiref to Pipeline A (1 product-only ref) eliminated the ski jacket appearing in every scene.</div>
+    <div class="exp-result">Motorcycle riders wear leather jackets. Hikers wear light jackets with gloves. MTB riders wear cycling jerseys. The model generates appropriate clothing per sport.</div>
+  </div>
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">4 Working Templates Identified</span><span class="exp-badge win">READY</span></div>
+    <div class="exp-desc">Hiker with gloves (94), Motorcycle coastal (89), Pipeline A MTB (88), Skiing close-up (95-98). These are ready for generate-and-filter production.</div>
+    <div class="exp-result">Next step: Generate 5 seeds per template, cherry-pick the best for marketing assets. Spring motorcycle is the priority.</div>
   </div>
   <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Variety / aspirational shots</span><span class="exp-badge test">R7 TESTING</span></div>
-    <div class="exp-desc">Justin wants: full-body action shots, different angles, dynamic poses, non-skiing use cases. Current pipeline only nails close-up/waist-up skiing.</div>
-    <div class="exp-result">R7 includes: mid-turn skiing, mid-air snowboard, full-body hiker from behind, MTB panning shot, festival, trail running.</div>
+    <div class="exp-header"><span class="exp-name">Symbol orientation</span><span class="exp-badge win">MANAGED</span></div>
+    <div class="exp-desc">"Buttons face the wearer" works ~50% of the time. Generate-and-filter handles the rest.</div>
+    <div class="exp-result">Not fixable via prompt alone. Strategy: generate 5, pick the one with correct orientation.</div>
   </div>
   <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Symbol orientation</span><span class="exp-badge win">90% SOLVED</span></div>
-    <div class="exp-desc">"Face the wearer, appear upside-down to camera" language works but not on every seed.</div>
-    <div class="exp-result">R6 MTB A confirmed correct orientation. Strategy: generate 3, cherry-pick the one with correct symbols.</div>
-  </div>
-  <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Placement consistency</span><span class="exp-badge win">MANAGED</span></div>
-    <div class="exp-desc">Placement varies by seed (upper arm vs lower forearm). Not fully prompt-controllable.</div>
-    <div class="exp-result">Strategy: generate multiple seeds, filter for correct placement. Seed 4 hit 98/100 with this approach.</div>
+    <div class="exp-header"><span class="exp-name">Product levitation on motorcycle</span><span class="exp-badge test">NEXT</span></div>
+    <div class="exp-desc">Motorcycle coastal scored 89/100 but product "levitates slightly" above the jacket. Need it flush.</div>
+    <div class="exp-result">Generate 5 more seeds of the motorcycle coastal prompt. Cherry-pick the one where product sits flush against the leather jacket.</div>
   </div>
 </div>
 
