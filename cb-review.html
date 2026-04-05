@@ -224,7 +224,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <div class="toast" id="toast"></div>
 
 <script>
-const SYNC_URL='https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
+const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
 const ALL_IMAGES=[
   // === R6: Symbol orientation fix + clothing bleed fix (3 per activity, cherry-pick best) ===
   {id:'r6-hiker1',url:'https://files.catbox.moe/qdsl6x.jpg',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour',label:'R6: Hiker A (symbol fix + trail clothes)',context:'R5 feedback: symbols face camera not wearer. Ski jacket bleeding into non-ski scenes. Fix: "symbols face wearer, appear upside-down to camera" + specify "lightweight trail clothing."'},
@@ -387,9 +387,22 @@ function go(dir){
 
 function syncFeedback(){
   const d=D();
-  const p={type:'feedback_sync',syncedAt:new Date().toISOString(),images:ALL_IMAGES.map(i=>({id:i.id,label:i.label,model:i.model,prompt:i.prompt,context:i.context||null,comments:d[i.id]?.comments||[]})).filter(i=>i.comments.length>0)};
-  fetch(SYNC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).then(()=>showToast('Synced '+p.images.length+' images!')).catch(()=>showToast('Sync sent'));
-  navigator.clipboard.writeText(JSON.stringify(p,null,2)).catch(()=>{});
+  const payload={type:'feedback_sync',syncedAt:new Date().toISOString(),images:ALL_IMAGES.map(i=>({id:i.id,label:i.label,model:i.model,prompt:i.prompt,context:i.context||null,comments:d[i.id]?.comments||[]})).filter(i=>i.comments.length>0)};
+  // Deploy as cb-feedback.json to GitHub via Sync scenario
+  fetch(SYNC_URL,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      jsonContent:JSON.stringify(payload,null,2),
+      filename:'cb-feedback.json',
+      commitMessage:'Sync feedback from review page ('+payload.images.length+' images, '+new Date().toLocaleString()+')'
+    })
+  }).then(r=>r.json()).then(d=>{
+    if(d.success) showToast('Synced '+payload.images.length+' images to GitHub!');
+    else showToast('Sync response received');
+  }).catch(()=>showToast('Sync sent (check GitHub)'));
+  // Also copy to clipboard as backup
+  navigator.clipboard.writeText(JSON.stringify(payload,null,2)).catch(()=>{});
 }
 
 function exportAll(){
