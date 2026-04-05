@@ -100,15 +100,29 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <div class="exp-result">Justin: "remote is perfect", "nailed it", "almost uncanny" — ~90% product accuracy on close-up/waist-up framing.</div>
   </div>
 
-  <div class="section-label">Active Experiment — R6</div>
+  <div class="section-label">Active Experiment — R7</div>
 
   <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">R6: Symbol orientation + clothing fix</span><span class="exp-badge test">TESTING NOW</span></div>
-    <div class="exp-desc">11 new images targeting the two biggest issues: (1) "symbols face the wearer, appear upside-down to camera" and (2) activity-specific clothing instead of ski jacket. 3 per activity for cherry-picking.</div>
-    <div class="exp-result">Awaiting Justin's review. If symbols flip correctly, this solves the #1 remaining issue and we're at production quality.</div>
+    <div class="exp-header"><span class="exp-name">R7: Break the one-trick-pony</span><span class="exp-badge test">GENERATING</span></div>
+    <div class="exp-desc">13 images targeting variety: action poses (mid-turn, mid-air, mid-stride), different camera angles (from behind, from below, panning), full-body aspirational shots. Also testing festival + running use cases.</div>
+    <div class="exp-result">R6 proved product accuracy is ~95% for skiing close-ups. But outputs look like remixes of the reference photos. R7 pushes for dynamic scenes the model hasn't memorized from the refs.</div>
   </div>
 
-  <div class="section-label">Completed Experiments</div>
+  <div class="section-label">Completed — R6 Results</div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">R6: Symbol orientation fix</span><span class="exp-badge win">PARTIALLY WORKED</span></div>
+    <div class="exp-desc">"Symbols face the wearer, appear upside-down to camera" language added to all prompts. Activity-specific clothing to reduce ski jacket bleed.</div>
+    <div class="exp-result">Symbol fix worked on MTB A ("orientation is right") and skier shots. But inconsistent — MTB B still had wrong orientation. Clothing fix helped (hikers no longer in ski jackets). Skiers: "excellent", "great work". Snowboard B/C: "good placement, accurate remote." Key insight: the model CAN do it right but doesn't every time → generate-and-filter strategy confirmed.</div>
+  </div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Reference photo bleed identified as #1 problem</span><span class="exp-badge win">ROOT CAUSE</span></div>
+    <div class="exp-desc">Justin: "The perfect ones look a lot like the modeling photo", "looks like my model photos superimposed over other photos", "I'm hoping this is not a one trick pony."</div>
+    <div class="exp-result">The 3 reference images dominate generation output. Every image looks like a remix of the same ski jacket modeling photo. R7 tests action poses and different angles to force variety. May also need to reduce reference images (use 1 product-only ref instead of 3).</div>
+  </div>
+
+  <div class="section-label">Previous Experiments</div>
 
   <div class="exp-card">
     <div class="exp-header"><span class="exp-name">Editorial prompting ("Canon 5D, f/2.8")</span><span class="exp-badge base">NICE LIGHTING</span></div>
@@ -200,19 +214,24 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
   <div class="section-label">Remaining Issues to Solve</div>
   <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Product placement</span><span class="exp-badge test">OPEN</span></div>
-    <div class="exp-desc">Product keeps landing on upper arm, wrist, or wrong orientation. Need it on lower forearm, 3in above wrist, buttons facing wearer.</div>
-    <div class="exp-result">Testing: anatomical prompts, negative prompts, seed variation, two-pass refinement. Pending review of combo experiments.</div>
+    <div class="exp-header"><span class="exp-name">Reference photo overfitting (#1)</span><span class="exp-badge test">R7 TESTING</span></div>
+    <div class="exp-desc">All outputs look like remixes of the same 3 reference photos. Justin: "one trick pony", "modeling photos superimposed." The model is reconstructing the refs, not creating new scenes.</div>
+    <div class="exp-result">R7 tests action poses, different camera angles, and non-standard framings to force the model out of its comfort zone.</div>
   </div>
   <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Symbol orientation</span><span class="exp-badge test">OPEN</span></div>
-    <div class="exp-desc">Button icons sometimes face the camera instead of the wearer (rotated 180°).</div>
-    <div class="exp-result">R5 tested "FACING THE WEARER" language. Editorial prompt got green LEDs showing. Pending review.</div>
+    <div class="exp-header"><span class="exp-name">Variety / aspirational shots</span><span class="exp-badge test">R7 TESTING</span></div>
+    <div class="exp-desc">Justin wants: full-body action shots, different angles, dynamic poses, non-skiing use cases. Current pipeline only nails close-up/waist-up skiing.</div>
+    <div class="exp-result">R7 includes: mid-turn skiing, mid-air snowboard, full-body hiker from behind, MTB panning shot, festival, trail running.</div>
   </div>
   <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Velcro strap closure</span><span class="exp-badge test">OPEN</span></div>
-    <div class="exp-desc">The fold-over velcro closure is often missing or incomplete.</div>
-    <div class="exp-result">R2 and R5 explicitly mentioned "velcro closure strap visible." Mixed results — strap shows but sometimes has artifacts.</div>
+    <div class="exp-header"><span class="exp-name">Symbol orientation</span><span class="exp-badge win">90% SOLVED</span></div>
+    <div class="exp-desc">"Face the wearer, appear upside-down to camera" language works but not on every seed.</div>
+    <div class="exp-result">R6 MTB A confirmed correct orientation. Strategy: generate 3, cherry-pick the one with correct symbols.</div>
+  </div>
+  <div class="exp-card">
+    <div class="exp-header"><span class="exp-name">Placement consistency</span><span class="exp-badge win">MANAGED</span></div>
+    <div class="exp-desc">Placement varies by seed (upper arm vs lower forearm). Not fully prompt-controllable.</div>
+    <div class="exp-result">Strategy: generate multiple seeds, filter for correct placement. Seed 4 hit 98/100 with this approach.</div>
   </div>
 </div>
 
@@ -226,6 +245,18 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <script>
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
 const ALL_IMAGES=[
+  // === R7: Break the one-trick-pony — action shots, varied angles, full body ===
+  {id:'r7-skier-action1',url:'https://drive.google.com/thumbnail?id=1pqmzz6CIh0fBd4_e1HdinPGm3jhF7cVC&sz=w1200',model:'flux2-pro-multiref',prompt:'Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle, dramatic mountain backdrop',label:'R7: Skier action A (mid-turn, side angle)',context:'R6 skiers were excellent but all looked like the same modeling photo. R7 pushes for dynamic mid-action poses and different camera angles to break the reference photo repetition.'},
+  {id:'r7-skier-action2',url:'https://drive.google.com/thumbnail?id=1aFMMYncjbwJIZLG5P_0i7D_rKADn0ugu&sz=w1200',model:'flux2-pro-multiref',prompt:'Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle',label:'R7: Skier action B (mid-turn)',context:'Same action prompt, different seed. Cherry-pick best.'},
+  {id:'r7-skier-action3',url:'https://drive.google.com/thumbnail?id=1kfn8UDZyyBKNBY-qmXf9rNYsVsO-rws5&sz=w1200',model:'flux2-pro-multiref',prompt:'Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle',label:'R7: Skier action C (mid-turn)',context:'Same action prompt, different seed.'},
+  {id:'r7-snow-action1',url:'https://drive.google.com/thumbnail?id=1iTPwemy8anApsiEhUwXozq-07kPPWUfa&sz=w1200',model:'flux2-pro-multiref',prompt:'Snowboarder mid-air grabbing board during a jump, remote on lower forearm, shot from below looking up, blue sky',label:'R7: Snowboard mid-air A (from below)',context:'Testing dynamic mid-air pose + upward camera angle. Something the reference photos could never produce.'},
+  {id:'r7-snow-action2',url:'https://drive.google.com/thumbnail?id=1fpP0c6AjoknfoUnEBn1mQBXFcg8yUAk3&sz=w1200',model:'flux2-pro-multiref',prompt:'Snowboarder mid-air grabbing board during a jump, remote on lower forearm, shot from below looking up',label:'R7: Snowboard mid-air B',context:'Same mid-air prompt, different seed.'},
+  {id:'r7-hiker-full1',url:'https://drive.google.com/thumbnail?id=1lGLMByTxdVpU4GXy7gFCNrobUsuyMk55&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body hiker walking along dramatic mountain ridge trail, lightweight hiking clothes, remote on lower forearm, shot from behind following the hiker, golden hour',label:'R7: Hiker full body A (from behind)',context:'Justin asked repeatedly for "that full body action shot, that real aspirational action shot." Testing full body from behind — a completely different angle than all previous close-ups.'},
+  {id:'r7-hiker-full2',url:'https://drive.google.com/thumbnail?id=109PF_uO23u6hW_4I4puXrXnbkKZk8YNd&sz=w1200',model:'flux2-pro-multiref',prompt:'Full body hiker walking along dramatic mountain ridge trail, shot from behind following the hiker, golden hour',label:'R7: Hiker full body B (from behind)',context:'Same full-body-from-behind prompt, different seed.'},
+  {id:'r7-mtb-action1',url:'https://drive.google.com/thumbnail?id=193OGYD1BbURS1JEoJqn9im1JEKg6lrl1&sz=w1200',model:'flux2-pro-multiref',prompt:'Mountain biker riding aggressively down dusty singletrack, leaning into turn, cycling jersey helmet gloves, remote on lower forearm, panning shot',label:'R7: MTB action A (panning shot)',context:'MTB has been inconsistent (R5 MTB was total fail, R6 MTB A was 95%). Testing aggressive riding pose + panning shot style.'},
+  {id:'r7-mtb-action2',url:'https://drive.google.com/thumbnail?id=17lnbcau_ycMix9YF7o8btWBCNLRbaP_m&sz=w1200',model:'flux2-pro-multiref',prompt:'Mountain biker riding aggressively down dusty singletrack, leaning into turn, panning shot',label:'R7: MTB action B (panning)',context:'Same action prompt, different seed.'},
+  {id:'r7-festival',url:'https://drive.google.com/thumbnail?id=1NBL9rGiubGhrR-NFSZPgZQfW7fi2dv4E&sz=w1200',model:'flux2-pro-multiref',prompt:'Person at outdoor music festival arms raised enjoying music, casual t-shirt, remote on lower forearm, colorful stage lights and crowd, evening',label:'R7: Festival (arms raised, evening)',context:'Testing non-sport use case. CB2 is used at concerts/festivals. Previous festival attempt (R5) had skin artifacts. Trying evening atmosphere + arms raised pose.'},
+  {id:'r7-runner',url:'https://drive.google.com/thumbnail?id=1tXtTp_a2CLNCVTswsUU1vrzqLnvnSwTj&sz=w1200',model:'flux2-pro-multiref',prompt:'Trail runner mid-stride on mountain path, running shorts and lightweight performance top, remote on lower forearm, morning light, action sports photography',label:'R7: Trail runner (mid-stride)',context:'Testing running as a use case. Running shorts + performance top should prevent ski jacket bleed completely.'},
   // === R6: Symbol orientation fix + clothing bleed fix (3 per activity, cherry-pick best) ===
   {id:'r6-hiker1',url:'https://files.catbox.moe/qdsl6x.jpg',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour',label:'R6: Hiker A (symbol fix + trail clothes)',context:'R5 feedback: symbols face camera not wearer. Ski jacket bleeding into non-ski scenes. Fix: "symbols face wearer, appear upside-down to camera" + specify "lightweight trail clothing."'},
   {id:'r6-hiker2',url:'https://drive.google.com/thumbnail?id=1IMF89VqtHPQBFBLF3Z9tZfTnfxrxNe3r&sz=w1200',model:'flux2-pro-multiref',prompt:'Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour',label:'R6: Hiker B (symbol fix + trail clothes)',context:'Same prompt as Hiker A — different seed for cherry-picking. Generate-and-filter strategy from seed variation test.'},
