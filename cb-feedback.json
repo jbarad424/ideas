@@ -1,1 +1,650 @@
-{}
+{
+  "type": "feedback_sync",
+  "syncedAt": "2026-04-05T18:46:49.505Z",
+  "images": [
+    {
+      "id": "r6-hiker1",
+      "label": "R6: Hiker A (symbol fix + trail clothes)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour",
+      "context": "R5 feedback: symbols face camera not wearer. Ski jacket bleeding into non-ski scenes. Fix: \"symbols face wearer, appear upside-down to camera\" + specify \"lightweight trail clothing.\"",
+      "comments": [
+        {
+          "text": "This is pretty good. I mean the skin looks a little strange and kinda looks like he's dying but but the remote looks accurate and the strap looks nice. Pretty great work with the remote sizing. Everything looks kind perfect on placement just his arm looks really strange.",
+          "time": "2026-04-05T18:41:22.249Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-hiker2",
+      "label": "R6: Hiker B (symbol fix + trail clothes)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour",
+      "context": "Same prompt as Hiker A — different seed for cherry-picking. Generate-and-filter strategy from seed variation test.",
+      "comments": [
+        {
+          "text": "This is a total fail because the strap is wrong and it looks like the remote is sitting on his arm perpendicularly to where it should be and he looks like really jacked but yeah, this is this is not good. It is oriented incorrectly. It doesn't even look like it's on person but it's interesting how you made it it's just totally wrong.",
+          "time": "2026-04-05T18:41:54.949Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-skier1",
+      "label": "R6: Skier A (symbol fix)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight",
+      "context": "Skier scenes can keep ski jacket. Only fixing symbol orientation.",
+      "comments": [
+        {
+          "text": "This is excellent I like the snow I like the jacket. I'm worried that like the really perfect ones look a lot like the modeling photo and that it's gonna be tough for you to like iterate on other situations but goddamn with the snow and everything. This looks pretty fucking perf for this type of image. I'm still waiting for that full body action shot that real aspirational action shot.",
+          "time": "2026-04-05T18:42:37.900Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-skier2",
+      "label": "R6: Skier B (symbol fix)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Again, great work looks really good. The snow everything the debris really cool. I just wanna see more variety of like the full body you know and and also the LED light is missing on the top right it just looks like a hole.",
+          "time": "2026-04-05T18:43:04.284Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-skier3",
+      "label": "R6: Skier C (symbol fix)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Same comment the unit looks good. The jacket looks good but again it just didn't goes to show that and the lighting looks cool too unless we're really just trying to nail this which I think we are placement looks good. It's just dumb. I guess I'm ready to see some different angles and some more like you know the whole point of this is that they're listening to music and having a good time but yeah, it is. It is really really good work.",
+          "time": "2026-04-05T18:43:45.034Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-mtb1",
+      "label": "R6: MTB A (symbol fix + cycling clothes)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees",
+      "context": "Fixing ski jacket bleed by specifying \"cycling jersey and helmet.\" Plus symbol orientation fix.",
+      "comments": [
+        {
+          "text": "Yeah, they're the symbol orientation is right. The skin looks a little bit better. The remote looks good. His arm looks a little bit too big but but I'd say this shit I mean it's pretty. It's pretty good probably 95% there, but in terms of the placement on the wrist it's pretty good.",
+          "time": "2026-04-05T18:44:29.019Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-mtb2",
+      "label": "R6: MTB B (symbol fix + cycling clothes)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is a total fail. The remote is facing the wrong way. You can see that the strap is like looped around on top of the arm and then there's another strap that doesn't even exist. It's just how you kinda try to make it work, but this is a zero out of 100 but correct product accuracy.",
+          "time": "2026-04-05T18:44:57.153Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-mtb3",
+      "label": "R6: MTB C (symbol fix + cycling clothes)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "The remote looks too small, but it is in the right spot on the forearm and the product act accuracy is pretty good. I don't know why the guy is facing another bicyclist. That's like going in the wrong direction though.",
+          "time": "2026-04-05T18:45:18.920Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-snow1",
+      "label": "R6: Snowboard A (symbol fix)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky",
+      "context": "Symbol orientation fix + colorful snow gear instead of dark jacket.",
+      "comments": [
+        {
+          "text": "This looks fantastic but again like it looks like he's super imposed over another picture of a skeet of a snowboard going downhill like why is he looking up and it still looks a lot like my model photos just super imposed over other photos so let's let's let's work on that",
+          "time": "2026-04-05T18:45:50.303Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-snow2",
+      "label": "R6: Snowboard B (symbol fix)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is cool good lighting good remote good placement. I like that. It's a different color jacket shows that you can actually show a different color jacket. Yeah I like this a lot but again I wanna see different angles.",
+          "time": "2026-04-05T18:46:16.102Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r6-snow3",
+      "label": "R6: Snowboard C (symbol fix)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Placement looks good remote looks accurate. It's cool. I really like this. I'm gonna as it relates to this particular angle looks really nice. I'm just looking for some versatility in this engine and I'm hoping that this is not a one trick pony.",
+          "time": "2026-04-05T18:46:45.685Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-editorial",
+      "label": "COMBO: Editorial (Canon 5D, f/2.8)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Award-winning product photography, Canon 5D Mark IV, golden hour, shallow depth of field, f/2.8, green LED icons, elastic armband with velcro closure",
+      "context": "Testing camera-specific language for better lighting and detail. First prompt to produce green LEDs consistently.",
+      "comments": [
+        {
+          "text": "This image is nice. The symbols are a little too bright and it's placed a little too low on the arm. But the lighting is cool. Don't know why it looks like he's wearing the same ski jacket from our modeling photo when he's hiking.",
+          "time": "2026-04-05T10:00:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-anatomical",
+      "label": "COMBO: Anatomical (3in above wrist)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Close up of hikers left arm, 3 inches above the wrist joint, elastic velcro armband wraps snugly",
+      "context": "R4 feedback: product kept going on upper arm. Testing ultra-specific anatomical placement language.",
+      "comments": [
+        {
+          "text": "Way too small, arm looks humongous. The remote is physically accurate though. It's just way too small.",
+          "time": "2026-04-05T10:01:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-negative",
+      "label": "COMBO: Negative prompt (NOT upper arm)",
+      "model": "flux2-pro-multiref",
+      "prompt": "LOWER forearm halfway between wrist and elbow, NOT on the upper arm, NOT on the wrist, NOT floating",
+      "context": "Testing exclusion language to prevent wrong placement. Does \"NOT on upper arm\" actually help?",
+      "comments": [
+        {
+          "text": "Way too chunky, much bigger than it should be, placed too close to the wrist. The armband looks inaccurate as well.",
+          "time": "2026-04-05T10:02:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-twopass-base",
+      "label": "COMBO: Two-pass BASE (before Kontext)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Waist-up hiker on mountain ridge, remote on forearm with velcro armband, golden hour",
+      "context": "Step 1 of two-pass experiment. Compare with REFINED version to see if Kontext Pro can reposition the product.",
+      "comments": [
+        {
+          "text": "Remote looks pretty good. Sizing looks OK, maybe 5% too large. Almost correct on placement, just a little too close to the wrist. Remote looks really nice and the lighting is really nice.",
+          "time": "2026-04-05T10:03:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-twopass-refined",
+      "label": "COMBO: Two-pass REFINED (after Kontext)",
+      "model": "multiref+kontext",
+      "prompt": "Kontext instruction: Move device to LOWER forearm, 3 inches above wrist",
+      "context": "Step 2: Kontext Pro tried to move product lower. Did it actually change position vs the BASE?",
+      "comments": [
+        {
+          "text": "Getting better. The symbols are only legible to the viewer of the image but they should be legible to the person wearing it — flipped 180 degrees.",
+          "time": "2026-04-05T10:04:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-seed1",
+      "label": "SEED 1 of 5 (same prompt)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "context": "Consistency test. 5 identical prompts — if placement varies wildly, the model is random, not prompt-controllable.",
+      "comments": [
+        {
+          "text": "Actually isn't that bad. The size looks OK. It's on a bare arm and the symbols are visible to the viewer of the photo, not to the hiker.",
+          "time": "2026-04-05T10:05:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-seed2",
+      "label": "SEED 2 of 5",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "context": "Same prompt as Seed 1. Compare placement.",
+      "comments": [
+        {
+          "text": "Pretty accurate in terms of the remote but again that's a guy wearing a ski jacket when he's hiking, which is strange.",
+          "time": "2026-04-05T10:06:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-seed3",
+      "label": "SEED 3 of 5",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "context": "Same prompt as Seed 1. Compare placement.",
+      "comments": [
+        {
+          "text": "Same issue — looks like our modeling photos where I was wearing my ski jacket, just superimposed over a hiker. Clothing needs to change but lighting is good and remote is accurate and placement is OK.",
+          "time": "2026-04-05T10:07:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-seed4",
+      "label": "SEED 4 of 5",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "context": "Same prompt as Seed 1. Compare placement.",
+      "comments": [
+        {
+          "text": "This is pretty damn close. I would say this is like a 98 out of 100.",
+          "time": "2026-04-05T10:08:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-seed5",
+      "label": "SEED 5 of 5",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "context": "Same prompt as Seed 1. Compare placement.",
+      "comments": [
+        {
+          "text": "This is great, I like it. But again ski jacket and a hiker — not good.",
+          "time": "2026-04-05T10:09:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lora-v4b-hiker",
+      "label": "LoRA v4b: Hiker",
+      "model": "flux-lora-v4b",
+      "prompt": "CB2REMOTE on lower forearm, hiker golden hour",
+      "context": "First-ever v4b test (Jordan's 50 photos, all 3 colorways). Does broader training data improve product learning?",
+      "comments": [
+        {
+          "text": "Zero visibility of the remote anywhere. Zero out of 100.",
+          "time": "2026-04-05T10:10:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lora-v4b-skier",
+      "label": "LoRA v4b: Skier",
+      "model": "flux-lora-v4b",
+      "prompt": "CB2REMOTE on forearm, skier powder",
+      "context": "v4b test. Does the model produce actual product shape or just text?",
+      "comments": [
+        {
+          "text": "Another F. Zero out of 100, no remote visible.",
+          "time": "2026-04-05T10:11:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lora-v4b-mtb",
+      "label": "LoRA v4b: MTB",
+      "model": "flux-lora-v4b",
+      "prompt": "CB2REMOTE on forearm, mountain biker",
+      "context": "v4b test. Checking product form factor from 50 training photos.",
+      "comments": [
+        {
+          "text": "This looks like a nightmare. I don't know what went wrong here. Your remote just says CB2. Total fail.",
+          "time": "2026-04-05T10:12:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lora-v4b-snowboard",
+      "label": "LoRA v4b: Snowboarder",
+      "model": "flux-lora-v4b",
+      "prompt": "CB2REMOTE on forearm, snowboarder",
+      "context": "v4b test. POV shot with \"CC2\" text — closest to actual product shape.",
+      "comments": [
+        {
+          "text": "This makes me want to vomit. Really bad, no remote and the person looks not even like a real person or an arm. Total fail.",
+          "time": "2026-04-05T10:13:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lora-v4b-runner",
+      "label": "LoRA v4b: Runner",
+      "model": "flux-lora-v4b",
+      "prompt": "CB2REMOTE on forearm, trail runner",
+      "context": "v4b test. Does trigger word produce the device or just approximations?",
+      "comments": [
+        {
+          "text": "The guy looks like he's holding a piece of rubber that has some symbols on it. Not even close to us. Total fail.",
+          "time": "2026-04-05T10:14:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r5-hiker",
+      "label": "R5: Hiker lower forearm",
+      "model": "flux2-pro-multiref",
+      "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, golden hour mountain trail",
+      "context": "R4: \"just move to lower forearm.\" Added explicit LOWER forearm + FACING THE WEARER.",
+      "comments": [
+        {
+          "text": "The lighting and accuracy of the remote is pretty good. The symbols should be facing the wearer, not visible to the viewer — should be flipped 180 degrees. If I'm being nitpicky, just a little bit further down the forearm closer to the wrist.",
+          "time": "2026-04-05T10:15:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r5-mtb",
+      "label": "R5: MTB lower forearm",
+      "model": "flux2-pro-multiref",
+      "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, pine forest trail",
+      "context": "R4 MTB: \"generally pretty great, move up an inch.\" Testing LOWER forearm language.",
+      "comments": [
+        {
+          "text": "It's a biker, that's nice, but there's no visible remote anywhere. Not good. I don't see it at all. Total fail.",
+          "time": "2026-04-05T10:16:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r5-snowboard",
+      "label": "R5: Snowboarder lower forearm",
+      "model": "flux2-pro-multiref",
+      "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, snowy peak",
+      "context": "R4 snowboard: \"symbols flipped 180°.\" Added FACING THE WEARER.",
+      "comments": [
+        {
+          "text": "Pretty cool. I see the remote. The symbols could be a little clearer, it's a little fuzzy, but placement is cool and the guy's got a dope vibe. 80 out of 100.",
+          "time": "2026-04-05T10:17:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r5-skier",
+      "label": "R5: Skier POV lower forearm",
+      "model": "flux2-pro-multiref",
+      "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, mountain panorama",
+      "context": "R4 skier was \"pretty damn good.\" Maintaining quality + testing lower forearm.",
+      "comments": [
+        {
+          "text": "This is a real slam dunk. Great job.",
+          "time": "2026-04-05T10:18:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r5-festival",
+      "label": "R5: Festival (new use case)",
+      "model": "flux2-pro-multiref",
+      "prompt": "LOWER forearm, FACING THE WEARER, outdoor music festival, stage lights",
+      "context": "NEW: Testing non-sport context. CB2 is used at festivals/concerts too.",
+      "comments": [
+        {
+          "text": "The way that it appears and the guy's skin looks a little strange. Also why is he at a concert venue? The size is probably 90% of what it should be, just a little too small. But generally physically looks pretty nice in terms of accuracy of the remote.",
+          "time": "2026-04-05T10:19:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r4-hiker",
+      "label": "R4: Hiker waist-up",
+      "model": "flux2-pro-multiref",
+      "prompt": "Waist-up hiker golden hour, remote on left forearm",
+      "context": "R3 full-body had floating products. R4 switched to waist-up as compromise.",
+      "comments": [
+        {
+          "text": "Product looks actually fine. Just need to put it on the lower forearm, not the upper arm. Product looks decent, a little wobbly, but pretty good.",
+          "time": "2026-04-05T00:00:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r4-skier",
+      "label": "R4: Skier close-up",
+      "model": "flux2-pro-multiref",
+      "prompt": "Upper body skier, remote on forearm, mountain panorama",
+      "context": "Waist-up test. Validated sweet-spot framing.",
+      "comments": [
+        {
+          "text": "Product looks great, lighting is great. Pretty damn good.",
+          "time": "2026-04-05T00:01:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r4-mtb",
+      "label": "R4: MTB 3/4 body",
+      "model": "flux2-pro-multiref",
+      "prompt": "3/4 body mountain biker, remote on forearm, pine trees",
+      "context": "3/4 body test. Product slightly low on arm but accuracy strong.",
+      "comments": [
+        {
+          "text": "Product looks good, a little low on the arm but generally pretty great. Move it up an inch and it's a great success.",
+          "time": "2026-04-05T00:02:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r4-snowboard",
+      "label": "R4: Snowboarder waist-up",
+      "model": "flux2-pro-multiref",
+      "prompt": "Waist-up snowboarder, remote on forearm, blue sky",
+      "context": "Symbols were rotated 180°. Led to R5 \"FACING THE WEARER\" experiment.",
+      "comments": [
+        {
+          "text": "Pretty great, except symbols are flipped — viewer sees the play button instead of the wearer. Should be rotated 180°. Other than that, product looks awesome.",
+          "time": "2026-04-05T00:03:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r3m-hiker",
+      "label": "R3: Hiker full body",
+      "model": "flux2-pro-multiref",
+      "prompt": "Full body hiker, remote on forearm, golden hour",
+      "context": "First full-body attempt. Testing if product survives wider framing.",
+      "comments": [
+        {
+          "text": "Two chubby buttons — one on left upper arm, one on right lower arm. The one on the right lower arm looks pretty good though.",
+          "time": "2026-04-05T00:04:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r3m-mtb",
+      "label": "R3: MTB full body",
+      "model": "flux2-pro-multiref",
+      "prompt": "Full body mountain biker, remote on forearm",
+      "context": "Full-body test proved too wide for reliable placement.",
+      "comments": [
+        {
+          "text": "Looks horrible. Floating above the arm, not even on it. Superimposed, as if copy-pasting an image on top of an arm. Bad.",
+          "time": "2026-04-05T00:05:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r3m-skier",
+      "label": "R3: Skier full body",
+      "model": "flux2-pro-multiref",
+      "prompt": "Full body skier, remote on forearm, mountain panorama",
+      "context": "Full-body caused duplicate product generation.",
+      "comments": [
+        {
+          "text": "Two different remotes stacked on top of each other. Remotes look OK but there's two of them and that's weird.",
+          "time": "2026-04-05T00:06:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r3m-runner",
+      "label": "R3: Runner full body",
+      "model": "flux2-pro-multiref",
+      "prompt": "Trail runner full body, remote on forearm",
+      "context": "Full-body: two remotes, symbols too bright.",
+      "comments": [
+        {
+          "text": "Two remotes — one upper arm, one lower. Symbols look too bright. That's like 80% there, maybe 70.",
+          "time": "2026-04-05T00:07:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r3m-snowboard",
+      "label": "R3: Snowboarder full body",
+      "model": "flux2-pro-multiref",
+      "prompt": "Full body snowboarder, remote on forearm",
+      "context": "Full-body: duplicate products, incorrect securing.",
+      "comments": [
+        {
+          "text": "Pretty gnarly. One thing on the bottom that doesn't look like us, one on top that does but not secured correctly. Remote looks OK but it's on the upper arm.",
+          "time": "2026-04-05T00:08:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r2-skiing-pov",
+      "label": "R2: Skiing POV (single ref)",
+      "model": "flux-2-pro-preview",
+      "prompt": "Remote on forearm over ski glove, snowy slopes, POV",
+      "context": "Single-ref test via BFL API. Proved 3-ref multiref is much better.",
+      "comments": [
+        {
+          "text": "Don't like the lighting — looks fake, too contrasted. Buttons don't look authentic, LEDs in wrong direction. Velcro looks OK but placed way too close to wrist.",
+          "time": "2026-04-04T22:04:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r2-hiking-summit",
+      "label": "R2: Hiking summit (single ref)",
+      "model": "flux-2-pro-preview",
+      "prompt": "Remote on forearm, mountain summit, golden hour",
+      "context": "Single-ref test. Confirmed multiref >>> single ref.",
+      "comments": [
+        {
+          "text": "Way too small, too zoomed in on arm. Looking for more full body people. Lighting is cool but product is small and not on correct spot. Strap looks great but has a thicker part at bottom that doesn't exist.",
+          "time": "2026-04-04T22:05:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux2-hiking-multiref",
+      "label": "R1: Hiking golden hour (BASELINE)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on hikers forearm, mountain trail, golden hour",
+      "context": "BASELINE. First multiref, simple prompt. Set the quality bar.",
+      "comments": [
+        {
+          "text": "This honestly looks pretty damn good. It's a little dreamlike but the remote is perfect and it's on the arm. Missing a bit of the strap velcro that goes over on top of the other side, but the logo is there and lighting is nice.",
+          "time": "2026-04-04T22:00:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux2-skiing-multiref",
+      "label": "R1: Skiing powder (BASELINE)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on skiers forearm, snowy slopes, bright sunlight",
+      "context": "BASELINE. Product accuracy ~95%.",
+      "comments": [
+        {
+          "text": "Interesting lighting, a little cheesy/early 2000s looking, but the remote really nailed it. It's on the arm, seam looks good, lighting looks good. Remote is almost uncanny.",
+          "time": "2026-04-04T22:01:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux2-snowboard-multiref",
+      "label": "R1: Snowboard halfpipe (BASELINE)",
+      "model": "flux2-pro-multiref",
+      "prompt": "Remote on snowboarders forearm, halfpipe, bright winter day",
+      "context": "BASELINE. Minor velcro strap issue but product excellent.",
+      "comments": [
+        {
+          "text": "Remote's great. Top of the velcro is missing a little bit. Remote looks almost as if it's really there. Don't know why we're in a half pipe but it's good.",
+          "time": "2026-04-04T22:02:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "kontext-tron-skiing",
+      "label": "R1: Kontext tron close-up",
+      "model": "flux-kontext-pro",
+      "prompt": "CB2 Tron with green LEDs, skier carving powder",
+      "context": "Kontext Pro single-ref vs multiref comparison. Had mysterious artifact.",
+      "comments": [
+        {
+          "text": "Really cool, remote looks accurate. Strange square patch on back of arm. Remote itself is great, can see Chubby Buttons logo, but still looks a little strange.",
+          "time": "2026-04-04T22:03:00Z",
+          "num": 1
+        }
+      ]
+    }
+  ]
+}
