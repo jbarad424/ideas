@@ -100,12 +100,24 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <div class="exp-result">Justin: "remote is perfect", "nailed it", "almost uncanny" — ~90% product accuracy on close-up/waist-up framing.</div>
   </div>
 
-  <div class="section-label">Active Experiment — R7</div>
+  <div class="section-label">Active Experiments — Pipeline Tests</div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Pipeline A: @image referencing (1 product ref only)</span><span class="exp-badge win">BREAKTHROUGH</span></div>
+    <div class="exp-desc">Instead of 3 refs (product + 2 on-arm ski jacket shots), use ONLY the product-front photo + @image syntax: "Place the product from image 1 on the forearm." The model pulls the scene from its own knowledge, not from the refs.</div>
+    <div class="exp-result">BROKE THE SKI JACKET BLEED. Hiker wears a t-shirt. MTB wears cycling jersey. Snowboarder has colorful gear. Festival person at a concert. Full body shots with variety. Product visible on festival image with 5 buttons. This is the architecture change we needed.</div>
+  </div>
 
   <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">R7: Break the one-trick-pony</span><span class="exp-badge test">GENERATING</span></div>
-    <div class="exp-desc">13 images targeting variety: action poses (mid-turn, mid-air, mid-stride), different camera angles (from behind, from below, panning), full-body aspirational shots. Also testing festival + running use cases.</div>
-    <div class="exp-result">R6 proved product accuracy is ~95% for skiing close-ups. But outputs look like remixes of the reference photos. R7 pushes for dynamic scenes the model hasn't memorized from the refs.</div>
+    <div class="exp-header"><span class="exp-name">Pipeline B: Scene → Mask → Inpaint (fal.ai Fill Pro)</span><span class="exp-badge test">NEEDS WORK</span></div>
+    <div class="exp-desc">Generate clean scene, create forearm mask, inpaint CB2 via fal.ai Fill Pro API. Gives full control over scene AND product placement.</div>
+    <div class="exp-result">API works on fal.ai (was blocked on BFL). But rough rectangle masks don't place the product accurately. Needs better forearm segmentation — could use AI segmentation (SAM, CLIPSeg) to auto-detect forearm regions.</div>
+  </div>
+
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">R7: Action shots via standard multiref</span><span class="exp-badge test">REVIEWED</span></div>
+    <div class="exp-desc">11 images: mid-turn skiing, mid-air snowboard, full-body hiker from behind, MTB panning, festival, trail runner.</div>
+    <div class="exp-result">Skiing close-ups still excellent. But action/full-body/new-sports: product disappears (1-10/100 on MTB, runner, festival). Confirms multiref with 3 on-arm refs can't do variety — led to Pipeline A discovery.</div>
   </div>
 
   <div class="section-label">Completed — R6 Results</div>
@@ -245,6 +257,14 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <script>
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
 const ALL_IMAGES=[
+  // === PIPELINE A: @image referencing with product-only reference (BREAKTHROUGH) ===
+  {id:'pipeA-hiker',url:'https://files.catbox.moe/dm1219.jpg',model:'flux2-pro-multiref (@image)',prompt:'Place the product from image 1 on a hikers lower forearm. Lightweight trail clothes, mountain ridge, golden hour. Full body shot from the side.',label:'PIPE A: Hiker full body (@image, 1 ref only)',context:'BREAKTHROUGH TEST. Using ONLY the product-front photo as reference (no on-arm ski jacket refs). The @image syntax tells the model "place product from image 1 on the forearm." This should eliminate ski jacket bleed and enable variety.'},
+  {id:'pipeA-mtb',url:'https://files.catbox.moe/l91i71.jpg',model:'flux2-pro-multiref (@image)',prompt:'Product from image 1 on bikers lower forearm, positioned like image 2. Cycling jersey. Action sports, dusty trail.',label:'PIPE A: MTB action (@image, 2 refs)',context:'Testing @image with 2 refs: product + arm placement guide. Explicit instruction: "completely different clothing than reference images." Does the model respect this?'},
+  {id:'pipeA-snowboard',url:'https://files.catbox.moe/djh1o2.jpg',model:'flux2-pro-multiref (@image)',prompt:'Product from image 1 on forearm. Snowboarder mid-air, colorful snow gear. From below looking up.',label:'PIPE A: Snowboard mid-air (@image, 1 ref)',context:'Testing if product survives in a completely novel scene (mid-air, from below) with only 1 product reference. No on-arm refs = no ski jacket bleed.'},
+  {id:'pipeA-festival',url:'https://files.catbox.moe/savr6w.jpg',model:'flux2-pro-multiref (@image)',prompt:'Product from image 1 on forearm. Person at music festival, arms raised, casual t-shirt, stage lights, evening.',label:'PIPE A: Festival arms raised (@image, 1 ref)',context:'Non-sport use case with product-only ref. Previous festival attempts (R5, R7) had skin artifacts or wrong placement. Does @image syntax fix this?'},
+  // === PIPELINE B: fal.ai Fill Pro inpainting (scene → mask → inpaint) ===
+  {id:'pipeB-festival',url:'https://files.catbox.moe/2egr9n.jpg',model:'flux-pro-fill (inpaint)',prompt:'Step 1: Generated clean festival scene. Step 2: Created forearm mask. Step 3: Inpainted CB2 via fal.ai Fill Pro.',label:'PIPE B: Festival inpaint (mask-based)',context:'Pipeline B test: generate scene without product, then inpaint the CB2 into a masked forearm region. The mask was a rough rectangle — better segmentation would improve placement. Compare with Pipeline A festival which used @image referencing instead.'},
+  {id:'pipeB-hiker',url:'https://files.catbox.moe/y6j9wl.jpg',model:'flux-pro-fill (inpaint)',prompt:'Step 1: Generated clean hiker scene (from behind, ridge trail). Step 2: Masked right forearm area. Step 3: Inpainted CB2.',label:'PIPE B: Hiker inpaint (mask-based)',context:'Pipeline B test with hiker scene. The mask was a rough ellipse placed where I estimated the forearm was. Inpainting produces something but mask precision is critical — better segmentation needed.'},
   // === R7: Break the one-trick-pony — action shots, varied angles, full body ===
   {id:'r7-skier-action1',url:'https://drive.google.com/thumbnail?id=1pqmzz6CIh0fBd4_e1HdinPGm3jhF7cVC&sz=w1200',model:'flux2-pro-multiref',prompt:'Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle, dramatic mountain backdrop',label:'R7: Skier action A (mid-turn, side angle)',context:'R6 skiers were excellent but all looked like the same modeling photo. R7 pushes for dynamic mid-action poses and different camera angles to break the reference photo repetition.'},
   {id:'r7-skier-action2',url:'https://drive.google.com/thumbnail?id=1aFMMYncjbwJIZLG5P_0i7D_rKADn0ugu&sz=w1200',model:'flux2-pro-multiref',prompt:'Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle',label:'R7: Skier action B (mid-turn)',context:'Same action prompt, different seed. Cherry-pick best.'},
