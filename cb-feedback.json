@@ -1,7 +1,203 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-05T19:33:15.514Z",
+  "syncedAt": "2026-04-05T20:16:42.943Z",
   "images": [
+    {
+      "id": "r8-mtb1",
+      "label": "R8: MTB 1 of 5 (Pipeline A)",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "MTB rider on singletrack, cycling jersey, product from image 1 on lower forearm, buttons face rider",
+      "context": "Scaling Pipeline A: 5 MTB variations for cherry-picking. Your previous Pipeline A MTB scored 88/100 — the highest non-skiing score ever. Generating 5 to find a 95+.",
+      "comments": [
+        {
+          "text": "This is it's pretty good. The roof looks nice but doesn't look like it's snug on his arm and still too low on his wrist but yeah I think I'm into the angle and the remote quality but the strap is not actually strapped on his form. Looks like it kind of floating like 60 out of 100.",
+          "time": "2026-04-05T20:09:27.948Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-mtb2",
+      "label": "R8: MTB 2 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same MTB prompt",
+      "context": "Same prompt, different seed. Cherry-pick best.",
+      "comments": [
+        {
+          "text": "This is really bad. The chubby button is on the front of the bike. It's much larger than it should be just sitting here on the top of the bike, not on his arm and it's way too large. I give you five points for getting the remote somewhat accurate, but still five out of 100.",
+          "time": "2026-04-05T20:09:51.595Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-mtb3",
+      "label": "R8: MTB 3 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same MTB prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Zero out of 100 there's a remote on the wrist, but it's not chubby buttons",
+          "time": "2026-04-05T20:10:03.278Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-mtb4",
+      "label": "R8: MTB 4 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same MTB prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Five out of 100 there's something on his wrist but you can't see the strap fully closed and it doesn't look anything like chubby buttons but it looks like almost like an iPhone is there from the side profile",
+          "time": "2026-04-05T20:10:24.394Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-mtb5",
+      "label": "R8: MTB 5 of 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same MTB prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Five out of 100 the remote looks recognizable so the only points are for that but other than that it's way too chunky and it's sitting on top of his forearm. It's not good sorry it's sitting on top of his like upper arm. Yeah it's it's pretty bad.",
+          "time": "2026-04-05T20:11:30.931Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-skier1",
+      "label": "R8: Skier full body 1 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Full body skier carving turn, bright ski jacket, product from image 1 on forearm, buttons face skier",
+      "context": "Testing full-body skiing with Pipeline A. Previous skiing images were close-ups/waist-up. Can @image do full body skiing with product visible?",
+      "comments": [
+        {
+          "text": "There's a unit here, but it looks like it's Photoshop on top of the person's arm. The sizing is wrong. The placement is good. I would not use this an ad. It does not look it just looks like yeah it's not great. It doesn't look aspirational enough it also like the remote is just like floating on top of his arm and I guess you get a couple of points for looking like our remote that's good. Give me 5 to 10 points for that but in terms of placement in shadows and all that stuff pretty bad.",
+          "time": "2026-04-05T20:12:11.461Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-skier2",
+      "label": "R8: Skier full body 2 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same skier prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is probably like a eight out of 100. I see something that looks like a remote but again just looks like a copy paste. Photoshop doesn't look OK maybe I'll give you 10 out of 100 cause it kinda looks like something but other than that pretty far off.",
+          "time": "2026-04-05T20:12:38.463Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-skier3",
+      "label": "R8: Skier full body 3 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same skier prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "I recognize the remote, but the strap just looks like it's floating above his arm like he's like sticking his arm through it. It does not look like it's you know snug on the jacket. I give it a five out of 100.",
+          "time": "2026-04-05T20:12:56.776Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-snow1",
+      "label": "R8: Snowboard full body 1 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Full body snowboarder on powder slope, colorful gear, product from image 1 on forearm, buttons face rider",
+      "context": "Full-body snowboarding with Pipeline A. Previous snowboard @image scored 65/100 (strap loose, symbols warped). Can we get higher with more seeds?",
+      "comments": [
+        {
+          "text": "I can see the remote it's a little too chunky, but it looks somewhat recognizable. I think it's flipped upside down. The symbol is not really. I can't really see. It also has two remotes and one charm that's not good and they're just a little too closer down the wrist, but I will give you like I'll give you like a 40 out of 100 just because it looks like a little bit like chubby buttons.",
+          "time": "2026-04-05T20:13:28.476Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-snow2",
+      "label": "R8: Snowboard full body 2 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same snowboard prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is almost comically horrible it looks like he's wearing a like a humongous 10 times the size chubby buttons on his arm, but the symbol orientation is right but it's not good. Give us a two out of 100.",
+          "time": "2026-04-05T20:14:02.961Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-snow3",
+      "label": "R8: Snowboard full body 3 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same snowboard prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Again, I really really big remote. The remote looks recognizable but it's way too big on the skier. Yeah I think you need to get a little bit closer if you're gonna be using size like this it looks like it's like 5 to 7 times the size really funny ha ha ha ha bad job like a six out of 100.",
+          "time": "2026-04-05T20:14:32.195Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-hiker1",
+      "label": "R8: Hiker with gloves 1 of 3 (on-brand)",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Hiker on mountain trail in cold weather, light jacket and hiking gloves, product from image 1 on forearm over sleeve, buttons face wearer, golden hour",
+      "context": "You noted hiking without gloves is less on-brand. Testing hiker WITH gloves in cold weather — closer to CB2 use case (people wearing gloves who need big buttons).",
+      "comments": [
+        {
+          "text": "This is really good except the fact that it's flipped 180° again either the viewer of the photo can see the play button but the user needs to see it in the right way so flipped 180° but it looks nice and taught on a jacket ar it's placed in the right spot. The shadows are cool again it probably is really good cause it's closest to the model photo, but but yeah, this is improvement.",
+          "time": "2026-04-05T20:15:10.392Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-hiker2",
+      "label": "R8: Hiker with gloves 2 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same hiker-gloves prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Hey, look at that the symbol is correct cause it's flipped on the right side for the guy and I don't know why it just yes I can see it but it looks so strange just like sticking his arm out for the I guess he's holding a walking stick that's cool. This is pretty cool. I would say if you could move it just a couple of centimeters up his arm away from his wrist. I mean it's also not. I'm really being nitpicky here cause this is good. It just looks a little bit AI with that kind of fish lens but we can get to the actual photos use later but in terms of placement damn I'll give us like a 94 out of 100.",
+          "time": "2026-04-05T20:16:05.342Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "r8-hiker3",
+      "label": "R8: Hiker with gloves 3 of 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same hiker-gloves prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "It's flipped the symbol is wrong cause I can see it but not him but the size is great. The lighting is great. The strap looks good. The iconography looks good yeah outside of it being the wrong orientation for the symbols pretty cool 92.5 out of 100.",
+          "time": "2026-04-05T20:16:38.144Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "pipeA-hiker",
       "label": "PIPE A: Hiker full body (@image, 1 ref only)",
