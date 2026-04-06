@@ -1,7 +1,217 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T17:44:12.070Z",
+  "syncedAt": "2026-04-06T17:54:14.432Z",
   "images": [
+    {
+      "id": "newgen-moto-s800",
+      "label": "NEW: Moto Coastal 1/5",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Moto coastal, earbuds, armored jacket, LEFT arm, bright icons",
+      "context": "NEW BATCH with improved prompts: added wireless earbuds, armored riding jacket, bright button icons. All based on your feedback about missing gear and faded symbols.",
+      "comments": [
+        {
+          "text": "The strap is wrong. The symbols are not perfect and it looks a little bit cartoonish, but it's placed somewhat in the right direction. It just looks a little fake. I give this 55.",
+          "time": "2026-04-06T17:46:44.736Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-moto-s801",
+      "label": "NEW: Moto Coastal 2/5",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same moto prompt",
+      "context": "Improved prompt batch, seed 801.",
+      "comments": [
+        {
+          "text": "There's two volume up buttons and there's a red something artifact on the chubby buttons looks like it's above his elbow, which is a fail it should it's not the right space he's not wearing a helmet, which is the problem, but the echography on the strap looks correct I give this a 60",
+          "time": "2026-04-06T17:47:17.769Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-moto-s802",
+      "label": "NEW: Moto Coastal 3/5",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same",
+      "context": "Seed 802.",
+      "comments": [
+        {
+          "text": "The guy wearing really strange looking earbuds, but he's not wearing a helmet which again a problem. The symbols are kind of there, but the strap is not visible so I get this like a 42 out of 100.",
+          "time": "2026-04-06T17:47:42.288Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-moto-s803",
+      "label": "NEW: Moto Coastal 4/5",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same",
+      "context": "Seed 803.",
+      "comments": [
+        {
+          "text": "Orientation chubby buttons looks good not really sure what the color weigh is should be beneath the elbow which it's not but everything else in the remote looks good and but again he's not wearing a helmet, which is a problem nor gloves, but I guess you don't really need gloves when you're on a motorcycle I get a 65",
+          "time": "2026-04-06T17:48:16.134Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-moto-s804",
+      "label": "NEW: Moto Coastal 5/5",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same",
+      "context": "Seed 804.",
+      "comments": [
+        {
+          "text": "Above the elbow again, symbols are wrong. Can't tell what color I guess it looks more like a hunter strap is strange. The guy is not wearing a helmet. Looks a little cartoonish as well. 38 out of 100.",
+          "time": "2026-04-06T17:48:36.901Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-mtb-s810",
+      "label": "NEW: MTB 1/3",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "MTB dusty forest trail, LEFT arm, bright icons",
+      "context": "Mountain biking has been averaging 34/100. These use Ref C + bright icon prompt. Can we crack MTB?",
+      "comments": [
+        {
+          "text": "Again above the elbow, which is weird I don't know why the symbols look like they're glowing, which is also wrong and there's two chubby buttons that are on him, which is strange the one in the lower part of his arm looks a little more accurate the one of the upper part is really strange. If we just took the one in the lower part, it might be good even though the shadowing the lighting could be a little bit better. It looks a little bit Photoshop, but I would give that for just the one in the lower arm. I'd give it probably a 72 out of 100.",
+          "time": "2026-04-06T17:49:16.901Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-mtb-s811",
+      "label": "NEW: MTB 2/3",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same MTB prompt",
+      "context": "MTB seed 811.",
+      "comments": [
+        {
+          "text": "This is getting much better. The remote looks great. It's in the right spot. If I really want to be nitpicky, I would say just an actually you know what it's in the perfect right spot orientation symbols look awesome. It's on his left arm. I mean damn dude for a mountain biker I'd give a 98.",
+          "time": "2026-04-06T17:50:04.783Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-mtb-s812",
+      "label": "NEW: MTB 3/3",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same",
+      "context": "MTB seed 812.",
+      "comments": [
+        {
+          "text": "I can't really see the symbols on here that well but it's placed well. Shadows are cool. Shadows could be a little bit better looks a little bit Photoshop but I mean for a mountain biker man I mean you're here you're getting somewhere with this 94.5 out of 100.",
+          "time": "2026-04-06T17:50:36.516Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-run-s820",
+      "label": "NEW: Running 1/3",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Trail runner cold weather, light gloves, LEFT arm",
+      "context": "First running attempt with gloves and cold weather gear. Previous running scored 38 avg.",
+      "comments": [
+        {
+          "text": "This is above his elbow that the symbols are glowing in an odd way, which is incorrect better than that if it was beneath the elbow in the right spot, it would look cool the placement wrong but because of the accuracy I give it a 62",
+          "time": "2026-04-06T17:51:01.741Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-run-s821",
+      "label": "NEW: Running 2/3",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same running prompt",
+      "context": "Running seed 821.",
+      "comments": [
+        {
+          "text": "Again, the buttons are glowing in an odd way, but the orientation is right. The placement is right and the strap looks good and the guy looks like he's kind of dope and inspiring if the symbols were not glowing, I'd give this a really great review but they look a little strange and because of that I give this 79",
+          "time": "2026-04-06T17:51:33.115Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-run-s822",
+      "label": "NEW: Running 3/3",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same",
+      "context": "Running seed 822.",
+      "comments": [
+        {
+          "text": "Fail does not look like our remote I give it a 10 out of 100",
+          "time": "2026-04-06T17:51:43.766Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-fish-s830",
+      "label": "NEW: Fishing 1/2",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Person on boat fishing, LEFT arm, calm lake, golden hour",
+      "context": "BRAND NEW SPORT: Fishing from a boat. Testing the nano stick backing use case.",
+      "comments": [
+        {
+          "text": "Fishing guy right spot symbols are weird. Shadows are OK. The iconography in the logo on the strap is strange. I get to say 52 out of 100.",
+          "time": "2026-04-06T17:52:04.198Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-fish-s831",
+      "label": "NEW: Fishing 2/2",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same fishing prompt",
+      "context": "Fishing seed 831.",
+      "comments": [
+        {
+          "text": "This is in the right orientation and the only difference only problems at the play pause is facing the wrong way but everything else is right like that the guy is fishing. He has two Rose ham which is a little weird. I get this 45 out of 100.",
+          "time": "2026-04-06T17:52:30.465Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-atv-s840",
+      "label": "NEW: ATV 1/2",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "ATV rider dirt trail, LEFT arm, dusty action",
+      "context": "BRAND NEW SPORT: ATV riding. Hands-free music control on the trail.",
+      "comments": [
+        {
+          "text": "This looks good, except the fact that it doesn't really look snug on his arm and it looks like it's sitting above a watch which is weird but for the accuracy of the remote, it looks like a combination of green buttons with the black plastic, which is strange, but I like where this is going wish the guy was wearing gloves is showing promise  I'll give it a 71 out of 100.",
+          "time": "2026-04-06T17:53:12.566Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "newgen-atv-s841",
+      "label": "NEW: ATV 2/2",
+      "model": "flux2-pro @image (Ref C v2)",
+      "prompt": "Same ATV prompt",
+      "context": "ATV seed 841.",
+      "comments": [
+        {
+          "text": "This is on the guys left hand right so it's oriented correctly. Where is it? Yeah it's on his left hand so the positive should be facing down. It's almost like you're almost got it but the positive button and the neck the volume up the volume down button just need to be reversed, even though everything else looks OK but I like the I like the placement although the strap is little failure, I'll call to 64 out of 100",
+          "time": "2026-04-06T17:54:09.483Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "samfix-refC1",
       "label": "SAM FIX: ref-C1 (was ~95-98 if flipped)",
