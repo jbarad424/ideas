@@ -96,6 +96,29 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .grid-badge.good{background:#f59e0b;color:#000}
 .grid-badge.ok{background:#3b82f6;color:#fff}
 .grid-badge.bad{background:#ef4444;color:#fff}
+/* CREATE tab */
+.create-wrap{width:100%;max-width:600px;padding:.5rem;display:none;margin:0 auto}
+.create-section{margin-bottom:1rem}
+.create-label{font-size:.7rem;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem}
+.create-grid{display:flex;flex-wrap:wrap;gap:.4rem}
+.cr-btn{padding:.4rem .7rem;border-radius:8px;border:2px solid #222;background:#111;color:#888;font-size:.7rem;font-weight:600;cursor:pointer;transition:all .15s}
+.cr-btn:hover{border-color:#555;color:#ccc}
+.cr-btn.active{border-color:#a855f7;color:#a855f7;background:#1a1030}
+.cr-btn.cw-tron.active{border-color:#22c55e;color:#22c55e;background:#0a1a0a}
+.cr-btn.cw-hunter.active{border-color:#84cc16;color:#84cc16;background:#0a1a0a}
+.cr-btn.cw-patriot.active{border-color:#ef4444;color:#ef4444;background:#1a0a0a}
+.create-prompt{width:100%;min-height:60px;background:#111;border:2px solid #222;border-radius:10px;color:#fff;font-size:.85rem;padding:.6rem;resize:vertical;font-family:inherit;line-height:1.4}
+.create-prompt:focus{outline:none;border-color:#a855f7}
+.create-prompt::placeholder{color:#555}
+.gen-btn{width:100%;background:linear-gradient(135deg,#a855f7,#6d28d9);border:none;color:#fff;padding:.8rem;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:.5rem;transition:opacity .15s}
+.gen-btn:hover{opacity:.85}
+.gen-btn:disabled{opacity:.4;cursor:default}
+.gen-count{display:flex;align-items:center;gap:.8rem;justify-content:center}
+.gen-count button{width:32px;height:32px;border-radius:8px;border:2px solid #333;background:#111;color:#fff;font-size:1rem;font-weight:700;cursor:pointer}
+.gen-count button:hover{border-color:#a855f7}
+.gen-count span{font-size:1.1rem;font-weight:700;color:#fff;min-width:24px;text-align:center}
+.preview-box{background:#0d1117;border:1px solid #1a3a2a;border-radius:8px;padding:.6rem .8rem;margin-top:.5rem;font-size:.7rem;color:#8b949e;line-height:1.5;max-height:120px;overflow-y:auto;word-break:break-word}
+.preview-box strong{color:#22c55e;display:block;margin-bottom:.2rem;font-size:.65rem}
 </style>
 </head><body>
 
@@ -110,6 +133,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="tab" onclick="setTab('progress')">PROGRESS</div>
   <div class="tab" onclick="setTab('gallery')">GALLERY</div>
   <div class="tab" onclick="setTab('videos')">VIDEOS (<span id="cntVid">0</span>)</div>
+  <div class="tab" onclick="setTab('create')">CREATE</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -280,6 +304,27 @@ const ALL_VIDEOS=[
 ];
 
 const ALL_IMAGES=[
+  // === HIGH-ENERGY ACTION SHOTS with colorway-specific prompts ===
+  {id:'action-moto-s900',url:'https://files.catbox.moe/xjl607.jpg',model:'flux2-pro @image (Ref C)',prompt:'Moto leaning into turn, speed blur, Hunter green/yellow',label:'ACTION: Moto Turn — Hunter',context:'HIGH-ENERGY batch with colorway prompting. Hunter green with yellow icons. Sharp turn, speed blur, coastal highway.'},
+  {id:'action-moto-s901',url:'https://files.catbox.moe/0fbqyo.jpg',model:'flux2-pro @image (Ref C)',prompt:'Moto at speed, wind in jacket, Tron black/cyan',label:'ACTION: Moto Speed — Tron',context:'Tron black with cyan icons. Open mountain road, wind, cinematic motion.'},
+  {id:'action-moto-s902',url:'https://files.catbox.moe/fyo0l2.jpg',model:'flux2-pro @image (Ref C)',prompt:'POV over handlebars, Patriot white/navy',label:'ACTION: Moto POV — Patriot',context:'Patriot white with navy buttons. POV over handlebars, forearm gripping throttle, coastal cliffs.'},
+  {id:'action-moto-s903',url:'https://files.catbox.moe/0ivrp2.jpg',model:'flux2-pro @image (Ref C)',prompt:'Moto desert highway, dust trail, Tron black/cyan',label:'ACTION: Moto Desert — Tron',context:'Tron black. Desert highway, dust trail, epic landscape.'},
+  {id:'action-moto-s904',url:'https://files.catbox.moe/63czqb.jpg',model:'flux2-pro @image (Ref C)',prompt:'Moto cresting mountain pass, Hunter green/yellow',label:'ACTION: Moto Pass — Hunter',context:'Hunter green. Mountain pass crest, panoramic vista, dramatic clouds.'},
+  {id:'action-ski-s910',url:'https://files.catbox.moe/o0yz9w.jpg',model:'flux2-pro @image (Ref C)',prompt:'Skier carving powder at speed, Tron black/cyan',label:'ACTION: Ski Powder — Tron',context:'Tron black. Fresh powder, snow spray, bright mountain sun.'},
+  {id:'action-ski-s911',url:'https://files.catbox.moe/2cxfml.jpg',model:'flux2-pro @image (Ref C)',prompt:'Skier launching off jump, Hunter green/yellow',label:'ACTION: Ski Jump — Hunter',context:'Hunter green. RIGHT arm. Airborne with mountain panorama.'},
+  {id:'action-ski-s912',url:'https://files.catbox.moe/32xvdt.jpg',model:'flux2-pro @image (Ref C)',prompt:'Skier racing through trees, Patriot white/navy',label:'ACTION: Ski Trees — Patriot',context:'Patriot white. Speed blur on trees, racing through tree-lined run.'},
+  {id:'action-ski-s913',url:'https://files.catbox.moe/6kk9bm.jpg',model:'flux2-pro @image (Ref C)',prompt:'Skier at summit looking down, Tron black/cyan',label:'ACTION: Ski Summit — Tron',context:'Tron black. Summit anticipation, dramatic mountain backdrop.'},
+  {id:'action-snow-s920',url:'https://files.catbox.moe/ace0fg.jpg',model:'flux2-pro @image (Ref C)',prompt:'Snowboarder halfpipe trick, airborne, Tron black/cyan',label:'ACTION: Snow Halfpipe — Tron',context:'Tron black. RIGHT arm. Mid-trick in halfpipe, airborne.'},
+  {id:'action-snow-s921',url:'https://files.catbox.moe/oqym14.jpg',model:'flux2-pro @image (Ref C)',prompt:'Snowboarder deep powder carve, Hunter green/yellow',label:'ACTION: Snow Powder — Hunter',context:'Hunter green. RIGHT arm. Deep powder turn, snow flying.'},
+  {id:'action-snow-s922',url:'https://files.catbox.moe/wwrps2.jpg',model:'flux2-pro @image (Ref C)',prompt:'Snowboarder steep chute, Patriot white/navy',label:'ACTION: Snow Chute — Patriot',context:'Patriot white. RIGHT arm. Dropping into steep chute, dramatic cliff.'},
+  {id:'action-mtb-s930',url:'https://files.catbox.moe/kgpl3d.jpg',model:'flux2-pro @image (Ref C)',prompt:'MTB flying over jump, Tron black/cyan',label:'ACTION: MTB Jump — Tron',context:'Tron black. Airborne over forest trail jump, dappled light.'},
+  {id:'action-mtb-s931',url:'https://files.catbox.moe/gzr2qk.jpg',model:'flux2-pro @image (Ref C)',prompt:'MTB rocky singletrack at speed, Hunter green/yellow',label:'ACTION: MTB Singletrack — Hunter',context:'Hunter green. Racing down rocky singletrack, dust cloud, intense action.'},
+  {id:'action-mtb-s932',url:'https://files.catbox.moe/lwjinn.jpg',model:'flux2-pro @image (Ref C)',prompt:'MTB cornering on berm, Patriot white/navy',label:'ACTION: MTB Berm — Patriot',context:'Patriot white. Hard cornering on a berm, bike leaning, golden hour.'},
+  {id:'action-mtb-s933',url:'https://files.catbox.moe/27m51p.jpg',model:'flux2-pro @image (Ref C)',prompt:'MTB steep descent, valley view, Tron black/cyan',label:'ACTION: MTB Descent — Tron',context:'Tron black. Steep mountain trail descent, valley view behind.'},
+  {id:'action-hike-s940',url:'https://files.catbox.moe/vhg3al.jpg',model:'flux2-pro @image (Ref C)',prompt:'Hiker summit celebration, Hunter green/yellow',label:'ACTION: Summit Celebrate — Hunter',context:'Hunter green. Mountain summit, arms spread celebrating, sunrise, clouds below.'},
+  {id:'action-run-s941',url:'https://files.catbox.moe/bklljd.jpg',model:'flux2-pro @image (Ref C)',prompt:'Trail runner sprinting ridge, Tron black/cyan',label:'ACTION: Ridge Run — Tron',context:'Tron black. Sprinting along ridge trail, mountains both sides, golden light, energy.'},
+  {id:'action-fish-s950',url:'https://files.catbox.moe/305k2r.jpg',model:'flux2-pro @image (Ref C)',prompt:'Reeling in catch on boat, Hunter green/yellow',label:'ACTION: Fishing Catch — Hunter',context:'Hunter green. Reeling in a big catch, rod bent, excitement, lake sunset.'},
+  {id:'action-fish-s951',url:'https://files.catbox.moe/wa23af.jpg',model:'flux2-pro @image (Ref C)',prompt:'Fly casting mountain stream, Tron black/cyan',label:'ACTION: Fly Fishing — Tron',context:'Tron black. Casting fly rod in mountain stream, mid-cast motion, misty morning.'},
   // === TWO-PASS TEST: Generate CB2 first, add helmet/gloves second ===
   {id:'twopass-flux-moto',url:'https://files.catbox.moe/op5aju.jpg',model:'two-pass (FLUX edit)',prompt:'Base: refC-moto-s101 (90/100) → FLUX edit added helmet',label:'TWO-PASS: Moto + Helmet (FLUX)',context:'TWO-PASS TEST: Took the 90/100 motorcycle image and ran it through FLUX 2 Pro edit asking ONLY to add a helmet. CB2 should be untouched. Does the helmet look real AND does the CB2 survive?'},
   {id:'twopass-kontext-moto',url:'https://files.catbox.moe/1lkfuw.jpg',model:'two-pass (Kontext)',prompt:'Base: refC-moto-s101 → Kontext added helmet',label:'TWO-PASS: Moto + Helmet (Kontext)',context:'Same base image, Kontext Pro for the second pass. Compare against the FLUX edit version — which preserves the CB2 better?'},
