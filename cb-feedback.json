@@ -1,7 +1,287 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T13:43:31.497Z",
+  "syncedAt": "2026-04-06T14:32:07.197Z",
   "images": [
+    {
+      "id": "refC-moto-s100",
+      "label": "REF C: Moto Coastal 1/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Motorcycle coastal, LEFT forearm, vol-up closest to wrist, waist-up, golden hour",
+      "context": "NEW GENERATION with Ref C (J&Mike Dual) — the A/B test winner (40-60% correct orientation, scores up to 100). LEFT arm + \"volume-up closest to wrist\" per Justin's handedness rule. Seed 100.",
+      "comments": [
+        {
+          "text": "OK, so this is a little bit closer to the elbow then I would like actually it's above the elbow which is bad it's on the left arm so the positive should be facing down which it is but that negative. Sorry the volume down symbol is a hallucination and it looks a little wobbly like it's not really what it should be and it's also rotated out from the arm little too much and also the guy is wearing a T-shirt with his motorcycle, which is a little dangerous but anyway that's just besides the point and the logos on the strap look a little strange. I'd give this like a 50 out of 100.",
+          "time": "2026-04-06T14:20:48.260Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-moto-s101",
+      "label": "REF C: Moto Coastal 2/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same moto coastal prompt",
+      "context": "Ref C generation, seed 101. Same LEFT arm orientation rule.",
+      "comments": [
+        {
+          "text": "What time is left arm? It's oriented correctly. It's in the right part of the arm. It looks good. Only problem. Is that like I would just say that you know he's not wearing the correct gear when he his motorcycling and he's not wearing AirPods or you know any type of like listening device as you know, this is a control, your media listening to your phone while your phone is in your pocket, ri in case you didn't know that but for what it is, I mean if this were a hiker, I'd give it 100. I'm just grading it based on like the overall feel and whether we use this photo so I give it like a 90 for the correct orientation of everything though.",
+          "time": "2026-04-06T14:21:51.617Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-moto-s102",
+      "label": "REF C: Moto Coastal 3/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 102.",
+      "comments": [
+        {
+          "text": "This guy it looks a little strange little little high up on the elbow should be a little should be like a little bit lower. Can't really tell what color way it is, but the symbols are oriented correctly and the logo is fine even though it's all cut off yeah I mean again my same critique about the outfit the guys wearing and why he's facing almost like driving off the cliff maybe if there's a way that we can refine the photos that are being used but yeah, in terms of the remote and the placement yeah give us like a 88.5 or 90",
+          "time": "2026-04-06T14:22:41.942Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-moto-s103",
+      "label": "REF C: Moto Coastal 4/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 103.",
+      "comments": [
+        {
+          "text": "It's in the right place it's rotating in the right direction, but the symbols are all garbled and it's hard to see and it looks a little bit like AI but the lighting is cool. You have the symbols were or legible. I'd give this like a 95 for 100 but because I can't see the symbols I'm giving it lik 75 or 70",
+          "time": "2026-04-06T14:23:19.676Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-moto-s104",
+      "label": "REF C: Moto Coastal 5/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 104.",
+      "comments": [
+        {
+          "text": "This is pretty excellent in terms of where it belongs in the symbol orientation in the logo again it just kind of concerned about the guy wearing a T-shirt. He's not wearing any protective gear while his cycling on a mountain.",
+          "time": "2026-04-06T14:23:43.526Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-hike-s200",
+      "label": "REF C: Hiker 1/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Hiker golden hour, LEFT forearm, vol-up closest to wrist, waist-up",
+      "context": "Ref C hiking generation. LEFT arm + orientation rule. Seed 200.",
+      "comments": [
+        {
+          "text": "This guy looks good. I wish the symbols were a little bit brighter the outline of the symbols. I can send you those photos if you need, but as a hiker, this is great outside of the symbol orientation. I'm sorry outside of the symbol is not really being perfectly visible I get this like it's probably just like a tiny couple of points too small give it like a 92 or 94 out of 100.",
+          "time": "2026-04-06T14:24:23.108Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-hike-s201",
+      "label": "REF C: Hiker 2/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same hiking prompt",
+      "context": "Ref C generation, seed 201.",
+      "comments": [
+        {
+          "text": "This is pretty bad symbols are not legible. The remote looks strange. I can't really tell what the it looks. A little big in Photoshop good looks like a 20 out of 100.",
+          "time": "2026-04-06T14:24:41.008Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-hike-s202",
+      "label": "REF C: Hiker 3/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 202.",
+      "comments": [
+        {
+          "text": "Hiker looks nice. It's in it. It's in the right spot the symbols look a little messed up because it's far away but other than that it's OK. It looks a little AI. I give it like an 80.",
+          "time": "2026-04-06T14:25:08.641Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-hike-s203",
+      "label": "REF C: Hiker 4/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 203.",
+      "comments": [
+        {
+          "text": "In the right spot rotate on the right direction it's on a hiker that's good cause his arms are Baer but they don't really need to do a whole whole lot of hiking just to let you know like this is more about action sports and wearing gloves and so like usually it's tough to control your phone while you're really moving and so I mean this is like a strange case, but but yeah that's not your fault. The symbols look like alien cryptography get this like a 50.",
+          "time": "2026-04-06T14:25:50.058Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-hike-s204",
+      "label": "REF C: Hiker 5/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 204.",
+      "comments": [
+        {
+          "text": "Again symbols are wrong, but the orientation rotation and the placement on the arm is Wright looks a little bit more like too much like a cartoon to give us a 35 at 100",
+          "time": "2026-04-06T14:26:08.590Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-ski-s300",
+      "label": "REF C: Skier 1/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier snowy slope, bright jacket, LEFT forearm over sleeve, vol-up closest to wrist",
+      "context": "Ref C skiing generation. LEFT arm over jacket sleeve. Seed 300.",
+      "comments": [
+        {
+          "text": "This is cool. The symbols are not fully ill like some of them are bright, and some of them are dark like the paint is wearing on one, but it's in the right part of the arm and I don't know what sport this guy is doing is not wearing gloves his hands look a little strange, but the shirt is interesting. I'd want to see like more of a fuller body to see like why he's using it. He just looks like he's Photoshop on top of some snow but other than that it's yeah and I can't really tell what color way is being used. Other thing I wanted to work on is like choosing the color way.",
+          "time": "2026-04-06T14:26:49.157Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-ski-s301",
+      "label": "REF C: Skier 2/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same skiing prompt",
+      "context": "Ref C generation, seed 301.",
+      "comments": [
+        {
+          "text": "Pretty damn good except the fact that I can't really see what color it is. Maybe it's because it's in the sun, but I wish you were wearing gloves. If you were this would be pretty dope yeah I'd give this like a 95 except the fact that I can't really tell what color it is, that's in the right spot is rotating the right in the right direction and the symbols are facing the right way as well.",
+          "time": "2026-04-06T14:27:24.092Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-ski-s302",
+      "label": "REF C: Skier 3/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 302.",
+      "comments": [
+        {
+          "text": "It's pretty damn good was she were wearing gloves and I wish the same but yeah the symbols look nice again. I want to get you a better reference photos of the symbols with like better outline paint and you can prompting for that if you need to, but who in the right spot cool cool lighting. The strap is wrong. Doesn't have our logo on it correctly but for the remote accuracy and placement give it like 90 out of 100.",
+          "time": "2026-04-06T14:28:07.456Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-ski-s303",
+      "label": "REF C: Skier 4/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 303.",
+      "comments": [
+        {
+          "text": "This is great again. I wish you were wearing gloves, but it's in the right spot. It's rotating correctly. The color is obviously Tron the black one the symbols look good. The logo looks good on the strap. This is a slam dunk. I give it like a 97 or 98.",
+          "time": "2026-04-06T14:28:36.841Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-ski-s304",
+      "label": "REF C: Skier 5/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 304.",
+      "comments": [
+        {
+          "text": "This looks strange because it just looks like a guy without a shirt just standing behind another dude but for the guy that's wearing the chubby buttons. It's in the right spot symbols look good again just kind of wish you were wearing gloves cause it looks like it's snow. It looks like you took a hiker and put them on top of a snow mountain, but in terms of the Rob Road accuracy in the place pretty great like an 88 or 90",
+          "time": "2026-04-06T14:29:11.875Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-snow-s400",
+      "label": "REF C: Snowboard 1/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Snowboarder powder slope, RIGHT forearm over sleeve, vol-down closest to wrist",
+      "context": "Ref C snowboard generation. RIGHT arm (testing Justin's handedness insight — vol-down toward wrist on right arm). Seed 400.",
+      "comments": [
+        {
+          "text": "It's above the elbow, so I kind of give this a bit of a fail, but the remote looks somewhat recognizable. It should be below the elbow, but I like that the person is snowboarding that's in. They wearing gloves that's cool. Just needs to be further down in the other position and you wouldn't held us you would've really nailed it, but I'll give it like 65.",
+          "time": "2026-04-06T14:29:46.208Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-snow-s401",
+      "label": "REF C: Snowboard 2/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same snowboard prompt",
+      "context": "Ref C generation, seed 401. RIGHT arm test.",
+      "comments": [
+        {
+          "text": "This is very cool. The remote looks a little too big but I can see five buttons and the person is snowboarding and happy it just needs to be a little more realistic. Looks old photo shopped like the yeah but it's better than other ones. I've seen like this. It's just not great cause it looks a little different than the remote but we're getting there. I'll give it like a 50/100.",
+          "time": "2026-04-06T14:30:29.924Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-snow-s402",
+      "label": "REF C: Snowboard 3/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 402.",
+      "comments": [
+        {
+          "text": "This is pretty cool. I wish you were just a little bit lower in the wrist but damn it's nice and taught around the jacket. The symbols are facing the right way. It's got good lighting. He's wearing gloves he snowboarding. It looks like he's falling off. Snowboarding is weird. I don't know what's happening. It's like foot is not actually in one of the clips but but it looks pretty cool and I'm getting somewhere with this. This is like a 93.5.",
+          "time": "2026-04-06T14:31:10.175Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-snow-s403",
+      "label": "REF C: Snowboard 4/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 403.",
+      "comments": [
+        {
+          "text": "Perfect placement iconography looks good. Just wish the guy was wearing gloves and he actually was doing something. He looks like he's just standing in the snow so that's a bit of a hallucination but the ski jacket looks neat as it relates to the remote itself. I can't hate man. This looks like like 100 but I but is it relates to the scene and the person I give it like a 70",
+          "time": "2026-04-06T14:31:40.007Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "refC-snow-s404",
+      "label": "REF C: Snowboard 5/5",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Same",
+      "context": "Ref C generation, seed 404.",
+      "comments": [
+        {
+          "text": "This is pretty fucking awesome. Might be one of your best things yet. I wish you were wearing your EarPods AirPods or something but fuck man this is like 100 I think.",
+          "time": "2026-04-06T14:32:03.305Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "ref-A1",
       "label": "REF TEST A: Hunter Arm Outside 1/6",
