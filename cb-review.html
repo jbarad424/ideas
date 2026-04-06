@@ -263,6 +263,31 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <script>
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
 const ALL_IMAGES=[
+  // === REF TEST: Hunter Arm Outside (third-person arm photo from Drive) ===
+  {id:'ref-A1',url:'https://files.catbox.moe/gasx8y.jpg',model:'flux2-pro @image',prompt:'Motorcycle coastal + exact layout spec',label:'REF TEST A: Hunter Arm Outside 1/6',context:'REFERENCE PHOTO TEST: Using "Hunter Arm Outside.jpg" found on Google Drive as the @image reference instead of the standing product shot. This is a THIRD-PERSON photo of the CB2 on someone\'s forearm, photographed by another person from the outside. Research predicted this would fix the 180° orientation flip.'},
+  {id:'ref-A2',url:'https://files.catbox.moe/2ao08m.jpg',model:'flux2-pro @image',prompt:'Same coastal prompt',label:'REF TEST A: Hunter Arm Outside 2/6',context:'Same third-person arm reference (Hunter Arm Outside.jpg), different seed.'},
+  {id:'ref-A3',url:'https://files.catbox.moe/vkmtt0.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST A: Hunter Arm Outside 3/6',context:'Same third-person arm reference, different seed.'},
+  {id:'ref-A4',url:'https://files.catbox.moe/asr5a1.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST A: Hunter Arm Outside 4/6',context:'Same third-person arm reference, different seed.'},
+  {id:'ref-A5',url:'https://files.catbox.moe/1esud0.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST A: Hunter Arm Outside 5/6',context:'Same third-person arm reference, different seed.'},
+  {id:'ref-A6',url:'https://files.catbox.moe/ls9164.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST A: Hunter Arm Outside 6/6',context:'Same third-person arm reference, different seed.'},
+  // === REF TEST B: Motorcycle Close Up (real moto photo from Drive) ===
+  {id:'ref-B1',url:'https://files.catbox.moe/ft8dv5.jpg',model:'flux2-pro @image',prompt:'Motorcycle coastal + exact layout spec',label:'REF TEST B: Moto Close Up 1/5',context:'REFERENCE PHOTO TEST: Using "Motorcycle Close Up.jpg" from Drive — a real photo of a motorcycle rider with CB2 on forearm gripping handlebars. Sport-specific third-person reference.'},
+  {id:'ref-B2',url:'https://files.catbox.moe/3gmr6h.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST B: Moto Close Up 2/5',context:'Same motorcycle reference, different seed.'},
+  {id:'ref-B3',url:'https://files.catbox.moe/vq0zj0.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST B: Moto Close Up 3/5',context:'Same motorcycle reference, different seed.'},
+  {id:'ref-B4',url:'https://files.catbox.moe/crepyb.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST B: Moto Close Up 4/5',context:'Same motorcycle reference, different seed.'},
+  {id:'ref-B5',url:'https://files.catbox.moe/qo9pfl.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST B: Moto Close Up 5/5',context:'Same motorcycle reference, different seed.'},
+  // === REF TEST C: J & Mike dual photo (two people with CB2 from Drive) ===
+  {id:'ref-C1',url:'https://files.catbox.moe/19gt6r.jpg',model:'flux2-pro @image',prompt:'Motorcycle coastal + exact layout spec',label:'REF TEST C: J&Mike Dual 1/5',context:'REFERENCE PHOTO TEST: Using "Hunter and Tron - J and Mike.png" — two people standing side by side, each wearing a CB2 (Hunter and Tron colorways), photographed from the front.'},
+  {id:'ref-C2',url:'https://files.catbox.moe/llwi3d.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST C: J&Mike Dual 2/5',context:'Same dual-person reference, different seed.'},
+  {id:'ref-C3',url:'https://files.catbox.moe/5awevk.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST C: J&Mike Dual 3/5',context:'Same dual-person reference, different seed.'},
+  {id:'ref-C4',url:'https://files.catbox.moe/yp5buw.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST C: J&Mike Dual 4/5',context:'Same dual-person reference, different seed.'},
+  {id:'ref-C5',url:'https://files.catbox.moe/z1qfov.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST C: J&Mike Dual 5/5',context:'Same dual-person reference, different seed.'},
+  // === REF TEST D: Original product-front (CONTROL — same ref we always use) ===
+  {id:'ref-D1',url:'https://files.catbox.moe/lp1iu3.jpg',model:'flux2-pro @image',prompt:'Motorcycle coastal + exact layout spec',label:'REF TEST D: Original Product (CONTROL) 1/5',context:'CONTROL GROUP: Same standing product-front reference we always use. Same prompt and seeds as A/B/C batches so orientation differences are PURELY from the reference photo change.'},
+  {id:'ref-D2',url:'https://files.catbox.moe/aq8cfi.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST D: Original Product (CONTROL) 2/5',context:'Control group — original product reference, different seed.'},
+  {id:'ref-D3',url:'https://files.catbox.moe/pqatt1.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST D: Original Product (CONTROL) 3/5',context:'Control group — original product reference, different seed.'},
+  {id:'ref-D4',url:'https://files.catbox.moe/kb3iuo.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST D: Original Product (CONTROL) 4/5',context:'Control group — original product reference, different seed.'},
+  {id:'ref-D5',url:'https://files.catbox.moe/0ygcz7.jpg',model:'flux2-pro @image',prompt:'Same',label:'REF TEST D: Original Product (CONTROL) 5/5',context:'Control group — original product reference, different seed.'},
   // === BATCH GEN: 15 Motorcycle Coastal with exact button layout spec ===
   {id:'bg-coast1',url:'https://files.catbox.moe/c5n4ci.jpg',model:'flux2-pro @image',prompt:'Motorcycle coastal + exact layout: plus near wrist, minus near elbow, play/pause center, LED/logo outward',label:'BATCH: Moto Coastal 1/15',context:'BATCH GENERATION with Justin\'s exact button layout spec: "plus closest to wrist, minus closest to elbow, play/pause center, LED and CB logo face outward." 15 seeds for cherry-picking.'},
   {id:'bg-coast2',url:'https://files.catbox.moe/4joby7.jpg',model:'flux2-pro @image',prompt:'Same coastal prompt with layout spec',label:'BATCH: Moto Coastal 2/15',context:'Same prompt, different seed.'},
