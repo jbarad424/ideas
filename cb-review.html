@@ -109,11 +109,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="tab" onclick="setTab('done')">REVIEWED (<span id="cntDone">0</span>)</div>
   <div class="tab" onclick="setTab('progress')">PROGRESS</div>
   <div class="tab" onclick="setTab('gallery')">GALLERY</div>
-</div>
-
-<div class="media-toggle" id="mediaToggle" style="display:none">
-  <button id="btnPhotos" class="active" onclick="setMedia('photo')">Photos</button>
-  <button id="btnVideos" onclick="setMedia('video')">Videos (<span id="cntVid">0</span>)</button>
+  <div class="tab" onclick="setTab('videos')">VIDEOS (<span id="cntVid">0</span>)</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -233,6 +229,21 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <a href="https://drive.google.com/drive/folders/10pn4wAdAwkIxj0xcFHfc8s8T7pphkC-o" target="_blank" style="font-size:.65rem;color:#888;text-decoration:underline">Open Google Drive Folders</a>
   </div>
   <div id="galGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem"></div>
+</div>
+
+<!-- VIDEOS TAB -->
+<div id="videosArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
+  <div id="vidPlayer"></div>
+  <div class="context-box" id="vidCtxBox" style="display:none"><div class="context-inner" id="vidCtxInner"></div></div>
+  <div class="comment-trail" id="vidTrail"></div>
+  <div class="feedback-area">
+    <textarea id="vidFb" placeholder="What do you think of this video? Does the CB2 stay consistent?"></textarea>
+    <div class="submit-row"><button class="submit-btn" onclick="vidSubmit()">Submit Comment</button></div>
+  </div>
+  <div class="nav">
+    <button id="vidPrevBtn" onclick="vidGo(-1)">&larr; Prev</button>
+    <button id="vidNextBtn" onclick="vidGo(1)">Next &rarr;</button>
+  </div>
 </div>
 
 <div class="btn-row">
@@ -717,32 +728,31 @@ function submitComment(){
 }
 
 function counts(){
-  const items=getItems();
-  document.getElementById('cntNew').textContent=items.filter(i=>!isRV(i)).length;
-  document.getElementById('cntDone').textContent=items.filter(i=>isRV(i)).length;
+  document.getElementById('cntNew').textContent=ALL_IMAGES.filter(i=>!isR(i)).length;
+  document.getElementById('cntDone').textContent=ALL_IMAGES.filter(i=>isR(i)).length;
   document.getElementById('cntVid').textContent=ALL_VIDEOS.length;
 }
 
 function setTab(t){
   tab=t;ci=0;navHistory=[];
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['new','done','progress','gallery'][i]===t)?' active':'');
+    el.className='tab'+((['new','done','progress','gallery','videos'][i]===t)?' active':'');
   });
-  // Show/hide sections
-  document.getElementById('mediaToggle').style.display=(t==='new'||t==='done')?'none':'none';
-  if(t==='new'||t==='done')document.getElementById('mediaToggle').style.display='flex';
-  document.getElementById('gridToggle').style.display=(t==='done'&&mediaType==='photo')?'block':'none';
+  // Show/hide sections — each tab has its own area
+  document.getElementById('gridToggle').style.display=(t==='done')?'block':'none';
   document.getElementById('gridArea').style.display='none';
   document.getElementById('reviewArea').style.display=(t==='new'||t==='done')?'block':'none';
   document.getElementById('progressArea').style.display=(t==='progress')?'block':'none';
   document.getElementById('galleryArea').style.display=(t==='gallery')?'block':'none';
+  document.getElementById('videosArea').style.display=(t==='videos')?'block':'none';
   document.getElementById('emptyState').style.display='none';
   if(t==='gallery'){renderGallery();}
+  else if(t==='videos'){vidRender();}
   else if(t!=='progress'){upFilt();renderView();}
   else{document.getElementById('counter').textContent='Experiment Tracker';}
 }
 
-function upFilt(){const items=getItems();filt=tab==='new'?items.filter(i=>!isRV(i)):items.filter(i=>isRV(i))}
+function upFilt(){filt=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i))}
 
 function render(){
   // Show/hide grid return bar
@@ -756,13 +766,8 @@ function render(){
   document.getElementById('reviewArea').style.display='block';
   document.getElementById('emptyState').style.display='none';
   const img=filt[ci];
-  const isVid=mediaType==='video';
   const wrap=document.getElementById('mediaWrap');
-  if(isVid){
-    wrap.innerHTML='<video controls playsinline style="width:100%;max-height:500px;display:block;background:#000"><source src="'+img.url+'" type="video/mp4"></video><div class="meta" id="meta"></div>';
-  }else{
-    wrap.innerHTML='<img id="mainImg" src="'+img.url+'" alt=""><div class="meta" id="meta"></div>';
-  }
+  wrap.innerHTML='<img id="mainImg" src="'+img.url+'" alt=""><div class="meta" id="meta"></div>';
   document.getElementById('counter').innerHTML=(ci+1)+' / '+filt.length+' — '+img.label;
   document.getElementById('meta').innerHTML='<span class="tag model">'+img.model+'</span><span class="tag">'+img.prompt.slice(0,70)+'...</span>';
   const cb=document.getElementById('ctxBox'),ci2=document.getElementById('ctxInner');
@@ -802,7 +807,7 @@ function go(dir){
         const reviewed=ALL_IMAGES.filter(i=>isR(i));
         idx=reviewed.findIndex(i=>i.id===prevId);
         if(idx!==-1){filt=reviewed;ci=idx;tab='done';
-          document.querySelectorAll('.tab').forEach((el,j)=>{el.className='tab'+((['new','done','progress'][j]===tab)?' active':'');});
+          document.querySelectorAll('.tab').forEach((el,j)=>{el.className='tab'+((['new','done','progress','gallery','videos'][j]===tab)?' active':'');});
           document.getElementById('gridToggle').style.display='block';
           counts();
         }else{upFilt();ci=Math.max(0,ci-1);}
@@ -816,7 +821,8 @@ function go(dir){
 
 function syncFeedback(){
   const d=D();
-  const payload={type:'feedback_sync',syncedAt:new Date().toISOString(),images:ALL_IMAGES.map(i=>({id:i.id,label:i.label,model:i.model,prompt:i.prompt,context:i.context||null,comments:d[i.id]?.comments||[]})).filter(i=>i.comments.length>0)};
+  const allItems=[...ALL_IMAGES,...ALL_VIDEOS];
+  const payload={type:'feedback_sync',syncedAt:new Date().toISOString(),images:allItems.map(i=>({id:i.id,label:i.label,model:i.model,prompt:i.prompt,context:i.context||null,comments:d[i.id]?.comments||[]})).filter(i=>i.comments.length>0)};
   // Deploy as cb-feedback.json to GitHub via Sync scenario
   fetch(SYNC_URL,{
     method:'POST',
@@ -846,17 +852,41 @@ document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;
 
 // === GALLERY TAB ===
 let galFilterMode='all';
-let mediaType='photo'; // 'photo' or 'video'
 
-function setMedia(m){
-  mediaType=m;
-  document.getElementById('btnPhotos').className=m==='photo'?'active':'';
-  document.getElementById('btnVideos').className=m==='video'?'active':'';
-  upFilt();renderView();
+// === SELF-CONTAINED VIDEO TAB ===
+let vidIdx=0;
+function vidRender(){
+  if(!ALL_VIDEOS.length){document.getElementById('counter').textContent='No videos yet';return;}
+  const v=ALL_VIDEOS[vidIdx];
+  document.getElementById('counter').innerHTML=(vidIdx+1)+' / '+ALL_VIDEOS.length+' — '+v.label;
+  document.getElementById('vidPlayer').innerHTML='<video controls playsinline autoplay style="width:100%;max-height:500px;border-radius:12px;background:#000"><source src="'+v.url+'" type="video/mp4"></video>'
+    +'<div class="meta"><span class="tag model">'+v.model+'</span><span class="tag">'+v.prompt.slice(0,70)+'</span></div>';
+  const cb=document.getElementById('vidCtxBox'),ci2=document.getElementById('vidCtxInner');
+  if(v.context){cb.style.display='block';ci2.innerHTML='<strong>ABOUT:</strong> '+v.context;}else cb.style.display='none';
+  const cs=getC(v.id),tr=document.getElementById('vidTrail');
+  tr.innerHTML=cs.map(c=>{
+    const d2=new Date(c.time);
+    return '<div class="comment-entry"><div class="ct">Comment #'+c.num+' — '+d2.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d2.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+'</div><div class="cx">'+c.text+'</div></div>';
+  }).join('');
+  document.getElementById('vidFb').value='';
+  document.getElementById('vidFb').placeholder=cs.length?'Add another comment...':'What do you think? Does the CB2 stay consistent?';
+  document.getElementById('vidPrevBtn').disabled=vidIdx===0;
+  document.getElementById('vidNextBtn').disabled=vidIdx===ALL_VIDEOS.length-1;
 }
-
-function getItems(){return mediaType==='video'?ALL_VIDEOS:ALL_IMAGES;}
-function isRV(item){return getC(item.id).length>0;}
+function vidGo(dir){vidIdx=Math.max(0,Math.min(ALL_VIDEOS.length-1,vidIdx+dir));vidRender();}
+function vidSubmit(){
+  const t=document.getElementById('vidFb').value.trim();
+  if(!t)return;
+  const v=ALL_VIDEOS[vidIdx];if(!v)return;
+  const d=D();
+  if(!d[v.id])d[v.id]={comments:[],label:v.label};
+  d[v.id].comments.push({text:t,time:new Date().toISOString(),num:d[v.id].comments.length+1});
+  d[v.id].label=v.label;
+  S(d);
+  document.getElementById('vidFb').value='';
+  vidRender();
+  showToast('Comment #'+d[v.id].comments.length+' saved');
+}
 
 function galScore(id){
   const cs=getC(id);if(!cs.length)return 50;
@@ -942,7 +972,7 @@ seedFromLocal();
 counts();
 if(!ALL_IMAGES.filter(i=>!isR(i)).length&&ALL_IMAGES.some(i=>isR(i)))tab='done';
 upFilt();
-document.querySelectorAll('.tab').forEach((el,i)=>{el.className='tab'+((['new','done','progress','gallery'][i]===tab)?' active':'');});
+document.querySelectorAll('.tab').forEach((el,i)=>{el.className='tab'+((['new','done','progress','gallery','videos'][i]===tab)?' active':'');});
 // Ensure grid toggle visibility matches initial tab
 document.getElementById('gridToggle').style.display=(tab==='done')?'block':'none';
 renderView();
