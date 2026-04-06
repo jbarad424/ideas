@@ -1,7 +1,166 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-05T23:10:07.798Z",
+  "syncedAt": "2026-04-06T02:08:47.900Z",
   "images": [
+    {
+      "id": "flip-coastal1",
+      "label": "FLIP FIX: Coastal 1 (ultra-specific prompt)",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Ultra-specific: \"symbols oriented so RIDER can read them, from camera they appear upside down and reversed.\" Coastal highway, spring.",
+      "context": "Approach 1: Extremely explicit symbol orientation language. \"The button symbols must be oriented so the RIDER can read them when looking at their own arm - from the cameras perspective the symbols will appear upside down and reversed.\"",
+      "comments": [
+        {
+          "text": "So I understand that the this is like an interesting experiment he said that the button symbols must be oriented so the writer can read them and look at their own arm technically that's right because it's left to right, but when you pick up your arm and you look at it as you know, it's the remote still always needs to have like the positive the volume up which is the plus as closest to the wrist and the minus is closest to the elbow, it always must be oriented that way maybe that'll be helpful for the the orientation of it. That way the the plus symbol is always at the play. Pause symbol is always in the center. Look in the right way, but yeah, this is an interesting exercise.",
+          "time": "2026-04-06T02:02:52.526Z",
+          "num": 1
+        },
+        {
+          "text": "Oh, I would also add that like lighting wise and remote faithfulness looks good. The strap looks weird. Does not look good mainly because it's oriented the wrong way.",
+          "time": "2026-04-06T02:03:13.672Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "flip-coastal2",
+      "label": "FLIP FIX: Coastal 2",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same ultra-specific symbol prompt, different seed",
+      "context": "Same prompt, different seed. Cherry-pick.",
+      "comments": [
+        {
+          "text": "This is flipped perpendicularly. I swear if this was just like turned 90° where that plus volume up is facing down towards the wrist this would be a real slam dunk.",
+          "time": "2026-04-06T02:03:39.375Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flip-coastal3",
+      "label": "FLIP FIX: Coastal 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same ultra-specific symbol prompt, different seed",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "You got the orientation right? I mean honestly this isn't bad. I mean the strap looks wrong because it has like a buckle on it. That's the only part that's like not really faithful but if it was just like a little further up and like I guess rotated a little bit inwards yeah I mean the shadowing the lighting. Everything looks pretty good. It's just needs to be like a little further up the arm and rotated a little bit inward.",
+          "time": "2026-04-06T02:04:21.137Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flip-coastal4",
+      "label": "FLIP FIX: Coastal 4",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same ultra-specific symbol prompt, different seed",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is weird. I don't know why his right hand is holding the left part of the motorcycle. It doesn't look really like it's on his arm correctly. It's a little loose and you can't really tell it's it's turned and the logo is a little strange yeah this is like I mean the remote itself looks good but the strap in the orientation something's going off about it I give it like a 70 out of 100.",
+          "time": "2026-04-06T02:04:56.423Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flip-coastal5",
+      "label": "FLIP FIX: Coastal 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same ultra-specific symbol prompt, different seed",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is interesting but it's flipped. It should be flipped 180° and should be a little tighter on the wrist but but it looks pretty good. The logo looks good. The lighting looks interesting. Yeah I was just getting somewhere give it like a like an 87.5 out of 100.",
+          "time": "2026-04-06T02:05:22.772Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "kontext-flip",
+      "label": "FLIP FIX: Kontext rotation of D2 Coastal 3",
+      "model": "kontext-pro (post-process)",
+      "prompt": "Took D2 Coastal 3 (~95/100) and asked Kontext: \"Rotate button symbols 180° so minus is closest to wrist. Keep everything else identical.\"",
+      "context": "Approach 2: Post-processing fix. Take the best image (D2 Coastal 3 that you said \"would be 100 if flipped\") and use Kontext Pro to rotate just the symbols. Did Kontext preserve the scene while fixing orientation?",
+      "comments": [
+        {
+          "text": "This is pretty bad although where it's located the wrist is pretty good. The size is a little off but I think the sizing looks. It was just like it's just like 5% over this oversize but all the symbol is wrong. I never seen one like this, where the symbols were all like messed up.",
+          "time": "2026-04-06T02:05:53.385Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "overlook2-1",
+      "label": "FLIP FIX: Overlook 1 (correct-orientation template)",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Motorcycle overlook template with \"buttons oriented so rider can read them looking down at own arm.\" Mountain vista, spring golden hour.",
+      "context": "Approach 3: D2 Overlook 1 already had CORRECT symbol orientation at 85/100. Generating 5 more seeds of the overlook template to find another correct-orientation image.",
+      "comments": [
+        {
+          "text": "This is cool looks little bit like AI the remotes a little too large, but but it should be a little further up his forearm not on his wrist probably like yeah, like you gotta move it up a couple inches up his forearm, but the symbols are oriented towards him and it looks great. I mean this this could be a winner if it was moved up a little and the LED is flipped on the wrong side. It's like put on the other side so the symbols are right, but you flipped the symbol so he could see it but then you kept the LED in the little CB logo on the same spot so it kind of got messed around",
+          "time": "2026-04-06T02:06:49.668Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "overlook2-2",
+      "label": "FLIP FIX: Overlook 2",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same overlook prompt, different seed",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is bad. It looks really big. It looks a little warped and it's flipped in the wrong side button is facing towards the shoulder. Yeah it looks like it's kind of stretched much longer than usual remote",
+          "time": "2026-04-06T02:07:08.499Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "overlook2-3",
+      "label": "FLIP FIX: Overlook 3",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same overlook prompt, different seed",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This isn't bad. The remote looks a little small, but it's generally where it needs to be on the army is wrong and that the symbol Marking is wrong and with regards to also the placement of the LED little window, the little circle and the CB logo as well but I like the picture I get this like a 75 out of 100. Maybe a 70.",
+          "time": "2026-04-06T02:07:47.767Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "overlook2-4",
+      "label": "FLIP FIX: Overlook 4",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same overlook prompt, different seed",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Needs to be flipped 180° but it's in exactly the right spot of the arm just feels a little bit too large like it's kind of enlarged a bit more than but maybe that could also be camera angle play but but yeah yeah I mean I mean it's pretty. It's pretty good if it was just flipped around it would be it was just turned 180° probably be like 100 but I give this like like a 92.5. No I give it like an 87.5 because the remote looks a little bit larger than it should be.",
+          "time": "2026-04-06T02:08:31.946Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "overlook2-5",
+      "label": "FLIP FIX: Overlook 5",
+      "model": "flux2-pro @image (1 ref)",
+      "prompt": "Same overlook prompt, different seed",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Wrong strap way too close to the wrist orientation give it like a 55 out of 100",
+          "time": "2026-04-06T02:08:46.246Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "pipeF-moto",
       "label": "PIPE F: Motorcycle spring (Kontext scene-swap)",
