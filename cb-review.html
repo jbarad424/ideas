@@ -14,7 +14,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .tab:not(.active){background:#111;color:#666}
 .counter{font-size:.8rem;color:#888;margin:.5rem 0;padding:0 .5rem;text-align:center}
 .img-wrap{width:100%;max-width:600px;background:#111;border-radius:12px;overflow:hidden;margin:0 auto}
-.img-wrap img{width:100%;display:block}
+.img-wrap img{width:100%;max-height:500px;object-fit:contain;display:block;background:#000}
 .meta{padding:.5rem .8rem;display:flex;gap:.4rem;flex-wrap:wrap}
 .tag{font-size:.6rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;background:#1a1030;color:#a855f7;border:1px solid #2d1a4e}
 .tag.model{background:#0a1a1a;color:#06b6d4;border-color:#0d2a2a}
@@ -59,6 +59,20 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .section-label{font-size:.7rem;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .4rem;padding-left:.2rem}
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:99}
 .toast.show{opacity:1}
+/* Grid view for REVIEWED tab */
+.grid-toggle{display:none;text-align:center;margin:.5rem 0}
+.grid-toggle button{background:none;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;cursor:pointer;margin:0 .2rem}
+.grid-toggle button.active{border-color:#a855f7;color:#a855f7;background:#1a1030}
+.grid-wrap{width:100%;max-width:620px;margin:0 auto;padding:.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem}
+.grid-card{background:#111;border:1px solid #222;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;transition:border-color .15s}
+.grid-card:hover{border-color:#a855f7}
+.grid-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.grid-card .grid-label{font-size:.5rem;padding:.2rem .3rem;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.grid-card .grid-badge{position:absolute;top:4px;right:4px;font-size:.5rem;padding:.1rem .3rem;border-radius:3px;font-weight:700}
+.grid-badge.great{background:#22c55e;color:#000}
+.grid-badge.good{background:#f59e0b;color:#000}
+.grid-badge.ok{background:#3b82f6;color:#fff}
+.grid-badge.bad{background:#ef4444;color:#fff}
 </style>
 </head><body>
 
@@ -74,6 +88,13 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 </div>
 
 <div class="counter" id="counter">-</div>
+
+<div class="grid-toggle" id="gridToggle">
+  <button id="btnList" class="active" onclick="setView('list')">List</button>
+  <button id="btnGrid" onclick="setView('grid')">Grid</button>
+</div>
+
+<div class="grid-wrap" id="gridArea" style="display:none"></div>
 
 <div id="reviewArea">
   <div class="img-wrap"><img id="mainImg" src="" alt=""><div class="meta" id="meta"></div></div>
@@ -506,6 +527,72 @@ const LS='cb2_review_v5';
 const FEEDBACK_URL='https://jbarad424.github.io/ideas/cb-feedback.json';
 let tab='new',filt=[],ci=0;
 let feedbackLoaded=false;
+let viewMode='list'; // 'list' or 'grid'
+
+// Quality keywords for sorting reviewed images (best first)
+const GREAT_WORDS=['98','95','94','100','slam dunk','perfect','nailed','uncanny','damn good','damn close','great job','excellent','breakthrough'];
+const BAD_WORDS=['fail','zero','0/100','horrible','vomit','nightmare','bad','worst','terrible','not good','dead','messed up'];
+const GOOD_WORDS=['pretty good','decent','80','85','87','89','90','nice','cool','good placement','accurate'];
+
+function scoreImage(id){
+  const cs=getC(id);if(!cs.length)return 50;
+  const txt=cs.map(c=>c.text).join(' ').toLowerCase();
+  let s=50;
+  for(const w of GREAT_WORDS)if(txt.includes(w))s+=15;
+  for(const w of GOOD_WORDS)if(txt.includes(w))s+=5;
+  for(const w of BAD_WORDS)if(txt.includes(w))s-=20;
+  // Extract numeric scores like "87.5/100" or "98 out of 100"
+  const m=txt.match(/(\d{1,3}(?:\.\d+)?)\s*(?:\/\s*100|out of 100)/);
+  if(m)s=parseFloat(m[1]);
+  return Math.max(0,Math.min(100,s));
+}
+
+function badgeFor(s){
+  if(s>=85)return{cls:'great',txt:Math.round(s)+'+'};
+  if(s>=65)return{cls:'good',txt:'~'+Math.round(s)};
+  if(s>=40)return{cls:'ok',txt:'mixed'};
+  return{cls:'bad',txt:'low'};
+}
+
+function setView(v){
+  viewMode=v;
+  document.getElementById('btnList').className=v==='list'?'active':'';
+  document.getElementById('btnGrid').className=v==='grid'?'active':'';
+  renderView();
+}
+
+function renderGrid(){
+  const g=document.getElementById('gridArea');
+  // Sort by score descending
+  const sorted=[...filt].sort((a,b)=>scoreImage(b.id)-scoreImage(a.id));
+  g.innerHTML=sorted.map((img,i)=>{
+    const s=scoreImage(img.id);
+    const b=badgeFor(s);
+    const shortLabel=img.label.replace(/^(REF TEST |BATCH: |FLIP FIX: |PIPE [A-Z]: )/,'');
+    return '<div class="grid-card" onclick="gridClick(\''+img.id+'\')"><img src="'+img.url+'" loading="lazy" alt=""><div class="grid-badge '+b.cls+'">'+b.txt+'</div><div class="grid-label">'+shortLabel+'</div></div>';
+  }).join('');
+}
+
+function gridClick(id){
+  // Switch to list view and navigate to this image
+  const idx=filt.findIndex(i=>i.id===id);
+  if(idx===-1)return;
+  ci=idx;
+  setView('list');
+}
+
+function renderView(){
+  if(tab==='done'&&viewMode==='grid'){
+    document.getElementById('reviewArea').style.display='none';
+    document.getElementById('emptyState').style.display='none';
+    document.getElementById('gridArea').style.display='grid';
+    document.getElementById('counter').innerHTML=filt.length+' reviewed — sorted by quality';
+    renderGrid();
+  }else{
+    document.getElementById('gridArea').style.display='none';
+    render();
+  }
+}
 
 function D(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch{return {}}}
 function S(d){localStorage.setItem(LS,JSON.stringify(d))}
@@ -545,7 +632,7 @@ async function loadSharedFeedback(){
     }
     S(local);
     feedbackLoaded=true;
-    counts();upFilt();render();
+    counts();upFilt();renderView();
     console.log('Loaded '+merged+' image reviews from shared feedback');
   }catch(e){
     console.log('Could not load shared feedback:',e);
@@ -580,7 +667,7 @@ function submitComment(){
   d[img.id].label=img.label;
   S(d);
   document.getElementById('fb').value='';
-  counts();render();
+  counts();renderView();
   showToast('Comment #'+d[img.id].comments.length+' saved');
 }
 
@@ -594,9 +681,12 @@ function setTab(t){
   document.querySelectorAll('.tab').forEach((el,i)=>{
     el.className='tab'+((['new','done','progress'][i]===t)?' active':'');
   });
+  // Show grid toggle only on REVIEWED tab
+  document.getElementById('gridToggle').style.display=(t==='done')?'block':'none';
+  document.getElementById('gridArea').style.display='none';
   document.getElementById('reviewArea').style.display=(t==='progress')?'none':'block';
   document.getElementById('progressArea').style.display=(t==='progress')?'block':'none';
-  if(t!=='progress'){upFilt();render();}
+  if(t!=='progress'){upFilt();renderView();}
   else{document.getElementById('counter').textContent='Experiment Tracker';document.getElementById('emptyState').style.display='none';}
 }
 
@@ -633,7 +723,7 @@ function go(dir){
   const pid=filt[ci]?.id;upFilt();
   if(dir===1){const s=filt.findIndex(i=>i.id===pid);ci=s===-1?Math.min(ci,filt.length-1):Math.min(s+1,filt.length-1);}
   else ci=Math.max(0,ci-1);
-  render();
+  renderView();
 }
 
 function syncFeedback(){
@@ -672,7 +762,7 @@ counts();
 if(!ALL_IMAGES.filter(i=>!isR(i)).length&&ALL_IMAGES.some(i=>isR(i)))tab='done';
 upFilt();
 document.querySelectorAll('.tab').forEach((el,i)=>{el.className='tab'+((['new','done','progress'][i]===tab)?' active':'');});
-render();
+renderView();
 // Load shared feedback from GitHub (merges remote reviews into local)
 loadSharedFeedback();
 </script>
