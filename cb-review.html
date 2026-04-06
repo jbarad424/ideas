@@ -762,7 +762,7 @@ function setTab(t){
   document.getElementById('videosArea').style.display=(t==='videos')?'block':'none';
   document.getElementById('emptyState').style.display='none';
   if(t==='gallery'){renderGallery();}
-  else if(t==='videos'){vidRender();}
+  else if(t==='videos'){vidSetTab('new');}
   else if(t!=='progress'){upFilt();renderView();}
   else{document.getElementById('counter').textContent='Experiment Tracker';}
 }
