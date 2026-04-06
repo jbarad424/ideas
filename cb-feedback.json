@@ -1,7 +1,63 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T17:54:14.432Z",
+  "syncedAt": "2026-04-06T18:11:16.021Z",
   "images": [
+    {
+      "id": "twopass-flux-moto",
+      "label": "TWO-PASS: Moto + Helmet (FLUX)",
+      "model": "two-pass (FLUX edit)",
+      "prompt": "Base: refC-moto-s101 (90/100) → FLUX edit added helmet",
+      "context": "TWO-PASS TEST: Took the 90/100 motorcycle image and ran it through FLUX 2 Pro edit asking ONLY to add a helmet. CB2 should be untouched. Does the helmet look real AND does the CB2 survive?",
+      "comments": [
+        {
+          "text": "I like that he added a helmet, but the earbuds look really strange like they're like not in the right place very strange. The CB2 remote is preserved, but the strap is completely fucked so it looks like they did change the strap so yeah I give this give us a for the fact that the earbuds look do not look like they're actually in his ears and the strap is strange but the remote is the same, but I'll give it a a 45 out of 100.",
+          "time": "2026-04-06T18:09:29.387Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "twopass-kontext-moto",
+      "label": "TWO-PASS: Moto + Helmet (Kontext)",
+      "model": "two-pass (Kontext)",
+      "prompt": "Base: refC-moto-s101 → Kontext added helmet",
+      "context": "Same base image, Kontext Pro for the second pass. Compare against the FLUX edit version — which preserves the CB2 better?",
+      "comments": [
+        {
+          "text": "The symbols are a little hard to read, but it's in the right direction again. This is another example where the guy is running a motorcycle without protective gear looks more like a hiker than he is actually a motorcycle list but I don't really know what you added maybe you added a helmet that's cool but the CB2 was preserved and that's pretty cool. If in fact, you just added a helmet then Great yeah great job 95 out of 100.",
+          "time": "2026-04-06T18:10:10.304Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "twopass-kontext-ski",
+      "label": "TWO-PASS: Skier + Gloves (Kontext)",
+      "model": "two-pass (Kontext)",
+      "prompt": "Base: refC-ski-s303 (98/100) → Kontext added gloves",
+      "context": "TWO-PASS TEST: Added ski gloves to the 98/100 skier. Risky because gloves go near the CB2. Kontext kept the CB2 visible but buttons slightly softer.",
+      "comments": [
+        {
+          "text": "This is awesome. The gloves like a little strange because they look like they're sitting on top of the hand and that actually like the hand is going through it a little bit of like a strange hallucination, but I see what you're going for and the remote is fully intact. If you actually fix the fact that the fingers were going through the gloves I'd give this I'd give us a really big really great score but unfortunately yet it gets like a you know 89.5 out of 100",
+          "time": "2026-04-06T18:10:59.386Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "twopass-flux-ski",
+      "label": "TWO-PASS: Skier + Gloves (FLUX) — CB2 LOST",
+      "model": "two-pass (FLUX edit)",
+      "prompt": "Base: refC-ski-s303 → FLUX edit added gloves",
+      "context": "WARNING: FLUX edit added thick gloves that completely buried the CB2. The remote is GONE. This shows the two-pass approach fails when gear overlaps the product area. Compare against the Kontext version.",
+      "comments": [
+        {
+          "text": "Total fail, the glove is concealing the entire chubby buttons so zero",
+          "time": "2026-04-06T18:11:11.805Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "newgen-moto-s800",
       "label": "NEW: Moto Coastal 1/5",
