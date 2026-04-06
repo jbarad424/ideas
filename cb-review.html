@@ -236,6 +236,22 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <script>
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
 const ALL_IMAGES=[
+  // === NEW GENERATION: Ref C + improved prompts (earbuds, gloves, gear, bright icons) ===
+  {id:'newgen-moto-s800',url:'https://files.catbox.moe/7ugeax.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Moto coastal, earbuds, armored jacket, LEFT arm, bright icons',label:'NEW: Moto Coastal 1/5',context:'NEW BATCH with improved prompts: added wireless earbuds, armored riding jacket, bright button icons. All based on your feedback about missing gear and faded symbols.'},
+  {id:'newgen-moto-s801',url:'https://files.catbox.moe/vmc2m9.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same moto prompt',label:'NEW: Moto Coastal 2/5',context:'Improved prompt batch, seed 801.'},
+  {id:'newgen-moto-s802',url:'https://files.catbox.moe/43a0lv.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same',label:'NEW: Moto Coastal 3/5',context:'Seed 802.'},
+  {id:'newgen-moto-s803',url:'https://files.catbox.moe/rr0uph.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same',label:'NEW: Moto Coastal 4/5',context:'Seed 803.'},
+  {id:'newgen-moto-s804',url:'https://files.catbox.moe/lb66cp.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same',label:'NEW: Moto Coastal 5/5',context:'Seed 804.'},
+  {id:'newgen-mtb-s810',url:'https://files.catbox.moe/s2srqy.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'MTB dusty forest trail, LEFT arm, bright icons',label:'NEW: MTB 1/3',context:'Mountain biking has been averaging 34/100. These use Ref C + bright icon prompt. Can we crack MTB?'},
+  {id:'newgen-mtb-s811',url:'https://files.catbox.moe/jts9if.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same MTB prompt',label:'NEW: MTB 2/3',context:'MTB seed 811.'},
+  {id:'newgen-mtb-s812',url:'https://files.catbox.moe/fcqyz9.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same',label:'NEW: MTB 3/3',context:'MTB seed 812.'},
+  {id:'newgen-run-s820',url:'https://files.catbox.moe/mctpqa.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Trail runner cold weather, light gloves, LEFT arm',label:'NEW: Running 1/3',context:'First running attempt with gloves and cold weather gear. Previous running scored 38 avg.'},
+  {id:'newgen-run-s821',url:'https://files.catbox.moe/6fgffz.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same running prompt',label:'NEW: Running 2/3',context:'Running seed 821.'},
+  {id:'newgen-run-s822',url:'https://files.catbox.moe/wincdz.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same',label:'NEW: Running 3/3',context:'Running seed 822.'},
+  {id:'newgen-fish-s830',url:'https://files.catbox.moe/aryzii.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Person on boat fishing, LEFT arm, calm lake, golden hour',label:'NEW: Fishing 1/2',context:'BRAND NEW SPORT: Fishing from a boat. Testing the nano stick backing use case.'},
+  {id:'newgen-fish-s831',url:'https://files.catbox.moe/ulbqms.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same fishing prompt',label:'NEW: Fishing 2/2',context:'Fishing seed 831.'},
+  {id:'newgen-atv-s840',url:'https://files.catbox.moe/z3unun.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'ATV rider dirt trail, LEFT arm, dusty action',label:'NEW: ATV 1/2',context:'BRAND NEW SPORT: ATV riding. Hands-free music control on the trail.'},
+  {id:'newgen-atv-s841',url:'https://files.catbox.moe/mji0rm.jpg',model:'flux2-pro @image (Ref C v2)',prompt:'Same ATV prompt',label:'NEW: ATV 2/2',context:'ATV seed 841.'},
   // === SAM ROTATION FIXES: Flipped winners auto-corrected ===
   {id:'samfix-refC1',url:'https://files.catbox.moe/kb21ox.jpg',model:'SAM rotation fix',prompt:'ref-C1 with CB2 rotated 180° by fix-orientation.py',label:'SAM FIX: ref-C1 (was ~95-98 if flipped)',context:'AUTOMATIC ROTATION FIX: Original ref-C1 scored 95-98 but had wrong orientation. SAM 3 detected the CB2 → rotated 180° → composited back. Does it look natural? Compare against original ref-C1.'},
   {id:'samfix-refA1',url:'https://files.catbox.moe/9ixnbr.jpg',model:'SAM rotation fix',prompt:'ref-A1 with CB2 rotated 180° by fix-orientation.py',label:'SAM FIX: ref-A1 (was ~92 if flipped)',context:'AUTOMATIC ROTATION FIX: Original ref-A1 scored 92 but with wrong orientation. SAM 3 detected → rotated → composited. Does it look right?'},
