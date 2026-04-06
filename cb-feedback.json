@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T18:30:12.995Z",
+  "syncedAt": "2026-04-06T22:27:36.422Z",
   "images": [
     {
       "id": "twopass-flux-moto",
@@ -3228,11 +3228,133 @@
       ]
     },
     {
+      "id": "vid-kling3-moto",
+      "label": "VIDEO: Kling 3.0 Pro — Moto",
+      "model": "Kling 3.0 Pro (fal.ai)",
+      "prompt": "Subtle cinematic camera movement, device stays still",
+      "context": "KLING 3.0 PRO: Reportedly the best image-to-video model as of April 2026. From the 90/100 motorcycle coastal still. ~$0.70. The one researchers say preserves product detail best.",
+      "comments": [
+        {
+          "text": "The guy is just kind of sitting there not really moving yet although it's interesting. He looks like he's ready to go now I know you're not gonna magically put like clothing on him, protective clothing, and a helmet but as it relates to this image, it animated pretty well. I just didn't make it into an action shot for sitting still and ready to go without any other further prompts. I'd say it's pretty perfect 95.",
+          "time": "2026-04-06T22:25:01.821Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-kling3-snow",
+      "label": "VIDEO: Kling 3.0 Pro — Snowboard",
+      "model": "Kling 3.0 Pro (fal.ai)",
+      "prompt": "Same prompt, snow particles",
+      "context": "Kling 3.0 Pro from the 100/100 snowboard. Compare against Gen-4.5 and Veo 3.1 snowboard versions.",
+      "comments": [
+        {
+          "text": "This is cool that she's looking at her chubby buttons and she's ready to go, but she's kinda like sitting there. It's more like an animated photo. It's not really you know an action shot but and the volume down button has lost a little bit when the when the user turns it towards the camera, but overall it's still pretty cool. I like your expressions give it like a 90 out of 100.",
+          "time": "2026-04-06T22:25:38.536Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-gen4t-moto",
+      "label": "VIDEO: Gen-4 Turbo — Moto",
+      "model": "Runway Gen-4 Turbo",
+      "prompt": "Subtle cinematic camera movement, device on forearm stays still",
+      "context": "RUNWAY GEN-4 TURBO: From the 90/100 motorcycle coastal still. 720x1280, 5s. Fastest model (~30s gen). Does Runway preserve the CB2 better than Kling/Veo?",
+      "comments": [
+        {
+          "text": "Interesting the motorcycle is not moving. It's just kind of sliding through but the background is moving behind the guy which is weird but the chubby buttons is stay the same which is great. I get this 15 out of 100.",
+          "time": "2026-04-06T18:44:22.117Z",
+          "num": 1
+        },
+        {
+          "text": "I like the fact that she's moving the chubby buttons looks good. I don't really know what she's doing. Looks like she's just kind of sitting there and turning around and talking slow Mo but it's moving. It's interesting chubby buttons looks nice. It's not really it's more like an animated photo of them like a real video. I still give this is still really fun to look at so you know 82 out of 185 out of 100.",
+          "time": "2026-04-06T18:44:56.450Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "vid-gen4t-snow",
+      "label": "VIDEO: Gen-4 Turbo — Snowboard",
+      "model": "Runway Gen-4 Turbo",
+      "prompt": "Same prompt",
+      "context": "Gen-4 Turbo from the 100/100 snowboard still. Compare CB2 consistency against the motorcycle version.",
+      "comments": [
+        {
+          "text": "Ha ha this is cool. The motorcycle wheels are moving chubby button stays the same. I like the glare but again the guy is not wearing you know protective gear Noah helmet so that's a little strange. Just not really production ready but in terms of preserving the remote really fucking good. I know what you're doing here and for what you did here it's a really good score 95.",
+          "time": "2026-04-06T18:45:30.684Z",
+          "num": 1
+        },
+        {
+          "text": "This is interesting. I like that. The angles are changing it's it's really good. I don't know what she's doing. Just kinda like looking into the distance but really fucking cool. I get this like a 97 for for what it is.",
+          "time": "2026-04-06T18:46:01.935Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "vid-gen45-moto",
+      "label": "VIDEO: Gen-4.5 — Moto",
+      "model": "Runway Gen-4.5",
+      "prompt": "Same prompt",
+      "context": "RUNWAY GEN-4.5: Higher quality than Gen-4 Turbo, double the bitrate. 720x1280, 5s, ~3-4 min gen time. The premium Runway model.",
+      "comments": [
+        {
+          "text": "This is cool. The CB is preserved the guys on the bike is wind is blowing through his face. I would like to see a helmet and earbuds, but I know that we were just animating a photo that already existed and for the sake of that I give us 95 out of 100.",
+          "time": "2026-04-06T22:26:11.172Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-gen45-snow",
+      "label": "VIDEO: Gen-4.5 — Snowboard",
+      "model": "Runway Gen-4.5",
+      "prompt": "Same prompt",
+      "context": "Gen-4.5 from the 100/100 snowboard. Higher bitrate than Turbo version.",
+      "comments": [
+        {
+          "text": "This is pretty cool more like a moving image but it's pretty cool. I like that you have the different angles on it and she's kinda looking into the distance. It's pretty dope. Do you have like a 94 out of 100 or an in terms of work I could go with video.",
+          "time": "2026-04-06T18:50:09.039Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-veo31-moto",
+      "label": "VIDEO: Veo 3.1 — Moto",
+      "model": "Veo 3.1 (Google)",
+      "prompt": "Same prompt",
+      "context": "GOOGLE VEO 3.1: Latest Google model. 720x1280, 8s (longer than others). Highest bitrate. Best photorealism according to research.",
+      "comments": [
+        {
+          "text": "Cool noises in the background the remote is staying still the way it should be the it's cool again. I would like to see earbuds and a helmet and maybe him going a little bit faster and some better music but I know it again I know what you're trying to do here and for that purpose he did great 95 out of hundred.",
+          "time": "2026-04-06T22:26:46.970Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-veo31-snow",
+      "label": "VIDEO: Veo 3.1 — Snowboard",
+      "model": "Veo 3.1 (Google)",
+      "prompt": "Same prompt",
+      "context": "Veo 3.1 from the 100/100 snowboard. 8 seconds. Compare against Runway versions.",
+      "comments": [
+        {
+          "text": "This is cool. The volume down button is missing a little bit and the symbols on the chubby buttons are lost compared to the other ones I give this an 80 out of 100.",
+          "time": "2026-04-06T22:27:10.738Z",
+          "num": 1
+        }
+      ]
+    },
+    {
       "id": "vid-kling-fal",
-      "label": "VIDEO: Kling v2.1 (fal.ai)",
+      "label": "VIDEO R1: Kling v2.1 (fal)",
       "model": "Kling v2.1 (fal.ai)",
-      "prompt": "Subtle camera movement, wind in jacket, engine vibration, device stays still",
-      "context": "IMAGE-TO-VIDEO TEST: Animated a motorcycle still using Kling v2.1 on fal.ai. 960x960, 5s, ~$0.30. Key question: does the CB2 stay consistent across frames or morph?",
+      "prompt": "Subtle camera movement, wind in jacket",
+      "context": "ROUND 1 BASELINE: Budget Kling on a lower-quality MTB source image. 960x960, 5s, ~$0.30.",
       "comments": [
         {
           "text": "This is strange the remote looks like it's changing shape with every frame looks like kind of an old version of video. Jhené does not look nearly as elegant as it could.",
@@ -3243,47 +3365,76 @@
           "text": "yeah I give this a 10 out of 100",
           "time": "2026-04-06T18:30:09.509Z",
           "num": 2
+        },
+        {
+          "text": "This must've not been one of my top scoring ones because their remote is above the elbow and it looks like it's morphine and being regenerated regenerated with every frame I get this like a 10 out of 100",
+          "time": "2026-04-06T18:20:30.371Z",
+          "num": 3
         }
       ]
     },
     {
       "id": "vid-veo2",
-      "label": "VIDEO: Veo 2 (Google)",
+      "label": "VIDEO R1: Veo 2",
       "model": "Veo 2 (fal.ai)",
       "prompt": "Same prompt",
-      "context": "Veo 2 test. 1280x720, 5s, ~$2.50 (most expensive). Google claims best photorealism. Compare CB2 consistency against Kling.",
+      "context": "Round 1: Veo 2 on MTB source. 1280x720, 5s, ~$2.50.",
       "comments": [
         {
           "text": "The remote looks like it's being rendered with every frame. It's a little clearer than the other one, but it's still pretty bad. I give it a 10 out of 100.",
           "time": "2026-04-06T18:29:12.958Z",
           "num": 1
+        },
+        {
+          "text": "I know what's happening here. The remote look is above his arms. It really wasn't one of the good ones that you're using here and it also looks like it's kind of being regenerated as every frame. It's good for the first couple frames and then it kind of degenerates a little bit.",
+          "time": "2026-04-06T18:21:23.555Z",
+          "num": 2
         }
       ]
     },
     {
       "id": "vid-minimax",
-      "label": "VIDEO: MiniMax/Hailuo",
+      "label": "VIDEO R1: MiniMax",
       "model": "MiniMax/Hailuo (fal.ai)",
       "prompt": "Same prompt",
-      "context": "MiniMax test. 960x960, 5s, ~$0.25 (cheapest). Does budget video quality hold up for product detail?",
+      "context": "Round 1: MiniMax on MTB source. 960x960, 5s, ~$0.25.",
       "comments": [
         {
           "text": "I don't know what's going on with the strap. I don't know why it's above his elbow. The symbol looks of the symbols look really strange and it looks like it's warping an eight out of 100.",
           "time": "2026-04-06T18:29:33.044Z",
           "num": 1
+        },
+        {
+          "text": "This is sitting above the elbow and it looks really incorrect and it looks like it's wobbly and looks like it's rendering with every frame. I get this like a seven out of 100.",
+          "time": "2026-04-06T18:23:30.038Z",
+          "num": 2
         }
       ]
     },
     {
       "id": "vid-hailuo-rep",
-      "label": "VIDEO: Hailuo 2.3 (Replicate)",
+      "label": "VIDEO R1: Hailuo 2.3",
       "model": "Hailuo 2.3 (Replicate)",
       "prompt": "Same prompt",
-      "context": "Hailuo 2.3 on Replicate. 1366x768, 5.9s. Same model as MiniMax but different platform — compare quality.",
+      "context": "Round 1: Hailuo 2.3 on MTB source. 1366x768, 5.9s.",
       "comments": [
         {
           "text": "there's no chubby buttons here at all zero out of 100",
           "time": "2026-04-06T18:29:47.675Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-kling-rep",
+      "label": "VIDEO R1: Kling v2.1 (Rep)",
+      "model": "Kling v2.1 (Replicate)",
+      "prompt": "Same prompt",
+      "context": "Round 1: Kling v2.1 on Replicate. 960x960, 5s.",
+      "comments": [
+        {
+          "text": "This is pretty weird. The remote is kind of wobbles around. Looks like it's being reanimated with every time that he's moving. I get this 42 out of 100.",
+          "time": "2026-04-06T22:27:31.988Z",
           "num": 1
         }
       ]
