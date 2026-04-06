@@ -119,109 +119,78 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <!-- PROGRESS TAB -->
 <div class="progress-wrap" id="progressArea">
-  <div class="section-label">🔬 Active Research — Orientation Fix</div>
+  <div class="section-label">How We Make the Photos</div>
 
   <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Third-Person Reference Photo Test</span><span class="exp-badge win">PROVEN — Ref C WINS</span></div>
-    <div class="exp-desc">A/B tested 4 reference photos × 5 seeds. Control (product shot): 0% correct orientation, avg ~35. Third-person photos: 33-60% correct, avg 67-87. <strong>Ref C (J&Mike Dual) is the winner</strong> — highest quality (scores up to 100!) and best orientation (40-60%).</div>
-    <div class="exp-result"><strong>Results:</strong> D (Control): 0/5 correct, avg 35 | A (Hunter Arm): 2/6, avg 75 | B (Moto Close): 2/5, avg 67 | <strong>C (J&Mike): 2-3/5, avg 87</strong>. Justin's insight: orientation depends on LEFT vs RIGHT arm (read left-to-right from wearer's POV). <strong>20 NEW images generated with Ref C + arm rules → in TO REVIEW tab now.</strong></div>
+    <div class="exp-header"><span class="exp-name">The Approach That Works</span><span class="exp-badge win">IN PRODUCTION</span></div>
+    <div class="exp-desc">We show the AI a real photo of the CB2 and say "put this product on a person doing [activity]." The AI generates a new lifestyle scene with the CB2 on the person's arm. We generate 5-10 versions of each scene and pick the best ones.</div>
+    <div class="exp-result"><strong>178 images reviewed so far.</strong> Best scores: 98, 97, 94, 93 out of 100. Works great for hiking, skiing, and motorcycle. Still struggling with MTB and snowmobile — the AI gets confused by bike handlebars and bulky snowmobile gear.</div>
+  </div>
+
+  <div class="section-label">The #1 Problem: Buttons Face the Wrong Way</div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Fixed: Use a Different Reference Photo</span><span class="exp-badge win">PROVEN</span></div>
+    <div class="exp-desc">The old reference photo was taken looking down at your own arm (wearer's view). The AI copied that angle, so the buttons appeared flipped to anyone looking at the photo. <strong>Fix:</strong> We switched to a photo of J&Mike standing together — taken by someone ELSE looking at their arms from the outside.</div>
+    <div class="exp-result"><strong>A/B test results:</strong> Old photo = 0% correct button orientation. New J&Mike photo = 40-60% correct, with scores up to a perfect 100. Justin also figured out that which ARM matters — left arm and right arm need opposite button layouts because you read them left-to-right from the wearer's perspective. <strong>20 new images using this fix are in the TO REVIEW tab now.</strong></div>
+  </div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Built: Auto-Fix for Remaining Flipped Images</span><span class="exp-badge win">READY TO USE</span></div>
+    <div class="exp-desc">For the 40-60% of images where the buttons still come out wrong, we built an automatic fixer. An AI finds just the CB2 in the photo, cuts it out, rotates it 180 degrees, and pastes it back with smooth edges. Costs half a cent per fix.</div>
+    <div class="exp-result"><strong>Tested and working.</strong> The detection AI cleanly finds just the device (not the strap or the arm), and the rotation looks natural because the CB2 is small enough that lighting differences are invisible. Script is ready to run on any image.</div>
+  </div>
+
+  <div class="section-label">What We Tried and Why We Stopped</div>
+
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">Edge Detection + Product Matching (Pipeline G)</span><span class="exp-badge fail">DIDN'T WORK</span></div>
+    <div class="exp-desc"><strong>The idea:</strong> Use an outline drawing of the CB2 to force the AI to draw it the right way, while also showing it a photo so it knows what it looks like. <strong>Why it failed:</strong> The two systems fight each other — when both are active, the image turns into a garbled mess. Also, this only works on an older, lower-quality AI model that costs 2.5x more.</div>
+    <div class="exp-result">Tested with 4 real API calls. Every combination produced worse results than what we already have. Abandoned.</div>
   </div>
 
   <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Pipeline G: ControlNet + IP-Adapter (fal.ai flux-general)</span><span class="exp-badge fail">DEAD — 3 FATAL ISSUES</span></div>
-    <div class="exp-desc">Tested 4 API calls with real images. Three fatal problems: (1) IP-Adapter overrides ControlNet — confirmed with live test, produces grid artifacts and garbled images. (2) flux-general runs FLUX.1 Dev, a generation behind FLUX 2 Pro — worse quality at 2.5x the cost. (3) Canny ControlNet can't solve orientation — it enforces the edge map of whatever you feed it, creating circular dependency.</div>
-    <div class="exp-result"><strong>Tested:</strong> ControlNet-only → ghost overlay. reference_image_url only → generic band, not CB2. Combined → catastrophic artifacts. <strong>Verdict: Eliminated. Not worth further testing.</strong></div>
-  </div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Pipeline H: SAM Post-Processing Rotation</span><span class="exp-badge win">VALIDATED — READY TO BUILD</span></div>
-    <div class="exp-desc">For images with wrong orientation: detect CB2 with SAM 3 → pixel-perfect mask → rotate product 180° → composite back with feathered edges. <strong>Live-tested:</strong> SAM 3 successfully detected CB2 on a real generated image with prompt "wearable remote control on forearm".</div>
-    <div class="exp-result"><strong>Test results:</strong> Mask cleanly isolated device body (114×129px, not strap). Center of mass within 1px of center — perfect for rotation. EVF-SAM tested as backup — too broad (captures entire forearm). 2-4px feathering recommended. Cost: $0.005/image (SAM only) or $0.055 with inpaint cleanup. <strong>Next: Build the Python pipeline.</strong></div>
-  </div>
-
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">LoRA Forensic Analysis — IMPLEMENTATION FAILURE</span><span class="exp-badge test">FORENSICS COMPLETE</span></div>
-    <div class="exp-desc">Examined all 8 Replicate training runs, downloaded all training ZIPs, read all captions, mapped all 40 inference predictions to versions. <strong>Verdict: Every version had critical data problems. The concept was never given a fair test.</strong></div>
-    <div class="exp-result">
-      <strong>V1:</strong> 13 composite images + autocaption — CB2 is tiny/invisible, captions don't describe it<br>
-      <strong>V2:</strong> 28 images, great manual captions, but still includes V1 composites<br>
-      <strong>V3/V3a:</strong> 37 images, best-tested version (18 predictions) — most promising but data still mixed<br>
-      <strong>V4:</strong> ⚠️ ZIP file is actually an HTML page (GitHub 404). <em>Trained on ZERO images.</em> 9 tests ran against an untrained model.<br>
-      <strong>V4b:</strong> 50 Jordan photos, excellent captions, but ALL wearer's-POV product shots — no lifestyle context<br>
-      <strong>→ V5 Recommended:</strong> Use 30-50 Tahoe/Moto third-person lifestyle photos + a few product close-ups + V2-style captions + rank 32/2500 steps
-    </div>
-  </div>
-
-  <div class="section-label">Production Pipeline</div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Pipeline A: @image referencing (1 product ref)</span><span class="exp-badge win">PRODUCTION WINNER</span></div>
-    <div class="exp-desc">Single product-front photo → fal.ai FLUX.2 Pro edit → "product from image 1" in prompt → generate 10 seeds → cherry-pick best. Broke the ski jacket bleed. Activity-appropriate clothing.</div>
-    <div class="exp-result"><strong>178 images reviewed.</strong> Top scores: 98, 97, 94, 93. Batch moto coastal: five 88+ scores. Ref C now default reference. <strong>#1 blocker: orientation flip</strong> (23%). Fix path: Ref C (40-60% correct) + SAM rotation post-process (validated). Best sports: Hiking (68), Skiing (63), Moto (59). MTB/Snowmobile still failing.</div>
-  </div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">4 Working Templates + 2 New</span><span class="exp-badge win">6 SPORTS</span></div>
-    <div class="exp-desc">Motorcycle Coastal (89), Motorcycle Overlook (87.5), Hiker Gloves (94), Skiing (95-98), MTB (88), Snowboard (80). Spring motorcycle is priority. 35 new batch images + 21 ref test images in review queue.</div>
-    <div class="exp-result">Snowmobile still needs work (20/100). 56 images awaiting Justin's review.</div>
-  </div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">290 Reference Photos Cataloged on Drive</span><span class="exp-badge win">ASSET LIBRARY</span></div>
-    <div class="exp-desc">Full Drive crawl found 290 images across 14 folders. Key finds: Hunter Arm Outside (third-person!), Motorcycle Close Up, Mike Moto Photoshoot (45 untapped), Tahoe Keepers (42 curated). 15 subfolders still unexplored.</div>
-    <div class="exp-result">Mike Moto + Tahoe Keepers currently being visually explored by research agent.</div>
-  </div>
-
-  <div class="section-label">Proven Findings</div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Generate-and-Filter Strategy</span><span class="exp-badge win">CONFIRMED</span></div>
-    <div class="exp-desc">Same prompt produces 5/100 to 98/100 depending on seed. Generate 10-20, cherry-pick winners.</div>
-    <div class="exp-result">Seed 4: "98 out of 100." Orientation correct ~30% of time. Strategy works, just need to push that 30% higher.</div>
-  </div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Waist-up framing + Simple prompts</span><span class="exp-badge win">CONFIRMED</span></div>
-    <div class="exp-desc">Full body = product too small. Close-up = no scene. Waist-up is the sweet spot. Simple prompts beat verbose ones.</div>
-    <div class="exp-result">Best images all use waist-up/3/4 body framing with short, direct prompts.</div>
-  </div>
-
-  <div class="section-label">Failed Pipelines (Properly Tested)</div>
-
-  <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Pipeline B: Crude Mask Inpainting</span><span class="exp-badge fail">-100/100</span></div>
-    <div class="exp-desc">Manual rectangular mask → FLUX Fill Pro. Destroyed the scene.</div>
-    <div class="exp-result">"Worse than fail." Approach fundamentally flawed for this use case.</div>
+    <div class="exp-header"><span class="exp-name">Painting the CB2 Into Existing Scenes (Pipelines B, C, E)</span><span class="exp-badge fail">0-5 / 100</span></div>
+    <div class="exp-desc"><strong>The idea:</strong> Generate a nice outdoor scene first, then "paint" the CB2 into a specific spot on the person's arm. Tried 3 versions: rough mask, precise mask with text description, and precise mask with a reference photo. <strong>Why it failed:</strong> The AI can't paint a recognizable CB2 from a text description alone, and when you give it a reference photo, it warps the entire image instead of just filling the masked area.</div>
+    <div class="exp-result">18 tests across all 3 approaches. Highest score: 5 out of 100. The "painting in" approach is fundamentally limited by how inpainting works in current AI models.</div>
   </div>
 
   <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Pipeline C: SAM + Fill Pro (text-only)</span><span class="exp-badge fail">0-5/100</span></div>
-    <div class="exp-desc">Precise SAM 3 masks + text-only Fill Pro inpainting. Text alone can't generate a recognizable CB2.</div>
-    <div class="exp-result">4 tests, all 0-5/100. Text-to-product fidelity is not good enough.</div>
-  </div>
-
-  <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Pipeline E: SAM + reference_image_url Inpainting</span><span class="exp-badge fail">0/100 (12 tests)</span></div>
-    <div class="exp-desc">Systematic sweep: 12 parameter combos across reference_strength (0.3-0.8) × conditioning_scale. The reference_image_url is a GLOBAL control that warps the entire image, not just the masked region.</div>
-    <div class="exp-result">API architecture limitation — not fixable by parameter tuning. Properly documented.</div>
-  </div>
-
-  <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Pipeline F: Kontext Scene-Swap</span><span class="exp-badge fail">80/100 MAX</span></div>
-    <div class="exp-desc">Start with real photo, tell Kontext to change the scene. Looks like "fancy photoshop" — not scalable for variety.</div>
-    <div class="exp-result">Kontext can't rotate symbols without breaking LED/logo. Good for one-off fixes, not production.</div>
+    <div class="exp-header"><span class="exp-name">Scene-Swapping Real Photos (Pipeline F)</span><span class="exp-badge fail">NICE BUT LIMITED</span></div>
+    <div class="exp-desc"><strong>The idea:</strong> Start with one of our real product photos and tell the AI "keep the CB2 exactly as-is but change the background to a mountain trail." <strong>Why we stopped:</strong> It works for single images but every result looks like the original modeling photo with a new backdrop — not enough variety for a full marketing campaign.</div>
+    <div class="exp-result">Best score: 80/100. Good for quick one-offs, but can't rotate the buttons or create truly new compositions. Not scalable.</div>
   </div>
 
   <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">LoRA v1-v4b (All Versions)</span><span class="exp-badge test">DATA PROBLEMS</span></div>
-    <div class="exp-desc">8 training runs examined forensically. V1: autocaptioned composites. V2: good captions, bad images. V3a: most-tested (18 runs), still mixed data. V4: <strong>trained on an HTML page, not images</strong>. V4b: all wearer's-POV product shots, zero lifestyle.</div>
-    <div class="exp-result"><strong>Not a concept failure.</strong> LoRA approach deserves V5 retry with Tahoe/Moto third-person lifestyle photos, proper captions, and verified ZIP. If LoRA works → combine with ControlNet on xlabs-ai/flux-dev-controlnet for orientation + fidelity in one call.</div>
+    <div class="exp-header"><span class="exp-name">Teaching the AI What CB2 Looks Like (LoRA Training)</span><span class="exp-badge test">WORTH RETRYING</span></div>
+    <div class="exp-desc"><strong>The idea:</strong> Fine-tune the AI on photos of the actual CB2 so it "learns" the product and can draw it from memory. <strong>What went wrong:</strong> We tried 8 times, but every training run had bad data — one version literally trained on a broken download (an error page, not photos), another used only tabletop product shots so the AI learned "CB2 on a table" instead of "CB2 on a person doing sports."</div>
+    <div class="exp-result"><strong>The concept isn't dead — we just never gave it good data.</strong> We now have 87 great third-person lifestyle photos from the Moto and Tahoe shoots. A new training run with these photos could teach the AI to draw the CB2 accurately in action scenes. Plan is ready, waiting for the right moment to pull the trigger.</div>
   </div>
 
   <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">AI Vision Co-Rater</span><span class="exp-badge fail">ABANDONED</span></div>
-    <div class="exp-desc">Claude Sonnet gave 5/5 to floating products. Human feedback is irreplaceable for product accuracy.</div>
-    <div class="exp-result">Replaced with this review page + natural language feedback.</div>
+    <div class="exp-header"><span class="exp-name">AI Scoring (Replacing Human Reviews)</span><span class="exp-badge fail">ABANDONED</span></div>
+    <div class="exp-desc"><strong>The idea:</strong> Have another AI rate the images so Justin doesn't have to review every one. <strong>Why it failed:</strong> The AI gave 5/5 to images where the product was literally floating in mid-air. It can't tell the difference between "looks like a photo" and "the CB2 is accurate."</div>
+    <div class="exp-result">Justin's eye is irreplaceable for product accuracy. That's why this review page exists.</div>
+  </div>
+
+  <div class="section-label">What We Know Works</div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Generate Many, Pick the Best</span><span class="exp-badge win">CORE STRATEGY</span></div>
+    <div class="exp-desc">The exact same prompt with different random seeds produces wildly different results — from 5/100 to 98/100. The AI is unpredictable image-to-image, but consistently produces winners if you generate enough.</div>
+    <div class="exp-result">Strategy: generate 5-10 versions of each scene, cherry-pick the best. This is how we've gotten every 90+ image.</div>
+  </div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Waist-Up Framing + Simple Prompts</span><span class="exp-badge win">PROVEN</span></div>
+    <div class="exp-desc">Full body shots make the CB2 too small to see. Extreme close-ups lose the scene. Waist-up is the sweet spot — you see the person, the activity, AND the product. Short, direct prompts work better than long, detailed ones.</div>
+    <div class="exp-result">Every image scoring 90+ uses waist-up framing with a 1-2 sentence prompt.</div>
+  </div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">290 Real Photos Ready to Use</span><span class="exp-badge win">ASSET LIBRARY</span></div>
+    <div class="exp-desc">Cataloged 290 photos across 14 Google Drive folders. Best finds: the J&Mike reference photo (now our default), 45 motorcycle lifestyle shots from Mike's photoshoot, and 42 curated outdoor shots from the Tahoe trip.</div>
+    <div class="exp-result">These photos serve double duty: reference images for generation AND training data for the next LoRA attempt.</div>
   </div>
 </div>
 
@@ -502,6 +471,7 @@ let feedbackLoaded=false;
 let viewMode='list'; // 'list' or 'grid'
 let navHistory=[]; // stack of image IDs for back button
 let cameFromGrid=false; // track if user clicked in from grid view
+let gridScrollPos=0; // remember scroll position when leaving grid
 
 // Quality keywords for sorting reviewed images (best first)
 const GREAT_WORDS=['98','95','94','100','slam dunk','perfect','nailed','uncanny','damn good','damn close','great job','excellent','breakthrough'];
@@ -553,6 +523,7 @@ function gridClick(id){
   if(idx===-1)return;
   ci=idx;
   cameFromGrid=true;
+  gridScrollPos=window.scrollY; // save where they were in the grid
   viewMode='list';
   document.getElementById('btnList').className='active';
   document.getElementById('btnGrid').className='';
@@ -562,6 +533,8 @@ function gridClick(id){
 function backToGrid(){
   cameFromGrid=false;
   setView('grid');
+  // restore scroll position after grid renders
+  requestAnimationFrame(()=>window.scrollTo(0,gridScrollPos));
 }
 
 function renderView(){
