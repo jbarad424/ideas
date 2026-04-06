@@ -1,7 +1,77 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T14:32:07.197Z",
+  "syncedAt": "2026-04-06T15:34:55.644Z",
   "images": [
+    {
+      "id": "lorav5-moto",
+      "label": "LoRA V5: Moto Coastal",
+      "model": "flux-lora-v5 (FLUX.1 Dev)",
+      "prompt": "CB2REMOTE on LEFT forearm, motorcycle coastal, vol-up closest to wrist",
+      "context": "FIRST TEST of LoRA V5 — trained on 18 Moto + 15 Tahoe + 12 Jordan photos (vs V4b which was all product shots). Does the model now know what CB2 looks like in a lifestyle context? Trigger word: CB2REMOTE.",
+      "comments": [
+        {
+          "text": "This is a like a 10 out of 100. It looks like a remote, but it's nothing like ours. It's in the right spot and it's in the right rotation, but the guy the motorcycle itself looks really strange. Looks like he's like on top of the wrong side of the motorcycle he was facing the wrong way yeah this is like a five out of 100.",
+          "time": "2026-04-06T15:33:29.863Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lorav5-hiker",
+      "label": "LoRA V5: Hiker",
+      "model": "flux-lora-v5 (FLUX.1 Dev)",
+      "prompt": "CB2REMOTE on LEFT forearm, hiker golden hour, vol-up closest to wrist",
+      "context": "LoRA V5 test. Previous LoRA versions scored 0/100 (V4b). V5 has lifestyle training data for the first time.",
+      "comments": [
+        {
+          "text": "This shows a guy holding another guy's arm with a remote with like seven or eight buttons. This is a fail five out of 100.",
+          "time": "2026-04-06T15:33:47.909Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lorav5-skier",
+      "label": "LoRA V5: Skier",
+      "model": "flux-lora-v5 (FLUX.1 Dev)",
+      "prompt": "CB2REMOTE on LEFT forearm over ski jacket, skier, wearing gloves",
+      "context": "LoRA V5 test. Skiing prompt with gloves (per Justin feedback). Does V5 produce a recognizable CB2 in winter sports?",
+      "comments": [
+        {
+          "text": "This is a person wearing a something on the wrist with two buttons. This is a fail, two out of 100.",
+          "time": "2026-04-06T15:34:04.629Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lorav5-snowboard",
+      "label": "LoRA V5: Snowboard",
+      "model": "flux-lora-v5 (FLUX.1 Dev)",
+      "prompt": "CB2REMOTE on RIGHT forearm over jacket, snowboarder, wearing gloves",
+      "context": "LoRA V5 test. RIGHT arm (testing handedness rule with LoRA). Does the trigger word produce the actual product?",
+      "comments": [
+        {
+          "text": "This is getting better, but the strap looks strange. The chubby buttons logo looks weird. The form factor isn't actually perfect. The symbols are wrong. I give this like a 17.5 out of 100.",
+          "time": "2026-04-06T15:34:24.258Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "lorav5-overlook",
+      "label": "LoRA V5: Moto Overlook",
+      "model": "flux-lora-v5 (FLUX.1 Dev)",
+      "prompt": "CB2REMOTE on LEFT forearm, moto rider overlooking valley, sunset",
+      "context": "LoRA V5 test. Motorcycle overlook scene. The big question: does the LoRA now know the CB2 product shape, buttons, and strap from the lifestyle training photos?",
+      "comments": [
+        {
+          "text": "I'm not sure what the guys holding on here again it looks like it's just like holding a bicycle from our motorbike from afar. The chubby buttons has six buttons the symbols are wrong. It's floating weirdly on the guys arm. There's also no protective gear on him as a motorcyclist, I get this seven out of 100.",
+          "time": "2026-04-06T15:34:52.525Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "refC-moto-s100",
       "label": "REF C: Moto Coastal 1/5",
