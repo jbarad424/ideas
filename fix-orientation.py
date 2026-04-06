@@ -35,7 +35,11 @@ from PIL import Image, ImageFilter
 
 FAL_API_KEY = "abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099"
 SAM3_ENDPOINT = "https://queue.fal.run/fal-ai/sam-3/image"
-SAM3_PROMPT = "wearable remote control on forearm"
+SAM3_PROMPTS = [
+    "black remote control on wrist",
+    "rectangular wearable on arm strap",
+    "wearable remote control on forearm",
+]
 
 FEATHER_RADIUS = 3       # px of Gaussian blur on alpha for compositing
 MIN_DEVICE_PX = 20       # skip if detected region smaller than this
@@ -112,23 +116,13 @@ def upload_image_for_api(source: str) -> str:
     return file_url
 
 
-def call_sam3(image_url: str) -> dict:
-    """Call SAM 3 on fal.ai to segment the CB2 device.
-
-    Uses the queue API: submit, then poll for result.
-    Returns the full API response dict.
-    """
-    headers = {
-        "Authorization": f"Key {FAL_API_KEY}",
-        "Content-Type": "application/json",
-    }
+def _call_sam3_single(image_url: str, prompt: str, headers: dict) -> dict:
+    """Submit a single SAM 3 request and poll for the result."""
     payload = {
         "image_url": image_url,
-        "prompt": SAM3_PROMPT,
+        "prompt": prompt,
         "apply_mask": True,
     }
-
-    print(f"  Submitting to SAM 3...")
 
     # Submit to queue
     submit_resp = requests.post(
@@ -141,7 +135,7 @@ def call_sam3(image_url: str) -> dict:
     queue_data = submit_resp.json()
 
     # Check if we got a direct result (non-queued response)
-    if "image" in queue_data:
+    if "image" in queue_data and queue_data["image"] is not None:
         return queue_data
 
     # Otherwise poll for result
@@ -152,7 +146,7 @@ def call_sam3(image_url: str) -> dict:
     if not request_id:
         raise RuntimeError(f"No request_id in queue response: {queue_data}")
 
-    print(f"  Queued (request_id: {request_id}). Polling for result...")
+    print(f"    Queued (request_id: {request_id}). Polling...")
 
     # Poll status
     start_time = time.time()
@@ -166,7 +160,6 @@ def call_sam3(image_url: str) -> dict:
 
         status = status_data.get("status", "")
         if status == "COMPLETED":
-            # Fetch the actual result
             result_url = response_url or f"https://queue.fal.run/fal-ai/sam-3/image/requests/{request_id}"
             result_resp = requests.get(result_url, headers=headers, timeout=API_TIMEOUT)
             result_resp.raise_for_status()
@@ -176,9 +169,39 @@ def call_sam3(image_url: str) -> dict:
             raise RuntimeError(f"SAM 3 request failed: {error}")
         else:
             elapsed = int(time.time() - start_time)
-            print(f"  Status: {status} ({elapsed}s elapsed)...")
+            print(f"    Status: {status} ({elapsed}s elapsed)...")
 
     raise TimeoutError(f"SAM 3 request timed out after {API_TIMEOUT}s")
+
+
+def call_sam3(image_url: str) -> dict:
+    """Call SAM 3 on fal.ai to segment the CB2 device.
+
+    Tries multiple prompts in order until one returns a valid detection.
+    Returns the full API response dict.
+    """
+    headers = {
+        "Authorization": f"Key {FAL_API_KEY}",
+        "Content-Type": "application/json",
+    }
+
+    for i, prompt in enumerate(SAM3_PROMPTS):
+        print(f"  Trying prompt {i+1}/{len(SAM3_PROMPTS)}: \"{prompt}\"")
+        try:
+            result = _call_sam3_single(image_url, prompt, headers)
+
+            # Check if we got a valid detection
+            masks = result.get("masks", [])
+            image_data = result.get("image")
+            if image_data is not None and len(masks) > 0:
+                print(f"  Detection successful with prompt: \"{prompt}\"")
+                return result
+            else:
+                print(f"    No detection with this prompt (masks={len(masks)}, image={'present' if image_data else 'null'})")
+        except Exception as e:
+            print(f"    Error with this prompt: {e}")
+
+    raise RuntimeError(f"SAM 3 could not detect the CB2 device with any of {len(SAM3_PROMPTS)} prompts")
 
 
 def find_mask_bbox(mask_img: Image.Image) -> tuple:
