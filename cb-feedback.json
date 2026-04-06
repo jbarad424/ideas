@@ -1,7 +1,386 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T18:30:12.995Z",
+  "syncedAt": "2026-04-06T23:16:47.397Z",
   "images": [
+    {
+      "id": "ab-old-moto",
+      "label": "A/B OLD: Moto (seed 1000)",
+      "model": "flux2-pro @image (OLD prompt)",
+      "prompt": "Person on motorcycle coastal highway, LEFT forearm, golden hour, adventure photography",
+      "context": "PROMPT A/B TEST: Our current simple prompt style. Compare directly against ab-new-moto which uses the same seed but with camera specs, lighting direction, and person description.",
+      "comments": [
+        {
+          "text": "This is unfortunate The writer looks good. But you can barely see the remote. I would say it’s probably like a 22 out of 100.",
+          "time": "2026-04-06T23:04:08.484Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ab-new-moto",
+      "label": "A/B NEW: Moto (seed 1000)",
+      "model": "flux2-pro @image (NEW prompt)",
+      "prompt": "Athletic man 30s, Sony A7IV 135mm f/2.8, golden backlight camera-right, editorial action sports",
+      "context": "RESEARCH-INFORMED: Same seed. Added Sony A7IV 70-200mm f/2.8, backlight from camera-right with rim light, athletic man early 30s, editorial action sports high-end outdoor brand campaign.",
+      "comments": [
+        {
+          "text": "The remote is preserved, but again the guy isn’t wearing any protective gear while his cycling Nora helmet so I would not use this as anything in my collateral so I’ll give it like a 30 out of 100",
+          "time": "2026-04-06T23:04:44.670Z",
+          "num": 1
+        },
+        {
+          "text": "But it is placed in the correct spot. I’ll give you that even though the symbols are not as bright as they could be.",
+          "time": "2026-04-06T23:04:59.381Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "ab-old-ski",
+      "label": "A/B OLD: Ski (seed 1001)",
+      "model": "flux2-pro @image (OLD prompt)",
+      "prompt": "Skier snowy slope, bright jacket, LEFT forearm, bright winter day",
+      "context": "Old simple prompt. Compare against ab-new-ski.",
+      "comments": [
+        {
+          "text": "Remote is perfectly preserved jacket looks cool. Only problem is the guy‘s not wearing gloves. It’s not as aspirational as I want though because it’s just showing an arm. He’s not really like active so I’ll give it like a minute. I don’t really know where we’re waiting here for if I get it maybe like a 60.",
+          "time": "2026-04-06T23:05:39.276Z",
+          "num": 1
+        },
+        {
+          "text": "Actually, I’ll I’ll give it a an idea for the remote preservation",
+          "time": "2026-04-06T23:05:51.325Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "ab-new-ski",
+      "label": "A/B NEW: Ski (seed 1001)",
+      "model": "flux2-pro @image (NEW prompt)",
+      "prompt": "Fit skier carving powder, Nikon Z9 400mm f/2.8, winter backlight, frozen snow particles",
+      "context": "Research-informed: Nikon Z9 400mm f/2.8, crisp winter backlight, frozen snow particles, dynamic diagonal, adrenaline-fueled intensity.",
+      "comments": [
+        {
+          "text": "I like how the angle is all different but you can barely see the remote so I give this a 25 out of 100",
+          "time": "2026-04-06T23:06:11.864Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ab-old-mtb",
+      "label": "A/B OLD: MTB (seed 1002)",
+      "model": "flux2-pro @image (OLD prompt)",
+      "prompt": "MTB dusty forest trail, LEFT forearm, action sports photography",
+      "context": "Old simple prompt. Compare against ab-new-mtb.",
+      "comments": [
+        {
+          "text": "This is pretty fucking cool. I wish I could see the symbols a little bit better in the way that you know we do on the real remote but a man it’s it’s really aspirational. It’s great. It’s perfect clothing for the sport. Great job. Maybe we can now that you have this note maybe we could do a quick thing where you like look at all the training photos put them in a zip file for me and I can remove the ones that have the bad symbols or at least point to the ones that have the correct symbol outline for the hunter.",
+          "time": "2026-04-06T23:07:21.002Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ab-new-mtb",
+      "label": "A/B NEW: MTB (seed 1002)",
+      "model": "flux2-pro @image (NEW prompt)",
+      "prompt": "Athletic MTB descending rocky singletrack, Canon R5 135mm f/2.8, dappled golden sidelight, dust particles",
+      "context": "Research-informed: Canon EOS R5 70-200mm f/2.8, dappled golden hour sidelight, dust particles catching light, outdoor lifestyle campaign.",
+      "comments": [
+        {
+          "text": "I mean this is pretty damn close. The symbols are just a little out of focus. Can’t really see but I like that he’s jazzed and the photo looks cool. Give us like a 92 out of 100.",
+          "time": "2026-04-06T23:07:51.685Z",
+          "num": 1
+        },
+        {
+          "text": "I just wish she was wearing a AirPods or something like that",
+          "time": "2026-04-06T23:08:01.848Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s900",
+      "label": "ACTION: Moto Turn — Hunter",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Moto leaning into turn, speed blur, Hunter green/yellow",
+      "context": "HIGH-ENERGY batch with colorway prompting. Hunter green with yellow icons. Sharp turn, speed blur, coastal highway.",
+      "comments": [
+        {
+          "text": "Total fail this does not look like our remote at all. The buttons are yellow. It’s way too big. I give it a 10 out of 100.",
+          "time": "2026-04-06T23:08:19.250Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s901",
+      "label": "ACTION: Moto Speed — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Moto at speed, wind in jacket, Tron black/cyan",
+      "context": "Tron black with cyan icons. Open mountain road, wind, cinematic motion.",
+      "comments": [
+        {
+          "text": "The remote seems to be above his elbow, which is a fail, and the symbols are illuminated, which is not how it should look, but there’s a remote there, which is I guess something to be said and give us a 15 out of 100",
+          "time": "2026-04-06T23:08:54.707Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s902",
+      "label": "ACTION: Moto POV — Patriot",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "POV over handlebars, Patriot white/navy",
+      "context": "Patriot white with navy buttons. POV over handlebars, forearm gripping throttle, coastal cliffs.",
+      "comments": [
+        {
+          "text": "This is really strange. He’s grabbing some art of the motorcycle, which doesn’t really make sense. It’s a white chassis but it’s incorrect color way for the patriot because it has a bottom red shell and the buttons are blue so and the strap is wrong. I give this a 12 1/2 out of 100. I’ll give you a 17 out of 100 just because it has the correct form factor but has all the wrong colors.",
+          "time": "2026-04-06T23:10:19.060Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s903",
+      "label": "ACTION: Moto Desert — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Moto desert highway, dust trail, Tron black/cyan",
+      "context": "Tron black. Desert highway, dust trail, epic landscape.",
+      "comments": [
+        {
+          "text": "Total fail does not look like our remote at all 12 out of 100",
+          "time": "2026-04-06T23:10:35.764Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s904",
+      "label": "ACTION: Moto Pass — Hunter",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Moto cresting mountain pass, Hunter green/yellow",
+      "context": "Hunter green. Mountain pass crest, panoramic vista, dramatic clouds.",
+      "comments": [
+        {
+          "text": "Zero out of 100. I don’t see the remote at all and it’s just the guy’s backside.",
+          "time": "2026-04-06T23:10:51.938Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-ski-s910",
+      "label": "ACTION: Ski Powder — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier carving powder at speed, Tron black/cyan",
+      "context": "Tron black. Fresh powder, snow spray, bright mountain sun.",
+      "comments": [
+        {
+          "text": "This is interesting. He’s kind of jazzed. He’s in a Lian on a skier, which is cool but the symbols look blue it illuminated which is wrong, but I’ll give it a 82.",
+          "time": "2026-04-06T23:11:24.196Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-ski-s911",
+      "label": "ACTION: Ski Jump — Hunter",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier launching off jump, Hunter green/yellow",
+      "context": "Hunter green. RIGHT arm. Airborne with mountain panorama.",
+      "comments": [
+        {
+          "text": "Looks like a terrible Photoshop job. There is a remote on the guys’s arm, but it doesn’t look like a remote because the buttons are bright yellow. I’ll give this a 20 out of 100.",
+          "time": "2026-04-06T23:11:49.855Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-ski-s912",
+      "label": "ACTION: Ski Trees — Patriot",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier racing through trees, Patriot white/navy",
+      "context": "Patriot white. Speed blur on trees, racing through tree-lined run.",
+      "comments": [
+        {
+          "text": "You can’t get the patriot Callaway right and the orientation is right and the action is cool but it’s above his elbow so a 50 out of 100",
+          "time": "2026-04-06T23:12:21.024Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-ski-s913",
+      "label": "ACTION: Ski Summit — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier at summit looking down, Tron black/cyan",
+      "context": "Tron black. Summit anticipation, dramatic mountain backdrop.",
+      "comments": [
+        {
+          "text": "I don’t really know what’s happening here. The remote is blue and the symbols which you shouldn’t be and some sort of a boot on 18 out of 100",
+          "time": "2026-04-06T23:13:10.901Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-snow-s920",
+      "label": "ACTION: Snow Halfpipe — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Snowboarder halfpipe trick, airborne, Tron black/cyan",
+      "context": "Tron black. RIGHT arm. Mid-trick in halfpipe, airborne.",
+      "comments": [
+        {
+          "text": "It’s in the right spot. The photo looks kind of neat, but the symbols are a little too bright. I don’t know why they’re so eliminated. Give us a 45 out of 100.",
+          "time": "2026-04-06T23:13:31.687Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-snow-s921",
+      "label": "ACTION: Snow Powder — Hunter",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Snowboarder deep powder carve, Hunter green/yellow",
+      "context": "Hunter green. RIGHT arm. Deep powder turn, snow flying.",
+      "comments": [
+        {
+          "text": "Symbols are bright yellow doesn’t look like our color at all and the action is neat with their remote is wrong so 35 out of 100",
+          "time": "2026-04-06T23:13:49.646Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-snow-s922",
+      "label": "ACTION: Snow Chute — Patriot",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Snowboarder steep chute, Patriot white/navy",
+      "context": "Patriot white. RIGHT arm. Dropping into steep chute, dramatic cliff.",
+      "comments": [
+        {
+          "text": "Symbols are wrong. There’s two volume plus buttons. It’s a little high up on the arm and the guy wearing short sleeves while assuming he’s skiing but I don’t even know really what he’s doing cause it looks like he’s just falling in the snow 28 out of 100.",
+          "time": "2026-04-06T23:14:25.636Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-mtb-s930",
+      "label": "ACTION: MTB Jump — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "MTB flying over jump, Tron black/cyan",
+      "context": "Tron black. Airborne over forest trail jump, dappled light.",
+      "comments": [
+        {
+          "text": "Two out of 100 doesn’t look anything like a remote like Chubby Buttons",
+          "time": "2026-04-06T23:14:40.935Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-mtb-s931",
+      "label": "ACTION: MTB Singletrack — Hunter",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "MTB rocky singletrack at speed, Hunter green/yellow",
+      "context": "Hunter green. Racing down rocky singletrack, dust cloud, intense action.",
+      "comments": [
+        {
+          "text": "Two out of 100. It’s on his leg. Looks nothing like our remote.",
+          "time": "2026-04-06T23:14:53.420Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-mtb-s932",
+      "label": "ACTION: MTB Berm — Patriot",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "MTB cornering on berm, Patriot white/navy",
+      "context": "Patriot white. Hard cornering on a berm, bike leaning, golden hour.",
+      "comments": [
+        {
+          "text": "Five out of 100. It’s in the right spot, but it doesn’t look like our remote. There’s also no buttons visible.",
+          "time": "2026-04-06T23:15:10.596Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-mtb-s933",
+      "label": "ACTION: MTB Descent — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "MTB steep descent, valley view, Tron black/cyan",
+      "context": "Tron black. Steep mountain trail descent, valley view behind.",
+      "comments": [
+        {
+          "text": "In the right spot aspirational, but the symbols and the buttons are eliminated too brightly and that’s wrong. Give it a 22 out of 100.",
+          "time": "2026-04-06T23:15:29.262Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-hike-s940",
+      "label": "ACTION: Summit Celebrate — Hunter",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Hiker summit celebration, Hunter green/yellow",
+      "context": "Hunter green. Mountain summit, arms spread celebrating, sunrise, clouds below.",
+      "comments": [
+        {
+          "text": "These are really strange. There’s two remotes on each charm. I don’t know why I give this a 12 out of 100 and they look nothing like our remote.",
+          "time": "2026-04-06T23:15:45.770Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-run-s941",
+      "label": "ACTION: Ridge Run — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Trail runner sprinting ridge, Tron black/cyan",
+      "context": "Tron black. Sprinting along ridge trail, mountains both sides, golden light, energy.",
+      "comments": [
+        {
+          "text": "Way too cartoonish the symbols are lit up. It’s just paint on the symbols. I don’t know why it’s about thinking it’s eliminated. Give us a 15 out of 100.",
+          "time": "2026-04-06T23:16:05.091Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-fish-s950",
+      "label": "ACTION: Fishing Catch — Hunter",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Reeling in catch on boat, Hunter green/yellow",
+      "context": "Hunter green. Reeling in a big catch, rod bent, excitement, lake sunset.",
+      "comments": [
+        {
+          "text": "Really goofy AI slop and the remote does not look like our remote and the symbols are wrong and it’s too big. I give it a 12 out of 100.",
+          "time": "2026-04-06T23:16:27.425Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "action-fish-s951",
+      "label": "ACTION: Fly Fishing — Tron",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Fly casting mountain stream, Tron black/cyan",
+      "context": "Tron black. Casting fly rod in mountain stream, mid-cast motion, misty morning.",
+      "comments": [
+        {
+          "text": "Zero out of 100 not even close to our remote",
+          "time": "2026-04-06T23:16:40.255Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "twopass-flux-moto",
       "label": "TWO-PASS: Moto + Helmet (FLUX)",
@@ -3229,10 +3608,10 @@
     },
     {
       "id": "vid-kling-fal",
-      "label": "VIDEO: Kling v2.1 (fal.ai)",
+      "label": "VIDEO R1: Kling v2.1 (fal)",
       "model": "Kling v2.1 (fal.ai)",
-      "prompt": "Subtle camera movement, wind in jacket, engine vibration, device stays still",
-      "context": "IMAGE-TO-VIDEO TEST: Animated a motorcycle still using Kling v2.1 on fal.ai. 960x960, 5s, ~$0.30. Key question: does the CB2 stay consistent across frames or morph?",
+      "prompt": "Subtle camera movement, wind in jacket",
+      "context": "ROUND 1 BASELINE: Budget Kling on a lower-quality MTB source image. 960x960, 5s, ~$0.30.",
       "comments": [
         {
           "text": "This is strange the remote looks like it's changing shape with every frame looks like kind of an old version of video. Jhené does not look nearly as elegant as it could.",
@@ -3248,10 +3627,10 @@
     },
     {
       "id": "vid-veo2",
-      "label": "VIDEO: Veo 2 (Google)",
+      "label": "VIDEO R1: Veo 2",
       "model": "Veo 2 (fal.ai)",
       "prompt": "Same prompt",
-      "context": "Veo 2 test. 1280x720, 5s, ~$2.50 (most expensive). Google claims best photorealism. Compare CB2 consistency against Kling.",
+      "context": "Round 1: Veo 2 on MTB source. 1280x720, 5s, ~$2.50.",
       "comments": [
         {
           "text": "The remote looks like it's being rendered with every frame. It's a little clearer than the other one, but it's still pretty bad. I give it a 10 out of 100.",
@@ -3262,10 +3641,10 @@
     },
     {
       "id": "vid-minimax",
-      "label": "VIDEO: MiniMax/Hailuo",
+      "label": "VIDEO R1: MiniMax",
       "model": "MiniMax/Hailuo (fal.ai)",
       "prompt": "Same prompt",
-      "context": "MiniMax test. 960x960, 5s, ~$0.25 (cheapest). Does budget video quality hold up for product detail?",
+      "context": "Round 1: MiniMax on MTB source. 960x960, 5s, ~$0.25.",
       "comments": [
         {
           "text": "I don't know what's going on with the strap. I don't know why it's above his elbow. The symbol looks of the symbols look really strange and it looks like it's warping an eight out of 100.",
@@ -3276,10 +3655,10 @@
     },
     {
       "id": "vid-hailuo-rep",
-      "label": "VIDEO: Hailuo 2.3 (Replicate)",
+      "label": "VIDEO R1: Hailuo 2.3",
       "model": "Hailuo 2.3 (Replicate)",
       "prompt": "Same prompt",
-      "context": "Hailuo 2.3 on Replicate. 1366x768, 5.9s. Same model as MiniMax but different platform — compare quality.",
+      "context": "Round 1: Hailuo 2.3 on MTB source. 1366x768, 5.9s.",
       "comments": [
         {
           "text": "there's no chubby buttons here at all zero out of 100",
