@@ -233,6 +233,10 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <!-- VIDEOS TAB -->
 <div id="videosArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
+  <div style="display:flex;gap:.3rem;justify-content:center;margin-bottom:.5rem">
+    <button id="vidTabNew" class="active" onclick="vidSetTab('new')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">To Review (<span id="vidCntNew">0</span>)</button>
+    <button id="vidTabDone" onclick="vidSetTab('done')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">Reviewed (<span id="vidCntDone">0</span>)</button>
+  </div>
   <div id="vidPlayer"></div>
   <div class="context-box" id="vidCtxBox" style="display:none"><div class="context-inner" id="vidCtxInner"></div></div>
   <div class="comment-trail" id="vidTrail"></div>
@@ -858,11 +862,39 @@ let galFilterMode='all';
 
 // === SELF-CONTAINED VIDEO TAB ===
 let vidIdx=0;
+let vidTab='new'; // 'new' or 'done'
+let vidFilt=[];
+
+function vidIsR(v){return getC(v.id).length>0;}
+function vidUpFilt(){vidFilt=vidTab==='new'?ALL_VIDEOS.filter(v=>!vidIsR(v)):ALL_VIDEOS.filter(v=>vidIsR(v));}
+
+function vidSetTab(t){
+  vidTab=t;vidIdx=0;
+  document.getElementById('vidTabNew').style.borderColor=t==='new'?'#a855f7':'#333';
+  document.getElementById('vidTabNew').style.color=t==='new'?'#a855f7':'#888';
+  document.getElementById('vidTabDone').style.borderColor=t==='done'?'#a855f7':'#333';
+  document.getElementById('vidTabDone').style.color=t==='done'?'#a855f7':'#888';
+  vidUpFilt();vidRender();
+}
+
 function vidRender(){
-  if(!ALL_VIDEOS.length){document.getElementById('counter').textContent='No videos yet';return;}
-  const v=ALL_VIDEOS[vidIdx];
-  document.getElementById('counter').innerHTML=(vidIdx+1)+' / '+ALL_VIDEOS.length+' — '+v.label;
-  document.getElementById('vidPlayer').innerHTML='<video controls playsinline autoplay style="width:100%;max-height:500px;border-radius:12px;background:#000"><source src="'+v.url+'" type="video/mp4"></video>'
+  vidUpFilt();
+  const cntNew=ALL_VIDEOS.filter(v=>!vidIsR(v)).length;
+  const cntDone=ALL_VIDEOS.filter(v=>vidIsR(v)).length;
+  document.getElementById('vidCntNew').textContent=cntNew;
+  document.getElementById('vidCntDone').textContent=cntDone;
+  if(!vidFilt.length){
+    document.getElementById('counter').textContent=vidTab==='new'?'All videos reviewed!':'No reviewed videos yet.';
+    document.getElementById('vidPlayer').innerHTML='';
+    document.getElementById('vidCtxBox').style.display='none';
+    document.getElementById('vidTrail').innerHTML='';
+    document.getElementById('vidFb').style.display='none';
+    return;
+  }
+  document.getElementById('vidFb').style.display='';
+  const v=vidFilt[vidIdx];
+  document.getElementById('counter').innerHTML=(vidIdx+1)+' / '+vidFilt.length+' — '+v.label;
+  document.getElementById('vidPlayer').innerHTML='<video controls playsinline autoplay loop style="width:100%;max-height:500px;border-radius:12px;background:#000"><source src="'+v.url+'" type="video/mp4"></video>'
     +'<div class="meta"><span class="tag model">'+v.model+'</span><span class="tag">'+v.prompt.slice(0,70)+'</span></div>';
   const cb=document.getElementById('vidCtxBox'),ci2=document.getElementById('vidCtxInner');
   if(v.context){cb.style.display='block';ci2.innerHTML='<strong>ABOUT:</strong> '+v.context;}else cb.style.display='none';
@@ -874,9 +906,9 @@ function vidRender(){
   document.getElementById('vidFb').value='';
   document.getElementById('vidFb').placeholder=cs.length?'Add another comment...':'What do you think? Does the CB2 stay consistent?';
   document.getElementById('vidPrevBtn').disabled=vidIdx===0;
-  document.getElementById('vidNextBtn').disabled=vidIdx===ALL_VIDEOS.length-1;
+  document.getElementById('vidNextBtn').disabled=vidIdx===vidFilt.length-1;
 }
-function vidGo(dir){vidIdx=Math.max(0,Math.min(ALL_VIDEOS.length-1,vidIdx+dir));vidRender();}
+function vidGo(dir){vidIdx=Math.max(0,Math.min(vidFilt.length-1,vidIdx+dir));vidRender();}
 function vidSubmit(){
   const t=document.getElementById('vidFb').value.trim();
   if(!t)return;
