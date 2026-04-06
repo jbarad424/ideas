@@ -1,7 +1,77 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T15:36:05.209Z",
+  "syncedAt": "2026-04-06T17:25:11.552Z",
   "images": [
+    {
+      "id": "flux2lora-moto",
+      "label": "FLUX 2 LoRA: Moto Coastal",
+      "model": "flux-2-dev-lora-v5 (FLUX 2)",
+      "prompt": "CB2REMOTE on LEFT forearm, motorcycle coastal, vol-up closest to wrist",
+      "context": "FLUX 2 Dev LoRA — same 45 training images as V5, but on the newer FLUX 2 Dev base model (vs FLUX 1 Dev). Research says FLUX 2 has significantly better photorealism and material rendering. Does it make a difference for product learning?",
+      "comments": [
+        {
+          "text": "This is like nightmare fuel, and looks like an alien is riding a bike. I don't know what he's holding onto and I do see something it looks a little bit more like our remote. I mean, I will say that the remote it looks a little better than before, but it's still totally garbled up and really strange. This is like a I mean the scene itself is like horrifying, but the fact that you got the strap somewhat right and it kind of looks like it could be the remote. I'll give us like a 15 or 17 out of 100.",
+          "time": "2026-04-06T17:23:48.001Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux2lora-hiker",
+      "label": "FLUX 2 LoRA: Hiker",
+      "model": "flux-2-dev-lora-v5 (FLUX 2)",
+      "prompt": "CB2REMOTE on LEFT forearm, hiker golden hour",
+      "context": "FLUX 2 Dev LoRA test. Compare directly against lorav5-hiker (FLUX 1) which scored 5/100.",
+      "comments": [
+        {
+          "text": "Nightmare fuel this looks like total zero",
+          "time": "2026-04-06T17:24:03.084Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux2lora-skier",
+      "label": "FLUX 2 LoRA: Skier",
+      "model": "flux-2-dev-lora-v5 (FLUX 2)",
+      "prompt": "CB2REMOTE on LEFT forearm, skier, wearing gloves",
+      "context": "FLUX 2 Dev LoRA test. Compare against lorav5-skier (FLUX 1) which scored 2/100.",
+      "comments": [
+        {
+          "text": "This has four buttons looks a little strange looks more like to see than anything else they've seen in this batch particularly but yeah it's not what we're looking for so I would say this is a eight or 10 out of 100",
+          "time": "2026-04-06T17:24:33.684Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux2lora-snowboard",
+      "label": "FLUX 2 LoRA: Snowboard",
+      "model": "flux-2-dev-lora-v5 (FLUX 2)",
+      "prompt": "CB2REMOTE on RIGHT forearm, snowboarder, wearing gloves",
+      "context": "FLUX 2 Dev LoRA test. Compare against lorav5-snowboard (FLUX 1) which scored 17.5/100.",
+      "comments": [
+        {
+          "text": "Nothing looks nothing like our remote was too small. Very strange. Give it a 12 out of 100.",
+          "time": "2026-04-06T17:24:55.385Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux2lora-overlook",
+      "label": "FLUX 2 LoRA: Moto Overlook",
+      "model": "flux-2-dev-lora-v5 (FLUX 2)",
+      "prompt": "CB2REMOTE on LEFT forearm, moto rider overlooking valley",
+      "context": "FLUX 2 Dev LoRA test. Compare against lorav5-overlook (FLUX 1) which scored 7/100. The big question: does FLUX 2 learn the CB2 product better than FLUX 1?",
+      "comments": [
+        {
+          "text": "Zero total fail",
+          "time": "2026-04-06T17:25:03.985Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "lorav5-moto",
       "label": "LoRA V5: Moto Coastal",
