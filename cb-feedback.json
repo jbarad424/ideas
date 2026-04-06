@@ -1,7 +1,791 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T02:08:47.900Z",
+  "syncedAt": "2026-04-06T13:43:31.497Z",
   "images": [
+    {
+      "id": "ref-A1",
+      "label": "REF TEST A: Hunter Arm Outside 1/6",
+      "model": "flux2-pro @image",
+      "prompt": "Motorcycle coastal + exact layout spec",
+      "context": "REFERENCE PHOTO TEST: Using \"Hunter Arm Outside.jpg\" found on Google Drive as the @image reference instead of the standing product shot. This is a THIRD-PERSON photo of the CB2 on someone's forearm, photographed by another person from the outside. Research predicted this would fix the 180° orientation flip.",
+      "comments": [
+        {
+          "text": "OK, this looks good. I love so there's like three things we're talking about right so I wanna be clear and how we talk about this I guess as it relates to being really picky right there's the there's the placement. I guess that we can call the positioning on the Y axis let's call the Y axis you know the arm right and or rather is called the arm length access right and there's where it goes on the right placement between the wrist and the elbow and then there orientation itself, right like is it is it flipped in the right way for the symbols to be viewer to be visible by the by the person wearing it and then there's also like the rotational part right of like where it exists on the strap in the arm and like I don't really know what the word is for this it's like the I guess the top part of the arm or the maybe I'll look for the anatomical reason for that, but anyway, the remote looks OK though it's oriented the wrong way so it needs to be flipped. The pause that the plus button should be closer to the wrist, but it's in the right part of the arm in ter the axis in terms of like the where it belongs between the wrist and the elbow, but also the the symbols on the hunter unit are a little faded maybe that's because of the training image but this is if it were flipped 180° outside of the fact that the image itself looks like a little looks a little bit like AI I get this like a like a 92 out of 100",
+          "time": "2026-04-06T12:43:50.634Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-A2",
+      "label": "REF TEST A: Hunter Arm Outside 2/6",
+      "model": "flux2-pro @image",
+      "prompt": "Same coastal prompt",
+      "context": "Same third-person arm reference (Hunter Arm Outside.jpg), different seed.",
+      "comments": [
+        {
+          "text": "This is above his elbow and the symbols are wrong and the guy has a weird looks like an earring, not even like an actual AirPod in his ear and he's also wearing a hat, not a helmet, which is really unsafe and the strap looks a little wrong cause it has a clip on it, but the plastic of their remote looks OK maybe like a 70 out of 100, maybe 75",
+          "time": "2026-04-06T12:44:37.983Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-A3",
+      "label": "REF TEST A: Hunter Arm Outside 3/6",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same third-person arm reference, different seed.",
+      "comments": [
+        {
+          "text": "The symbols are wrong cause there's positives there's plus buttons on both sides and still the play button is flipped. It's more of a bit of hallucination that the iconography on the strap is wrong but the placement on the arm is pretty good. It's in the right spot and turns of like you know the space between the elbow and the wrist. Maybe you can kind of give me a better way to explain this in the future that's that's a question for you. Tatian part is also good but the remote is not accurate 55 maybe 60 out of 100.",
+          "time": "2026-04-06T12:48:14.389Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-A4",
+      "label": "REF TEST A: Hunter Arm Outside 4/6",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same third-person arm reference, different seed.",
+      "comments": [
+        {
+          "text": "Here the remote is in the correct orientation. The LED in that little circular thing in the corner is not in the right spot but everything else looks good. The iconography of the strap is a little strange, but that's fine but it's also in the right spot on the arm and it is also in the right rotational part of the arm. This is this could be really promising if the symbols were better, really like it.",
+          "time": "2026-04-06T12:48:58.559Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-A5",
+      "label": "REF TEST A: Hunter Arm Outside 5/6",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same third-person arm reference, different seed.",
+      "comments": [
+        {
+          "text": "The symbols here are flipped again. The positive is close of the elbow and the negative closer to the wrist, which should be the other way around the photo looks a little like AI there's a USB charging port on the unit which actually doesn't exist. I don't know why that's there the straps a little strange and you can barely see the the icons cause we did put new paint on there. Maybe you need to train with some of the photos with the new paint and the symbols.",
+          "time": "2026-04-06T12:49:33.920Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-A6",
+      "label": "REF TEST A: Hunter Arm Outside 6/6",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same third-person arm reference, different seed.",
+      "comments": [
+        {
+          "text": "This is really promising, but it does show two LED circles on either side. The one that's lit up is actually in the right spot but the other one is a little strange but the symbols are right and the logo itself is a little different but I like how it's interpreted there's also like a little light and it looks like something on the edge of the remote, which is hallucination it doesn't exist, but the positioning of the remote and the orientation of the remote and the rotation of the remote are pretty great. This is we're getting somewhere guys. This is like outside of the little artifacts on the remote. I'd like a 94 out of 100 maybe 90.",
+          "time": "2026-04-06T12:50:27.401Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-B1",
+      "label": "REF TEST B: Moto Close Up 1/5",
+      "model": "flux2-pro @image",
+      "prompt": "Motorcycle coastal + exact layout spec",
+      "context": "REFERENCE PHOTO TEST: Using \"Motorcycle Close Up.jpg\" from Drive — a real photo of a motorcycle rider with CB2 on forearm gripping handlebars. Sport-specific third-person reference.",
+      "comments": [
+        {
+          "text": "The rotational part of this is wrong cause it's like facing us and it's also in the strange part of the zipper. That's a little weird. It should be like more on the up on the flat part of the person's wrist. I'm not on the outside of the elbow because he needs to be able to look at it when he turns his arm in, but the Civils are clear and unfortunately, it's flipped to the wrong direction. The positive should be the positive should be closest to the wrist.",
+          "time": "2026-04-06T12:51:00.619Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-B2",
+      "label": "REF TEST B: Moto Close Up 2/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same motorcycle reference, different seed.",
+      "comments": [
+        {
+          "text": "This is a nice photo but again the remote looks OK. It looks a little more metallic than then it should be and the the positive and the negative are flipped which is incorrect and also there's a strange looking like CB something battery pack with like lights on it I don't know what that is. That's a crazy hallucination, but the remote looks nice outside of the crazy like wrist wrap. I give this like a like well I give it like you did well with the symbols, but they've flipped in the wrong way, but you're getting somewhere.",
+          "time": "2026-04-06T12:51:56.002Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-B3",
+      "label": "REF TEST B: Moto Close Up 3/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same motorcycle reference, different seed.",
+      "comments": [
+        {
+          "text": "This is really nice. I like the lighting but again the positive and negative need to be flipped, but it's interesting like you have the play button looking correct oh my God I just realize something and you're gonna hate me but maybe this is part of what training is all about if you put the remote on the driver's left hand then the positive button needs to face the wrist but if you put it on its right hand, the negative button needs to face the wrist. It's all about like the orientation of the I guess that and the place symbols right it should basically the the volume down is left and the and the volume up is to the right reading left to right so you should be able to read from left to right on your right hand and read from left to right on your left hand. Oh my God I hope this is not too specific enough for the training .",
+          "time": "2026-04-06T12:54:08.289Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-B4",
+      "label": "REF TEST B: Moto Close Up 4/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same motorcycle reference, different seed.",
+      "comments": [
+        {
+          "text": "This is a cool angle and it's on the driver's right hand and it looks good. You have that or you have that oriented correctly. Strap looks a little different but that's fine but yeah this is this is really good. Well done. Looks like I get that like I mean that sorry the plastic colors little strange looks so little gray. I really wanna hone in on which color way that we, but that's another thing. We need to work on like when we pick the actual color ways but the positioning on the wrist is right the rotational part is right and the orientation is right.",
+          "time": "2026-04-06T12:55:12.338Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-B5",
+      "label": "REF TEST B: Moto Close Up 5/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same motorcycle reference, different seed.",
+      "comments": [
+        {
+          "text": "Again, right hand positioning the symbols looks good. It looks a little more metallic than any of our actual color ways will work on that, but the positioning is nice and yeah, I really like this outside of the color of the plastic pretty good job.",
+          "time": "2026-04-06T12:55:42.603Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-C1",
+      "label": "REF TEST C: J&Mike Dual 1/5",
+      "model": "flux2-pro @image",
+      "prompt": "Motorcycle coastal + exact layout spec",
+      "context": "REFERENCE PHOTO TEST: Using \"Hunter and Tron - J and Mike.png\" — two people standing side by side, each wearing a CB2 (Hunter and Tron colorways), photographed from the front.",
+      "comments": [
+        {
+          "text": "This is a little too high up on the person's wrist, but I'm really being nitpicky right here and again it's on his left hand so it's correct because the it's reading from left to right although the volume down is flipped, it looks like a line instead of a negative that's the only thing wrong with it. I mean, if it was just down a little bit towards his wrist, I'd give this lik 98. It's really getting there or 95 yeah",
+          "time": "2026-04-06T12:56:17.788Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-C2",
+      "label": "REF TEST C: J&Mike Dual 2/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same dual-person reference, different seed.",
+      "comments": [
+        {
+          "text": "This is pretty cool. I can't really see the actual orientation but the placement on the wrist is correct and the scene looks cool yeah damn let's see if I zoom in little bit more. Yeah the symbols look a little warbled. I can't really tell but it's cool photo so I'll get that like a 90 the symbols need to be clearer though.",
+          "time": "2026-04-06T12:56:57.388Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-C3",
+      "label": "REF TEST C: J&Mike Dual 3/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same dual-person reference, different seed.",
+      "comments": [
+        {
+          "text": "This is pretty dope really good. The logo looks good. The positioning looks good. The color looks good the guys handsome aspirational fuck man I'm dare. I say this is pretty close to 100.",
+          "time": "2026-04-06T12:57:22.754Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-C4",
+      "label": "REF TEST C: J&Mike Dual 4/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same dual-person reference, different seed.",
+      "comments": [
+        {
+          "text": "This one's a little strange the symbols are wrong. There's something on the volume down button doesn't really look like our remote that Great the strap is not visible. It's kind of floating. There looks very like AI hallucination give us like a 50 out of 100 if only because like the positioning and the rotational element is right, but the remote is wrong and the strap is wrong.",
+          "time": "2026-04-06T12:57:52.155Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-C5",
+      "label": "REF TEST C: J&Mike Dual 5/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same dual-person reference, different seed.",
+      "comments": [
+        {
+          "text": "This is rotationally incorrect because it's on the outside of his arm, but it's on the right arm, so yeah, it's also little incorrect cause it should be. It's in the right side. The positive button should be up, but the strap is interesting even though there's some symbol it's a little hallucinatory, but the color of the hunt looks good. Let me know in the future when we run this like how I can retrain the symbol outline for the hunter maybe you need a new photo of that.",
+          "time": "2026-04-06T12:58:35.387Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-D1",
+      "label": "REF TEST D: Original Product (CONTROL) 1/5",
+      "model": "flux2-pro @image",
+      "prompt": "Motorcycle coastal + exact layout spec",
+      "context": "CONTROL GROUP: Same standing product-front reference we always use. Same prompt and seeds as A/B/C batches so orientation differences are PURELY from the reference photo change.",
+      "comments": [
+        {
+          "text": "This the remote looks nice here but it's not strapped incorrectly and it's also hitting perpendicular to the wrist, which is unfortunate but it looks pretty. It's just it's just sitting in an impossible way because like it's perpendicular to the way it should be oriented so this is not this is it it looks nice but it's totally wrong.",
+          "time": "2026-04-06T12:59:07.139Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-D2",
+      "label": "REF TEST D: Original Product (CONTROL) 2/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Control group — original product reference, different seed.",
+      "comments": [
+        {
+          "text": "This is cool. The buttons are a little more round than they should be, but and the symbols are a little strange looking and that it's on his left arm yet it's like again the positive should be or the volume up should be pointing down towards the wrist, the logo on the strap right in the positioning in the arm is correct and the lighting is cool but the symbols are totally wrong so I could get like 55 or 60 out of 100.",
+          "time": "2026-04-06T12:59:51.741Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-D3",
+      "label": "REF TEST D: Original Product (CONTROL) 3/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Control group — original product reference, different seed.",
+      "comments": [
+        {
+          "text": "This does not look like our remote at all. Also, the guy that looks anatomically strange like he's stretching his arm out for some weird reason I get to say a 15 out of 100 if only because you got the logo of the chubby buttons right on the strap.",
+          "time": "2026-04-06T13:00:14.821Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-D4",
+      "label": "REF TEST D: Original Product (CONTROL) 4/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Control group — original product reference, different seed.",
+      "comments": [
+        {
+          "text": "This is wrong because the symbols are flipping the wrong way, but the logo the strap looks good. The positioning in the arm should be a little bit lower and rotated in words towards his body. Also, he's just yeah I give us like a give us a 35 out of 100 or 40 only because the remote looks good and the logo looks good. I'm sorry I'll give it closer to like a 65 but it's just not nearly as good as positioned as the other ones.",
+          "time": "2026-04-06T13:00:47.471Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ref-D5",
+      "label": "REF TEST D: Original Product (CONTROL) 5/5",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Control group — original product reference, different seed.",
+      "comments": [
+        {
+          "text": "This is bad. The remote looks really tiny strap looks wrong. Symbols are facing the wrong way 15 or 10 out of 100.",
+          "time": "2026-04-06T13:01:03.254Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast1",
+      "label": "BATCH: Moto Coastal 1/15",
+      "model": "flux2-pro @image",
+      "prompt": "Motorcycle coastal + exact layout: plus near wrist, minus near elbow, play/pause center, LED/logo outward",
+      "context": "BATCH GENERATION with Justin's exact button layout spec: \"plus closest to wrist, minus closest to elbow, play/pause center, LED and CB logo face outward.\" 15 seeds for cherry-picking.",
+      "comments": [
+        {
+          "text": "Remote looks really tiny on this person. Actually the size is probably like maybe 6075% of what it should be. It's also worn on his wrist, which is incorrect, but yeah and the volume down button is flipped in the weird way it's all kind of hallucinatory.",
+          "time": "2026-04-06T13:01:30.417Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast2",
+      "label": "BATCH: Moto Coastal 2/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same coastal prompt with layout spec",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Again, like facing way down on his wrist, the symbols look nice. The logo looks nice. The strap looks good. Their remote looks really cool inaccurate if it were just a little further up on his wrist, I'd give this like a 97 but because it's down closer to his wrist. I give it like an 88.5.",
+          "time": "2026-04-06T13:02:01.282Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast3",
+      "label": "BATCH: Moto Coastal 3/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Damn dude fuck I don't know what's wrong with this I think I'm speechless. I think this looks really good again. I just wanna make sure we can do this on other sports as well but looks pretty fireman like the second 97 or 98 out of 100.",
+          "time": "2026-04-06T13:02:35.335Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast4",
+      "label": "BATCH: Moto Coastal 4/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Right hand looks good positioning looks good. The symbol looks like it's glowing a little bit more than it should but other than that like it's glowing in blue but I guess that's part of like the whole image. It looks pretty fire damn dude 9392 out of 100.",
+          "time": "2026-04-06T13:03:08.416Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast5",
+      "label": "BATCH: Moto Coastal 5/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "The remote looks a little too small. The strap looks wrong, but it's in the right orientation. That's good. Just needs to be a little further up on the arm and just looks really small though.",
+          "time": "2026-04-06T13:03:27.449Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast6",
+      "label": "BATCH: Moto Coastal 6/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This ain't bad man this ain't bad at all except for the little LED window is missing like a actual like little you know the frosted glass that's usually there and the strap looks a little strange, but it's pretty close to perfect I would say besides the fact that it's maybe just a little too small it looks really good man you nailed it. I'll get this like 90 out of 100.",
+          "time": "2026-04-06T13:04:01.750Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast7",
+      "label": "BATCH: Moto Coastal 7/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Little too close to the wrist, but the orientation is right but the strap is weird cause it's not actually taught on the wrist and it's not over his jacket. It's just kinda like floating there and there's some weird hallucinations on like what's on the strap, but the lighting is cool. Shadow is cool remote looks interesting and fun and interestingly rendered maybe like a nine a 78 maybe 75 well the strap is really bad so I'll go down to lake 68.5.",
+          "time": "2026-04-06T13:04:43.850Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast8",
+      "label": "BATCH: Moto Coastal 8/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Strap is bad does not look like it's going over his jacket correctly, but the orientation of the symbols are right remote looks good. The little LED is glowing. Doesn't need to be on the top right little circle. The lighting on the on the photo is cool though.",
+          "time": "2026-04-06T13:05:07.032Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast9",
+      "label": "BATCH: Moto Coastal 9/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "The orientation of the symbols is wrong, but but the strap is right. The logo on the strap is right it positioned to right the remote looks pretty cool although there's like a USB port which doesn't exist on the side. I don't know why that's there. Yeah give us like an 82 1/2.",
+          "time": "2026-04-06T13:05:35.318Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast10",
+      "label": "BATCH: Moto Coastal 10/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Really bad it's only half the remote and it's flipped in the wrong direction fail",
+          "time": "2026-04-06T13:05:45.085Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast11",
+      "label": "BATCH: Moto Coastal 11/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "The remote is flipped to the wrong direction and like the perpendicular realm. It looks like a watch yeah this is not good. I give this like a 20 if only because you got their remote looking somewhat decent.",
+          "time": "2026-04-06T13:06:08.783Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast14",
+      "label": "BATCH: Moto Coastal 12/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is not good. The remote is flipped in the wrong direction. The chubby button is low on the strap is wrong. The symbol looks good. It's just not facing in the right orientation on the on the arm, so yeah, this would be a fail.",
+          "time": "2026-04-06T13:06:35.519Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast17",
+      "label": "BATCH: Moto Coastal 13/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This looks nice. Their remote looks a little small but and we're not really sure what color it is. It's like somewhere between the hunter Green and the Tron, but we're getting somewhere get us like us. Yeah their remote looks good. Strap looks good. It just should be a little further up on the arm, but yeah, I give it like a 75.",
+          "time": "2026-04-06T13:07:07.150Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast19",
+      "label": "BATCH: Moto Coastal 14/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This is really bad the strap incorrect. The symbols are wrong. It's just kind of floating. Give us like a 30 out of 100.",
+          "time": "2026-04-06T13:07:18.484Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-coast20",
+      "label": "BATCH: Moto Coastal 15/15",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This looks pretty good. There's a weird like on the side of the remote. There's some hallucination about like writing CB on the side which does not exist and the window of the LED is missing. I don't know why maybe that was missing when we did the training photos symbols are wrong and yeah, maybe you could show me what those training photos look like. Ha ha I can see now that the training photos some of them are missing that little frosted piece of glass and the LED window on the top right and that's why you're using it. I understand babe that's on me.",
+          "time": "2026-04-06T13:09:15.938Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over1",
+      "label": "BATCH: Moto Overlook 1/10",
+      "model": "flux2-pro @image",
+      "prompt": "Motorcycle overlook + exact layout: plus near wrist, minus near elbow, play/pause center, LED/logo outward",
+      "context": "Overlook template with exact button layout spec. D2 Overlook 1 already had correct orientation at 85/100 — generating 10 more to find additional correct-orientation seeds.",
+      "comments": [
+        {
+          "text": "This is pretty cool little high up in the elbow, but orientation is right should be rotated inward towards his body symbols. Look cool logo looks good. The remote looks. Maybe it's about the right size maybe 5% oversized but pretty damn good man we're getting there. it's like like a like a 89.",
+          "time": "2026-04-06T13:09:45.967Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over2",
+      "label": "BATCH: Moto Overlook 2/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same overlook prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Little further little too high up on the elbow symbols are flipped in the wrong direction cause it's on the left arm. It should be a little lower and he should be able to read it but the chubby buns logo looks good. Lighting is interesting. Give us if it was flipped in the other direction and a little further down the arm would be really great. Give it like an 87.5 or 88",
+          "time": "2026-04-06T13:10:18.319Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over3",
+      "label": "BATCH: Moto Overlook 3/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "A remote looks a little not like it's taught on the arm, but it's in the right spot. Maybe it's just 5% too big but the symbols look good. The chubby buttons logo looks good and unfortunately there there's two volume up buttons there you didn't do the volume down. It just looks like 2+ buttons.",
+          "time": "2026-04-06T13:10:49.535Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over4",
+      "label": "BATCH: Moto Overlook 4/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Needs to be rotated inward a little bit towards the body and again the symbols need to be flipped around, but if this, but the symbols are flipped around and the positive was facing toward the wrist I'd give this like like a 97 but because it's not to give it like a 90",
+          "time": "2026-04-06T13:11:16.118Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over5",
+      "label": "BATCH: Moto Overlook 5/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "A little too high up the arm and the symbol the button is missing but the chubby buns logo looks OK. Should be rotated inward a little bit bit. I'll give it like an 82.",
+          "time": "2026-04-06T13:11:32.923Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over6",
+      "label": "BATCH: Moto Overlook 6/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This looks strange. Looks like the guy's arm is broken and it's strapped above the elbow and it's all crinkle in a weird way I get this probably like a 40 or 35 maybe even like a 30",
+          "time": "2026-04-06T13:11:51.436Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over7",
+      "label": "BATCH: Moto Overlook 7/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "The remote needs to be needs to be flipped around so that he can read it, but it needs to be a little bit further down the arm, but their remote looks nice. The logo on the strap looks good. Yeah I'd give it a good rating of it do those things fixed",
+          "time": "2026-04-06T13:12:22.557Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over8",
+      "label": "BATCH: Moto Overlook 8/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "A little too high up on the arm and flipped in the wrong direction actually, it's above the elbow, which is not good for this purpose, and the symbols are flipped in the wrong direction 60 out of 100",
+          "time": "2026-04-06T13:12:41.835Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over9",
+      "label": "BATCH: Moto Overlook 9/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Symbols need to be flipped around so he can read it better than that. Looks good. It needs to be a little lower on the arm closer to the wrist but and also I don't know where this motorcycle is standing. Is it on the side of the road, but yeah it looks and also I can't really tell what the color is.",
+          "time": "2026-04-06T13:13:10.969Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-over10",
+      "label": "BATCH: Moto Overlook 10/10",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Symbols need to be flipped again with the positive facing the risk cause it's on the left arm and needs to be lower on the arm. This is above the elbow anything above the elbow as a fail, but the logo looks good on the strap.",
+          "time": "2026-04-06T13:13:31.385Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-mtb2",
+      "label": "BATCH: MTB 1/4",
+      "model": "flux2-pro @image",
+      "prompt": "MTB on dusty trail + exact layout spec",
+      "context": "First test of exact button layout spec on mountain biking. Previous Pipeline A MTB scored 88/100 without the spec.",
+      "comments": [
+        {
+          "text": "This is weird there's two chubby buttons one on his left one of his right they're in different positions and it looks a little weirdly Photoshop maybe a 15 out of 100",
+          "time": "2026-04-06T13:13:47.922Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-mtb3",
+      "label": "BATCH: MTB 2/4",
+      "model": "flux2-pro @image",
+      "prompt": "Same MTB prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "This looks really bad. It doesn't not look like CB. It looks Photoshop five out of 100.",
+          "time": "2026-04-06T13:14:00.018Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-mtb4",
+      "label": "BATCH: MTB 3/4",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Not good way too big not accurate lighting is wrong. Looks like AI five or seven out of 100.",
+          "time": "2026-04-06T13:14:13.587Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-mtb5",
+      "label": "BATCH: MTB 4/4",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Zero out of 100 there's nothing visible no chubby buttons visible at all",
+          "time": "2026-04-06T13:14:24.553Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-snowmo1",
+      "label": "BATCH: Snowmobile 1/3",
+      "model": "flux2-pro @image",
+      "prompt": "Snowmobile on snowy trail + exact layout spec",
+      "context": "Testing snowmobile with exact button layout spec. Snowmobile previously scored only 20/100 — can the new spec improve it?",
+      "comments": [
+        {
+          "text": "There's something on this guy above his arm, but it looks strange and not recognizable maybe five or seven out of 100",
+          "time": "2026-04-06T13:14:39.652Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-snowmo2",
+      "label": "BATCH: Snowmobile 2/3",
+      "model": "flux2-pro @image",
+      "prompt": "Same snowmobile prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Cool picture of a guy on a snowmobile and there's some weird hallucination of chubby button's logo on it which is weird but there's no remote visible so zero",
+          "time": "2026-04-06T13:14:57.602Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-snowmo3",
+      "label": "BATCH: Snowmobile 3/3",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "I don't know why this guy's arm is pointing out towards us. It's so strange but their remote looks a little more accurate. Unfortunately, there's 2+ buttons instead of the correct orientation which shit can be flipped and the strap looks a little bit strange but the logo is good but the place placement on the arm is right it just it's like a weird weirdly odd position. this looks very AI cause it does not look natural for him.",
+          "time": "2026-04-06T13:15:28.888Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-snow1",
+      "label": "BATCH: Snowboard 1/3",
+      "model": "flux2-pro @image",
+      "prompt": "Snowboarder on powder slope + exact layout spec",
+      "context": "Testing snowboarding with exact button layout spec. Previous best was 80/100.",
+      "comments": [
+        {
+          "text": "This is pretty comically bad just a big chubby buttons on the guy's arm. It's almost like five or six times the size of the remote. I called this a fail.",
+          "time": "2026-04-06T13:15:44.102Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-snow2",
+      "label": "BATCH: Snowboard 2/3",
+      "model": "flux2-pro @image",
+      "prompt": "Same snowboard prompt",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Getting somewhere with the skier it's in the right spot. It should be flipped again with the positive down towards the risk cause it's on his left arm, but I don't even know what this guy is doing. Looks like he's just falling in the snow. That's so strange. It doesn't look like he's skiing or snowboarding but the remote looks nice in the shadows cool although it looks a little Photoshop to get it's like a 72 out of 100.",
+          "time": "2026-04-06T13:16:17.436Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "bg-snow3",
+      "label": "BATCH: Snowboard 3/3",
+      "model": "flux2-pro @image",
+      "prompt": "Same",
+      "context": "Same prompt, different seed.",
+      "comments": [
+        {
+          "text": "Pretty bad it's flipped in the wrong direction. Look looking like a watch but itself looks accurate even though the color is different. I get this like a 15 or 17.5 out of 100.",
+          "time": "2026-04-06T13:16:36.401Z",
+          "num": 1
+        }
+      ]
+    },
     {
       "id": "flip-coastal1",
       "label": "FLIP FIX: Coastal 1 (ultra-specific prompt)",
@@ -29,7 +813,7 @@
       "context": "Same prompt, different seed. Cherry-pick.",
       "comments": [
         {
-          "text": "This is flipped perpendicularly. I swear if this was just like turned 90\u00b0 where that plus volume up is facing down towards the wrist this would be a real slam dunk.",
+          "text": "This is flipped perpendicularly. I swear if this was just like turned 90° where that plus volume up is facing down towards the wrist this would be a real slam dunk.",
           "time": "2026-04-06T02:03:39.375Z",
           "num": 1
         }
@@ -71,7 +855,7 @@
       "context": "Same prompt, different seed.",
       "comments": [
         {
-          "text": "This is interesting but it's flipped. It should be flipped 180\u00b0 and should be a little tighter on the wrist but but it looks pretty good. The logo looks good. The lighting looks interesting. Yeah I was just getting somewhere give it like a like an 87.5 out of 100.",
+          "text": "This is interesting but it's flipped. It should be flipped 180° and should be a little tighter on the wrist but but it looks pretty good. The logo looks good. The lighting looks interesting. Yeah I was just getting somewhere give it like a like an 87.5 out of 100.",
           "time": "2026-04-06T02:05:22.772Z",
           "num": 1
         }
@@ -81,7 +865,7 @@
       "id": "kontext-flip",
       "label": "FLIP FIX: Kontext rotation of D2 Coastal 3",
       "model": "kontext-pro (post-process)",
-      "prompt": "Took D2 Coastal 3 (~95/100) and asked Kontext: \"Rotate button symbols 180\u00b0 so minus is closest to wrist. Keep everything else identical.\"",
+      "prompt": "Took D2 Coastal 3 (~95/100) and asked Kontext: \"Rotate button symbols 180° so minus is closest to wrist. Keep everything else identical.\"",
       "context": "Approach 2: Post-processing fix. Take the best image (D2 Coastal 3 that you said \"would be 100 if flipped\") and use Kontext Pro to rotate just the symbols. Did Kontext preserve the scene while fixing orientation?",
       "comments": [
         {
@@ -141,7 +925,7 @@
       "context": "Same prompt, different seed.",
       "comments": [
         {
-          "text": "Needs to be flipped 180\u00b0 but it's in exactly the right spot of the arm just feels a little bit too large like it's kind of enlarged a bit more than but maybe that could also be camera angle play but but yeah yeah I mean I mean it's pretty. It's pretty good if it was just flipped around it would be it was just turned 180\u00b0 probably be like 100 but I give this like like a 92.5. No I give it like an 87.5 because the remote looks a little bit larger than it should be.",
+          "text": "Needs to be flipped 180° but it's in exactly the right spot of the arm just feels a little bit too large like it's kind of enlarged a bit more than but maybe that could also be camera angle play but but yeah yeah I mean I mean it's pretty. It's pretty good if it was just flipped around it would be it was just turned 180° probably be like 100 but I give this like like a 92.5. No I give it like an 87.5 because the remote looks a little bit larger than it should be.",
           "time": "2026-04-06T02:08:31.946Z",
           "num": 1
         }
@@ -165,7 +949,7 @@
       "id": "pipeF-moto",
       "label": "PIPE F: Motorcycle spring (Kontext scene-swap)",
       "model": "kontext-pro (scene-swap)",
-      "prompt": "On-arm close-up ref \u2192 Kontext Pro: \"Keep this exact product on forearm. Change background to motorcycle riding, cherry blossom road, gripping handlebars.\"",
+      "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to motorcycle riding, cherry blossom road, gripping handlebars.\"",
       "context": "PIPELINE F: Completely different approach. Instead of generating a scene and adding product, we START with the real product photo on the arm and tell Kontext to CHANGE THE SCENE around it. Product preservation is Kontext's strength.",
       "comments": [
         {
@@ -179,8 +963,8 @@
       "id": "pipeF-mtb",
       "label": "PIPE F: MTB trail (Kontext scene-swap)",
       "model": "kontext-pro (scene-swap)",
-      "prompt": "On-arm close-up ref \u2192 Kontext Pro: \"Keep this exact product on forearm. Change background to MTB trail, gripping bike handlebars, pine forest.\"",
-      "context": "Same approach: real product photo \u2192 Kontext changes scene to mountain biking. Does the product survive AND does the scene change convincingly?",
+      "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to MTB trail, gripping bike handlebars, pine forest.\"",
+      "context": "Same approach: real product photo → Kontext changes scene to mountain biking. Does the product survive AND does the scene change convincingly?",
       "comments": [
         {
           "text": "same story here.. it's nice, but it looks just like the modeling photos. i'm worried this wont necessarily scale for different angles. but it def kept the fidelity of the remote. it just looks like a fancy photoshop job over a different background.",
@@ -193,7 +977,7 @@
       "id": "pipeF-snowmo",
       "label": "PIPE F: Snowmobile (Kontext scene-swap)",
       "model": "kontext-pro (scene-swap)",
-      "prompt": "Horizontal arm ref \u2192 Kontext Pro: \"Keep product on forearm. Change to snowmobile rider, snowy trail, winter gear.\"",
+      "prompt": "Horizontal arm ref → Kontext Pro: \"Keep product on forearm. Change to snowmobile rider, snowy trail, winter gear.\"",
       "context": "Using the horizontal arm reference. Snowmobile is a key CB2 sport. Does Kontext preserve the product while creating a full-body snowmobile scene?",
       "comments": [
         {
@@ -207,7 +991,7 @@
       "id": "pipeF-moto-product",
       "label": "PIPE F: Motorcycle (product as input)",
       "model": "kontext-pro (scene-swap)",
-      "prompt": "Product front photo \u2192 Kontext Pro: \"Show this product strapped to motorcycle riders forearm, gripping handlebars, cherry blossoms, all 5 buttons visible.\"",
+      "prompt": "Product front photo → Kontext Pro: \"Show this product strapped to motorcycle riders forearm, gripping handlebars, cherry blossoms, all 5 buttons visible.\"",
       "context": "Variation: using the standalone product photo as input instead of the on-arm photo. Different starting point, same scene-swap concept.",
       "comments": [
         {
@@ -292,7 +1076,7 @@
       "label": "PIPE D2: Moto overlook 1 of 3",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Motorcycle rider at scenic mountain overlook, product on lower forearm, mountain vista, spring golden hour",
-      "context": "Motorcycle overlook template \u2014 rider stopped at scenic point. Helmet off, relaxed pose. 3 seeds for cherry-picking.",
+      "context": "Motorcycle overlook template — rider stopped at scenic point. Helmet off, relaxed pose. 3 seeds for cherry-picking.",
       "comments": [
         {
           "text": "ayyy! not bad! just a little closer to the wrist, and also more so that the motorcyclist can actually see the remote, but the symbols are in the correct orientation! 85/100",
@@ -390,7 +1174,7 @@
       "label": "PIPE E2: ref=0.65 str=0.75 (baseline)",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.65, strength=0.75",
-      "context": "The first combo that showed promise \u2014 scene partially preserved with something on the wrist.",
+      "context": "The first combo that showed promise — scene partially preserved with something on the wrist.",
       "comments": [
         {
           "text": "a nightmare. terrible",
@@ -491,7 +1275,7 @@
       "context": "Motorcycle on mountain road. Product on forearm area.",
       "comments": [
         {
-          "text": "This is flipped horizontally. The remote looks good but it's perpendicular the way it should be. It's not placed in the right direction but the remote itself looks accurate. I'll give you like 50 points for having the remote accurate but 50 out of 100 because it's not placed correctly if you just rotate at 90\u00b0 it would be pretty damn good.",
+          "text": "This is flipped horizontally. The remote looks good but it's perpendicular the way it should be. It's not placed in the right direction but the remote itself looks accurate. I'll give you like 50 points for having the remote accurate but 50 out of 100 because it's not placed correctly if you just rotate at 90° it would be pretty damn good.",
           "time": "2026-04-05T21:02:26.264Z",
           "num": 1
         }
@@ -544,7 +1328,7 @@
       "label": "PIPE E: Moto ref=0.8 (product took over)",
       "model": "flux-general (mask+ref)",
       "prompt": "fill_image mask + reference_image_url at strength 0.8. Scene: motorcycle close-up.",
-      "context": "PIPELINE E: The holy grail \u2014 mask-based inpainting WITH product reference image. Uses fal-ai/flux-general with fill_image (mask) + reference_image_url (product). At ref_strength=0.8, the reference dominates and produces a product render instead of a scene. Product fidelity is AMAZING though.",
+      "context": "PIPELINE E: The holy grail — mask-based inpainting WITH product reference image. Uses fal-ai/flux-general with fill_image (mask) + reference_image_url (product). At ref_strength=0.8, the reference dominates and produces a product render instead of a scene. Product fidelity is AMAZING though.",
       "comments": [
         {
           "text": "This just looks like a red redo of one of our shots from the photo box with none of the symbols there I don't know what this is meant to do, but it's it's pretty bad but thief plastic looks OK just none of the buttons are accurate",
@@ -583,7 +1367,7 @@
     },
     {
       "id": "pipeC-motoc",
-      "label": "PIPE C: Motorcycle close-up (SAM\u2192Fill)",
+      "label": "PIPE C: Motorcycle close-up (SAM→Fill)",
       "model": "SAM3 + Fill Pro",
       "prompt": "Step 1: BFL generated clean motorcycle close-up scene (spring, cherry blossoms). Step 2: SAM 3 detected arm region (\"arm in leather jacket sleeve\"). Step 3: Fill Pro inpainted CB2 into SAM-derived forearm mask.",
       "context": "PIPELINE C TEST: 3-step automated pipeline. SAM 3 provides pixel-perfect forearm segmentation (no more crude rectangles). Fill Pro inpaints the product into precisely the right region. The question: does text-only inpainting (no product ref image) produce a recognizable CB2?",
@@ -597,7 +1381,7 @@
     },
     {
       "id": "pipeC-moto",
-      "label": "PIPE C: Motorcycle riding (SAM\u2192Fill)",
+      "label": "PIPE C: Motorcycle riding (SAM→Fill)",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean motorcycle riding scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
       "context": "Motorcycle on winding mountain road. SAM detected the rider arm. Fill Pro attempted to place CB2. Spring = motorcycle season, this is a priority use case.",
@@ -611,10 +1395,10 @@
     },
     {
       "id": "pipeC-snowmo",
-      "label": "PIPE C: Snowmobile POV (SAM\u2192Fill)",
+      "label": "PIPE C: Snowmobile POV (SAM→Fill)",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean snowmobile POV scene + SAM 3 forearm mask + Fill Pro CB2 inpaint",
-      "context": "Snowmobile POV with visible forearm. SAM detected the puffy jacket forearm area. Another key CB2 sport \u2014 gloves + cold weather = perfect use case.",
+      "context": "Snowmobile POV with visible forearm. SAM detected the puffy jacket forearm area. Another key CB2 sport — gloves + cold weather = perfect use case.",
       "comments": [
         {
           "text": "I would give this five out of now I give it two. It's a cool picture. Looks a little bit like a dream like and cartoon like but there's no remote there. It just looks like a Fitbit.",
@@ -625,7 +1409,7 @@
     },
     {
       "id": "pipeC-mtb",
-      "label": "PIPE C: MTB action (SAM\u2192Fill)",
+      "label": "PIPE C: MTB action (SAM→Fill)",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean MTB action scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
       "context": "Full body mountain biker. SAM detected cyclist arm on handlebar. Testing if the 3-step pipeline can solve full-body product placement that all other approaches failed at.",
@@ -642,7 +1426,7 @@
       "label": "R8: MTB 1 of 5 (Pipeline A)",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "MTB rider on singletrack, cycling jersey, product from image 1 on lower forearm, buttons face rider",
-      "context": "Scaling Pipeline A: 5 MTB variations for cherry-picking. Your previous Pipeline A MTB scored 88/100 \u2014 the highest non-skiing score ever. Generating 5 to find a 95+.",
+      "context": "Scaling Pipeline A: 5 MTB variations for cherry-picking. Your previous Pipeline A MTB scored 88/100 — the highest non-skiing score ever. Generating 5 to find a 95+.",
       "comments": [
         {
           "text": "This is it's pretty good. The roof looks nice but doesn't look like it's snug on his arm and still too low on his wrist but yeah I think I'm into the angle and the remote quality but the strap is not actually strapped on his form. Looks like it kind of floating like 60 out of 100.",
@@ -796,10 +1580,10 @@
       "label": "R8: Hiker with gloves 1 of 3 (on-brand)",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Hiker on mountain trail in cold weather, light jacket and hiking gloves, product from image 1 on forearm over sleeve, buttons face wearer, golden hour",
-      "context": "You noted hiking without gloves is less on-brand. Testing hiker WITH gloves in cold weather \u2014 closer to CB2 use case (people wearing gloves who need big buttons).",
+      "context": "You noted hiking without gloves is less on-brand. Testing hiker WITH gloves in cold weather — closer to CB2 use case (people wearing gloves who need big buttons).",
       "comments": [
         {
-          "text": "This is really good except the fact that it's flipped 180\u00b0 again either the viewer of the photo can see the play button but the user needs to see it in the right way so flipped 180\u00b0 but it looks nice and taught on a jacket ar it's placed in the right spot. The shadows are cool again it probably is really good cause it's closest to the model photo, but but yeah, this is improvement.",
+          "text": "This is really good except the fact that it's flipped 180° again either the viewer of the photo can see the play button but the user needs to see it in the right way so flipped 180° but it looks nice and taught on a jacket ar it's placed in the right spot. The shadows are cool again it probably is really good cause it's closest to the model photo, but but yeah, this is improvement.",
           "time": "2026-04-05T20:15:10.392Z",
           "num": 1
         }
@@ -883,7 +1667,7 @@
       "context": "Non-sport use case with product-only ref. Previous festival attempts (R5, R7) had skin artifacts or wrong placement. Does @image syntax fix this?",
       "comments": [
         {
-          "text": "The iconography is interesting. The remote looks way too big and it's not facing the guy like it should be flipped 180\u00b0 but I also don't know why he's at a concert. This is not on brand for us at all so I would probably not use these photos again, but it's also a little further down on his arm.",
+          "text": "The iconography is interesting. The remote looks way too big and it's not facing the guy like it should be flipped 180° but I also don't know why he's at a concert. This is not on brand for us at all so I would probably not use these photos again, but it's also a little further down on his arm.",
           "time": "2026-04-05T19:32:23.880Z",
           "num": 1
         }
@@ -894,7 +1678,7 @@
       "label": "PIPE B: Festival inpaint (mask-based)",
       "model": "flux-pro-fill (inpaint)",
       "prompt": "Step 1: Generated clean festival scene. Step 2: Created forearm mask. Step 3: Inpainted CB2 via fal.ai Fill Pro.",
-      "context": "Pipeline B test: generate scene without product, then inpaint the CB2 into a masked forearm region. The mask was a rough rectangle \u2014 better segmentation would improve placement. Compare with Pipeline A festival which used @image referencing instead.",
+      "context": "Pipeline B test: generate scene without product, then inpaint the CB2 into a masked forearm region. The mask was a rough rectangle — better segmentation would improve placement. Compare with Pipeline A festival which used @image referencing instead.",
       "comments": [
         {
           "text": "This is a nice photo of the person that a concert but there's no remote visible so I give it a zero out of 100",
@@ -908,7 +1692,7 @@
       "label": "PIPE B: Hiker inpaint (mask-based)",
       "model": "flux-pro-fill (inpaint)",
       "prompt": "Step 1: Generated clean hiker scene (from behind, ridge trail). Step 2: Masked right forearm area. Step 3: Inpainted CB2.",
-      "context": "Pipeline B test with hiker scene. The mask was a rough ellipse placed where I estimated the forearm was. Inpainting produces something but mask precision is critical \u2014 better segmentation needed.",
+      "context": "Pipeline B test with hiker scene. The mask was a rough ellipse placed where I estimated the forearm was. Inpainting produces something but mask precision is critical — better segmentation needed.",
       "comments": [
         {
           "text": "This looks like you took a picture of a guy and then you took someone's old shitty television, remote that he made with the first version of AI and copy and paste it in Photoshop a total fail, 0 out of 100. This is worse than fail.",
@@ -992,7 +1776,7 @@
       "label": "R7: Hiker full body A (from behind)",
       "model": "flux2-pro-multiref",
       "prompt": "Full body hiker walking along dramatic mountain ridge trail, lightweight hiking clothes, remote on lower forearm, shot from behind following the hiker, golden hour",
-      "context": "Justin asked repeatedly for \"that full body action shot, that real aspirational action shot.\" Testing full body from behind \u2014 a completely different angle than all previous close-ups.",
+      "context": "Justin asked repeatedly for \"that full body action shot, that real aspirational action shot.\" Testing full body from behind — a completely different angle than all previous close-ups.",
       "comments": [
         {
           "text": "This is bad. I don't see any remote at all. I just see a guy wearing a wristwatch, but it does look like a cool photo of a guy hiking. I'll give you that and it's interesting lighting. Looks a little AI.",
@@ -1090,7 +1874,7 @@
       "label": "R6: Hiker B (symbol fix + trail clothes)",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour",
-      "context": "Same prompt as Hiker A \u2014 different seed for cherry-picking. Generate-and-filter strategy from seed variation test.",
+      "context": "Same prompt as Hiker A — different seed for cherry-picking. Generate-and-filter strategy from seed variation test.",
       "comments": [
         {
           "text": "This is a total fail because the strap is wrong and it looks like the remote is sitting on his arm perpendicularly to where it should be and he looks like really jacked but yeah, this is this is not good. It is oriented incorrectly. It doesn't even look like it's on person but it's interesting how you made it it's just totally wrong.",
@@ -1289,7 +2073,7 @@
       "context": "Step 2: Kontext Pro tried to move product lower. Did it actually change position vs the BASE?",
       "comments": [
         {
-          "text": "Getting better. The symbols are only legible to the viewer of the image but they should be legible to the person wearing it \u2014 flipped 180 degrees.",
+          "text": "Getting better. The symbols are only legible to the viewer of the image but they should be legible to the person wearing it — flipped 180 degrees.",
           "time": "2026-04-05T10:04:00Z",
           "num": 1
         }
@@ -1300,7 +2084,7 @@
       "label": "SEED 1 of 5 (same prompt)",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
-      "context": "Consistency test. 5 identical prompts \u2014 if placement varies wildly, the model is random, not prompt-controllable.",
+      "context": "Consistency test. 5 identical prompts — if placement varies wildly, the model is random, not prompt-controllable.",
       "comments": [
         {
           "text": "Actually isn't that bad. The size looks OK. It's on a bare arm and the symbols are visible to the viewer of the photo, not to the hiker.",
@@ -1331,7 +2115,7 @@
       "context": "Same prompt as Seed 1. Compare placement.",
       "comments": [
         {
-          "text": "Same issue \u2014 looks like our modeling photos where I was wearing my ski jacket, just superimposed over a hiker. Clothing needs to change but lighting is good and remote is accurate and placement is OK.",
+          "text": "Same issue — looks like our modeling photos where I was wearing my ski jacket, just superimposed over a hiker. Clothing needs to change but lighting is good and remote is accurate and placement is OK.",
           "time": "2026-04-05T10:07:00Z",
           "num": 1
         }
@@ -1359,7 +2143,7 @@
       "context": "Same prompt as Seed 1. Compare placement.",
       "comments": [
         {
-          "text": "This is great, I like it. But again ski jacket and a hiker \u2014 not good.",
+          "text": "This is great, I like it. But again ski jacket and a hiker — not good.",
           "time": "2026-04-05T10:09:00Z",
           "num": 1
         }
@@ -1412,7 +2196,7 @@
       "label": "LoRA v4b: Snowboarder",
       "model": "flux-lora-v4b",
       "prompt": "CB2REMOTE on forearm, snowboarder",
-      "context": "v4b test. POV shot with \"CC2\" text \u2014 closest to actual product shape.",
+      "context": "v4b test. POV shot with \"CC2\" text — closest to actual product shape.",
       "comments": [
         {
           "text": "This makes me want to vomit. Really bad, no remote and the person looks not even like a real person or an arm. Total fail.",
@@ -1443,7 +2227,7 @@
       "context": "R4: \"just move to lower forearm.\" Added explicit LOWER forearm + FACING THE WEARER.",
       "comments": [
         {
-          "text": "The lighting and accuracy of the remote is pretty good. The symbols should be facing the wearer, not visible to the viewer \u2014 should be flipped 180 degrees. If I'm being nitpicky, just a little bit further down the forearm closer to the wrist.",
+          "text": "The lighting and accuracy of the remote is pretty good. The symbols should be facing the wearer, not visible to the viewer — should be flipped 180 degrees. If I'm being nitpicky, just a little bit further down the forearm closer to the wrist.",
           "time": "2026-04-05T10:15:00Z",
           "num": 1
         }
@@ -1468,7 +2252,7 @@
       "label": "R5: Snowboarder lower forearm",
       "model": "flux2-pro-multiref",
       "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, snowy peak",
-      "context": "R4 snowboard: \"symbols flipped 180\u00b0.\" Added FACING THE WEARER.",
+      "context": "R4 snowboard: \"symbols flipped 180°.\" Added FACING THE WEARER.",
       "comments": [
         {
           "text": "Pretty cool. I see the remote. The symbols could be a little clearer, it's a little fuzzy, but placement is cool and the guy's got a dope vibe. 80 out of 100.",
@@ -1552,10 +2336,10 @@
       "label": "R4: Snowboarder waist-up",
       "model": "flux2-pro-multiref",
       "prompt": "Waist-up snowboarder, remote on forearm, blue sky",
-      "context": "Symbols were rotated 180\u00b0. Led to R5 \"FACING THE WEARER\" experiment.",
+      "context": "Symbols were rotated 180°. Led to R5 \"FACING THE WEARER\" experiment.",
       "comments": [
         {
-          "text": "Pretty great, except symbols are flipped \u2014 viewer sees the play button instead of the wearer. Should be rotated 180\u00b0. Other than that, product looks awesome.",
+          "text": "Pretty great, except symbols are flipped — viewer sees the play button instead of the wearer. Should be rotated 180°. Other than that, product looks awesome.",
           "time": "2026-04-05T00:03:00Z",
           "num": 1
         }
@@ -1569,7 +2353,7 @@
       "context": "First full-body attempt. Testing if product survives wider framing.",
       "comments": [
         {
-          "text": "Two chubby buttons \u2014 one on left upper arm, one on right lower arm. The one on the right lower arm looks pretty good though.",
+          "text": "Two chubby buttons — one on left upper arm, one on right lower arm. The one on the right lower arm looks pretty good though.",
           "time": "2026-04-05T00:04:00Z",
           "num": 1
         }
@@ -1611,7 +2395,7 @@
       "context": "Full-body: two remotes, symbols too bright.",
       "comments": [
         {
-          "text": "Two remotes \u2014 one upper arm, one lower. Symbols look too bright. That's like 80% there, maybe 70.",
+          "text": "Two remotes — one upper arm, one lower. Symbols look too bright. That's like 80% there, maybe 70.",
           "time": "2026-04-05T00:07:00Z",
           "num": 1
         }
@@ -1639,7 +2423,7 @@
       "context": "Single-ref test via BFL API. Proved 3-ref multiref is much better.",
       "comments": [
         {
-          "text": "Don't like the lighting \u2014 looks fake, too contrasted. Buttons don't look authentic, LEDs in wrong direction. Velcro looks OK but placed way too close to wrist.",
+          "text": "Don't like the lighting — looks fake, too contrasted. Buttons don't look authentic, LEDs in wrong direction. Velcro looks OK but placed way too close to wrist.",
           "time": "2026-04-04T22:04:00Z",
           "num": 1
         }
