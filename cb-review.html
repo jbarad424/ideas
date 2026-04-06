@@ -439,26 +439,70 @@ const SEED_COMMENTS={
   'r5-festival':[{text:"The way that it appears and the guy's skin looks a little strange. Also why is he at a concert venue? The size is probably 90% of what it should be, just a little too small. But generally physically looks pretty nice in terms of accuracy of the remote.",time:'2026-04-05T10:19:00Z',num:1}]
 };
 
-const LS='cb2_review_v3';
+const LS='cb2_review_v5';
+const FEEDBACK_URL='https://jbarad424.github.io/ideas/cb-feedback.json';
 let tab='new',filt=[],ci=0;
+let feedbackLoaded=false;
 
 function D(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch{return {}}}
 function S(d){localStorage.setItem(LS,JSON.stringify(d))}
 
-// Merge seed comments on first load
-function seedOnce(){
-  if(localStorage.getItem('cb2_seeded_v4'))return;
+// Load shared feedback from GitHub Pages JSON + merge with localStorage
+// This makes reviews visible to ALL users (Justin, Jordan, anyone with the link)
+async function loadSharedFeedback(){
+  try{
+    // Always merge from remote — picks up reviews from any user who synced
+    const resp=await fetch(FEEDBACK_URL+'?t='+Date.now()); // cache-bust
+    if(!resp.ok)return;
+    const remote=await resp.json();
+    const remoteImages=remote.images||[];
+    const local=D();
+    let merged=0;
+    for(const img of remoteImages){
+      const id=img.id;
+      const remoteComments=img.comments||[];
+      if(!remoteComments.length)continue;
+      if(!local[id])local[id]={comments:[],label:img.label||''};
+      // Merge: keep all remote comments, add any local-only comments on top
+      // Use timestamp to detect new local comments not yet synced
+      const remoteTimestamps=new Set(remoteComments.map(c=>c.time));
+      const localOnly=(local[id].comments||[]).filter(c=>!remoteTimestamps.has(c.time));
+      // Remote comments are the base, local-only are appended
+      local[id].comments=[...remoteComments,...localOnly];
+      local[id].comments.forEach((c,i)=>c.num=i+1); // renumber
+      local[id].label=img.label||local[id].label;
+      merged++;
+    }
+    // Also seed from SEED_COMMENTS for any images not in remote
+    for(const[id,comments]of Object.entries(SEED_COMMENTS)){
+      if(!local[id]||!local[id].comments.length){
+        local[id]={comments,label:ALL_IMAGES.find(i=>i.id===id)?.label||''};
+        merged++;
+      }
+    }
+    S(local);
+    feedbackLoaded=true;
+    counts();upFilt();render();
+    console.log('Loaded '+merged+' image reviews from shared feedback');
+  }catch(e){
+    console.log('Could not load shared feedback:',e);
+    // Fall back to seed comments
+    seedFromLocal();
+  }
+}
+
+function seedFromLocal(){
+  if(localStorage.getItem('cb2_seeded_v5'))return;
   const d=D();
   for(const[id,comments]of Object.entries(SEED_COMMENTS)){
     if(!d[id])d[id]={comments:[],label:''};
     const img=ALL_IMAGES.find(i=>i.id===id);
     d[id].label=img?img.label:'';
-    d[id].comments=comments;
+    if(!d[id].comments.length)d[id].comments=comments;
   }
   S(d);
-  localStorage.setItem('cb2_seeded_v4','1');
+  localStorage.setItem('cb2_seeded_v5','1');
 }
-seedOnce();
 
 function getC(id){return D()[id]?.comments||[]}
 function isR(img){return getC(img.id).length>0}
@@ -559,10 +603,14 @@ function showToast(m){const t=document.getElementById('toast');t.textContent=m;t
 
 document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);});
 
+// Init: seed from local first (instant), then load shared feedback (async merge)
+seedFromLocal();
 counts();
 if(!ALL_IMAGES.filter(i=>!isR(i)).length&&ALL_IMAGES.some(i=>isR(i)))tab='done';
 upFilt();
 document.querySelectorAll('.tab').forEach((el,i)=>{el.className='tab'+((['new','done','progress'][i]===tab)?' active':'');});
 render();
+// Load shared feedback from GitHub (merges remote reviews into local)
+loadSharedFeedback();
 </script>
 </body></html>
