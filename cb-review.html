@@ -122,16 +122,16 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <div class="exp-result">21 test images generated with 4 different reference photos (Hunter Arm Outside, Motorcycle Close Up, J&Mike Dual, Original Product). In TO REVIEW tab now — comparing orientation accuracy across reference photos.</div>
   </div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Pipeline G: ControlNet + IP-Adapter (fal.ai flux-general)</span><span class="exp-badge test">RESEARCHED</span></div>
-    <div class="exp-desc">Use canny edges from a correctly-oriented CB2 photo as structural control + IP-Adapter for product appearance, in a single API call. Only possible on fal.ai's flux-general endpoint — Replicate has NO native model that combines both.</div>
-    <div class="exp-result"><strong>Status:</strong> Research complete, ready to test. <strong>Risk:</strong> Known conflict (GitHub issue #89) where IP-Adapter overrides ControlNet structure in FLUX. May need lighter "reference_image_url" mode instead of full IP-Adapter. Cost: ~$0.075/image.</div>
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">Pipeline G: ControlNet + IP-Adapter (fal.ai flux-general)</span><span class="exp-badge fail">DEAD — 3 FATAL ISSUES</span></div>
+    <div class="exp-desc">Tested 4 API calls with real images. Three fatal problems: (1) IP-Adapter overrides ControlNet — confirmed with live test, produces grid artifacts and garbled images. (2) flux-general runs FLUX.1 Dev, a generation behind FLUX 2 Pro — worse quality at 2.5x the cost. (3) Canny ControlNet can't solve orientation — it enforces the edge map of whatever you feed it, creating circular dependency.</div>
+    <div class="exp-result"><strong>Tested:</strong> ControlNet-only → ghost overlay. reference_image_url only → generic band, not CB2. Combined → catastrophic artifacts. <strong>Verdict: Eliminated. Not worth further testing.</strong></div>
   </div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Pipeline H: SAM Post-Processing Rotation</span><span class="exp-badge test">DESIGNED</span></div>
-    <div class="exp-desc">For images with wrong orientation: detect CB2 with SAM 3 → pixel-perfect mask → rotate product 180° → composite back with feathered edges → optional inpainting cleanup on seam.</div>
-    <div class="exp-result"><strong>Status:</strong> Full design complete, ready to build. SAM 3 on fal.ai ($0.005/call) for detection. PIL for rotation. EVF-SAM as fallback with built-in mask refinement. Total cost: $0.005-$0.085/corrected image. Lighting inversion probably not noticeable for small product in lifestyle photos.</div>
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Pipeline H: SAM Post-Processing Rotation</span><span class="exp-badge win">VALIDATED — READY TO BUILD</span></div>
+    <div class="exp-desc">For images with wrong orientation: detect CB2 with SAM 3 → pixel-perfect mask → rotate product 180° → composite back with feathered edges. <strong>Live-tested:</strong> SAM 3 successfully detected CB2 on a real generated image with prompt "wearable remote control on forearm".</div>
+    <div class="exp-result"><strong>Test results:</strong> Mask cleanly isolated device body (114×129px, not strap). Center of mass within 1px of center — perfect for rotation. EVF-SAM tested as backup — too broad (captures entire forearm). 2-4px feathering recommended. Cost: $0.005/image (SAM only) or $0.055 with inpaint cleanup. <strong>Next: Build the Python pipeline.</strong></div>
   </div>
 
   <div class="exp-card testing">
@@ -152,7 +152,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="exp-card winner">
     <div class="exp-header"><span class="exp-name">Pipeline A: @image referencing (1 product ref)</span><span class="exp-badge win">PRODUCTION WINNER</span></div>
     <div class="exp-desc">Single product-front photo → fal.ai FLUX.2 Pro edit → "product from image 1" in prompt → generate 10 seeds → cherry-pick best. Broke the ski jacket bleed. Activity-appropriate clothing.</div>
-    <div class="exp-result">Top scores: 98/100 (hiker), 94/100 (hiker gloves), 89/100 (moto coastal). ~30% correct orientation. Strategy: generate many, filter winners. NOW TESTING third-person reference to push orientation above 70%.</div>
+    <div class="exp-result"><strong>122 images reviewed.</strong> Top scores: 98, 94, 92.5, 89. Avg: 53.8/100. 45% score 70+, 30% are complete fails. <strong>#1 blocker: orientation flip</strong> (23% of images). At least 5 images would be 90-100 if just flipped 180°. Best sports: Hiking (avg 68), Skiing (63), Moto (59). Worst: MTB (34), Snowmobile (34).</div>
   </div>
 
   <div class="exp-card winner">
