@@ -121,10 +121,10 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <div class="progress-wrap" id="progressArea">
   <div class="section-label">🔬 Active Research — Orientation Fix</div>
 
-  <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Third-Person Reference Photo Test</span><span class="exp-badge test">TESTING NOW</span></div>
-    <div class="exp-desc">Found "Hunter Arm Outside.jpg" on Drive — a THIRD-PERSON photo of CB2 on a forearm, taken by another person from the outside. Research predicted this would fix the 180° orientation flip by giving the model the correct camera angle to reproduce.</div>
-    <div class="exp-result">21 test images generated with 4 different reference photos (Hunter Arm Outside, Motorcycle Close Up, J&Mike Dual, Original Product). In TO REVIEW tab now — comparing orientation accuracy across reference photos.</div>
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Third-Person Reference Photo Test</span><span class="exp-badge win">PROVEN — Ref C WINS</span></div>
+    <div class="exp-desc">A/B tested 4 reference photos × 5 seeds. Control (product shot): 0% correct orientation, avg ~35. Third-person photos: 33-60% correct, avg 67-87. <strong>Ref C (J&Mike Dual) is the winner</strong> — highest quality (scores up to 100!) and best orientation (40-60%).</div>
+    <div class="exp-result"><strong>Results:</strong> D (Control): 0/5 correct, avg 35 | A (Hunter Arm): 2/6, avg 75 | B (Moto Close): 2/5, avg 67 | <strong>C (J&Mike): 2-3/5, avg 87</strong>. Justin's insight: orientation depends on LEFT vs RIGHT arm (read left-to-right from wearer's POV). <strong>20 NEW images generated with Ref C + arm rules → in TO REVIEW tab now.</strong></div>
   </div>
 
   <div class="exp-card failed">
@@ -157,7 +157,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="exp-card winner">
     <div class="exp-header"><span class="exp-name">Pipeline A: @image referencing (1 product ref)</span><span class="exp-badge win">PRODUCTION WINNER</span></div>
     <div class="exp-desc">Single product-front photo → fal.ai FLUX.2 Pro edit → "product from image 1" in prompt → generate 10 seeds → cherry-pick best. Broke the ski jacket bleed. Activity-appropriate clothing.</div>
-    <div class="exp-result"><strong>122 images reviewed.</strong> Top scores: 98, 94, 92.5, 89. Avg: 53.8/100. 45% score 70+, 30% are complete fails. <strong>#1 blocker: orientation flip</strong> (23% of images). At least 5 images would be 90-100 if just flipped 180°. Best sports: Hiking (avg 68), Skiing (63), Moto (59). Worst: MTB (34), Snowmobile (34).</div>
+    <div class="exp-result"><strong>178 images reviewed.</strong> Top scores: 98, 97, 94, 93. Batch moto coastal: five 88+ scores. Ref C now default reference. <strong>#1 blocker: orientation flip</strong> (23%). Fix path: Ref C (40-60% correct) + SAM rotation post-process (validated). Best sports: Hiking (68), Skiing (63), Moto (59). MTB/Snowmobile still failing.</div>
   </div>
 
   <div class="exp-card winner">
@@ -235,6 +235,27 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <script>
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
 const ALL_IMAGES=[
+  // === REF C GENERATION: J&Mike Dual reference (WINNER) + left/right arm orientation rules ===
+  {id:'refC-moto-s100',url:'https://files.catbox.moe/gngxze.jpg',model:'flux2-pro @image (Ref C)',prompt:'Motorcycle coastal, LEFT forearm, vol-up closest to wrist, waist-up, golden hour',label:'REF C: Moto Coastal 1/5',context:'NEW GENERATION with Ref C (J&Mike Dual) — the A/B test winner (40-60% correct orientation, scores up to 100). LEFT arm + "volume-up closest to wrist" per Justin\'s handedness rule. Seed 100.'},
+  {id:'refC-moto-s101',url:'https://files.catbox.moe/4efklh.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same moto coastal prompt',label:'REF C: Moto Coastal 2/5',context:'Ref C generation, seed 101. Same LEFT arm orientation rule.'},
+  {id:'refC-moto-s102',url:'https://files.catbox.moe/uepfc8.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Moto Coastal 3/5',context:'Ref C generation, seed 102.'},
+  {id:'refC-moto-s103',url:'https://files.catbox.moe/vo8wqn.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Moto Coastal 4/5',context:'Ref C generation, seed 103.'},
+  {id:'refC-moto-s104',url:'https://files.catbox.moe/pgsopt.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Moto Coastal 5/5',context:'Ref C generation, seed 104.'},
+  {id:'refC-hike-s200',url:'https://files.catbox.moe/h5zap1.jpg',model:'flux2-pro @image (Ref C)',prompt:'Hiker golden hour, LEFT forearm, vol-up closest to wrist, waist-up',label:'REF C: Hiker 1/5',context:'Ref C hiking generation. LEFT arm + orientation rule. Seed 200.'},
+  {id:'refC-hike-s201',url:'https://files.catbox.moe/ubk1ak.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same hiking prompt',label:'REF C: Hiker 2/5',context:'Ref C generation, seed 201.'},
+  {id:'refC-hike-s202',url:'https://files.catbox.moe/r9yabm.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Hiker 3/5',context:'Ref C generation, seed 202.'},
+  {id:'refC-hike-s203',url:'https://files.catbox.moe/orx15l.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Hiker 4/5',context:'Ref C generation, seed 203.'},
+  {id:'refC-hike-s204',url:'https://files.catbox.moe/3712gm.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Hiker 5/5',context:'Ref C generation, seed 204.'},
+  {id:'refC-ski-s300',url:'https://files.catbox.moe/5zwa9j.jpg',model:'flux2-pro @image (Ref C)',prompt:'Skier snowy slope, bright jacket, LEFT forearm over sleeve, vol-up closest to wrist',label:'REF C: Skier 1/5',context:'Ref C skiing generation. LEFT arm over jacket sleeve. Seed 300.'},
+  {id:'refC-ski-s301',url:'https://files.catbox.moe/4z3rh6.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same skiing prompt',label:'REF C: Skier 2/5',context:'Ref C generation, seed 301.'},
+  {id:'refC-ski-s302',url:'https://files.catbox.moe/l5pjxq.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Skier 3/5',context:'Ref C generation, seed 302.'},
+  {id:'refC-ski-s303',url:'https://files.catbox.moe/ox24sk.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Skier 4/5',context:'Ref C generation, seed 303.'},
+  {id:'refC-ski-s304',url:'https://files.catbox.moe/vjlidz.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Skier 5/5',context:'Ref C generation, seed 304.'},
+  {id:'refC-snow-s400',url:'https://files.catbox.moe/xlrpkl.jpg',model:'flux2-pro @image (Ref C)',prompt:'Snowboarder powder slope, RIGHT forearm over sleeve, vol-down closest to wrist',label:'REF C: Snowboard 1/5',context:'Ref C snowboard generation. RIGHT arm (testing Justin\'s handedness insight — vol-down toward wrist on right arm). Seed 400.'},
+  {id:'refC-snow-s401',url:'https://files.catbox.moe/d89ma4.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same snowboard prompt',label:'REF C: Snowboard 2/5',context:'Ref C generation, seed 401. RIGHT arm test.'},
+  {id:'refC-snow-s402',url:'https://files.catbox.moe/a8bm2b.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Snowboard 3/5',context:'Ref C generation, seed 402.'},
+  {id:'refC-snow-s403',url:'https://files.catbox.moe/k4k8m8.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Snowboard 4/5',context:'Ref C generation, seed 403.'},
+  {id:'refC-snow-s404',url:'https://files.catbox.moe/8e71gp.jpg',model:'flux2-pro @image (Ref C)',prompt:'Same',label:'REF C: Snowboard 5/5',context:'Ref C generation, seed 404.'},
   // === REF TEST: Hunter Arm Outside (third-person arm photo from Drive) ===
   {id:'ref-A1',url:'https://files.catbox.moe/gasx8y.jpg',model:'flux2-pro @image',prompt:'Motorcycle coastal + exact layout spec',label:'REF TEST A: Hunter Arm Outside 1/6',context:'REFERENCE PHOTO TEST: Using "Hunter Arm Outside.jpg" found on Google Drive as the @image reference instead of the standing product shot. This is a THIRD-PERSON photo of the CB2 on someone\'s forearm, photographed by another person from the outside. Research predicted this would fix the 180° orientation flip.'},
   {id:'ref-A2',url:'https://files.catbox.moe/2ao08m.jpg',model:'flux2-pro @image',prompt:'Same coastal prompt',label:'REF TEST A: Hunter Arm Outside 2/6',context:'Same third-person arm reference (Hunter Arm Outside.jpg), different seed.'},
