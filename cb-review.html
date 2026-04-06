@@ -128,7 +128,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <div class="grid-return" id="gridReturn" style="display:none"><button onclick="backToGrid()">← Back to Grid</button></div>
 
 <div id="reviewArea">
-  <div class="img-wrap"><img id="mainImg" src="" alt=""><div class="meta" id="meta"></div></div>
+  <div class="img-wrap" id="mediaWrap"><img id="mainImg" src="" alt=""><div class="meta" id="meta"></div></div>
   <div class="context-box" id="ctxBox" style="display:none"><div class="context-inner" id="ctxInner"></div></div>
   <div class="comment-trail" id="trail"></div>
   <div class="feedback-area">
@@ -757,12 +757,11 @@ function render(){
   document.getElementById('emptyState').style.display='none';
   const img=filt[ci];
   const isVid=mediaType==='video';
-  const wrap=document.getElementById('mainImg').parentElement;
+  const wrap=document.getElementById('mediaWrap');
   if(isVid){
-    wrap.innerHTML='<video id="mainVid" controls playsinline style="width:100%;max-height:500px;display:block;background:#000"><source src="'+img.url+'" type="video/mp4"></video><div class="meta" id="meta"></div>';
+    wrap.innerHTML='<video controls playsinline style="width:100%;max-height:500px;display:block;background:#000"><source src="'+img.url+'" type="video/mp4"></video><div class="meta" id="meta"></div>';
   }else{
-    if(!document.getElementById('mainImg'))wrap.innerHTML='<img id="mainImg" src="" alt=""><div class="meta" id="meta"></div>';
-    document.getElementById('mainImg').src=img.url;
+    wrap.innerHTML='<img id="mainImg" src="'+img.url+'" alt=""><div class="meta" id="meta"></div>';
   }
   document.getElementById('counter').innerHTML=(ci+1)+' / '+filt.length+' — '+img.label;
   document.getElementById('meta').innerHTML='<span class="tag model">'+img.model+'</span><span class="tag">'+img.prompt.slice(0,70)+'...</span>';
