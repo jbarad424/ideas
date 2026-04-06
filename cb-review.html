@@ -87,6 +87,10 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .grid-return{width:100%;max-width:600px;margin:.3rem auto 0;padding:0 .5rem}
 .grid-return button{background:#1a1030;border:1px solid #a855f7;color:#a855f7;padding:.4rem .8rem;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;width:100%;text-align:left}
 .grid-return button:hover{background:#2d1a4e}
+.media-toggle{display:flex;gap:.3rem;justify-content:center;margin:.3rem 0}
+.media-toggle button{background:#111;border:1px solid #333;color:#888;padding:.25rem .6rem;border-radius:6px;font-size:.65rem;font-weight:600;cursor:pointer}
+.media-toggle button.active{border-color:#a855f7;color:#a855f7;background:#1a1030}
+.vid-wrap video{width:100%;max-height:500px;border-radius:8px;background:#000}
 .grid-card .grid-badge{position:absolute;top:4px;right:4px;font-size:.5rem;padding:.1rem .3rem;border-radius:3px;font-weight:700}
 .grid-badge.great{background:#22c55e;color:#000}
 .grid-badge.good{background:#f59e0b;color:#000}
@@ -105,6 +109,11 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="tab" onclick="setTab('done')">REVIEWED (<span id="cntDone">0</span>)</div>
   <div class="tab" onclick="setTab('progress')">PROGRESS</div>
   <div class="tab" onclick="setTab('gallery')">GALLERY</div>
+</div>
+
+<div class="media-toggle" id="mediaToggle" style="display:none">
+  <button id="btnPhotos" class="active" onclick="setMedia('photo')">Photos</button>
+  <button id="btnVideos" onclick="setMedia('video')">Videos (<span id="cntVid">0</span>)</button>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -235,6 +244,15 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <script>
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
+// === VIDEO ENTRIES (shown when mediaType toggle is 'video') ===
+const ALL_VIDEOS=[
+  {id:'vid-kling-fal',url:'https://files.catbox.moe/kdvkgf.mp4',model:'Kling v2.1 (fal.ai)',prompt:'Subtle camera movement, wind in jacket, engine vibration, device stays still',label:'VIDEO: Kling v2.1 (fal.ai)',context:'IMAGE-TO-VIDEO TEST: Animated a motorcycle still using Kling v2.1 on fal.ai. 960x960, 5s, ~$0.30. Key question: does the CB2 stay consistent across frames or morph?'},
+  {id:'vid-veo2',url:'https://files.catbox.moe/m39e5c.mp4',model:'Veo 2 (fal.ai)',prompt:'Same prompt',label:'VIDEO: Veo 2 (Google)',context:'Veo 2 test. 1280x720, 5s, ~$2.50 (most expensive). Google claims best photorealism. Compare CB2 consistency against Kling.'},
+  {id:'vid-minimax',url:'https://files.catbox.moe/we3ggf.mp4',model:'MiniMax/Hailuo (fal.ai)',prompt:'Same prompt',label:'VIDEO: MiniMax/Hailuo',context:'MiniMax test. 960x960, 5s, ~$0.25 (cheapest). Does budget video quality hold up for product detail?'},
+  {id:'vid-hailuo-rep',url:'https://files.catbox.moe/vplv0d.mp4',model:'Hailuo 2.3 (Replicate)',prompt:'Same prompt',label:'VIDEO: Hailuo 2.3 (Replicate)',context:'Hailuo 2.3 on Replicate. 1366x768, 5.9s. Same model as MiniMax but different platform — compare quality.'},
+  {id:'vid-kling-rep',url:'https://files.catbox.moe/z56lx3.mp4',model:'Kling v2.1 (Replicate)',prompt:'Same prompt',label:'VIDEO: Kling v2.1 (Replicate)',context:'Kling v2.1 on Replicate. Same model as first video but different platform. Compare to fal.ai version.'},
+];
+
 const ALL_IMAGES=[
   // === TWO-PASS TEST: Generate CB2 first, add helmet/gloves second ===
   {id:'twopass-flux-moto',url:'https://files.catbox.moe/op5aju.jpg',model:'two-pass (FLUX edit)',prompt:'Base: refC-moto-s101 (90/100) → FLUX edit added helmet',label:'TWO-PASS: Moto + Helmet (FLUX)',context:'TWO-PASS TEST: Took the 90/100 motorcycle image and ran it through FLUX 2 Pro edit asking ONLY to add a helmet. CB2 should be untouched. Does the helmet look real AND does the CB2 survive?'},
@@ -699,8 +717,10 @@ function submitComment(){
 }
 
 function counts(){
-  document.getElementById('cntNew').textContent=ALL_IMAGES.filter(i=>!isR(i)).length;
-  document.getElementById('cntDone').textContent=ALL_IMAGES.filter(i=>isR(i)).length;
+  const items=getItems();
+  document.getElementById('cntNew').textContent=items.filter(i=>!isRV(i)).length;
+  document.getElementById('cntDone').textContent=items.filter(i=>isRV(i)).length;
+  document.getElementById('cntVid').textContent=ALL_VIDEOS.length;
 }
 
 function setTab(t){
@@ -709,7 +729,9 @@ function setTab(t){
     el.className='tab'+((['new','done','progress','gallery'][i]===t)?' active':'');
   });
   // Show/hide sections
-  document.getElementById('gridToggle').style.display=(t==='done')?'block':'none';
+  document.getElementById('mediaToggle').style.display=(t==='new'||t==='done')?'none':'none';
+  if(t==='new'||t==='done')document.getElementById('mediaToggle').style.display='flex';
+  document.getElementById('gridToggle').style.display=(t==='done'&&mediaType==='photo')?'block':'none';
   document.getElementById('gridArea').style.display='none';
   document.getElementById('reviewArea').style.display=(t==='new'||t==='done')?'block':'none';
   document.getElementById('progressArea').style.display=(t==='progress')?'block':'none';
@@ -720,7 +742,7 @@ function setTab(t){
   else{document.getElementById('counter').textContent='Experiment Tracker';}
 }
 
-function upFilt(){filt=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i))}
+function upFilt(){const items=getItems();filt=tab==='new'?items.filter(i=>!isRV(i)):items.filter(i=>isRV(i))}
 
 function render(){
   // Show/hide grid return bar
@@ -734,7 +756,14 @@ function render(){
   document.getElementById('reviewArea').style.display='block';
   document.getElementById('emptyState').style.display='none';
   const img=filt[ci];
-  document.getElementById('mainImg').src=img.url;
+  const isVid=mediaType==='video';
+  const wrap=document.getElementById('mainImg').parentElement;
+  if(isVid){
+    wrap.innerHTML='<video id="mainVid" controls playsinline style="width:100%;max-height:500px;display:block;background:#000"><source src="'+img.url+'" type="video/mp4"></video><div class="meta" id="meta"></div>';
+  }else{
+    if(!document.getElementById('mainImg'))wrap.innerHTML='<img id="mainImg" src="" alt=""><div class="meta" id="meta"></div>';
+    document.getElementById('mainImg').src=img.url;
+  }
   document.getElementById('counter').innerHTML=(ci+1)+' / '+filt.length+' — '+img.label;
   document.getElementById('meta').innerHTML='<span class="tag model">'+img.model+'</span><span class="tag">'+img.prompt.slice(0,70)+'...</span>';
   const cb=document.getElementById('ctxBox'),ci2=document.getElementById('ctxInner');
@@ -818,6 +847,17 @@ document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;
 
 // === GALLERY TAB ===
 let galFilterMode='all';
+let mediaType='photo'; // 'photo' or 'video'
+
+function setMedia(m){
+  mediaType=m;
+  document.getElementById('btnPhotos').className=m==='photo'?'active':'';
+  document.getElementById('btnVideos').className=m==='video'?'active':'';
+  upFilt();renderView();
+}
+
+function getItems(){return mediaType==='video'?ALL_VIDEOS:ALL_IMAGES;}
+function isRV(item){return getC(item.id).length>0;}
 
 function galScore(id){
   const cs=getC(id);if(!cs.length)return 50;
