@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T18:11:16.021Z",
+  "syncedAt": "2026-04-06T18:30:12.995Z",
   "images": [
     {
       "id": "twopass-flux-moto",
@@ -3223,6 +3223,67 @@
         {
           "text": "Really cool, remote looks accurate. Strange square patch on back of arm. Remote itself is great, can see Chubby Buttons logo, but still looks a little strange.",
           "time": "2026-04-04T22:03:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-kling-fal",
+      "label": "VIDEO: Kling v2.1 (fal.ai)",
+      "model": "Kling v2.1 (fal.ai)",
+      "prompt": "Subtle camera movement, wind in jacket, engine vibration, device stays still",
+      "context": "IMAGE-TO-VIDEO TEST: Animated a motorcycle still using Kling v2.1 on fal.ai. 960x960, 5s, ~$0.30. Key question: does the CB2 stay consistent across frames or morph?",
+      "comments": [
+        {
+          "text": "This is strange the remote looks like it's changing shape with every frame looks like kind of an old version of video. Jhené does not look nearly as elegant as it could.",
+          "time": "2026-04-06T18:28:51.474Z",
+          "num": 1
+        },
+        {
+          "text": "yeah I give this a 10 out of 100",
+          "time": "2026-04-06T18:30:09.509Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "vid-veo2",
+      "label": "VIDEO: Veo 2 (Google)",
+      "model": "Veo 2 (fal.ai)",
+      "prompt": "Same prompt",
+      "context": "Veo 2 test. 1280x720, 5s, ~$2.50 (most expensive). Google claims best photorealism. Compare CB2 consistency against Kling.",
+      "comments": [
+        {
+          "text": "The remote looks like it's being rendered with every frame. It's a little clearer than the other one, but it's still pretty bad. I give it a 10 out of 100.",
+          "time": "2026-04-06T18:29:12.958Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-minimax",
+      "label": "VIDEO: MiniMax/Hailuo",
+      "model": "MiniMax/Hailuo (fal.ai)",
+      "prompt": "Same prompt",
+      "context": "MiniMax test. 960x960, 5s, ~$0.25 (cheapest). Does budget video quality hold up for product detail?",
+      "comments": [
+        {
+          "text": "I don't know what's going on with the strap. I don't know why it's above his elbow. The symbol looks of the symbols look really strange and it looks like it's warping an eight out of 100.",
+          "time": "2026-04-06T18:29:33.044Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-hailuo-rep",
+      "label": "VIDEO: Hailuo 2.3 (Replicate)",
+      "model": "Hailuo 2.3 (Replicate)",
+      "prompt": "Same prompt",
+      "context": "Hailuo 2.3 on Replicate. 1366x768, 5.9s. Same model as MiniMax but different platform — compare quality.",
+      "comments": [
+        {
+          "text": "there's no chubby buttons here at all zero out of 100",
+          "time": "2026-04-06T18:29:47.675Z",
           "num": 1
         }
       ]
