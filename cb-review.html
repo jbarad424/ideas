@@ -756,6 +756,8 @@ async function loadSharedFeedback(){
     S(local);
     feedbackLoaded=true;
     counts();upFilt();renderView();
+    // Also refresh video tab in case video comments were loaded from another device
+    if(tab==='videos'){vidUpFilt();vidRender();}
     console.log('Loaded '+merged+' image reviews from shared feedback');
   }catch(e){
     console.log('Could not load shared feedback:',e);
@@ -886,18 +888,44 @@ function go(dir){
   renderView();
 }
 
-function syncFeedback(){
+async function syncFeedback(){
   const d=D();
   const allItems=[...ALL_IMAGES,...ALL_VIDEOS];
-  const payload={type:'feedback_sync',syncedAt:new Date().toISOString(),images:allItems.map(i=>({id:i.id,label:i.label,model:i.model,prompt:i.prompt,context:i.context||null,comments:d[i.id]?.comments||[]})).filter(i=>i.comments.length>0)};
-  // Deploy as cb-feedback.json to GitHub via Sync scenario
+  // MERGE with remote first so we never overwrite another device's data
+  try{
+    const remote=await fetch(FEEDBACK_URL+'?t='+Date.now()).then(r=>r.ok?r.json():null);
+    if(remote&&remote.images){
+      // Build map of local comments by ID
+      const localMap={};
+      for(const item of allItems){
+        if(d[item.id]?.comments?.length)localMap[item.id]={...item,comments:d[item.id].comments};
+      }
+      // Merge: keep remote entries that this device doesn't know about
+      for(const img of remote.images){
+        if(!localMap[img.id]&&img.comments?.length){
+          localMap[img.id]=img; // preserve other device's reviews
+        }else if(localMap[img.id]){
+          // Both have comments — merge by timestamp, local wins on conflicts
+          const localTimes=new Set(localMap[img.id].comments.map(c=>c.time));
+          const remoteOnly=img.comments.filter(c=>!localTimes.has(c.time));
+          if(remoteOnly.length)localMap[img.id].comments=[...localMap[img.id].comments,...remoteOnly];
+        }
+      }
+      var merged=Object.values(localMap);
+    }else{
+      var merged=allItems.map(i=>({id:i.id,label:i.label,model:i.model,prompt:i.prompt,context:i.context||null,comments:d[i.id]?.comments||[]})).filter(i=>i.comments.length>0);
+    }
+  }catch(e){
+    var merged=allItems.map(i=>({id:i.id,label:i.label,model:i.model,prompt:i.prompt,context:i.context||null,comments:d[i.id]?.comments||[]})).filter(i=>i.comments.length>0);
+  }
+  const payload={type:'feedback_sync',syncedAt:new Date().toISOString(),images:merged};
   fetch(SYNC_URL,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       jsonContent:JSON.stringify(payload,null,2),
       filename:'cb-feedback.json',
-      commitMessage:'Sync feedback from review page ('+payload.images.length+' images, '+new Date().toLocaleString()+')'
+      commitMessage:'Sync feedback from review page ('+payload.images.length+' items, '+new Date().toLocaleString()+')'
     })
   }).then(r=>r.json()).then(d=>{
     if(d.success){
