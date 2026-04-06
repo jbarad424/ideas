@@ -29,7 +29,7 @@
       "context": "Same prompt, different seed. Cherry-pick.",
       "comments": [
         {
-          "text": "This is flipped perpendicularly. I swear if this was just like turned 90° where that plus volume up is facing down towards the wrist this would be a real slam dunk.",
+          "text": "This is flipped perpendicularly. I swear if this was just like turned 90\u00b0 where that plus volume up is facing down towards the wrist this would be a real slam dunk.",
           "time": "2026-04-06T02:03:39.375Z",
           "num": 1
         }
@@ -71,7 +71,7 @@
       "context": "Same prompt, different seed.",
       "comments": [
         {
-          "text": "This is interesting but it's flipped. It should be flipped 180° and should be a little tighter on the wrist but but it looks pretty good. The logo looks good. The lighting looks interesting. Yeah I was just getting somewhere give it like a like an 87.5 out of 100.",
+          "text": "This is interesting but it's flipped. It should be flipped 180\u00b0 and should be a little tighter on the wrist but but it looks pretty good. The logo looks good. The lighting looks interesting. Yeah I was just getting somewhere give it like a like an 87.5 out of 100.",
           "time": "2026-04-06T02:05:22.772Z",
           "num": 1
         }
@@ -81,7 +81,7 @@
       "id": "kontext-flip",
       "label": "FLIP FIX: Kontext rotation of D2 Coastal 3",
       "model": "kontext-pro (post-process)",
-      "prompt": "Took D2 Coastal 3 (~95/100) and asked Kontext: \"Rotate button symbols 180° so minus is closest to wrist. Keep everything else identical.\"",
+      "prompt": "Took D2 Coastal 3 (~95/100) and asked Kontext: \"Rotate button symbols 180\u00b0 so minus is closest to wrist. Keep everything else identical.\"",
       "context": "Approach 2: Post-processing fix. Take the best image (D2 Coastal 3 that you said \"would be 100 if flipped\") and use Kontext Pro to rotate just the symbols. Did Kontext preserve the scene while fixing orientation?",
       "comments": [
         {
@@ -141,7 +141,7 @@
       "context": "Same prompt, different seed.",
       "comments": [
         {
-          "text": "Needs to be flipped 180° but it's in exactly the right spot of the arm just feels a little bit too large like it's kind of enlarged a bit more than but maybe that could also be camera angle play but but yeah yeah I mean I mean it's pretty. It's pretty good if it was just flipped around it would be it was just turned 180° probably be like 100 but I give this like like a 92.5. No I give it like an 87.5 because the remote looks a little bit larger than it should be.",
+          "text": "Needs to be flipped 180\u00b0 but it's in exactly the right spot of the arm just feels a little bit too large like it's kind of enlarged a bit more than but maybe that could also be camera angle play but but yeah yeah I mean I mean it's pretty. It's pretty good if it was just flipped around it would be it was just turned 180\u00b0 probably be like 100 but I give this like like a 92.5. No I give it like an 87.5 because the remote looks a little bit larger than it should be.",
           "time": "2026-04-06T02:08:31.946Z",
           "num": 1
         }
@@ -165,7 +165,7 @@
       "id": "pipeF-moto",
       "label": "PIPE F: Motorcycle spring (Kontext scene-swap)",
       "model": "kontext-pro (scene-swap)",
-      "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to motorcycle riding, cherry blossom road, gripping handlebars.\"",
+      "prompt": "On-arm close-up ref \u2192 Kontext Pro: \"Keep this exact product on forearm. Change background to motorcycle riding, cherry blossom road, gripping handlebars.\"",
       "context": "PIPELINE F: Completely different approach. Instead of generating a scene and adding product, we START with the real product photo on the arm and tell Kontext to CHANGE THE SCENE around it. Product preservation is Kontext's strength.",
       "comments": [
         {
@@ -179,8 +179,8 @@
       "id": "pipeF-mtb",
       "label": "PIPE F: MTB trail (Kontext scene-swap)",
       "model": "kontext-pro (scene-swap)",
-      "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to MTB trail, gripping bike handlebars, pine forest.\"",
-      "context": "Same approach: real product photo → Kontext changes scene to mountain biking. Does the product survive AND does the scene change convincingly?",
+      "prompt": "On-arm close-up ref \u2192 Kontext Pro: \"Keep this exact product on forearm. Change background to MTB trail, gripping bike handlebars, pine forest.\"",
+      "context": "Same approach: real product photo \u2192 Kontext changes scene to mountain biking. Does the product survive AND does the scene change convincingly?",
       "comments": [
         {
           "text": "same story here.. it's nice, but it looks just like the modeling photos. i'm worried this wont necessarily scale for different angles. but it def kept the fidelity of the remote. it just looks like a fancy photoshop job over a different background.",
@@ -193,7 +193,7 @@
       "id": "pipeF-snowmo",
       "label": "PIPE F: Snowmobile (Kontext scene-swap)",
       "model": "kontext-pro (scene-swap)",
-      "prompt": "Horizontal arm ref → Kontext Pro: \"Keep product on forearm. Change to snowmobile rider, snowy trail, winter gear.\"",
+      "prompt": "Horizontal arm ref \u2192 Kontext Pro: \"Keep product on forearm. Change to snowmobile rider, snowy trail, winter gear.\"",
       "context": "Using the horizontal arm reference. Snowmobile is a key CB2 sport. Does Kontext preserve the product while creating a full-body snowmobile scene?",
       "comments": [
         {
@@ -207,7 +207,7 @@
       "id": "pipeF-moto-product",
       "label": "PIPE F: Motorcycle (product as input)",
       "model": "kontext-pro (scene-swap)",
-      "prompt": "Product front photo → Kontext Pro: \"Show this product strapped to motorcycle riders forearm, gripping handlebars, cherry blossoms, all 5 buttons visible.\"",
+      "prompt": "Product front photo \u2192 Kontext Pro: \"Show this product strapped to motorcycle riders forearm, gripping handlebars, cherry blossoms, all 5 buttons visible.\"",
       "context": "Variation: using the standalone product photo as input instead of the on-arm photo. Different starting point, same scene-swap concept.",
       "comments": [
         {
@@ -292,7 +292,7 @@
       "label": "PIPE D2: Moto overlook 1 of 3",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Motorcycle rider at scenic mountain overlook, product on lower forearm, mountain vista, spring golden hour",
-      "context": "Motorcycle overlook template — rider stopped at scenic point. Helmet off, relaxed pose. 3 seeds for cherry-picking.",
+      "context": "Motorcycle overlook template \u2014 rider stopped at scenic point. Helmet off, relaxed pose. 3 seeds for cherry-picking.",
       "comments": [
         {
           "text": "ayyy! not bad! just a little closer to the wrist, and also more so that the motorcyclist can actually see the remote, but the symbols are in the correct orientation! 85/100",
@@ -390,7 +390,7 @@
       "label": "PIPE E2: ref=0.65 str=0.75 (baseline)",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.65, strength=0.75",
-      "context": "The first combo that showed promise — scene partially preserved with something on the wrist.",
+      "context": "The first combo that showed promise \u2014 scene partially preserved with something on the wrist.",
       "comments": [
         {
           "text": "a nightmare. terrible",
@@ -491,7 +491,7 @@
       "context": "Motorcycle on mountain road. Product on forearm area.",
       "comments": [
         {
-          "text": "This is flipped horizontally. The remote looks good but it's perpendicular the way it should be. It's not placed in the right direction but the remote itself looks accurate. I'll give you like 50 points for having the remote accurate but 50 out of 100 because it's not placed correctly if you just rotate at 90° it would be pretty damn good.",
+          "text": "This is flipped horizontally. The remote looks good but it's perpendicular the way it should be. It's not placed in the right direction but the remote itself looks accurate. I'll give you like 50 points for having the remote accurate but 50 out of 100 because it's not placed correctly if you just rotate at 90\u00b0 it would be pretty damn good.",
           "time": "2026-04-05T21:02:26.264Z",
           "num": 1
         }
@@ -544,7 +544,7 @@
       "label": "PIPE E: Moto ref=0.8 (product took over)",
       "model": "flux-general (mask+ref)",
       "prompt": "fill_image mask + reference_image_url at strength 0.8. Scene: motorcycle close-up.",
-      "context": "PIPELINE E: The holy grail — mask-based inpainting WITH product reference image. Uses fal-ai/flux-general with fill_image (mask) + reference_image_url (product). At ref_strength=0.8, the reference dominates and produces a product render instead of a scene. Product fidelity is AMAZING though.",
+      "context": "PIPELINE E: The holy grail \u2014 mask-based inpainting WITH product reference image. Uses fal-ai/flux-general with fill_image (mask) + reference_image_url (product). At ref_strength=0.8, the reference dominates and produces a product render instead of a scene. Product fidelity is AMAZING though.",
       "comments": [
         {
           "text": "This just looks like a red redo of one of our shots from the photo box with none of the symbols there I don't know what this is meant to do, but it's it's pretty bad but thief plastic looks OK just none of the buttons are accurate",
@@ -583,7 +583,7 @@
     },
     {
       "id": "pipeC-motoc",
-      "label": "PIPE C: Motorcycle close-up (SAM→Fill)",
+      "label": "PIPE C: Motorcycle close-up (SAM\u2192Fill)",
       "model": "SAM3 + Fill Pro",
       "prompt": "Step 1: BFL generated clean motorcycle close-up scene (spring, cherry blossoms). Step 2: SAM 3 detected arm region (\"arm in leather jacket sleeve\"). Step 3: Fill Pro inpainted CB2 into SAM-derived forearm mask.",
       "context": "PIPELINE C TEST: 3-step automated pipeline. SAM 3 provides pixel-perfect forearm segmentation (no more crude rectangles). Fill Pro inpaints the product into precisely the right region. The question: does text-only inpainting (no product ref image) produce a recognizable CB2?",
@@ -597,7 +597,7 @@
     },
     {
       "id": "pipeC-moto",
-      "label": "PIPE C: Motorcycle riding (SAM→Fill)",
+      "label": "PIPE C: Motorcycle riding (SAM\u2192Fill)",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean motorcycle riding scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
       "context": "Motorcycle on winding mountain road. SAM detected the rider arm. Fill Pro attempted to place CB2. Spring = motorcycle season, this is a priority use case.",
@@ -611,10 +611,10 @@
     },
     {
       "id": "pipeC-snowmo",
-      "label": "PIPE C: Snowmobile POV (SAM→Fill)",
+      "label": "PIPE C: Snowmobile POV (SAM\u2192Fill)",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean snowmobile POV scene + SAM 3 forearm mask + Fill Pro CB2 inpaint",
-      "context": "Snowmobile POV with visible forearm. SAM detected the puffy jacket forearm area. Another key CB2 sport — gloves + cold weather = perfect use case.",
+      "context": "Snowmobile POV with visible forearm. SAM detected the puffy jacket forearm area. Another key CB2 sport \u2014 gloves + cold weather = perfect use case.",
       "comments": [
         {
           "text": "I would give this five out of now I give it two. It's a cool picture. Looks a little bit like a dream like and cartoon like but there's no remote there. It just looks like a Fitbit.",
@@ -625,7 +625,7 @@
     },
     {
       "id": "pipeC-mtb",
-      "label": "PIPE C: MTB action (SAM→Fill)",
+      "label": "PIPE C: MTB action (SAM\u2192Fill)",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean MTB action scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
       "context": "Full body mountain biker. SAM detected cyclist arm on handlebar. Testing if the 3-step pipeline can solve full-body product placement that all other approaches failed at.",
@@ -642,7 +642,7 @@
       "label": "R8: MTB 1 of 5 (Pipeline A)",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "MTB rider on singletrack, cycling jersey, product from image 1 on lower forearm, buttons face rider",
-      "context": "Scaling Pipeline A: 5 MTB variations for cherry-picking. Your previous Pipeline A MTB scored 88/100 — the highest non-skiing score ever. Generating 5 to find a 95+.",
+      "context": "Scaling Pipeline A: 5 MTB variations for cherry-picking. Your previous Pipeline A MTB scored 88/100 \u2014 the highest non-skiing score ever. Generating 5 to find a 95+.",
       "comments": [
         {
           "text": "This is it's pretty good. The roof looks nice but doesn't look like it's snug on his arm and still too low on his wrist but yeah I think I'm into the angle and the remote quality but the strap is not actually strapped on his form. Looks like it kind of floating like 60 out of 100.",
@@ -796,10 +796,10 @@
       "label": "R8: Hiker with gloves 1 of 3 (on-brand)",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Hiker on mountain trail in cold weather, light jacket and hiking gloves, product from image 1 on forearm over sleeve, buttons face wearer, golden hour",
-      "context": "You noted hiking without gloves is less on-brand. Testing hiker WITH gloves in cold weather — closer to CB2 use case (people wearing gloves who need big buttons).",
+      "context": "You noted hiking without gloves is less on-brand. Testing hiker WITH gloves in cold weather \u2014 closer to CB2 use case (people wearing gloves who need big buttons).",
       "comments": [
         {
-          "text": "This is really good except the fact that it's flipped 180° again either the viewer of the photo can see the play button but the user needs to see it in the right way so flipped 180° but it looks nice and taught on a jacket ar it's placed in the right spot. The shadows are cool again it probably is really good cause it's closest to the model photo, but but yeah, this is improvement.",
+          "text": "This is really good except the fact that it's flipped 180\u00b0 again either the viewer of the photo can see the play button but the user needs to see it in the right way so flipped 180\u00b0 but it looks nice and taught on a jacket ar it's placed in the right spot. The shadows are cool again it probably is really good cause it's closest to the model photo, but but yeah, this is improvement.",
           "time": "2026-04-05T20:15:10.392Z",
           "num": 1
         }
@@ -883,7 +883,7 @@
       "context": "Non-sport use case with product-only ref. Previous festival attempts (R5, R7) had skin artifacts or wrong placement. Does @image syntax fix this?",
       "comments": [
         {
-          "text": "The iconography is interesting. The remote looks way too big and it's not facing the guy like it should be flipped 180° but I also don't know why he's at a concert. This is not on brand for us at all so I would probably not use these photos again, but it's also a little further down on his arm.",
+          "text": "The iconography is interesting. The remote looks way too big and it's not facing the guy like it should be flipped 180\u00b0 but I also don't know why he's at a concert. This is not on brand for us at all so I would probably not use these photos again, but it's also a little further down on his arm.",
           "time": "2026-04-05T19:32:23.880Z",
           "num": 1
         }
@@ -894,7 +894,7 @@
       "label": "PIPE B: Festival inpaint (mask-based)",
       "model": "flux-pro-fill (inpaint)",
       "prompt": "Step 1: Generated clean festival scene. Step 2: Created forearm mask. Step 3: Inpainted CB2 via fal.ai Fill Pro.",
-      "context": "Pipeline B test: generate scene without product, then inpaint the CB2 into a masked forearm region. The mask was a rough rectangle — better segmentation would improve placement. Compare with Pipeline A festival which used @image referencing instead.",
+      "context": "Pipeline B test: generate scene without product, then inpaint the CB2 into a masked forearm region. The mask was a rough rectangle \u2014 better segmentation would improve placement. Compare with Pipeline A festival which used @image referencing instead.",
       "comments": [
         {
           "text": "This is a nice photo of the person that a concert but there's no remote visible so I give it a zero out of 100",
@@ -908,10 +908,10 @@
       "label": "PIPE B: Hiker inpaint (mask-based)",
       "model": "flux-pro-fill (inpaint)",
       "prompt": "Step 1: Generated clean hiker scene (from behind, ridge trail). Step 2: Masked right forearm area. Step 3: Inpainted CB2.",
-      "context": "Pipeline B test with hiker scene. The mask was a rough ellipse placed where I estimated the forearm was. Inpainting produces something but mask precision is critical — better segmentation needed.",
+      "context": "Pipeline B test with hiker scene. The mask was a rough ellipse placed where I estimated the forearm was. Inpainting produces something but mask precision is critical \u2014 better segmentation needed.",
       "comments": [
         {
-          "text": "This looks like you took a picture of a guy and then you took someone's old shitty television, remote that he made with the first version of AI and copy and paste it in Photoshop a -100 out of 100. This is worse than fail.",
+          "text": "This looks like you took a picture of a guy and then you took someone's old shitty television, remote that he made with the first version of AI and copy and paste it in Photoshop a total fail, 0 out of 100. This is worse than fail.",
           "time": "2026-04-05T19:33:11.730Z",
           "num": 1
         }
@@ -992,7 +992,7 @@
       "label": "R7: Hiker full body A (from behind)",
       "model": "flux2-pro-multiref",
       "prompt": "Full body hiker walking along dramatic mountain ridge trail, lightweight hiking clothes, remote on lower forearm, shot from behind following the hiker, golden hour",
-      "context": "Justin asked repeatedly for \"that full body action shot, that real aspirational action shot.\" Testing full body from behind — a completely different angle than all previous close-ups.",
+      "context": "Justin asked repeatedly for \"that full body action shot, that real aspirational action shot.\" Testing full body from behind \u2014 a completely different angle than all previous close-ups.",
       "comments": [
         {
           "text": "This is bad. I don't see any remote at all. I just see a guy wearing a wristwatch, but it does look like a cool photo of a guy hiking. I'll give you that and it's interesting lighting. Looks a little AI.",
@@ -1090,7 +1090,7 @@
       "label": "R6: Hiker B (symbol fix + trail clothes)",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour",
-      "context": "Same prompt as Hiker A — different seed for cherry-picking. Generate-and-filter strategy from seed variation test.",
+      "context": "Same prompt as Hiker A \u2014 different seed for cherry-picking. Generate-and-filter strategy from seed variation test.",
       "comments": [
         {
           "text": "This is a total fail because the strap is wrong and it looks like the remote is sitting on his arm perpendicularly to where it should be and he looks like really jacked but yeah, this is this is not good. It is oriented incorrectly. It doesn't even look like it's on person but it's interesting how you made it it's just totally wrong.",
@@ -1289,7 +1289,7 @@
       "context": "Step 2: Kontext Pro tried to move product lower. Did it actually change position vs the BASE?",
       "comments": [
         {
-          "text": "Getting better. The symbols are only legible to the viewer of the image but they should be legible to the person wearing it — flipped 180 degrees.",
+          "text": "Getting better. The symbols are only legible to the viewer of the image but they should be legible to the person wearing it \u2014 flipped 180 degrees.",
           "time": "2026-04-05T10:04:00Z",
           "num": 1
         }
@@ -1300,7 +1300,7 @@
       "label": "SEED 1 of 5 (same prompt)",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
-      "context": "Consistency test. 5 identical prompts — if placement varies wildly, the model is random, not prompt-controllable.",
+      "context": "Consistency test. 5 identical prompts \u2014 if placement varies wildly, the model is random, not prompt-controllable.",
       "comments": [
         {
           "text": "Actually isn't that bad. The size looks OK. It's on a bare arm and the symbols are visible to the viewer of the photo, not to the hiker.",
@@ -1331,7 +1331,7 @@
       "context": "Same prompt as Seed 1. Compare placement.",
       "comments": [
         {
-          "text": "Same issue — looks like our modeling photos where I was wearing my ski jacket, just superimposed over a hiker. Clothing needs to change but lighting is good and remote is accurate and placement is OK.",
+          "text": "Same issue \u2014 looks like our modeling photos where I was wearing my ski jacket, just superimposed over a hiker. Clothing needs to change but lighting is good and remote is accurate and placement is OK.",
           "time": "2026-04-05T10:07:00Z",
           "num": 1
         }
@@ -1359,7 +1359,7 @@
       "context": "Same prompt as Seed 1. Compare placement.",
       "comments": [
         {
-          "text": "This is great, I like it. But again ski jacket and a hiker — not good.",
+          "text": "This is great, I like it. But again ski jacket and a hiker \u2014 not good.",
           "time": "2026-04-05T10:09:00Z",
           "num": 1
         }
@@ -1412,7 +1412,7 @@
       "label": "LoRA v4b: Snowboarder",
       "model": "flux-lora-v4b",
       "prompt": "CB2REMOTE on forearm, snowboarder",
-      "context": "v4b test. POV shot with \"CC2\" text — closest to actual product shape.",
+      "context": "v4b test. POV shot with \"CC2\" text \u2014 closest to actual product shape.",
       "comments": [
         {
           "text": "This makes me want to vomit. Really bad, no remote and the person looks not even like a real person or an arm. Total fail.",
@@ -1443,7 +1443,7 @@
       "context": "R4: \"just move to lower forearm.\" Added explicit LOWER forearm + FACING THE WEARER.",
       "comments": [
         {
-          "text": "The lighting and accuracy of the remote is pretty good. The symbols should be facing the wearer, not visible to the viewer — should be flipped 180 degrees. If I'm being nitpicky, just a little bit further down the forearm closer to the wrist.",
+          "text": "The lighting and accuracy of the remote is pretty good. The symbols should be facing the wearer, not visible to the viewer \u2014 should be flipped 180 degrees. If I'm being nitpicky, just a little bit further down the forearm closer to the wrist.",
           "time": "2026-04-05T10:15:00Z",
           "num": 1
         }
@@ -1468,7 +1468,7 @@
       "label": "R5: Snowboarder lower forearm",
       "model": "flux2-pro-multiref",
       "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, snowy peak",
-      "context": "R4 snowboard: \"symbols flipped 180°.\" Added FACING THE WEARER.",
+      "context": "R4 snowboard: \"symbols flipped 180\u00b0.\" Added FACING THE WEARER.",
       "comments": [
         {
           "text": "Pretty cool. I see the remote. The symbols could be a little clearer, it's a little fuzzy, but placement is cool and the guy's got a dope vibe. 80 out of 100.",
@@ -1552,10 +1552,10 @@
       "label": "R4: Snowboarder waist-up",
       "model": "flux2-pro-multiref",
       "prompt": "Waist-up snowboarder, remote on forearm, blue sky",
-      "context": "Symbols were rotated 180°. Led to R5 \"FACING THE WEARER\" experiment.",
+      "context": "Symbols were rotated 180\u00b0. Led to R5 \"FACING THE WEARER\" experiment.",
       "comments": [
         {
-          "text": "Pretty great, except symbols are flipped — viewer sees the play button instead of the wearer. Should be rotated 180°. Other than that, product looks awesome.",
+          "text": "Pretty great, except symbols are flipped \u2014 viewer sees the play button instead of the wearer. Should be rotated 180\u00b0. Other than that, product looks awesome.",
           "time": "2026-04-05T00:03:00Z",
           "num": 1
         }
@@ -1569,7 +1569,7 @@
       "context": "First full-body attempt. Testing if product survives wider framing.",
       "comments": [
         {
-          "text": "Two chubby buttons — one on left upper arm, one on right lower arm. The one on the right lower arm looks pretty good though.",
+          "text": "Two chubby buttons \u2014 one on left upper arm, one on right lower arm. The one on the right lower arm looks pretty good though.",
           "time": "2026-04-05T00:04:00Z",
           "num": 1
         }
@@ -1611,7 +1611,7 @@
       "context": "Full-body: two remotes, symbols too bright.",
       "comments": [
         {
-          "text": "Two remotes — one upper arm, one lower. Symbols look too bright. That's like 80% there, maybe 70.",
+          "text": "Two remotes \u2014 one upper arm, one lower. Symbols look too bright. That's like 80% there, maybe 70.",
           "time": "2026-04-05T00:07:00Z",
           "num": 1
         }
@@ -1639,7 +1639,7 @@
       "context": "Single-ref test via BFL API. Proved 3-ref multiref is much better.",
       "comments": [
         {
-          "text": "Don't like the lighting — looks fake, too contrasted. Buttons don't look authentic, LEDs in wrong direction. Velcro looks OK but placed way too close to wrist.",
+          "text": "Don't like the lighting \u2014 looks fake, too contrasted. Buttons don't look authentic, LEDs in wrong direction. Velcro looks OK but placed way too close to wrist.",
           "time": "2026-04-04T22:04:00Z",
           "num": 1
         }
