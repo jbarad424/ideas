@@ -261,11 +261,19 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
 // === VIDEO ENTRIES (shown when mediaType toggle is 'video') ===
 const ALL_VIDEOS=[
-  {id:'vid-kling-fal',url:'https://files.catbox.moe/kdvkgf.mp4',model:'Kling v2.1 (fal.ai)',prompt:'Subtle camera movement, wind in jacket, engine vibration, device stays still',label:'VIDEO: Kling v2.1 (fal.ai)',context:'IMAGE-TO-VIDEO TEST: Animated a motorcycle still using Kling v2.1 on fal.ai. 960x960, 5s, ~$0.30. Key question: does the CB2 stay consistent across frames or morph?'},
-  {id:'vid-veo2',url:'https://files.catbox.moe/m39e5c.mp4',model:'Veo 2 (fal.ai)',prompt:'Same prompt',label:'VIDEO: Veo 2 (Google)',context:'Veo 2 test. 1280x720, 5s, ~$2.50 (most expensive). Google claims best photorealism. Compare CB2 consistency against Kling.'},
-  {id:'vid-minimax',url:'https://files.catbox.moe/we3ggf.mp4',model:'MiniMax/Hailuo (fal.ai)',prompt:'Same prompt',label:'VIDEO: MiniMax/Hailuo',context:'MiniMax test. 960x960, 5s, ~$0.25 (cheapest). Does budget video quality hold up for product detail?'},
-  {id:'vid-hailuo-rep',url:'https://files.catbox.moe/vplv0d.mp4',model:'Hailuo 2.3 (Replicate)',prompt:'Same prompt',label:'VIDEO: Hailuo 2.3 (Replicate)',context:'Hailuo 2.3 on Replicate. 1366x768, 5.9s. Same model as MiniMax but different platform — compare quality.'},
-  {id:'vid-kling-rep',url:'https://files.catbox.moe/z56lx3.mp4',model:'Kling v2.1 (Replicate)',prompt:'Same prompt',label:'VIDEO: Kling v2.1 (Replicate)',context:'Kling v2.1 on Replicate. Same model as first video but different platform. Compare to fal.ai version.'},
+  // === ROUND 2: Top-tier models on best stills (Runway Gen-4, Gen-4.5, Veo 3.1) ===
+  {id:'vid-gen4t-moto',url:'https://files.catbox.moe/d3ugv3.mp4',model:'Runway Gen-4 Turbo',prompt:'Subtle cinematic camera movement, device on forearm stays still',label:'VIDEO: Gen-4 Turbo — Moto',context:'RUNWAY GEN-4 TURBO: From the 90/100 motorcycle coastal still. 720x1280, 5s. Fastest model (~30s gen). Does Runway preserve the CB2 better than Kling/Veo?'},
+  {id:'vid-gen4t-snow',url:'https://files.catbox.moe/rzxknn.mp4',model:'Runway Gen-4 Turbo',prompt:'Same prompt',label:'VIDEO: Gen-4 Turbo — Snowboard',context:'Gen-4 Turbo from the 100/100 snowboard still. Compare CB2 consistency against the motorcycle version.'},
+  {id:'vid-gen45-moto',url:'https://files.catbox.moe/bkeese.mp4',model:'Runway Gen-4.5',prompt:'Same prompt',label:'VIDEO: Gen-4.5 — Moto',context:'RUNWAY GEN-4.5: Higher quality than Gen-4 Turbo, double the bitrate. 720x1280, 5s, ~3-4 min gen time. The premium Runway model.'},
+  {id:'vid-gen45-snow',url:'https://files.catbox.moe/y9z0qm.mp4',model:'Runway Gen-4.5',prompt:'Same prompt',label:'VIDEO: Gen-4.5 — Snowboard',context:'Gen-4.5 from the 100/100 snowboard. Higher bitrate than Turbo version.'},
+  {id:'vid-veo31-moto',url:'https://files.catbox.moe/xs9o5n.mp4',model:'Veo 3.1 (Google)',prompt:'Same prompt',label:'VIDEO: Veo 3.1 — Moto',context:'GOOGLE VEO 3.1: Latest Google model. 720x1280, 8s (longer than others). Highest bitrate. Best photorealism according to research.'},
+  {id:'vid-veo31-snow',url:'https://files.catbox.moe/ajo9l3.mp4',model:'Veo 3.1 (Google)',prompt:'Same prompt',label:'VIDEO: Veo 3.1 — Snowboard',context:'Veo 3.1 from the 100/100 snowboard. 8 seconds. Compare against Runway versions.'},
+  // === ROUND 1: Budget models on MTB still (baseline comparison) ===
+  {id:'vid-kling-fal',url:'https://files.catbox.moe/kdvkgf.mp4',model:'Kling v2.1 (fal.ai)',prompt:'Subtle camera movement, wind in jacket',label:'VIDEO R1: Kling v2.1 (fal)',context:'ROUND 1 BASELINE: Budget Kling on a lower-quality MTB source image. 960x960, 5s, ~$0.30.'},
+  {id:'vid-veo2',url:'https://files.catbox.moe/m39e5c.mp4',model:'Veo 2 (fal.ai)',prompt:'Same prompt',label:'VIDEO R1: Veo 2',context:'Round 1: Veo 2 on MTB source. 1280x720, 5s, ~$2.50.'},
+  {id:'vid-minimax',url:'https://files.catbox.moe/we3ggf.mp4',model:'MiniMax/Hailuo (fal.ai)',prompt:'Same prompt',label:'VIDEO R1: MiniMax',context:'Round 1: MiniMax on MTB source. 960x960, 5s, ~$0.25.'},
+  {id:'vid-hailuo-rep',url:'https://files.catbox.moe/vplv0d.mp4',model:'Hailuo 2.3 (Replicate)',prompt:'Same prompt',label:'VIDEO R1: Hailuo 2.3',context:'Round 1: Hailuo 2.3 on MTB source. 1366x768, 5.9s.'},
+  {id:'vid-kling-rep',url:'https://files.catbox.moe/z56lx3.mp4',model:'Kling v2.1 (Replicate)',prompt:'Same prompt',label:'VIDEO R1: Kling v2.1 (Rep)',context:'Round 1: Kling v2.1 on Replicate. 960x960, 5s.'},
 ];
 
 const ALL_IMAGES=[
