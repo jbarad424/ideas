@@ -134,10 +134,17 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <div class="exp-result"><strong>Status:</strong> Full design complete, ready to build. SAM 3 on fal.ai ($0.005/call) for detection. PIL for rotation. EVF-SAM as fallback with built-in mask refinement. Total cost: $0.005-$0.085/corrected image. Lighting inversion probably not noticeable for small product in lifestyle photos.</div>
   </div>
 
-  <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">LoRA Re-Investigation</span><span class="exp-badge test">PENDING</span></div>
-    <div class="exp-desc">Previous LoRA tests scored 0/100, but was this a concept failure or implementation failure? Need to examine: training config (trigger token, learning rate, steps), training images (variety, quality), and inference settings. A working LoRA + ControlNet would be the ultimate fix.</div>
-    <div class="exp-result"><strong>Status:</strong> Waiting for Justin to share LoRA training location (Replicate training run, configs). The xlabs-ai/flux-dev-controlnet model on Replicate supports LoRA + ControlNet — if LoRA works, this solves orientation AND product fidelity in one call.</div>
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">LoRA Forensic Analysis — IMPLEMENTATION FAILURE</span><span class="exp-badge test">FORENSICS COMPLETE</span></div>
+    <div class="exp-desc">Examined all 8 Replicate training runs, downloaded all training ZIPs, read all captions, mapped all 40 inference predictions to versions. <strong>Verdict: Every version had critical data problems. The concept was never given a fair test.</strong></div>
+    <div class="exp-result">
+      <strong>V1:</strong> 13 composite images + autocaption — CB2 is tiny/invisible, captions don't describe it<br>
+      <strong>V2:</strong> 28 images, great manual captions, but still includes V1 composites<br>
+      <strong>V3/V3a:</strong> 37 images, best-tested version (18 predictions) — most promising but data still mixed<br>
+      <strong>V4:</strong> ⚠️ ZIP file is actually an HTML page (GitHub 404). <em>Trained on ZERO images.</em> 9 tests ran against an untrained model.<br>
+      <strong>V4b:</strong> 50 Jordan photos, excellent captions, but ALL wearer's-POV product shots — no lifestyle context<br>
+      <strong>→ V5 Recommended:</strong> Use 30-50 Tahoe/Moto third-person lifestyle photos + a few product close-ups + V2-style captions + rank 32/2500 steps
+    </div>
   </div>
 
   <div class="section-label">Production Pipeline</div>
@@ -200,10 +207,10 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <div class="exp-result">Kontext can't rotate symbols without breaking LED/logo. Good for one-off fixes, not production.</div>
   </div>
 
-  <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">LoRA v4/v4b</span><span class="exp-badge test">UNDER REVIEW</span></div>
-    <div class="exp-desc">v4: Tron-only (38 photos) → product didn't appear. v4b: all colorways (50 photos, Jordan's) → 0/100 on all 5 tests. But was the training config correct? Trigger token used? Resolution matched?</div>
-    <div class="exp-result">Justin not convinced this is a concept failure. Re-investigation pending — need to examine training run details before declaring dead.</div>
+  <div class="exp-card">
+    <div class="exp-header"><span class="exp-name">LoRA v1-v4b (All Versions)</span><span class="exp-badge test">DATA PROBLEMS</span></div>
+    <div class="exp-desc">8 training runs examined forensically. V1: autocaptioned composites. V2: good captions, bad images. V3a: most-tested (18 runs), still mixed data. V4: <strong>trained on an HTML page, not images</strong>. V4b: all wearer's-POV product shots, zero lifestyle.</div>
+    <div class="exp-result"><strong>Not a concept failure.</strong> LoRA approach deserves V5 retry with Tahoe/Moto third-person lifestyle photos, proper captions, and verified ZIP. If LoRA works → combine with ControlNet on xlabs-ai/flux-dev-controlnet for orientation + fidelity in one call.</div>
   </div>
 
   <div class="exp-card failed">
@@ -467,6 +474,7 @@ const FEEDBACK_URL='https://jbarad424.github.io/ideas/cb-feedback.json';
 let tab='new',filt=[],ci=0;
 let feedbackLoaded=false;
 let viewMode='list'; // 'list' or 'grid'
+let navHistory=[]; // stack of image IDs for back button
 
 // Quality keywords for sorting reviewed images (best first)
 const GREAT_WORDS=['98','95','94','100','slam dunk','perfect','nailed','uncanny','damn good','damn close','great job','excellent','breakthrough'];
@@ -616,7 +624,7 @@ function counts(){
 }
 
 function setTab(t){
-  tab=t;ci=0;
+  tab=t;ci=0;navHistory=[];
   document.querySelectorAll('.tab').forEach((el,i)=>{
     el.className='tab'+((['new','done','progress'][i]===t)?' active':'');
   });
@@ -653,15 +661,43 @@ function render(){
   }).join('');
   document.getElementById('fb').value='';
   document.getElementById('fb').placeholder=cs.length?'Add another comment...':'Tap mic and say what you see...';
-  document.getElementById('prevBtn').disabled=ci===0;
+  document.getElementById('prevBtn').disabled=ci===0&&navHistory.length===0;
   document.getElementById('nextBtn').disabled=ci===filt.length-1;
   window.scrollTo(0,0);
 }
 
 function go(dir){
-  const pid=filt[ci]?.id;upFilt();
-  if(dir===1){const s=filt.findIndex(i=>i.id===pid);ci=s===-1?Math.min(ci,filt.length-1):Math.min(s+1,filt.length-1);}
-  else ci=Math.max(0,ci-1);
+  const pid=filt[ci]?.id;
+  if(dir===1){
+    // Going forward: push current image to history for back navigation
+    if(pid)navHistory.push(pid);
+    upFilt();
+    const s=filt.findIndex(i=>i.id===pid);
+    ci=s===-1?Math.min(ci,filt.length-1):Math.min(s+1,filt.length-1);
+  }else{
+    // Going back: pop from history and navigate to that image
+    if(navHistory.length>0){
+      const prevId=navHistory.pop();
+      // Look in ALL images (reviewed or not) since history may span tabs
+      const allForTab=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i));
+      // First try current tab's filter
+      let idx=allForTab.findIndex(i=>i.id===prevId);
+      if(idx!==-1){
+        filt=allForTab;ci=idx;
+      }else{
+        // Image was reviewed since we saw it — check reviewed tab
+        const reviewed=ALL_IMAGES.filter(i=>isR(i));
+        idx=reviewed.findIndex(i=>i.id===prevId);
+        if(idx!==-1){filt=reviewed;ci=idx;tab='done';
+          document.querySelectorAll('.tab').forEach((el,j)=>{el.className='tab'+((['new','done','progress'][j]===tab)?' active':'');});
+          document.getElementById('gridToggle').style.display='block';
+          counts();
+        }else{upFilt();ci=Math.max(0,ci-1);}
+      }
+    }else{
+      upFilt();ci=Math.max(0,ci-1);
+    }
+  }
   renderView();
 }
 
