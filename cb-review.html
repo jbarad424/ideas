@@ -114,163 +114,102 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <!-- PROGRESS TAB -->
 <div class="progress-wrap" id="progressArea">
-  <div class="section-label">Current Best Approach</div>
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">flux2-pro-multiref (3 refs, fal.ai)</span><span class="exp-badge win">WINNER</span></div>
-    <div class="exp-desc">3 reference photos → fal.ai FLUX.2 Pro edit endpoint. Simple prompts outperform verbose ones.</div>
-    <div class="exp-result">Justin: "remote is perfect", "nailed it", "almost uncanny" — ~90% product accuracy on close-up/waist-up framing.</div>
-  </div>
+  <div class="section-label">🔬 Active Research — Orientation Fix</div>
 
-  <div class="section-label">Active Experiments — Pipeline Tests</div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Pipeline A: @image referencing (1 product ref only)</span><span class="exp-badge win">BREAKTHROUGH</span></div>
-    <div class="exp-desc">Instead of 3 refs (product + 2 on-arm ski jacket shots), use ONLY the product-front photo + @image syntax: "Place the product from image 1 on the forearm." The model pulls the scene from its own knowledge, not from the refs.</div>
-    <div class="exp-result">BROKE THE SKI JACKET BLEED. Hiker wears a t-shirt. MTB wears cycling jersey. Snowboarder has colorful gear. Festival person at a concert. Full body shots with variety. Product visible on festival image with 5 buttons. This is the architecture change we needed.</div>
-  </div>
-
-  <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Pipeline B/C/E: All inpainting approaches</span><span class="exp-badge fail">ALL FAILED</span></div>
-    <div class="exp-desc">Tested 3 inpainting variants: crude masks (B), SAM 3 precise masks + text-only Fill Pro (C), SAM 3 masks + reference_image_url guided inpainting (E). None produced a recognizable CB2.</div>
-    <div class="exp-result">Pipeline B: -100/100 ("worse than fail"). Pipeline C: 0-5/100 (text-only can't generate CB2). Pipeline E: ref=0.8 destroys scene, ref=0.3 no product visible. The Goldilocks zone doesn't exist for this approach. Inpainting is dead for CB2.</div>
+  <div class="exp-card testing">
+    <div class="exp-header"><span class="exp-name">Third-Person Reference Photo Test</span><span class="exp-badge test">TESTING NOW</span></div>
+    <div class="exp-desc">Found "Hunter Arm Outside.jpg" on Drive — a THIRD-PERSON photo of CB2 on a forearm, taken by another person from the outside. Research predicted this would fix the 180° orientation flip by giving the model the correct camera angle to reproduce.</div>
+    <div class="exp-result">21 test images generated with 4 different reference photos (Hunter Arm Outside, Motorcycle Close Up, J&Mike Dual, Original Product). In TO REVIEW tab now — comparing orientation accuracy across reference photos.</div>
   </div>
 
   <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">Pipeline D: @image for motorcycle (spring priority)</span><span class="exp-badge win">89/100</span></div>
-    <div class="exp-desc">6 motorcycle images via Pipeline A @image. Motorcycle coastal scored 89/100 — "if it was flush against the jacket, pretty damn good."</div>
-    <div class="exp-result">Motorcycle coastal is the motorcycle template. Needs generate-and-filter to find a seed where product sits flush. This is the spring marketing priority.</div>
+    <div class="exp-header"><span class="exp-name">Pipeline G: ControlNet + IP-Adapter (fal.ai flux-general)</span><span class="exp-badge test">RESEARCHED</span></div>
+    <div class="exp-desc">Use canny edges from a correctly-oriented CB2 photo as structural control + IP-Adapter for product appearance, in a single API call. Only possible on fal.ai's flux-general endpoint — Replicate has NO native model that combines both.</div>
+    <div class="exp-result"><strong>Status:</strong> Research complete, ready to test. <strong>Risk:</strong> Known conflict (GitHub issue #89) where IP-Adapter overrides ControlNet structure in FLUX. May need lighter "reference_image_url" mode instead of full IP-Adapter. Cost: ~$0.075/image.</div>
   </div>
 
   <div class="exp-card testing">
-    <div class="exp-header"><span class="exp-name">R7: Action shots via standard multiref</span><span class="exp-badge fail">FAILED</span></div>
-    <div class="exp-desc">11 images: mid-turn skiing, mid-air snowboard, full-body hiker from behind, MTB panning, festival, trail runner.</div>
-    <div class="exp-result">Skiing close-ups still excellent. But action/full-body/new-sports: product disappears (1-10/100 on MTB, runner, festival). Confirms multiref with 3 on-arm refs can't do variety — led to Pipeline A discovery.</div>
-  </div>
-
-  <div class="section-label">Completed — R6 Results</div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">R6: Symbol orientation fix</span><span class="exp-badge win">PARTIALLY WORKED</span></div>
-    <div class="exp-desc">"Symbols face the wearer, appear upside-down to camera" language added to all prompts. Activity-specific clothing to reduce ski jacket bleed.</div>
-    <div class="exp-result">Symbol fix worked on MTB A ("orientation is right") and skier shots. But inconsistent — MTB B still had wrong orientation. Clothing fix helped (hikers no longer in ski jackets). Skiers: "excellent", "great work". Snowboard B/C: "good placement, accurate remote." Key insight: the model CAN do it right but doesn't every time → generate-and-filter strategy confirmed.</div>
-  </div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Reference photo bleed identified as #1 problem</span><span class="exp-badge win">ROOT CAUSE</span></div>
-    <div class="exp-desc">Justin: "The perfect ones look a lot like the modeling photo", "looks like my model photos superimposed over other photos", "I'm hoping this is not a one trick pony."</div>
-    <div class="exp-result">The 3 reference images dominate generation output. Every image looks like a remix of the same ski jacket modeling photo. R7 tests action poses and different angles to force variety. May also need to reduce reference images (use 1 product-only ref instead of 3).</div>
-  </div>
-
-  <div class="section-label">Previous Experiments</div>
-
-  <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Editorial prompting ("Canon 5D, f/2.8")</span><span class="exp-badge base">NICE LIGHTING</span></div>
-    <div class="exp-desc">Camera-specific language for better lighting.</div>
-    <div class="exp-result">Justin: "Lighting is cool, symbols too bright, placed too low." Not transformative over simple prompts.</div>
-  </div>
-
-  <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Anatomical placement ("3in above wrist")</span><span class="exp-badge fail">OVERCORRECTED</span></div>
-    <div class="exp-desc">Ultra-specific body language for placement control.</div>
-    <div class="exp-result">Justin: "Way too small, arm looks humongous." Product accurate but scale was off.</div>
-  </div>
-
-  <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Negative prompts ("NOT upper arm")</span><span class="exp-badge fail">OVERCORRECTED</span></div>
-    <div class="exp-desc">Exclusion language to prevent wrong placement.</div>
-    <div class="exp-result">Justin: "Way too chunky, much bigger than it should be, armband looks inaccurate." Negative language overcorrected.</div>
-  </div>
-
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Seed variation → Generate-and-filter</span><span class="exp-badge win">KEY FINDING</span></div>
-    <div class="exp-desc">Same prompt, 5 seeds: scores ranged from 70/100 to 98/100.</div>
-    <div class="exp-result">Seed 4: "98 out of 100" — our best ever. Proves the model CAN nail it, we just need to generate multiple and cherry-pick winners. This is now the strategy.</div>
+    <div class="exp-header"><span class="exp-name">Pipeline H: SAM Post-Processing Rotation</span><span class="exp-badge test">DESIGNED</span></div>
+    <div class="exp-desc">For images with wrong orientation: detect CB2 with SAM 3 → pixel-perfect mask → rotate product 180° → composite back with feathered edges → optional inpainting cleanup on seam.</div>
+    <div class="exp-result"><strong>Status:</strong> Full design complete, ready to build. SAM 3 on fal.ai ($0.005/call) for detection. PIL for rotation. EVF-SAM as fallback with built-in mask refinement. Total cost: $0.005-$0.085/corrected image. Lighting inversion probably not noticeable for small product in lifestyle photos.</div>
   </div>
 
   <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Two-pass (multiref → Kontext)</span><span class="exp-badge base">MARGINAL</span></div>
-    <div class="exp-desc">Kontext Pro tried to reposition product after multiref generation.</div>
-    <div class="exp-result">Justin: BASE was "really nice" but Kontext refinement "didn't help much — symbols still flipped." Kontext doesn't meaningfully reposition.</div>
+    <div class="exp-header"><span class="exp-name">LoRA Re-Investigation</span><span class="exp-badge test">PENDING</span></div>
+    <div class="exp-desc">Previous LoRA tests scored 0/100, but was this a concept failure or implementation failure? Need to examine: training config (trigger token, learning rate, steps), training images (variety, quality), and inference settings. A working LoRA + ControlNet would be the ultimate fix.</div>
+    <div class="exp-result"><strong>Status:</strong> Waiting for Justin to share LoRA training location (Replicate training run, configs). The xlabs-ai/flux-dev-controlnet model on Replicate supports LoRA + ControlNet — if LoRA works, this solves orientation AND product fidelity in one call.</div>
+  </div>
+
+  <div class="section-label">Production Pipeline</div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">Pipeline A: @image referencing (1 product ref)</span><span class="exp-badge win">PRODUCTION WINNER</span></div>
+    <div class="exp-desc">Single product-front photo → fal.ai FLUX.2 Pro edit → "product from image 1" in prompt → generate 10 seeds → cherry-pick best. Broke the ski jacket bleed. Activity-appropriate clothing.</div>
+    <div class="exp-result">Top scores: 98/100 (hiker), 94/100 (hiker gloves), 89/100 (moto coastal). ~30% correct orientation. Strategy: generate many, filter winners. NOW TESTING third-person reference to push orientation above 70%.</div>
   </div>
 
   <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Ski jacket bleed identified</span><span class="exp-badge win">ROOT CAUSE FOUND</span></div>
-    <div class="exp-desc">On-arm reference photos show someone in a dark ski jacket. Model copies that clothing into ALL scenes.</div>
-    <div class="exp-result">Justin: "looks like our modeling photos just superimposed over a hiker." Fix: specify activity-appropriate clothing in prompt. Being tested in R6.</div>
+    <div class="exp-header"><span class="exp-name">4 Working Templates + 2 New</span><span class="exp-badge win">6 SPORTS</span></div>
+    <div class="exp-desc">Motorcycle Coastal (89), Motorcycle Overlook (87.5), Hiker Gloves (94), Skiing (95-98), MTB (88), Snowboard (80). Spring motorcycle is priority. 35 new batch images + 21 ref test images in review queue.</div>
+    <div class="exp-result">Snowmobile still needs work (20/100). 56 images awaiting Justin's review.</div>
+  </div>
+
+  <div class="exp-card winner">
+    <div class="exp-header"><span class="exp-name">290 Reference Photos Cataloged on Drive</span><span class="exp-badge win">ASSET LIBRARY</span></div>
+    <div class="exp-desc">Full Drive crawl found 290 images across 14 folders. Key finds: Hunter Arm Outside (third-person!), Motorcycle Close Up, Mike Moto Photoshoot (45 untapped), Tahoe Keepers (42 curated). 15 subfolders still unexplored.</div>
+    <div class="exp-result">Mike Moto + Tahoe Keepers currently being visually explored by research agent.</div>
   </div>
 
   <div class="section-label">Proven Findings</div>
 
   <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Waist-up framing = sweet spot</span><span class="exp-badge win">CONFIRMED</span></div>
-    <div class="exp-desc">Full body loses product (too small, duplicates). Extreme close-up loses scene context. Waist-up/3/4 body is the right balance.</div>
-    <div class="exp-result">R3 full-body: "horrible, floating, superimposed." R4 waist-up: "product looks awesome", "pretty damn good."</div>
+    <div class="exp-header"><span class="exp-name">Generate-and-Filter Strategy</span><span class="exp-badge win">CONFIRMED</span></div>
+    <div class="exp-desc">Same prompt produces 5/100 to 98/100 depending on seed. Generate 10-20, cherry-pick winners.</div>
+    <div class="exp-result">Seed 4: "98 out of 100." Orientation correct ~30% of time. Strategy works, just need to push that 30% higher.</div>
   </div>
 
   <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">3 refs >>> 1 ref</span><span class="exp-badge win">CONFIRMED</span></div>
-    <div class="exp-desc">Multiref with 3 reference images dramatically outperforms single-reference approaches (Kontext, flux-2-pro-preview).</div>
-    <div class="exp-result">R1 multiref: "nailed it." R2 single-ref: "lighting fake, LEDs wrong direction, too close to wrist."</div>
+    <div class="exp-header"><span class="exp-name">Waist-up framing + Simple prompts</span><span class="exp-badge win">CONFIRMED</span></div>
+    <div class="exp-desc">Full body = product too small. Close-up = no scene. Waist-up is the sweet spot. Simple prompts beat verbose ones.</div>
+    <div class="exp-result">Best images all use waist-up/3/4 body framing with short, direct prompts.</div>
   </div>
 
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Simple prompts > verbose prompts</span><span class="exp-badge win">CONFIRMED</span></div>
-    <div class="exp-desc">"This exact black remote with 5 buttons on forearm" beats long detailed descriptions of every product feature.</div>
-    <div class="exp-result">The best-rated R1 images used the simplest prompts. Over-specification seems to confuse the model.</div>
-  </div>
-
-  <div class="section-label">Failed / Abandoned</div>
+  <div class="section-label">Failed Pipelines (Properly Tested)</div>
 
   <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">FLUX Fill Pro (inpainting)</span><span class="exp-badge fail">FAILED</span></div>
-    <div class="exp-desc">Pixel-preserving inpainting: compose product onto scene, then blend edges. Theory was sound (from research PDF).</div>
-    <div class="exp-result">API returned "Forbidden" on our key. One crude test produced product absorbed into ski pole. Approach abandoned.</div>
+    <div class="exp-header"><span class="exp-name">Pipeline B: Crude Mask Inpainting</span><span class="exp-badge fail">-100/100</span></div>
+    <div class="exp-desc">Manual rectangular mask → FLUX Fill Pro. Destroyed the scene.</div>
+    <div class="exp-result">"Worse than fail." Approach fundamentally flawed for this use case.</div>
   </div>
 
   <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">LoRA v4 (Tron-only, 38 photos)</span><span class="exp-badge fail">FAILED</span></div>
-    <div class="exp-desc">LoRA trained only on Tron/black colorway.</div>
-    <div class="exp-result">Product didn't appear in generated images.</div>
+    <div class="exp-header"><span class="exp-name">Pipeline C: SAM + Fill Pro (text-only)</span><span class="exp-badge fail">0-5/100</span></div>
+    <div class="exp-desc">Precise SAM 3 masks + text-only Fill Pro inpainting. Text alone can't generate a recognizable CB2.</div>
+    <div class="exp-result">4 tests, all 0-5/100. Text-to-product fidelity is not good enough.</div>
   </div>
 
   <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">LoRA v4b (all colorways, 50 photos)</span><span class="exp-badge fail">FAILED 0/100</span></div>
-    <div class="exp-desc">Jordan's 50 photos (28 Patriot, 20 Hunter, 2 Tron). Broader training data.</div>
-    <div class="exp-result">Justin: "Zero visibility of remote", "makes me want to vomit", "total fail." All 5 images scored 0/100. LoRA approach is conclusively dead for CB2.</div>
+    <div class="exp-header"><span class="exp-name">Pipeline E: SAM + reference_image_url Inpainting</span><span class="exp-badge fail">0/100 (12 tests)</span></div>
+    <div class="exp-desc">Systematic sweep: 12 parameter combos across reference_strength (0.3-0.8) × conditioning_scale. The reference_image_url is a GLOBAL control that warps the entire image, not just the masked region.</div>
+    <div class="exp-result">API architecture limitation — not fixable by parameter tuning. Properly documented.</div>
   </div>
 
   <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">AI Vision Co-Rater (1-5 scoring)</span><span class="exp-badge fail">ABANDONED</span></div>
-    <div class="exp-desc">Claude Sonnet scoring images 1-5 on product/scene/brand. Gave 5/5 to clearly wrong images (floating product, gray LEDs).</div>
-    <div class="exp-result">Justin: "product is literally sitting in front of this guy like the size of a person and AI says 5/5." Replaced with human natural-language feedback.</div>
+    <div class="exp-header"><span class="exp-name">Pipeline F: Kontext Scene-Swap</span><span class="exp-badge fail">80/100 MAX</span></div>
+    <div class="exp-desc">Start with real photo, tell Kontext to change the scene. Looks like "fancy photoshop" — not scalable for variety.</div>
+    <div class="exp-result">Kontext can't rotate symbols without breaking LED/logo. Good for one-off fixes, not production.</div>
   </div>
 
   <div class="exp-card failed">
-    <div class="exp-header"><span class="exp-name">Complex trainer app (cb-trainer.html)</span><span class="exp-badge fail">ABANDONED</span></div>
-    <div class="exp-desc">Star ratings, grid views, filter tabs, auto feedback loops, webhooks — too much infrastructure, not enough iteration.</div>
-    <div class="exp-result">Justin: "a lot of energy was wasted on the website itself." Replaced with simple review page + chat-based feedback.</div>
+    <div class="exp-header"><span class="exp-name">LoRA v4/v4b</span><span class="exp-badge test">UNDER REVIEW</span></div>
+    <div class="exp-desc">v4: Tron-only (38 photos) → product didn't appear. v4b: all colorways (50 photos, Jordan's) → 0/100 on all 5 tests. But was the training config correct? Trigger token used? Resolution matched?</div>
+    <div class="exp-result">Justin not convinced this is a concept failure. Re-investigation pending — need to examine training run details before declaring dead.</div>
   </div>
 
-  <div class="section-label">Current Status + Next Steps</div>
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">Reference bleed SOLVED</span><span class="exp-badge win">FIXED</span></div>
-    <div class="exp-desc">Switching from 3-ref multiref to Pipeline A (1 product-only ref) eliminated the ski jacket appearing in every scene.</div>
-    <div class="exp-result">Motorcycle riders wear leather jackets. Hikers wear light jackets with gloves. MTB riders wear cycling jerseys. The model generates appropriate clothing per sport.</div>
-  </div>
-  <div class="exp-card winner">
-    <div class="exp-header"><span class="exp-name">4 Working Templates Identified</span><span class="exp-badge win">READY</span></div>
-    <div class="exp-desc">Hiker with gloves (94), Motorcycle coastal (89), Pipeline A MTB (88), Skiing close-up (95-98). These are ready for generate-and-filter production.</div>
-    <div class="exp-result">Next step: Generate 5 seeds per template, cherry-pick the best for marketing assets. Spring motorcycle is the priority.</div>
-  </div>
-  <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Symbol orientation</span><span class="exp-badge win">MANAGED</span></div>
-    <div class="exp-desc">"Buttons face the wearer" works ~50% of the time. Generate-and-filter handles the rest.</div>
-    <div class="exp-result">Not fixable via prompt alone. Strategy: generate 5, pick the one with correct orientation.</div>
-  </div>
-  <div class="exp-card">
-    <div class="exp-header"><span class="exp-name">Product levitation on motorcycle</span><span class="exp-badge test">NEXT</span></div>
-    <div class="exp-desc">Motorcycle coastal scored 89/100 but product "levitates slightly" above the jacket. Need it flush.</div>
-    <div class="exp-result">Generate 5 more seeds of the motorcycle coastal prompt. Cherry-pick the one where product sits flush against the leather jacket.</div>
+  <div class="exp-card failed">
+    <div class="exp-header"><span class="exp-name">AI Vision Co-Rater</span><span class="exp-badge fail">ABANDONED</span></div>
+    <div class="exp-desc">Claude Sonnet gave 5/5 to floating products. Human feedback is irreplaceable for product accuracy.</div>
+    <div class="exp-result">Replaced with this review page + natural language feedback.</div>
   </div>
 </div>
 
