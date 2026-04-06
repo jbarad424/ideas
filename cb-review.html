@@ -261,6 +261,9 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
 // === VIDEO ENTRIES (shown when mediaType toggle is 'video') ===
 const ALL_VIDEOS=[
+  // === ROUND 3: Kling 3.0 Pro (reportedly best quality, fal.ai) ===
+  {id:'vid-kling3-moto',url:'https://files.catbox.moe/nr34vc.mp4',model:'Kling 3.0 Pro (fal.ai)',prompt:'Subtle cinematic camera movement, device stays still',label:'VIDEO: Kling 3.0 Pro — Moto',context:'KLING 3.0 PRO: Reportedly the best image-to-video model as of April 2026. From the 90/100 motorcycle coastal still. ~$0.70. The one researchers say preserves product detail best.'},
+  {id:'vid-kling3-snow',url:'https://files.catbox.moe/hk0xoh.mp4',model:'Kling 3.0 Pro (fal.ai)',prompt:'Same prompt, snow particles',label:'VIDEO: Kling 3.0 Pro — Snowboard',context:'Kling 3.0 Pro from the 100/100 snowboard. Compare against Gen-4.5 and Veo 3.1 snowboard versions.'},
   // === ROUND 2: Top-tier models on best stills (Runway Gen-4, Gen-4.5, Veo 3.1) ===
   {id:'vid-gen4t-moto',url:'https://files.catbox.moe/d3ugv3.mp4',model:'Runway Gen-4 Turbo',prompt:'Subtle cinematic camera movement, device on forearm stays still',label:'VIDEO: Gen-4 Turbo — Moto',context:'RUNWAY GEN-4 TURBO: From the 90/100 motorcycle coastal still. 720x1280, 5s. Fastest model (~30s gen). Does Runway preserve the CB2 better than Kling/Veo?'},
   {id:'vid-gen4t-snow',url:'https://files.catbox.moe/rzxknn.mp4',model:'Runway Gen-4 Turbo',prompt:'Same prompt',label:'VIDEO: Gen-4 Turbo — Snowboard',context:'Gen-4 Turbo from the 100/100 snowboard still. Compare CB2 consistency against the motorcycle version.'},
@@ -886,11 +889,9 @@ function vidSetTab(t){
 }
 
 function vidRender(){
-  vidUpFilt();
-  const cntNew=ALL_VIDEOS.filter(v=>!vidIsR(v)).length;
-  const cntDone=ALL_VIDEOS.filter(v=>vidIsR(v)).length;
-  document.getElementById('vidCntNew').textContent=cntNew;
-  document.getElementById('vidCntDone').textContent=cntDone;
+  // Update counts but don't re-filter (filtering happens in vidSetTab and vidGo)
+  document.getElementById('vidCntNew').textContent=ALL_VIDEOS.filter(v=>!vidIsR(v)).length;
+  document.getElementById('vidCntDone').textContent=ALL_VIDEOS.filter(v=>vidIsR(v)).length;
   if(!vidFilt.length){
     document.getElementById('counter').textContent=vidTab==='new'?'All videos reviewed!':'No reviewed videos yet.';
     document.getElementById('vidPlayer').innerHTML='';
@@ -899,6 +900,7 @@ function vidRender(){
     document.getElementById('vidFb').style.display='none';
     return;
   }
+  if(vidIdx>=vidFilt.length)vidIdx=vidFilt.length-1;
   document.getElementById('vidFb').style.display='';
   const v=vidFilt[vidIdx];
   document.getElementById('counter').innerHTML=(vidIdx+1)+' / '+vidFilt.length+' — '+v.label;
@@ -916,17 +918,29 @@ function vidRender(){
   document.getElementById('vidPrevBtn').disabled=vidIdx===0;
   document.getElementById('vidNextBtn').disabled=vidIdx===vidFilt.length-1;
 }
-function vidGo(dir){vidIdx=Math.max(0,Math.min(vidFilt.length-1,vidIdx+dir));vidRender();}
+function vidGo(dir){
+  // Re-filter on navigation so reviewed videos move out of "to review"
+  const curId=vidFilt[vidIdx]?.id;
+  vidUpFilt();
+  if(dir===1){
+    const s=vidFilt.findIndex(v=>v.id===curId);
+    vidIdx=s===-1?Math.min(vidIdx,vidFilt.length-1):Math.min(s+1,vidFilt.length-1);
+  }else{
+    vidIdx=Math.max(0,vidIdx-1);
+  }
+  vidRender();
+}
 function vidSubmit(){
   const t=document.getElementById('vidFb').value.trim();
   if(!t)return;
-  const v=ALL_VIDEOS[vidIdx];if(!v)return;
+  const v=vidFilt[vidIdx];if(!v)return;
   const d=D();
   if(!d[v.id])d[v.id]={comments:[],label:v.label};
   d[v.id].comments.push({text:t,time:new Date().toISOString(),num:d[v.id].comments.length+1});
   d[v.id].label=v.label;
   S(d);
   document.getElementById('vidFb').value='';
+  // Re-render WITHOUT re-filtering so the video stays in place and comment shows
   vidRender();
   showToast('Comment #'+d[v.id].comments.length+' saved');
 }
