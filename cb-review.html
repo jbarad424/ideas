@@ -833,8 +833,11 @@ function syncFeedback(){
       commitMessage:'Sync feedback from review page ('+payload.images.length+' images, '+new Date().toLocaleString()+')'
     })
   }).then(r=>r.json()).then(d=>{
-    if(d.success) showToast('Synced '+payload.images.length+' images to GitHub!');
-    else showToast('Sync response received');
+    if(d.success){
+      const photos=payload.images.filter(i=>!i.id.startsWith('vid-')).length;
+      const vids=payload.images.filter(i=>i.id.startsWith('vid-')).length;
+      showToast('Synced '+photos+' photos'+(vids?' + '+vids+' videos':'')+' to GitHub!');
+    }else showToast('Sync response received');
   }).catch(()=>showToast('Sync sent (check GitHub)'));
   // Also copy to clipboard as backup
   navigator.clipboard.writeText(JSON.stringify(payload,null,2)).catch(()=>{});
