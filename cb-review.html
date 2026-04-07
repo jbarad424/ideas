@@ -304,6 +304,27 @@ const ALL_VIDEOS=[
 ];
 
 const ALL_IMAGES=[
+  // === FLEX g7.0 VALIDATION BATCH: 20 images across 5 sports ===
+  {id:'flex7-moto-2000',url:'https://files.catbox.moe/06c3md.jpg',model:'FLUX 2 Flex g7.0',prompt:'Moto coastal, LEFT arm, seed 2000',label:'FLEX g7: Moto 1/5',context:'FLEX VALIDATION: Testing FLUX 2 Flex at guidance_scale 7.0 (which scored 100 in the initial test) across all sports. 33% cheaper than Pro. Does the quality hold at scale?'},
+  {id:'flex7-moto-2001',url:'https://files.catbox.moe/2qgcht.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2001',label:'FLEX g7: Moto 2/5',context:'Flex g7.0 validation batch.'},
+  {id:'flex7-moto-2002',url:'https://files.catbox.moe/iwgiqp.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2002',label:'FLEX g7: Moto 3/5',context:'Flex g7.0 validation.'},
+  {id:'flex7-moto-2003',url:'https://files.catbox.moe/750pv5.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2003',label:'FLEX g7: Moto 4/5',context:'Flex g7.0 validation.'},
+  {id:'flex7-moto-2004',url:'https://files.catbox.moe/xxb9b0.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2004',label:'FLEX g7: Moto 5/5',context:'Flex g7.0 validation.'},
+  {id:'flex7-ski-2010',url:'https://files.catbox.moe/l61nfc.jpg',model:'FLUX 2 Flex g7.0',prompt:'Skier snowy slope, LEFT arm, seed 2010',label:'FLEX g7: Ski 1/5',context:'Flex g7.0 skiing.'},
+  {id:'flex7-ski-2011',url:'https://files.catbox.moe/mtqxhz.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2011',label:'FLEX g7: Ski 2/5',context:'Flex g7.0 skiing.'},
+  {id:'flex7-ski-2012',url:'https://files.catbox.moe/j2uln8.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2012',label:'FLEX g7: Ski 3/5',context:'Flex g7.0 skiing.'},
+  {id:'flex7-ski-2013',url:'https://files.catbox.moe/ebq6gi.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2013',label:'FLEX g7: Ski 4/5',context:'Flex g7.0 skiing.'},
+  {id:'flex7-ski-2014',url:'https://files.catbox.moe/wthmzd.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2014',label:'FLEX g7: Ski 5/5',context:'Flex g7.0 skiing.'},
+  {id:'flex7-snow-2020',url:'https://files.catbox.moe/133741.jpg',model:'FLUX 2 Flex g7.0',prompt:'Snowboarder powder, RIGHT arm, seed 2020',label:'FLEX g7: Snow 1/4',context:'Flex g7.0 snowboard. RIGHT arm test.'},
+  {id:'flex7-snow-2021',url:'https://files.catbox.moe/x5dr1a.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2021',label:'FLEX g7: Snow 2/4',context:'Flex g7.0 snowboard.'},
+  {id:'flex7-snow-2022',url:'https://files.catbox.moe/yfqwej.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2022',label:'FLEX g7: Snow 3/4',context:'Flex g7.0 snowboard.'},
+  {id:'flex7-snow-2023',url:'https://files.catbox.moe/dbvfe8.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2023',label:'FLEX g7: Snow 4/4',context:'Flex g7.0 snowboard.'},
+  {id:'flex7-mtb-2030',url:'https://files.catbox.moe/6ezzr8.jpg',model:'FLUX 2 Flex g7.0',prompt:'MTB forest trail, LEFT arm, seed 2030',label:'FLEX g7: MTB 1/4',context:'Flex g7.0 MTB.'},
+  {id:'flex7-mtb-2031',url:'https://files.catbox.moe/mph8v4.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2031',label:'FLEX g7: MTB 2/4',context:'Flex g7.0 MTB.'},
+  {id:'flex7-mtb-2032',url:'https://files.catbox.moe/jkq2xg.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2032',label:'FLEX g7: MTB 3/4',context:'Flex g7.0 MTB.'},
+  {id:'flex7-mtb-2033',url:'https://files.catbox.moe/zwizzg.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2033',label:'FLEX g7: MTB 4/4',context:'Flex g7.0 MTB.'},
+  {id:'flex7-hike-2040',url:'https://files.catbox.moe/px6h48.jpg',model:'FLUX 2 Flex g7.0',prompt:'Hiker golden hour, LEFT arm, seed 2040',label:'FLEX g7: Hike 1/2',context:'Flex g7.0 hiking.'},
+  {id:'flex7-hike-2041',url:'https://files.catbox.moe/61i878.jpg',model:'FLUX 2 Flex g7.0',prompt:'Same, seed 2041',label:'FLEX g7: Hike 2/2',context:'Flex g7.0 hiking.'},
   // === TEST: Tahoe Keepers photos as skiing/hiking/MTB refs ===
   {id:'tahoe-ski-1400',url:'https://files.catbox.moe/3kkm1y.jpg',model:'flux2-pro @image (Tahoe ref)',prompt:'Skiing prompt, Tahoe IMG_0084 (puffy vest) as ref, seed 1400',label:'TAHOE REF: Ski 1 (s1400)',context:'TAHOE REF TEST: Using a Tahoe Keepers photo as the sole reference. This one is J&Mike dual arm shot with puffy vest. The vest color carried over into the ski jacket. Does clothing transfer help?'},
   {id:'tahoe-ski-1401',url:'https://files.catbox.moe/zz8e2c.jpg',model:'flux2-pro @image (Tahoe ref)',prompt:'Same ref, seed 1401',label:'TAHOE REF: Ski 2 (s1401)',context:'Same Tahoe ref, different seed. Olive/sage jacket from reference preserved.'},
