@@ -293,9 +293,10 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     </div>
     <div id="scanMeta" style="padding:.5rem 0;font-size:.7rem;color:#888;text-align:center"></div>
   </div>
-  <div style="display:flex;gap:1rem;justify-content:center;margin:.8rem 0">
+  <div style="display:flex;gap:1rem;justify-content:center;align-items:center;margin:.8rem 0">
     <button onclick="scanVote('fail')" style="width:70px;height:70px;border-radius:50%;border:3px solid #ef4444;background:transparent;color:#ef4444;font-size:1.8rem;cursor:pointer;transition:all .15s" onmousedown="this.style.background='#ef4444';this.style.color='#fff'" onmouseup="this.style.background='transparent';this.style.color='#ef4444'">✕</button>
-    <button onclick="scanVote('maybe')" style="width:56px;height:56px;border-radius:50%;border:3px solid #f59e0b;background:transparent;color:#f59e0b;font-size:1.2rem;cursor:pointer;align-self:center;transition:all .15s" onmousedown="this.style.background='#f59e0b';this.style.color='#fff'" onmouseup="this.style.background='transparent';this.style.color='#f59e0b'">?</button>
+    <button id="scanUndoBtn" onclick="scanUndo()" style="width:42px;height:42px;border-radius:50%;border:2px solid #555;background:transparent;color:#555;font-size:1rem;cursor:pointer;transition:all .15s;opacity:0.3" disabled>&#8630;</button>
+    <button onclick="scanVote('maybe')" style="width:56px;height:56px;border-radius:50%;border:3px solid #f59e0b;background:transparent;color:#f59e0b;font-size:1.2rem;cursor:pointer;transition:all .15s" onmousedown="this.style.background='#f59e0b';this.style.color='#fff'" onmouseup="this.style.background='transparent';this.style.color='#f59e0b'">?</button>
     <button onclick="scanVote('pass')" style="width:70px;height:70px;border-radius:50%;border:3px solid #22c55e;background:transparent;color:#22c55e;font-size:1.8rem;cursor:pointer;transition:all .15s" onmousedown="this.style.background='#22c55e';this.style.color='#fff'" onmouseup="this.style.background='transparent';this.style.color='#22c55e'">♥</button>
   </div>
   <div id="scanProgress" style="text-align:center;font-size:.75rem;color:#666;margin-bottom:.5rem"></div>
@@ -1470,7 +1471,7 @@ renderView();
 loadSharedFeedback();
 
 // === SCAN TAB (Swipe to Review) ===
-let scanQueue=[], scanIdx=0, scanVotes={}, scanTouchStartX=0, scanTouchStartY=0, scanSwiping=false;
+let scanQueue=[], scanIdx=0, scanVotes={}, scanTouchStartX=0, scanTouchStartY=0, scanSwiping=false, scanHistory=[];
 
 function getScanVotes(){try{return JSON.parse(localStorage.getItem('scanVotes')||'{}');}catch(e){return {};}}
 function saveScanVotes(){localStorage.setItem('scanVotes',JSON.stringify(scanVotes));}
@@ -1531,8 +1532,11 @@ function scanRender(){
 function scanVote(verdict){
   if(scanIdx>=scanQueue.length) return;
   const img=scanQueue[scanIdx];
+  scanHistory.push({id:img.id, idx:scanIdx});
   scanVotes[img.id]=verdict;
   saveScanVotes();
+  // Enable undo button
+  const ub=document.getElementById('scanUndoBtn');ub.disabled=false;ub.style.opacity='1';
   // Animate out
   const card=document.getElementById('scanCard');
   const dir=verdict==='pass'?1:verdict==='fail'?-1:0;
@@ -1550,6 +1554,21 @@ function scanVote(verdict){
     scanUpdateCounts();
   },250);
   // No comment saved — approved/maybe images flow to TO REVIEW for detailed feedback
+}
+
+function scanUndo(){
+  if(!scanHistory.length) return;
+  const prev=scanHistory.pop();
+  delete scanVotes[prev.id];
+  saveScanVotes();
+  // Jump back to that image
+  scanIdx=scanQueue.findIndex(i=>i.id===prev.id);
+  if(scanIdx<0) scanIdx=prev.idx;
+  scanRender();
+  scanUpdateCounts();
+  // Disable undo if no more history
+  if(!scanHistory.length){const ub=document.getElementById('scanUndoBtn');ub.disabled=true;ub.style.opacity='0.3';}
+  showToast('Undone!');
 }
 
 function scanUpdateCounts(){
