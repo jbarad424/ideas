@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T14:16:01.084Z",
+  "syncedAt": "2026-04-07T14:29:58.247Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -5693,6 +5693,36 @@
         {
           "text": "No remote here at all just an arm on a motorcycle zero out of 100",
           "time": "2026-04-07T14:14:16.715Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "kontext-v3-mtb-9101",
+      "url": "https://files.catbox.moe/j39b42.jpg",
+      "model": "Kontext LoRA Inpaint",
+      "prompt": "Exact winning params (Ref C, g7.0, 28 steps, short prompt), portrait MTB base, bigger mask (14%x 9%y)",
+      "label": "Kontext V3: MTB (fixed params)",
+      "context": "FIXED APPROACH: Used EXACT same params as the 96-97 scoring originals — Ref C reference, short prompt, g7.0, 28 steps, NO strength param. Portrait-oriented MTB base (800x1056) with bigger mask matching original proportions. Device IS visible on the arm but positioned on upper arm/bicep instead of forearm (mask was slightly too high).",
+      "comments": [
+        {
+          "text": "The chubby buttons looks like it's in the correct. It looks a lot more familiar to me, but it's still a little bit too big almost like three times the size and it's on the upper forearm or whether it's on the upper arm. It's not on the forearm. this is better than your first attempts though, and the strap is like almost the. I give it a 50 out of 100.",
+          "time": "2026-04-07T14:29:05.984Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "kontext-v3-repro-9102",
+      "url": "https://files.catbox.moe/sofoxb.jpg",
+      "model": "Kontext LoRA Inpaint",
+      "prompt": "Exact reproduction of original 96-scoring test (same base, mask, seed, all params)",
+      "label": "Kontext V3: Reproduction Test",
+      "context": "REPRODUCTION: Same base image (3wv1cj.jpg), same mask (47xdcj.jpg), same seed (8001), same everything as the original test that scored 96. If this scores well, the approach is reproducible. If not, the original score was an anomaly.",
+      "comments": [
+        {
+          "text": "This is perfect. This looks just like the original one that I really liked give it up 98.",
+          "time": "2026-04-07T14:29:26.749Z",
           "num": 1
         }
       ]
