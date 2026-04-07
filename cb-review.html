@@ -1365,71 +1365,95 @@ function mmDetectModel(model){
   return{type:'pro',endpoint:'fal-ai/flux-2-pro/edit',name:'FLUX 2 Pro'};
 }
 
+function mmNotify(msg,isError){
+  let bar=document.getElementById('mmNotifyBar');
+  if(!bar){bar=document.createElement('div');bar.id='mmNotifyBar';bar.style.cssText='position:fixed;top:0;left:0;right:0;z-index:200;padding:.5rem;text-align:center;font-size:.7rem;font-weight:600;transition:opacity .3s';document.body.appendChild(bar);}
+  bar.style.background=isError?'#7f1d1d':'#1a1030';
+  bar.style.color=isError?'#fca5a5':'#a855f7';
+  bar.textContent=msg;
+  bar.style.opacity='1';
+  if(!isError)setTimeout(()=>{bar.style.opacity='0';},8000);
+}
+
 async function galGenerate(id,fidelity){
   const img=ALL_IMAGES.find(i=>i.id===id);if(!img)return;
   const modifier=document.getElementById('mmText-'+id).value.trim();
-  const status=document.getElementById('mmStatus-'+id);
-  const results=document.getElementById('mmResults-'+id);
-  results.innerHTML='';
+  // Update overlay UI if still open
+  const statusEl=document.getElementById('mmStatus-'+id);
+  const resultsEl=document.getElementById('mmResults-'+id);
+  if(resultsEl)resultsEl.innerHTML='';
 
   const FK='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
   const REF='https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800';
   const mdl=mmDetectModel(img.model);
-  status.innerHTML='Submitting to '+mdl.name+'...';
 
-  // Model-specific CB2 blocks
   const CB2_GPT='the wearable remote from image 2 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons: PLUS sign, REWIND (two left triangles with bar), PLAY/PAUSE (triangle next to two vertical bars), FAST-FORWARD (two right triangles with bar), MINUS sign';
   const CB2_FLUX='wearing the wearable remote from image 2 on their LEFT forearm, volume-up button closest to wrist';
   const cb2=mdl.type==='gpt'?CB2_GPT:CB2_FLUX;
-
-  const basePrompt=modifier
+  const fullPrompt=modifier
     ?'Create a variation of image 1: '+modifier+'. Preserve '+cb2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.'
     :'Create a unique variation of image 1 with a fresh angle and composition. Preserve '+cb2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.';
 
+  // Show status in both overlay (if open) and notification bar
+  function setStatus(msg){
+    const s=document.getElementById('mmStatus-'+id);
+    if(s)s.innerHTML=msg;
+    mmNotify(msg);
+  }
+  setStatus('Submitting to '+mdl.name+'...');
+
+  // Run entire pipeline in background — survives overlay close
   try{
     const allImgs=[];
+    const seeds=[];
     if(mdl.type==='gpt'){
-      // GPT: single call, num_images:2
-      const rid=await mmSubmit(mdl.endpoint,{image_urls:[img.url,REF],prompt:basePrompt,size:'1024x1536',quality:'high',input_fidelity:fidelity,num_images:2},FK);
-      status.innerHTML='Generating 2 variations via '+mdl.name+'... (60-90s)';
-      const imgs=await mmPoll(mdl.endpoint,rid,FK,status);
+      const rid=await mmSubmit(mdl.endpoint,{image_urls:[img.url,REF],prompt:fullPrompt,size:'1024x1536',quality:'high',input_fidelity:fidelity,num_images:2},FK);
+      setStatus('Generating 2 variations via '+mdl.name+'... (60-90s)');
+      const imgs=await mmPoll(mdl.endpoint,rid,FK,null);
       allImgs.push(...imgs);
+      seeds.push('n/a','n/a');
     }else{
-      // FLUX: two parallel calls with random seeds
       const gs=mdl.type==='flex'?(fidelity==='high'?5.0:9.0):undefined;
-      const mkPayload=()=>{
-        const p={image_urls:[img.url,REF],prompt:basePrompt,seed:Math.floor(Math.random()*100000),num_images:1,output_format:'jpeg',safety_tolerance:5};
+      const s1=Math.floor(Math.random()*100000),s2=Math.floor(Math.random()*100000);
+      seeds.push(s1,s2);
+      const mkPayload=(seed)=>{
+        const p={image_urls:[img.url,REF],prompt:fullPrompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
         if(mdl.type==='flex'){p.guidance_scale=gs;p.num_inference_steps=28;}
         return p;
       };
-      const [rid1,rid2]=await Promise.all([mmSubmit(mdl.endpoint,mkPayload(),FK),mmSubmit(mdl.endpoint,mkPayload(),FK)]);
-      status.innerHTML='Generating 2 variations via '+mdl.name+'... (30-60s)';
-      const [imgs1,imgs2]=await Promise.all([mmPoll(mdl.endpoint,rid1,FK,status),mmPoll(mdl.endpoint,rid2,FK,status)]);
+      const [rid1,rid2]=await Promise.all([mmSubmit(mdl.endpoint,mkPayload(s1),FK),mmSubmit(mdl.endpoint,mkPayload(s2),FK)]);
+      setStatus('Generating 2 variations via '+mdl.name+'... (30-60s)');
+      const [imgs1,imgs2]=await Promise.all([mmPoll(mdl.endpoint,rid1,FK,null),mmPoll(mdl.endpoint,rid2,FK,null)]);
       allImgs.push(...imgs1,...imgs2);
     }
-    if(!allImgs.length){status.innerHTML='No images returned.';return;}
-    status.innerHTML='Saving '+allImgs.length+' images permanently...';
-    // Upload to catbox for permanent URLs
+    if(!allImgs.length){setStatus('No images returned.');return;}
+    setStatus('Saving '+allImgs.length+' images permanently...');
     const permUrls=await Promise.all(allImgs.map(im=>mmUploadCatbox(im.url).catch(()=>im.url)));
     const ts=Date.now();
     const added=[];
     permUrls.forEach((url,idx)=>{
       const vid='mm-'+id+'-'+ts+'-'+idx;
       if(!ALL_IMAGES.find(i=>i.id===vid)){
-        const entry={id:vid,url:url,model:mdl.name+' (variation)',prompt:(modifier||'variation')+' of '+id,label:'VAR: '+(img.label||id),context:'Make More Like This from '+id+'. '+mdl.name+', fidelity='+fidelity+'.'};
+        const seedStr=seeds[idx]!==undefined?seeds[idx]:'n/a';
+        const entry={id:vid,url:url,model:mdl.name+' (variation)',
+          prompt:fullPrompt,
+          label:'VAR: '+(img.label||id),
+          context:'Make More Like This from '+id+'.\nModifier: '+(modifier||'(none)')+'\nModel: '+mdl.name+' | Fidelity: '+fidelity+' | Seed: '+seedStr+'\nSource score: '+Math.round(galScore(id))};
         ALL_IMAGES.push(entry);
         added.push(entry);
       }
     });
     mmSaveVariations(added);
     counts();
-    status.innerHTML=added.length+' variation'+(added.length>1?'s':'')+' added to TO REVIEW!';
-    results.innerHTML=permUrls.map(url=>'<img src="'+url+'" alt="variation" style="border:2px solid #22c55e">').join('');
+    setStatus(added.length+' variation'+(added.length>1?'s':'')+' added to TO REVIEW!');
+    // Update overlay results if still open
+    const r=document.getElementById('mmResults-'+id);
+    if(r)r.innerHTML=permUrls.map(url=>'<img src="'+url+'" alt="variation" style="border:2px solid #22c55e">').join('');
   }catch(e){
     if(e.message.includes('Failed to fetch')||e.message.includes('NetworkError')){
-      status.innerHTML='CORS blocked. Use Claude Code to generate variations for now.';
+      setStatus('CORS blocked. Use Claude Code to generate variations.');
     }else{
-      status.innerHTML='Error: '+e.message;
+      setStatus('Error: '+e.message);
     }
   }
 }
