@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T20:53:41.011Z",
+  "syncedAt": "2026-04-07T21:17:27.916Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6494,6 +6494,11 @@
           "text": "Rejected",
           "time": "2026-04-07T20:20:22.769Z",
           "num": 1
+        },
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T20:04:59.244Z",
+          "num": 2
         }
       ]
     },
@@ -6509,6 +6514,11 @@
           "text": "This is unbelievable. This is like the most incredible photo I’ve seen so far and there’s only one little problem with the symbol and it’s the second button but every other symbol looks good enough if there’s any way to go from here to 100% this is a 99.",
           "time": "2026-04-07T20:21:11.252Z",
           "num": 1
+        },
+        {
+          "text": "This is almost perfect save for like one of the buttons. It's like the one button is the track reverse. This is like one of the coolest things I've ever seen. Just that one button is is a problem. Can we? Can we get even closer on the fixing?",
+          "time": "2026-04-07T20:07:03.688Z",
+          "num": 2
         }
       ]
     },
@@ -6768,6 +6778,231 @@
         {
           "text": "Third boat should be just a little bit bigger, but it looks really cool. I give it an 88.",
           "time": "2026-04-07T20:50:56.122Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "micro-moto99-rect-10401",
+      "url": "https://files.catbox.moe/9uvztj.png",
+      "model": "GPT Image 1.5 (micro-inpaint)",
+      "prompt": "Micro-inpaint Mask A (rectangle over button strip) on the 99-scored motorcycle masked inpaint result.",
+      "label": "MICRO: Moto99 Rectangle",
+      "context": "MICRO-INPAINTING TEST on 99-scored image. Mask A = rectangle over button strip. Symbols ARE clearer but visible dark patch artifact where mask hit the jacket leather. Mask was slightly too tall.",
+      "comments": [
+        {
+          "text": "This is bad. The symbols are not legible, and it looks a little bit too large for the arm. This does not pass.",
+          "time": "2026-04-07T21:15:18.290Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "micro-moto99-circles-10402",
+      "url": "https://files.catbox.moe/imxart.png",
+      "model": "GPT Image 1.5 (micro-inpaint)",
+      "prompt": "Micro-inpaint Mask B (five individual circles) on 99-scored motorcycle.",
+      "label": "MICRO: Moto99 Five Circles",
+      "context": "MICRO-INPAINTING Mask B = five tiny circles on each button. Symbols clearer, no artifacts, but button layout slightly rearranged (some in 2 rows vs single row). Too-tight masks risk rearranging layout.",
+      "comments": [
+        {
+          "text": "This does not pass. There's only four buttons now too bad.",
+          "time": "2026-04-07T21:15:30.273Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "micro-moto99-oval-10403",
+      "url": "https://files.catbox.moe/ucauxx.png",
+      "model": "GPT Image 1.5 (micro-inpaint)",
+      "prompt": "Micro-inpaint Mask C (oval over full device face) on 99-scored motorcycle.",
+      "label": "MICRO: Moto99 Oval WINNER",
+      "context": "MICRO-INPAINTING BEST RESULT. Mask C = oval covering entire CB2 face. Crisp +, pause, play, skip, - symbols all visible. No artifacts. Clean blend. Everything outside oval is pixel-identical to original 99. This is the production finishing step — oval mask over device face, GPT sharpens symbols.",
+      "comments": [
+        {
+          "text": "There's only four buttons on this does not pass and no visible strap",
+          "time": "2026-04-07T21:15:44.121Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "micro-ski100-rect-10404",
+      "url": "https://files.catbox.moe/yw6h14.png",
+      "model": "GPT Image 1.5 (micro-inpaint)",
+      "prompt": "Micro-inpaint Mask A (rectangle) on 100-scored NB2 skiing image.",
+      "label": "MICRO: Ski100 Rectangle",
+      "context": "MICRO-INPAINTING on non-GPT image (NB2 skiing 100). Rectangle mask kept the scene but CHANGED the CB2 colorway from dark to green (Hunter from Ref C). GPT replaced the device identity instead of just sharpening symbols. Micro-inpainting works best on GPT-generated images.",
+      "comments": [
+        {
+          "text": "This also does not pass because it only now has four buttons. I don't know what happened. Maybe you can double check the prompting does not pass.",
+          "time": "2026-04-07T21:16:04.020Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "micro-ski100-circles-10405",
+      "url": "https://files.catbox.moe/04ybkr.png",
+      "model": "GPT Image 1.5 (micro-inpaint)",
+      "prompt": "Micro-inpaint Mask B (circles) on 100-scored NB2 skiing image.",
+      "label": "MICRO: Ski100 Circles FAIL",
+      "context": "MICRO-INPAINTING FAILURE. Tiny circle masks on non-GPT image caused GPT to REPLACE THE ENTIRE IMAGE with Ref C photo. Small masks below a threshold cause catastrophic mode collapse where GPT ignores the source entirely.",
+      "comments": [
+        {
+          "text": "The strap and the remote look fine, but the symbols do not look good. They're not oriented in the right direction. I guess the symbols kind of look right if they were flipped each 90°, but the buttons themselves also look like they're no longer have well some of them look like they're no longer raised.",
+          "time": "2026-04-07T21:16:45.938Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "micro-ski100-oval-10406",
+      "url": "https://files.catbox.moe/er3clp.png",
+      "model": "GPT Image 1.5 (micro-inpaint)",
+      "prompt": "Micro-inpaint Mask C (oval) on 100-scored NB2 skiing image.",
+      "label": "MICRO: Ski100 Oval FAIL",
+      "context": "MICRO-INPAINTING FAILURE. Same catastrophic mode collapse — GPT replaced entire skiing image with Ref C photo. Oval mask that worked perfectly on GPT-generated images fails completely on NB2-generated images. The finishing step only works on images GPT itself generated.",
+      "comments": [
+        {
+          "text": "This does not pass either of the symbols do not look accurate, but I see what you did if there's a way to perfect that maybe",
+          "time": "2026-04-07T21:17:02.169Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "micro-ski100-nbpro-10407",
+      "url": "https://files.catbox.moe/9pfttq.png",
+      "model": "Nano Banana Pro",
+      "prompt": "NB Pro re-edit asking to sharpen button symbols on 100-scored skiing image.",
+      "label": "MICRO: Ski100 NB Pro Re-edit",
+      "context": "NANO BANANA PRO re-edit attempt — no mask support, just prompted to make symbols crisper. Zero visible change to buttons. NB Pro cannot do targeted micro-edits without mask support.",
+      "comments": [
+        {
+          "text": "This is fantastic one of our best winners 100%",
+          "time": "2026-04-07T21:17:24.353Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-0",
+      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "excellent, 90",
+          "time": "2026-04-07T19:20:37.937Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-1",
+      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:47.636Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-0",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:56.418Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-1",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "nice. 85",
+          "time": "2026-04-07T19:21:13.486Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-0",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
+          "time": "2026-04-07T19:21:34.619Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-1",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
+          "time": "2026-04-07T19:21:47.035Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-0",
+      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "This is cool yeah I really like this one great 95",
+          "time": "2026-04-07T19:22:10.501Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-1",
+      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
+          "time": "2026-04-07T19:22:36.702Z",
           "num": 1
         }
       ]
@@ -7033,126 +7268,6 @@
         {
           "text": "This is pretty weird. The remote is kind of wobbles around. Looks like it's being reanimated with every time that he's moving. I get this 42 out of 100.",
           "time": "2026-04-06T22:27:31.988Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589419542-0",
-      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "excellent, 90",
-          "time": "2026-04-07T19:20:37.937Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589419542-1",
-      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:47.636Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589531515-0",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:56.418Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589531515-1",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "nice. 85",
-          "time": "2026-04-07T19:21:13.486Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589559647-0",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
-          "time": "2026-04-07T19:21:34.619Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589559647-1",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
-          "time": "2026-04-07T19:21:47.035Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589600635-0",
-      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "This is cool yeah I really like this one great 95",
-          "time": "2026-04-07T19:22:10.501Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589600635-1",
-      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
-          "time": "2026-04-07T19:22:36.702Z",
           "num": 1
         }
       ]
