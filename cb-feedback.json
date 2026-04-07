@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T09:27:32.014Z",
+  "syncedAt": "2026-04-07T13:16:02.480Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -619,6 +619,156 @@
           "text": "Never mind it just showed up. It's in the right spot. Remote looks good maybe a little bigger than it should be. Symbols are almost visible just a little bit out of focus. If it was a little bit smaller, the symbols were better. This should be great. I'll give it like a 86.",
           "time": "2026-04-07T02:21:20.986Z",
           "num": 2
+        }
+      ]
+    },
+    {
+      "id": "flex-twopass-jacket",
+      "url": "https://files.catbox.moe/ugkn7k.jpg",
+      "model": "Flex g7.0 two-pass",
+      "prompt": "Base: flex7-moto-2004 (90/100) → add leather motorcycle jacket",
+      "label": "FLEX 2PASS: Moto Jacket",
+      "context": "FLEX TWO-PASS: Does g7.0 higher guidance make \"keep remote unchanged\" more reliable? Previous Pro test was mixed. This adds a full moto jacket to the 90-scoring moto image.",
+      "comments": [
+        {
+          "text": "So now everything looks a little bit cartoonish, even though the remote is in the right place it looks almost like an AI painting, not for a realistic, give us a and the symbols are not really that accurate. I don't think. I graded this a 60.",
+          "time": "2026-04-07T12:57:02.162Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex-twopass-helmet",
+      "url": "https://files.catbox.moe/6q32e6.jpg",
+      "model": "Flex g7.0 two-pass",
+      "prompt": "Base: flex7-moto-2004 → add helmet only",
+      "label": "FLEX 2PASS: Helmet Only",
+      "context": "Flex two-pass: just adding a helmet. Helmets worked on Pro (scored 95 via Kontext). Does Flex do it cleaner?",
+      "comments": [
+        {
+          "text": "Yeah the the helmet is added, but it looks like the strap is a little bit a little bit worked maybe you could I don't know what the original photo look like but this looks like a hallucination a little bit a little bit too much like an AI painting and the remote is losing some of its integrity",
+          "time": "2026-04-07T12:57:51.079Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex-twopass-goggles",
+      "url": "https://files.catbox.moe/lrm0gm.jpg",
+      "model": "Flex g7.0 two-pass",
+      "prompt": "Base: flex7-ski-2011 (93/100) → add ski goggles on forehead",
+      "label": "FLEX 2PASS: Ski Goggles",
+      "context": "Flex two-pass: adding ski goggles to the 93-scoring skier. Small targeted addition — should be safe for CB2.",
+      "comments": [
+        {
+          "text": "This is excellent you added ski goggles. Great remote looks great. Everything looks perfect. I wish I was doing something a little more like aspirational intense but if all you added was adding sea goggles, then you did a fantastic job.",
+          "time": "2026-04-07T12:58:23.345Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex-twopass-neckguard",
+      "url": "https://files.catbox.moe/p212yj.jpg",
+      "model": "Flex g7.0 two-pass",
+      "prompt": "Base: flex7-moto-2004 → add neck guard only",
+      "label": "FLEX 2PASS: Neck Guard",
+      "context": "Most surgical test: just adding a motorcycle neck guard. Minimal change. If this destroys the CB2, two-pass is dead on Flex too.",
+      "comments": [
+        {
+          "text": "I don't know what a motorcycle neck guard is, but you added it even though the picture looks a little little more like an AI painting, but but the remote looks fine even though the symbols are a little bit I can't tell if the symbols are the same the previous photo, but if they are compared to my last comments, then I guess you were able to add the motorcycle neck guard correctly.",
+          "time": "2026-04-07T12:59:11.262Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flexmulti-moto-1600",
+      "url": "https://files.catbox.moe/mje3x2.jpg",
+      "model": "Flex g7.0 multi-ref",
+      "prompt": "Moto coastal, ref1=J&Mike ref2=Mike Moto (IMG_2592), seed 1600",
+      "label": "FLEX MULTI: Moto 1/3",
+      "context": "FLEX MULTI-REF: J&Mike for orientation + the Mike Moto photo that scored 99 for clothing/Tron. Does Flex g7.0 blend them better than Pro did? Looking for: moto gear + Tron colorway + correct orientation.",
+      "comments": [
+        {
+          "text": "This is fire. I love the motorcycle. It's it's you know it's interesting. I think the remote looks a little bit too big looks a bit like a Photoshop job, but it's aspirational and really interesting looking and the remote is just needs to be a little bit better lighting, but it looks cool. I'll give us 88.",
+          "time": "2026-04-07T12:59:42.243Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flexmulti-moto-1601",
+      "url": "https://files.catbox.moe/v6ppun.jpg",
+      "model": "Flex g7.0 multi-ref",
+      "prompt": "Same, seed 1601",
+      "label": "FLEX MULTI: Moto 2/3",
+      "context": "Flex multi-ref motorcycle, seed 1601.",
+      "comments": [
+        {
+          "text": "this is fantastic A+ give it 99 I'd give it 100",
+          "time": "2026-04-07T13:00:05.627Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flexmulti-moto-1602",
+      "url": "https://files.catbox.moe/lm5qu5.jpg",
+      "model": "Flex g7.0 multi-ref",
+      "prompt": "Same, seed 1602",
+      "label": "FLEX MULTI: Moto 3/3",
+      "context": "Flex multi-ref motorcycle, seed 1602.",
+      "comments": [
+        {
+          "text": "remote is above the shoulder, which is not correct symbols are a little bit hard to tell but I think they look OK just it's in the wrong position oh and there's two CB twos visible on his right arm so this is a fail this is a 10 out of 100",
+          "time": "2026-04-07T13:00:36.934Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flexmulti-ski-1603",
+      "url": "https://files.catbox.moe/j7nzuz.jpg",
+      "model": "Flex g7.0 multi-ref",
+      "prompt": "Skiing, ref1=J&Mike ref2=Mike Moto, seed 1603",
+      "label": "FLEX MULTI: Ski 1/3",
+      "context": "Flex multi-ref skiing — does motorcycle clothing leak into ski scene? Or does the prompt override the second ref clothing?",
+      "comments": [
+        {
+          "text": "This is really cool. The symbols look good. The guy looks interesting. I wish she was doing something a little more aspirational, but I really want that remote to be below the shop below the elbow rather you know on the forearm so I get this. This doesn't pass because it's not below the elbow.",
+          "time": "2026-04-07T13:01:12.402Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flexmulti-ski-1604",
+      "url": "https://files.catbox.moe/z42o8p.jpg",
+      "model": "Flex g7.0 multi-ref",
+      "prompt": "Same, seed 1604",
+      "label": "FLEX MULTI: Ski 2/3",
+      "context": "Flex multi-ref skiing, seed 1604.",
+      "comments": [
+        {
+          "text": "This is great. I wish it was a little more active, but the symbols are unfortunately flipped in the wrong direction, but that's it's OK. I'm not sure what we're testing here for but it looks good. I give it an 86 if it weren't for the symbols being the wrong direction.",
+          "time": "2026-04-07T13:01:42.687Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flexmulti-ski-1605",
+      "url": "https://files.catbox.moe/ticu3j.jpg",
+      "model": "Flex g7.0 multi-ref",
+      "prompt": "Same, seed 1605",
+      "label": "FLEX MULTI: Ski 3/3",
+      "context": "Flex multi-ref skiing, seed 1605.",
+      "comments": [
+        {
+          "text": "This is strange because it just looks like the two guys from the model shoot that are super imposed on skis and looks like they're on tandem skis, which is really strange and you can't really tell what the remotes look like but yeah give us like a 50",
+          "time": "2026-04-07T13:02:12.369Z",
+          "num": 1
         }
       ]
     },
@@ -4808,6 +4958,516 @@
         {
           "text": "Really cool, remote looks accurate. Strange square patch on back of arm. Remote itself is great, can see Chubby Buttons logo, but still looks a little strange.",
           "time": "2026-04-04T22:03:00Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-mtb-2001",
+      "url": "https://files.catbox.moe/62ndcq.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "MTB trail, LEFT arm, Tahoe cyclist ref, seed 2001",
+      "label": "Tahoe Cyclist: MTB 1/4",
+      "context": "TAHOE CYCLIST REF TEST: Using IMG_9733 (Tron + red Giro helmet cyclist) as ref instead of J&Mike. Testing if sport-matched ref outperforms for MTB.",
+      "comments": [
+        {
+          "text": "This looks too much like the original photo even though the remote looks nice but he also looks very contorted in strange like he's like doing something weird on the bike. This is a little too much. There was a lot of strange hallucinations going on here. I give us a 42 out of 100.",
+          "time": "2026-04-07T13:02:43.252Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-mtb-2002",
+      "url": "https://files.catbox.moe/75ob2f.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "MTB trail, LEFT arm, Tahoe cyclist ref, seed 2002",
+      "label": "Tahoe Cyclist: MTB 2/4",
+      "context": "Tahoe cyclist ref test. Sport matches ref (both MTB/cycling).",
+      "comments": [
+        {
+          "text": "Again, this looks a lot like there is no model and the remote is like four or five times the size it should be. I get this 15 out of 100.",
+          "time": "2026-04-07T13:03:00.817Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-mtb-2003",
+      "url": "https://files.catbox.moe/vg5ory.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "MTB trail, LEFT arm, Tahoe cyclist ref, seed 2003",
+      "label": "Tahoe Cyclist: MTB 3/4",
+      "context": "Tahoe cyclist ref test. Sport matches ref.",
+      "comments": [
+        {
+          "text": "This is better boat looks interesting. The strap is a little bit, not on brand but it's in the right spot and but he's not wearing like protective gear as a biker but it's cool. I give it a 72.",
+          "time": "2026-04-07T13:03:30.217Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-mtb-2004",
+      "url": "https://files.catbox.moe/womftd.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "MTB trail, LEFT arm, Tahoe cyclist ref, seed 2004",
+      "label": "Tahoe Cyclist: MTB 4/4",
+      "context": "Tahoe cyclist ref test. Sport matches ref.",
+      "comments": [
+        {
+          "text": "This is cooler little more Agro, which we like, but if his ears are exposed and you definitely wanna see that he has little earbuds in there and the remote is like almost like ours but a little too big and flat, so not exactly perfect. I'd I'd give us a 72 out of 100.",
+          "time": "2026-04-07T13:04:07.451Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-ski-2010",
+      "url": "https://files.catbox.moe/o1u68m.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Skiing, LEFT arm, Tahoe cyclist ref (cross-sport), seed 2010",
+      "label": "Tahoe Cyclist: Ski 1/2 (cross-sport)",
+      "context": "CROSS-SPORT TEST: Cycling ref used for skiing prompt. Does sport mismatch between ref and prompt hurt quality?",
+      "comments": [
+        {
+          "text": "This is a zero out of 100 cause it's not our remote and it's above the elbow",
+          "time": "2026-04-07T13:04:17.936Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-ski-2011",
+      "url": "https://files.catbox.moe/b734em.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Skiing, LEFT arm, Tahoe cyclist ref (cross-sport), seed 2011",
+      "label": "Tahoe Cyclist: Ski 2/2 (cross-sport)",
+      "context": "Cross-sport test: cycling ref → skiing output. Clothing leak test.",
+      "comments": [
+        {
+          "text": "The symbols are not preserved here and it's above the elbow. This does not pass.",
+          "time": "2026-04-07T13:04:29.784Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2587",
+      "url": "https://files.catbox.moe/u1g5qu.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2587 ref",
+      "label": "Mike Moto: IMG_2587",
+      "context": "MIKE MOTO DEEP DIVE: Testing 10 different Mike Moto photos as refs. Only 3 of 45 tested before (one scored 99). Each uses a different photo as the sole reference image.",
+      "comments": [
+        {
+          "text": "This does not pass because it shows a remote that is not ours. In addition to the remote that is ours and even in the original CB remote that's there looks great. Let's see what you do. Yeah, you added on something strange on the elbow if you didn't, this would've been really good, but it's a non-pass.",
+          "time": "2026-04-07T13:04:58.851Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2589",
+      "url": "https://files.catbox.moe/97nt96.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2589 ref",
+      "label": "Mike Moto: IMG_2589",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "This is pretty fire. I just want the symbols to be a little clearer. I give it a 82.",
+          "time": "2026-04-07T13:05:13.000Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2590",
+      "url": "https://files.catbox.moe/lk4vv7.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2590 ref",
+      "label": "Mike Moto: IMG_2590",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "This is not pass. I don't know what the guys wearing on his arm, but there's a strap of some sort and then there's another chubby button on top of it and it doesn't. It looks like it preserves the symbols well but it's should be a little bit closer to the like rotated inside the body just a different one for that other artifact there of the other things trapped in his arm. This would've been a pass, but it's not.",
+          "time": "2026-04-07T13:05:52.819Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2593",
+      "url": "https://files.catbox.moe/0f600t.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2593 ref",
+      "label": "Mike Moto: IMG_2593",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "Symbols are in the correct order, but it looks a little chunkier than it should a little flatter. I give this a 75.",
+          "time": "2026-04-07T13:06:14.667Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2595",
+      "url": "https://files.catbox.moe/be4h3c.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2595 ref",
+      "label": "Mike Moto: IMG_2595",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "Can't see the symbols I'm not really sure what color way it's being used here. It almost looks a little like metallic silver. I get a 60 out of 100.",
+          "time": "2026-04-07T13:06:36.684Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2599",
+      "url": "https://files.catbox.moe/ksrj76.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2599 ref",
+      "label": "Mike Moto: IMG_2599",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "Symbols do not look legible here and the photo looks warped a little bit. I get this 58 out of 100.",
+          "time": "2026-04-07T13:06:58.784Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2601",
+      "url": "https://files.catbox.moe/bbjf8h.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2601 ref",
+      "label": "Mike Moto: IMG_2601",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "The remote looks in the right position and it's in the right spot, but the symbols are not visible and I'm not sure what color wave is being used but otherwise it's a really cool photo. I give it 82.",
+          "time": "2026-04-07T13:07:29.618Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2604",
+      "url": "https://files.catbox.moe/mcf6qi.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2604 ref",
+      "label": "Mike Moto: IMG_2604",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "Symbols are not legible looks like hallucination, but it's in the right spot of the arm. I give it a 65",
+          "time": "2026-04-07T13:07:52.566Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2607",
+      "url": "https://files.catbox.moe/sfxjvv.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2607 ref",
+      "label": "Mike Moto: IMG_2607",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "I give this a zero does not look like our remote at all",
+          "time": "2026-04-07T13:08:00.552Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikemoto-2610",
+      "url": "https://files.catbox.moe/3tj7f6.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Mike Moto IMG_2610 ref",
+      "label": "Mike Moto: IMG_2610",
+      "context": "Mike Moto deep dive. Different ref photo angle/pose.",
+      "comments": [
+        {
+          "text": "I give us a zero as well does not look like our remote at all",
+          "time": "2026-04-07T13:08:09.883Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-b2b-moto-3001",
+      "url": "https://files.catbox.moe/vk52vz.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, Tahoe group ref, seed 3001",
+      "label": "Tahoe Group: Moto",
+      "context": "TAHOE BACK-TO-BACK REF TEST: Using a Tahoe group photo (two people with CB2) as alternative to J&Mike Dual. Testing if this different two-person ref produces comparable results.",
+      "comments": [
+        {
+          "text": "This is way too similar to the reference photo of the model. Must just looks like our photo but worked a little bit because of that I give it a two out of 100.",
+          "time": "2026-04-07T13:08:30.435Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-b2b-ski-3002",
+      "url": "https://files.catbox.moe/7rk0um.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Skiing, LEFT arm, Tahoe group ref, seed 3002",
+      "label": "Tahoe Group: Ski",
+      "context": "Tahoe group ref test. Cross-sport from group photo.",
+      "comments": [
+        {
+          "text": "No, this is this looks like not like our remote has the wrong symbol. It's the wrong form factor it looks and it's the wrong strap and it's above the elbow zero out of 100.",
+          "time": "2026-04-07T13:08:46.552Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-b2b-mtb-3003",
+      "url": "https://files.catbox.moe/012sxt.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "MTB trail, LEFT arm, Tahoe group ref, seed 3003",
+      "label": "Tahoe Group: MTB",
+      "context": "Tahoe group ref test. Cross-sport from group photo.",
+      "comments": [
+        {
+          "text": "This is pretty cool. It's in the right spot. The lighting looks interesting but the symbols aren't that visible but again it might be OK because of the distance from the photo but if a person zooms in then they wouldn't be able to see it. I give it a 72.",
+          "time": "2026-04-07T13:09:14.950Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-b2b-snow-3004",
+      "url": "https://files.catbox.moe/qtyqew.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Snowboard, RIGHT arm, Tahoe group ref, seed 3004",
+      "label": "Tahoe Group: Snow",
+      "context": "Tahoe group ref test. Cross-sport from group photo.",
+      "comments": [
+        {
+          "text": "This is very cool action shot aspirational the lighting looks a little bit like little fake and the symbols aren't visible and the strap doesn't look as accurate as it could, but I'm not really sure what you're testing here but this it's somewhat preserved. I like the outfit I like that the aspirational aspect of the sport, but the remote symbols aren't visible and looks all Photoshop so I gave it to 68.",
+          "time": "2026-04-07T13:09:59.918Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vest-moto-4001",
+      "url": "https://files.catbox.moe/w396pb.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, puffy vest J&Mike ref, seed 4001",
+      "label": "Puffy Vest: Moto 1/2",
+      "context": "PUFFY VEST REF TEST: IMG_0084 from Tahoe — same J&Mike dual pose but wearing puffy vests instead of T-shirts. Tests whether vest clothing transfers to output (solving the T-shirt bleed problem).",
+      "comments": [
+        {
+          "text": "The remote looks a little strange because the symbols in preserved it looks like a little like a dream version of what our remote could be so yeah give us a 58",
+          "time": "2026-04-07T13:10:23.851Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vest-moto-4002",
+      "url": "https://files.catbox.moe/2jujqk.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Moto coastal, LEFT arm, puffy vest J&Mike ref, seed 4002",
+      "label": "Puffy Vest: Moto 2/2",
+      "context": "Puffy vest ref test. Same dual pose, different clothing.",
+      "comments": [
+        {
+          "text": "I give this a 10/100 it's using glowing unless you were using the skin as a reference photo here but other than that, I don't know why it's glowing",
+          "time": "2026-04-07T13:10:48.751Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vest-ski-4010",
+      "url": "https://files.catbox.moe/7a8ju1.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Skiing, LEFT arm, puffy vest J&Mike ref, seed 4010",
+      "label": "Puffy Vest: Ski 1/2",
+      "context": "Puffy vest ref test. If vest → ski jacket, this could replace Ref C for winter sports.",
+      "comments": [
+        {
+          "text": "It's above the elbow, which sucks, but the symbols are correct in the logo on the strap looks nice and the girls wearing a helmet and gloves and all that stuff. I just wish it was below the the elbow give it a 70.",
+          "time": "2026-04-07T13:11:15.068Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vest-ski-4011",
+      "url": "https://files.catbox.moe/aj87mc.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Skiing, LEFT arm, puffy vest J&Mike ref, seed 4011",
+      "label": "Puffy Vest: Ski 2/2",
+      "context": "Puffy vest ref test. Clothing transfer test.",
+      "comments": [
+        {
+          "text": "Should be below the elbow the symbols look accurate but it's a glowing green, but I don't really have a color like that. I think it's matching the jacket which is strange so I give it 45.",
+          "time": "2026-04-07T13:11:34.618Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB-moto-6001",
+      "url": "https://files.catbox.moe/ahhien.jpg",
+      "model": "FLUX Pro Fill (outpaint)",
+      "prompt": "Moto coastal, outpainted from real IMG_2592 CB2 arm photo",
+      "label": "PATH B: Outpaint Moto",
+      "context": "NEW APPROACH — OUTPAINTING: Real photo of CB2 on Mike arm (IMG_2592) cropped and placed on canvas, then FLUX Fill outpaints the scene around it. CB2 should be pixel-perfect real photo. Does the boundary blend? Does the scene look natural?",
+      "comments": [
+        {
+          "text": "The chubby buns itself looks absolutely perfect. It's preserved in the right spot. That's great. It's on a motorcycle and he's just gonna chill in there, but it does look like there is some hallucination around the fact, but it's cool. I think he's on a bike. It could be a little more interesting looking but from a photo perspective the chubby buttons is 100% preserved so is the strap I give it 95",
+          "time": "2026-04-07T13:12:24.386Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB-ski-6002",
+      "url": "https://files.catbox.moe/ywsfr9.jpg",
+      "model": "FLUX Pro Fill (outpaint)",
+      "prompt": "Skiing scene, outpainted from real IMG_2592 CB2 arm photo",
+      "label": "PATH B: Outpaint Ski",
+      "context": "OUTPAINTING TEST: Same real CB2 arm photo but outpainted into a skiing scene. Cross-sport test — does the motorcycle clothing from the source fight the ski scene?",
+      "comments": [
+        {
+          "text": "This is not a ski scene cause it looks like a fusion of a ski pole and a motorcycle, which is strange like he's wearing part motorcycle jacket and part backpack and some ski goggles and it looks like he's standing on something strange but as relates to the remote being preserved that's perfect. It's just the things around it that look really strange so I give this a 30.",
+          "time": "2026-04-07T13:13:03.601Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathC-base-5000",
+      "url": "https://files.catbox.moe/3wv1cj.jpg",
+      "model": "FLUX 2 Flex g2.0",
+      "prompt": "Clean motorcycle rider, no CB2, low guidance",
+      "label": "PATH C: Base Rider (no CB2)",
+      "context": "PATH C BASE: Clean motorcycle rider generated with low guidance_scale (2.0) to minimize CB2 reference leakage. This is the \"stock photo\" that we then try to add CB2 onto in the next image.",
+      "comments": [
+        {
+          "text": "The chubby buttons looks good. It's in the right spot. Can't really see the symbols but that's fine. It's really good. I give us an 90",
+          "time": "2026-04-07T13:13:29.134Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathC-combined-5001",
+      "url": "https://files.catbox.moe/elzaic.jpg",
+      "model": "FLUX 2 Flex g7.0 multi-ref",
+      "prompt": "Multi-ref: CB2 from image 1 + rider from image 2",
+      "label": "PATH C: CB2 Added to Rider",
+      "context": "PATH C COMBINED: Two-image multi-ref edit — image 1 is Ref C (CB2 source), image 2 is the clean rider above. Prompt tells FLUX to put the CB2 from image 1 onto the rider from image 2. Does this separation work better than single-ref generation?",
+      "comments": [
+        {
+          "text": "The chubby buttons looks way too big than it should. It looks almost like it's four times the size and the guy himself looks AI cartoonish I give it a I give it a 40 out of 100.",
+          "time": "2026-04-07T13:13:59.919Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB2-tight-moto-7001",
+      "url": "https://files.catbox.moe/qr2mep.jpg",
+      "model": "FLUX Pro Fill (outpaint)",
+      "prompt": "Tight arm crop, outpaint motorcycle scene",
+      "label": "PATH B v2: Tight Moto",
+      "context": "OUTPAINT V2 — TIGHT CROP: Only the forearm+CB2 from real photo kept. Rest of scene (body, bike, background) fully AI-generated. Tighter crop = more freedom for AI to build a convincing biker. Does the sport read clearly now?",
+      "comments": [
+        {
+          "text": "This is really strange. There's no chubby buttons. It's a lot of hallucinations. Looks like his hand looks like the terminator like there's some metallic fingers. I'll give us a zero out of 100.",
+          "time": "2026-04-07T13:14:18.167Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB2-tight-ski-7002",
+      "url": "https://files.catbox.moe/63pdn1.jpg",
+      "model": "FLUX Pro Fill (outpaint)",
+      "prompt": "Tight arm crop, outpaint skiing scene",
+      "label": "PATH B v2: Tight Ski",
+      "context": "OUTPAINT V2 — TIGHT CROP: Same tight arm+CB2 crop, outpainted into skiing scene. Sport-specific prompt (ski jacket, goggles, helmet, snow). CB2 is real photo.",
+      "comments": [
+        {
+          "text": "This is a really strange hallucination of a person two different people one a snowboarder and one skier looking really strange like some sort of nightmare. This is a zero out of 100.",
+          "time": "2026-04-07T13:14:38.768Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB2-med-moto-7003",
+      "url": "https://files.catbox.moe/nky325.jpg",
+      "model": "FLUX Pro Fill (outpaint)",
+      "prompt": "Medium arm crop, outpaint motorcycle scene",
+      "label": "PATH B v2: Medium Moto",
+      "context": "OUTPAINT V2 — MEDIUM CROP: Slightly more of the original arm/torso kept (600x300 vs 500x200). Comparing: does more source context help or hurt the sport-specific scene?",
+      "comments": [
+        {
+          "text": "The chubby button itself remote is fine, but the strap is wrong. The guy's hands look like they're made out of feathers. I don't know what he's doing. It's really weird hallucination I give us a five out of 100.",
+          "time": "2026-04-07T13:15:01.051Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB2-med-ski-7004",
+      "url": "https://files.catbox.moe/8ure0e.jpg",
+      "model": "FLUX Pro Fill (outpaint)",
+      "prompt": "Medium arm crop, outpaint skiing scene",
+      "label": "PATH B v2: Medium Ski",
+      "context": "OUTPAINT V2 — MEDIUM CROP: More source context (arm+partial torso). Cross-sport test: motorcycle source → ski output with medium crop.",
+      "comments": [
+        {
+          "text": "This guy looks like again. He's either on a bike or he's on a ski Mountain. It looks like a really weird blending of strange hallucinations. I give this a two out of 100.",
+          "time": "2026-04-07T13:15:22.268Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB2-tight-mtb-7005",
+      "url": "https://files.catbox.moe/nakl8l.jpg",
+      "model": "FLUX Pro Fill (outpaint)",
+      "prompt": "Tight arm crop, outpaint MTB scene",
+      "label": "PATH B v2: Tight MTB",
+      "context": "OUTPAINT V2 — TIGHT CROP MTB: Same real CB2 arm, outpainted into mountain biking scene. Cycling jersey, helmet, forest trail.",
+      "comments": [
+        {
+          "text": "Give us a zero cause there's no chubby button and I'm not even sure what I'm looking at",
+          "time": "2026-04-07T13:15:33.000Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB2-tight-snow-7006",
+      "url": "https://files.catbox.moe/as928g.jpg",
+      "model": "FLUX Pro Fill (outpaint)",
+      "prompt": "Tight arm crop, outpaint snowboard scene",
+      "label": "PATH B v2: Tight Snow",
+      "context": "OUTPAINT V2 — TIGHT CROP SNOWBOARD: Same real CB2 arm, outpainted into snowboarding scene. Colorful winter gear, powder slope.",
+      "comments": [
+        {
+          "text": "Give this one out of 100 because it looks really strange almost like the beginning of AI meets where we're at today like it doesn't look like a person. It looks like a strange hallucination of a person and there's no chubby buttons remote.",
+          "time": "2026-04-07T13:15:58.900Z",
           "num": 1
         }
       ]
