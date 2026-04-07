@@ -79,11 +79,26 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .gal-card .gal-score.s50{background:rgba(59,130,246,.85);color:#fff}
 .gal-card .gal-score.s0{background:rgba(239,68,68,.85);color:#fff}
 .gal-card .gal-label{font-size:.5rem;padding:.2rem .3rem;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.gal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:100;display:flex;flex-direction:column;align-items:center;padding:1rem;overflow-y:auto}
 .gal-overlay img{max-width:90vw;max-height:60vh;object-fit:contain;border-radius:8px}
 .gal-overlay .gal-info{max-width:500px;margin-top:.8rem;text-align:center}
 .gal-overlay .gal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer}
 .gal-overlay .gal-dl{display:inline-block;margin-top:.5rem;padding:.3rem .8rem;border-radius:6px;border:1px solid #22c55e;color:#22c55e;font-size:.7rem;text-decoration:none}
+.gal-mm{display:inline-block;margin-top:.4rem;margin-left:.5rem;padding:.3rem .8rem;border-radius:6px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.7rem;cursor:pointer;font-weight:600}
+.gal-mm:hover{background:#1a1030}
+.mm-panel{margin-top:.6rem;width:100%;max-width:500px;text-align:left}
+.mm-panel input{width:100%;padding:.4rem .6rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.7rem;box-sizing:border-box}
+.mm-panel input::placeholder{color:#555}
+.mm-btns{display:flex;gap:.4rem;margin-top:.4rem}
+.mm-btns button{flex:1;padding:.35rem .5rem;border-radius:6px;font-size:.65rem;font-weight:600;cursor:pointer}
+.mm-btn-close{border:1px solid #22c55e;background:transparent;color:#22c55e}
+.mm-btn-creative{border:1px solid #f59e0b;background:transparent;color:#f59e0b}
+.mm-btn-close:hover{background:#0a2010}
+.mm-btn-creative:hover{background:#1a1500}
+.mm-status{margin-top:.4rem;font-size:.65rem;color:#888;text-align:center}
+.mm-results{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.5rem}
+.mm-results img{width:100%;border-radius:6px;cursor:pointer;border:2px solid transparent}
+.mm-results img:hover{border-color:#a855f7}
 .grid-return{width:100%;max-width:600px;margin:.3rem auto 0;padding:0 .5rem}
 .grid-return button{background:#1a1030;border:1px solid #a855f7;color:#a855f7;padding:.4rem .8rem;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;width:100%;text-align:left}
 .grid-return button:hover{background:#2d1a4e}
@@ -1322,8 +1337,94 @@ function galOpen(id){
     +'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+' — Score: <strong style="color:'+(s>=90?'#22c55e':s>=70?'#f59e0b':s>=50?'#3b82f6':'#ef4444')+'">'+Math.round(s)+'/100</strong></div>'
     +'<div style="font-size:.7rem;color:#aaa;max-height:200px;overflow-y:auto;text-align:left;background:#111;padding:.5rem;border-radius:6px">'+comment+'</div>'
     +'<a class="gal-dl" href="'+img.url+'" download target="_blank">Download Full Resolution</a>'
+    +'<button class="gal-mm" onclick="galToggleMM(\''+img.id+'\')">Make More Like This</button>'
+    +'<div id="mmPanel-'+img.id+'" class="mm-panel" style="display:none">'
+    +'<input id="mmText-'+img.id+'" type="text" placeholder="Optional: more snow, change to sunset, zoom closer...">'
+    +'<div class="mm-btns">'
+    +'<button class="mm-btn-close" onclick="galGenerate(\''+img.id+'\',\'high\')">Close Variation</button>'
+    +'<button class="mm-btn-creative" onclick="galGenerate(\''+img.id+'\',\'low\')">Creative Variation</button>'
+    +'</div>'
+    +'<div id="mmStatus-'+img.id+'" class="mm-status"></div>'
+    +'<div id="mmResults-'+img.id+'" class="mm-results"></div>'
+    +'</div>'
     +'</div>';
   document.body.appendChild(ov);
+}
+
+function galToggleMM(id){
+  const p=document.getElementById('mmPanel-'+id);
+  p.style.display=p.style.display==='none'?'block':'none';
+}
+
+async function galGenerate(id,fidelity){
+  const img=ALL_IMAGES.find(i=>i.id===id);if(!img)return;
+  const modifier=document.getElementById('mmText-'+id).value.trim();
+  const status=document.getElementById('mmStatus-'+id);
+  const results=document.getElementById('mmResults-'+id);
+  status.innerHTML='Submitting to GPT Image 1.5...';
+  results.innerHTML='';
+
+  const FK='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
+  const REF='https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800';
+  const CB2='the wearable remote from image 2 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons: PLUS sign, REWIND (two left triangles with bar), PLAY/PAUSE (triangle next to two vertical bars), FAST-FORWARD (two right triangles with bar), MINUS sign';
+  const prompt=modifier
+    ?'Create a variation of image 1: '+modifier+'. Preserve '+CB2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.'
+    :'Create a unique variation of image 1 with a fresh angle and composition. Preserve '+CB2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.';
+
+  try{
+    const resp=await fetch('https://queue.fal.run/fal-ai/gpt-image-1.5/edit',{
+      method:'POST',
+      headers:{'Authorization':'Key '+FK,'Content-Type':'application/json'},
+      body:JSON.stringify({image_urls:[img.url,REF],prompt,size:'1024x1536',quality:'high',input_fidelity:fidelity,num_images:2})
+    });
+    if(!resp.ok)throw new Error('Submit failed: '+resp.status);
+    const data=await resp.json();
+    const rid=data.request_id;
+    status.innerHTML='Generating 2 variations... (typically 60-90s)';
+
+    let done=false,elapsed=0;
+    while(!done&&elapsed<300){
+      await new Promise(r=>setTimeout(r,5000));
+      elapsed+=5;
+      const sr=await fetch('https://queue.fal.run/fal-ai/gpt-image-1.5/requests/'+rid+'/status',{headers:{'Authorization':'Key '+FK}});
+      const sd=await sr.json();
+      if(sd.status==='COMPLETED'){
+        const rr=await fetch('https://queue.fal.run/fal-ai/gpt-image-1.5/requests/'+rid,{headers:{'Authorization':'Key '+FK}});
+        const rd=await rr.json();
+        const imgs=rd.images||[];
+        if(!imgs.length){status.innerHTML='No images returned.';return;}
+        status.innerHTML=imgs.length+' variation'+(imgs.length>1?'s':'')+' ready! Tap to add to review queue.';
+        const ts=Date.now();
+        results.innerHTML=imgs.map((im,idx)=>{
+          const vid='mm-'+id+'-'+ts+'-'+idx;
+          return '<img src="'+im.url+'" alt="variation" onclick="galAddVariation(\''+vid+'\',\''+im.url.replace(/'/g,"\\'")+'\',\''+id+'\')">';
+        }).join('');
+        done=true;
+      }else if(sd.status==='FAILED'){
+        status.innerHTML='Generation failed. Try again.';
+        done=true;
+      }else{
+        status.innerHTML='Generating... '+elapsed+'s ('+sd.status+')';
+      }
+    }
+    if(!done)status.innerHTML='Timed out after 5 minutes. The job may still complete on fal.ai.';
+  }catch(e){
+    if(e.message.includes('Failed to fetch')||e.message.includes('NetworkError')){
+      status.innerHTML='CORS blocked. Use Claude Code to generate variations for now.';
+    }else{
+      status.innerHTML='Error: '+e.message;
+    }
+  }
+}
+
+function galAddVariation(vid,url,sourceId){
+  if(ALL_IMAGES.find(i=>i.id===vid))return;
+  const src=ALL_IMAGES.find(i=>i.id===sourceId);
+  ALL_IMAGES.push({id:vid,url:url,model:'GPT Image 1.5 (variation)',prompt:'Variation of '+sourceId,label:'VAR: '+(src?src.label:sourceId),context:'Generated via Make More Like This from '+sourceId+'. Temporary fal.media URL.'});
+  const el=document.querySelector('img[onclick*="'+vid+'"]');
+  if(el){el.style.border='2px solid #22c55e';el.style.opacity='.7';}
+  counts();
+  alert('Added to review queue! Switch to TO REVIEW tab to rate it.');
 }
 
 // Init: seed from local first (instant), then load shared feedback (async merge)
