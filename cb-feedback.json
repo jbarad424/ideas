@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T18:39:25.870Z",
+  "syncedAt": "2026-04-07T18:53:42.241Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6418,6 +6418,66 @@
         {
           "text": "this is really fucking close. The Ford track board button is missing a second triangle and the plus the minus in our little flipped, but if this were on the other arm and we saw it from inside his body like I guess he was looking at it then that would be a good orientation, but the strap looks good and the colors look good and the symbols look great.",
           "time": "2026-04-07T18:38:55.098Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-patriot-moto-9001",
+      "url": "https://files.catbox.moe/b3jbsy.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Dual-ref (Ref C + Patriot close-up) + explicit symbol names (PLUS, REWIND, PLAY/PAUSE, FAST-FORWARD, MINUS). PCH golden hour, leather jacket, helmet.",
+      "label": "COMBO: Patriot Moto Coastal",
+      "context": "COMBO TEST: Dual-reference + explicit symbol names — combining the two approaches that each scored well independently. sym-explicit-8601 got 95% on symbols with just words. dualref-patriot got perfect remote preservation. This combines both. Does the combo finally crack symbol clarity?",
+      "comments": [
+        {
+          "text": "So here you were able to get the patriot strapped onto the arm correctly, but unfortunately, the symbols don't pass and it's and it's above the elbow so I would not consider this a pass as it relates to cracking the symbol problem",
+          "time": "2026-04-07T18:51:58.582Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-patriot-moto-med-9002",
+      "url": "https://files.catbox.moe/pzbj1n.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Dual-ref (Ref C + Patriot close-up) + explicit symbols. Medium close-up of torso and arms on handlebars, 1536x1024 landscape, shallow DOF.",
+      "label": "COMBO: Patriot Moto Medium Close-up",
+      "context": "COMBO TEST: Same dual-ref + explicit symbols but TIGHTER FRAMING (medium close-up, landscape orientation). CB2 should be larger in frame = more pixel budget for symbols.",
+      "comments": [
+        {
+          "text": "Half the strap is missing and the symbols are still a little bit. Strange I would not consider this an answer to the symbol problem to the symbol problem.",
+          "time": "2026-04-07T18:52:23.324Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-tron-ski-9003",
+      "url": "https://files.catbox.moe/u1s9s4.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Dual-ref (Ref C + Tron close-up) + explicit symbol names. Skier at top of powder run, ski jacket, goggles, helmet, gloves.",
+      "label": "COMBO: Tron Skiing Alpine",
+      "context": "COMBO TEST: Same combo approach with Tron colorway (dark body, teal symbols) and skiing. Tests generalization across colorways and sports. Tron ski image says chubby buttons on strap.",
+      "comments": [
+        {
+          "text": "This is pretty close. I mean the strap has a strange chubby button's logo on it but if you just turn that play button around, it would be pretty good. Oh wait no you had to flip the whole thing it's it needs to be flipped 180 so it's not in the right orientation, but it could possibly work if this were on the other arm and you were looking at it from the viewer pe it could be something to consider",
+          "time": "2026-04-07T18:53:11.909Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "combo-patriot-snow-9004",
+      "url": "https://files.catbox.moe/00igx1.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Dual-ref (Ref C + Patriot close-up) + explicit symbols. Snowboarder at terrain park edge, beanie with goggles, bright winter sunlight.",
+      "label": "COMBO: Patriot Snowboard Park",
+      "context": "COMBO TEST: Patriot dual-ref + explicit symbols on snowboard — third sport tested with combo approach.",
+      "comments": [
+        {
+          "text": "This is getting closer. The strap looks a little strange, but it's possible it's in the right part of the arm, but the symbols are not legible, unfortunately",
+          "time": "2026-04-07T18:53:32.776Z",
           "num": 1
         }
       ]
