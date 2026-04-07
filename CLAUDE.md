@@ -139,11 +139,20 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 - **Hunter symbol fidelity:** All existing Hunter reference photos have old/faded symbol outlines and missing LED plastic. Generated Hunter images inherit these flaws.
 - **Patriot coverage:** Zero third-person Patriot photos exist anywhere.
 
+### Latest Test Batch (April 7 — awaiting Justin's review)
+24 new images deployed to review page, testing remaining reference photo options:
+- **Mike Moto deep dive** (10 images): 10 different Mike Moto photos as solo refs on Flex g7.0. Only 3 of 45 Mike photos tested previously (one scored 99). IDs: mikemoto-2587 through mikemoto-2610.
+- **Tahoe bicyclist IMG_9733** (6 images): Tron cyclist with red helmet as ref. 4 MTB (sport-matched) + 2 skiing (cross-sport). IDs: tahoe-mtb-2001 through tahoe-ski-2011.
+- **Tahoe back-to-back IMG_0087** (4 images): Group photo as alternative to J&Mike Dual — motorcycle prompt completely reproduced the source photo (confirmed test #12 "copies original" failure). NOT viable. IDs: tahoe-b2b-moto-3001 through tahoe-b2b-snow-3004.
+- **Puffy vest J&Mike IMG_0084** (4 images): Same J&Mike dual pose but wearing puffy vests instead of T-shirts. KEY TEST — if vest clothing transfers, this could upgrade Ref C for winter sports without needing Jordan's reshoot. IDs: vest-moto-4001 through vest-ski-4011.
+
 ### Next Session Priorities
-1. **Jordan shoots 7 reference photos** — 3 Hunter (moto jacket, ski jacket, hiking gear) + 3 Patriot (same) + 1 Tron winter. Updated units with fresh symbols. Both arms. See jordan-shot-list.html.
-2. **Build CREATE tab** — sport/colorway/vibe dropdowns → Make.com webhook → auto-generate → images appear in review page
-3. **Scale video production** — animate approved stills only with Gen-4 Turbo
-4. **Cancel Recraft subscription** ($25/mo, never used)
+1. **Justin reviews 24 new images** — especially the puffy vest results (could eliminate need for some Jordan shots)
+2. **Jordan shoots 7 reference photos** — 3 Hunter (moto jacket, ski jacket, hiking gear) + 3 Patriot (same) + 1 Tron winter. Updated units with fresh symbols. Both arms. See jordan-shot-list.html. (May reduce if puffy vest test succeeds)
+3. **Build CREATE tab** — sport/colorway/vibe dropdowns → Make.com webhook → auto-generate → images appear in review page
+4. **Scale video production** — animate approved stills only with Gen-4 Turbo
+5. **Cancel Recraft subscription** ($25/mo, never used)
+6. **Fix feedback sync** — SYNC_URL points to wrong webhook (plan exists in luminous-bubbling-candy.md)
 
 ### Key Resources
 | Resource | Location |
