@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CB Creative Lab: Evolution</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#e8e8e8;min-height:100vh;overflow-x:hidden;font-size:16px;line-height:1.5}
+a{color:#a78bfa;text-decoration:none}
+a:hover{color:#c4b5fd}
+
+/* Loading */
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;gap:1rem}
+.spinner{width:32px;height:32px;border:2px solid #1a1a1a;border-top-color:#a855f7;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading p{color:#555;font-size:.85rem}
+.error-msg{color:#ef4444;text-align:center;padding:2rem;font-size:.9rem}
+
+/* Header */
+.page-header{text-align:center;padding:2.5rem 1rem 1.5rem;border-bottom:1px solid #161616}
+.page-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em}
+.page-header .subtitle{color:#555;font-size:.85rem;margin-top:.3rem}
+.back-link{display:inline-block;margin-top:.8rem;font-size:.8rem;color:#666;transition:color .15s}
+.back-link:hover{color:#a78bfa}
+
+/* Stats bar */
+.stats-bar{display:flex;justify-content:center;gap:2rem;padding:1rem 1rem;border-bottom:1px solid #161616;flex-wrap:wrap}
+.stat{text-align:center;min-width:60px}
+.stat .val{font-size:1.1rem;font-weight:700;color:#a78bfa}
+.stat .lbl{font-size:.7rem;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-top:.1rem}
+
+/* Main content */
+.main{max-width:900px;margin:0 auto;padding:1rem}
+
+/* Accordion */
+.batch-row{border-bottom:1px solid #141414}
+.batch-header{display:flex;align-items:center;padding:.85rem .5rem;cursor:pointer;gap:.6rem;transition:background .15s;user-select:none}
+.batch-header:hover{background:#111}
+.chevron{color:#444;font-size:.75rem;width:1rem;text-align:center;flex-shrink:0;transition:transform .2s}
+.batch-row.open .chevron{transform:rotate(90deg)}
+.batch-title{font-size:.9rem;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.batch-title .batch-id{color:#555;font-weight:400;margin-left:.4rem}
+.batch-count{font-size:.7rem;color:#444;flex-shrink:0}
+.batch-date{font-size:.7rem;color:#444;flex-shrink:0}
+
+.batch-body{display:none;padding:.25rem .5rem 1rem}
+.batch-row.open .batch-body{display:block}
+
+.batch-summary{font-size:.75rem;color:#555;margin-bottom:.75rem;padding-left:.15rem}
+.batch-summary .liked{color:#22c55e}
+.batch-summary .disliked{color:#ef4444}
+
+/* Thumbnail grid */
+.thumb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px}
+@media(min-width:600px){.thumb-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}}
+@media(min-width:900px){.thumb-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
+
+.thumb{position:relative;aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#111;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.thumb:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Video placeholder */
+.thumb-video{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#0e0e0e}
+.play-icon{width:0;height:0;border-style:solid;border-width:10px 0 10px 18px;border-color:transparent transparent transparent rgba(255,255,255,.6)}
+
+/* Engine badge - bottom left */
+.engine-badge{position:absolute;bottom:3px;left:3px;font-size:.55rem;font-weight:700;padding:2px 5px;border-radius:3px;background:rgba(0,0,0,.8);backdrop-filter:blur(4px);pointer-events:none;letter-spacing:.02em}
+.eb-flux-pro{color:#818cf8}
+.eb-flux-kontext{color:#60a5fa}
+.eb-recraft{color:#4ade80}
+.eb-runway{color:#f472b6}
+.eb-unknown{color:#666}
+
+/* Rating dot - top right */
+.rating-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;pointer-events:none}
+.rd-like{background:#22c55e}
+.rd-dislike{background:#ef4444}
+.rd-mixed{background:#f59e0b}
+
+/* Download section */
+.download-section{text-align:center;padding:2rem 1rem 3rem}
+.download-btn{background:linear-gradient(135deg,#a855f7,#3b82f6);color:#fff;border:none;border-radius:8px;padding:.65rem 1.8rem;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .15s}
+.download-btn:hover{opacity:.9}
+.download-btn:active{opacity:.75}
+.download-btn:disabled{opacity:.3;cursor:default}
+
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:100;align-items:center;justify-content:center;padding:1rem;flex-direction:column}
+.modal-overlay.open{display:flex}
+.modal-close{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:#555;font-size:1.5rem;cursor:pointer;z-index:101;padding:.5rem}
+.modal-close:hover{color:#999}
+.modal-img{max-width:90vw;max-height:55vh;object-fit:contain;border-radius:6px}
+.modal-video{max-width:90vw;max-height:55vh;border-radius:6px}
+.modal-details{max-width:90vw;width:500px;margin-top:1rem;text-align:left}
+.modal-prompt{font-size:.85rem;color:#999;line-height:1.6;margin-bottom:.6rem;font-style:italic}
+.modal-meta{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;font-size:.75rem}
+.modal-badge{padding:3px 8px;border-radius:4px;font-weight:700;font-size:.65rem;text-transform:uppercase}
+.mb-flux-pro{background:#1a1a3a;color:#818cf8;border:1px solid #2a2a5a}
+.mb-flux-kontext{background:#1a1a3a;color:#60a5fa;border:1px solid #2a2a5a}
+.mb-recraft{background:#1a2a1a;color:#4ade80;border:1px solid #2a4a2a}
+.mb-runway{background:#2a1a2a;color:#f472b6;border:1px solid #4a2a4a}
+.mb-unknown{background:#1a1a1a;color:#666;border:1px solid #333}
+.modal-rating{font-size:.75rem;color:#666}
+.modal-rating.liked{color:#22c55e}
+.modal-rating.disliked{color:#ef4444}
+.modal-rating.mixed{color:#f59e0b}
+.modal-ai{margin-top:.8rem;font-size:.8rem;color:#666;line-height:1.5;border-top:1px solid #1a1a1a;padding-top:.6rem}
+.modal-ai strong{color:#888;font-weight:600}
+
+/* Batch story narrative */
+.batch-story{background:#111;border-left:2px solid #a855f7;padding:.8rem;margin-top:.75rem;border-radius:0 6px 6px 0;font-size:.8rem;line-height:1.6;color:#999}
+.batch-story .story-section{margin-bottom:.6rem}
+.batch-story .story-section:last-child{margin-bottom:0}
+.batch-story .story-label{font-size:.7rem;font-weight:700;color:#a78bfa;text-transform:uppercase;letter-spacing:.4px;margin-bottom:.15rem}
+.batch-story .story-text{color:#888;font-size:.78rem}
+.batch-story .story-quote{color:#666;font-style:italic;font-size:.75rem;margin-left:.5rem}
+.batch-story .story-scores{color:#60a5fa;font-size:.75rem}
+.batch-story .story-insight{color:#fbbf24;font-size:.78rem}
+.batch-story .story-arrow{color:#4ade80;font-size:.78rem}
+
+/* Empty state */
+.empty{text-align:center;padding:4rem 1rem;color:#333;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<div id="loading" class="loading">
+  <div class="spinner"></div>
+  <p>Loading asset data...</p>
+</div>
+
+<div id="app" style="display:none">
+
+  <div class="page-header">
+    <h1>CB Creative Lab: Evolution</h1>
+    <p class="subtitle">Asset generation log -- scan, expand, explore</p>
+    <div><a class="back-link" href="https://jbarad424.github.io/ideas/asset-tagger.html">&larr; Back to Lab</a></div>
+  </div>
+
+  <div class="stats-bar" id="statsBar"></div>
+
+  <div class="main" id="batchList"></div>
+
+  <div class="download-section">
+    <button class="download-btn" id="dlBtn" onclick="downloadCSV()">Download All Data (CSV)</button>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <button class="modal-close" onclick="closeModal()">&times;</button>
+  <div id="modalMedia"></div>
+  <div class="modal-details" id="modalDetails"></div>
+</div>
+
+<script>
+const DATA_URL = 'https://jbarad424.github.io/ideas/cb-ai-lab.json';
+let allImages = [];
+
+const ENGINE_MAP = {
+  'flux-pro-1.1': 'FLUX Pro',
+  'flux-kontext-pro': 'FLUX Kontext',
+  'recraft-v3': 'Recraft',
+  'runway': 'Runway',
+};
+
+function engineName(model) {
+  if (!model) return 'Unknown';
+  const k = model.toLowerCase().trim();
+  if (ENGINE_MAP[k]) return ENGINE_MAP[k];
+  if (k.includes('kontext')) return 'FLUX Kontext';
+  if (k.includes('flux')) return 'FLUX Pro';
+  if (k.includes('recraft')) return 'Recraft';
+  if (k.includes('runway')) return 'Runway';
+  return model;
+}
+
+function engineBadgeClass(model) {
+  const m = (model || '').toLowerCase();
+  if (m.includes('kontext')) return 'eb-flux-kontext';
+  if (m.includes('flux')) return 'eb-flux-pro';
+  if (m.includes('recraft')) return 'eb-recraft';
+  if (m.includes('runway')) return 'eb-runway';
+  return 'eb-unknown';
+}
+
+function modalBadgeClass(model) {
+  const m = (model || '').toLowerCase();
+  if (m.includes('kontext')) return 'mb-flux-kontext';
+  if (m.includes('flux')) return 'mb-flux-pro';
+  if (m.includes('recraft')) return 'mb-recraft';
+  if (m.includes('runway')) return 'mb-runway';
+  return 'mb-unknown';
+}
+
+function isVideo(img) { return (img.model || '').toLowerCase() === 'runway'; }
+
+function thumbUrl(img) {
+  if (!img.driveFileId) return '';
+  return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(img.driveFileId) + '&sz=w300';
+}
+
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function escAttr(s) {
+  return (s || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;');
+}
+
+function fmtDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  } catch { return ''; }
+}
+
+function isReadableId(id) {
+  if (!id) return false;
+  if (/^auto[-_]\d+$/i.test(id)) return false;
+  if (/^[0-9a-f]{8,}$/i.test(id)) return false;
+  if (/^\d+$/.test(id)) return false;
+  if (id === 'unknown') return false;
+  return true;
+}
+
+/* Build batches sorted chronologically */
+function getBatches() {
+  const map = {};
+  allImages.forEach(img => {
+    const bid = img.batchId || 'unknown';
+    if (!map[bid]) map[bid] = [];
+    map[bid].push(img);
+  });
+  return Object.entries(map).map(([id, imgs]) => {
+    const dates = imgs.map(i => i.generatedAt).filter(Boolean).sort();
+    return { id, images: imgs, date: dates[0] || null };
+  }).sort((a, b) => {
+    if (!a.date && !b.date) return 0;
+    if (!a.date) return 1;
+    if (!b.date) return -1;
+    return new Date(a.date) - new Date(b.date);
+  });
+}
+
+async function init() {
+  try {
+    const res = await fetch(DATA_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    allImages = data.images || [];
+    render();
+  } catch (e) {
+    document.getElementById('loading').innerHTML =
+      '<div class="error-msg">Failed to load data. ' + esc(e.message) + '</div>';
+  }
+}
+
+function render() {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  renderStats();
+  renderBatches();
+  if (allImages.length === 0) {
+    document.getElementById('dlBtn').disabled = true;
+  }
+}
+
+function renderStats() {
+  const total = allImages.length;
+  const rated = allImages.filter(i => i.rating).length;
+
+  // Compute average AI score if aiAnalysis.overallScore exists
+  const scores = allImages
+    .map(i => i.aiAnalysis && typeof i.aiAnalysis.overallScore === 'number' ? i.aiAnalysis.overallScore : null)
+    .filter(v => v !== null);
+  const avgScore = scores.length > 0 ? (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1) : null;
+
+  let html = '';
+  html += '<div class="stat"><div class="val">' + total + '</div><div class="lbl">Total</div></div>';
+  html += '<div class="stat"><div class="val">' + rated + '</div><div class="lbl">Rated</div></div>';
+  if (avgScore !== null) {
+    html += '<div class="stat"><div class="val">' + avgScore + '</div><div class="lbl">Avg AI Score</div></div>';
+  }
+  document.getElementById('statsBar').innerHTML = html;
+}
+
+/* Build batch story narrative */
+function buildBatchStory(batch, idx, allBatches) {
+  // --- What was tried ---
+  const repPrompt = batch.images[0] ? batch.images[0].prompt : '';
+  const truncPrompt = repPrompt.length > 100 ? repPrompt.slice(0, 100) + '...' : repPrompt;
+  const model = engineName(batch.images[0] ? batch.images[0].model : '');
+
+  // --- Human feedback ---
+  let humanLines = [];
+  batch.images.forEach(img => {
+    if (img.feedbackText) {
+      try {
+        const fb = typeof img.feedbackText === 'string' && img.feedbackText.startsWith('{')
+          ? JSON.parse(img.feedbackText) : null;
+        if (fb && fb.ratedBy && fb.text) {
+          humanLines.push(esc(fb.ratedBy) + ': "' + esc(fb.text) + '"');
+        } else if (typeof img.feedbackText === 'string' && img.feedbackText.trim()) {
+          humanLines.push(esc(img.feedbackText));
+        }
+      } catch {
+        if (img.feedbackText.trim()) humanLines.push(esc(img.feedbackText));
+      }
+    }
+    if (img.feedbackTags) {
+      const tags = Array.isArray(img.feedbackTags) ? img.feedbackTags : (img.feedbackTags ? [img.feedbackTags] : []);
+      if (tags.length > 0) humanLines.push('Tags: ' + esc(tags.join(', ')));
+    }
+  });
+  const rated = batch.images.filter(i => i.rating).length;
+  const likes = batch.images.filter(i => i.rating === 'like').length;
+  const dislikes = batch.images.filter(i => i.rating === 'dislike').length;
+  const mixed = batch.images.filter(i => i.rating === 'mixed').length;
+  if (rated > 0 && humanLines.length === 0) {
+    let parts = [];
+    if (likes) parts.push(likes + ' liked');
+    if (dislikes) parts.push(dislikes + ' disliked');
+    if (mixed) parts.push(mixed + ' mixed');
+    humanLines.push(parts.join(', ') + ' (no written feedback)');
+  }
+  if (humanLines.length === 0) humanLines.push('No ratings yet');
+
+  // --- AI Vision analysis ---
+  const aiImgs = batch.images.filter(i => i.aiAnalysis);
+  let aiHtml = '';
+  if (aiImgs.length > 0) {
+    const avgP = (aiImgs.reduce((s,i) => s + i.aiAnalysis.productScore, 0) / aiImgs.length).toFixed(1);
+    const avgS = (aiImgs.reduce((s,i) => s + i.aiAnalysis.sceneScore, 0) / aiImgs.length).toFixed(1);
+    const avgB = (aiImgs.reduce((s,i) => s + i.aiAnalysis.brandScore, 0) / aiImgs.length).toFixed(1);
+    aiHtml += '<span class="story-scores">Avg scores: Product ' + avgP + ', Scene ' + avgS + ', Brand ' + avgB + '</span><br>';
+    // Key issues: collect unique summaries with low product scores
+    const issues = [];
+    aiImgs.forEach(i => {
+      if (i.aiAnalysis.productScore <= 2 && i.aiAnalysis.summary) {
+        const short = i.aiAnalysis.summary.split('.')[0];
+        if (!issues.includes(short)) issues.push(short);
+      }
+    });
+    if (issues.length > 0) {
+      aiHtml += 'Key issues: ' + esc(issues.slice(0, 3).join('; '));
+    } else {
+      // Show strengths
+      const strengths = [];
+      aiImgs.forEach(i => {
+        if (i.aiAnalysis.productScore >= 4 && i.aiAnalysis.summary) {
+          const short = i.aiAnalysis.summary.split('.')[0];
+          if (!strengths.includes(short)) strengths.push(short);
+        }
+      });
+      if (strengths.length > 0) aiHtml += 'Strengths: ' + esc(strengths.slice(0, 3).join('; '));
+    }
+  } else {
+    aiHtml = 'No AI analysis available for this batch';
+  }
+
+  // --- Takeaway ---
+  let takeaway = '';
+  if (aiImgs.length > 0) {
+    const avgProduct = aiImgs.reduce((s,i) => s + i.aiAnalysis.productScore, 0) / aiImgs.length;
+    const avgScene = aiImgs.reduce((s,i) => s + i.aiAnalysis.sceneScore, 0) / aiImgs.length;
+    const avgBrand = aiImgs.reduce((s,i) => s + i.aiAnalysis.brandScore, 0) / aiImgs.length;
+    const missingCount = aiImgs.filter(i => i.aiAnalysis.productScore <= 1).length;
+    const wrongForm = aiImgs.filter(i => i.aiAnalysis.productScore === 2).length;
+
+    if (avgProduct <= 2 && avgScene >= 4) {
+      if (missingCount > wrongForm) {
+        takeaway = 'Product disappears in complex scenes. Text-to-image cannot reliably place specific products.';
+      } else {
+        takeaway = 'Text-to-image generates wrong product form factor. Need reference photos to guide product accuracy.';
+      }
+    } else if (avgProduct >= 4 && avgBrand <= 2) {
+      takeaway = 'Product accuracy is strong but scenes lack lifestyle energy. Need to combine accurate product with action settings.';
+    } else if (avgProduct >= 4 && avgBrand >= 4 && avgScene >= 4) {
+      takeaway = 'Strong results across all dimensions. This approach is working well.';
+    } else if (avgProduct >= 3 && missingCount > 0) {
+      takeaway = 'Mixed results: some images nail the product, others lose it entirely. Inconsistent preservation.';
+    } else {
+      takeaway = 'Incremental progress. Scores suggest further iteration needed on product accuracy.';
+    }
+  } else {
+    takeaway = 'No AI analysis to derive insights.';
+  }
+
+  // --- What changed next ---
+  let changedNext = '';
+  const nextBatch = idx < allBatches.length - 1 ? allBatches[idx + 1] : null;
+  if (nextBatch) {
+    const curModel = (batch.images[0] && batch.images[0].model) || '';
+    const nextModel = (nextBatch.images[0] && nextBatch.images[0].model) || '';
+    const curUsesKontext = curModel.toLowerCase().includes('kontext');
+    const nextUsesKontext = nextModel.toLowerCase().includes('kontext');
+    const curUsesRecraft = curModel.toLowerCase().includes('recraft');
+    const nextUsesRecraft = nextModel.toLowerCase().includes('recraft');
+    const nextUsesRunway = nextModel.toLowerCase().includes('runway');
+    const curPrompt = (batch.images[0] && batch.images[0].prompt) || '';
+    const nextPrompt = (nextBatch.images[0] && nextBatch.images[0].prompt) || '';
+
+    let changes = [];
+    if (!curUsesKontext && nextUsesKontext) {
+      changes.push('Switched to FLUX Kontext (image-to-image with reference photos)');
+    }
+    if (curUsesKontext && nextUsesKontext && curModel === nextModel) {
+      // Compare prompts for preservation language
+      const nextHasArrow = nextPrompt.includes('->');
+      const curHasArrow = curPrompt.includes('->');
+      if (!curHasArrow && nextHasArrow) {
+        changes.push('Added scene transformation syntax (reference -> scene)');
+      } else if (curHasArrow && nextHasArrow) {
+        changes.push('Refined prompts with different scene compositions');
+      }
+    }
+    if (!curUsesRecraft && nextUsesRecraft) {
+      changes.push('Tried Recraft v3 as alternative model');
+    }
+    if (nextUsesRunway) {
+      changes.push('Moved to video generation with Runway');
+    }
+    if (nextPrompt.toLowerCase().includes('cb2') && !curPrompt.toLowerCase().includes('cb2')) {
+      changes.push('Added explicit CB2 product name in prompts');
+    }
+    if (changes.length === 0) {
+      changes.push('Continued iterating with ' + engineName(nextModel));
+    }
+    changedNext = changes.join('. ') + '.';
+  } else {
+    changedNext = 'This is the latest batch.';
+  }
+
+  return '<div class="batch-story">' +
+    '<div style="font-size:.7rem;font-weight:700;color:#a78bfa;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.5px">Batch Story</div>' +
+    '<div class="story-section"><div class="story-label">What was tried</div><div class="story-text">' + esc(model) + ': "' + esc(truncPrompt) + '"</div></div>' +
+    '<div class="story-section"><div class="story-label">Human feedback</div><div class="story-text">' + humanLines.map(l => '<div class="story-quote">' + l + '</div>').join('') + '</div></div>' +
+    '<div class="story-section"><div class="story-label">AI Vision analysis</div><div class="story-text">' + aiHtml + '</div></div>' +
+    '<div class="story-section"><div class="story-label">Takeaway</div><div class="story-text story-insight">' + esc(takeaway) + '</div></div>' +
+    '<div class="story-section"><div class="story-label">What changed next</div><div class="story-text story-arrow">' + esc(changedNext) + '</div></div>' +
+  '</div>';
+}
+
+function renderBatches() {
+  const batches = getBatches();
+  const container = document.getElementById('batchList');
+
+  if (batches.length === 0) {
+    container.innerHTML = '<div class="empty">No assets found.</div>';
+    return;
+  }
+
+  container.innerHTML = batches.map((batch, idx) => {
+    const num = idx + 1;
+    const readable = isReadableId(batch.id);
+    const dateStr = fmtDate(batch.date);
+    const count = batch.images.length;
+
+    // Title: "Batch 1 -- explore-1 -- Apr 2" or "Batch 1 -- Apr 2"
+    let titleHtml = 'Batch ' + num;
+    if (readable) titleHtml += '<span class="batch-id"> -- ' + esc(batch.id) + '</span>';
+    if (dateStr) titleHtml += '<span class="batch-id"> -- ' + esc(dateStr) + '</span>';
+
+    // Summary counts
+    const likes = batch.images.filter(i => i.rating === 'like').length;
+    const dislikes = batch.images.filter(i => i.rating === 'dislike').length;
+    const mixed = batch.images.filter(i => i.rating === 'mixed').length;
+    const unrated = count - likes - dislikes - mixed;
+    let summaryParts = [];
+    if (likes > 0) summaryParts.push('<span class="liked">' + likes + ' liked</span>');
+    if (dislikes > 0) summaryParts.push('<span class="disliked">' + dislikes + ' disliked</span>');
+    if (unrated > 0) summaryParts.push(unrated + ' unrated');
+    const summaryHtml = summaryParts.join(', ');
+
+    // Thumbnails
+    const thumbsHtml = batch.images.map((img, i) => {
+      const dataIdx = allImages.indexOf(img);
+      const ebClass = engineBadgeClass(img.model);
+      const eName = engineName(img.model);
+
+      // Rating dot
+      let dotHtml = '';
+      if (img.rating === 'like') dotHtml = '<div class="rating-dot rd-like"></div>';
+      else if (img.rating === 'dislike') dotHtml = '<div class="rating-dot rd-dislike"></div>';
+      else if (img.rating === 'mixed') dotHtml = '<div class="rating-dot rd-mixed"></div>';
+
+      if (isVideo(img)) {
+        return '<div class="thumb" onclick="openModal(' + dataIdx + ')">' +
+          '<div class="thumb-video"><div class="play-icon"></div></div>' +
+          '<span class="engine-badge ' + ebClass + '">' + esc(eName) + '</span>' +
+          dotHtml +
+        '</div>';
+      }
+
+      const url = thumbUrl(img);
+      if (!url) return '';
+      return '<div class="thumb" onclick="openModal(' + dataIdx + ')">' +
+        '<img src="' + escAttr(url) + '" alt="" loading="lazy">' +
+        '<span class="engine-badge ' + ebClass + '">' + esc(eName) + '</span>' +
+        dotHtml +
+      '</div>';
+    }).join('');
+
+    // Batch story narrative
+    const storyHtml = buildBatchStory(batch, idx, batches);
+
+    return '<div class="batch-row" id="batch-' + idx + '">' +
+      '<div class="batch-header" onclick="toggleBatch(' + idx + ')">' +
+        '<span class="chevron">&#9656;</span>' +
+        '<span class="batch-title">' + titleHtml + '</span>' +
+        '<span class="batch-count">' + count + ' assets</span>' +
+      '</div>' +
+      '<div class="batch-body">' +
+        (summaryHtml ? '<div class="batch-summary">' + summaryHtml + '</div>' : '') +
+        '<div class="thumb-grid">' + thumbsHtml + '</div>' +
+        storyHtml +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function toggleBatch(idx) {
+  const el = document.getElementById('batch-' + idx);
+  if (el) el.classList.toggle('open');
+}
+
+/* Modal */
+function openModal(dataIdx) {
+  const img = allImages[dataIdx];
+  if (!img) return;
+
+  const modal = document.getElementById('modal');
+  const media = document.getElementById('modalMedia');
+  const details = document.getElementById('modalDetails');
+
+  if (isVideo(img) && img.driveFileId) {
+    media.innerHTML = '<video class="modal-video" controls autoplay src="https://drive.google.com/uc?id=' + escAttr(img.driveFileId) + '&export=download"></video>';
+  } else if (isVideo(img)) {
+    media.innerHTML = '<div style="color:#555;padding:2rem">Video preview unavailable</div>';
+  } else {
+    const bigUrl = img.driveFileId
+      ? 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(img.driveFileId) + '&sz=w800'
+      : '';
+    if (bigUrl) {
+      media.innerHTML = '<img class="modal-img" src="' + escAttr(bigUrl) + '" alt="">';
+    } else {
+      media.innerHTML = '<div style="color:#555;padding:2rem">No preview</div>';
+    }
+  }
+
+  // Details
+  let html = '';
+  if (img.prompt) {
+    html += '<div class="modal-prompt">' + esc(img.prompt) + '</div>';
+  }
+
+  html += '<div class="modal-meta">';
+  html += '<span class="modal-badge ' + modalBadgeClass(img.model) + '">' + esc(engineName(img.model)) + '</span>';
+
+  if (img.rating === 'like') html += '<span class="modal-rating liked">Liked</span>';
+  else if (img.rating === 'dislike') html += '<span class="modal-rating disliked">Disliked</span>';
+  else if (img.rating === 'mixed') html += '<span class="modal-rating mixed">Mixed</span>';
+  else html += '<span class="modal-rating">Unrated</span>';
+
+  if (img.shotType) html += '<span style="color:#555">' + esc(img.shotType) + '</span>';
+  if (img.style) html += '<span style="color:#555">' + esc(img.style) + '</span>';
+  html += '</div>';
+
+  // AI Analysis
+  if (img.aiAnalysis) {
+    html += '<div class="modal-ai">';
+    html += '<strong>AI Analysis</strong><br>';
+    if (typeof img.aiAnalysis.overallScore === 'number') {
+      html += 'Score: ' + img.aiAnalysis.overallScore + '/10<br>';
+    }
+    if (img.aiAnalysis.summary) {
+      html += esc(img.aiAnalysis.summary);
+    } else if (img.aiAnalysis.strengths || img.aiAnalysis.weaknesses) {
+      if (img.aiAnalysis.strengths) html += 'Strengths: ' + esc(Array.isArray(img.aiAnalysis.strengths) ? img.aiAnalysis.strengths.join(', ') : img.aiAnalysis.strengths) + '<br>';
+      if (img.aiAnalysis.weaknesses) html += 'Weaknesses: ' + esc(Array.isArray(img.aiAnalysis.weaknesses) ? img.aiAnalysis.weaknesses.join(', ') : img.aiAnalysis.weaknesses);
+    }
+    html += '</div>';
+  }
+
+  details.innerHTML = html;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal') && !e.target.closest('.modal-close')) return;
+  const modal = document.getElementById('modal');
+  modal.classList.remove('open');
+  document.getElementById('modalMedia').innerHTML = '';
+  document.getElementById('modalDetails').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* CSV Download */
+function downloadCSV() {
+  if (allImages.length === 0) return;
+  const headers = ['imageId','batchId','model','shotType','style','rating','feedbackTags','feedbackText','ratedAt','generatedAt','prompt'];
+  const rows = allImages.map(img =>
+    headers.map(h => {
+      let v = img[h];
+      if (h === 'feedbackTags' && Array.isArray(v)) v = v.join('; ');
+      if (v == null) v = '';
+      v = String(v).replace(/"/g, '""');
+      if (v.includes(',') || v.includes('"') || v.includes('\n')) v = '"' + v + '"';
+      return v;
+    }).join(',')
+  );
+  const csv = headers.join(',') + '\n' + rows.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cb-creative-lab-data.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+init();
+</script>
+</body>
+</html>
