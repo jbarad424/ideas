@@ -1128,7 +1128,18 @@ function submitComment(){
 }
 
 function counts(){
-  document.getElementById('cntNew').textContent=ALL_IMAGES.filter(i=>!isR(i)).length;
+  const sv=getScanVotes();
+  const hasScan=Object.keys(sv).length>0;
+  let newCnt;
+  if(hasScan){
+    // Match upFilt logic: scan-approved/maybe that haven't been detail-reviewed
+    newCnt=ALL_IMAGES.filter(i=>!isR(i) && (sv[i.id]==='pass'||sv[i.id]==='maybe')).length;
+    // Plus any unscanned+unreviewed images
+    if(!newCnt) newCnt=ALL_IMAGES.filter(i=>!isR(i) && !sv[i.id]).length;
+  } else {
+    newCnt=ALL_IMAGES.filter(i=>!isR(i)).length;
+  }
+  document.getElementById('cntNew').textContent=newCnt;
   document.getElementById('cntDone').textContent=ALL_IMAGES.filter(i=>isR(i)).length;
   document.getElementById('cntVid').textContent=ALL_VIDEOS.length;
 }
@@ -1213,8 +1224,15 @@ function go(dir){
     // Going forward: push current image to history for back navigation
     if(pid)navHistory.push(pid);
     upFilt();
+    if(!filt.length){render();counts();return;}
     const s=filt.findIndex(i=>i.id===pid);
-    ci=s===-1?Math.min(ci,filt.length-1):Math.min(s+1,filt.length-1);
+    if(s!==-1){
+      // Current image still in filter — advance past it
+      ci=Math.min(s+1,filt.length-1);
+    }else{
+      // Image left the filter (just got reviewed) — stay at same position
+      ci=Math.min(ci,filt.length-1);
+    }
   }else{
     // Going back: pop from history and navigate to that image
     if(navHistory.length>0){
