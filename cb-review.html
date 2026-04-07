@@ -134,6 +134,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="tab" onclick="setTab('gallery')">GALLERY</div>
   <div class="tab" onclick="setTab('videos')">VIDEOS (<span id="cntVid">0</span>)</div>
   <div class="tab" onclick="setTab('create')">CREATE</div>
+  <div class="tab" onclick="setTab('scan')">SCAN</div>
   <div class="tab" onclick="setTab('aiscore')">AI SCORING</div>
   <div class="tab" onclick="setTab('balance')">BALANCE</div>
 </div>
@@ -281,6 +282,40 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div style="font-size:2rem;margin-bottom:.5rem">🚧</div>
   <div style="font-size:1rem;font-weight:700;color:#a855f7;margin-bottom:.3rem">CREATE — Under Construction</div>
   <div style="font-size:.8rem;color:#888">Self-serve generation coming soon: pick sport, colorway, vibe → auto-generate a batch.</div>
+</div>
+
+<!-- SCAN TAB (Swipe to Review) -->
+<div id="scanArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem;position:relative;overflow:hidden">
+  <div id="scanCard" style="position:relative;width:100%;touch-action:pan-y">
+    <div id="scanImg" style="width:100%;background:#111;border-radius:12px;overflow:hidden;position:relative;min-height:300px">
+      <img id="scanPhoto" src="" style="width:100%;display:block;object-fit:contain;max-height:70vh;background:#000" onclick="scanZoom()">
+      <div id="scanOverlay" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:900;pointer-events:none;opacity:0;transition:opacity .15s"></div>
+    </div>
+    <div id="scanMeta" style="padding:.5rem 0;font-size:.7rem;color:#888;text-align:center"></div>
+  </div>
+  <div style="display:flex;gap:1rem;justify-content:center;margin:.8rem 0">
+    <button onclick="scanVote('fail')" style="width:70px;height:70px;border-radius:50%;border:3px solid #ef4444;background:transparent;color:#ef4444;font-size:1.8rem;cursor:pointer;transition:all .15s" onmousedown="this.style.background='#ef4444';this.style.color='#fff'" onmouseup="this.style.background='transparent';this.style.color='#ef4444'">✕</button>
+    <button onclick="scanVote('maybe')" style="width:56px;height:56px;border-radius:50%;border:3px solid #f59e0b;background:transparent;color:#f59e0b;font-size:1.2rem;cursor:pointer;align-self:center;transition:all .15s" onmousedown="this.style.background='#f59e0b';this.style.color='#fff'" onmouseup="this.style.background='transparent';this.style.color='#f59e0b'">?</button>
+    <button onclick="scanVote('pass')" style="width:70px;height:70px;border-radius:50%;border:3px solid #22c55e;background:transparent;color:#22c55e;font-size:1.8rem;cursor:pointer;transition:all .15s" onmousedown="this.style.background='#22c55e';this.style.color='#fff'" onmouseup="this.style.background='transparent';this.style.color='#22c55e'">♥</button>
+  </div>
+  <div id="scanProgress" style="text-align:center;font-size:.75rem;color:#666;margin-bottom:.5rem"></div>
+  <div style="display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem">
+    <button onclick="scanShowResults('pass')" style="padding:.3rem .8rem;border-radius:6px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.7rem;cursor:pointer">Winners (<span id="scanPassCnt">0</span>)</button>
+    <button onclick="scanShowResults('maybe')" style="padding:.3rem .8rem;border-radius:6px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.7rem;cursor:pointer">Maybe (<span id="scanMaybeCnt">0</span>)</button>
+    <button onclick="scanShowResults('fail')" style="padding:.3rem .8rem;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-size:.7rem;cursor:pointer">Rejected (<span id="scanFailCnt">0</span>)</button>
+  </div>
+  <div id="scanResults" style="display:none">
+    <div id="scanResultsTitle" style="font-size:.8rem;font-weight:700;color:#a855f7;margin-bottom:.5rem;text-align:center"></div>
+    <div id="scanResultsGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"></div>
+    <div style="text-align:center;margin-top:.8rem">
+      <button onclick="scanHideResults()" style="padding:.4rem 1rem;border-radius:8px;border:1px solid #333;background:#111;color:#888;font-size:.75rem;cursor:pointer">Back to Scanning</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scan Zoom Overlay -->
+<div id="scanZoomOverlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:1000;display:none;align-items:center;justify-content:center" onclick="this.style.display='none'">
+  <img id="scanZoomImg" src="" style="max-width:95vw;max-height:95vh;object-fit:contain">
 </div>
 
 <!-- BALANCE TAB -->
@@ -1090,7 +1125,7 @@ function counts(){
 function setTab(t){
   tab=t;ci=0;navHistory=[];
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['new','done','progress','gallery','videos','create','aiscore','balance'][i]===t)?' active':'');
+    el.className='tab'+((['new','done','progress','gallery','videos','create','scan','aiscore','balance'][i]===t)?' active':'');
   });
   // Show/hide sections — each tab has its own area
   document.getElementById('gridToggle').style.display=(t==='done')?'block':'none';
@@ -1100,12 +1135,14 @@ function setTab(t){
   document.getElementById('galleryArea').style.display=(t==='gallery')?'block':'none';
   document.getElementById('videosArea').style.display=(t==='videos')?'block':'none';
   document.getElementById('createArea').style.display=(t==='create')?'block':'none';
+  document.getElementById('scanArea').style.display=(t==='scan')?'block':'none';
   document.getElementById('aiscoreArea').style.display=(t==='aiscore')?'block':'none';
   document.getElementById('balanceArea').style.display=(t==='balance')?'block':'none';
   document.getElementById('emptyState').style.display='none';
   if(t==='gallery'){renderGallery();}
   else if(t==='videos'){vidSetTab('new');}
   else if(t==='aiscore'){aiScoreRender();}
+  else if(t==='scan'){scanInit();}
   else if(t==='new'||t==='done'){upFilt();renderView();}
   else if(t==='progress'){document.getElementById('counter').textContent='Experiment Tracker';}
   else if(t==='create'){document.getElementById('counter').textContent='Create — Coming Soon';}
@@ -1406,5 +1443,195 @@ document.getElementById('gridToggle').style.display=(tab==='done')?'block':'none
 renderView();
 // Load shared feedback from GitHub (merges remote reviews into local)
 loadSharedFeedback();
+
+// === SCAN TAB (Swipe to Review) ===
+let scanQueue=[], scanIdx=0, scanVotes={}, scanTouchStartX=0, scanTouchStartY=0, scanSwiping=false;
+
+function scanInit(){
+  // Queue = unreviewed images (same as TO REVIEW tab)
+  scanQueue=ALL_IMAGES.filter(i=>!isR(i));
+  // If all reviewed, show all images sorted by score for re-scanning
+  if(!scanQueue.length) scanQueue=ALL_IMAGES.filter(i=>isR(i));
+  // Restore votes from sessionStorage
+  try{scanVotes=JSON.parse(sessionStorage.getItem('scanVotes')||'{}');}catch(e){scanVotes={};}
+  // Skip already-voted images
+  while(scanIdx<scanQueue.length && scanVotes[scanQueue[scanIdx].id]) scanIdx++;
+  scanRender();
+  scanUpdateCounts();
+  document.getElementById('scanResults').style.display='none';
+  document.getElementById('scanCard').style.display='block';
+  document.getElementById('counter').textContent='Quick Scan — swipe or tap to rate';
+  // Setup touch handlers
+  const card=document.getElementById('scanCard');
+  card.ontouchstart=scanTouchStart;
+  card.ontouchmove=scanTouchMove;
+  card.ontouchend=scanTouchEnd;
+}
+
+function scanRender(){
+  if(scanIdx>=scanQueue.length){
+    document.getElementById('scanPhoto').src='';
+    document.getElementById('scanMeta').textContent='';
+    document.getElementById('scanProgress').textContent='All done! Check your results below.';
+    document.getElementById('scanCard').style.opacity='0.3';
+    return;
+  }
+  document.getElementById('scanCard').style.opacity='1';
+  const img=scanQueue[scanIdx];
+  document.getElementById('scanPhoto').src=img.url;
+  const short=img.label.replace(/^(REF TEST |REF C: |BATCH: |FLIP FIX: |PIPE [A-Z]: |LoRA V5: |FLUX 2 LoRA: )/,'');
+  document.getElementById('scanMeta').innerHTML='<span style="color:#06b6d4">'+img.model+'</span> — '+short;
+  const voted=Object.keys(scanVotes).length;
+  const total=scanQueue.length;
+  document.getElementById('scanProgress').textContent=(voted)+' / '+total+' scanned';
+  // Reset card position
+  document.getElementById('scanCard').style.transform='';
+  document.getElementById('scanOverlay').style.opacity='0';
+}
+
+function scanVote(verdict){
+  if(scanIdx>=scanQueue.length) return;
+  const img=scanQueue[scanIdx];
+  scanVotes[img.id]=verdict;
+  sessionStorage.setItem('scanVotes',JSON.stringify(scanVotes));
+  // Animate out
+  const card=document.getElementById('scanCard');
+  const dir=verdict==='pass'?1:verdict==='fail'?-1:0;
+  card.style.transition='transform .25s ease, opacity .25s ease';
+  card.style.transform='translateX('+(dir*120)+'%) rotate('+(dir*15)+'deg)';
+  card.style.opacity='0';
+  setTimeout(()=>{
+    card.style.transition='none';
+    card.style.transform='';
+    card.style.opacity='1';
+    scanIdx++;
+    // Skip already voted
+    while(scanIdx<scanQueue.length && scanVotes[scanQueue[scanIdx].id]) scanIdx++;
+    scanRender();
+    scanUpdateCounts();
+  },250);
+  // If voted pass, also save a quick comment so it shows as "reviewed"
+  if(verdict==='pass'){
+    const d=D();
+    if(!d[img.id])d[img.id]={comments:[],label:img.label};
+    if(!d[img.id].comments.length){
+      d[img.id].comments.push({text:'[Quick scan: APPROVED]',time:new Date().toISOString(),num:1});
+      d[img.id].label=img.label;
+      S(d);
+    }
+  }
+}
+
+function scanUpdateCounts(){
+  let p=0,m=0,f=0;
+  for(const v of Object.values(scanVotes)){
+    if(v==='pass')p++;else if(v==='maybe')m++;else f++;
+  }
+  document.getElementById('scanPassCnt').textContent=p;
+  document.getElementById('scanMaybeCnt').textContent=m;
+  document.getElementById('scanFailCnt').textContent=f;
+}
+
+function scanShowResults(type){
+  const ids=Object.entries(scanVotes).filter(([k,v])=>v===type).map(([k])=>k);
+  const imgs=ids.map(id=>ALL_IMAGES.find(i=>i.id===id)).filter(Boolean);
+  document.getElementById('scanCard').style.display='none';
+  document.getElementById('scanResults').style.display='block';
+  const labels={pass:'Winners',maybe:'Maybe — Tap to Rescue',fail:'Rejected — Tap to Rescue'};
+  const colors={pass:'#22c55e',maybe:'#f59e0b',fail:'#ef4444'};
+  document.getElementById('scanResultsTitle').textContent=labels[type]+' ('+imgs.length+')';
+  document.getElementById('scanResultsTitle').style.color=colors[type];
+  document.getElementById('scanResultsGrid').innerHTML=imgs.map(img=>{
+    const border=type==='pass'?'#22c55e':type==='maybe'?'#f59e0b':'#ef4444';
+    return '<div style="position:relative;cursor:pointer" onclick="scanRescue(\''+img.id+'\',\''+type+'\')"><img src="'+img.url+'" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;border:2px solid '+border+'" loading="lazy">'+(type!=='pass'?'<div style="position:absolute;bottom:4px;right:4px;background:#22c55e;color:#000;font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:4px">Rescue</div>':'')+'</div>';
+  }).join('');
+  document.getElementById('counter').textContent=labels[type]+': '+imgs.length+' images';
+}
+
+function scanRescue(id,fromType){
+  if(fromType==='pass') return; // already a winner, just zoom
+  scanVotes[id]='pass';
+  sessionStorage.setItem('scanVotes',JSON.stringify(scanVotes));
+  // Save approval comment
+  const img=ALL_IMAGES.find(i=>i.id===id);
+  if(img){
+    const d=D();
+    if(!d[id])d[id]={comments:[],label:img.label};
+    if(!d[id].comments.some(c=>c.text.includes('Quick scan'))){
+      d[id].comments.push({text:'[Quick scan: RESCUED from '+fromType+']',time:new Date().toISOString(),num:d[id].comments.length+1});
+      d[id].label=img.label;
+      S(d);
+    }
+  }
+  scanUpdateCounts();
+  scanShowResults(fromType); // re-render current results
+  showToast('Rescued! Moved to Winners.');
+}
+
+function scanHideResults(){
+  document.getElementById('scanResults').style.display='none';
+  document.getElementById('scanCard').style.display='block';
+  scanRender();
+  document.getElementById('counter').textContent='Quick Scan — swipe or tap to rate';
+}
+
+function scanZoom(){
+  if(scanIdx>=scanQueue.length) return;
+  const ov=document.getElementById('scanZoomOverlay');
+  document.getElementById('scanZoomImg').src=scanQueue[scanIdx].url;
+  ov.style.display='flex';
+}
+
+// Touch swipe handlers
+function scanTouchStart(e){
+  scanTouchStartX=e.touches[0].clientX;
+  scanTouchStartY=e.touches[0].clientY;
+  scanSwiping=false;
+}
+function scanTouchMove(e){
+  const dx=e.touches[0].clientX-scanTouchStartX;
+  const dy=e.touches[0].clientY-scanTouchStartY;
+  // Only swipe if horizontal movement > vertical
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>15){
+    scanSwiping=true;
+    e.preventDefault();
+    const card=document.getElementById('scanCard');
+    const pct=dx/window.innerWidth;
+    card.style.transform='translateX('+dx+'px) rotate('+(pct*15)+'deg)';
+    const ov=document.getElementById('scanOverlay');
+    if(dx>50){ov.textContent='♥';ov.style.color='#22c55e';ov.style.opacity=Math.min(1,(dx-50)/100);}
+    else if(dx<-50){ov.textContent='✕';ov.style.color='#ef4444';ov.style.opacity=Math.min(1,(-dx-50)/100);}
+    else{ov.style.opacity='0';}
+  }
+}
+function scanTouchEnd(e){
+  if(!scanSwiping){
+    document.getElementById('scanCard').style.transform='';
+    document.getElementById('scanOverlay').style.opacity='0';
+    return;
+  }
+  const dx=e.changedTouches[0].clientX-scanTouchStartX;
+  if(dx>80) scanVote('pass');
+  else if(dx<-80) scanVote('fail');
+  else{
+    // Snap back
+    const card=document.getElementById('scanCard');
+    card.style.transition='transform .2s ease';
+    card.style.transform='';
+    document.getElementById('scanOverlay').style.opacity='0';
+    setTimeout(()=>{card.style.transition='none';},200);
+  }
+  scanSwiping=false;
+}
+
+// Keyboard shortcuts for scan tab
+document.addEventListener('keydown',e=>{
+  if(tab!=='scan') return;
+  if(document.getElementById('scanResults').style.display==='block') return;
+  if(e.key==='ArrowRight'||e.key==='l') scanVote('pass');
+  else if(e.key==='ArrowLeft'||e.key==='h') scanVote('fail');
+  else if(e.key==='ArrowDown'||e.key==='j') scanVote('maybe');
+  else if(e.key===' '){e.preventDefault();scanZoom();}
+});
 </script>
 </body></html>
