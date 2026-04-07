@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T15:04:25.053Z",
+  "syncedAt": "2026-04-07T15:08:40.445Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -5903,6 +5903,96 @@
         {
           "text": "This looks similar to other ones, but it's above the elbow, but the symbols look great remote looks great. It's in the right position. I mean it's in it's it's the right configuration so yeah I give this a unfortunately a 70 due to above elbow placement.",
           "time": "2026-04-07T15:03:56.269Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "twopass-sunrise-helmet-8201",
+      "url": "https://files.catbox.moe/23hd7x.jpg",
+      "model": "FLUX 2 Flex g7.0 (two-pass)",
+      "prompt": "Two-pass: moto-sunrise-8106 base + added full-face helmet via second FLUX edit pass",
+      "label": "Two-Pass: Sunrise + Helmet",
+      "context": "TWO-PASS TEST: Original moto-sunrise had no helmet (back to camera). Second pass added a full-face helmet while preserving the CB2 on forearm. Compare with moto-sunrise-8106 to see the addition. Composition and golden hour lighting preserved.",
+      "comments": [
+        {
+          "text": "This is above his elbow, which is unfortunate but with the chubby ones preserved, I want you out of the helmet that's pretty cool and there's a full sleeve",
+          "time": "2026-04-07T15:06:46.270Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "twopass-alpine-earbuds-8202",
+      "url": "https://files.catbox.moe/vdd80x.jpg",
+      "model": "FLUX 2 Flex g7.0 (two-pass)",
+      "prompt": "Two-pass: moto-alpine-8105 base + added wireless earbuds via second FLUX edit pass",
+      "label": "Two-Pass: Alpine + Earbuds",
+      "context": "TWO-PASS TEST: Original moto-alpine already had helmet and jacket. Second pass attempted to add wireless earbuds. Earbuds not visually obvious (under helmet). CB2 survived on forearm. Compare with moto-alpine-8105.",
+      "comments": [
+        {
+          "text": "Are the CB survived on the forearm but again it looks like the clothing is like ripped off so I give it like a 50",
+          "time": "2026-04-07T15:07:08.651Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "compare-flex-8301",
+      "url": "https://files.catbox.moe/c3970k.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Coastal highway golden hour, leather jacket, helmet, LEFT forearm vol-up wrist, Sony A7R IV 85mm",
+      "label": "Compare: FLUX 2 Flex (current)",
+      "context": "MODEL SHOOTOUT: Identical prompt + Ref C across 4 models. This is our current production model (Flex g7.0, $0.05/MP). Compare CB2 visibility, photorealism, and overall quality against Pro, Max, and GPT Image 1.5.",
+      "comments": [
+        {
+          "text": "This is cool photo looks like a painting in a bad way, but there's no chubby buttons visible",
+          "time": "2026-04-07T15:07:26.252Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "compare-pro-8301",
+      "url": "https://files.catbox.moe/cepgk7.jpg",
+      "model": "FLUX 2 Pro",
+      "prompt": "Same prompt as Flex comparison, seed 8301",
+      "label": "Compare: FLUX 2 Pro ($0.03/MP)",
+      "context": "MODEL SHOOTOUT: FLUX 2 Pro — 40% cheaper than Flex, no guidance_scale control. Research says higher base photorealism than Flex. Same API pattern, direct drop-in replacement.",
+      "comments": [
+        {
+          "text": "This is promise, cause it looks really inspiring, but the chubby buttons is flipped perpendicularly to the way it should be so unfortunately it's a fail due to that",
+          "time": "2026-04-07T15:07:45.900Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "compare-max-8301",
+      "url": "https://files.catbox.moe/fm3owa.jpg",
+      "model": "FLUX 2 Max",
+      "prompt": "Same prompt as Flex comparison, seed 8301",
+      "label": "Compare: FLUX 2 Max ($0.07/MP)",
+      "context": "MODEL SHOOTOUT: FLUX 2 Max — highest photorealism in the FLUX family per research. 40% more expensive than Flex. Incredible leather texture detail and natural lens flare. Zero-config like Pro.",
+      "comments": [
+        {
+          "text": "This would be really cool if the chubby buttons was below his elbow, but it's not, but it looks inspiring. I just wish that it was below his elbow man do I wish it was below his elbow so badly",
+          "time": "2026-04-07T15:08:08.374Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "compare-gpt-8301",
+      "url": "https://files.catbox.moe/guzo5i.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Same prompt + input_fidelity:high + quality:high",
+      "label": "Compare: GPT Image 1.5 (~$0.10)",
+      "context": "MODEL SHOOTOUT: GPT Image 1.5 — completely different architecture (autoregressive, not diffusion). input_fidelity:high designed to preserve product details from reference images. CB2 buttons are the most clearly visible of all 4 models. 1.95MB vs 270-300KB — much higher detail. Warm cinematic quality.",
+      "comments": [
+        {
+          "text": "This is pretty cool besides the fact that it looks a little strange the way he's turning the motorcycle. Looks like he's about to fall over. The quality of the images is amazing. The remote is preserved. I really like this kind of style.",
+          "time": "2026-04-07T15:08:37.818Z",
           "num": 1
         }
       ]
