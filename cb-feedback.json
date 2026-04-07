@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T18:06:46.625Z",
+  "syncedAt": "2026-04-07T18:26:01.305Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6288,6 +6288,36 @@
       ]
     },
     {
+      "id": "sym-moto-coastal-8801",
+      "url": "https://files.catbox.moe/4541nw.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, wearing leather riding jacket and full-face helmet, CB2 with velcro strap wrapped fully around LEFT lower forearm OVER jacket sleeve, halfway between wrist and elbow, five round tactile buttons with geometric symbols: plus sign, two-left-pointing-triangles-with-vertical-bar, right-pointing-triangle-beside-two-vertical-bars, two-right-pointing-triangles-with-vertical-bar, minus sign, Sony A7R IV 85mm f/2.0, film grain",
+      "label": "Sym-Opt: Moto Coastal",
+      "context": "OPTIMIZED SYMBOL BATCH: GPT Image 1.5 with geometric symbol descriptions baked into prompt. Same coastal scene that scored 90. Testing whether explicit symbol geometry produces clearer button icons. quality:high, input_fidelity:high.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T18:22:00.678Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-moto-desert-8802",
+      "url": "https://files.catbox.moe/cki20t.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Desert highway through red rock canyon, adventure motorcycle rider stopped looking at vast landscape, wearing textile riding jacket and full-face helmet with visor up, CB2 with geometric symbol buttons on LEFT lower forearm OVER jacket sleeve, Nikon Z9 70mm f/2.8, harsh midday desert sun, documentary",
+      "label": "Sym-Opt: Moto Desert",
+      "context": "OPTIMIZED SYMBOL BATCH: Desert canyon scene (original scored 89). Rider stopped and looking at landscape. Geometric symbol descriptions in prompt. quality:high, input_fidelity:high.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T18:22:05.777Z",
+          "num": 1
+        }
+      ]
+    },
+    {
       "id": "sym-ski-alpine-8803",
       "url": "https://files.catbox.moe/folhk4.png",
       "model": "GPT Image 1.5",
@@ -6298,6 +6328,51 @@
         {
           "text": "This is really cool, but the symbol is not visible. I really just want the symbols to work otherwise this would be really dope.",
           "time": "2026-04-07T18:05:57.026Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-snow-park-8804",
+      "url": "https://files.catbox.moe/fdj77a.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Snowboarder standing at top of terrain park, fresh groomed snow, snowboard jacket and beanie with goggles, CB2 with geometric symbol buttons on LEFT lower forearm OVER jacket sleeve, Sony A7R IV 70mm f/2.8, bright winter sunlight, action sports editorial",
+      "label": "Sym-Opt: Snowboard Park",
+      "context": "OPTIMIZED SYMBOL BATCH: FIRST GPT Image 1.5 snowboard test. Previous snowboard images scored up to 100 with FLUX 2 Flex. Testing GPT 1.5 for winter sports. quality:high, input_fidelity:high.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T18:22:08.344Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-mtb-trail-8805",
+      "url": "https://files.catbox.moe/4bzjwq.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Mountain biker pausing on singletrack trail overlooking valley, MTB jersey and full-face mountain bike helmet, CB2 with geometric symbol buttons on LEFT lower forearm, Canon R5 85mm f/2.0, dappled forest light, adventure cycling editorial",
+      "label": "Sym-Opt: MTB Trail",
+      "context": "OPTIMIZED SYMBOL BATCH: FIRST GPT Image 1.5 MTB test. Previous MTB images scored 94-98 with FLUX 2 Flex. Testing GPT 1.5 photorealism for cycling. quality:high, input_fidelity:high.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T18:22:10.427Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-moto-detail-8806",
+      "url": "https://files.catbox.moe/9v3ujv.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Close-up medium shot of motorcycle riders torso and arms on handlebars, leather riding jacket, CB2 with geometric symbol buttons on LEFT lower forearm, Sony A7R IV 135mm f/2.0, shallow DOF, golden hour sidelight, film grain",
+      "label": "Sym-Opt: Moto Detail Close-up",
+      "context": "OPTIMIZED SYMBOL BATCH: Tighter framing to make CB2 larger in frame. Combines geometric symbol prompt with tight medium shot to maximize button readability. 1536x1024 landscape orientation. quality:high, input_fidelity:high.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T18:22:18.244Z",
           "num": 1
         }
       ]
