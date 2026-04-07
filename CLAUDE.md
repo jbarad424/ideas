@@ -25,21 +25,27 @@ Justin Barad, co-founder of Chubby Buttons. Prefers direct, no-BS communication.
 - SAM rotation post-processing (compositing looks unnatural)
 - AI auto-scoring (unreliable)
 
-## Current Stats (April 6, 2026)
-- 230+ images generated and reviewed, 41 scored 90+
-- 13 test videos across 6 models (awaiting review)
+## Current Stats (April 7, 2026)
+- 270+ images generated and reviewed, 41 scored 90+
+- 13 test videos across 6 models (Gen-4 Turbo scored 97!)
 - Best scores: 100, 98, 97, 95 across motorcycle, hiking, skiing, snowboard, MTB
 - Orientation correct 65-70% with Ref C + arm rules
+- Multi-ref colorway: colors transfer, orientation same as baseline
+- Two-pass gear addition: proven for helmets (CB2 survives)
+- Colorway-specific prompting: DEAD (causes glowing/wrong colors)
+- Action shots with colorway in prompt: DEAD (10-22 avg)
 
 ## API Keys
 Stored in local memory files (not in repo for security). Keys: fal.ai, Replicate, Runway Gen-4.
 Check ~/.claude/projects/-Users-justinbarad-Documents-Claude-Code-ideas/memory/project_architecture.md for keys.
 
 ## Next Session Priorities
-1. Review video test results → pick winning model
-2. Build CREATE tab (sport/colorway/vibe dropdowns → auto-generate)
-3. Refine running/fishing/ATV prompts
-4. Test colorway-specific prompting
+1. Take 3 new third-person photos (one per colorway, in sport gear — solves colorway + T-shirt + orientation)
+2. Test sport-specific refs from 290 Drive photos (Moto photoshoot, Tahoe)
+3. Build CREATE tab (sport/colorway/vibe dropdowns → auto-generate)
+4. Two-pass clothing swap test (change T-shirt to jacket on winners)
+5. Test FLUX 2 Flex (cheaper, adjustable parameters)
+6. Test prompt restructure: CB2 first, camera specs last
 
 ## Key Resources
 - Review page: https://jbarad424.github.io/ideas/cb-review.html
