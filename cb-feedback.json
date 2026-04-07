@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T18:26:01.305Z",
+  "syncedAt": "2026-04-07T18:39:24.020Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6373,6 +6373,51 @@
         {
           "text": "Rejected",
           "time": "2026-04-07T18:22:18.244Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "dualref-hunter-moto-8901",
+      "url": "https://files.catbox.moe/bp7bvw.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, wearing leather riding jacket and full-face helmet, the wearable remote from image 1 in the HUNTER colorway matching image 2 with its olive green body and dark tactile button symbols, velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons with clearly embossed symbols matching the symbols shown in image 2, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain, slight lens vignetting",
+      "label": "DUAL-REF: Hunter Moto Coastal",
+      "context": "DUAL-REFERENCE TEST: Ref C (lifestyle) + IMG_0534 Hunter close-up (clear olive buttons with dark symbols). Testing whether adding a product close-up as second reference improves symbol clarity. This is THE critical test for fixing the symbol problem.",
+      "comments": [
+        {
+          "text": "OK this is in a good place, but the symbols are still wrong. Yeah it doesn't make the symbols perfect.. this is not a pass for this test",
+          "time": "2026-04-07T18:37:32.953Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "dualref-patriot-moto-8902",
+      "url": "https://files.catbox.moe/ty8zyu.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, wearing leather riding jacket and full-face helmet, the wearable remote from image 1 in the PATRIOT colorway matching image 2 with its white body and navy blue tactile button symbols, velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons with clearly embossed symbols matching the symbols shown in image 2, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain, slight lens vignetting",
+      "label": "DUAL-REF: Patriot Moto Coastal",
+      "context": "DUAL-REFERENCE TEST: Ref C (lifestyle) + IMG_0513 Patriot close-up (clearest symbols of all colorways — white body, navy blue buttons). Testing dual-reference for symbol fidelity improvement.",
+      "comments": [
+        {
+          "text": "the remote looks perfect. It just looks like it's stuck on his arm and it's not actually strapped around his arm, but otherwise the remote is preserved perfectly as a patriot. It would even be in the right position if it were further down his arm it just looks like the strap is floating on his jacket and not strapped around his arm.",
+          "time": "2026-04-07T18:38:10.283Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "dualref-tron-ski-8903",
+      "url": "https://files.catbox.moe/m6wq2x.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Skier pausing at top of powder run with panoramic mountain views, wearing insulated ski jacket and goggles on helmet, the wearable remote from image 1 in the TRON colorway matching image 2 with its dark body and teal/mint green tactile button symbols, velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons with clearly embossed symbols matching the symbols shown in image 2, waist-up, Shot on Canon R5 85mm f/2.0, bright overcast alpine light, editorial sports photography",
+      "label": "DUAL-REF: Tron Skiing Alpine",
+      "context": "DUAL-REFERENCE TEST: Ref C (lifestyle) + Tron_Landscape product photo (teal/mint symbols, crystal clear). Testing dual-reference on a different sport (skiing) and different colorway to see if approach generalizes.",
+      "comments": [
+        {
+          "text": "this is really fucking close. The Ford track board button is missing a second triangle and the plus the minus in our little flipped, but if this were on the other arm and we saw it from inside his body like I guess he was looking at it then that would be a good orientation, but the strap looks good and the colors look good and the symbols look great.",
+          "time": "2026-04-07T18:38:55.098Z",
           "num": 1
         }
       ]
