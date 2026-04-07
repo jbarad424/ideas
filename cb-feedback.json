@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T09:16:52.891Z",
+  "syncedAt": "2026-04-07T09:27:30.563Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -133,6 +133,171 @@
         {
           "text": "I'm wondering where like that we're getting these Tron now that don't have the correct outline coloring on the symbols because you used to get that right all the time, but it's decently in the right position where she was a little bit lower on the arm, but the symbols are on the right, correct the right direction and I like the vibe with the jacket the ski just wish they were wearing gloves or doing something more aspirational and active",
           "time": "2026-04-07T09:14:37.024Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-ski-2014",
+      "url": "https://files.catbox.moe/wthmzd.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Same, seed 2014",
+      "label": "FLEX g7: Ski 5/5",
+      "context": "Flex g7.0 skiing.",
+      "comments": [
+        {
+          "text": "This unit is above the shoulder above the elbow rather and but it's in the correct direction and the symbol biography could be a little bit. The symbol color could be better, but their remote looks good. I give this 70.",
+          "time": "2026-04-07T09:17:44.905Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-snow-2020",
+      "url": "https://files.catbox.moe/133741.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Snowboarder powder, RIGHT arm, seed 2020",
+      "label": "FLEX g7: Snow 1/4",
+      "context": "Flex g7.0 snowboard. RIGHT arm test.",
+      "comments": [
+        {
+          "text": "it's in the reposition the guy snowboarding correctly with helmet and gloves. Yeah, it's in the right position. This is aspirational. I guess I couldn't tell if they were earbuds or not cause they ring a helmet which is totally fine. I guess that's the thing as long as they're wearing a helmet you don't really have to put earbuds inside of their helmet. This is pretty fucking cool. I get this like a 98.",
+          "time": "2026-04-07T09:20:48.559Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-snow-2021",
+      "url": "https://files.catbox.moe/x5dr1a.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Same, seed 2021",
+      "label": "FLEX g7: Snow 2/4",
+      "context": "Flex g7.0 snowboard.",
+      "comments": [
+        {
+          "text": "This is awesome. Besides a little bit of lighting change it's in the reposition. You can see the remote clearly the guy doing something gnarly in a fun way I get this 92",
+          "time": "2026-04-07T09:21:25.046Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-snow-2022",
+      "url": "https://files.catbox.moe/yfqwej.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Same, seed 2022",
+      "label": "FLEX g7: Snow 3/4",
+      "context": "Flex g7.0 snowboard.",
+      "comments": [
+        {
+          "text": "I wish the symbol outline colors were a little bit on that cyan color that that are true to form but other than that, this is pretty perfect 96",
+          "time": "2026-04-07T09:21:53.040Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-snow-2023",
+      "url": "https://files.catbox.moe/dbvfe8.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Same, seed 2023",
+      "label": "FLEX g7: Snow 4/4",
+      "context": "Flex g7.0 snowboard.",
+      "comments": [
+        {
+          "text": "I think this guy is wearing a hunter color way and you can't really tell what he's doing. I guess he's almost snowboarding even though the snowboard is not visible but there's gloves there's a helmet there's a cooler jacket and the sun is out and I can see the remote perfectly give this to 96",
+          "time": "2026-04-07T09:22:31.126Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-mtb-2030",
+      "url": "https://files.catbox.moe/6ezzr8.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "MTB forest trail, LEFT arm, seed 2030",
+      "label": "FLEX g7: MTB 1/4",
+      "context": "Flex g7.0 MTB.",
+      "comments": [
+        {
+          "text": "This is aspirational and the guy is doing some great work on a motorbike, but unfortunately, the remote looks a little bit different than our usual one and it's a little bit bigger than it should be and the symbols are not visible I would give this a 84.",
+          "time": "2026-04-07T09:23:16.138Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-mtb-2031",
+      "url": "https://files.catbox.moe/mph8v4.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Same, seed 2031",
+      "label": "FLEX g7: MTB 2/4",
+      "context": "Flex g7.0 MTB.",
+      "comments": [
+        {
+          "text": "This is pretty cold aspirational it's in the right spot because wearing the correct clothing for the motor biking sport the remotes in reposition the strap is a little beefier than it should be and you can't really make up the symbols but honestly, I think it's OK considering how far away the photo is, but if it could be a little more clear, I would give it a better score but this is like for what it is I said 88",
+          "time": "2026-04-07T09:24:04.122Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-mtb-2032",
+      "url": "https://files.catbox.moe/jkq2xg.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Same, seed 2032",
+      "label": "FLEX g7: MTB 3/4",
+      "context": "Flex g7.0 MTB.",
+      "comments": [
+        {
+          "text": "I really like the positioning. I like the guys running a helmet while he's biking Jenny's wearing the same vest and T-shirt. Wish you could change clothing in a little bit for some more. You know accurate clothing for the sport, but I wish the symbols were a little more visible but again because we are far away it doesn't really matter, but I'm just being nitpicky, but I give this 87",
+          "time": "2026-04-07T09:24:58.806Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-mtb-2033",
+      "url": "https://files.catbox.moe/zwizzg.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Same, seed 2033",
+      "label": "FLEX g7: MTB 4/4",
+      "context": "Flex g7.0 MTB.",
+      "comments": [
+        {
+          "text": "This is above the elbow and you can't really tell the symbols and you should be able to tell because we're a little bit close to the person again the same stupid vest and T-shirt with the girls wearing more more relevant clothing for the sport I give this 75.",
+          "time": "2026-04-07T09:25:41.294Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-hike-2040",
+      "url": "https://files.catbox.moe/px6h48.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Hiker golden hour, LEFT arm, seed 2040",
+      "label": "FLEX g7: Hike 1/2",
+      "context": "Flex g7.0 hiking.",
+      "comments": [
+        {
+          "text": "This guy is hiking. That's cool again hiking isn't really our main demo mainly because like people have headphones and they don't mind controlling their phones while doing that it's really for like glove sports and like moving fast but again not terrible to have that template for hiking this is fine. The positions in the right remote in the right position the symbols are visible lighting is cool for a hiking photo. Yeah I give it a high score. I just wish the guy was wearing different clothing or doing something a little more like active and aspirational and fast give it 90 score",
+          "time": "2026-04-07T09:26:46.155Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flex7-hike-2041",
+      "url": "https://files.catbox.moe/61i878.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Same, seed 2041",
+      "label": "FLEX g7: Hike 2/2",
+      "context": "Flex g7.0 hiking.",
+      "comments": [
+        {
+          "text": "similar thoughts as the other hiker don't really need hiking photos like this because the whole point of chubby buttons is that you're wearing earbuds with a helmet and glove or gloves and it's hard to talk to Siri cause the winds in your face and all that stuff, but for a hiking photo, this is pretty decent even though the symbols look little too bright and cartoonish, but I'll give us an 82",
+          "time": "2026-04-07T09:27:27.257Z",
           "num": 1
         }
       ]
