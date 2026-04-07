@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T14:29:59.871Z",
+  "syncedAt": "2026-04-07T14:51:03.847Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -5723,6 +5723,96 @@
         {
           "text": "This is perfect. This looks just like the original one that I really liked give it up 98.",
           "time": "2026-04-07T14:29:26.749Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pov-moto-coastal-7001",
+      "url": "https://files.catbox.moe/jzgqm8.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "First-person POV looking down at motorcycle handlebars, coastal highway, leather jacket, LEFT forearm vol-up wrist",
+      "label": "POV: Motorcycle Coastal",
+      "context": "NEW COMPOSITION TYPE: First-person POV looking down at arms on handlebars. CB2 is prominent on forearm. Testing whether POV shots work for marketing — puts the product front and center.",
+      "comments": [
+        {
+          "text": "Looks good it's a little too big but it looks good. I could. I'd love to see like some more advanced looking AI photos though I've seen some really good ones and they still look a little cartoonish but they but the remote looks accurate. I wish the symbols were a little more like the blue, but yeah, give it like a 92.",
+          "time": "2026-04-07T14:48:16.038Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pov-cycle-mountain-7002",
+      "url": "https://files.catbox.moe/7d3ouc.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "First-person POV road bike handlebars, mountain road, drop bars, LEFT forearm vol-up wrist",
+      "label": "POV: Road Cycling Mountain",
+      "context": "NEW SPORT: Road cycling POV. Arms gripping drop bars on a mountain road. Testing cycling as a new sport category.",
+      "comments": [
+        {
+          "text": "This is strange because the guys are on a on a road bike, but it looks like he's going fast on a motorcycle so really more of the issue with the initial image Jen maybe we can use a different image Jen that you can look into that makes some more realistic things also looks like he's wearing two chubby buttons, but on the left-hand side, there's an Apple Watch on the right hand side. It looks like the chubby buttons, which l yeah I give it like for that respect. I give it like a 90.",
+          "time": "2026-04-07T14:48:57.568Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pov-mtb-forest-7003",
+      "url": "https://files.catbox.moe/a9lbtv.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "First-person POV MTB handlebars, steep forest singletrack, dirt flying, LEFT forearm vol-up wrist",
+      "label": "POV: MTB Forest Singletrack",
+      "context": "MTB POV shot — looking down at flat bars on a forest trail. Tests aggressive MTB composition.",
+      "comments": [
+        {
+          "text": "Yeah, this is cool guys in the mountain bike. The symbols look good. It's strapped on his arm. It's a little loose but it looks good. It's a hunter. I can see the symbols looking good. I mean again I would like some gloves and maybe some protective gear, but I give it a I give it a 93 is it Baer arm because that's the reference photo?",
+          "time": "2026-04-07T14:49:30.819Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "agg-moto-lean-7004",
+      "url": "https://files.catbox.moe/n09wt3.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Low-angle motorcycle rider leaning into canyon turn, knee almost touching asphalt, LEFT forearm vol-up wrist, cinematic",
+      "label": "Aggressive: Moto Canyon Lean",
+      "context": "Third-person dramatic lean into a turn. Very cinematic but CB2 may not be visible at this angle.",
+      "comments": [
+        {
+          "text": "This is cool but again a little more cartoonish and unfortunately I don't see a chubby buttons so it looks like a zero",
+          "time": "2026-04-07T14:49:46.666Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pov-moto-desert-7005",
+      "url": "https://files.catbox.moe/mqdzl0.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "First-person POV motorcycle, desert highway, GoPro style, LEFT forearm vol-up wrist, raw adventure",
+      "label": "POV: Motorcycle Desert Highway",
+      "context": "Desert highway POV with GoPro fisheye effect. CB2 very prominent. May be oversized — check if it looks natural.",
+      "comments": [
+        {
+          "text": "This is not natural. It looks a little bit like a body hallucination and a wart nightmare so I give it like a 10 out of 100.",
+          "time": "2026-04-07T14:50:03.134Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "agg-cycle-climb-7006",
+      "url": "https://files.catbox.moe/v6q6c9.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Road cyclist climbing steep mountain pass, low angle from behind, dramatic sky, LEFT forearm vol-up wrist",
+      "label": "Aggressive: Road Cyclist Climb",
+      "context": "Third-person road cyclist hammering up a mountain pass. Dramatic stormy sky. Testing intense cycling composition.",
+      "comments": [
+        {
+          "text": "This is cool but again looks like super HD but the the symbols look decent I guess because it's a little out of out of focus that's fine but yeah it's in the right spot I would like for him to be wearing. You know some sort of in your AirPods, something like that, but other than that, it's a good rendition. I just have some beef with the cartoonish of the photo. Maybe we can find a different place that does that but for the remote on the arm yeah I give it like a 92 but my question remains about the forearm being bare.",
+          "time": "2026-04-07T14:50:59.001Z",
           "num": 1
         }
       ]
