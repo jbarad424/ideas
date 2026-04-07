@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T16:07:04.995Z",
+  "syncedAt": "2026-04-07T16:25:58.253Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6119,6 +6119,96 @@
           "text": "Also, I can only see 1/2 of the strap",
           "time": "2026-04-07T15:58:29.970Z",
           "num": 2
+        }
+      ]
+    },
+    {
+      "id": "sym-explicit-8601",
+      "url": "https://files.catbox.moe/mf981f.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Same coastal prompt + explicit symbol names (plus minus play forward back) in prompt",
+      "label": "Symbol Fix A: Explicit Names",
+      "context": "SYMBOL CLARITY TEST: Added \"five round tactile buttons showing plus minus play forward and back symbols\" to prompt. Same waist-up framing. Question: does naming the symbols help GPT render them more clearly?",
+      "comments": [
+        {
+          "text": "It actually got pretty close. The symbols are pretty damn good. They're almost actually legible. I would say fuck you like you're about 95% there on the symbol accuracy whatever you did they are definitely do again. This is awesome. This is like a like a 95 and it would otherwise be perfect if the symbols are perfect, but you got the symbols much better than last time.",
+          "time": "2026-04-07T16:24:21.485Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-closeup-8602",
+      "url": "https://files.catbox.moe/gxd0ph.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Close-up detail shot of forearm on handlebar, macro lens, shallow DOF focused on remote, 1536x1024 landscape",
+      "label": "Symbol Fix B: Close-Up Detail",
+      "context": "SYMBOL CLARITY TEST: Tight crop on forearm + handlebar. CB2 is MUCH larger in frame. Buttons and symbols more visible. Key question: does making the device bigger in frame solve the symbol problem? May have too many buttons (grid layout). Could work as a \"hero detail\" shot paired with a wider lifestyle shot.",
+      "comments": [
+        {
+          "text": "Symbols are not good here and the strap is a little strange looking so this does not pass",
+          "time": "2026-04-07T16:24:37.732Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-twopass-8603",
+      "url": "https://files.catbox.moe/vs3m6g.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Two-pass: fed coastal v2 winner + Ref C, asked to sharpen button symbols matching reference",
+      "label": "Symbol Fix C: Two-Pass Enhancement",
+      "context": "SYMBOL CLARITY TEST: Fed the coastal v2 (that Justin loved) back into GPT Image 1.5 with Ref C as second reference. Prompt asked to sharpen symbols. Preserved composition but symbols only slightly improved.",
+      "comments": [
+        {
+          "text": "Symbols are terrible here this does not pass",
+          "time": "2026-04-07T16:24:49.564Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-desert-8604",
+      "url": "https://files.catbox.moe/kfsf8f.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Desert landscape, rider looking back at camera, arm facing viewer, 1536x1024, explicit symbols",
+      "label": "Symbol Fix D: Desert Facing Camera",
+      "context": "SYMBOL CLARITY TEST: Rider looking back over shoulder at camera — CB2 arm faces the viewer directly. Device is LARGE in frame. Symbols more visible than any waist-up shot. But placement is above elbow. Shows that symbol clarity is a SCALE problem — device needs to be bigger in frame.",
+      "comments": [
+        {
+          "text": "Symbols are not as good there and it's above the elbow as well. It's just like a 40 out of 100 in terms of accuracy of the symbols.",
+          "time": "2026-04-07T16:25:11.083Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-medium-8605",
+      "url": "https://files.catbox.moe/so9fkz.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Medium close-up torso and arm, 1536x1024 landscape, minimum focus distance, explicit symbols",
+      "label": "Symbol Fix E: Medium Shot",
+      "context": "SYMBOL CLARITY TEST: Tighter framing — chest to hand instead of full waist-up. CB2 larger in frame than standard shots. Good compromise between lifestyle feel and product detail. 5 buttons visible with some symbol shapes.",
+      "comments": [
+        {
+          "text": "You got a little bit better with the symbols, but not as good as the one that I really liked and it's above the elbow, so it does not pass",
+          "time": "2026-04-07T16:25:27.616Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-flex-8606",
+      "url": "https://files.catbox.moe/i9twq0.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "Two-pass: coastal v2 base + low guidance (3.0) asking to sharpen button symbols",
+      "label": "Symbol Fix F: FLUX Enhance",
+      "context": "SYMBOL CLARITY TEST: Fed coastal v2 winner through FLUX 2 Flex at guidance_scale 3.0 (low to preserve input). Asked to sharpen symbols. Did NOT improve — low guidance just reproduced the input without enhancement. FLUX two-pass is not the right tool for symbol refinement.",
+      "comments": [
+        {
+          "text": "Symbols here look really strange and it's above the elbow, so it does not pass",
+          "time": "2026-04-07T16:25:41.214Z",
+          "num": 1
         }
       ]
     },
