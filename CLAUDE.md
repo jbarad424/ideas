@@ -26,13 +26,25 @@ AI product photography pipeline for Chubby Buttons CB2 — a wearable Bluetooth 
   }
   ```
 
-### Prompt Templates
-- Motorcycle: `Person on motorcycle on coastal mountain road, wearing the wearable remote from image 1 on their LEFT forearm, volume-up button closest to wrist, waist-up, golden hour, adventure photography`
-- Skiing: `Skier on snowy mountain slope, bright ski jacket, wearing the wearable remote from image 1 on their LEFT forearm over jacket sleeve, volume-up button closest to wrist, waist-up, bright winter day`
-- Snowboard: `Snowboarder on powder slope, colorful winter gear, wearing the wearable remote from image 1 on their RIGHT forearm over jacket sleeve, volume-down button closest to wrist, waist-up, mountain backdrop`
-- MTB: `Mountain biker on dusty forest trail, wearing the wearable remote from image 1 on their LEFT forearm, volume-up button closest to wrist, waist-up, action sports photography`
+### Prompt Structure
+Every prompt follows this skeleton. The **middle is locked** (never change the CB2 block). The **bookends are creative choices** — scene/setting and style/mood/camera can be varied freely per batch. Validated across 289 images with editorial, documentary, Sony A7IV, harsh midday, golden hour, and others — style variation does not affect CB2 hit rate.
 
-NOTE: These templates are locked for now (used as controlled variables during testing). A style/mood variation test is pending before opening up the creative bookends (lighting, camera style, mood descriptors). Do not vary them without running that test first.
+**Structure:** `[SCENE + SETTING] + [SUBJECT + ACTIVITY] + LOCKED CB2 BLOCK + waist-up + [STYLE/MOOD/CAMERA]`
+
+**Locked CB2 block (always use exactly this):**
+- Left arm: `wearing the wearable remote from image 1 on their LEFT forearm, volume-up button closest to wrist`
+- Right arm: `wearing the wearable remote from image 1 on their RIGHT forearm, volume-down button closest to wrist`
+
+**Example prompts:**
+- `Dramatic coastal highway at golden hour, motorcycle rider leaning into a turn, wearing the wearable remote from image 1 on their LEFT forearm, volume-up button closest to wrist, waist-up, adventure photography, sense of freedom`
+- `Steep powder run in bright alpine sun, skier carving through fresh powder, wearing the wearable remote from image 1 on their LEFT forearm, volume-up button closest to wrist, waist-up, Shot on Sony A7IV 135mm f/2.8, adrenaline`
+
+**What NOT to put in prompts:**
+- Colorway names or button colors (let the reference photo handle it)
+- "Bright button icons" or "clearly visible symbols" (causes glowing)
+- Complex multi-detail instructions (earbuds + helmet + jacket — use two-pass instead)
+- "Product photography" (triggers sterile white-background aesthetic)
+- CB2 description before the scene (scene-first produces better results)
 
 ### Arm Orientation Rule
 - LEFT arm: volume-up (+) closest to WRIST
@@ -126,14 +138,12 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 - **Colorway control:** No reliable way to specify Hunter/Tron/Patriot from prompt alone. Multi-ref (J&Mike + colorway close-up) partially transfers color but doesn't improve orientation. Fix requires colorway-specific third-person reference photos.
 - **Hunter symbol fidelity:** All existing Hunter reference photos have old/faded symbol outlines and missing LED plastic. Generated Hunter images inherit these flaws.
 - **Patriot coverage:** Zero third-person Patriot photos exist anywhere.
-- **Style variation untested:** Prompt templates use "golden hour" and "adventure photography" as controlled variables. Not yet validated whether other styles (blue hour, editorial, documentary) maintain the same CB2 hit rate.
 
 ### Next Session Priorities
 1. **Jordan shoots 7 reference photos** — 3 Hunter (moto jacket, ski jacket, hiking gear) + 3 Patriot (same) + 1 Tron winter. Updated units with fresh symbols. Both arms. See jordan-shot-list.html.
 2. **Build CREATE tab** — sport/colorway/vibe dropdowns → Make.com webhook → auto-generate → images appear in review page
-3. **Run style/mood variation test** — 3 different lighting/camera combos × 5 seeds to validate whether creative bookends affect CB2 hit rate before opening up prompt templates
-4. **Scale video production** — animate approved stills only with Gen-4 Turbo
-5. **Cancel Recraft subscription** ($25/mo, never used)
+3. **Scale video production** — animate approved stills only with Gen-4 Turbo
+4. **Cancel Recraft subscription** ($25/mo, never used)
 
 ### Key Resources
 | Resource | Location |
