@@ -1408,12 +1408,20 @@ async function galGenerate(id,fidelity){
       allImgs.push(...imgs1,...imgs2);
     }
     if(!allImgs.length){status.innerHTML='No images returned.';return;}
-    status.innerHTML=allImgs.length+' variation'+(allImgs.length>1?'s':'')+' ready! Tap to add to review queue.';
     const ts=Date.now();
-    results.innerHTML=allImgs.map((im,idx)=>{
+    const added=[];
+    allImgs.forEach((im,idx)=>{
       const vid='mm-'+id+'-'+ts+'-'+idx;
-      return '<img src="'+im.url+'" alt="variation" onclick="galAddVariation(\''+vid+'\',\''+im.url.replace(/'/g,"\\'")+'\',\''+id+'\',\''+mdl.name.replace(/'/g,"\\'")+'\')">';
-    }).join('');
+      if(!ALL_IMAGES.find(i=>i.id===vid)){
+        const entry={id:vid,url:im.url,model:mdl.name+' (variation)',prompt:(modifier||'variation')+' of '+id,label:'VAR: '+(img.label||id),context:'Make More Like This from '+id+'. '+mdl.name+', fidelity='+fidelity+'.'};
+        ALL_IMAGES.push(entry);
+        added.push(entry);
+      }
+    });
+    mmSaveVariations(added);
+    counts();
+    status.innerHTML=added.length+' variation'+(added.length>1?'s':'')+' added to TO REVIEW!';
+    results.innerHTML=allImgs.map((im,idx)=>'<img src="'+im.url+'" alt="variation" style="border:2px solid #22c55e">').join('');
   }catch(e){
     if(e.message.includes('Failed to fetch')||e.message.includes('NetworkError')){
       status.innerHTML='CORS blocked. Use Claude Code to generate variations for now.';
@@ -1453,17 +1461,19 @@ async function mmPoll(endpoint,rid,key,statusEl){
   throw new Error('Timed out after 5 minutes');
 }
 
-function galAddVariation(vid,url,sourceId,modelName){
-  if(ALL_IMAGES.find(i=>i.id===vid))return;
-  const src=ALL_IMAGES.find(i=>i.id===sourceId);
-  ALL_IMAGES.push({id:vid,url:url,model:(modelName||'Unknown')+' (variation)',prompt:'Variation of '+sourceId,label:'VAR: '+(src?src.label:sourceId),context:'Generated via Make More Like This from '+sourceId+'. Temporary fal.media URL.'});
-  const el=document.querySelector('img[onclick*="'+vid+'"]');
-  if(el){el.style.border='2px solid #22c55e';el.style.opacity='.7';}
-  counts();
-  alert('Added to review queue! Switch to TO REVIEW tab to rate it.');
+function mmSaveVariations(entries){
+  const saved=JSON.parse(localStorage.getItem('cb2_mm_variations')||'[]');
+  saved.push(...entries);
+  localStorage.setItem('cb2_mm_variations',JSON.stringify(saved));
+}
+function mmLoadVariations(){
+  const saved=JSON.parse(localStorage.getItem('cb2_mm_variations')||'[]');
+  saved.forEach(e=>{if(!ALL_IMAGES.find(i=>i.id===e.id))ALL_IMAGES.push(e);});
 }
 
-// Init: seed from local first (instant), then load shared feedback (async merge)
+// Init: load any Make More Like This variations from localStorage
+mmLoadVariations();
+// Seed from local first (instant), then load shared feedback (async merge)
 seedFromLocal();
 counts();
 if(!ALL_IMAGES.filter(i=>!isR(i)).length&&ALL_IMAGES.some(i=>isR(i)))tab='done';
