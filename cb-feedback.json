@@ -1,7 +1,327 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T02:09:56.636Z",
+  "syncedAt": "2026-04-07T02:21:25.083Z",
   "images": [
+    {
+      "id": "tahoe-ski-1400",
+      "url": "https://files.catbox.moe/3kkm1y.jpg",
+      "model": "flux2-pro @image (Tahoe ref)",
+      "prompt": "Skiing prompt, Tahoe IMG_0084 (puffy vest) as ref, seed 1400",
+      "label": "TAHOE REF: Ski 1 (s1400)",
+      "context": "TAHOE REF TEST: Using a Tahoe Keepers photo as the sole reference. This one is J&Mike dual arm shot with puffy vest. The vest color carried over into the ski jacket. Does clothing transfer help?",
+      "comments": [
+        {
+          "text": "The remote is above the elbow and there's two volume plus buttons, which is incorrect, but and the strap is a little strange, but the colors transferred well",
+          "time": "2026-04-07T02:11:35.315Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-ski-1401",
+      "url": "https://files.catbox.moe/zz8e2c.jpg",
+      "model": "flux2-pro @image (Tahoe ref)",
+      "prompt": "Same ref, seed 1401",
+      "label": "TAHOE REF: Ski 2 (s1401)",
+      "context": "Same Tahoe ref, different seed. Olive/sage jacket from reference preserved.",
+      "comments": [
+        {
+          "text": "This is on the rear side of the guys arm. It should be on the front side of his arm. The symbols are a little too pale, but the hunter colored plastic looks good. Just not the symbols on the button. It's probably due to the older reference photos.",
+          "time": "2026-04-07T02:12:05.192Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-hike-1402",
+      "url": "https://files.catbox.moe/qrnhe1.jpg",
+      "model": "flux2-pro @image (Tahoe ref)",
+      "prompt": "Hiking prompt, Tahoe IMG_0339 (woman on ridge) as ref",
+      "label": "TAHOE REF: Hike 1 (s1402)",
+      "context": "Tahoe hiking ref — woman on mountain ridge. Agent noted clothing carried over almost perfectly (sports bra, shorts). Does it look like a real hiking photo?",
+      "comments": [
+        {
+          "text": "This is good, but it's above the elbow and the logo looks strange on the strap and the model looks too similar to the original person that we shot",
+          "time": "2026-04-07T02:12:37.621Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-hike-1403",
+      "url": "https://files.catbox.moe/wc5r97.jpg",
+      "model": "flux2-pro @image (Tahoe ref)",
+      "prompt": "Same ref, seed 1403",
+      "label": "TAHOE REF: Hike 2 (s1403)",
+      "context": "Same Tahoe hiking ref, different seed.",
+      "comments": [
+        {
+          "text": "This looks good, but it honestly just looks like a AI version of the person that we shot but the remote looks great",
+          "time": "2026-04-07T02:12:59.804Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-mtb-1404",
+      "url": "https://files.catbox.moe/52tsmw.jpg",
+      "model": "flux2-pro @image (Tahoe ref)",
+      "prompt": "MTB prompt, Tahoe IMG_9733 (cyclist red helmet) as ref",
+      "label": "TAHOE REF: MTB 1 (s1404)",
+      "context": "Tahoe MTB ref — cyclist with red Giro helmet. Agent warned this is almost a 1:1 copy of the original photo. When ref matches the prompt activity, model just reproduces the ref.",
+      "comments": [
+        {
+          "text": "Yeah, this looks like the original photo without a strap",
+          "time": "2026-04-07T02:13:16.765Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "tahoe-mtb-1405",
+      "url": "https://files.catbox.moe/7o53ih.jpg",
+      "model": "flux2-pro @image (Tahoe ref)",
+      "prompt": "Same ref, seed 1405",
+      "label": "TAHOE REF: MTB 2 (s1405)",
+      "context": "Same Tahoe MTB ref. Again very close to original. Limited diversity when ref and prompt match.",
+      "comments": [
+        {
+          "text": "The strap is wrong. The remote is wrong, but the model looks way too familiar to the original person.",
+          "time": "2026-04-07T02:13:34.015Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "clothswap-moto-jacket",
+      "url": "https://files.catbox.moe/dvhmyj.jpg",
+      "model": "two-pass (FLUX edit)",
+      "prompt": "Base: refC-moto-s101 (90/100) → swap T-shirt to moto jacket + helmet",
+      "label": "CLOTHSWAP: Moto Jacket",
+      "context": "TWO-PASS CLOTHING SWAP: Took the 90/100 motorcycle image and asked FLUX to change clothing to armored moto jacket + helmet. Did the CB2 survive the full wardrobe change?",
+      "comments": [
+        {
+          "text": "I'm happy to say that it didn't fact survive the full wardrobe change except for a little bit of dribbling on the symbols but if you could clean that up, this would be almost perfect with the absolute perfect motorcycle gear",
+          "time": "2026-04-07T02:14:31.795Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "clothswap-ski-gloves",
+      "url": "https://files.catbox.moe/lzpgb3.jpg",
+      "model": "two-pass (FLUX edit)",
+      "prompt": "Base: refC-ski-s302 (~90/100) → add ski gloves to hands only",
+      "label": "CLOTHSWAP: Ski Gloves",
+      "context": "Two-pass: added ski gloves to the 90/100 skier. Agent noted CB2 survived but framing changed dramatically to a close-up. Compare against original.",
+      "comments": [
+        {
+          "text": "Do you have ski gloves or a little yeah the remote survived the strap is wrong. They look like oven gloves in a way but I see what you're trying to do but with the garage to the remote itself it did, but the strap did not.",
+          "time": "2026-04-07T02:15:08.083Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "clothswap-snow-earbuds",
+      "url": "https://files.catbox.moe/7zle0m.jpg",
+      "model": "two-pass (FLUX edit)",
+      "prompt": "Base: refC-snow-s404 (100/100) → add wireless earbuds",
+      "label": "CLOTHSWAP: Earbuds on 100-scorer",
+      "context": "Two-pass: added earbuds to the PERFECT 100/100 snowboarder. Agent noted jacket color changed to rainbow tie-dye (not requested) and CB2 is smaller. Did the edit make it worse?",
+      "comments": [
+        {
+          "text": "Wow, the CB still looks good on the arm, but the earbuds look almost comical like she has. It looks like the worst Photoshop Photoshop job I've ever seen.",
+          "time": "2026-04-07T02:15:37.340Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikeref-1-s1100",
+      "url": "https://files.catbox.moe/swu7op.jpg",
+      "model": "flux2-pro @image (Mike Moto ref)",
+      "prompt": "Moto coastal, Mike IMG_2568 as sole ref, seed 1100",
+      "label": "MIKE MOTO REF 1a (s1100)",
+      "context": "MIKE MOTO TEST: Using a single photo from the 45-photo Mike Moto shoot as the ONLY reference. These are third-person, Tron colorway, actual motorcycle gear. Does this give us correct clothing + Tron + good CB2 all at once?",
+      "comments": [
+        {
+          "text": "Besides just a little wary of the of the symbols, which I can't really make out um, the placement is right the strap looks a little different, but yeah, the pasta looks good. The buttons look good just that the symbols aren't really that legible but it's like they could almost be there.",
+          "time": "2026-04-07T02:16:28.982Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikeref-1-s1101",
+      "url": "https://files.catbox.moe/6i8l0g.jpg",
+      "model": "flux2-pro @image (Mike Moto ref)",
+      "prompt": "Same ref, seed 1101",
+      "label": "MIKE MOTO REF 1b (s1101)",
+      "context": "Same Mike Moto ref (IMG_2568), different seed.",
+      "comments": [
+        {
+          "text": "This is a zero out of 100. It looks like he's wearing a battery pack.",
+          "time": "2026-04-07T02:16:44.965Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikeref-2-s1102",
+      "url": "https://files.catbox.moe/uqknpx.jpg",
+      "model": "flux2-pro @image (Mike Moto ref)",
+      "prompt": "Moto coastal, Mike IMG_2592 as ref, seed 1102",
+      "label": "MIKE MOTO REF 2a (s1102)",
+      "context": "Different Mike Moto photo (IMG_2592) — different angle/pose. Does angle of ref matter?",
+      "comments": [
+        {
+          "text": "The symbols look like they're lit up like a strange battery illumination, which is wrong, but it's in the right spot in the plastic of the remote looks OK looks very dreamlike",
+          "time": "2026-04-07T02:17:08.317Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikeref-2-s1103",
+      "url": "https://files.catbox.moe/bwa53y.jpg",
+      "model": "flux2-pro @image (Mike Moto ref)",
+      "prompt": "Same ref, seed 1103",
+      "label": "MIKE MOTO REF 2b (s1103)",
+      "context": "Same ref, different seed.",
+      "comments": [
+        {
+          "text": "The symbols look good cause on the right hand and it's oriented correctly. The remote is in the right place. The clothing looks great. It's a sick motorcycle and yeah, this is really great. I mean the symbols are a little out of focus, but it almost doesn't matter I get this like a 99 out of 100.",
+          "time": "2026-04-07T02:17:47.322Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikeref-3-s1104",
+      "url": "https://files.catbox.moe/4ry3n2.jpg",
+      "model": "flux2-pro @image (Mike Moto ref)",
+      "prompt": "Moto coastal, Mike IMG_2611 as ref, seed 1104",
+      "label": "MIKE MOTO REF 3a (s1104)",
+      "context": "Third Mike Moto photo (IMG_2611). Three different refs from the same shoot to see which angle works best.",
+      "comments": [
+        {
+          "text": "This is a total fail. It looks like some hallucination of what our remote looks like.",
+          "time": "2026-04-07T02:18:00.602Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mikeref-3-s1105",
+      "url": "https://files.catbox.moe/ftmudo.jpg",
+      "model": "flux2-pro @image (Mike Moto ref)",
+      "prompt": "Same ref, seed 1105",
+      "label": "MIKE MOTO REF 3b (s1105)",
+      "context": "Same ref, different seed.",
+      "comments": [
+        {
+          "text": "Total fail, not our product",
+          "time": "2026-04-07T02:18:15.602Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "scene-moto-1300",
+      "url": "https://files.catbox.moe/etmaj1.jpg",
+      "model": "flux2-pro (scene-first)",
+      "prompt": "Person on motorcycle... wearing remote from image 1",
+      "label": "PROMPT: Scene-First Moto (s1300)",
+      "context": "PROMPT ORDER TEST: Current approach — scene description first, CB2 second. Compare against cb2-moto-1300 which puts CB2 first. Same seed.",
+      "comments": [
+        {
+          "text": "I can't really tell the symbols, but the strap is a little different. It looks like it has a different bottom then we have like a kind of created what it wants to look like in the bottom but this is interesting. It's just weird that he doesn't have protective gear on.",
+          "time": "2026-04-07T02:18:46.673Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cb2-moto-1300",
+      "url": "https://files.catbox.moe/83tz30.jpg",
+      "model": "flux2-pro (CB2-first)",
+      "prompt": "Compact remote from image 1 on LEFT forearm... person riding motorcycle",
+      "label": "PROMPT: CB2-First Moto (s1300)",
+      "context": "CB2 FIRST: Product description leads the prompt. Research said FLUX 2 weights earlier elements more. Does the CB2 render better or does the scene suffer?",
+      "comments": [
+        {
+          "text": "The scene is cool, but the strap is wrong. The remote looks fine, but there's no symbols which is a loss.",
+          "time": "2026-04-07T02:19:14.626Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "scene-ski-1301",
+      "url": "https://files.catbox.moe/qliqas.jpg",
+      "model": "flux2-pro (scene-first)",
+      "prompt": "Skier on slope... remote from image 1",
+      "label": "PROMPT: Scene-First Ski (s1301)",
+      "context": "Scene-first skiing. Compare against cb2-ski-1301.",
+      "comments": [
+        {
+          "text": "This picture did not load correctly. Maybe you can redo it for the next batch.",
+          "time": "2026-04-07T02:19:28.777Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cb2-ski-1301",
+      "url": "https://files.catbox.moe/o14jfe.jpg",
+      "model": "flux2-pro (CB2-first)",
+      "prompt": "Remote from image 1 on LEFT forearm... skier on slope",
+      "label": "PROMPT: CB2-First Ski (s1301)",
+      "context": "CB2 first skiing. Agent noted this broke the scene — generated two people at a summit instead of skiing.",
+      "comments": [
+        {
+          "text": "There is one that just looks like the Deuell photo superimposed over a Summit and the remote looks a little flatter and longer than it in the symbols are pretty much not visible, and the buttons look too flat",
+          "time": "2026-04-07T02:19:57.546Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "scene-mtb-1302",
+      "url": "https://files.catbox.moe/84e9d7.jpg",
+      "model": "flux2-pro (scene-first)",
+      "prompt": "MTB on trail... remote from image 1",
+      "label": "PROMPT: Scene-First MTB (s1302)",
+      "context": "Scene-first MTB. Compare against cb2-mtb-1302.",
+      "comments": [
+        {
+          "text": "Buttons, you can't make out the symbols, but it's in the right place and the remote looks OK. The color is a little strange looks a bit like an AI dream I give it like a 74 out of 100.",
+          "time": "2026-04-07T02:20:20.837Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cb2-mtb-1302",
+      "url": "https://files.catbox.moe/rsa8ig.jpg",
+      "model": "flux2-pro (CB2-first)",
+      "prompt": "Remote from image 1 on LEFT forearm... MTB on trail",
+      "label": "PROMPT: CB2-First MTB (s1302)",
+      "context": "CB2 first MTB. Agent noted similar to scene-first but device slightly different shape/color.",
+      "comments": [
+        {
+          "text": "I don't see the photo if you could regenerate it for the next test",
+          "time": "2026-04-07T02:20:36.666Z",
+          "num": 1
+        },
+        {
+          "text": "Never mind it just showed up. It's in the right spot. Remote looks good maybe a little bigger than it should be. Symbols are almost visible just a little bit out of focus. If it was a little bit smaller, the symbols were better. This should be great. I'll give it like a 86.",
+          "time": "2026-04-07T02:21:20.986Z",
+          "num": 2
+        }
+      ]
+    },
     {
       "id": "flex-default",
       "url": "https://files.catbox.moe/xasfeb.jpg",
