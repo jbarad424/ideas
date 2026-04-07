@@ -311,6 +311,9 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
       <button onclick="scanHideResults()" style="padding:.4rem 1rem;border-radius:8px;border:1px solid #333;background:#111;color:#888;font-size:.75rem;cursor:pointer">Back to Scanning</button>
     </div>
   </div>
+  <div style="text-align:center;margin-top:1.5rem;padding-top:.5rem;border-top:1px solid #222">
+    <button onclick="if(confirm('Reset all scan votes? Winners/maybes will need to be re-scanned.')){localStorage.removeItem('scanVotes');scanVotes={};scanIdx=0;scanInit();}" style="padding:.3rem .8rem;border-radius:6px;border:1px solid #333;background:transparent;color:#555;font-size:.65rem;cursor:pointer">Reset All Scan Votes</button>
+  </div>
 </div>
 
 <!-- Scan Zoom Overlay -->
@@ -907,7 +910,14 @@ const ALL_IMAGES=[
   {id:'pipe-E-direct-8702',url:'https://files.catbox.moe/9m3kdd.png',model:'GPT Image 1.5',prompt:'Direct inpaint on full image with mask over CB2 area. Preserve horizontal orientation. Five round buttons: plus, skip back, play/pause, skip forward, minus.',label:'Pipeline E: Direct Inpaint (full scene)',context:'SYMBOL FIX PIPELINE TEST: Applied GPT 1.5 inpaint directly on the full sym-explicit-8601 image with mask over the CB2 area. No cropping or compositing. Question: do the symbols look accurate vs the real CB2? Does the scene integration work?'},
   {id:'pipe-C-composite-8703',url:'https://files.catbox.moe/fwqioy.png',model:'GPT Image 1.5',prompt:'Crop + upscale + inpaint + composite back into original with feathered blending',label:'Pipeline C: Composite (pasted back)',context:'SYMBOL FIX PIPELINE TEST: Took the Pipeline B inpainted crop, downscaled it, and composited it back into the original full image with feathered blending. Does it look natural or pasted on?'},
   {id:'pipe-D-direct-v1-8704',url:'https://files.catbox.moe/n1zlgm.png',model:'GPT Image 1.5',prompt:'Direct inpaint v1 — device got rotated to vertical, 6 buttons instead of 5',label:'Pipeline D: Direct Inpaint v1 (wrong orientation)',context:'SYMBOL FIX PIPELINE TEST: First direct inpaint attempt. GPT 1.5 rotated the device from horizontal to vertical and generated 6 buttons. Included for comparison — shows how GPT reinterprets device shape without strong orientation constraints.'},
-  {id:'pipe-A-upscale-8705',url:'https://files.catbox.moe/zsxh2g.png',model:'AuraSR v2',prompt:'4x upscale only of CB2 crop — no inpainting, just enhancement',label:'Pipeline A: Upscale Only (no inpaint)',context:'SYMBOL FIX PIPELINE TEST: Cropped CB2 area and upscaled 4x with AuraSR v2. No inpainting — just magnification. Does upscaling alone make the symbols readable, or does it just make the blur bigger?'}
+  {id:'pipe-A-upscale-8705',url:'https://files.catbox.moe/zsxh2g.png',model:'AuraSR v2',prompt:'4x upscale only of CB2 crop — no inpainting, just enhancement',label:'Pipeline A: Upscale Only (no inpaint)',context:'SYMBOL FIX PIPELINE TEST: Cropped CB2 area and upscaled 4x with AuraSR v2. No inpainting — just magnification. Does upscaling alone make the symbols readable, or does it just make the blur bigger?'},
+  // === OPTIMIZED SYMBOL BATCH: GPT Image 1.5 + geometric symbol descriptions across 4 sports ===
+  {id:'sym-moto-coastal-8801',url:'https://files.catbox.moe/4541nw.png',model:'GPT Image 1.5',prompt:'Motorcycle rider cruising Pacific Coast Highway at golden hour, wearing leather riding jacket and full-face helmet, CB2 with velcro strap wrapped fully around LEFT lower forearm OVER jacket sleeve, halfway between wrist and elbow, five round tactile buttons with geometric symbols: plus sign, two-left-pointing-triangles-with-vertical-bar, right-pointing-triangle-beside-two-vertical-bars, two-right-pointing-triangles-with-vertical-bar, minus sign, Sony A7R IV 85mm f/2.0, film grain',label:'Sym-Opt: Moto Coastal',context:'OPTIMIZED SYMBOL BATCH: GPT Image 1.5 with geometric symbol descriptions baked into prompt. Same coastal scene that scored 90. Testing whether explicit symbol geometry produces clearer button icons. quality:high, input_fidelity:high.'},
+  {id:'sym-moto-desert-8802',url:'https://files.catbox.moe/cki20t.png',model:'GPT Image 1.5',prompt:'Desert highway through red rock canyon, adventure motorcycle rider stopped looking at vast landscape, wearing textile riding jacket and full-face helmet with visor up, CB2 with geometric symbol buttons on LEFT lower forearm OVER jacket sleeve, Nikon Z9 70mm f/2.8, harsh midday desert sun, documentary',label:'Sym-Opt: Moto Desert',context:'OPTIMIZED SYMBOL BATCH: Desert canyon scene (original scored 89). Rider stopped and looking at landscape. Geometric symbol descriptions in prompt. quality:high, input_fidelity:high.'},
+  {id:'sym-ski-alpine-8803',url:'https://files.catbox.moe/folhk4.png',model:'GPT Image 1.5',prompt:'Skier pausing at top of powder run, steep alpine terrain, insulated ski jacket and goggles on helmet, CB2 with geometric symbol buttons on LEFT lower forearm OVER jacket sleeve, Canon R5 85mm f/2.0, bright overcast, editorial sports photography',label:'Sym-Opt: Skiing Alpine',context:'OPTIMIZED SYMBOL BATCH: FIRST GPT Image 1.5 skiing test. Previous skiing images were all FLUX 2 Flex (scored 95-98). Testing whether GPT 1.5 photorealism translates to winter sports. quality:high, input_fidelity:high.'},
+  {id:'sym-snow-park-8804',url:'https://files.catbox.moe/fdj77a.png',model:'GPT Image 1.5',prompt:'Snowboarder standing at top of terrain park, fresh groomed snow, snowboard jacket and beanie with goggles, CB2 with geometric symbol buttons on LEFT lower forearm OVER jacket sleeve, Sony A7R IV 70mm f/2.8, bright winter sunlight, action sports editorial',label:'Sym-Opt: Snowboard Park',context:'OPTIMIZED SYMBOL BATCH: FIRST GPT Image 1.5 snowboard test. Previous snowboard images scored up to 100 with FLUX 2 Flex. Testing GPT 1.5 for winter sports. quality:high, input_fidelity:high.'},
+  {id:'sym-mtb-trail-8805',url:'https://files.catbox.moe/4bzjwq.png',model:'GPT Image 1.5',prompt:'Mountain biker pausing on singletrack trail overlooking valley, MTB jersey and full-face mountain bike helmet, CB2 with geometric symbol buttons on LEFT lower forearm, Canon R5 85mm f/2.0, dappled forest light, adventure cycling editorial',label:'Sym-Opt: MTB Trail',context:'OPTIMIZED SYMBOL BATCH: FIRST GPT Image 1.5 MTB test. Previous MTB images scored 94-98 with FLUX 2 Flex. Testing GPT 1.5 photorealism for cycling. quality:high, input_fidelity:high.'},
+  {id:'sym-moto-detail-8806',url:'https://files.catbox.moe/9v3ujv.png',model:'GPT Image 1.5',prompt:'Close-up medium shot of motorcycle riders torso and arms on handlebars, leather riding jacket, CB2 with geometric symbol buttons on LEFT lower forearm, Sony A7R IV 135mm f/2.0, shallow DOF, golden hour sidelight, film grain',label:'Sym-Opt: Moto Detail Close-up',context:'OPTIMIZED SYMBOL BATCH: Tighter framing to make CB2 larger in frame. Combines geometric symbol prompt with tight medium shot to maximize button readability. 1536x1024 landscape orientation. quality:high, input_fidelity:high.'}
 ];
 
 // Pre-seed Justin's existing feedback
@@ -1149,7 +1159,22 @@ function setTab(t){
   else if(t==='balance'){document.getElementById('counter').textContent='API Balance & Spending';}
 }
 
-function upFilt(){filt=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i))}
+function upFilt(){
+  if(tab==='new'){
+    const sv=getScanVotes();
+    const hasScanData=Object.keys(sv).length>0;
+    if(hasScanData){
+      // Funnel: only show scan-approved or scan-maybe images that haven't been detail-reviewed yet
+      filt=ALL_IMAGES.filter(i=>!isR(i) && (sv[i.id]==='pass'||sv[i.id]==='maybe'));
+      // If no approved/maybe images pending review, show any remaining unscanned+unreviewed
+      if(!filt.length) filt=ALL_IMAGES.filter(i=>!isR(i) && !sv[i.id]);
+    } else {
+      filt=ALL_IMAGES.filter(i=>!isR(i));
+    }
+  } else {
+    filt=ALL_IMAGES.filter(i=>isR(i));
+  }
+}
 
 function render(){
   // Show/hide grid return bar
@@ -1194,7 +1219,7 @@ function go(dir){
     if(navHistory.length>0){
       const prevId=navHistory.pop();
       // Look in ALL images (reviewed or not) since history may span tabs
-      const allForTab=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i));
+      upFilt(); const allForTab=filt;
       // First try current tab's filter
       let idx=allForTab.findIndex(i=>i.id===prevId);
       if(idx!==-1){
@@ -1447,14 +1472,28 @@ loadSharedFeedback();
 // === SCAN TAB (Swipe to Review) ===
 let scanQueue=[], scanIdx=0, scanVotes={}, scanTouchStartX=0, scanTouchStartY=0, scanSwiping=false;
 
+function getScanVotes(){try{return JSON.parse(localStorage.getItem('scanVotes')||'{}');}catch(e){return {};}}
+function saveScanVotes(){localStorage.setItem('scanVotes',JSON.stringify(scanVotes));}
+
 function scanInit(){
-  // Queue = unreviewed images (same as TO REVIEW tab)
-  scanQueue=ALL_IMAGES.filter(i=>!isR(i));
-  // If all reviewed, show all images sorted by score for re-scanning
-  if(!scanQueue.length) scanQueue=ALL_IMAGES.filter(i=>isR(i));
-  // Restore votes from sessionStorage
-  try{scanVotes=JSON.parse(sessionStorage.getItem('scanVotes')||'{}');}catch(e){scanVotes={};}
-  // Skip already-voted images
+  // Restore votes from localStorage (persists across sessions)
+  scanVotes=getScanVotes();
+  // Queue = images with NO comments AND NO scan vote yet (pure unrated)
+  scanQueue=ALL_IMAGES.filter(i=>!isR(i) && !scanVotes[i.id]);
+  // If nothing unrated, show a summary
+  if(!scanQueue.length){
+    const total=Object.keys(scanVotes).length;
+    if(total>0){
+      document.getElementById('scanProgress').textContent='All scanned! '+total+' images sorted. Check results below.';
+      document.getElementById('scanCard').style.opacity='0.3';
+      scanUpdateCounts();
+      return;
+    }
+    // No scan votes and all reviewed — allow re-scanning reviewed images
+    scanQueue=ALL_IMAGES.filter(i=>isR(i));
+  }
+  scanIdx=0;
+  // Skip already-voted images (safety check)
   while(scanIdx<scanQueue.length && scanVotes[scanQueue[scanIdx].id]) scanIdx++;
   scanRender();
   scanUpdateCounts();
@@ -1493,7 +1532,7 @@ function scanVote(verdict){
   if(scanIdx>=scanQueue.length) return;
   const img=scanQueue[scanIdx];
   scanVotes[img.id]=verdict;
-  sessionStorage.setItem('scanVotes',JSON.stringify(scanVotes));
+  saveScanVotes();
   // Animate out
   const card=document.getElementById('scanCard');
   const dir=verdict==='pass'?1:verdict==='fail'?-1:0;
@@ -1510,16 +1549,7 @@ function scanVote(verdict){
     scanRender();
     scanUpdateCounts();
   },250);
-  // If voted pass, also save a quick comment so it shows as "reviewed"
-  if(verdict==='pass'){
-    const d=D();
-    if(!d[img.id])d[img.id]={comments:[],label:img.label};
-    if(!d[img.id].comments.length){
-      d[img.id].comments.push({text:'[Quick scan: APPROVED]',time:new Date().toISOString(),num:1});
-      d[img.id].label=img.label;
-      S(d);
-    }
-  }
+  // No comment saved — approved/maybe images flow to TO REVIEW for detailed feedback
 }
 
 function scanUpdateCounts(){
@@ -1551,18 +1581,7 @@ function scanShowResults(type){
 function scanRescue(id,fromType){
   if(fromType==='pass') return; // already a winner, just zoom
   scanVotes[id]='pass';
-  sessionStorage.setItem('scanVotes',JSON.stringify(scanVotes));
-  // Save approval comment
-  const img=ALL_IMAGES.find(i=>i.id===id);
-  if(img){
-    const d=D();
-    if(!d[id])d[id]={comments:[],label:img.label};
-    if(!d[id].comments.some(c=>c.text.includes('Quick scan'))){
-      d[id].comments.push({text:'[Quick scan: RESCUED from '+fromType+']',time:new Date().toISOString(),num:d[id].comments.length+1});
-      d[id].label=img.label;
-      S(d);
-    }
-  }
+  saveScanVotes();
   scanUpdateCounts();
   scanShowResults(fromType); // re-render current results
   showToast('Rescued! Moved to Winners.');
