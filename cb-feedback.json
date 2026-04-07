@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T19:23:35.274Z",
+  "syncedAt": "2026-04-07T20:51:00.399Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6483,121 +6483,291 @@
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589419542-0",
-      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "excellent, 90",
-          "time": "2026-04-07T19:20:37.937Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589419542-1",
-      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "id": "mask-inpaint-clean-10001",
+      "url": "https://files.catbox.moe/yrmvtk.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Clean motorcycle scene (no CB2) — Step 1 of masked inpainting pipeline.",
+      "label": "MASK INPAINT: Clean Base Scene",
+      "context": "MASKED INPAINTING TEST: Step 1 — Generate a clean photorealistic motorcycle scene with NO CB2. This becomes the canvas. Step 2 masks the lower forearm region. Step 3 inpaints the CB2 into ONLY the masked area using Ref C. The hypothesis: masks solve above-elbow placement by physically constraining where the CB2 can go.",
       "comments": [
         {
           "text": "Rejected",
-          "time": "2026-04-07T19:20:47.636Z",
+          "time": "2026-04-07T20:20:22.769Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589531515-0",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "id": "mask-inpaint-result-10002",
+      "url": "https://files.catbox.moe/pxcfo9.png",
+      "model": "GPT Image 1.5 (masked inpaint)",
+      "prompt": "Masked inpainting — CB2 placed into lower forearm mask region only, using Ref C + input_fidelity:high. Forearm mask constrained edit to lower arm only.",
+      "label": "MASK INPAINT: Final Result",
+      "context": "MASKED INPAINTING RESULT: The mask worked! CB2 appeared exactly in the masked lower-forearm region. ~5 buttons visible, + on left (correct LEFT arm orientation), olive/green Hunter colorway from Ref C, over the jacket sleeve. Rest of image is pixel-identical to clean scene. This approach SOLVES above-elbow placement — if mask only covers lower forearm, model cannot place CB2 above elbow.",
       "comments": [
         {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:56.418Z",
+          "text": "This is unbelievable. This is like the most incredible photo I’ve seen so far and there’s only one little problem with the symbol and it’s the second button but every other symbol looks good enough if there’s any way to go from here to 100% this is a 99.",
+          "time": "2026-04-07T20:21:11.252Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589531515-1",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "id": "nbpro-coastal-a1-10101",
+      "url": "https://files.catbox.moe/6qjymp.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Motorcycle coastal golden hour, leather jacket, helmet, Ref C, locked CB2 block.",
+      "label": "NB PRO: Coastal A1",
+      "context": "NANO BANANA PRO TEST: Google Gemini 3 Pro Image underneath. Reasoning-based model, up to 14 refs. $0.15/image. Testing if reasoning produces better CB2 placement.",
       "comments": [
         {
-          "text": "nice. 85",
-          "time": "2026-04-07T19:21:13.486Z",
+          "text": "This is really cool love how it’s working with the reference photo. I love it. I’d love to see you just a little bit more action, but it looks really good. You mailed it. I’m 98.",
+          "time": "2026-04-07T20:21:38.080Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-refC-snow-s404-1775589559647-0",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "id": "nbpro-coastal-a2-10102",
+      "url": "https://files.catbox.moe/1eriuv.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Same prompt as A1, second output.",
+      "label": "NB PRO: Coastal A2",
+      "context": "NANO BANANA PRO: CB2 barely visible. Device too small, blends into jacket.",
       "comments": [
         {
-          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
-          "time": "2026-04-07T19:21:34.619Z",
+          "text": "This is pretty cool. I really like it if it was just flipped around in the right orientation it would be awesome. You could fix it by putting it on the other arm, but I’ll give this I mean at least like a 91.",
+          "time": "2026-04-07T20:23:30.294Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-refC-snow-s404-1775589559647-1",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "id": "nbpro-coastal-b1-10103",
+      "url": "https://files.catbox.moe/dsnpe5.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Same coastal prompt, second request.",
+      "label": "NB PRO: Coastal B1",
+      "context": "NANO BANANA PRO: Device very small, too close to wrist. Not usable as CB2 product shot.",
       "comments": [
         {
-          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
-          "time": "2026-04-07T19:21:47.035Z",
+          "text": "Symbols are missing the process but the remote looks cool. It does not",
+          "time": "2026-04-07T20:23:53.401Z",
+          "num": 1
+        },
+        {
+          "text": "Does not pass",
+          "time": "2026-04-07T20:25:54.883Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "nbpro-coastal-b2-10104",
+      "url": "https://files.catbox.moe/wd9gde.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Same coastal prompt, second request output 2.",
+      "label": "NB PRO: Coastal B2",
+      "context": "NANO BANANA PRO: Best strap rendering of Pro batch — visible dark strap wrapping around forearm. 5 buttons in a row. Buttons dark/grey, no colored icons.",
+      "comments": [
+        {
+          "text": "Holy shit this might be one of the best things you’ve ever made. I wish you had gloves on, but I give it a 99.",
+          "time": "2026-04-07T20:26:27.677Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-refC-snow-s404-1775589600635-0",
-      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "id": "nbpro-desert-c1-10105",
+      "url": "https://files.catbox.moe/unisfk.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Desert highway red rock canyon, adventure bike, textile jacket, helmet, Ref C.",
+      "label": "NB PRO: Desert C1",
+      "context": "NANO BANANA PRO: Magazine-quality desert scene. BUT button layout WRONG — 2x3 grid instead of 1x5 row. CB2 has 5 buttons in a single row.",
       "comments": [
         {
-          "text": "This is cool yeah I really like this one great 95",
-          "time": "2026-04-07T19:22:10.501Z",
+          "text": "The buttons are there, but the symbols are not visible and it looks like he’s on a motorcycle with a motorcycle behind him so it’s impressive, but it does not pass",
+          "time": "2026-04-07T20:32:08.416Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-refC-snow-s404-1775589600635-1",
-      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "id": "nbpro-desert-c2-10106",
+      "url": "https://files.catbox.moe/iipj7q.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Same desert prompt, second output.",
+      "label": "NB PRO: Desert C2",
+      "context": "NANO BANANA PRO: Device at elbow level — too high. Confusing second element near wrist. Great scene but CB2 fidelity poor.",
       "comments": [
         {
-          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
-          "time": "2026-04-07T19:22:36.702Z",
+          "text": "This is really cool. The symbols are not perfectly clear. I’ll give it like a 95% on the symbol but everything else is perfect. The photo is cool. The strap is great and nailed it.",
+          "time": "2026-04-07T20:36:45.333Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nb2-coastal-1-10201",
+      "url": "https://files.catbox.moe/0i09c3.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Motorcycle coastal golden hour, leather jacket, helmet, Ref C, locked CB2 block.",
+      "label": "NB2: Coastal #1",
+      "context": "NANO BANANA 2 TEST: Cheaper sibling of Pro ($0.08 vs $0.15). 5 round buttons visible, correct lower-forearm placement, strap visible, over sleeve. Strong photorealism.",
+      "comments": [
+        {
+          "text": "Very cool photo but the symbols are totally wrong does not pass",
+          "time": "2026-04-07T20:37:05.216Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nb2-coastal-2-10202",
+      "url": "https://files.catbox.moe/xnhkad.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Same coastal prompt, second output.",
+      "label": "NB2: Coastal #2",
+      "context": "NANO BANANA 2: Partial CHU branding text visible. ~5 buttons. Minor bare skin gap between jacket cuff and strap.",
+      "comments": [
+        {
+          "text": "Cool photo but the symbols are not perfectly visible and the guy’s hands look like they should be holding out the handlebars, but they’re not they’re just in the air does not pass",
+          "time": "2026-04-07T20:37:34.429Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nb2-desert-1-10203",
+      "url": "https://files.catbox.moe/y174e6.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Desert highway red rock canyon, adventure bike, Ref C.",
+      "label": "NB2: Desert #1",
+      "context": "NANO BANANA 2: Outstanding photorealism but CB2 blends into motorcycle instrument cluster — not recognizable. Miss.",
+      "comments": [
+        {
+          "text": "The CB2 is in fact, recognizable only problem is that the symbols are not they’re about halfway there in terms of resolution if there’s anything you can do to make this make these symbols better. This picture would be outstanding, but it looks like not a pass.",
+          "time": "2026-04-07T20:45:00.839Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nb2-desert-2-10204",
+      "url": "https://files.catbox.moe/a6ycye.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Same desert prompt, second output.",
+      "label": "NB2: Desert #2",
+      "context": "NANO BANANA 2: CB2 clearly visible mid-forearm, strap at top and bottom, 4-5 round buttons. Good desert canyon scene.",
+      "comments": [
+        {
+          "text": "This is a really cool photo. I wish you were wearing gloves and I wish the symbols were clear. They’re almost there. It would pass if the symbols were really good. Please just tell me you can figure out a way to get these symbols better",
+          "time": "2026-04-07T20:46:08.631Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nb2-ski-1-10205",
+      "url": "https://files.catbox.moe/qsu0b3.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Skier carving through fresh powder, ski jacket, helmet, goggles, Ref C.",
+      "label": "NB2: Skiing #1",
+      "context": "NANO BANANA 2 SKIING: 5 buttons, play/pause/skip symbols visible, lower forearm over orange ski jacket. Dynamic powder spray. Very photographic.",
+      "comments": [
+        {
+          "text": "This is a 100. The only thing I would want to change is his facial expression, but everything else is perfect. Great job.",
+          "time": "2026-04-07T20:46:57.689Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nb2-ski-2-10206",
+      "url": "https://files.catbox.moe/b96yvr.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Same skiing prompt, second output.",
+      "label": "NB2: Skiing #2",
+      "context": "NANO BANANA 2 SKIING: Most dynamic composition of entire batch — carving through deep powder, dramatic low angle. Olive/green tint on device. Outstanding action photography.",
+      "comments": [
+        {
+          "text": "The symbols do not show up in this one so it does not pass",
+          "time": "2026-04-07T20:47:19.266Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux-gpt-flux42-10301",
+      "url": "https://files.catbox.moe/jvgcpf.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "FLUX original (seed 42). Motorcycle coastal golden hour, Ref C, guidance_scale:7.0.",
+      "label": "FLUX-GPT: FLUX Original (s42)",
+      "context": "FLUX-GPT PIPELINE STEP 1: Generate with FLUX 2 Flex for accurate CB2. This is the BEFORE. Compare to the GPT-enhanced version to see photorealism upgrade.",
+      "comments": [
+        {
+          "text": "Really cool photo the Chubby Buttons should in fact be a little more like photo realistic, but it’s really good. I mean we could even use this one. I’ll give it a 94.",
+          "time": "2026-04-07T20:48:15.045Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux-gpt-flux1337-10302",
+      "url": "https://files.catbox.moe/lekdj4.jpg",
+      "model": "FLUX 2 Flex g7.0",
+      "prompt": "FLUX original (seed 1337). Same prompt.",
+      "label": "FLUX-GPT: FLUX Original (s1337)",
+      "context": "FLUX-GPT STEP 1: Second FLUX original. Green button icons from Ref C, strap visible, lower forearm. Better composition than seed 42.",
+      "comments": [
+        {
+          "text": "This is unbelievable. It’s really great. I think the color waves are cool. I think it’s really good. I give it like a 97.",
+          "time": "2026-04-07T20:48:56.624Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux-gpt-enhanced42-10303",
+      "url": "https://files.catbox.moe/cieh4f.png",
+      "model": "GPT Image 1.5 (enhancing FLUX)",
+      "prompt": "GPT enhancement of FLUX seed 42. input_fidelity:high.",
+      "label": "FLUX-GPT: Enhanced s42 (high)",
+      "context": "FLUX-GPT STEP 2: GPT with input_fidelity:high enhancing FLUX original. Photorealism jumped — leather textures convincing, helmet reflection realistic. CB2 SURVIVED but buttons shifted slightly.",
+      "comments": [
+        {
+          "text": "This looks really really really really cool. It’s a little bit different from our normal form factor just like a smidge off of it but the colors look cool. I wish you got the bottom red part of the patriot but it’s still almost usable. I give it a 91.",
+          "time": "2026-04-07T20:50:01.185Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux-gpt-enhanced1337-10304",
+      "url": "https://files.catbox.moe/1t38lm.png",
+      "model": "GPT Image 1.5 (enhancing FLUX)",
+      "prompt": "GPT enhancement of FLUX seed 1337. input_fidelity:high.",
+      "label": "FLUX-GPT: Enhanced s1337 (high)",
+      "context": "FLUX-GPT BEST RESULT: Green icons survived, strap wrapping, lower forearm maintained. Leather looks genuinely photographed. Painterly FLUX quality completely gone. Best of both worlds.",
+      "comments": [
+        {
+          "text": "This is great I really like it. It looks like the symbols are illuminated a little too much in the light but you know what it’s fucking fire. I give it a 94.",
+          "time": "2026-04-07T20:50:31.657Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "flux-gpt-nofidelity42-10305",
+      "url": "https://files.catbox.moe/xl1li9.png",
+      "model": "GPT Image 1.5 (enhancing FLUX)",
+      "prompt": "GPT enhancement of FLUX seed 42. NO input_fidelity (control test).",
+      "label": "FLUX-GPT: Enhanced s42 (no fidelity)",
+      "context": "FLUX-GPT CONTROL: Same seed 42 but WITHOUT input_fidelity:high. Surprisingly similar to high-fidelity version — GPT naturally preserves enhance requests well.",
+      "comments": [
+        {
+          "text": "Third boat should be just a little bit bigger, but it looks really cool. I give it an 88.",
+          "time": "2026-04-07T20:50:56.122Z",
           "num": 1
         }
       ]
@@ -6863,6 +7033,126 @@
         {
           "text": "This is pretty weird. The remote is kind of wobbles around. Looks like it's being reanimated with every time that he's moving. I get this 42 out of 100.",
           "time": "2026-04-06T22:27:31.988Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-0",
+      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "excellent, 90",
+          "time": "2026-04-07T19:20:37.937Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-1",
+      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:47.636Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-0",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:56.418Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-1",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "nice. 85",
+          "time": "2026-04-07T19:21:13.486Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-0",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
+          "time": "2026-04-07T19:21:34.619Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-1",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
+          "time": "2026-04-07T19:21:47.035Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-0",
+      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "This is cool yeah I really like this one great 95",
+          "time": "2026-04-07T19:22:10.501Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-1",
+      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
+          "time": "2026-04-07T19:22:36.702Z",
           "num": 1
         }
       ]
