@@ -96,6 +96,8 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 | 12 | **Tahoe single-person reference photos** | 6 images across 3 sports | Copies original | Too constraining — model reproduces the reference person verbatim instead of creating diverse compositions. "Looks like the original photo" across all tests. | Apr 7 |
 | 13 | **Full wardrobe swap via two-pass** (change T-shirt to motorcycle jacket) | 3 tests | CB2 destroyed | Model treats the CB2 as part of the "clothing" and removes it along with the T-shirt. Only small, targeted additions (helmet, earbuds) survive two-pass. | Apr 7 |
 | 14 | **AI Vision co-rater** (early Claude Sonnet scoring) | ~20 images | Gave 5/5 to floating products | Holistic scoring by LLMs is fundamentally unreliable for product-specific detail assessment. | Apr 3 |
+| 15 | **Outpainting from real CB2 photo** (FLUX Pro Fill) | 14 tests across 3 crop strategies | 0/100 (V2/V3), scene-confused (V1) | V1 (wide Mike Moto crop): CB2 perfect but motorcycle context leaked into every sport scene. V2 (tight arm crop): too little context, total hallucinations. V3 (Ref C arm crop): two-person fragments fused into nightmares. Outpainting is designed for background extension, not constructing full-body action athletes from arm fragments. | Apr 7 |
+| 16 | **Stock photo + multi-ref CB2 overlay** (Path C) | 2 tests | 40/100 | Base rider scored 90 but the combination step (adding CB2 via multi-ref edit) produced oversized CB2 (4x too big) and cartoonish quality. Multi-ref edit treats both images as creative inspiration, not as "overlay product onto person." | Apr 7 |
 
 ## 4. Operating Rules (Always Follow)
 
