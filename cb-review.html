@@ -304,6 +304,13 @@ const ALL_VIDEOS=[
 ];
 
 const ALL_IMAGES=[
+  // === TEST: Prompt order — Scene-first vs CB2-first (same seeds) ===
+  {id:'scene-moto-1300',url:'https://files.catbox.moe/etmaj1.jpg',model:'flux2-pro (scene-first)',prompt:'Person on motorcycle... wearing remote from image 1',label:'PROMPT: Scene-First Moto (s1300)',context:'PROMPT ORDER TEST: Current approach — scene description first, CB2 second. Compare against cb2-moto-1300 which puts CB2 first. Same seed.'},
+  {id:'cb2-moto-1300',url:'https://files.catbox.moe/83tz30.jpg',model:'flux2-pro (CB2-first)',prompt:'Compact remote from image 1 on LEFT forearm... person riding motorcycle',label:'PROMPT: CB2-First Moto (s1300)',context:'CB2 FIRST: Product description leads the prompt. Research said FLUX 2 weights earlier elements more. Does the CB2 render better or does the scene suffer?'},
+  {id:'scene-ski-1301',url:'https://files.catbox.moe/qliqas.jpg',model:'flux2-pro (scene-first)',prompt:'Skier on slope... remote from image 1',label:'PROMPT: Scene-First Ski (s1301)',context:'Scene-first skiing. Compare against cb2-ski-1301.'},
+  {id:'cb2-ski-1301',url:'https://files.catbox.moe/o14jfe.jpg',model:'flux2-pro (CB2-first)',prompt:'Remote from image 1 on LEFT forearm... skier on slope',label:'PROMPT: CB2-First Ski (s1301)',context:'CB2 first skiing. Agent noted this broke the scene — generated two people at a summit instead of skiing.'},
+  {id:'scene-mtb-1302',url:'https://files.catbox.moe/84e9d7.jpg',model:'flux2-pro (scene-first)',prompt:'MTB on trail... remote from image 1',label:'PROMPT: Scene-First MTB (s1302)',context:'Scene-first MTB. Compare against cb2-mtb-1302.'},
+  {id:'cb2-mtb-1302',url:'https://files.catbox.moe/rsa8ig.jpg',model:'flux2-pro (CB2-first)',prompt:'Remote from image 1 on LEFT forearm... MTB on trail',label:'PROMPT: CB2-First MTB (s1302)',context:'CB2 first MTB. Agent noted similar to scene-first but device slightly different shape/color.'},
   // === TEST: FLUX 2 Flex vs Pro (cheaper, adjustable guidance/steps) ===
   {id:'flex-default',url:'https://files.catbox.moe/xasfeb.jpg',model:'FLUX 2 Flex (default)',prompt:'Moto coastal, guidance 3.5, steps 28',label:'FLEX: Default (g3.5 s28)',context:'FLUX 2 FLEX TEST: Same J&Mike ref, same prompt as Pro. Default settings. Flex is 33% cheaper ($0.02 vs $0.03/MP) and has adjustable guidance + steps. Does quality match Pro?'},
   {id:'flex-highguide',url:'https://files.catbox.moe/b80lk8.jpg',model:'FLUX 2 Flex (high guidance)',prompt:'Moto coastal, guidance 7.0, steps 28',label:'FLEX: High Guidance (g7.0 s28)',context:'Flex with guidance_scale doubled to 7.0. Higher guidance = more literal prompt adherence. Does this improve CB2 accuracy or make it worse?'},
