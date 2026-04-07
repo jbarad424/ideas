@@ -304,6 +304,13 @@ const ALL_VIDEOS=[
 ];
 
 const ALL_IMAGES=[
+  // === TEST: Mike Moto photos as primary ref (Tron + moto gear, third-person) ===
+  {id:'mikeref-1-s1100',url:'https://files.catbox.moe/swu7op.jpg',model:'flux2-pro @image (Mike Moto ref)',prompt:'Moto coastal, Mike IMG_2568 as sole ref, seed 1100',label:'MIKE MOTO REF 1a (s1100)',context:'MIKE MOTO TEST: Using a single photo from the 45-photo Mike Moto shoot as the ONLY reference. These are third-person, Tron colorway, actual motorcycle gear. Does this give us correct clothing + Tron + good CB2 all at once?'},
+  {id:'mikeref-1-s1101',url:'https://files.catbox.moe/6i8l0g.jpg',model:'flux2-pro @image (Mike Moto ref)',prompt:'Same ref, seed 1101',label:'MIKE MOTO REF 1b (s1101)',context:'Same Mike Moto ref (IMG_2568), different seed.'},
+  {id:'mikeref-2-s1102',url:'https://files.catbox.moe/uqknpx.jpg',model:'flux2-pro @image (Mike Moto ref)',prompt:'Moto coastal, Mike IMG_2592 as ref, seed 1102',label:'MIKE MOTO REF 2a (s1102)',context:'Different Mike Moto photo (IMG_2592) — different angle/pose. Does angle of ref matter?'},
+  {id:'mikeref-2-s1103',url:'https://files.catbox.moe/bwa53y.jpg',model:'flux2-pro @image (Mike Moto ref)',prompt:'Same ref, seed 1103',label:'MIKE MOTO REF 2b (s1103)',context:'Same ref, different seed.'},
+  {id:'mikeref-3-s1104',url:'https://files.catbox.moe/4ry3n2.jpg',model:'flux2-pro @image (Mike Moto ref)',prompt:'Moto coastal, Mike IMG_2611 as ref, seed 1104',label:'MIKE MOTO REF 3a (s1104)',context:'Third Mike Moto photo (IMG_2611). Three different refs from the same shoot to see which angle works best.'},
+  {id:'mikeref-3-s1105',url:'https://files.catbox.moe/ftmudo.jpg',model:'flux2-pro @image (Mike Moto ref)',prompt:'Same ref, seed 1105',label:'MIKE MOTO REF 3b (s1105)',context:'Same ref, different seed.'},
   // === TEST: Prompt order — Scene-first vs CB2-first (same seeds) ===
   {id:'scene-moto-1300',url:'https://files.catbox.moe/etmaj1.jpg',model:'flux2-pro (scene-first)',prompt:'Person on motorcycle... wearing remote from image 1',label:'PROMPT: Scene-First Moto (s1300)',context:'PROMPT ORDER TEST: Current approach — scene description first, CB2 second. Compare against cb2-moto-1300 which puts CB2 first. Same seed.'},
   {id:'cb2-moto-1300',url:'https://files.catbox.moe/83tz30.jpg',model:'flux2-pro (CB2-first)',prompt:'Compact remote from image 1 on LEFT forearm... person riding motorcycle',label:'PROMPT: CB2-First Moto (s1300)',context:'CB2 FIRST: Product description leads the prompt. Research said FLUX 2 weights earlier elements more. Does the CB2 render better or does the scene suffer?'},
