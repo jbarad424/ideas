@@ -1339,6 +1339,7 @@ function galOpen(id){
     +'<a class="gal-dl" href="'+img.url+'" download target="_blank">Download Full Resolution</a>'
     +'<button class="gal-mm" onclick="galToggleMM(\''+img.id+'\')">Make More Like This</button>'
     +'<div id="mmPanel-'+img.id+'" class="mm-panel" style="display:none">'
+    +'<div style="font-size:.6rem;color:#a855f7;margin-bottom:.3rem">Using: '+mmDetectModel(img.model).name+'</div>'
     +'<input id="mmText-'+img.id+'" type="text" placeholder="Optional: more snow, change to sunset, zoom closer...">'
     +'<div class="mm-btns">'
     +'<button class="mm-btn-close" onclick="galGenerate(\''+img.id+'\',\'high\')">Close Variation</button>'
@@ -1356,58 +1357,63 @@ function galToggleMM(id){
   p.style.display=p.style.display==='none'?'block':'none';
 }
 
+function mmDetectModel(model){
+  const m=(model||'').toLowerCase();
+  if(m.includes('gpt image'))return{type:'gpt',endpoint:'fal-ai/gpt-image-1.5/edit',name:'GPT Image 1.5'};
+  if(m.includes('flex'))return{type:'flex',endpoint:'fal-ai/flux-2-flex/edit',name:'FLUX 2 Flex'};
+  if(m.includes('max'))return{type:'max',endpoint:'fal-ai/flux-2-max/edit',name:'FLUX 2 Max'};
+  return{type:'pro',endpoint:'fal-ai/flux-2-pro/edit',name:'FLUX 2 Pro'};
+}
+
 async function galGenerate(id,fidelity){
   const img=ALL_IMAGES.find(i=>i.id===id);if(!img)return;
   const modifier=document.getElementById('mmText-'+id).value.trim();
   const status=document.getElementById('mmStatus-'+id);
   const results=document.getElementById('mmResults-'+id);
-  status.innerHTML='Submitting to GPT Image 1.5...';
   results.innerHTML='';
 
   const FK='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
   const REF='https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800';
-  const CB2='the wearable remote from image 2 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons: PLUS sign, REWIND (two left triangles with bar), PLAY/PAUSE (triangle next to two vertical bars), FAST-FORWARD (two right triangles with bar), MINUS sign';
-  const prompt=modifier
-    ?'Create a variation of image 1: '+modifier+'. Preserve '+CB2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.'
-    :'Create a unique variation of image 1 with a fresh angle and composition. Preserve '+CB2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.';
+  const mdl=mmDetectModel(img.model);
+  status.innerHTML='Submitting to '+mdl.name+'...';
+
+  // Model-specific CB2 blocks
+  const CB2_GPT='the wearable remote from image 2 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons: PLUS sign, REWIND (two left triangles with bar), PLAY/PAUSE (triangle next to two vertical bars), FAST-FORWARD (two right triangles with bar), MINUS sign';
+  const CB2_FLUX='wearing the wearable remote from image 2 on their LEFT forearm, volume-up button closest to wrist';
+  const cb2=mdl.type==='gpt'?CB2_GPT:CB2_FLUX;
+
+  const basePrompt=modifier
+    ?'Create a variation of image 1: '+modifier+'. Preserve '+cb2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.'
+    :'Create a unique variation of image 1 with a fresh angle and composition. Preserve '+cb2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.';
 
   try{
-    const resp=await fetch('https://queue.fal.run/fal-ai/gpt-image-1.5/edit',{
-      method:'POST',
-      headers:{'Authorization':'Key '+FK,'Content-Type':'application/json'},
-      body:JSON.stringify({image_urls:[img.url,REF],prompt,size:'1024x1536',quality:'high',input_fidelity:fidelity,num_images:2})
-    });
-    if(!resp.ok)throw new Error('Submit failed: '+resp.status);
-    const data=await resp.json();
-    const rid=data.request_id;
-    status.innerHTML='Generating 2 variations... (typically 60-90s)';
-
-    let done=false,elapsed=0;
-    while(!done&&elapsed<300){
-      await new Promise(r=>setTimeout(r,5000));
-      elapsed+=5;
-      const sr=await fetch('https://queue.fal.run/fal-ai/gpt-image-1.5/requests/'+rid+'/status',{headers:{'Authorization':'Key '+FK}});
-      const sd=await sr.json();
-      if(sd.status==='COMPLETED'){
-        const rr=await fetch('https://queue.fal.run/fal-ai/gpt-image-1.5/requests/'+rid,{headers:{'Authorization':'Key '+FK}});
-        const rd=await rr.json();
-        const imgs=rd.images||[];
-        if(!imgs.length){status.innerHTML='No images returned.';return;}
-        status.innerHTML=imgs.length+' variation'+(imgs.length>1?'s':'')+' ready! Tap to add to review queue.';
-        const ts=Date.now();
-        results.innerHTML=imgs.map((im,idx)=>{
-          const vid='mm-'+id+'-'+ts+'-'+idx;
-          return '<img src="'+im.url+'" alt="variation" onclick="galAddVariation(\''+vid+'\',\''+im.url.replace(/'/g,"\\'")+'\',\''+id+'\')">';
-        }).join('');
-        done=true;
-      }else if(sd.status==='FAILED'){
-        status.innerHTML='Generation failed. Try again.';
-        done=true;
-      }else{
-        status.innerHTML='Generating... '+elapsed+'s ('+sd.status+')';
-      }
+    const allImgs=[];
+    if(mdl.type==='gpt'){
+      // GPT: single call, num_images:2
+      const rid=await mmSubmit(mdl.endpoint,{image_urls:[img.url,REF],prompt:basePrompt,size:'1024x1536',quality:'high',input_fidelity:fidelity,num_images:2},FK);
+      status.innerHTML='Generating 2 variations via '+mdl.name+'... (60-90s)';
+      const imgs=await mmPoll(mdl.endpoint,rid,FK,status);
+      allImgs.push(...imgs);
+    }else{
+      // FLUX: two parallel calls with random seeds
+      const gs=mdl.type==='flex'?(fidelity==='high'?5.0:9.0):undefined;
+      const mkPayload=()=>{
+        const p={image_urls:[img.url,REF],prompt:basePrompt,seed:Math.floor(Math.random()*100000),num_images:1,output_format:'jpeg',safety_tolerance:5};
+        if(mdl.type==='flex'){p.guidance_scale=gs;p.num_inference_steps=28;}
+        return p;
+      };
+      const [rid1,rid2]=await Promise.all([mmSubmit(mdl.endpoint,mkPayload(),FK),mmSubmit(mdl.endpoint,mkPayload(),FK)]);
+      status.innerHTML='Generating 2 variations via '+mdl.name+'... (30-60s)';
+      const [imgs1,imgs2]=await Promise.all([mmPoll(mdl.endpoint,rid1,FK,status),mmPoll(mdl.endpoint,rid2,FK,status)]);
+      allImgs.push(...imgs1,...imgs2);
     }
-    if(!done)status.innerHTML='Timed out after 5 minutes. The job may still complete on fal.ai.';
+    if(!allImgs.length){status.innerHTML='No images returned.';return;}
+    status.innerHTML=allImgs.length+' variation'+(allImgs.length>1?'s':'')+' ready! Tap to add to review queue.';
+    const ts=Date.now();
+    results.innerHTML=allImgs.map((im,idx)=>{
+      const vid='mm-'+id+'-'+ts+'-'+idx;
+      return '<img src="'+im.url+'" alt="variation" onclick="galAddVariation(\''+vid+'\',\''+im.url.replace(/'/g,"\\'")+'\',\''+id+'\',\''+mdl.name.replace(/'/g,"\\'")+'\')">';
+    }).join('');
   }catch(e){
     if(e.message.includes('Failed to fetch')||e.message.includes('NetworkError')){
       status.innerHTML='CORS blocked. Use Claude Code to generate variations for now.';
@@ -1417,10 +1423,40 @@ async function galGenerate(id,fidelity){
   }
 }
 
-function galAddVariation(vid,url,sourceId){
+async function mmSubmit(endpoint,payload,key){
+  const resp=await fetch('https://queue.fal.run/'+endpoint,{
+    method:'POST',headers:{'Authorization':'Key '+key,'Content-Type':'application/json'},body:JSON.stringify(payload)
+  });
+  if(!resp.ok)throw new Error('Submit failed: '+resp.status);
+  const data=await resp.json();
+  return data.request_id;
+}
+
+async function mmPoll(endpoint,rid,key,statusEl){
+  // Strip /edit from endpoint for status URL
+  const base=endpoint.replace(/\/edit$/,'');
+  let elapsed=0;
+  while(elapsed<300){
+    await new Promise(r=>setTimeout(r,5000));
+    elapsed+=5;
+    const sr=await fetch('https://queue.fal.run/'+base+'/requests/'+rid+'/status',{headers:{'Authorization':'Key '+key}});
+    const sd=await sr.json();
+    if(sd.status==='COMPLETED'){
+      const rr=await fetch('https://queue.fal.run/'+base+'/requests/'+rid,{headers:{'Authorization':'Key '+key}});
+      const rd=await rr.json();
+      return rd.images||[];
+    }else if(sd.status==='FAILED'){
+      throw new Error('Generation failed');
+    }
+    if(statusEl)statusEl.innerHTML='Generating... '+elapsed+'s ('+sd.status+')';
+  }
+  throw new Error('Timed out after 5 minutes');
+}
+
+function galAddVariation(vid,url,sourceId,modelName){
   if(ALL_IMAGES.find(i=>i.id===vid))return;
   const src=ALL_IMAGES.find(i=>i.id===sourceId);
-  ALL_IMAGES.push({id:vid,url:url,model:'GPT Image 1.5 (variation)',prompt:'Variation of '+sourceId,label:'VAR: '+(src?src.label:sourceId),context:'Generated via Make More Like This from '+sourceId+'. Temporary fal.media URL.'});
+  ALL_IMAGES.push({id:vid,url:url,model:(modelName||'Unknown')+' (variation)',prompt:'Variation of '+sourceId,label:'VAR: '+(src?src.label:sourceId),context:'Generated via Make More Like This from '+sourceId+'. Temporary fal.media URL.'});
   const el=document.querySelector('img[onclick*="'+vid+'"]');
   if(el){el.style.border='2px solid #22c55e';el.style.opacity='.7';}
   counts();
