@@ -304,6 +304,11 @@ const ALL_VIDEOS=[
 ];
 
 const ALL_IMAGES=[
+  // === TEST: FLUX 2 Flex vs Pro (cheaper, adjustable guidance/steps) ===
+  {id:'flex-default',url:'https://files.catbox.moe/xasfeb.jpg',model:'FLUX 2 Flex (default)',prompt:'Moto coastal, guidance 3.5, steps 28',label:'FLEX: Default (g3.5 s28)',context:'FLUX 2 FLEX TEST: Same J&Mike ref, same prompt as Pro. Default settings. Flex is 33% cheaper ($0.02 vs $0.03/MP) and has adjustable guidance + steps. Does quality match Pro?'},
+  {id:'flex-highguide',url:'https://files.catbox.moe/b80lk8.jpg',model:'FLUX 2 Flex (high guidance)',prompt:'Moto coastal, guidance 7.0, steps 28',label:'FLEX: High Guidance (g7.0 s28)',context:'Flex with guidance_scale doubled to 7.0. Higher guidance = more literal prompt adherence. Does this improve CB2 accuracy or make it worse?'},
+  {id:'flex-moresteps',url:'https://files.catbox.moe/0tfsfw.jpg',model:'FLUX 2 Flex (more steps)',prompt:'Moto coastal, guidance 3.5, steps 50',label:'FLEX: More Steps (g3.5 s50)',context:'Flex with 50 inference steps instead of 28. More steps = higher quality rendering. Does the CB2 look sharper?'},
+  {id:'flex-highboth',url:'https://files.catbox.moe/ydxypo.jpg',model:'FLUX 2 Flex (high both)',prompt:'Moto coastal, guidance 7.0, steps 50',label:'FLEX: High Both (g7.0 s50)',context:'Flex with both guidance and steps maxed. Maximum control and quality. Compare against default Flex and Pro results.'},
   // === COLORWAY REFERENCE TEST: Different ref photo per colorway, same prompt, same seeds ===
   {id:'cw-control-s51',url:'https://files.catbox.moe/0y0dgp.jpg',model:'flux2-pro @image (J&Mike CONTROL)',prompt:'Moto coastal, LEFT arm, simple prompt, seed 51',label:'COLORWAY: J&Mike Control (seed 51)',context:'COLORWAY REF TEST CONTROL: Same J&Mike Dual reference we always use. Compare the colorway that appears here against the Hunter, Patriot, and Tron versions below — all same prompt and seed.'},
   {id:'cw-hunter-s50',url:'https://files.catbox.moe/p5bwhb.jpg',model:'flux2-pro @image (Hunter on-arm ref)',prompt:'Same moto prompt, seed 50',label:'COLORWAY: Hunter Ref (seed 50)',context:'HUNTER REF: Using Jordan\'s IMG_0534 (Hunter on-arm, wearer\'s POV) as the reference instead of J&Mike. Does the green/yellow colorway transfer? Does orientation go back to shit since this is wearer\'s POV?'},
