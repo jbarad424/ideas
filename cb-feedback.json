@@ -1,12 +1,743 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-06T22:27:36.422Z",
+  "syncedAt": "2026-04-07T01:31:17.079Z",
   "images": [
     {
+      "id": "multiref-hunter-s60",
+      "url": "https://files.catbox.moe/2qwap9.jpg",
+      "model": "flux2-pro @image (2 refs)",
+      "prompt": "Moto coastal, ref1=J&Mike ref2=Hunter on-arm, LEFT arm",
+      "label": "MULTI-REF: Moto Hunter",
+      "context": "MULTI-REFERENCE TEST: image_urls[0]=J&Mike (for orientation), image_urls[1]=Jordan Hunter on-arm (for green/yellow colorway). Prompt says \"remote from image 1 in the Hunter colorway from image 2.\" Does this give us BOTH correct orientation AND correct colorway?",
+      "comments": [
+        {
+          "text": "This is a hunter. It's a little brighter than it should be but again the guy is wearing a T-shirt and sleeveless wrong orientation unfortunately it would be right if it run on the right arm, but it's wrong. It's on the left arm.",
+          "time": "2026-04-07T01:28:20.267Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "multiref-patriot-s60",
+      "url": "https://files.catbox.moe/k4w1fo.jpg",
+      "model": "flux2-pro @image (2 refs)",
+      "prompt": "Moto coastal, ref1=J&Mike ref2=Patriot on-arm, LEFT arm",
+      "label": "MULTI-REF: Moto Patriot",
+      "context": "Multi-ref: J&Mike + Jordan Patriot. Does the white/red/navy colorway transfer while keeping J&Mike orientation?",
+      "comments": [
+        {
+          "text": "Great placement I see a little bit of the red on the bottom, but it should be red all the way around the bottom. It's like the second clamshell of the deposit chassis, but this buttons know the colors look right. The symbols look right in terms of color, but they are oriented the wrong way again. It would be right if the surround the other arm, but since the left arm the volume up button and everything else should be flipped you know the other way.",
+          "time": "2026-04-07T01:29:07.317Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "multiref-tron-s60",
+      "url": "https://files.catbox.moe/qts5or.jpg",
+      "model": "flux2-pro @image (2 refs)",
+      "prompt": "Moto coastal, ref1=J&Mike ref2=Tron product, LEFT arm",
+      "label": "MULTI-REF: Moto Tron",
+      "context": "Multi-ref: J&Mike + Tron product photo. Does black/cyan transfer?",
+      "comments": [
+        {
+          "text": "This is oriented correctly, but it's a little smaller than it should be in the strap is wrong and the symbols are a little garble",
+          "time": "2026-04-07T01:29:29.751Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "multiref-hunter-s61",
+      "url": "https://files.catbox.moe/1cf9nq.jpg",
+      "model": "flux2-pro @image (2 refs)",
+      "prompt": "Skier snowy slope, ref1=J&Mike ref2=Hunter on-arm, LEFT arm",
+      "label": "MULTI-REF: Ski Hunter",
+      "context": "Multi-ref skiing test. Same dual-reference approach. Hunter colorway on a skier.",
+      "comments": [
+        {
+          "text": "incorrect orientation, but fine placement of remote and strap.",
+          "time": "2026-04-07T01:29:52.537Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "multiref-patriot-s61",
+      "url": "https://files.catbox.moe/sz0rli.jpg",
+      "model": "flux2-pro @image (2 refs)",
+      "prompt": "Skier snowy slope, ref1=J&Mike ref2=Patriot on-arm, LEFT arm",
+      "label": "MULTI-REF: Ski Patriot",
+      "context": "Multi-ref skiing. Patriot colorway.",
+      "comments": [
+        {
+          "text": "incorrect orienation, but decent colors on buttons, lacking the red bottom of the patriot color way.",
+          "time": "2026-04-07T01:30:16.466Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "multiref-tron-s61",
+      "url": "https://files.catbox.moe/8vq857.jpg",
+      "model": "flux2-pro @image (2 refs)",
+      "prompt": "Skier snowy slope, ref1=J&Mike ref2=Tron product, LEFT arm",
+      "label": "MULTI-REF: Ski Tron",
+      "context": "Multi-ref skiing. Tron colorway.",
+      "comments": [
+        {
+          "text": "tron is correct orientation, but the symbols are a little too brght. the guy on the left has the wrong colors on his. it's like a tron and hunter hybrid with very super bright symbols outlines.",
+          "time": "2026-04-07T01:31:14.883Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cw-control-s51",
+      "url": "https://files.catbox.moe/0y0dgp.jpg",
+      "model": "flux2-pro @image (J&Mike CONTROL)",
+      "prompt": "Moto coastal, LEFT arm, simple prompt, seed 51",
+      "label": "COLORWAY: J&Mike Control (seed 51)",
+      "context": "COLORWAY REF TEST CONTROL: Same J&Mike Dual reference we always use. Compare the colorway that appears here against the Hunter, Patriot, and Tron versions below — all same prompt and seed.",
+      "comments": [
+        {
+          "text": "I'm not sure what the color way we're testing here is but it's above the elbow and he can't really see the symbols, which is OK, but it just should be below the elbow and the helmet looks strange in the guy's head and the image itself looks a little cartoony he's also wearing sleeves a sleeveless T-shirt, which she shouldn't be when he's on a motorcycle, but I think it looks like a hunter if that's what you're going for.",
+          "time": "2026-04-07T00:45:10.678Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cw-hunter-s50",
+      "url": "https://files.catbox.moe/p5bwhb.jpg",
+      "model": "flux2-pro @image (Hunter on-arm ref)",
+      "prompt": "Same moto prompt, seed 50",
+      "label": "COLORWAY: Hunter Ref (seed 50)",
+      "context": "HUNTER REF: Using Jordan's IMG_0534 (Hunter on-arm, wearer's POV) as the reference instead of J&Mike. Does the green/yellow colorway transfer? Does orientation go back to shit since this is wearer's POV?",
+      "comments": [
+        {
+          "text": "The symbols are flipped in the wrong direction. It's so that the viewer the image sees it not the writer and the remote is like really big. It's almost like 2 1/2 times the size of what it should be. It looks like a hunter, but that's but only in color not in size 60 score of 60.",
+          "time": "2026-04-07T00:46:01.295Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cw-hunter-s51",
+      "url": "https://files.catbox.moe/n2ba8y.jpg",
+      "model": "flux2-pro @image (Hunter on-arm ref)",
+      "prompt": "Same, seed 51",
+      "label": "COLORWAY: Hunter Ref (seed 51)",
+      "context": "Hunter ref, second seed. Compare orientation and colorway against the J&Mike control at seed 51.",
+      "comments": [
+        {
+          "text": "The orientation is wrong. I should be that you know flipped around again. This looks like a hunter the symbol the symbols look good. It's actually the exactly the right paint on the symbol outline, but this looks strange like his arms are like really too long and looks like he's about to drive off a cliff, which is really stran but just needs to be flipped around otherwise I get this 78",
+          "time": "2026-04-07T00:46:44.629Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cw-patriot-s50",
+      "url": "https://files.catbox.moe/fsbsp3.jpg",
+      "model": "flux2-pro @image (Patriot on-arm ref)",
+      "prompt": "Same moto prompt, seed 50",
+      "label": "COLORWAY: Patriot Ref (seed 50)",
+      "context": "PATRIOT REF: Using Jordan's IMG_0544 (Patriot on-arm, wearer's POV). Does the white/red/navy colorway transfer? Critical test for the third colorway.",
+      "comments": [
+        {
+          "text": "The patriot looks right I can't really see the red on the bottom and it looks a little bit longer and flatter than it usually is for factor wise should be a little lower than the elbow and facing toward the person, but the symbols are in the incorrect orientation, they should be flipped 180° give this a and 84.",
+          "time": "2026-04-07T00:47:30.644Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cw-patriot-s51",
+      "url": "https://files.catbox.moe/kq5y12.jpg",
+      "model": "flux2-pro @image (Patriot on-arm ref)",
+      "prompt": "Same, seed 51",
+      "label": "COLORWAY: Patriot Ref (seed 51)",
+      "context": "Patriot ref, second seed.",
+      "comments": [
+        {
+          "text": "This is really interesting the symbol should be flipped, but the remote looks a little flatter than usual and you can't see the red bottom and the red bottom chest part of the chassis but the blue buttons are good. It's in the right position on the arm and it's rotated well just a little longer and flatter than it should be in real life and of course the symbols are oriented in the wrong direction.",
+          "time": "2026-04-07T00:48:20.746Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cw-tron-s50",
+      "url": "https://files.catbox.moe/minyjl.jpg",
+      "model": "flux2-pro @image (Tron product ref)",
+      "prompt": "Same moto prompt, seed 50",
+      "label": "COLORWAY: Tron Ref (seed 50)",
+      "context": "TRON REF: Using the Tron Landscape professional product photo as reference. Does the black/cyan colorway transfer? This is a product shot, not on-arm — different framing than the others.",
+      "comments": [
+        {
+          "text": "This is sitting horizontally on the wrist with 2+ buttons on both sides. Give us a 30 out of 100.",
+          "time": "2026-04-07T00:48:40.662Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cw-tron-s51",
+      "url": "https://files.catbox.moe/vfipni.jpg",
+      "model": "flux2-pro @image (Tron product ref)",
+      "prompt": "Same, seed 51",
+      "label": "COLORWAY: Tron Ref (seed 51)",
+      "context": "Tron ref, second seed.",
+      "comments": [
+        {
+          "text": "Should be flipped around cause it's on the left hand, but it's it's a Tron and that's true but it's all black just and it's a little smaller than in reality and again the guy is not wearing protective gear on his body nor is he wearing a helmet I give it a 72",
+          "time": "2026-04-07T00:49:28.180Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "ab-old-moto",
+      "url": "https://files.catbox.moe/rzptoc.jpg",
+      "model": "flux2-pro @image (OLD prompt)",
+      "prompt": "Person on motorcycle coastal highway, LEFT forearm, golden hour, adventure photography",
+      "label": "A/B OLD: Moto (seed 1000)",
+      "context": "PROMPT A/B TEST: Our current simple prompt style. Compare directly against ab-new-moto which uses the same seed but with camera specs, lighting direction, and person description.",
+      "comments": [
+        {
+          "text": "This is unfortunate The writer looks good. But you can barely see the remote. I would say it’s probably like a 22 out of 100.",
+          "time": "2026-04-06T23:04:08.484Z",
+          "num": 1
+        },
+        {
+          "text": "This is unfortunate The writer looks good. But you can barely see the remote. I would say it is probably like a 22 out of 100.",
+          "time": "2026-04-06T23:30:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "ab-new-moto",
+      "url": "https://files.catbox.moe/iyz8ne.jpg",
+      "model": "flux2-pro @image (NEW prompt)",
+      "prompt": "Athletic man 30s, Sony A7IV 135mm f/2.8, golden backlight camera-right, editorial action sports",
+      "label": "A/B NEW: Moto (seed 1000)",
+      "context": "RESEARCH-INFORMED: Same seed. Added Sony A7IV 70-200mm f/2.8, backlight from camera-right with rim light, athletic man early 30s, editorial action sports high-end outdoor brand campaign.",
+      "comments": [
+        {
+          "text": "The remote is preserved, but again the guy isn’t wearing any protective gear while his cycling Nora helmet so I would not use this as anything in my collateral so I’ll give it like a 30 out of 100",
+          "time": "2026-04-06T23:04:44.670Z",
+          "num": 1
+        },
+        {
+          "text": "But it is placed in the correct spot. I’ll give you that even though the symbols are not as bright as they could be.",
+          "time": "2026-04-06T23:04:59.381Z",
+          "num": 2
+        },
+        {
+          "text": "The remote is preserved, but again the guy is not wearing any protective gear while cycling nor a helmet so I would not use this as anything in my collateral so I will give it like a 30 out of 100. But it is placed in the correct spot even though the symbols are not as bright as they could be.",
+          "time": "2026-04-06T23:31:00Z",
+          "num": 3
+        }
+      ]
+    },
+    {
+      "id": "ab-old-ski",
+      "url": "https://files.catbox.moe/53hq1t.jpg",
+      "model": "flux2-pro @image (OLD prompt)",
+      "prompt": "Skier snowy slope, bright jacket, LEFT forearm, bright winter day",
+      "label": "A/B OLD: Ski (seed 1001)",
+      "context": "Old simple prompt. Compare against ab-new-ski.",
+      "comments": [
+        {
+          "text": "Remote is perfectly preserved jacket looks cool. Only problem is the guy‘s not wearing gloves. It’s not as aspirational as I want though because it’s just showing an arm. He’s not really like active so I’ll give it like a minute. I don’t really know where we’re waiting here for if I get it maybe like a 60.",
+          "time": "2026-04-06T23:05:39.276Z",
+          "num": 1
+        },
+        {
+          "text": "Actually, I’ll I’ll give it a an idea for the remote preservation",
+          "time": "2026-04-06T23:05:51.325Z",
+          "num": 2
+        },
+        {
+          "text": "Remote is perfectly preserved jacket looks cool. Only problem is the guy is not wearing gloves. Not as aspirational as I want though because it is just showing an arm. I will give it like a 60. Actually I will give it an 80 for the remote preservation.",
+          "time": "2026-04-06T23:32:00Z",
+          "num": 3
+        }
+      ]
+    },
+    {
+      "id": "ab-new-ski",
+      "url": "https://files.catbox.moe/zp9sbs.jpg",
+      "model": "flux2-pro @image (NEW prompt)",
+      "prompt": "Fit skier carving powder, Nikon Z9 400mm f/2.8, winter backlight, frozen snow particles",
+      "label": "A/B NEW: Ski (seed 1001)",
+      "context": "Research-informed: Nikon Z9 400mm f/2.8, crisp winter backlight, frozen snow particles, dynamic diagonal, adrenaline-fueled intensity.",
+      "comments": [
+        {
+          "text": "I like how the angle is all different but you can barely see the remote so I give this a 25 out of 100",
+          "time": "2026-04-06T23:06:11.864Z",
+          "num": 1
+        },
+        {
+          "text": "I like how the angle is all different but you can barely see the remote so I give this a 25 out of 100",
+          "time": "2026-04-06T23:33:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "ab-old-mtb",
+      "url": "https://files.catbox.moe/pmd4xa.jpg",
+      "model": "flux2-pro @image (OLD prompt)",
+      "prompt": "MTB dusty forest trail, LEFT forearm, action sports photography",
+      "label": "A/B OLD: MTB (seed 1002)",
+      "context": "Old simple prompt. Compare against ab-new-mtb.",
+      "comments": [
+        {
+          "text": "This is pretty fucking cool. I wish I could see the symbols a little bit better in the way that you know we do on the real remote but a man it’s it’s really aspirational. It’s great. It’s perfect clothing for the sport. Great job. Maybe we can now that you have this note maybe we could do a quick thing where you like look at all the training photos put them in a zip file for me and I can remove the ones that have the bad symbols or at least point to the ones that have the correct symbol outline for the hunter.",
+          "time": "2026-04-06T23:07:21.002Z",
+          "num": 1
+        },
+        {
+          "text": "This is pretty fucking cool. I wish I could see the symbols a little bit better but man it is really aspirational. Great perfect clothing for the sport. Great job.",
+          "time": "2026-04-06T23:34:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "ab-new-mtb",
+      "url": "https://files.catbox.moe/jgf1qi.jpg",
+      "model": "flux2-pro @image (NEW prompt)",
+      "prompt": "Athletic MTB descending rocky singletrack, Canon R5 135mm f/2.8, dappled golden sidelight, dust particles",
+      "label": "A/B NEW: MTB (seed 1002)",
+      "context": "Research-informed: Canon EOS R5 70-200mm f/2.8, dappled golden hour sidelight, dust particles catching light, outdoor lifestyle campaign.",
+      "comments": [
+        {
+          "text": "I mean this is pretty damn close. The symbols are just a little out of focus. Can’t really see but I like that he’s jazzed and the photo looks cool. Give us like a 92 out of 100.",
+          "time": "2026-04-06T23:07:51.685Z",
+          "num": 1
+        },
+        {
+          "text": "I just wish she was wearing a AirPods or something like that",
+          "time": "2026-04-06T23:08:01.848Z",
+          "num": 2
+        },
+        {
+          "text": "I mean this is pretty damn close. The symbols are just a little out of focus. I like that he is jazzed and the photo looks cool. Give us like a 92 out of 100. I just wish he was wearing AirPods or something like that.",
+          "time": "2026-04-06T23:35:00Z",
+          "num": 3
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s900",
+      "url": "https://files.catbox.moe/xjl607.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Moto leaning into turn, speed blur, Hunter green/yellow",
+      "label": "ACTION: Moto Turn — Hunter",
+      "context": "HIGH-ENERGY batch with colorway prompting. Hunter green with yellow icons. Sharp turn, speed blur, coastal highway.",
+      "comments": [
+        {
+          "text": "Total fail this does not look like our remote at all. The buttons are yellow. It’s way too big. I give it a 10 out of 100.",
+          "time": "2026-04-06T23:08:19.250Z",
+          "num": 1
+        },
+        {
+          "text": "Total fail this does not look like our remote at all. The buttons are yellow. Way too big. I give it a 10 out of 100.",
+          "time": "2026-04-06T23:36:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s901",
+      "url": "https://files.catbox.moe/0fbqyo.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Moto at speed, wind in jacket, Tron black/cyan",
+      "label": "ACTION: Moto Speed — Tron",
+      "context": "Tron black with cyan icons. Open mountain road, wind, cinematic motion.",
+      "comments": [
+        {
+          "text": "The remote seems to be above his elbow, which is a fail, and the symbols are illuminated, which is not how it should look, but there’s a remote there, which is I guess something to be said and give us a 15 out of 100",
+          "time": "2026-04-06T23:08:54.707Z",
+          "num": 1
+        },
+        {
+          "text": "The remote seems to be above his elbow which is a fail and the symbols are illuminated which is not how it should look. Give us a 15 out of 100",
+          "time": "2026-04-06T23:37:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s902",
+      "url": "https://files.catbox.moe/fyo0l2.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "POV over handlebars, Patriot white/navy",
+      "label": "ACTION: Moto POV — Patriot",
+      "context": "Patriot white with navy buttons. POV over handlebars, forearm gripping throttle, coastal cliffs.",
+      "comments": [
+        {
+          "text": "This is really strange. He’s grabbing some art of the motorcycle, which doesn’t really make sense. It’s a white chassis but it’s incorrect color way for the patriot because it has a bottom red shell and the buttons are blue so and the strap is wrong. I give this a 12 1/2 out of 100. I’ll give you a 17 out of 100 just because it has the correct form factor but has all the wrong colors.",
+          "time": "2026-04-06T23:10:19.060Z",
+          "num": 1
+        },
+        {
+          "text": "Really strange. Wrong color way for the patriot. Strap is wrong. I give this a 17 out of 100.",
+          "time": "2026-04-06T23:38:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s903",
+      "url": "https://files.catbox.moe/0ivrp2.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Moto desert highway, dust trail, Tron black/cyan",
+      "label": "ACTION: Moto Desert — Tron",
+      "context": "Tron black. Desert highway, dust trail, epic landscape.",
+      "comments": [
+        {
+          "text": "Total fail does not look like our remote at all 12 out of 100",
+          "time": "2026-04-06T23:10:35.764Z",
+          "num": 1
+        },
+        {
+          "text": "Total fail does not look like our remote at all 12 out of 100",
+          "time": "2026-04-06T23:39:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-moto-s904",
+      "url": "https://files.catbox.moe/63czqb.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Moto cresting mountain pass, Hunter green/yellow",
+      "label": "ACTION: Moto Pass — Hunter",
+      "context": "Hunter green. Mountain pass crest, panoramic vista, dramatic clouds.",
+      "comments": [
+        {
+          "text": "Zero out of 100. I don’t see the remote at all and it’s just the guy’s backside.",
+          "time": "2026-04-06T23:10:51.938Z",
+          "num": 1
+        },
+        {
+          "text": "Zero out of 100. I do not see the remote at all.",
+          "time": "2026-04-06T23:40:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-ski-s910",
+      "url": "https://files.catbox.moe/o0yz9w.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier carving powder at speed, Tron black/cyan",
+      "label": "ACTION: Ski Powder — Tron",
+      "context": "Tron black. Fresh powder, snow spray, bright mountain sun.",
+      "comments": [
+        {
+          "text": "This is interesting. He’s kind of jazzed. He’s in a Lian on a skier, which is cool but the symbols look blue it illuminated which is wrong, but I’ll give it a 82.",
+          "time": "2026-04-06T23:11:24.196Z",
+          "num": 1
+        },
+        {
+          "text": "Interesting but the symbols look blue and illuminated which is wrong. I will give it a 82 out of 100.",
+          "time": "2026-04-06T23:41:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-ski-s911",
+      "url": "https://files.catbox.moe/2cxfml.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier launching off jump, Hunter green/yellow",
+      "label": "ACTION: Ski Jump — Hunter",
+      "context": "Hunter green. RIGHT arm. Airborne with mountain panorama.",
+      "comments": [
+        {
+          "text": "Looks like a terrible Photoshop job. There is a remote on the guys’s arm, but it doesn’t look like a remote because the buttons are bright yellow. I’ll give this a 20 out of 100.",
+          "time": "2026-04-06T23:11:49.855Z",
+          "num": 1
+        },
+        {
+          "text": "Looks like a terrible Photoshop job. Buttons are bright yellow. 20 out of 100.",
+          "time": "2026-04-06T23:42:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-ski-s912",
+      "url": "https://files.catbox.moe/32xvdt.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier racing through trees, Patriot white/navy",
+      "label": "ACTION: Ski Trees — Patriot",
+      "context": "Patriot white. Speed blur on trees, racing through tree-lined run.",
+      "comments": [
+        {
+          "text": "You can’t get the patriot Callaway right and the orientation is right and the action is cool but it’s above his elbow so a 50 out of 100",
+          "time": "2026-04-06T23:12:21.024Z",
+          "num": 1
+        },
+        {
+          "text": "Can not get the patriot colorway right. Orientation is right and action is cool but above his elbow so 50 out of 100",
+          "time": "2026-04-06T23:43:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-ski-s913",
+      "url": "https://files.catbox.moe/6kk9bm.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Skier at summit looking down, Tron black/cyan",
+      "label": "ACTION: Ski Summit — Tron",
+      "context": "Tron black. Summit anticipation, dramatic mountain backdrop.",
+      "comments": [
+        {
+          "text": "I don’t really know what’s happening here. The remote is blue and the symbols which you shouldn’t be and some sort of a boot on 18 out of 100",
+          "time": "2026-04-06T23:13:10.901Z",
+          "num": 1
+        },
+        {
+          "text": "Remote is blue and the symbols should not be. 18 out of 100",
+          "time": "2026-04-06T23:44:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-snow-s920",
+      "url": "https://files.catbox.moe/ace0fg.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Snowboarder halfpipe trick, airborne, Tron black/cyan",
+      "label": "ACTION: Snow Halfpipe — Tron",
+      "context": "Tron black. RIGHT arm. Mid-trick in halfpipe, airborne.",
+      "comments": [
+        {
+          "text": "It’s in the right spot. The photo looks kind of neat, but the symbols are a little too bright. I don’t know why they’re so eliminated. Give us a 45 out of 100.",
+          "time": "2026-04-06T23:13:31.687Z",
+          "num": 1
+        },
+        {
+          "text": "In the right spot. Photo looks kind of neat but symbols are too bright and illuminated. 45 out of 100.",
+          "time": "2026-04-06T23:45:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-snow-s921",
+      "url": "https://files.catbox.moe/oqym14.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Snowboarder deep powder carve, Hunter green/yellow",
+      "label": "ACTION: Snow Powder — Hunter",
+      "context": "Hunter green. RIGHT arm. Deep powder turn, snow flying.",
+      "comments": [
+        {
+          "text": "Symbols are bright yellow doesn’t look like our color at all and the action is neat with their remote is wrong so 35 out of 100",
+          "time": "2026-04-06T23:13:49.646Z",
+          "num": 1
+        },
+        {
+          "text": "Symbols are bright yellow does not look like our color at all. 35 out of 100",
+          "time": "2026-04-06T23:46:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-snow-s922",
+      "url": "https://files.catbox.moe/wwrps2.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Snowboarder steep chute, Patriot white/navy",
+      "label": "ACTION: Snow Chute — Patriot",
+      "context": "Patriot white. RIGHT arm. Dropping into steep chute, dramatic cliff.",
+      "comments": [
+        {
+          "text": "Symbols are wrong. There’s two volume plus buttons. It’s a little high up on the arm and the guy wearing short sleeves while assuming he’s skiing but I don’t even know really what he’s doing cause it looks like he’s just falling in the snow 28 out of 100.",
+          "time": "2026-04-06T23:14:25.636Z",
+          "num": 1
+        },
+        {
+          "text": "Symbols are wrong. Two volume plus buttons. High on the arm and wearing short sleeves while skiing. 28 out of 100.",
+          "time": "2026-04-06T23:47:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-mtb-s930",
+      "url": "https://files.catbox.moe/kgpl3d.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "MTB flying over jump, Tron black/cyan",
+      "label": "ACTION: MTB Jump — Tron",
+      "context": "Tron black. Airborne over forest trail jump, dappled light.",
+      "comments": [
+        {
+          "text": "Two out of 100 doesn’t look anything like a remote like Chubby Buttons",
+          "time": "2026-04-06T23:14:40.935Z",
+          "num": 1
+        },
+        {
+          "text": "Two out of 100 does not look anything like a remote like Chubby Buttons",
+          "time": "2026-04-06T23:48:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-mtb-s931",
+      "url": "https://files.catbox.moe/gzr2qk.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "MTB rocky singletrack at speed, Hunter green/yellow",
+      "label": "ACTION: MTB Singletrack — Hunter",
+      "context": "Hunter green. Racing down rocky singletrack, dust cloud, intense action.",
+      "comments": [
+        {
+          "text": "Two out of 100. It’s on his leg. Looks nothing like our remote.",
+          "time": "2026-04-06T23:14:53.420Z",
+          "num": 1
+        },
+        {
+          "text": "Two out of 100. On his leg. Looks nothing like our remote.",
+          "time": "2026-04-06T23:49:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-mtb-s932",
+      "url": "https://files.catbox.moe/lwjinn.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "MTB cornering on berm, Patriot white/navy",
+      "label": "ACTION: MTB Berm — Patriot",
+      "context": "Patriot white. Hard cornering on a berm, bike leaning, golden hour.",
+      "comments": [
+        {
+          "text": "Five out of 100. It’s in the right spot, but it doesn’t look like our remote. There’s also no buttons visible.",
+          "time": "2026-04-06T23:15:10.596Z",
+          "num": 1
+        },
+        {
+          "text": "Five out of 100. In the right spot but does not look like our remote. No buttons visible.",
+          "time": "2026-04-06T23:50:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-mtb-s933",
+      "url": "https://files.catbox.moe/27m51p.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "MTB steep descent, valley view, Tron black/cyan",
+      "label": "ACTION: MTB Descent — Tron",
+      "context": "Tron black. Steep mountain trail descent, valley view behind.",
+      "comments": [
+        {
+          "text": "In the right spot aspirational, but the symbols and the buttons are eliminated too brightly and that’s wrong. Give it a 22 out of 100.",
+          "time": "2026-04-06T23:15:29.262Z",
+          "num": 1
+        },
+        {
+          "text": "In the right spot aspirational but the symbols and buttons are illuminated too brightly and that is wrong. 22 out of 100.",
+          "time": "2026-04-06T23:51:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-hike-s940",
+      "url": "https://files.catbox.moe/vhg3al.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Hiker summit celebration, Hunter green/yellow",
+      "label": "ACTION: Summit Celebrate — Hunter",
+      "context": "Hunter green. Mountain summit, arms spread celebrating, sunrise, clouds below.",
+      "comments": [
+        {
+          "text": "These are really strange. There’s two remotes on each charm. I don’t know why I give this a 12 out of 100 and they look nothing like our remote.",
+          "time": "2026-04-06T23:15:45.770Z",
+          "num": 1
+        },
+        {
+          "text": "Really strange. Two remotes on each arm. They look nothing like our remote. 12 out of 100.",
+          "time": "2026-04-06T23:52:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-run-s941",
+      "url": "https://files.catbox.moe/bklljd.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Trail runner sprinting ridge, Tron black/cyan",
+      "label": "ACTION: Ridge Run — Tron",
+      "context": "Tron black. Sprinting along ridge trail, mountains both sides, golden light, energy.",
+      "comments": [
+        {
+          "text": "Way too cartoonish the symbols are lit up. It’s just paint on the symbols. I don’t know why it’s about thinking it’s eliminated. Give us a 15 out of 100.",
+          "time": "2026-04-06T23:16:05.091Z",
+          "num": 1
+        },
+        {
+          "text": "Way too cartoonish the symbols are lit up. It is just paint on the symbols. 15 out of 100.",
+          "time": "2026-04-06T23:53:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-fish-s950",
+      "url": "https://files.catbox.moe/305k2r.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Reeling in catch on boat, Hunter green/yellow",
+      "label": "ACTION: Fishing Catch — Hunter",
+      "context": "Hunter green. Reeling in a big catch, rod bent, excitement, lake sunset.",
+      "comments": [
+        {
+          "text": "Really goofy AI slop and the remote does not look like our remote and the symbols are wrong and it’s too big. I give it a 12 out of 100.",
+          "time": "2026-04-06T23:16:27.425Z",
+          "num": 1
+        },
+        {
+          "text": "Really goofy AI slop. Remote does not look like our remote. Symbols are wrong and too big. 12 out of 100.",
+          "time": "2026-04-06T23:54:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "id": "action-fish-s951",
+      "url": "https://files.catbox.moe/wa23af.jpg",
+      "model": "flux2-pro @image (Ref C)",
+      "prompt": "Fly casting mountain stream, Tron black/cyan",
+      "label": "ACTION: Fly Fishing — Tron",
+      "context": "Tron black. Casting fly rod in mountain stream, mid-cast motion, misty morning.",
+      "comments": [
+        {
+          "text": "Zero out of 100 not even close to our remote",
+          "time": "2026-04-06T23:16:40.255Z",
+          "num": 1
+        },
+        {
+          "text": "Zero out of 100 not even close to our remote",
+          "time": "2026-04-06T23:55:00Z",
+          "num": 2
+        }
+      ]
+    },
+    {
       "id": "twopass-flux-moto",
-      "label": "TWO-PASS: Moto + Helmet (FLUX)",
+      "url": "https://files.catbox.moe/op5aju.jpg",
       "model": "two-pass (FLUX edit)",
       "prompt": "Base: refC-moto-s101 (90/100) → FLUX edit added helmet",
+      "label": "TWO-PASS: Moto + Helmet (FLUX)",
       "context": "TWO-PASS TEST: Took the 90/100 motorcycle image and ran it through FLUX 2 Pro edit asking ONLY to add a helmet. CB2 should be untouched. Does the helmet look real AND does the CB2 survive?",
       "comments": [
         {
@@ -18,9 +749,10 @@
     },
     {
       "id": "twopass-kontext-moto",
-      "label": "TWO-PASS: Moto + Helmet (Kontext)",
+      "url": "https://files.catbox.moe/1lkfuw.jpg",
       "model": "two-pass (Kontext)",
       "prompt": "Base: refC-moto-s101 → Kontext added helmet",
+      "label": "TWO-PASS: Moto + Helmet (Kontext)",
       "context": "Same base image, Kontext Pro for the second pass. Compare against the FLUX edit version — which preserves the CB2 better?",
       "comments": [
         {
@@ -32,9 +764,10 @@
     },
     {
       "id": "twopass-kontext-ski",
-      "label": "TWO-PASS: Skier + Gloves (Kontext)",
+      "url": "https://files.catbox.moe/zcboii.jpg",
       "model": "two-pass (Kontext)",
       "prompt": "Base: refC-ski-s303 (98/100) → Kontext added gloves",
+      "label": "TWO-PASS: Skier + Gloves (Kontext)",
       "context": "TWO-PASS TEST: Added ski gloves to the 98/100 skier. Risky because gloves go near the CB2. Kontext kept the CB2 visible but buttons slightly softer.",
       "comments": [
         {
@@ -46,9 +779,10 @@
     },
     {
       "id": "twopass-flux-ski",
-      "label": "TWO-PASS: Skier + Gloves (FLUX) — CB2 LOST",
+      "url": "https://files.catbox.moe/mx6xxj.jpg",
       "model": "two-pass (FLUX edit)",
       "prompt": "Base: refC-ski-s303 → FLUX edit added gloves",
+      "label": "TWO-PASS: Skier + Gloves (FLUX) — CB2 LOST",
       "context": "WARNING: FLUX edit added thick gloves that completely buried the CB2. The remote is GONE. This shows the two-pass approach fails when gear overlaps the product area. Compare against the Kontext version.",
       "comments": [
         {
@@ -60,9 +794,10 @@
     },
     {
       "id": "newgen-moto-s800",
-      "label": "NEW: Moto Coastal 1/5",
+      "url": "https://files.catbox.moe/7ugeax.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Moto coastal, earbuds, armored jacket, LEFT arm, bright icons",
+      "label": "NEW: Moto Coastal 1/5",
       "context": "NEW BATCH with improved prompts: added wireless earbuds, armored riding jacket, bright button icons. All based on your feedback about missing gear and faded symbols.",
       "comments": [
         {
@@ -74,9 +809,10 @@
     },
     {
       "id": "newgen-moto-s801",
-      "label": "NEW: Moto Coastal 2/5",
+      "url": "https://files.catbox.moe/vmc2m9.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same moto prompt",
+      "label": "NEW: Moto Coastal 2/5",
       "context": "Improved prompt batch, seed 801.",
       "comments": [
         {
@@ -88,9 +824,10 @@
     },
     {
       "id": "newgen-moto-s802",
-      "label": "NEW: Moto Coastal 3/5",
+      "url": "https://files.catbox.moe/43a0lv.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same",
+      "label": "NEW: Moto Coastal 3/5",
       "context": "Seed 802.",
       "comments": [
         {
@@ -102,9 +839,10 @@
     },
     {
       "id": "newgen-moto-s803",
-      "label": "NEW: Moto Coastal 4/5",
+      "url": "https://files.catbox.moe/rr0uph.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same",
+      "label": "NEW: Moto Coastal 4/5",
       "context": "Seed 803.",
       "comments": [
         {
@@ -116,9 +854,10 @@
     },
     {
       "id": "newgen-moto-s804",
-      "label": "NEW: Moto Coastal 5/5",
+      "url": "https://files.catbox.moe/lb66cp.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same",
+      "label": "NEW: Moto Coastal 5/5",
       "context": "Seed 804.",
       "comments": [
         {
@@ -130,9 +869,10 @@
     },
     {
       "id": "newgen-mtb-s810",
-      "label": "NEW: MTB 1/3",
+      "url": "https://files.catbox.moe/s2srqy.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "MTB dusty forest trail, LEFT arm, bright icons",
+      "label": "NEW: MTB 1/3",
       "context": "Mountain biking has been averaging 34/100. These use Ref C + bright icon prompt. Can we crack MTB?",
       "comments": [
         {
@@ -144,9 +884,10 @@
     },
     {
       "id": "newgen-mtb-s811",
-      "label": "NEW: MTB 2/3",
+      "url": "https://files.catbox.moe/jts9if.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same MTB prompt",
+      "label": "NEW: MTB 2/3",
       "context": "MTB seed 811.",
       "comments": [
         {
@@ -158,9 +899,10 @@
     },
     {
       "id": "newgen-mtb-s812",
-      "label": "NEW: MTB 3/3",
+      "url": "https://files.catbox.moe/fcqyz9.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same",
+      "label": "NEW: MTB 3/3",
       "context": "MTB seed 812.",
       "comments": [
         {
@@ -172,9 +914,10 @@
     },
     {
       "id": "newgen-run-s820",
-      "label": "NEW: Running 1/3",
+      "url": "https://files.catbox.moe/mctpqa.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Trail runner cold weather, light gloves, LEFT arm",
+      "label": "NEW: Running 1/3",
       "context": "First running attempt with gloves and cold weather gear. Previous running scored 38 avg.",
       "comments": [
         {
@@ -186,9 +929,10 @@
     },
     {
       "id": "newgen-run-s821",
-      "label": "NEW: Running 2/3",
+      "url": "https://files.catbox.moe/6fgffz.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same running prompt",
+      "label": "NEW: Running 2/3",
       "context": "Running seed 821.",
       "comments": [
         {
@@ -200,9 +944,10 @@
     },
     {
       "id": "newgen-run-s822",
-      "label": "NEW: Running 3/3",
+      "url": "https://files.catbox.moe/wincdz.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same",
+      "label": "NEW: Running 3/3",
       "context": "Running seed 822.",
       "comments": [
         {
@@ -214,9 +959,10 @@
     },
     {
       "id": "newgen-fish-s830",
-      "label": "NEW: Fishing 1/2",
+      "url": "https://files.catbox.moe/aryzii.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Person on boat fishing, LEFT arm, calm lake, golden hour",
+      "label": "NEW: Fishing 1/2",
       "context": "BRAND NEW SPORT: Fishing from a boat. Testing the nano stick backing use case.",
       "comments": [
         {
@@ -228,9 +974,10 @@
     },
     {
       "id": "newgen-fish-s831",
-      "label": "NEW: Fishing 2/2",
+      "url": "https://files.catbox.moe/ulbqms.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same fishing prompt",
+      "label": "NEW: Fishing 2/2",
       "context": "Fishing seed 831.",
       "comments": [
         {
@@ -242,9 +989,10 @@
     },
     {
       "id": "newgen-atv-s840",
-      "label": "NEW: ATV 1/2",
+      "url": "https://files.catbox.moe/z3unun.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "ATV rider dirt trail, LEFT arm, dusty action",
+      "label": "NEW: ATV 1/2",
       "context": "BRAND NEW SPORT: ATV riding. Hands-free music control on the trail.",
       "comments": [
         {
@@ -256,9 +1004,10 @@
     },
     {
       "id": "newgen-atv-s841",
-      "label": "NEW: ATV 2/2",
+      "url": "https://files.catbox.moe/mji0rm.jpg",
       "model": "flux2-pro @image (Ref C v2)",
       "prompt": "Same ATV prompt",
+      "label": "NEW: ATV 2/2",
       "context": "ATV seed 841.",
       "comments": [
         {
@@ -270,9 +1019,10 @@
     },
     {
       "id": "samfix-refC1",
-      "label": "SAM FIX: ref-C1 (was ~95-98 if flipped)",
+      "url": "https://files.catbox.moe/kb21ox.jpg",
       "model": "SAM rotation fix",
       "prompt": "ref-C1 with CB2 rotated 180° by fix-orientation.py",
+      "label": "SAM FIX: ref-C1 (was ~95-98 if flipped)",
       "context": "AUTOMATIC ROTATION FIX: Original ref-C1 scored 95-98 but had wrong orientation. SAM 3 detected the CB2 → rotated 180° → composited back. Does it look natural? Compare against original ref-C1.",
       "comments": [
         {
@@ -284,9 +1034,10 @@
     },
     {
       "id": "samfix-refA1",
-      "label": "SAM FIX: ref-A1 (was ~92 if flipped)",
+      "url": "https://files.catbox.moe/9ixnbr.jpg",
       "model": "SAM rotation fix",
       "prompt": "ref-A1 with CB2 rotated 180° by fix-orientation.py",
+      "label": "SAM FIX: ref-A1 (was ~92 if flipped)",
       "context": "AUTOMATIC ROTATION FIX: Original ref-A1 scored 92 but with wrong orientation. SAM 3 detected → rotated → composited. Does it look right?",
       "comments": [
         {
@@ -298,9 +1049,10 @@
     },
     {
       "id": "samfix-motoS103",
-      "label": "SAM FIX: moto-s103 (was 75, symbols garbled)",
+      "url": "https://files.catbox.moe/dyrw7t.jpg",
       "model": "SAM rotation fix",
       "prompt": "refC-moto-s103 with CB2 rotated 180°",
+      "label": "SAM FIX: moto-s103 (was 75, symbols garbled)",
       "context": "AUTOMATIC ROTATION FIX: Original scored 75 — \"would be 95 if symbols visible.\" SAM detection was small (51x48px) so this one might not look clean. Worth checking.",
       "comments": [
         {
@@ -312,9 +1064,10 @@
     },
     {
       "id": "flux2lora-moto",
-      "label": "FLUX 2 LoRA: Moto Coastal",
+      "url": "https://files.catbox.moe/uxmgav.jpg",
       "model": "flux-2-dev-lora-v5 (FLUX 2)",
       "prompt": "CB2REMOTE on LEFT forearm, motorcycle coastal, vol-up closest to wrist",
+      "label": "FLUX 2 LoRA: Moto Coastal",
       "context": "FLUX 2 Dev LoRA — same 45 training images as V5, but on the newer FLUX 2 Dev base model (vs FLUX 1 Dev). Research says FLUX 2 has significantly better photorealism and material rendering. Does it make a difference for product learning?",
       "comments": [
         {
@@ -326,9 +1079,10 @@
     },
     {
       "id": "flux2lora-hiker",
-      "label": "FLUX 2 LoRA: Hiker",
+      "url": "https://files.catbox.moe/aqxh5a.jpg",
       "model": "flux-2-dev-lora-v5 (FLUX 2)",
       "prompt": "CB2REMOTE on LEFT forearm, hiker golden hour",
+      "label": "FLUX 2 LoRA: Hiker",
       "context": "FLUX 2 Dev LoRA test. Compare directly against lorav5-hiker (FLUX 1) which scored 5/100.",
       "comments": [
         {
@@ -340,9 +1094,10 @@
     },
     {
       "id": "flux2lora-skier",
-      "label": "FLUX 2 LoRA: Skier",
+      "url": "https://files.catbox.moe/uh86y6.jpg",
       "model": "flux-2-dev-lora-v5 (FLUX 2)",
       "prompt": "CB2REMOTE on LEFT forearm, skier, wearing gloves",
+      "label": "FLUX 2 LoRA: Skier",
       "context": "FLUX 2 Dev LoRA test. Compare against lorav5-skier (FLUX 1) which scored 2/100.",
       "comments": [
         {
@@ -354,9 +1109,10 @@
     },
     {
       "id": "flux2lora-snowboard",
-      "label": "FLUX 2 LoRA: Snowboard",
+      "url": "https://files.catbox.moe/w31pz3.jpg",
       "model": "flux-2-dev-lora-v5 (FLUX 2)",
       "prompt": "CB2REMOTE on RIGHT forearm, snowboarder, wearing gloves",
+      "label": "FLUX 2 LoRA: Snowboard",
       "context": "FLUX 2 Dev LoRA test. Compare against lorav5-snowboard (FLUX 1) which scored 17.5/100.",
       "comments": [
         {
@@ -368,9 +1124,10 @@
     },
     {
       "id": "flux2lora-overlook",
-      "label": "FLUX 2 LoRA: Moto Overlook",
+      "url": "https://files.catbox.moe/mmh1tm.jpg",
       "model": "flux-2-dev-lora-v5 (FLUX 2)",
       "prompt": "CB2REMOTE on LEFT forearm, moto rider overlooking valley",
+      "label": "FLUX 2 LoRA: Moto Overlook",
       "context": "FLUX 2 Dev LoRA test. Compare against lorav5-overlook (FLUX 1) which scored 7/100. The big question: does FLUX 2 learn the CB2 product better than FLUX 1?",
       "comments": [
         {
@@ -382,9 +1139,10 @@
     },
     {
       "id": "lorav5-moto",
-      "label": "LoRA V5: Moto Coastal",
+      "url": "https://files.catbox.moe/s7ziqt.jpg",
       "model": "flux-lora-v5 (FLUX.1 Dev)",
       "prompt": "CB2REMOTE on LEFT forearm, motorcycle coastal, vol-up closest to wrist",
+      "label": "LoRA V5: Moto Coastal",
       "context": "FIRST TEST of LoRA V5 — trained on 18 Moto + 15 Tahoe + 12 Jordan photos (vs V4b which was all product shots). Does the model now know what CB2 looks like in a lifestyle context? Trigger word: CB2REMOTE.",
       "comments": [
         {
@@ -396,9 +1154,10 @@
     },
     {
       "id": "lorav5-hiker",
-      "label": "LoRA V5: Hiker",
+      "url": "https://files.catbox.moe/oxucn3.jpg",
       "model": "flux-lora-v5 (FLUX.1 Dev)",
       "prompt": "CB2REMOTE on LEFT forearm, hiker golden hour, vol-up closest to wrist",
+      "label": "LoRA V5: Hiker",
       "context": "LoRA V5 test. Previous LoRA versions scored 0/100 (V4b). V5 has lifestyle training data for the first time.",
       "comments": [
         {
@@ -410,9 +1169,10 @@
     },
     {
       "id": "lorav5-skier",
-      "label": "LoRA V5: Skier",
+      "url": "https://files.catbox.moe/rbre3n.jpg",
       "model": "flux-lora-v5 (FLUX.1 Dev)",
       "prompt": "CB2REMOTE on LEFT forearm over ski jacket, skier, wearing gloves",
+      "label": "LoRA V5: Skier",
       "context": "LoRA V5 test. Skiing prompt with gloves (per Justin feedback). Does V5 produce a recognizable CB2 in winter sports?",
       "comments": [
         {
@@ -424,9 +1184,10 @@
     },
     {
       "id": "lorav5-snowboard",
-      "label": "LoRA V5: Snowboard",
+      "url": "https://files.catbox.moe/3abffd.jpg",
       "model": "flux-lora-v5 (FLUX.1 Dev)",
       "prompt": "CB2REMOTE on RIGHT forearm over jacket, snowboarder, wearing gloves",
+      "label": "LoRA V5: Snowboard",
       "context": "LoRA V5 test. RIGHT arm (testing handedness rule with LoRA). Does the trigger word produce the actual product?",
       "comments": [
         {
@@ -438,9 +1199,10 @@
     },
     {
       "id": "lorav5-overlook",
-      "label": "LoRA V5: Moto Overlook",
+      "url": "https://files.catbox.moe/rtc4a4.jpg",
       "model": "flux-lora-v5 (FLUX.1 Dev)",
       "prompt": "CB2REMOTE on LEFT forearm, moto rider overlooking valley, sunset",
+      "label": "LoRA V5: Moto Overlook",
       "context": "LoRA V5 test. Motorcycle overlook scene. The big question: does the LoRA now know the CB2 product shape, buttons, and strap from the lifestyle training photos?",
       "comments": [
         {
@@ -452,9 +1214,10 @@
     },
     {
       "id": "refC-moto-s100",
-      "label": "REF C: Moto Coastal 1/5",
+      "url": "https://files.catbox.moe/gngxze.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Motorcycle coastal, LEFT forearm, vol-up closest to wrist, waist-up, golden hour",
+      "label": "REF C: Moto Coastal 1/5",
       "context": "NEW GENERATION with Ref C (J&Mike Dual) — the A/B test winner (40-60% correct orientation, scores up to 100). LEFT arm + \"volume-up closest to wrist\" per Justin's handedness rule. Seed 100.",
       "comments": [
         {
@@ -466,9 +1229,10 @@
     },
     {
       "id": "refC-moto-s101",
-      "label": "REF C: Moto Coastal 2/5",
+      "url": "https://files.catbox.moe/4efklh.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same moto coastal prompt",
+      "label": "REF C: Moto Coastal 2/5",
       "context": "Ref C generation, seed 101. Same LEFT arm orientation rule.",
       "comments": [
         {
@@ -480,9 +1244,10 @@
     },
     {
       "id": "refC-moto-s102",
-      "label": "REF C: Moto Coastal 3/5",
+      "url": "https://files.catbox.moe/uepfc8.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Moto Coastal 3/5",
       "context": "Ref C generation, seed 102.",
       "comments": [
         {
@@ -494,9 +1259,10 @@
     },
     {
       "id": "refC-moto-s103",
-      "label": "REF C: Moto Coastal 4/5",
+      "url": "https://files.catbox.moe/vo8wqn.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Moto Coastal 4/5",
       "context": "Ref C generation, seed 103.",
       "comments": [
         {
@@ -508,9 +1274,10 @@
     },
     {
       "id": "refC-moto-s104",
-      "label": "REF C: Moto Coastal 5/5",
+      "url": "https://files.catbox.moe/pgsopt.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Moto Coastal 5/5",
       "context": "Ref C generation, seed 104.",
       "comments": [
         {
@@ -522,9 +1289,10 @@
     },
     {
       "id": "refC-hike-s200",
-      "label": "REF C: Hiker 1/5",
+      "url": "https://files.catbox.moe/h5zap1.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Hiker golden hour, LEFT forearm, vol-up closest to wrist, waist-up",
+      "label": "REF C: Hiker 1/5",
       "context": "Ref C hiking generation. LEFT arm + orientation rule. Seed 200.",
       "comments": [
         {
@@ -536,9 +1304,10 @@
     },
     {
       "id": "refC-hike-s201",
-      "label": "REF C: Hiker 2/5",
+      "url": "https://files.catbox.moe/ubk1ak.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same hiking prompt",
+      "label": "REF C: Hiker 2/5",
       "context": "Ref C generation, seed 201.",
       "comments": [
         {
@@ -550,9 +1319,10 @@
     },
     {
       "id": "refC-hike-s202",
-      "label": "REF C: Hiker 3/5",
+      "url": "https://files.catbox.moe/r9yabm.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Hiker 3/5",
       "context": "Ref C generation, seed 202.",
       "comments": [
         {
@@ -564,9 +1334,10 @@
     },
     {
       "id": "refC-hike-s203",
-      "label": "REF C: Hiker 4/5",
+      "url": "https://files.catbox.moe/orx15l.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Hiker 4/5",
       "context": "Ref C generation, seed 203.",
       "comments": [
         {
@@ -578,9 +1349,10 @@
     },
     {
       "id": "refC-hike-s204",
-      "label": "REF C: Hiker 5/5",
+      "url": "https://files.catbox.moe/3712gm.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Hiker 5/5",
       "context": "Ref C generation, seed 204.",
       "comments": [
         {
@@ -592,9 +1364,10 @@
     },
     {
       "id": "refC-ski-s300",
-      "label": "REF C: Skier 1/5",
+      "url": "https://files.catbox.moe/5zwa9j.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Skier snowy slope, bright jacket, LEFT forearm over sleeve, vol-up closest to wrist",
+      "label": "REF C: Skier 1/5",
       "context": "Ref C skiing generation. LEFT arm over jacket sleeve. Seed 300.",
       "comments": [
         {
@@ -606,9 +1379,10 @@
     },
     {
       "id": "refC-ski-s301",
-      "label": "REF C: Skier 2/5",
+      "url": "https://files.catbox.moe/4z3rh6.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same skiing prompt",
+      "label": "REF C: Skier 2/5",
       "context": "Ref C generation, seed 301.",
       "comments": [
         {
@@ -620,9 +1394,10 @@
     },
     {
       "id": "refC-ski-s302",
-      "label": "REF C: Skier 3/5",
+      "url": "https://files.catbox.moe/l5pjxq.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Skier 3/5",
       "context": "Ref C generation, seed 302.",
       "comments": [
         {
@@ -634,9 +1409,10 @@
     },
     {
       "id": "refC-ski-s303",
-      "label": "REF C: Skier 4/5",
+      "url": "https://files.catbox.moe/ox24sk.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Skier 4/5",
       "context": "Ref C generation, seed 303.",
       "comments": [
         {
@@ -648,9 +1424,10 @@
     },
     {
       "id": "refC-ski-s304",
-      "label": "REF C: Skier 5/5",
+      "url": "https://files.catbox.moe/vjlidz.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Skier 5/5",
       "context": "Ref C generation, seed 304.",
       "comments": [
         {
@@ -662,9 +1439,10 @@
     },
     {
       "id": "refC-snow-s400",
-      "label": "REF C: Snowboard 1/5",
+      "url": "https://files.catbox.moe/xlrpkl.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Snowboarder powder slope, RIGHT forearm over sleeve, vol-down closest to wrist",
+      "label": "REF C: Snowboard 1/5",
       "context": "Ref C snowboard generation. RIGHT arm (testing Justin's handedness insight — vol-down toward wrist on right arm). Seed 400.",
       "comments": [
         {
@@ -676,9 +1454,10 @@
     },
     {
       "id": "refC-snow-s401",
-      "label": "REF C: Snowboard 2/5",
+      "url": "https://files.catbox.moe/d89ma4.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same snowboard prompt",
+      "label": "REF C: Snowboard 2/5",
       "context": "Ref C generation, seed 401. RIGHT arm test.",
       "comments": [
         {
@@ -690,9 +1469,10 @@
     },
     {
       "id": "refC-snow-s402",
-      "label": "REF C: Snowboard 3/5",
+      "url": "https://files.catbox.moe/a8bm2b.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Snowboard 3/5",
       "context": "Ref C generation, seed 402.",
       "comments": [
         {
@@ -704,9 +1484,10 @@
     },
     {
       "id": "refC-snow-s403",
-      "label": "REF C: Snowboard 4/5",
+      "url": "https://files.catbox.moe/k4k8m8.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Snowboard 4/5",
       "context": "Ref C generation, seed 403.",
       "comments": [
         {
@@ -718,9 +1499,10 @@
     },
     {
       "id": "refC-snow-s404",
-      "label": "REF C: Snowboard 5/5",
+      "url": "https://files.catbox.moe/8e71gp.jpg",
       "model": "flux2-pro @image (Ref C)",
       "prompt": "Same",
+      "label": "REF C: Snowboard 5/5",
       "context": "Ref C generation, seed 404.",
       "comments": [
         {
@@ -732,9 +1514,10 @@
     },
     {
       "id": "ref-A1",
-      "label": "REF TEST A: Hunter Arm Outside 1/6",
+      "url": "https://files.catbox.moe/gasx8y.jpg",
       "model": "flux2-pro @image",
       "prompt": "Motorcycle coastal + exact layout spec",
+      "label": "REF TEST A: Hunter Arm Outside 1/6",
       "context": "REFERENCE PHOTO TEST: Using \"Hunter Arm Outside.jpg\" found on Google Drive as the @image reference instead of the standing product shot. This is a THIRD-PERSON photo of the CB2 on someone's forearm, photographed by another person from the outside. Research predicted this would fix the 180° orientation flip.",
       "comments": [
         {
@@ -746,9 +1529,10 @@
     },
     {
       "id": "ref-A2",
-      "label": "REF TEST A: Hunter Arm Outside 2/6",
+      "url": "https://files.catbox.moe/2ao08m.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same coastal prompt",
+      "label": "REF TEST A: Hunter Arm Outside 2/6",
       "context": "Same third-person arm reference (Hunter Arm Outside.jpg), different seed.",
       "comments": [
         {
@@ -760,9 +1544,10 @@
     },
     {
       "id": "ref-A3",
-      "label": "REF TEST A: Hunter Arm Outside 3/6",
+      "url": "https://files.catbox.moe/vkmtt0.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST A: Hunter Arm Outside 3/6",
       "context": "Same third-person arm reference, different seed.",
       "comments": [
         {
@@ -774,9 +1559,10 @@
     },
     {
       "id": "ref-A4",
-      "label": "REF TEST A: Hunter Arm Outside 4/6",
+      "url": "https://files.catbox.moe/asr5a1.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST A: Hunter Arm Outside 4/6",
       "context": "Same third-person arm reference, different seed.",
       "comments": [
         {
@@ -788,9 +1574,10 @@
     },
     {
       "id": "ref-A5",
-      "label": "REF TEST A: Hunter Arm Outside 5/6",
+      "url": "https://files.catbox.moe/1esud0.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST A: Hunter Arm Outside 5/6",
       "context": "Same third-person arm reference, different seed.",
       "comments": [
         {
@@ -802,9 +1589,10 @@
     },
     {
       "id": "ref-A6",
-      "label": "REF TEST A: Hunter Arm Outside 6/6",
+      "url": "https://files.catbox.moe/ls9164.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST A: Hunter Arm Outside 6/6",
       "context": "Same third-person arm reference, different seed.",
       "comments": [
         {
@@ -816,9 +1604,10 @@
     },
     {
       "id": "ref-B1",
-      "label": "REF TEST B: Moto Close Up 1/5",
+      "url": "https://files.catbox.moe/ft8dv5.jpg",
       "model": "flux2-pro @image",
       "prompt": "Motorcycle coastal + exact layout spec",
+      "label": "REF TEST B: Moto Close Up 1/5",
       "context": "REFERENCE PHOTO TEST: Using \"Motorcycle Close Up.jpg\" from Drive — a real photo of a motorcycle rider with CB2 on forearm gripping handlebars. Sport-specific third-person reference.",
       "comments": [
         {
@@ -830,9 +1619,10 @@
     },
     {
       "id": "ref-B2",
-      "label": "REF TEST B: Moto Close Up 2/5",
+      "url": "https://files.catbox.moe/3gmr6h.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST B: Moto Close Up 2/5",
       "context": "Same motorcycle reference, different seed.",
       "comments": [
         {
@@ -844,9 +1634,10 @@
     },
     {
       "id": "ref-B3",
-      "label": "REF TEST B: Moto Close Up 3/5",
+      "url": "https://files.catbox.moe/vq0zj0.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST B: Moto Close Up 3/5",
       "context": "Same motorcycle reference, different seed.",
       "comments": [
         {
@@ -858,9 +1649,10 @@
     },
     {
       "id": "ref-B4",
-      "label": "REF TEST B: Moto Close Up 4/5",
+      "url": "https://files.catbox.moe/crepyb.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST B: Moto Close Up 4/5",
       "context": "Same motorcycle reference, different seed.",
       "comments": [
         {
@@ -872,9 +1664,10 @@
     },
     {
       "id": "ref-B5",
-      "label": "REF TEST B: Moto Close Up 5/5",
+      "url": "https://files.catbox.moe/qo9pfl.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST B: Moto Close Up 5/5",
       "context": "Same motorcycle reference, different seed.",
       "comments": [
         {
@@ -886,9 +1679,10 @@
     },
     {
       "id": "ref-C1",
-      "label": "REF TEST C: J&Mike Dual 1/5",
+      "url": "https://files.catbox.moe/19gt6r.jpg",
       "model": "flux2-pro @image",
       "prompt": "Motorcycle coastal + exact layout spec",
+      "label": "REF TEST C: J&Mike Dual 1/5",
       "context": "REFERENCE PHOTO TEST: Using \"Hunter and Tron - J and Mike.png\" — two people standing side by side, each wearing a CB2 (Hunter and Tron colorways), photographed from the front.",
       "comments": [
         {
@@ -900,9 +1694,10 @@
     },
     {
       "id": "ref-C2",
-      "label": "REF TEST C: J&Mike Dual 2/5",
+      "url": "https://files.catbox.moe/llwi3d.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST C: J&Mike Dual 2/5",
       "context": "Same dual-person reference, different seed.",
       "comments": [
         {
@@ -914,9 +1709,10 @@
     },
     {
       "id": "ref-C3",
-      "label": "REF TEST C: J&Mike Dual 3/5",
+      "url": "https://files.catbox.moe/5awevk.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST C: J&Mike Dual 3/5",
       "context": "Same dual-person reference, different seed.",
       "comments": [
         {
@@ -928,9 +1724,10 @@
     },
     {
       "id": "ref-C4",
-      "label": "REF TEST C: J&Mike Dual 4/5",
+      "url": "https://files.catbox.moe/yp5buw.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST C: J&Mike Dual 4/5",
       "context": "Same dual-person reference, different seed.",
       "comments": [
         {
@@ -942,9 +1739,10 @@
     },
     {
       "id": "ref-C5",
-      "label": "REF TEST C: J&Mike Dual 5/5",
+      "url": "https://files.catbox.moe/z1qfov.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST C: J&Mike Dual 5/5",
       "context": "Same dual-person reference, different seed.",
       "comments": [
         {
@@ -956,9 +1754,10 @@
     },
     {
       "id": "ref-D1",
-      "label": "REF TEST D: Original Product (CONTROL) 1/5",
+      "url": "https://files.catbox.moe/lp1iu3.jpg",
       "model": "flux2-pro @image",
       "prompt": "Motorcycle coastal + exact layout spec",
+      "label": "REF TEST D: Original Product (CONTROL) 1/5",
       "context": "CONTROL GROUP: Same standing product-front reference we always use. Same prompt and seeds as A/B/C batches so orientation differences are PURELY from the reference photo change.",
       "comments": [
         {
@@ -970,9 +1769,10 @@
     },
     {
       "id": "ref-D2",
-      "label": "REF TEST D: Original Product (CONTROL) 2/5",
+      "url": "https://files.catbox.moe/aq8cfi.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST D: Original Product (CONTROL) 2/5",
       "context": "Control group — original product reference, different seed.",
       "comments": [
         {
@@ -984,9 +1784,10 @@
     },
     {
       "id": "ref-D3",
-      "label": "REF TEST D: Original Product (CONTROL) 3/5",
+      "url": "https://files.catbox.moe/pqatt1.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST D: Original Product (CONTROL) 3/5",
       "context": "Control group — original product reference, different seed.",
       "comments": [
         {
@@ -998,9 +1799,10 @@
     },
     {
       "id": "ref-D4",
-      "label": "REF TEST D: Original Product (CONTROL) 4/5",
+      "url": "https://files.catbox.moe/kb3iuo.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST D: Original Product (CONTROL) 4/5",
       "context": "Control group — original product reference, different seed.",
       "comments": [
         {
@@ -1012,9 +1814,10 @@
     },
     {
       "id": "ref-D5",
-      "label": "REF TEST D: Original Product (CONTROL) 5/5",
+      "url": "https://files.catbox.moe/0ygcz7.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "REF TEST D: Original Product (CONTROL) 5/5",
       "context": "Control group — original product reference, different seed.",
       "comments": [
         {
@@ -1026,9 +1829,10 @@
     },
     {
       "id": "bg-coast1",
-      "label": "BATCH: Moto Coastal 1/15",
+      "url": "https://files.catbox.moe/c5n4ci.jpg",
       "model": "flux2-pro @image",
       "prompt": "Motorcycle coastal + exact layout: plus near wrist, minus near elbow, play/pause center, LED/logo outward",
+      "label": "BATCH: Moto Coastal 1/15",
       "context": "BATCH GENERATION with Justin's exact button layout spec: \"plus closest to wrist, minus closest to elbow, play/pause center, LED and CB logo face outward.\" 15 seeds for cherry-picking.",
       "comments": [
         {
@@ -1040,9 +1844,10 @@
     },
     {
       "id": "bg-coast2",
-      "label": "BATCH: Moto Coastal 2/15",
+      "url": "https://files.catbox.moe/4joby7.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same coastal prompt with layout spec",
+      "label": "BATCH: Moto Coastal 2/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1054,9 +1859,10 @@
     },
     {
       "id": "bg-coast3",
-      "label": "BATCH: Moto Coastal 3/15",
+      "url": "https://files.catbox.moe/chd65o.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 3/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1068,9 +1874,10 @@
     },
     {
       "id": "bg-coast4",
-      "label": "BATCH: Moto Coastal 4/15",
+      "url": "https://files.catbox.moe/lz2xin.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 4/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1082,9 +1889,10 @@
     },
     {
       "id": "bg-coast5",
-      "label": "BATCH: Moto Coastal 5/15",
+      "url": "https://files.catbox.moe/2f8r3l.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 5/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1096,9 +1904,10 @@
     },
     {
       "id": "bg-coast6",
-      "label": "BATCH: Moto Coastal 6/15",
+      "url": "https://files.catbox.moe/cg97ei.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 6/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1110,9 +1919,10 @@
     },
     {
       "id": "bg-coast7",
-      "label": "BATCH: Moto Coastal 7/15",
+      "url": "https://files.catbox.moe/ouk7fo.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 7/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1124,9 +1934,10 @@
     },
     {
       "id": "bg-coast8",
-      "label": "BATCH: Moto Coastal 8/15",
+      "url": "https://files.catbox.moe/p2kn9n.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 8/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1138,9 +1949,10 @@
     },
     {
       "id": "bg-coast9",
-      "label": "BATCH: Moto Coastal 9/15",
+      "url": "https://files.catbox.moe/wszass.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 9/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1152,9 +1964,10 @@
     },
     {
       "id": "bg-coast10",
-      "label": "BATCH: Moto Coastal 10/15",
+      "url": "https://files.catbox.moe/tb14ar.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 10/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1166,9 +1979,10 @@
     },
     {
       "id": "bg-coast11",
-      "label": "BATCH: Moto Coastal 11/15",
+      "url": "https://files.catbox.moe/8vie9c.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 11/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1180,9 +1994,10 @@
     },
     {
       "id": "bg-coast14",
-      "label": "BATCH: Moto Coastal 12/15",
+      "url": "https://files.catbox.moe/l0ssuz.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 12/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1194,9 +2009,10 @@
     },
     {
       "id": "bg-coast17",
-      "label": "BATCH: Moto Coastal 13/15",
+      "url": "https://files.catbox.moe/5wci35.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 13/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1208,9 +2024,10 @@
     },
     {
       "id": "bg-coast19",
-      "label": "BATCH: Moto Coastal 14/15",
+      "url": "https://files.catbox.moe/p722cc.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 14/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1222,9 +2039,10 @@
     },
     {
       "id": "bg-coast20",
-      "label": "BATCH: Moto Coastal 15/15",
+      "url": "https://files.catbox.moe/qpy7rl.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Coastal 15/15",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1236,9 +2054,10 @@
     },
     {
       "id": "bg-over1",
-      "label": "BATCH: Moto Overlook 1/10",
+      "url": "https://files.catbox.moe/8h81qs.jpg",
       "model": "flux2-pro @image",
       "prompt": "Motorcycle overlook + exact layout: plus near wrist, minus near elbow, play/pause center, LED/logo outward",
+      "label": "BATCH: Moto Overlook 1/10",
       "context": "Overlook template with exact button layout spec. D2 Overlook 1 already had correct orientation at 85/100 — generating 10 more to find additional correct-orientation seeds.",
       "comments": [
         {
@@ -1250,9 +2069,10 @@
     },
     {
       "id": "bg-over2",
-      "label": "BATCH: Moto Overlook 2/10",
+      "url": "https://files.catbox.moe/tiuq1a.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same overlook prompt",
+      "label": "BATCH: Moto Overlook 2/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1264,9 +2084,10 @@
     },
     {
       "id": "bg-over3",
-      "label": "BATCH: Moto Overlook 3/10",
+      "url": "https://files.catbox.moe/awc5uj.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Overlook 3/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1278,9 +2099,10 @@
     },
     {
       "id": "bg-over4",
-      "label": "BATCH: Moto Overlook 4/10",
+      "url": "https://files.catbox.moe/tlfo7o.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Overlook 4/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1292,9 +2114,10 @@
     },
     {
       "id": "bg-over5",
-      "label": "BATCH: Moto Overlook 5/10",
+      "url": "https://files.catbox.moe/lrbz30.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Overlook 5/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1306,9 +2129,10 @@
     },
     {
       "id": "bg-over6",
-      "label": "BATCH: Moto Overlook 6/10",
+      "url": "https://files.catbox.moe/k18ux6.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Overlook 6/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1320,9 +2144,10 @@
     },
     {
       "id": "bg-over7",
-      "label": "BATCH: Moto Overlook 7/10",
+      "url": "https://files.catbox.moe/rk4i8n.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Overlook 7/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1334,9 +2159,10 @@
     },
     {
       "id": "bg-over8",
-      "label": "BATCH: Moto Overlook 8/10",
+      "url": "https://files.catbox.moe/fda83y.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Overlook 8/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1348,9 +2174,10 @@
     },
     {
       "id": "bg-over9",
-      "label": "BATCH: Moto Overlook 9/10",
+      "url": "https://files.catbox.moe/di398g.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Overlook 9/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1362,9 +2189,10 @@
     },
     {
       "id": "bg-over10",
-      "label": "BATCH: Moto Overlook 10/10",
+      "url": "https://files.catbox.moe/7jt59j.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Moto Overlook 10/10",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1376,9 +2204,10 @@
     },
     {
       "id": "bg-mtb2",
-      "label": "BATCH: MTB 1/4",
+      "url": "https://files.catbox.moe/ddgi7c.jpg",
       "model": "flux2-pro @image",
       "prompt": "MTB on dusty trail + exact layout spec",
+      "label": "BATCH: MTB 1/4",
       "context": "First test of exact button layout spec on mountain biking. Previous Pipeline A MTB scored 88/100 without the spec.",
       "comments": [
         {
@@ -1390,9 +2219,10 @@
     },
     {
       "id": "bg-mtb3",
-      "label": "BATCH: MTB 2/4",
+      "url": "https://files.catbox.moe/2bqxn1.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same MTB prompt",
+      "label": "BATCH: MTB 2/4",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1404,9 +2234,10 @@
     },
     {
       "id": "bg-mtb4",
-      "label": "BATCH: MTB 3/4",
+      "url": "https://files.catbox.moe/11utcc.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: MTB 3/4",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1418,9 +2249,10 @@
     },
     {
       "id": "bg-mtb5",
-      "label": "BATCH: MTB 4/4",
+      "url": "https://files.catbox.moe/99exdq.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: MTB 4/4",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1432,9 +2264,10 @@
     },
     {
       "id": "bg-snowmo1",
-      "label": "BATCH: Snowmobile 1/3",
+      "url": "https://files.catbox.moe/zjgn6d.jpg",
       "model": "flux2-pro @image",
       "prompt": "Snowmobile on snowy trail + exact layout spec",
+      "label": "BATCH: Snowmobile 1/3",
       "context": "Testing snowmobile with exact button layout spec. Snowmobile previously scored only 20/100 — can the new spec improve it?",
       "comments": [
         {
@@ -1446,9 +2279,10 @@
     },
     {
       "id": "bg-snowmo2",
-      "label": "BATCH: Snowmobile 2/3",
+      "url": "https://files.catbox.moe/a3jp3b.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same snowmobile prompt",
+      "label": "BATCH: Snowmobile 2/3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1460,9 +2294,10 @@
     },
     {
       "id": "bg-snowmo3",
-      "label": "BATCH: Snowmobile 3/3",
+      "url": "https://files.catbox.moe/c8ze1q.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Snowmobile 3/3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1474,9 +2309,10 @@
     },
     {
       "id": "bg-snow1",
-      "label": "BATCH: Snowboard 1/3",
+      "url": "https://files.catbox.moe/g8isjy.jpg",
       "model": "flux2-pro @image",
       "prompt": "Snowboarder on powder slope + exact layout spec",
+      "label": "BATCH: Snowboard 1/3",
       "context": "Testing snowboarding with exact button layout spec. Previous best was 80/100.",
       "comments": [
         {
@@ -1488,9 +2324,10 @@
     },
     {
       "id": "bg-snow2",
-      "label": "BATCH: Snowboard 2/3",
+      "url": "https://files.catbox.moe/l3uk6w.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same snowboard prompt",
+      "label": "BATCH: Snowboard 2/3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1502,9 +2339,10 @@
     },
     {
       "id": "bg-snow3",
-      "label": "BATCH: Snowboard 3/3",
+      "url": "https://files.catbox.moe/wvpxmc.jpg",
       "model": "flux2-pro @image",
       "prompt": "Same",
+      "label": "BATCH: Snowboard 3/3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1516,9 +2354,10 @@
     },
     {
       "id": "flip-coastal1",
-      "label": "FLIP FIX: Coastal 1 (ultra-specific prompt)",
+      "url": "https://files.catbox.moe/ucbqr9.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Ultra-specific: \"symbols oriented so RIDER can read them, from camera they appear upside down and reversed.\" Coastal highway, spring.",
+      "label": "FLIP FIX: Coastal 1 (ultra-specific prompt)",
       "context": "Approach 1: Extremely explicit symbol orientation language. \"The button symbols must be oriented so the RIDER can read them when looking at their own arm - from the cameras perspective the symbols will appear upside down and reversed.\"",
       "comments": [
         {
@@ -1535,9 +2374,10 @@
     },
     {
       "id": "flip-coastal2",
-      "label": "FLIP FIX: Coastal 2",
+      "url": "https://files.catbox.moe/attshw.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same ultra-specific symbol prompt, different seed",
+      "label": "FLIP FIX: Coastal 2",
       "context": "Same prompt, different seed. Cherry-pick.",
       "comments": [
         {
@@ -1549,9 +2389,10 @@
     },
     {
       "id": "flip-coastal3",
-      "label": "FLIP FIX: Coastal 3",
+      "url": "https://files.catbox.moe/wxi0vq.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same ultra-specific symbol prompt, different seed",
+      "label": "FLIP FIX: Coastal 3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1563,9 +2404,10 @@
     },
     {
       "id": "flip-coastal4",
-      "label": "FLIP FIX: Coastal 4",
+      "url": "https://files.catbox.moe/2fpea3.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same ultra-specific symbol prompt, different seed",
+      "label": "FLIP FIX: Coastal 4",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1577,9 +2419,10 @@
     },
     {
       "id": "flip-coastal5",
-      "label": "FLIP FIX: Coastal 5",
+      "url": "https://files.catbox.moe/6xprfl.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same ultra-specific symbol prompt, different seed",
+      "label": "FLIP FIX: Coastal 5",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1591,9 +2434,10 @@
     },
     {
       "id": "kontext-flip",
-      "label": "FLIP FIX: Kontext rotation of D2 Coastal 3",
+      "url": "https://files.catbox.moe/vsfh8f.jpg",
       "model": "kontext-pro (post-process)",
       "prompt": "Took D2 Coastal 3 (~95/100) and asked Kontext: \"Rotate button symbols 180° so minus is closest to wrist. Keep everything else identical.\"",
+      "label": "FLIP FIX: Kontext rotation of D2 Coastal 3",
       "context": "Approach 2: Post-processing fix. Take the best image (D2 Coastal 3 that you said \"would be 100 if flipped\") and use Kontext Pro to rotate just the symbols. Did Kontext preserve the scene while fixing orientation?",
       "comments": [
         {
@@ -1605,9 +2449,10 @@
     },
     {
       "id": "overlook2-1",
-      "label": "FLIP FIX: Overlook 1 (correct-orientation template)",
+      "url": "https://files.catbox.moe/28k1mb.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Motorcycle overlook template with \"buttons oriented so rider can read them looking down at own arm.\" Mountain vista, spring golden hour.",
+      "label": "FLIP FIX: Overlook 1 (correct-orientation template)",
       "context": "Approach 3: D2 Overlook 1 already had CORRECT symbol orientation at 85/100. Generating 5 more seeds of the overlook template to find another correct-orientation image.",
       "comments": [
         {
@@ -1619,9 +2464,10 @@
     },
     {
       "id": "overlook2-2",
-      "label": "FLIP FIX: Overlook 2",
+      "url": "https://files.catbox.moe/4k3eka.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same overlook prompt, different seed",
+      "label": "FLIP FIX: Overlook 2",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1633,9 +2479,10 @@
     },
     {
       "id": "overlook2-3",
-      "label": "FLIP FIX: Overlook 3",
+      "url": "https://files.catbox.moe/79bmdu.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same overlook prompt, different seed",
+      "label": "FLIP FIX: Overlook 3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1647,9 +2494,10 @@
     },
     {
       "id": "overlook2-4",
-      "label": "FLIP FIX: Overlook 4",
+      "url": "https://files.catbox.moe/zramq8.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same overlook prompt, different seed",
+      "label": "FLIP FIX: Overlook 4",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1661,9 +2509,10 @@
     },
     {
       "id": "overlook2-5",
-      "label": "FLIP FIX: Overlook 5",
+      "url": "https://files.catbox.moe/0g4ill.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same overlook prompt, different seed",
+      "label": "FLIP FIX: Overlook 5",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -1675,9 +2524,10 @@
     },
     {
       "id": "pipeF-moto",
-      "label": "PIPE F: Motorcycle spring (Kontext scene-swap)",
+      "url": "https://files.catbox.moe/tyvssy.jpg",
       "model": "kontext-pro (scene-swap)",
       "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to motorcycle riding, cherry blossom road, gripping handlebars.\"",
+      "label": "PIPE F: Motorcycle spring (Kontext scene-swap)",
       "context": "PIPELINE F: Completely different approach. Instead of generating a scene and adding product, we START with the real product photo on the arm and tell Kontext to CHANGE THE SCENE around it. Product preservation is Kontext's strength.",
       "comments": [
         {
@@ -1689,9 +2539,10 @@
     },
     {
       "id": "pipeF-mtb",
-      "label": "PIPE F: MTB trail (Kontext scene-swap)",
+      "url": "https://files.catbox.moe/op8i10.jpg",
       "model": "kontext-pro (scene-swap)",
       "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to MTB trail, gripping bike handlebars, pine forest.\"",
+      "label": "PIPE F: MTB trail (Kontext scene-swap)",
       "context": "Same approach: real product photo → Kontext changes scene to mountain biking. Does the product survive AND does the scene change convincingly?",
       "comments": [
         {
@@ -1703,9 +2554,10 @@
     },
     {
       "id": "pipeF-snowmo",
-      "label": "PIPE F: Snowmobile (Kontext scene-swap)",
+      "url": "https://files.catbox.moe/up0g47.jpg",
       "model": "kontext-pro (scene-swap)",
       "prompt": "Horizontal arm ref → Kontext Pro: \"Keep product on forearm. Change to snowmobile rider, snowy trail, winter gear.\"",
+      "label": "PIPE F: Snowmobile (Kontext scene-swap)",
       "context": "Using the horizontal arm reference. Snowmobile is a key CB2 sport. Does Kontext preserve the product while creating a full-body snowmobile scene?",
       "comments": [
         {
@@ -1717,9 +2569,10 @@
     },
     {
       "id": "pipeF-moto-product",
-      "label": "PIPE F: Motorcycle (product as input)",
+      "url": "https://files.catbox.moe/vke9y5.jpg",
       "model": "kontext-pro (scene-swap)",
       "prompt": "Product front photo → Kontext Pro: \"Show this product strapped to motorcycle riders forearm, gripping handlebars, cherry blossoms, all 5 buttons visible.\"",
+      "label": "PIPE F: Motorcycle (product as input)",
       "context": "Variation: using the standalone product photo as input instead of the on-arm photo. Different starting point, same scene-swap concept.",
       "comments": [
         {
@@ -1731,9 +2584,10 @@
     },
     {
       "id": "pipeD2-coast1",
-      "label": "PIPE D2: Moto coastal 1 of 5",
+      "url": "https://files.catbox.moe/w92msh.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Motorcycle rider coastal highway, product flush against lower forearm, ocean cliffs, spring sunlight",
+      "label": "PIPE D2: Moto coastal 1 of 5",
       "context": "Cherry-picking batch: 5 seeds of the motorcycle coastal prompt that scored 89/100. Looking for the seed where product sits flush against the jacket.",
       "comments": [
         {
@@ -1745,9 +2599,10 @@
     },
     {
       "id": "pipeD2-coast2",
-      "label": "PIPE D2: Moto coastal 2 of 5",
+      "url": "https://files.catbox.moe/a58ygl.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same coastal prompt",
+      "label": "PIPE D2: Moto coastal 2 of 5",
       "context": "Different seed, same prompt. Cherry-pick best.",
       "comments": [
         {
@@ -1759,9 +2614,10 @@
     },
     {
       "id": "pipeD2-coast3",
-      "label": "PIPE D2: Moto coastal 3 of 5",
+      "url": "https://files.catbox.moe/jizk6s.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same coastal prompt",
+      "label": "PIPE D2: Moto coastal 3 of 5",
       "context": "Different seed.",
       "comments": [
         {
@@ -1773,9 +2629,10 @@
     },
     {
       "id": "pipeD2-coast4",
-      "label": "PIPE D2: Moto coastal 4 of 5",
+      "url": "https://files.catbox.moe/kdhmm9.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same coastal prompt",
+      "label": "PIPE D2: Moto coastal 4 of 5",
       "context": "Different seed.",
       "comments": [
         {
@@ -1787,9 +2644,10 @@
     },
     {
       "id": "pipeD2-coast5",
-      "label": "PIPE D2: Moto coastal 5 of 5",
+      "url": "https://files.catbox.moe/xojqml.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same coastal prompt",
+      "label": "PIPE D2: Moto coastal 5 of 5",
       "context": "Different seed.",
       "comments": [
         {
@@ -1801,9 +2659,10 @@
     },
     {
       "id": "pipeD2-over1",
-      "label": "PIPE D2: Moto overlook 1 of 3",
+      "url": "https://files.catbox.moe/d5ijol.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Motorcycle rider at scenic mountain overlook, product on lower forearm, mountain vista, spring golden hour",
+      "label": "PIPE D2: Moto overlook 1 of 3",
       "context": "Motorcycle overlook template — rider stopped at scenic point. Helmet off, relaxed pose. 3 seeds for cherry-picking.",
       "comments": [
         {
@@ -1815,9 +2674,10 @@
     },
     {
       "id": "pipeD2-over2",
-      "label": "PIPE D2: Moto overlook 2 of 3",
+      "url": "https://files.catbox.moe/jdx5ja.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same overlook prompt",
+      "label": "PIPE D2: Moto overlook 2 of 3",
       "context": "Different seed.",
       "comments": [
         {
@@ -1829,9 +2689,10 @@
     },
     {
       "id": "pipeD2-over3",
-      "label": "PIPE D2: Moto overlook 3 of 3",
+      "url": "https://files.catbox.moe/keclg7.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same overlook prompt",
+      "label": "PIPE D2: Moto overlook 3 of 3",
       "context": "Different seed.",
       "comments": [
         {
@@ -1843,9 +2704,10 @@
     },
     {
       "id": "E2-r50-s80",
-      "label": "PIPE E2: ref=0.50 str=0.80 (low ref)",
+      "url": "https://files.catbox.moe/inmwjr.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.50, strength=0.80",
+      "label": "PIPE E2: ref=0.50 str=0.80 (low ref)",
       "context": "Pipeline E REDO with proper small masks (product-sized, not whole-arm). Testing if lower reference strength preserves the scene while still generating the product. Compare across the full sweep.",
       "comments": [
         {
@@ -1857,9 +2719,10 @@
     },
     {
       "id": "E2-r55-s75",
-      "label": "PIPE E2: ref=0.55 str=0.75",
+      "url": "https://files.catbox.moe/2r9tve.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.55, strength=0.75",
+      "label": "PIPE E2: ref=0.55 str=0.75",
       "context": "Sweep point. Small mask + moderate reference.",
       "comments": [
         {
@@ -1871,9 +2734,10 @@
     },
     {
       "id": "E2-r60-s70",
-      "label": "PIPE E2: ref=0.60 str=0.70",
+      "url": "https://files.catbox.moe/1tou62.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.60, strength=0.70",
+      "label": "PIPE E2: ref=0.60 str=0.70",
       "context": "Sweep point. Increasing reference, decreasing strength.",
       "comments": [
         {
@@ -1885,9 +2749,10 @@
     },
     {
       "id": "E2-r60-s85",
-      "label": "PIPE E2: ref=0.60 str=0.85 (high strength)",
+      "url": "https://files.catbox.moe/lcu811.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.60, strength=0.85",
+      "label": "PIPE E2: ref=0.60 str=0.85 (high strength)",
       "context": "Testing if high overall strength with moderate reference helps. The strength controls how much the image changes overall.",
       "comments": [
         {
@@ -1899,9 +2764,10 @@
     },
     {
       "id": "E2-r65-s75",
-      "label": "PIPE E2: ref=0.65 str=0.75 (baseline)",
+      "url": "https://files.catbox.moe/ujgwni.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.65, strength=0.75",
+      "label": "PIPE E2: ref=0.65 str=0.75 (baseline)",
       "context": "The first combo that showed promise — scene partially preserved with something on the wrist.",
       "comments": [
         {
@@ -1913,9 +2779,10 @@
     },
     {
       "id": "E2-r70-s70",
-      "label": "PIPE E2: ref=0.70 str=0.70",
+      "url": "https://files.catbox.moe/2qxro5.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.70, strength=0.70",
+      "label": "PIPE E2: ref=0.70 str=0.70",
       "context": "Higher reference. Does the product become more recognizable?",
       "comments": [
         {
@@ -1927,9 +2794,10 @@
     },
     {
       "id": "E2-r70-s80",
-      "label": "PIPE E2: ref=0.70 str=0.80 (high both)",
+      "url": "https://files.catbox.moe/725qts.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Small product-sized mask + ref=0.70, strength=0.80",
+      "label": "PIPE E2: ref=0.70 str=0.80 (high both)",
       "context": "Both reference and strength high. Risk: scene gets destroyed. Reward: product might be visible.",
       "comments": [
         {
@@ -1941,9 +2809,10 @@
     },
     {
       "id": "E2-moto-r65s75",
-      "label": "PIPE E2: Moto riding (cross-scene test)",
+      "url": "https://files.catbox.moe/ts18o1.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Motorcycle RIDING scene + ref=0.65, str=0.75",
+      "label": "PIPE E2: Moto riding (cross-scene test)",
       "context": "Testing if the best combo (ref=0.65, str=0.75) works on a different scene. The motorcycle riding scene has the forearm in a different position.",
       "comments": [
         {
@@ -1955,9 +2824,10 @@
     },
     {
       "id": "E2-snowmo-r65s75",
-      "label": "PIPE E2: Snowmobile (cross-scene test)",
+      "url": "https://files.catbox.moe/myb602.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "Snowmobile scene + ref=0.65, str=0.75",
+      "label": "PIPE E2: Snowmobile (cross-scene test)",
       "context": "Same best combo on snowmobile POV. Testing cross-scene generalization.",
       "comments": [
         {
@@ -1969,9 +2839,10 @@
     },
     {
       "id": "pipeD-motoc",
-      "label": "PIPE D: Motorcycle close-up (spring!)",
+      "url": "https://files.catbox.moe/h4fgq1.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Motorcycle rider close-up, leather jacket, product from image 1 on lower forearm, spring road with cherry blossoms",
+      "label": "PIPE D: Motorcycle close-up (spring!)",
       "context": "MOTORCYCLE IS SPRING PRIORITY. Pipeline A @image with product-only ref. Cherry blossoms = spring. This is the template we need for the seasonal push.",
       "comments": [
         {
@@ -1983,9 +2854,10 @@
     },
     {
       "id": "pipeD-moto-waist",
-      "label": "PIPE D: Motorcycle waist-up (spring)",
+      "url": "https://files.catbox.moe/5u22kr.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Waist-up motorcycle rider at scenic overlook, leather jacket, product from image 1 on forearm, mountain vista, spring golden hour",
+      "label": "PIPE D: Motorcycle waist-up (spring)",
       "context": "Motorcycle waist-up template. Product on forearm with \"Chubby Buttons\" visible. Mountain vista, golden hour.",
       "comments": [
         {
@@ -1997,9 +2869,10 @@
     },
     {
       "id": "pipeD-moto",
-      "label": "PIPE D: Motorcycle riding (spring)",
+      "url": "https://files.catbox.moe/8ys7xe.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Motorcycle rider on winding mountain road, leather jacket, product from image 1 on forearm, green hills, golden hour",
+      "label": "PIPE D: Motorcycle riding (spring)",
       "context": "Motorcycle on mountain road. Product on forearm area.",
       "comments": [
         {
@@ -2011,9 +2884,10 @@
     },
     {
       "id": "pipeD-moto-coast",
-      "label": "PIPE D: Motorcycle coastal (spring)",
+      "url": "https://files.catbox.moe/m3msjf.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Motorcycle rider cruising coastal highway, leather jacket, product from image 1 on forearm, ocean and cliffs, spring sunlight",
+      "label": "PIPE D: Motorcycle coastal (spring)",
       "context": "Coastal motorcycle ride. Different scene variety for motorcycle template.",
       "comments": [
         {
@@ -2025,9 +2899,10 @@
     },
     {
       "id": "pipeD-snowmo",
-      "label": "PIPE D: Snowmobile POV",
+      "url": "https://files.catbox.moe/4ayvti.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Snowmobile rider POV, winter gear, product from image 1 on forearm, snowy trail, mountains",
+      "label": "PIPE D: Snowmobile POV",
       "context": "Snowmobile with product ref. Key CB2 sport.",
       "comments": [
         {
@@ -2039,9 +2914,10 @@
     },
     {
       "id": "pipeD-mtb",
-      "label": "PIPE D: MTB action",
+      "url": "https://files.catbox.moe/nt3pce.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "MTB rider on trail, cycling jersey, product from image 1 on forearm, pine trees, sunlight",
+      "label": "PIPE D: MTB action",
       "context": "Mountain biking with product ref. Testing if @image works for non-winter sports.",
       "comments": [
         {
@@ -2053,9 +2929,10 @@
     },
     {
       "id": "pipeE-motoc-hi",
-      "label": "PIPE E: Moto ref=0.8 (product took over)",
+      "url": "https://files.catbox.moe/frcfey.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "fill_image mask + reference_image_url at strength 0.8. Scene: motorcycle close-up.",
+      "label": "PIPE E: Moto ref=0.8 (product took over)",
       "context": "PIPELINE E: The holy grail — mask-based inpainting WITH product reference image. Uses fal-ai/flux-general with fill_image (mask) + reference_image_url (product). At ref_strength=0.8, the reference dominates and produces a product render instead of a scene. Product fidelity is AMAZING though.",
       "comments": [
         {
@@ -2067,9 +2944,10 @@
     },
     {
       "id": "pipeE-motoc-lo",
-      "label": "PIPE E: Moto ref=0.3 (scene preserved)",
+      "url": "https://files.catbox.moe/ryw6zp.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "fill_image mask + reference_image_url at strength 0.3. Scene: motorcycle close-up.",
+      "label": "PIPE E: Moto ref=0.3 (scene preserved)",
       "context": "Same Pipeline E but reference_strength lowered to 0.3. Scene survives! But is the product visible? The Goldilocks zone is somewhere between 0.3 and 0.8.",
       "comments": [
         {
@@ -2081,9 +2959,10 @@
     },
     {
       "id": "pipeE-motoc-mid",
-      "label": "PIPE E: Moto ref=0.4 (balanced attempt)",
+      "url": "https://files.catbox.moe/4b1104.jpg",
       "model": "flux-general (mask+ref)",
       "prompt": "fill_image mask + reference_image_url at strength 0.4, overall strength 0.5.",
+      "label": "PIPE E: Moto ref=0.4 (balanced attempt)",
       "context": "Pipeline E at ref=0.4, strength=0.5. Trying to find the balance between product visibility and scene preservation.",
       "comments": [
         {
@@ -2095,9 +2974,10 @@
     },
     {
       "id": "pipeC-motoc",
-      "label": "PIPE C: Motorcycle close-up (SAM→Fill)",
+      "url": "https://files.catbox.moe/80fp1l.jpg",
       "model": "SAM3 + Fill Pro",
       "prompt": "Step 1: BFL generated clean motorcycle close-up scene (spring, cherry blossoms). Step 2: SAM 3 detected arm region (\"arm in leather jacket sleeve\"). Step 3: Fill Pro inpainted CB2 into SAM-derived forearm mask.",
+      "label": "PIPE C: Motorcycle close-up (SAM→Fill)",
       "context": "PIPELINE C TEST: 3-step automated pipeline. SAM 3 provides pixel-perfect forearm segmentation (no more crude rectangles). Fill Pro inpaints the product into precisely the right region. The question: does text-only inpainting (no product ref image) produce a recognizable CB2?",
       "comments": [
         {
@@ -2109,9 +2989,10 @@
     },
     {
       "id": "pipeC-moto",
-      "label": "PIPE C: Motorcycle riding (SAM→Fill)",
+      "url": "https://files.catbox.moe/16poqh.jpg",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean motorcycle riding scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
+      "label": "PIPE C: Motorcycle riding (SAM→Fill)",
       "context": "Motorcycle on winding mountain road. SAM detected the rider arm. Fill Pro attempted to place CB2. Spring = motorcycle season, this is a priority use case.",
       "comments": [
         {
@@ -2123,9 +3004,10 @@
     },
     {
       "id": "pipeC-snowmo",
-      "label": "PIPE C: Snowmobile POV (SAM→Fill)",
+      "url": "https://files.catbox.moe/uhwfmi.jpg",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean snowmobile POV scene + SAM 3 forearm mask + Fill Pro CB2 inpaint",
+      "label": "PIPE C: Snowmobile POV (SAM→Fill)",
       "context": "Snowmobile POV with visible forearm. SAM detected the puffy jacket forearm area. Another key CB2 sport — gloves + cold weather = perfect use case.",
       "comments": [
         {
@@ -2137,9 +3019,10 @@
     },
     {
       "id": "pipeC-mtb",
-      "label": "PIPE C: MTB action (SAM→Fill)",
+      "url": "https://files.catbox.moe/7289l0.jpg",
       "model": "SAM3 + Fill Pro",
       "prompt": "Clean MTB action scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
+      "label": "PIPE C: MTB action (SAM→Fill)",
       "context": "Full body mountain biker. SAM detected cyclist arm on handlebar. Testing if the 3-step pipeline can solve full-body product placement that all other approaches failed at.",
       "comments": [
         {
@@ -2151,9 +3034,10 @@
     },
     {
       "id": "r8-mtb1",
-      "label": "R8: MTB 1 of 5 (Pipeline A)",
+      "url": "https://files.catbox.moe/dwquh6.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "MTB rider on singletrack, cycling jersey, product from image 1 on lower forearm, buttons face rider",
+      "label": "R8: MTB 1 of 5 (Pipeline A)",
       "context": "Scaling Pipeline A: 5 MTB variations for cherry-picking. Your previous Pipeline A MTB scored 88/100 — the highest non-skiing score ever. Generating 5 to find a 95+.",
       "comments": [
         {
@@ -2165,9 +3049,10 @@
     },
     {
       "id": "r8-mtb2",
-      "label": "R8: MTB 2 of 5",
+      "url": "https://files.catbox.moe/xppvst.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same MTB prompt",
+      "label": "R8: MTB 2 of 5",
       "context": "Same prompt, different seed. Cherry-pick best.",
       "comments": [
         {
@@ -2179,9 +3064,10 @@
     },
     {
       "id": "r8-mtb3",
-      "label": "R8: MTB 3 of 5",
+      "url": "https://files.catbox.moe/jjw4bm.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same MTB prompt",
+      "label": "R8: MTB 3 of 5",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2193,9 +3079,10 @@
     },
     {
       "id": "r8-mtb4",
-      "label": "R8: MTB 4 of 5",
+      "url": "https://files.catbox.moe/67j1se.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same MTB prompt",
+      "label": "R8: MTB 4 of 5",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2207,9 +3094,10 @@
     },
     {
       "id": "r8-mtb5",
-      "label": "R8: MTB 5 of 5",
+      "url": "https://files.catbox.moe/eb1izb.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same MTB prompt",
+      "label": "R8: MTB 5 of 5",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2221,9 +3109,10 @@
     },
     {
       "id": "r8-skier1",
-      "label": "R8: Skier full body 1 of 3",
+      "url": "https://files.catbox.moe/z28tcm.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Full body skier carving turn, bright ski jacket, product from image 1 on forearm, buttons face skier",
+      "label": "R8: Skier full body 1 of 3",
       "context": "Testing full-body skiing with Pipeline A. Previous skiing images were close-ups/waist-up. Can @image do full body skiing with product visible?",
       "comments": [
         {
@@ -2235,9 +3124,10 @@
     },
     {
       "id": "r8-skier2",
-      "label": "R8: Skier full body 2 of 3",
+      "url": "https://files.catbox.moe/qlihtp.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same skier prompt",
+      "label": "R8: Skier full body 2 of 3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2249,9 +3139,10 @@
     },
     {
       "id": "r8-skier3",
-      "label": "R8: Skier full body 3 of 3",
+      "url": "https://files.catbox.moe/br4i1k.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same skier prompt",
+      "label": "R8: Skier full body 3 of 3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2263,9 +3154,10 @@
     },
     {
       "id": "r8-snow1",
-      "label": "R8: Snowboard full body 1 of 3",
+      "url": "https://files.catbox.moe/s0qcjr.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Full body snowboarder on powder slope, colorful gear, product from image 1 on forearm, buttons face rider",
+      "label": "R8: Snowboard full body 1 of 3",
       "context": "Full-body snowboarding with Pipeline A. Previous snowboard @image scored 65/100 (strap loose, symbols warped). Can we get higher with more seeds?",
       "comments": [
         {
@@ -2277,9 +3169,10 @@
     },
     {
       "id": "r8-snow2",
-      "label": "R8: Snowboard full body 2 of 3",
+      "url": "https://files.catbox.moe/zh306f.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same snowboard prompt",
+      "label": "R8: Snowboard full body 2 of 3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2291,9 +3184,10 @@
     },
     {
       "id": "r8-snow3",
-      "label": "R8: Snowboard full body 3 of 3",
+      "url": "https://files.catbox.moe/igaa2w.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same snowboard prompt",
+      "label": "R8: Snowboard full body 3 of 3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2305,9 +3199,10 @@
     },
     {
       "id": "r8-hiker1",
-      "label": "R8: Hiker with gloves 1 of 3 (on-brand)",
+      "url": "https://files.catbox.moe/dqzvgd.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Hiker on mountain trail in cold weather, light jacket and hiking gloves, product from image 1 on forearm over sleeve, buttons face wearer, golden hour",
+      "label": "R8: Hiker with gloves 1 of 3 (on-brand)",
       "context": "You noted hiking without gloves is less on-brand. Testing hiker WITH gloves in cold weather — closer to CB2 use case (people wearing gloves who need big buttons).",
       "comments": [
         {
@@ -2319,9 +3214,10 @@
     },
     {
       "id": "r8-hiker2",
-      "label": "R8: Hiker with gloves 2 of 3",
+      "url": "https://files.catbox.moe/fw7odz.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same hiker-gloves prompt",
+      "label": "R8: Hiker with gloves 2 of 3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2333,9 +3229,10 @@
     },
     {
       "id": "r8-hiker3",
-      "label": "R8: Hiker with gloves 3 of 3",
+      "url": "https://files.catbox.moe/fy5zsp.jpg",
       "model": "flux2-pro @image (1 ref)",
       "prompt": "Same hiker-gloves prompt",
+      "label": "R8: Hiker with gloves 3 of 3",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2347,9 +3244,10 @@
     },
     {
       "id": "pipeA-hiker",
-      "label": "PIPE A: Hiker full body (@image, 1 ref only)",
+      "url": "https://files.catbox.moe/dm1219.jpg",
       "model": "flux2-pro-multiref (@image)",
       "prompt": "Place the product from image 1 on a hikers lower forearm. Lightweight trail clothes, mountain ridge, golden hour. Full body shot from the side.",
+      "label": "PIPE A: Hiker full body (@image, 1 ref only)",
       "context": "BREAKTHROUGH TEST. Using ONLY the product-front photo as reference (no on-arm ski jacket refs). The @image syntax tells the model \"place product from image 1 on the forearm.\" This should eliminate ski jacket bleed and enable variety.",
       "comments": [
         {
@@ -2361,9 +3259,10 @@
     },
     {
       "id": "pipeA-mtb",
-      "label": "PIPE A: MTB action (@image, 2 refs)",
+      "url": "https://files.catbox.moe/l91i71.jpg",
       "model": "flux2-pro-multiref (@image)",
       "prompt": "Product from image 1 on bikers lower forearm, positioned like image 2. Cycling jersey. Action sports, dusty trail.",
+      "label": "PIPE A: MTB action (@image, 2 refs)",
       "context": "Testing @image with 2 refs: product + arm placement guide. Explicit instruction: \"completely different clothing than reference images.\" Does the model respect this?",
       "comments": [
         {
@@ -2375,9 +3274,10 @@
     },
     {
       "id": "pipeA-snowboard",
-      "label": "PIPE A: Snowboard mid-air (@image, 1 ref)",
+      "url": "https://files.catbox.moe/djh1o2.jpg",
       "model": "flux2-pro-multiref (@image)",
       "prompt": "Product from image 1 on forearm. Snowboarder mid-air, colorful snow gear. From below looking up.",
+      "label": "PIPE A: Snowboard mid-air (@image, 1 ref)",
       "context": "Testing if product survives in a completely novel scene (mid-air, from below) with only 1 product reference. No on-arm refs = no ski jacket bleed.",
       "comments": [
         {
@@ -2389,9 +3289,10 @@
     },
     {
       "id": "pipeA-festival",
-      "label": "PIPE A: Festival arms raised (@image, 1 ref)",
+      "url": "https://files.catbox.moe/savr6w.jpg",
       "model": "flux2-pro-multiref (@image)",
       "prompt": "Product from image 1 on forearm. Person at music festival, arms raised, casual t-shirt, stage lights, evening.",
+      "label": "PIPE A: Festival arms raised (@image, 1 ref)",
       "context": "Non-sport use case with product-only ref. Previous festival attempts (R5, R7) had skin artifacts or wrong placement. Does @image syntax fix this?",
       "comments": [
         {
@@ -2403,9 +3304,10 @@
     },
     {
       "id": "pipeB-festival",
-      "label": "PIPE B: Festival inpaint (mask-based)",
+      "url": "https://files.catbox.moe/2egr9n.jpg",
       "model": "flux-pro-fill (inpaint)",
       "prompt": "Step 1: Generated clean festival scene. Step 2: Created forearm mask. Step 3: Inpainted CB2 via fal.ai Fill Pro.",
+      "label": "PIPE B: Festival inpaint (mask-based)",
       "context": "Pipeline B test: generate scene without product, then inpaint the CB2 into a masked forearm region. The mask was a rough rectangle — better segmentation would improve placement. Compare with Pipeline A festival which used @image referencing instead.",
       "comments": [
         {
@@ -2417,9 +3319,10 @@
     },
     {
       "id": "pipeB-hiker",
-      "label": "PIPE B: Hiker inpaint (mask-based)",
+      "url": "https://files.catbox.moe/y6j9wl.jpg",
       "model": "flux-pro-fill (inpaint)",
       "prompt": "Step 1: Generated clean hiker scene (from behind, ridge trail). Step 2: Masked right forearm area. Step 3: Inpainted CB2.",
+      "label": "PIPE B: Hiker inpaint (mask-based)",
       "context": "Pipeline B test with hiker scene. The mask was a rough ellipse placed where I estimated the forearm was. Inpainting produces something but mask precision is critical — better segmentation needed.",
       "comments": [
         {
@@ -2431,9 +3334,10 @@
     },
     {
       "id": "r7-skier-action1",
-      "label": "R7: Skier action A (mid-turn, side angle)",
+      "url": "https://drive.google.com/thumbnail?id=1pqmzz6CIh0fBd4_e1HdinPGm3jhF7cVC&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle, dramatic mountain backdrop",
+      "label": "R7: Skier action A (mid-turn, side angle)",
       "context": "R6 skiers were excellent but all looked like the same modeling photo. R7 pushes for dynamic mid-action poses and different camera angles to break the reference photo repetition.",
       "comments": [
         {
@@ -2445,9 +3349,10 @@
     },
     {
       "id": "r7-skier-action2",
-      "label": "R7: Skier action B (mid-turn)",
+      "url": "https://drive.google.com/thumbnail?id=1aFMMYncjbwJIZLG5P_0i7D_rKADn0ugu&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle",
+      "label": "R7: Skier action B (mid-turn)",
       "context": "Same action prompt, different seed. Cherry-pick best.",
       "comments": [
         {
@@ -2459,9 +3364,10 @@
     },
     {
       "id": "r7-skier-action3",
-      "label": "R7: Skier action C (mid-turn)",
+      "url": "https://drive.google.com/thumbnail?id=1kfn8UDZyyBKNBY-qmXf9rNYsVsO-rws5&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Skier mid-turn carving through deep powder, snow spraying, shot from the side at low angle",
+      "label": "R7: Skier action C (mid-turn)",
       "context": "Same action prompt, different seed.",
       "comments": [
         {
@@ -2473,9 +3379,10 @@
     },
     {
       "id": "r7-snow-action1",
-      "label": "R7: Snowboard mid-air A (from below)",
+      "url": "https://drive.google.com/thumbnail?id=1iTPwemy8anApsiEhUwXozq-07kPPWUfa&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Snowboarder mid-air grabbing board during a jump, remote on lower forearm, shot from below looking up, blue sky",
+      "label": "R7: Snowboard mid-air A (from below)",
       "context": "Testing dynamic mid-air pose + upward camera angle. Something the reference photos could never produce.",
       "comments": [
         {
@@ -2487,9 +3394,10 @@
     },
     {
       "id": "r7-snow-action2",
-      "label": "R7: Snowboard mid-air B",
+      "url": "https://drive.google.com/thumbnail?id=1fpP0c6AjoknfoUnEBn1mQBXFcg8yUAk3&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Snowboarder mid-air grabbing board during a jump, remote on lower forearm, shot from below looking up",
+      "label": "R7: Snowboard mid-air B",
       "context": "Same mid-air prompt, different seed.",
       "comments": [
         {
@@ -2501,9 +3409,10 @@
     },
     {
       "id": "r7-hiker-full1",
-      "label": "R7: Hiker full body A (from behind)",
+      "url": "https://drive.google.com/thumbnail?id=1lGLMByTxdVpU4GXy7gFCNrobUsuyMk55&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Full body hiker walking along dramatic mountain ridge trail, lightweight hiking clothes, remote on lower forearm, shot from behind following the hiker, golden hour",
+      "label": "R7: Hiker full body A (from behind)",
       "context": "Justin asked repeatedly for \"that full body action shot, that real aspirational action shot.\" Testing full body from behind — a completely different angle than all previous close-ups.",
       "comments": [
         {
@@ -2515,9 +3424,10 @@
     },
     {
       "id": "r7-hiker-full2",
-      "label": "R7: Hiker full body B (from behind)",
+      "url": "https://drive.google.com/thumbnail?id=109PF_uO23u6hW_4I4puXrXnbkKZk8YNd&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Full body hiker walking along dramatic mountain ridge trail, shot from behind following the hiker, golden hour",
+      "label": "R7: Hiker full body B (from behind)",
       "context": "Same full-body-from-behind prompt, different seed.",
       "comments": [
         {
@@ -2529,9 +3439,10 @@
     },
     {
       "id": "r7-mtb-action1",
-      "label": "R7: MTB action A (panning shot)",
+      "url": "https://drive.google.com/thumbnail?id=193OGYD1BbURS1JEoJqn9im1JEKg6lrl1&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Mountain biker riding aggressively down dusty singletrack, leaning into turn, cycling jersey helmet gloves, remote on lower forearm, panning shot",
+      "label": "R7: MTB action A (panning shot)",
       "context": "MTB has been inconsistent (R5 MTB was total fail, R6 MTB A was 95%). Testing aggressive riding pose + panning shot style.",
       "comments": [
         {
@@ -2543,9 +3454,10 @@
     },
     {
       "id": "r7-mtb-action2",
-      "label": "R7: MTB action B (panning)",
+      "url": "https://drive.google.com/thumbnail?id=17lnbcau_ycMix9YF7o8btWBCNLRbaP_m&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Mountain biker riding aggressively down dusty singletrack, leaning into turn, panning shot",
+      "label": "R7: MTB action B (panning)",
       "context": "Same action prompt, different seed.",
       "comments": [
         {
@@ -2557,9 +3469,10 @@
     },
     {
       "id": "r7-festival",
-      "label": "R7: Festival (arms raised, evening)",
+      "url": "https://drive.google.com/thumbnail?id=1NBL9rGiubGhrR-NFSZPgZQfW7fi2dv4E&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Person at outdoor music festival arms raised enjoying music, casual t-shirt, remote on lower forearm, colorful stage lights and crowd, evening",
+      "label": "R7: Festival (arms raised, evening)",
       "context": "Testing non-sport use case. CB2 is used at concerts/festivals. Previous festival attempt (R5) had skin artifacts. Trying evening atmosphere + arms raised pose.",
       "comments": [
         {
@@ -2571,9 +3484,10 @@
     },
     {
       "id": "r7-runner",
-      "label": "R7: Trail runner (mid-stride)",
+      "url": "https://drive.google.com/thumbnail?id=1tXtTp_a2CLNCVTswsUU1vrzqLnvnSwTj&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Trail runner mid-stride on mountain path, running shorts and lightweight performance top, remote on lower forearm, morning light, action sports photography",
+      "label": "R7: Trail runner (mid-stride)",
       "context": "Testing running as a use case. Running shorts + performance top should prevent ski jacket bleed completely.",
       "comments": [
         {
@@ -2585,9 +3499,10 @@
     },
     {
       "id": "r6-hiker1",
-      "label": "R6: Hiker A (symbol fix + trail clothes)",
+      "url": "https://files.catbox.moe/qdsl6x.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour",
+      "label": "R6: Hiker A (symbol fix + trail clothes)",
       "context": "R5 feedback: symbols face camera not wearer. Ski jacket bleeding into non-ski scenes. Fix: \"symbols face wearer, appear upside-down to camera\" + specify \"lightweight trail clothing.\"",
       "comments": [
         {
@@ -2599,9 +3514,10 @@
     },
     {
       "id": "r6-hiker2",
-      "label": "R6: Hiker B (symbol fix + trail clothes)",
+      "url": "https://drive.google.com/thumbnail?id=1IMF89VqtHPQBFBLF3Z9tZfTnfxrxNe3r&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm, button symbols face the wearer and appear upside-down to camera, lightweight trail clothing and daypack, mountain trail, golden hour",
+      "label": "R6: Hiker B (symbol fix + trail clothes)",
       "context": "Same prompt as Hiker A — different seed for cherry-picking. Generate-and-filter strategy from seed variation test.",
       "comments": [
         {
@@ -2613,9 +3529,10 @@
     },
     {
       "id": "r6-skier1",
-      "label": "R6: Skier A (symbol fix)",
+      "url": "https://files.catbox.moe/jo84r6.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight",
+      "label": "R6: Skier A (symbol fix)",
       "context": "Skier scenes can keep ski jacket. Only fixing symbol orientation.",
       "comments": [
         {
@@ -2627,9 +3544,10 @@
     },
     {
       "id": "r6-skier2",
-      "label": "R6: Skier B (symbol fix)",
+      "url": "https://drive.google.com/thumbnail?id=16kT-1nrQAqCXQ_7Cgt5Gkp-O6vDL3utz&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight",
+      "label": "R6: Skier B (symbol fix)",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2641,9 +3559,10 @@
     },
     {
       "id": "r6-skier3",
-      "label": "R6: Skier C (symbol fix)",
+      "url": "https://drive.google.com/thumbnail?id=1UWHPCeJ9Lv5HBIO7mvOiV3o5B6Pki05A&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on skiers lower forearm over ski jacket, button symbols face the wearer and appear upside-down to camera, snowy mountain slopes, bright winter sunlight",
+      "label": "R6: Skier C (symbol fix)",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2655,9 +3574,10 @@
     },
     {
       "id": "r6-mtb1",
-      "label": "R6: MTB A (symbol fix + cycling clothes)",
+      "url": "https://files.catbox.moe/7kqr2m.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees",
+      "label": "R6: MTB A (symbol fix + cycling clothes)",
       "context": "Fixing ski jacket bleed by specifying \"cycling jersey and helmet.\" Plus symbol orientation fix.",
       "comments": [
         {
@@ -2669,9 +3589,10 @@
     },
     {
       "id": "r6-mtb2",
-      "label": "R6: MTB B (symbol fix + cycling clothes)",
+      "url": "https://drive.google.com/thumbnail?id=1leeind2i1_6uOFt4j5Pw51fOahUZ2E2Y&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees",
+      "label": "R6: MTB B (symbol fix + cycling clothes)",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2683,9 +3604,10 @@
     },
     {
       "id": "r6-mtb3",
-      "label": "R6: MTB C (symbol fix + cycling clothes)",
+      "url": "https://drive.google.com/thumbnail?id=1WghIY5veIeSWMWzMm5o9onpqgWHiMrnH&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on mountain bikers lower forearm, button symbols face the wearer and appear upside-down to camera, cycling jersey and helmet, dusty mountain trail, pine trees",
+      "label": "R6: MTB C (symbol fix + cycling clothes)",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2697,9 +3619,10 @@
     },
     {
       "id": "r6-snow1",
-      "label": "R6: Snowboard A (symbol fix)",
+      "url": "https://files.catbox.moe/38zfzr.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky",
+      "label": "R6: Snowboard A (symbol fix)",
       "context": "Symbol orientation fix + colorful snow gear instead of dark jacket.",
       "comments": [
         {
@@ -2711,9 +3634,10 @@
     },
     {
       "id": "r6-snow2",
-      "label": "R6: Snowboard B (symbol fix)",
+      "url": "https://drive.google.com/thumbnail?id=1WJs-vJ0ckVYdbd5_Udy6AB12rgbxjsvb&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky",
+      "label": "R6: Snowboard B (symbol fix)",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2725,9 +3649,10 @@
     },
     {
       "id": "r6-snow3",
-      "label": "R6: Snowboard C (symbol fix)",
+      "url": "https://drive.google.com/thumbnail?id=1zToWWgdsW49tcgbTOcyb4Rw-eJfZcDHz&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on snowboarders lower forearm, button symbols face the wearer and appear upside-down to camera, colorful snow gear, pristine powder, blue sky",
+      "label": "R6: Snowboard C (symbol fix)",
       "context": "Same prompt, different seed.",
       "comments": [
         {
@@ -2739,9 +3664,10 @@
     },
     {
       "id": "combo-editorial",
-      "label": "COMBO: Editorial (Canon 5D, f/2.8)",
+      "url": "https://files.catbox.moe/hnulh4.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Award-winning product photography, Canon 5D Mark IV, golden hour, shallow depth of field, f/2.8, green LED icons, elastic armband with velcro closure",
+      "label": "COMBO: Editorial (Canon 5D, f/2.8)",
       "context": "Testing camera-specific language for better lighting and detail. First prompt to produce green LEDs consistently.",
       "comments": [
         {
@@ -2753,9 +3679,10 @@
     },
     {
       "id": "combo-anatomical",
-      "label": "COMBO: Anatomical (3in above wrist)",
+      "url": "https://files.catbox.moe/slvawu.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Close up of hikers left arm, 3 inches above the wrist joint, elastic velcro armband wraps snugly",
+      "label": "COMBO: Anatomical (3in above wrist)",
       "context": "R4 feedback: product kept going on upper arm. Testing ultra-specific anatomical placement language.",
       "comments": [
         {
@@ -2767,9 +3694,10 @@
     },
     {
       "id": "combo-negative",
-      "label": "COMBO: Negative prompt (NOT upper arm)",
+      "url": "https://files.catbox.moe/e9v5wh.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "LOWER forearm halfway between wrist and elbow, NOT on the upper arm, NOT on the wrist, NOT floating",
+      "label": "COMBO: Negative prompt (NOT upper arm)",
       "context": "Testing exclusion language to prevent wrong placement. Does \"NOT on upper arm\" actually help?",
       "comments": [
         {
@@ -2781,9 +3709,10 @@
     },
     {
       "id": "combo-twopass-base",
-      "label": "COMBO: Two-pass BASE (before Kontext)",
+      "url": "https://files.catbox.moe/wgqdqv.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Waist-up hiker on mountain ridge, remote on forearm with velcro armband, golden hour",
+      "label": "COMBO: Two-pass BASE (before Kontext)",
       "context": "Step 1 of two-pass experiment. Compare with REFINED version to see if Kontext Pro can reposition the product.",
       "comments": [
         {
@@ -2795,9 +3724,10 @@
     },
     {
       "id": "combo-twopass-refined",
-      "label": "COMBO: Two-pass REFINED (after Kontext)",
+      "url": "https://files.catbox.moe/vxtc21.jpg",
       "model": "multiref+kontext",
       "prompt": "Kontext instruction: Move device to LOWER forearm, 3 inches above wrist",
+      "label": "COMBO: Two-pass REFINED (after Kontext)",
       "context": "Step 2: Kontext Pro tried to move product lower. Did it actually change position vs the BASE?",
       "comments": [
         {
@@ -2809,9 +3739,10 @@
     },
     {
       "id": "combo-seed1",
-      "label": "SEED 1 of 5 (same prompt)",
+      "url": "https://files.catbox.moe/x7g3jp.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "label": "SEED 1 of 5 (same prompt)",
       "context": "Consistency test. 5 identical prompts — if placement varies wildly, the model is random, not prompt-controllable.",
       "comments": [
         {
@@ -2823,9 +3754,10 @@
     },
     {
       "id": "combo-seed2",
-      "label": "SEED 2 of 5",
+      "url": "https://files.catbox.moe/9knsrn.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "label": "SEED 2 of 5",
       "context": "Same prompt as Seed 1. Compare placement.",
       "comments": [
         {
@@ -2837,9 +3769,10 @@
     },
     {
       "id": "combo-seed3",
-      "label": "SEED 3 of 5",
+      "url": "https://files.catbox.moe/6p4k03.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "label": "SEED 3 of 5",
       "context": "Same prompt as Seed 1. Compare placement.",
       "comments": [
         {
@@ -2851,9 +3784,10 @@
     },
     {
       "id": "combo-seed4",
-      "label": "SEED 4 of 5",
+      "url": "https://files.catbox.moe/ux8ep4.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "label": "SEED 4 of 5",
       "context": "Same prompt as Seed 1. Compare placement.",
       "comments": [
         {
@@ -2865,9 +3799,10 @@
     },
     {
       "id": "combo-seed5",
-      "label": "SEED 5 of 5",
+      "url": "https://files.catbox.moe/a97dxy.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers lower forearm between wrist and elbow, mountain trail, golden hour",
+      "label": "SEED 5 of 5",
       "context": "Same prompt as Seed 1. Compare placement.",
       "comments": [
         {
@@ -2879,9 +3814,10 @@
     },
     {
       "id": "lora-v4b-hiker",
-      "label": "LoRA v4b: Hiker",
+      "url": "https://files.catbox.moe/obdhqf.jpg",
       "model": "flux-lora-v4b",
       "prompt": "CB2REMOTE on lower forearm, hiker golden hour",
+      "label": "LoRA v4b: Hiker",
       "context": "First-ever v4b test (Jordan's 50 photos, all 3 colorways). Does broader training data improve product learning?",
       "comments": [
         {
@@ -2893,9 +3829,10 @@
     },
     {
       "id": "lora-v4b-skier",
-      "label": "LoRA v4b: Skier",
+      "url": "https://files.catbox.moe/twtjj9.jpg",
       "model": "flux-lora-v4b",
       "prompt": "CB2REMOTE on forearm, skier powder",
+      "label": "LoRA v4b: Skier",
       "context": "v4b test. Does the model produce actual product shape or just text?",
       "comments": [
         {
@@ -2907,9 +3844,10 @@
     },
     {
       "id": "lora-v4b-mtb",
-      "label": "LoRA v4b: MTB",
+      "url": "https://files.catbox.moe/pho0yb.jpg",
       "model": "flux-lora-v4b",
       "prompt": "CB2REMOTE on forearm, mountain biker",
+      "label": "LoRA v4b: MTB",
       "context": "v4b test. Checking product form factor from 50 training photos.",
       "comments": [
         {
@@ -2921,9 +3859,10 @@
     },
     {
       "id": "lora-v4b-snowboard",
-      "label": "LoRA v4b: Snowboarder",
+      "url": "https://files.catbox.moe/bhr32u.jpg",
       "model": "flux-lora-v4b",
       "prompt": "CB2REMOTE on forearm, snowboarder",
+      "label": "LoRA v4b: Snowboarder",
       "context": "v4b test. POV shot with \"CC2\" text — closest to actual product shape.",
       "comments": [
         {
@@ -2935,9 +3874,10 @@
     },
     {
       "id": "lora-v4b-runner",
-      "label": "LoRA v4b: Runner",
+      "url": "https://files.catbox.moe/zompfm.jpg",
       "model": "flux-lora-v4b",
       "prompt": "CB2REMOTE on forearm, trail runner",
+      "label": "LoRA v4b: Runner",
       "context": "v4b test. Does trigger word produce the device or just approximations?",
       "comments": [
         {
@@ -2949,9 +3889,10 @@
     },
     {
       "id": "r5-hiker",
-      "label": "R5: Hiker lower forearm",
+      "url": "https://files.catbox.moe/ny3zg1.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, golden hour mountain trail",
+      "label": "R5: Hiker lower forearm",
       "context": "R4: \"just move to lower forearm.\" Added explicit LOWER forearm + FACING THE WEARER.",
       "comments": [
         {
@@ -2963,9 +3904,10 @@
     },
     {
       "id": "r5-mtb",
-      "label": "R5: MTB lower forearm",
+      "url": "https://files.catbox.moe/4uqszy.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, pine forest trail",
+      "label": "R5: MTB lower forearm",
       "context": "R4 MTB: \"generally pretty great, move up an inch.\" Testing LOWER forearm language.",
       "comments": [
         {
@@ -2977,9 +3919,10 @@
     },
     {
       "id": "r5-snowboard",
-      "label": "R5: Snowboarder lower forearm",
+      "url": "https://files.catbox.moe/lzjy9c.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, snowy peak",
+      "label": "R5: Snowboarder lower forearm",
       "context": "R4 snowboard: \"symbols flipped 180°.\" Added FACING THE WEARER.",
       "comments": [
         {
@@ -2991,9 +3934,10 @@
     },
     {
       "id": "r5-skier",
-      "label": "R5: Skier POV lower forearm",
+      "url": "https://files.catbox.moe/wbumgt.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "LOWER forearm near wrist, buttons FACING THE WEARER, mountain panorama",
+      "label": "R5: Skier POV lower forearm",
       "context": "R4 skier was \"pretty damn good.\" Maintaining quality + testing lower forearm.",
       "comments": [
         {
@@ -3005,9 +3949,10 @@
     },
     {
       "id": "r5-festival",
-      "label": "R5: Festival (new use case)",
+      "url": "https://files.catbox.moe/2g5bgv.jpg",
       "model": "flux2-pro-multiref",
       "prompt": "LOWER forearm, FACING THE WEARER, outdoor music festival, stage lights",
+      "label": "R5: Festival (new use case)",
       "context": "NEW: Testing non-sport context. CB2 is used at festivals/concerts too.",
       "comments": [
         {
@@ -3019,9 +3964,10 @@
     },
     {
       "id": "r4-hiker",
-      "label": "R4: Hiker waist-up",
+      "url": "https://drive.google.com/thumbnail?id=1SKqdW2-IG_wIT1mXhpZlrxMGAwaFiiAZ&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Waist-up hiker golden hour, remote on left forearm",
+      "label": "R4: Hiker waist-up",
       "context": "R3 full-body had floating products. R4 switched to waist-up as compromise.",
       "comments": [
         {
@@ -3033,9 +3979,10 @@
     },
     {
       "id": "r4-skier",
-      "label": "R4: Skier close-up",
+      "url": "https://drive.google.com/thumbnail?id=1dw1Ac3VZms1hazlTa11xp3Au9gWm_iwa&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Upper body skier, remote on forearm, mountain panorama",
+      "label": "R4: Skier close-up",
       "context": "Waist-up test. Validated sweet-spot framing.",
       "comments": [
         {
@@ -3047,9 +3994,10 @@
     },
     {
       "id": "r4-mtb",
-      "label": "R4: MTB 3/4 body",
+      "url": "https://drive.google.com/thumbnail?id=1MaHVFBwrhMH6fOlhtR7FEsedw9ed957D&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "3/4 body mountain biker, remote on forearm, pine trees",
+      "label": "R4: MTB 3/4 body",
       "context": "3/4 body test. Product slightly low on arm but accuracy strong.",
       "comments": [
         {
@@ -3061,9 +4009,10 @@
     },
     {
       "id": "r4-snowboard",
-      "label": "R4: Snowboarder waist-up",
+      "url": "https://drive.google.com/thumbnail?id=1bd71TfrC7dJPPvXrhiob9sPBKkLnVfNj&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Waist-up snowboarder, remote on forearm, blue sky",
+      "label": "R4: Snowboarder waist-up",
       "context": "Symbols were rotated 180°. Led to R5 \"FACING THE WEARER\" experiment.",
       "comments": [
         {
@@ -3075,9 +4024,10 @@
     },
     {
       "id": "r3m-hiker",
-      "label": "R3: Hiker full body",
+      "url": "https://drive.google.com/thumbnail?id=1BxuJ2cbcjabyw84iAURt-bJ95OlxuHIE&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Full body hiker, remote on forearm, golden hour",
+      "label": "R3: Hiker full body",
       "context": "First full-body attempt. Testing if product survives wider framing.",
       "comments": [
         {
@@ -3089,9 +4039,10 @@
     },
     {
       "id": "r3m-mtb",
-      "label": "R3: MTB full body",
+      "url": "https://drive.google.com/thumbnail?id=1jjeHvhEuyZdLykDJ8MDfYMWdpnowjvMr&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Full body mountain biker, remote on forearm",
+      "label": "R3: MTB full body",
       "context": "Full-body test proved too wide for reliable placement.",
       "comments": [
         {
@@ -3103,9 +4054,10 @@
     },
     {
       "id": "r3m-skier",
-      "label": "R3: Skier full body",
+      "url": "https://drive.google.com/thumbnail?id=18ok5ZBJSD8mHPsR8t5vGEBzD8zLbU3nm&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Full body skier, remote on forearm, mountain panorama",
+      "label": "R3: Skier full body",
       "context": "Full-body caused duplicate product generation.",
       "comments": [
         {
@@ -3117,9 +4069,10 @@
     },
     {
       "id": "r3m-runner",
-      "label": "R3: Runner full body",
+      "url": "https://drive.google.com/thumbnail?id=1vePZlpyrIfMsVz1jTl5hCymnB_4G4Ybp&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Trail runner full body, remote on forearm",
+      "label": "R3: Runner full body",
       "context": "Full-body: two remotes, symbols too bright.",
       "comments": [
         {
@@ -3131,9 +4084,10 @@
     },
     {
       "id": "r3m-snowboard",
-      "label": "R3: Snowboarder full body",
+      "url": "https://drive.google.com/thumbnail?id=1MZYtDBuKNjRzSPrg0u2Hj3eOzXzO3zRE&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Full body snowboarder, remote on forearm",
+      "label": "R3: Snowboarder full body",
       "context": "Full-body: duplicate products, incorrect securing.",
       "comments": [
         {
@@ -3145,9 +4099,10 @@
     },
     {
       "id": "r2-skiing-pov",
-      "label": "R2: Skiing POV (single ref)",
+      "url": "https://files.catbox.moe/9jmhu5.jpg",
       "model": "flux-2-pro-preview",
       "prompt": "Remote on forearm over ski glove, snowy slopes, POV",
+      "label": "R2: Skiing POV (single ref)",
       "context": "Single-ref test via BFL API. Proved 3-ref multiref is much better.",
       "comments": [
         {
@@ -3159,9 +4114,10 @@
     },
     {
       "id": "r2-hiking-summit",
-      "label": "R2: Hiking summit (single ref)",
+      "url": "https://files.catbox.moe/1vxain.jpg",
       "model": "flux-2-pro-preview",
       "prompt": "Remote on forearm, mountain summit, golden hour",
+      "label": "R2: Hiking summit (single ref)",
       "context": "Single-ref test. Confirmed multiref >>> single ref.",
       "comments": [
         {
@@ -3173,9 +4129,10 @@
     },
     {
       "id": "flux2-hiking-multiref",
-      "label": "R1: Hiking golden hour (BASELINE)",
+      "url": "https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on hikers forearm, mountain trail, golden hour",
+      "label": "R1: Hiking golden hour (BASELINE)",
       "context": "BASELINE. First multiref, simple prompt. Set the quality bar.",
       "comments": [
         {
@@ -3187,9 +4144,10 @@
     },
     {
       "id": "flux2-skiing-multiref",
-      "label": "R1: Skiing powder (BASELINE)",
+      "url": "https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on skiers forearm, snowy slopes, bright sunlight",
+      "label": "R1: Skiing powder (BASELINE)",
       "context": "BASELINE. Product accuracy ~95%.",
       "comments": [
         {
@@ -3201,9 +4159,10 @@
     },
     {
       "id": "flux2-snowboard-multiref",
-      "label": "R1: Snowboard halfpipe (BASELINE)",
+      "url": "https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200",
       "model": "flux2-pro-multiref",
       "prompt": "Remote on snowboarders forearm, halfpipe, bright winter day",
+      "label": "R1: Snowboard halfpipe (BASELINE)",
       "context": "BASELINE. Minor velcro strap issue but product excellent.",
       "comments": [
         {
@@ -3215,9 +4174,10 @@
     },
     {
       "id": "kontext-tron-skiing",
-      "label": "R1: Kontext tron close-up",
+      "url": "https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200",
       "model": "flux-kontext-pro",
       "prompt": "CB2 Tron with green LEDs, skier carving powder",
+      "label": "R1: Kontext tron close-up",
       "context": "Kontext Pro single-ref vs multiref comparison. Had mysterious artifact.",
       "comments": [
         {
@@ -3229,37 +4189,50 @@
     },
     {
       "id": "vid-kling3-moto",
-      "label": "VIDEO: Kling 3.0 Pro — Moto",
+      "url": "https://files.catbox.moe/nr34vc.mp4",
       "model": "Kling 3.0 Pro (fal.ai)",
       "prompt": "Subtle cinematic camera movement, device stays still",
+      "label": "VIDEO: Kling 3.0 Pro — Moto",
       "context": "KLING 3.0 PRO: Reportedly the best image-to-video model as of April 2026. From the 90/100 motorcycle coastal still. ~$0.70. The one researchers say preserves product detail best.",
       "comments": [
         {
           "text": "The guy is just kind of sitting there not really moving yet although it's interesting. He looks like he's ready to go now I know you're not gonna magically put like clothing on him, protective clothing, and a helmet but as it relates to this image, it animated pretty well. I just didn't make it into an action shot for sitting still and ready to go without any other further prompts. I'd say it's pretty perfect 95.",
           "time": "2026-04-06T22:25:01.821Z",
           "num": 1
+        },
+        {
+          "text": "The guy is just kind of sitting there not really moving yet although it is interesting. He looks like he is ready to go.",
+          "time": "2026-04-06T22:00:00Z",
+          "num": 2
         }
       ]
     },
     {
       "id": "vid-kling3-snow",
-      "label": "VIDEO: Kling 3.0 Pro — Snowboard",
+      "url": "https://files.catbox.moe/hk0xoh.mp4",
       "model": "Kling 3.0 Pro (fal.ai)",
       "prompt": "Same prompt, snow particles",
+      "label": "VIDEO: Kling 3.0 Pro — Snowboard",
       "context": "Kling 3.0 Pro from the 100/100 snowboard. Compare against Gen-4.5 and Veo 3.1 snowboard versions.",
       "comments": [
         {
           "text": "This is cool that she's looking at her chubby buttons and she's ready to go, but she's kinda like sitting there. It's more like an animated photo. It's not really you know an action shot but and the volume down button has lost a little bit when the when the user turns it towards the camera, but overall it's still pretty cool. I like your expressions give it like a 90 out of 100.",
           "time": "2026-04-06T22:25:38.536Z",
           "num": 1
+        },
+        {
+          "text": "This is cool that she is looking at her chubby buttons and she is ready to go but she is kinda like sitting there. More like an animated photo.",
+          "time": "2026-04-06T22:00:00Z",
+          "num": 2
         }
       ]
     },
     {
       "id": "vid-gen4t-moto",
-      "label": "VIDEO: Gen-4 Turbo — Moto",
+      "url": "https://files.catbox.moe/d3ugv3.mp4",
       "model": "Runway Gen-4 Turbo",
       "prompt": "Subtle cinematic camera movement, device on forearm stays still",
+      "label": "VIDEO: Gen-4 Turbo — Moto",
       "context": "RUNWAY GEN-4 TURBO: From the 90/100 motorcycle coastal still. 720x1280, 5s. Fastest model (~30s gen). Does Runway preserve the CB2 better than Kling/Veo?",
       "comments": [
         {
@@ -3271,14 +4244,20 @@
           "text": "I like the fact that she's moving the chubby buttons looks good. I don't really know what she's doing. Looks like she's just kind of sitting there and turning around and talking slow Mo but it's moving. It's interesting chubby buttons looks nice. It's not really it's more like an animated photo of them like a real video. I still give this is still really fun to look at so you know 82 out of 185 out of 100.",
           "time": "2026-04-06T18:44:56.450Z",
           "num": 2
+        },
+        {
+          "text": "I like the fact that she is moving the chubby buttons looks good. I do not really know what she is doing. Looks like she is just kind of sitting there and turning around and talking slow Mo but it is moving.",
+          "time": "2026-04-06T22:00:00Z",
+          "num": 3
         }
       ]
     },
     {
       "id": "vid-gen4t-snow",
-      "label": "VIDEO: Gen-4 Turbo — Snowboard",
+      "url": "https://files.catbox.moe/rzxknn.mp4",
       "model": "Runway Gen-4 Turbo",
       "prompt": "Same prompt",
+      "label": "VIDEO: Gen-4 Turbo — Snowboard",
       "context": "Gen-4 Turbo from the 100/100 snowboard still. Compare CB2 consistency against the motorcycle version.",
       "comments": [
         {
@@ -3290,70 +4269,100 @@
           "text": "This is interesting. I like that. The angles are changing it's it's really good. I don't know what she's doing. Just kinda like looking into the distance but really fucking cool. I get this like a 97 for for what it is.",
           "time": "2026-04-06T18:46:01.935Z",
           "num": 2
+        },
+        {
+          "text": "This is interesting. I like that. The angles are changing it is really good. I do not know what she is doing. Just kinda like looking into the distance but really fucking cool. I give this like a 97 out of 100.",
+          "time": "2026-04-06T22:00:00Z",
+          "num": 3
         }
       ]
     },
     {
       "id": "vid-gen45-moto",
-      "label": "VIDEO: Gen-4.5 — Moto",
+      "url": "https://files.catbox.moe/bkeese.mp4",
       "model": "Runway Gen-4.5",
       "prompt": "Same prompt",
+      "label": "VIDEO: Gen-4.5 — Moto",
       "context": "RUNWAY GEN-4.5: Higher quality than Gen-4 Turbo, double the bitrate. 720x1280, 5s, ~3-4 min gen time. The premium Runway model.",
       "comments": [
         {
           "text": "This is cool. The CB is preserved the guys on the bike is wind is blowing through his face. I would like to see a helmet and earbuds, but I know that we were just animating a photo that already existed and for the sake of that I give us 95 out of 100.",
           "time": "2026-04-06T22:26:11.172Z",
           "num": 1
+        },
+        {
+          "text": "This is cool. The CB is preserved the guys on the bike is wind is blowing through his face. I would like to see a helmet and earbuds.",
+          "time": "2026-04-06T22:00:00Z",
+          "num": 2
         }
       ]
     },
     {
       "id": "vid-gen45-snow",
-      "label": "VIDEO: Gen-4.5 — Snowboard",
+      "url": "https://files.catbox.moe/y9z0qm.mp4",
       "model": "Runway Gen-4.5",
       "prompt": "Same prompt",
+      "label": "VIDEO: Gen-4.5 — Snowboard",
       "context": "Gen-4.5 from the 100/100 snowboard. Higher bitrate than Turbo version.",
       "comments": [
         {
           "text": "This is pretty cool more like a moving image but it's pretty cool. I like that you have the different angles on it and she's kinda looking into the distance. It's pretty dope. Do you have like a 94 out of 100 or an in terms of work I could go with video.",
           "time": "2026-04-06T18:50:09.039Z",
           "num": 1
+        },
+        {
+          "text": "This is pretty cool more like a moving image but it is pretty cool. I like that you have the different angles on it. Pretty dope. 94 out of 100.",
+          "time": "2026-04-06T22:00:00Z",
+          "num": 2
         }
       ]
     },
     {
       "id": "vid-veo31-moto",
-      "label": "VIDEO: Veo 3.1 — Moto",
+      "url": "https://files.catbox.moe/xs9o5n.mp4",
       "model": "Veo 3.1 (Google)",
       "prompt": "Same prompt",
+      "label": "VIDEO: Veo 3.1 — Moto",
       "context": "GOOGLE VEO 3.1: Latest Google model. 720x1280, 8s (longer than others). Highest bitrate. Best photorealism according to research.",
       "comments": [
         {
           "text": "Cool noises in the background the remote is staying still the way it should be the it's cool again. I would like to see earbuds and a helmet and maybe him going a little bit faster and some better music but I know it again I know what you're trying to do here and for that purpose he did great 95 out of hundred.",
           "time": "2026-04-06T22:26:46.970Z",
           "num": 1
+        },
+        {
+          "text": "Cool noises in the background the remote is staying still the way it should be. Cool again would like to see earbuds and a helmet.",
+          "time": "2026-04-06T22:00:00Z",
+          "num": 2
         }
       ]
     },
     {
       "id": "vid-veo31-snow",
-      "label": "VIDEO: Veo 3.1 — Snowboard",
+      "url": "https://files.catbox.moe/ajo9l3.mp4",
       "model": "Veo 3.1 (Google)",
       "prompt": "Same prompt",
+      "label": "VIDEO: Veo 3.1 — Snowboard",
       "context": "Veo 3.1 from the 100/100 snowboard. 8 seconds. Compare against Runway versions.",
       "comments": [
         {
           "text": "This is cool. The volume down button is missing a little bit and the symbols on the chubby buttons are lost compared to the other ones I give this an 80 out of 100.",
           "time": "2026-04-06T22:27:10.738Z",
           "num": 1
+        },
+        {
+          "text": "This is cool. The volume down button is missing a little bit and the symbols on the chubby buttons are lost compared to the other ones. 80 out of 100.",
+          "time": "2026-04-06T22:00:00Z",
+          "num": 2
         }
       ]
     },
     {
       "id": "vid-kling-fal",
-      "label": "VIDEO R1: Kling v2.1 (fal)",
+      "url": "https://files.catbox.moe/kdvkgf.mp4",
       "model": "Kling v2.1 (fal.ai)",
       "prompt": "Subtle camera movement, wind in jacket",
+      "label": "VIDEO R1: Kling v2.1 (fal)",
       "context": "ROUND 1 BASELINE: Budget Kling on a lower-quality MTB source image. 960x960, 5s, ~$0.30.",
       "comments": [
         {
@@ -3375,9 +4384,10 @@
     },
     {
       "id": "vid-veo2",
-      "label": "VIDEO R1: Veo 2",
+      "url": "https://files.catbox.moe/m39e5c.mp4",
       "model": "Veo 2 (fal.ai)",
       "prompt": "Same prompt",
+      "label": "VIDEO R1: Veo 2",
       "context": "Round 1: Veo 2 on MTB source. 1280x720, 5s, ~$2.50.",
       "comments": [
         {
@@ -3394,9 +4404,10 @@
     },
     {
       "id": "vid-minimax",
-      "label": "VIDEO R1: MiniMax",
+      "url": "https://files.catbox.moe/we3ggf.mp4",
       "model": "MiniMax/Hailuo (fal.ai)",
       "prompt": "Same prompt",
+      "label": "VIDEO R1: MiniMax",
       "context": "Round 1: MiniMax on MTB source. 960x960, 5s, ~$0.25.",
       "comments": [
         {
@@ -3413,9 +4424,10 @@
     },
     {
       "id": "vid-hailuo-rep",
-      "label": "VIDEO R1: Hailuo 2.3",
+      "url": "https://files.catbox.moe/vplv0d.mp4",
       "model": "Hailuo 2.3 (Replicate)",
       "prompt": "Same prompt",
+      "label": "VIDEO R1: Hailuo 2.3",
       "context": "Round 1: Hailuo 2.3 on MTB source. 1366x768, 5.9s.",
       "comments": [
         {
@@ -3427,9 +4439,10 @@
     },
     {
       "id": "vid-kling-rep",
-      "label": "VIDEO R1: Kling v2.1 (Rep)",
+      "url": "https://files.catbox.moe/z56lx3.mp4",
       "model": "Kling v2.1 (Replicate)",
       "prompt": "Same prompt",
+      "label": "VIDEO R1: Kling v2.1 (Rep)",
       "context": "Round 1: Kling v2.1 on Replicate. 960x960, 5s.",
       "comments": [
         {
