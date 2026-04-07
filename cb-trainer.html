@@ -1,0 +1,915 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CB Creative Lab Trainer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#a855f7;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--cyan:#06b6d4;--bg:#0a0a0a;--card:#111;--border:#222;--text:#fff;--muted:#888;--dim:#555}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;overflow-x:hidden}
+a{color:var(--purple);text-decoration:none}
+
+/* === NAME SCREEN === */
+#nameScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center}
+#nameScreen h1{font-size:1.6rem;color:var(--purple);margin-bottom:.3rem}
+#nameScreen p{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+.name-btns{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center}
+.name-btn{background:#1a1a2e;border:2px solid #333;color:#fff;padding:.7rem 1.4rem;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s}
+.name-btn:hover{border-color:var(--purple);background:#1a1030}
+
+/* === TOP BAR === */
+#mainApp{display:none}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;background:#050505;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.topbar h1{font-size:.95rem;color:var(--purple);font-weight:700}
+.topbar-user{font-size:.7rem;color:var(--dim);background:#1a1a1a;padding:.2rem .5rem;border-radius:6px}
+
+/* === TABS === */
+.tabs{display:flex;gap:.4rem;padding:.6rem 1rem;justify-content:center;border-bottom:1px solid #1a1a1a}
+.tab{background:none;border:2px solid #333;color:var(--muted);padding:.4rem 1.2rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.tab.active{border-color:var(--purple);color:var(--purple)}
+.tab:hover{border-color:#555}
+
+/* === REVIEW TAB === */
+.review-wrap{padding:.5rem}
+.review-stats{display:flex;gap:1.5rem;justify-content:center;padding:.5rem 0}
+.stat{text-align:center}
+.stat-num{font-size:1.2rem;font-weight:700}
+.stat-num.done{color:var(--purple)}
+.stat-num.left{color:var(--dim)}
+.stat-lbl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+.review-filters{display:flex;gap:.3rem;justify-content:center;padding:.3rem 1rem .5rem}
+.filt{background:none;border:1px solid #333;color:var(--muted);padding:.25rem .7rem;border-radius:8px;font-size:.75rem;cursor:pointer;transition:all .15s}
+.filt.active{border-color:var(--purple);color:var(--purple)}
+
+/* Image card */
+.img-card{background:var(--card);border-radius:12px;margin:0 .5rem;overflow:hidden}
+.img-wrap{width:100%;max-height:38vh;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden}
+.img-wrap img{width:100%;height:100%;max-height:38vh;object-fit:contain}
+.img-meta{padding:.5rem .7rem .3rem;display:flex;gap:.3rem;flex-wrap:wrap;align-items:center}
+.badge{font-size:.6rem;padding:.15rem .4rem;border-radius:5px;font-weight:600;text-transform:uppercase}
+.b-model{background:#1a1030;color:var(--purple);border:1px solid #2d1a4e}
+.b-shot{background:#2a1a0a;color:var(--yellow);border:1px solid #3a2a0a}
+.b-style{background:#1a1a1a;color:#ccc;border:1px solid #333}
+.img-caption{font-size:.75rem;color:var(--muted);padding:0 .7rem .4rem}
+
+/* AI Assessment */
+.ai-panel{margin:.4rem .7rem;padding:.5rem;background:#0d0d0d;border-radius:10px;border:1px solid var(--border)}
+.ai-title{font-size:.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:.3rem}
+.ai-scores{display:flex;gap:1rem;justify-content:center}
+.ai-score{text-align:center}
+.ai-dots{display:flex;gap:2px;margin-bottom:2px}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:#333}
+.ai-dot.filled.high{background:var(--green)}.ai-dot.filled.mid{background:var(--yellow)}.ai-dot.filled.low{background:var(--red)}
+.ai-lbl{font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.ai-summary{font-size:.7rem;color:#777;padding:.3rem 0 0;line-height:1.4;font-style:italic}
+
+/* === HUMAN RATING === */
+.human-panel{margin:.5rem .7rem;padding:.6rem;background:#0d0d0d;border-radius:10px;border:1px solid var(--border)}
+.human-title{font-size:.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:.5rem}
+.rating-row{display:flex;align-items:center;gap:.5rem;padding:.3rem 0}
+.rating-label{font-size:.75rem;color:#ccc;width:80px;flex-shrink:0}
+.rating-stars{display:flex;gap:4px;flex:1}
+.star{width:32px;height:32px;border-radius:8px;border:2px solid #333;background:#1a1a1a;color:var(--dim);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;user-select:none}
+.star:hover{border-color:#555;background:#222}
+.star.active{border-color:var(--purple);background:#1a1030;color:var(--purple)}
+.star.active.s1{border-color:var(--red);background:#1a0a0a;color:var(--red)}
+.star.active.s2{border-color:#f97316;background:#1a1000;color:#f97316}
+.star.active.s3{border-color:var(--yellow);background:#1a1a0a;color:var(--yellow)}
+.star.active.s4{border-color:#84cc16;background:#0a1a0a;color:#84cc16}
+.star.active.s5{border-color:var(--green);background:#0a1a0a;color:var(--green)}
+.rating-val{font-size:.7rem;color:var(--dim);width:24px;text-align:center}
+
+.notes-field{width:100%;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-size:.8rem;padding:.4rem .5rem;resize:none;height:2.5rem;margin-top:.4rem;font-family:inherit}
+.notes-field::placeholder{color:#444}
+.notes-field:focus{outline:none;border-color:var(--purple)}
+
+.save-row{display:flex;gap:.4rem;padding:.5rem .7rem .7rem}
+.save-btn{flex:1;padding:.6rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-skip{background:#1a1a1a;color:var(--muted)}
+.btn-skip:hover{background:#222}
+.btn-save{background:linear-gradient(135deg,#7c3aed,var(--purple));color:#fff}
+.btn-save:hover{opacity:.9}
+.btn-save:disabled{opacity:.4;cursor:not-allowed}
+
+/* Thumbnail strip (horizontal scroll) */
+.grid-toggle{display:flex;justify-content:center;padding:.3rem;gap:.8rem;align-items:center}
+.grid-toggle button{background:none;border:none;color:var(--purple);font-size:.75rem;cursor:pointer;text-decoration:underline}
+.grid-toggle .clear-btn{color:var(--red);font-size:.65rem}
+.mini-grid{display:flex;gap:4px;padding:.3rem .7rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.mini-grid::-webkit-scrollbar{height:4px}.mini-grid::-webkit-scrollbar-track{background:#111}.mini-grid::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+.mini-thumb{position:relative;width:56px;height:56px;min-width:56px;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;scroll-snap-align:center}
+.mini-thumb img{width:100%;height:100%;object-fit:cover}
+.mini-thumb.current{border-color:var(--purple)}
+.mini-thumb.rated{opacity:.6}
+.mini-thumb .mini-dot{position:absolute;bottom:3px;right:3px;width:8px;height:8px;border-radius:50%}
+.mini-thumb .mini-idx{position:absolute;top:1px;left:3px;font-size:.5rem;color:#fff;text-shadow:0 0 3px #000}
+
+/* Empty state */
+.empty{text-align:center;padding:3rem 1rem;color:var(--dim)}
+.empty h3{color:var(--muted);margin-bottom:.3rem}
+
+/* === CREATE TAB === */
+.create-wrap{display:none;padding:1rem;max-width:500px;margin:0 auto}
+.create-wrap h2{font-size:1.1rem;margin-bottom:.2rem}
+.create-wrap .sub{color:var(--muted);font-size:.8rem;margin-bottom:1rem}
+.form-group{margin-bottom:1rem}
+.form-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem;display:block}
+
+.option-grid{display:flex;gap:.4rem;flex-wrap:wrap}
+.opt{background:#1a1a1a;border:2px solid #333;color:#ccc;padding:.4rem .8rem;border-radius:10px;font-size:.8rem;font-weight:500;cursor:pointer;transition:all .15s}
+.opt:hover{border-color:#555}
+.opt.active{border-color:var(--purple);color:var(--purple);background:#1a1030}
+.opt.colorway{padding:.3rem .6rem;display:flex;align-items:center;gap:.3rem}
+.color-dot{width:14px;height:14px;border-radius:50%;border:1px solid #555}
+.cd-tron{background:#1a1a1a;border-color:#4ade80}
+.cd-patriot{background:linear-gradient(135deg,#ef4444,#fff,#3b82f6)}
+.cd-hunter{background:#166534}
+
+.text-input{width:100%;background:#111;border:1px solid #333;border-radius:10px;color:#fff;font-size:.85rem;padding:.6rem .7rem;font-family:inherit;resize:none;height:4rem}
+.text-input::placeholder{color:#444}
+.text-input:focus{outline:none;border-color:var(--purple)}
+
+.count-row{display:flex;gap:.3rem;align-items:center}
+.count-btn{width:36px;height:36px;border-radius:8px;border:2px solid #333;background:#1a1a1a;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.count-btn:hover{border-color:#555}
+.count-val{font-size:1.1rem;font-weight:700;width:40px;text-align:center}
+
+.generate-btn{width:100%;padding:.8rem;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#7c3aed,var(--purple));color:#fff;margin-top:.5rem;transition:all .2s}
+.generate-btn:hover{opacity:.9}
+.generate-btn:disabled{opacity:.4;cursor:not-allowed}
+.gen-status{text-align:center;padding:1rem;color:var(--muted);font-size:.85rem;display:none}
+.gen-status.active{display:block}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--purple);border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;margin-right:.3rem;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* === INSIGHTS TAB === */
+.insights-wrap{display:none;padding:1rem;max-width:500px;margin:0 auto}
+.insight-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.7rem;margin-bottom:.5rem}
+.insight-title{font-size:.7rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem}
+.insight-val{font-size:1.5rem;font-weight:700;color:var(--purple)}
+.insight-row{display:flex;gap:.5rem;align-items:center;padding:.2rem 0;font-size:.8rem;color:#ccc}
+.insight-icon{font-size:1rem}
+.pattern-tag{display:inline-block;background:#1a1030;color:var(--purple);border:1px solid #2d1a4e;padding:.15rem .4rem;border-radius:5px;font-size:.7rem;margin:.1rem}
+.prompt-preview{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:.5rem;font-size:.75rem;color:var(--muted);line-height:1.5;margin-top:.3rem;white-space:pre-wrap}
+
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--purple);color:#fff;padding:.5rem 1.2rem;border-radius:10px;font-size:.85rem;font-weight:600;z-index:200;transition:transform .3s;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* Responsive */
+@media(min-width:600px){
+  .img-wrap{max-height:42vh}
+  .rating-stars{gap:6px}
+  .star{width:38px;height:38px;font-size:.9rem}
+}
+</style>
+</head><body>
+
+<!-- NAME SCREEN -->
+<div id="nameScreen">
+  <h1>CB Creative Lab Trainer</h1>
+  <p>Rate, refine, and generate CB2 marketing assets</p>
+  <div class="name-btns">
+    <button class="name-btn" onclick="startApp('Justin')">Justin</button>
+    <button class="name-btn" onclick="startApp('Jordan')">Jordan</button>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp">
+  <div class="topbar">
+    <h1>CB Creative Lab Trainer</h1>
+    <span class="topbar-user" id="userTag"></span>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="setTab('review')" id="tabReview">Review</button>
+    <button class="tab" onclick="setTab('create')" id="tabCreate">Create</button>
+    <button class="tab" onclick="setTab('insights')" id="tabInsights">Insights</button>
+  </div>
+
+  <!-- REVIEW -->
+  <div class="review-wrap" id="reviewWrap">
+    <div class="review-stats">
+      <div class="stat"><div class="stat-num done" id="nRated">0</div><div class="stat-lbl">Rated</div></div>
+      <div class="stat"><div class="stat-num left" id="nUnrated">0</div><div class="stat-lbl">Unrated</div></div>
+    </div>
+    <div class="review-filters">
+      <button class="filt active" onclick="setFilter('unrated')">Unrated</button>
+      <button class="filt" onclick="setFilter('all')">All</button>
+      <button class="filt" onclick="setFilter('rated')">Rated</button>
+    </div>
+
+    <div class="grid-toggle">
+      <button onclick="toggleMiniGrid()" id="gridBtn">Show Thumbnails</button>
+      <button class="clear-btn" onclick="clearAllRatings()">Clear My Ratings</button>
+    </div>
+    <div class="mini-grid" id="miniGrid" style="display:none"></div>
+
+    <div id="cardArea"></div>
+  </div>
+
+  <!-- CREATE -->
+  <div class="create-wrap" id="createWrap">
+    <h2>Generate New Assets</h2>
+    <p class="sub">Pick your options, describe the shot, and let FLUX.2 create it.</p>
+
+    <div class="form-group">
+      <label class="form-label">Colorway</label>
+      <div class="option-grid" id="colorwayOpts">
+        <button class="opt colorway active" onclick="pickOpt('colorway','tron',this)"><span class="color-dot cd-tron"></span>Tron (Black)</button>
+        <button class="opt colorway" onclick="pickOpt('colorway','patriot',this)"><span class="color-dot cd-patriot"></span>Patriot</button>
+        <button class="opt colorway" onclick="pickOpt('colorway','hunter',this)"><span class="color-dot cd-hunter"></span>Hunter (Green)</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Sport / Activity</label>
+      <div class="option-grid" id="sportOpts">
+        <button class="opt active" onclick="pickOpt('sport','skiing',this)">Skiing</button>
+        <button class="opt" onclick="pickOpt('sport','snowboarding',this)">Snowboarding</button>
+        <button class="opt" onclick="pickOpt('sport','motorcycle',this)">Motorcycle</button>
+        <button class="opt" onclick="pickOpt('sport','hiking',this)">Hiking</button>
+        <button class="opt" onclick="pickOpt('sport','mountain-bike',this)">Mountain Bike</button>
+        <button class="opt" onclick="pickOpt('sport','running',this)">Running</button>
+        <button class="opt" onclick="pickOpt('sport','studio',this)">Studio / Product</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Shot Type</label>
+      <div class="option-grid" id="shotOpts">
+        <button class="opt active" onclick="pickOpt('shot','action',this)">Action (on athlete)</button>
+        <button class="opt" onclick="pickOpt('shot','product',this)">Product (close-up)</button>
+        <button class="opt" onclick="pickOpt('shot','lifestyle',this)">Lifestyle</button>
+        <button class="opt" onclick="pickOpt('shot','wide',this)">Wide / Environmental</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Vibe</label>
+      <div class="option-grid" id="vibeOpts">
+        <button class="opt active" onclick="pickOpt('vibe','epic',this)">Epic / Dramatic</button>
+        <button class="opt" onclick="pickOpt('vibe','chill',this)">Chill / Lifestyle</button>
+        <button class="opt" onclick="pickOpt('vibe','professional',this)">Professional / Clean</button>
+        <button class="opt" onclick="pickOpt('vibe','gritty',this)">Gritty / Raw</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Describe Your Vision (optional)</label>
+      <textarea class="text-input" id="createPrompt" placeholder="e.g. Full body shot of a cyclist bombing down a mountain trail at sunset, device clearly visible on forearm..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">How Many</label>
+      <div class="count-row">
+        <button class="count-btn" onclick="adjustCount(-1)">-</button>
+        <span class="count-val" id="countVal">3</span>
+        <button class="count-btn" onclick="adjustCount(1)">+</button>
+      </div>
+    </div>
+
+    <button class="generate-btn" id="genBtn" onclick="generateImages()">Generate Images</button>
+    <div class="gen-status" id="genStatus"><span class="spinner"></span><span id="genMsg">Generating...</span></div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="insights-wrap" id="insightsWrap">
+    <div id="insightsContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== CONFIG =====
+const DATA_URL = 'https://jbarad424.github.io/ideas/cb-ai-lab.json';
+const RATE_API = 'https://hook.us1.make.com/b4l7shwxqblbeq5t36ttse62bivls9y3';
+const SYNC_API = 'https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
+const FLUX_GEN_API = 'https://hook.us1.make.com/e95rfn1iz88bnhtejhqhadqtvblnp128';
+
+// Reference images per colorway (uploaded to fal.ai CDN)
+const REF_IMAGES = {
+  tron: 'https://v3b.fal.media/files/b/0a94d8dc/vhUF5u93KjoM4-XVpmfnu_cb2-ref-standing-vertical-front.jpeg',
+  hunter: 'https://v3b.fal.media/files/b/0a94d8dc/vhUF5u93KjoM4-XVpmfnu_cb2-ref-standing-vertical-front.jpeg',
+  patriot: 'https://v3b.fal.media/files/b/0a94d8dc/vhUF5u93KjoM4-XVpmfnu_cb2-ref-standing-vertical-front.jpeg'
+};
+const LS_NAME = 'cb_trainer_name';
+function lsRatings(){ return 'cb_trainer_ratings_' + (userName||'').toLowerCase().trim(); }
+
+// CB2 product descriptions per colorway
+const CB2_DESC = {
+  tron: 'Chubby Buttons CB2 Tron — compact black matte silicone Bluetooth remote, 5 large raised tactile buttons with green LED icons (minus, back, play/pause, forward, plus), small Bluetooth and camera side buttons, CB2 logo on front, adjustable elastic armband with velcro closure.',
+  hunter: 'Chubby Buttons CB2 Hunter — compact green matte silicone Bluetooth remote, 5 large raised tactile buttons with yellow/gold icons, CB2 logo on front, adjustable elastic armband with velcro closure.',
+  patriot: 'Chubby Buttons CB2 Patriot — compact red/white/blue matte silicone Bluetooth remote, 5 large raised tactile buttons, CB2 logo on front, adjustable elastic armband with velcro closure.'
+};
+
+// Scene templates
+const SCENES = {
+  skiing: 'skier carving down a pristine powder slope, snowy mountain peaks in background, bright winter sunlight',
+  snowboarding: 'snowboarder riding through fresh powder, mountain terrain park, dramatic winter sky',
+  motorcycle: 'motorcyclist on a forest trail, POV-style action shot, adventure riding',
+  hiking: 'hiker on a mountain trail with scenic valley views, golden hour lighting, outdoor adventure',
+  'mountain-bike': 'mountain biker bombing down a trail, dirt and motion blur, adrenaline-filled action',
+  running: 'trail runner on a scenic coastal path, morning light, athletic energy',
+  studio: 'clean product photography on dark surface, dramatic studio lighting, premium feel'
+};
+
+const SHOTS = {
+  action: 'worn on athlete forearm over jacket/glove, action sports photography, device clearly visible',
+  product: 'close-up product shot, device as hero subject, shallow depth of field',
+  lifestyle: 'lifestyle photography, device naturally incorporated, aspirational setting',
+  wide: 'wide environmental shot, full athlete visible in dramatic landscape, device on forearm'
+};
+
+const VIBES = {
+  epic: 'cinematic dramatic lighting, high energy, hero moment, wide dynamic range',
+  chill: 'relaxed natural lighting, casual confidence, warm tones',
+  professional: 'clean sharp studio quality, neutral background, commercial product photography',
+  gritty: 'raw authentic feel, natural imperfections, photojournalistic style'
+};
+
+// Positive inversion map for feedback → prompt fixes
+const POS_INVERSION = {
+  'wrong-buttons': 'exactly 5 buttons clearly visible with correct layout matching reference photos',
+  'product-shape': 'product proportions and form factor exactly matching reference — compact rounded rectangle',
+  'band-wrong': 'armband snugly strapped over sleeve with realistic fabric interaction and visible velcro',
+  'floating': 'device resting naturally with realistic shadow and physical contact on surface/arm',
+  'wrong-color': 'exact colorway matching the reference images precisely',
+  'bad-lighting': 'professional cinematic lighting with natural light interaction on product surface',
+  'artifacts': 'clean sharp photorealistic rendering with no AI artifacts or distortions',
+  'wrong-vibe': 'high-energy aspirational outdoor lifestyle aesthetic matching Chubby Buttons brand',
+  'hands-wrong': 'natural hand position with anatomically correct fingers',
+  'too-small': 'device prominently featured and clearly visible, not too small in frame'
+};
+
+// ===== STATE =====
+let imgs = [], userName = '', tab = 'review', filter = 'unrated', ci = 0, genCount = 3;
+let createOpts = { colorway: 'tron', sport: 'skiing', shot: 'action', vibe: 'epic' };
+let showGrid = false;
+let currentImg = null; // CRITICAL: stable reference for saveRating — never re-filter to find current image
+
+// ===== STARTUP =====
+const saved = localStorage.getItem(LS_NAME);
+if (saved) startApp(saved);
+
+function startApp(name) {
+  userName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  localStorage.setItem(LS_NAME, userName);
+  document.getElementById('nameScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  document.getElementById('userTag').textContent = userName;
+  loadData();
+}
+
+// ===== DATA =====
+async function loadData() {
+  try {
+    const r = await fetch(DATA_URL + '?t=' + Date.now());
+    const d = await r.json();
+    imgs = d.images || d || [];
+  } catch(e) { imgs = []; }
+
+  // Merge local ratings
+  const local = getLocal();
+  imgs.forEach(img => {
+    const l = local[img.imageId];
+    if (l) Object.assign(img, l);
+  });
+
+  updateStats();
+  render();
+}
+
+function getLocal() { try { return JSON.parse(localStorage.getItem(lsRatings()) || '{}'); } catch(e) { return {}; } }
+function saveLocal(id, data) { const l = getLocal(); l[id] = { ...l[id], ...data }; localStorage.setItem(lsRatings(), JSON.stringify(l)); }
+
+// ===== FILTERING =====
+function filtered() {
+  const local = getLocal();
+  if (filter === 'unrated') return imgs.filter(i => !local[i.imageId]?.humanProduct);
+  if (filter === 'rated') return imgs.filter(i => local[i.imageId]?.humanProduct);
+  return imgs;
+}
+
+function updateStats() {
+  const rated = imgs.filter(i => getLocal()[i.imageId]?.humanProduct).length;
+  document.getElementById('nRated').textContent = rated;
+  document.getElementById('nUnrated').textContent = imgs.length - rated;
+}
+
+// ===== TABS =====
+function setTab(t) {
+  tab = t;
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.add('active');
+  document.getElementById('reviewWrap').style.display = t === 'review' ? 'block' : 'none';
+  document.getElementById('createWrap').style.display = t === 'create' ? 'block' : 'none';
+  document.getElementById('insightsWrap').style.display = t === 'insights' ? 'block' : 'none';
+  if (t === 'insights') renderInsights();
+}
+
+function setFilter(f) {
+  filter = f;
+  ci = 0;
+  document.querySelectorAll('.filt').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  render();
+}
+
+// ===== REVIEW RENDER =====
+function render() {
+  const f = filtered();
+  const area = document.getElementById('cardArea');
+
+  if (!f.length) {
+    area.innerHTML = '<div class="empty"><h3>' + (filter === 'unrated' ? 'All rated!' : 'No images yet') + '</h3><p>' + (filter === 'unrated' ? 'Switch to "All" to re-rate, or generate more.' : 'Go to Create to generate some.') + '</p></div>';
+    updateStats();
+    renderMiniGrid();
+    return;
+  }
+
+  if (ci >= f.length) ci = 0;
+  const img = f[ci];
+  currentImg = img; // Lock reference so saveRating can't target wrong image
+  const local = getLocal()[img.imageId] || {};
+  const driveUrl = img.driveFileId ? 'https://lh3.googleusercontent.com/d/' + img.driveFileId + '=w1200' : '';
+
+  // Parse AI analysis
+  let ai = null;
+  if (img.aiAnalysis) {
+    try { ai = typeof img.aiAnalysis === 'string' ? JSON.parse(img.aiAnalysis) : img.aiAnalysis; } catch(e) {}
+  }
+
+  // Caption
+  const caption = img.shotType && img.style
+    ? img.shotType.charAt(0).toUpperCase() + img.shotType.slice(1) + ' — ' + img.style.charAt(0).toUpperCase() + img.style.slice(1)
+    : img.prompt ? img.prompt.substring(0, 80) + '...' : '';
+
+  let html = '<div class="img-card">';
+  html += '<div class="img-wrap"><img src="' + driveUrl + '" alt="CB2 generated image" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23111%22 width=%22400%22 height=%22300%22/><text fill=%22%23555%22 x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22>Image unavailable</text></svg>\'"></div>';
+
+  // Badges
+  html += '<div class="img-meta">';
+  html += '<span class="badge b-model">' + (img.model || 'FLUX.2') + '</span>';
+  if (img.shotType) html += '<span class="badge b-shot">' + img.shotType + '</span>';
+  if (img.style) html += '<span class="badge b-style">' + img.style + '</span>';
+  html += '</div>';
+  html += '<div class="img-caption">' + caption + '</div>';
+
+  // AI Assessment
+  if (ai) {
+    html += '<div class="ai-panel"><div class="ai-title">AI Vision Assessment</div><div class="ai-scores">';
+    html += renderAiScore('Product', ai.productScore);
+    html += renderAiScore('Scene', ai.sceneScore);
+    html += renderAiScore('Brand', ai.brandScore);
+    if (ai.marketingScore) html += renderAiScore('Usable', ai.marketingScore);
+    html += '</div>';
+    if (ai.summary) html += '<div class="ai-summary">' + ai.summary + '</div>';
+    html += '</div>';
+  }
+
+  // Human rating
+  html += '<div class="human-panel"><div class="human-title">Your Rating</div>';
+  html += renderRatingRow('Product', 'humanProduct', 'Does the CB2 look accurate?', local.humanProduct || 0);
+  html += renderRatingRow('Scene', 'humanScene', 'Is the scene compelling?', local.humanScene || 0);
+  html += renderRatingRow('Brand', 'humanBrand', 'Does this feel like CB?', local.humanBrand || 0);
+  html += renderRatingRow('Impact', 'humanImpact', '"I want that" factor', local.humanImpact || 0);
+  html += '<textarea class="notes-field" id="rateNotes" placeholder="Optional notes — what would make this better?">' + (local.notes || '') + '</textarea>';
+  html += '</div>';
+
+  html += '</div>';
+
+  // Nav buttons
+  html += '<div class="save-row">';
+  html += '<button class="save-btn btn-skip" onclick="skipImage()">Skip</button>';
+  html += '<span style="font-size:.7rem;color:var(--dim);align-self:center">' + (ci + 1) + ' / ' + f.length + '</span>';
+  html += '<button class="save-btn btn-save" id="saveBtn" onclick="saveRating()">Save & Next</button>';
+  html += '</div>';
+
+  area.innerHTML = html;
+  updateStats();
+  renderMiniGrid();
+  // Scroll to top of card on each image change
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderAiScore(label, score) {
+  if (!score) return '';
+  const level = score >= 4 ? 'high' : score >= 3 ? 'mid' : 'low';
+  let dots = '';
+  for (let i = 1; i <= 5; i++) {
+    dots += '<div class="ai-dot' + (i <= score ? ' filled ' + level : '') + '"></div>';
+  }
+  return '<div class="ai-score"><div class="ai-dots">' + dots + '</div><div class="ai-lbl">' + label + ' ' + score + '/5</div></div>';
+}
+
+function renderRatingRow(label, key, hint, val) {
+  let html = '<div class="rating-row">';
+  html += '<div class="rating-label" title="' + hint + '">' + label + '</div>';
+  html += '<div class="rating-stars">';
+  for (let i = 1; i <= 5; i++) {
+    html += '<div class="star' + (i <= val ? ' active s' + i : '') + '" onclick="setRating(\'' + key + '\',' + i + ')" data-key="' + key + '" data-val="' + i + '">' + i + '</div>';
+  }
+  html += '</div>';
+  html += '<div class="rating-val">' + (val ? val + '/5' : '') + '</div>';
+  html += '</div>';
+  return html;
+}
+
+function setRating(key, val) {
+  // Toggle: clicking same value clears it
+  const img = currentImg;
+  if (!img) return;
+  const local = getLocal()[img.imageId] || {};
+  const current = local[key] || 0;
+  const newVal = current === val ? 0 : val;
+
+  saveLocal(img.imageId, { [key]: newVal });
+
+  // Re-render just the stars for this row
+  document.querySelectorAll('.star[data-key="' + key + '"]').forEach(s => {
+    const sv = parseInt(s.dataset.val);
+    s.className = 'star' + (sv <= newVal ? ' active s' + sv : '');
+  });
+  // Update val display
+  const row = document.querySelector('.star[data-key="' + key + '"]').parentElement.parentElement;
+  row.querySelector('.rating-val').textContent = newVal ? newVal + '/5' : '';
+}
+
+function saveRating() {
+  // Use the locked reference — never re-filter, or we'll target the wrong image
+  const img = currentImg;
+  if (!img) return;
+  const local = getLocal()[img.imageId] || {};
+
+  // Get notes and save them to the CORRECT image
+  const notes = document.getElementById('rateNotes')?.value || '';
+  if (notes) saveLocal(img.imageId, { notes });
+
+  // Need at least one dimension rated (re-read after notes save)
+  const freshLocal = getLocal()[img.imageId] || {};
+  if (!freshLocal.humanProduct && !freshLocal.humanScene && !freshLocal.humanBrand && !freshLocal.humanImpact) {
+    showToast('Rate at least one dimension');
+    return;
+  }
+
+  // Save timestamp
+  saveLocal(img.imageId, { ratedAt: new Date().toISOString(), ratedBy: userName });
+
+  // Sync to Make.com
+  const data = getLocal()[img.imageId];
+  fetch(RATE_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      imageId: img.imageId,
+      rating: data.humanImpact >= 4 ? 'like' : data.humanImpact <= 2 ? 'dislike' : 'mixed',
+      humanProduct: data.humanProduct || 0,
+      humanScene: data.humanScene || 0,
+      humanBrand: data.humanBrand || 0,
+      humanImpact: data.humanImpact || 0,
+      feedbackText: data.notes || '',
+      ratedAt: data.ratedAt,
+      ratedBy: data.ratedBy
+    })
+  }).catch(() => {});
+
+  showToast('Saved!');
+
+  // Advance — for unrated filter, re-filter and stay at same ci (next unrated slides in)
+  if (filter === 'unrated') {
+    render();
+  } else {
+    ci++;
+    render();
+  }
+}
+
+function skipImage() {
+  ci++;
+  render();
+}
+
+// ===== MINI GRID =====
+function toggleMiniGrid() {
+  showGrid = !showGrid;
+  document.getElementById('miniGrid').style.display = showGrid ? 'flex' : 'none';
+  document.getElementById('gridBtn').textContent = showGrid ? 'Hide Thumbnails' : 'Show Thumbnails';
+  if (showGrid) renderMiniGrid();
+}
+
+function renderMiniGrid() {
+  if (!showGrid) return;
+  const f = filtered();
+  const local = getLocal();
+  let html = '';
+  f.forEach((img, i) => {
+    const driveUrl = img.driveFileId ? 'https://lh3.googleusercontent.com/d/' + img.driveFileId + '=w120' : '';
+    const rated = local[img.imageId]?.humanProduct;
+    const isCurrent = i === ci;
+    let dotColor = '#333';
+    if (rated) {
+      const impact = local[img.imageId].humanImpact || 0;
+      dotColor = impact >= 4 ? 'var(--green)' : impact >= 3 ? 'var(--yellow)' : 'var(--red)';
+    }
+    html += '<div class="mini-thumb' + (isCurrent ? ' current' : '') + (rated ? ' rated' : '') + '" onclick="jumpTo(' + i + ')">';
+    html += '<img src="' + driveUrl + '" loading="lazy">';
+    html += '<span class="mini-idx">' + (i + 1) + '</span>';
+    if (rated) html += '<div class="mini-dot" style="background:' + dotColor + '"></div>';
+    html += '</div>';
+  });
+  document.getElementById('miniGrid').innerHTML = html;
+
+  // Scroll the current thumbnail into view
+  setTimeout(() => {
+    const current = document.querySelector('.mini-thumb.current');
+    if (current) current.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }, 50);
+}
+
+function jumpTo(i) {
+  ci = i;
+  render();
+}
+
+function clearAllRatings() {
+  if (!confirm('Clear ALL your ratings? This resets your local data so you can start fresh.')) return;
+  localStorage.removeItem(lsRatings());
+  ci = 0;
+  render();
+  showToast('Ratings cleared');
+}
+
+// ===== CREATE =====
+function pickOpt(group, val, el) {
+  createOpts[group] = val;
+  el.parentElement.querySelectorAll('.opt').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function adjustCount(d) {
+  genCount = Math.max(1, Math.min(10, genCount + d));
+  document.getElementById('countVal').textContent = genCount;
+}
+
+async function generateImages() {
+  const btn = document.getElementById('genBtn');
+  const status = document.getElementById('genStatus');
+  btn.disabled = true;
+  status.classList.add('active');
+  document.getElementById('genMsg').textContent = 'Building prompt from your feedback...';
+
+  // Build prompt using feedback analysis
+  const feedbackFixes = buildFeedbackFixes();
+  const colorway = createOpts.colorway;
+  const productDesc = CB2_DESC[colorway];
+  const scene = SCENES[createOpts.sport] || '';
+  const shot = SHOTS[createOpts.shot] || '';
+  const vibe = VIBES[createOpts.vibe] || '';
+  const userPrompt = document.getElementById('createPrompt').value.trim();
+
+  // Construct final prompt
+  let prompt = '';
+  if (userPrompt) {
+    prompt = userPrompt + '. ' + productDesc + ' ' + shot + '. ' + vibe + '.';
+  } else {
+    prompt = 'Place this exact ' + productDesc + ' ' + shot + ' in this scene: ' + scene + '. ' + vibe + '.';
+  }
+
+  if (feedbackFixes) {
+    prompt += ' IMPORTANT: ' + feedbackFixes;
+  }
+
+  prompt += ' Professional commercial photography, photorealistic, high resolution.';
+
+  const batchId = 'trainer-' + Date.now();
+  const refImage = REF_IMAGES[colorway] || REF_IMAGES.tron;
+
+  // BFL API body for flux-kontext-pro
+  const bflBody = JSON.stringify({
+    prompt: prompt,
+    input_image: refImage,
+    aspect_ratio: '4:3',
+    output_format: 'jpeg'
+  });
+
+  document.getElementById('genMsg').textContent = 'Sending ' + genCount + ' image(s) to Kontext Pro...';
+
+  let completed = 0, failed = 0;
+
+  // Fire all requests in parallel (one per image)
+  const promises = [];
+  for (let i = 0; i < genCount; i++) {
+    promises.push(
+      fetch(FLUX_GEN_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          endpoint: 'flux-kontext-pro',
+          body: bflBody,
+          prompt: prompt,
+          shotType: createOpts.shot,
+          style: colorway,
+          batchId: batchId,
+          model: 'flux-kontext-pro'
+        })
+      }).then(async r => {
+        const data = await r.json().catch(() => ({}));
+        if (r.ok && data.success) {
+          completed++;
+        } else {
+          failed++;
+        }
+        document.getElementById('genMsg').textContent =
+          completed + '/' + genCount + ' done' + (failed ? ', ' + failed + ' failed' : '') + '...';
+      }).catch(() => {
+        failed++;
+        document.getElementById('genMsg').textContent =
+          completed + '/' + genCount + ' done, ' + failed + ' failed...';
+      })
+    );
+  }
+
+  await Promise.all(promises);
+
+  if (completed > 0) {
+    document.getElementById('genMsg').textContent =
+      completed + ' image(s) generated! Syncing to JSON...';
+    // Trigger JSON sync so new images appear in Review tab
+    try {
+      await fetch(SYNC_API, { method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ trigger: 'trainer', batchId: batchId })
+      });
+      document.getElementById('genMsg').textContent =
+        completed + ' image(s) generated! Refresh the page in ~30s to see them in Review.';
+    } catch(e) {
+      document.getElementById('genMsg').textContent =
+        completed + ' image(s) generated! JSON sync may need manual trigger.';
+    }
+  } else {
+    document.getElementById('genMsg').textContent =
+      'All ' + genCount + ' requests failed. Check Make.com scenario logs.';
+  }
+
+  status.classList.remove('active');
+  btn.disabled = false;
+}
+
+// ===== FEEDBACK LOOP ENGINE =====
+// This is the actual feedback loop: reads all human ratings, extracts patterns,
+// and produces prompt fixes that get appended to the next generation's prompt.
+function buildFeedbackFixes() {
+  const local = getLocal();
+  const rated = imgs.filter(i => local[i.imageId]?.humanProduct);
+  if (!rated.length) return '';
+
+  const fixes = [];
+  let lowProduct = 0, lowScene = 0, lowBrand = 0, highImpact = [];
+  const allNotes = [];
+
+  rated.forEach(img => {
+    const r = local[img.imageId];
+    if (r.humanProduct && r.humanProduct <= 2) lowProduct++;
+    if (r.humanScene && r.humanScene <= 2) lowScene++;
+    if (r.humanBrand && r.humanBrand <= 2) lowBrand++;
+    if (r.humanImpact && r.humanImpact >= 4) highImpact.push(img);
+    if (r.notes && r.notes.trim()) allNotes.push(r.notes.trim());
+  });
+
+  // Product accuracy is low → emphasize product fidelity
+  if (lowProduct > rated.length * 0.3) {
+    fixes.push('Product must exactly match reference: 5 buttons in correct horizontal row, correct icons, correct proportions, no extra buttons');
+  }
+
+  // Scene quality is low → emphasize scene
+  if (lowScene > rated.length * 0.3) {
+    fixes.push('Scene must be dramatic, well-lit, and professionally composed');
+  }
+
+  // Brand feel is low → emphasize brand
+  if (lowBrand > rated.length * 0.3) {
+    fixes.push('Image must feel premium, aspirational, and match Chubby Buttons outdoor adventure brand identity');
+  }
+
+  // Extract text patterns from notes
+  const noteText = allNotes.join(' ').toLowerCase();
+  if (noteText.includes('wider') || noteText.includes('full body') || noteText.includes('more of')) {
+    fixes.push('Show more of the athlete and environment, wider framing');
+  }
+  if (noteText.includes('close') || noteText.includes('detail') || noteText.includes('button')) {
+    fixes.push('Keep product details sharp and clearly visible');
+  }
+  if (noteText.includes('band') || noteText.includes('strap') || noteText.includes('float')) {
+    fixes.push('Armband must be snugly attached to sleeve with realistic fabric contact');
+  }
+
+  // Learn from high-impact images: what scenes/styles scored well?
+  if (highImpact.length) {
+    const goodStyles = highImpact.map(i => i.style).filter(Boolean);
+    const goodShots = highImpact.map(i => i.shotType).filter(Boolean);
+    // Could use these to influence generation but keep it simple for now
+  }
+
+  // AI scoring issues
+  imgs.forEach(img => {
+    if (img.aiAnalysis) {
+      try {
+        const ai = typeof img.aiAnalysis === 'string' ? JSON.parse(img.aiAnalysis) : img.aiAnalysis;
+        if (ai.productScore && ai.productScore <= 2) {
+          if (ai.productNotes && ai.productNotes.toLowerCase().includes('button')) {
+            fixes.push('Device must have exactly 5 buttons — not 4, not 6');
+          }
+        }
+      } catch(e) {}
+    }
+  });
+
+  // Deduplicate
+  return [...new Set(fixes)].join('. ');
+}
+
+// ===== INSIGHTS TAB =====
+function renderInsights() {
+  const local = getLocal();
+  const rated = imgs.filter(i => local[i.imageId]?.humanProduct);
+  const content = document.getElementById('insightsContent');
+
+  if (!rated.length) {
+    content.innerHTML = '<div class="empty"><h3>No ratings yet</h3><p>Rate some images in the Review tab to see insights and feedback patterns.</p></div>';
+    return;
+  }
+
+  // Calculate averages
+  let avgProduct = 0, avgScene = 0, avgBrand = 0, avgImpact = 0;
+  const notes = [];
+  rated.forEach(img => {
+    const r = local[img.imageId];
+    avgProduct += (r.humanProduct || 0);
+    avgScene += (r.humanScene || 0);
+    avgBrand += (r.humanBrand || 0);
+    avgImpact += (r.humanImpact || 0);
+    if (r.notes) notes.push(r.notes);
+  });
+  const n = rated.length;
+  avgProduct = (avgProduct / n).toFixed(1);
+  avgScene = (avgScene / n).toFixed(1);
+  avgBrand = (avgBrand / n).toFixed(1);
+  avgImpact = (avgImpact / n).toFixed(1);
+
+  let html = '';
+
+  // Summary card
+  html += '<div class="insight-card"><div class="insight-title">Rating Summary (' + n + ' images rated)</div>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.3rem">';
+  html += insightBox('Product', avgProduct);
+  html += insightBox('Scene', avgScene);
+  html += insightBox('Brand', avgBrand);
+  html += insightBox('Impact', avgImpact);
+  html += '</div></div>';
+
+  // Feedback fixes being applied
+  const fixes = buildFeedbackFixes();
+  if (fixes) {
+    html += '<div class="insight-card"><div class="insight-title">What your feedback is fixing in the next batch</div>';
+    fixes.split('. ').filter(Boolean).forEach(fix => {
+      html += '<div class="insight-row"><span class="insight-icon" style="color:var(--green)">&#10003;</span> ' + fix + '</div>';
+    });
+    html += '</div>';
+  }
+
+  // User notes
+  if (notes.length) {
+    html += '<div class="insight-card"><div class="insight-title">Your Notes (' + notes.length + ')</div>';
+    notes.forEach(note => {
+      html += '<div class="insight-row" style="font-style:italic;color:#999">"' + note + '"</div>';
+    });
+    html += '</div>';
+  }
+
+  // Next prompt preview
+  if (fixes) {
+    html += '<div class="insight-card"><div class="insight-title">Preview: How Next Prompt Will Change</div>';
+    html += '<div class="prompt-preview">Base prompt + your feedback:\n\n...IMPORTANT: ' + fixes + '</div>';
+    html += '</div>';
+  }
+
+  content.innerHTML = html;
+}
+
+function insightBox(label, avg) {
+  const color = avg >= 4 ? 'var(--green)' : avg >= 3 ? 'var(--yellow)' : 'var(--red)';
+  return '<div style="text-align:center;padding:.5rem;background:#0d0d0d;border-radius:8px">' +
+    '<div style="font-size:1.4rem;font-weight:700;color:' + color + '">' + avg + '</div>' +
+    '<div style="font-size:.65rem;color:var(--muted);text-transform:uppercase">' + label + '</div></div>';
+}
+
+// ===== UTILS =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1500);
+}
+</script>
+</body></html>

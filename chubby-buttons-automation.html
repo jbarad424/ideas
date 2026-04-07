@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chubby Buttons Bookkeeping Automation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        h1 { font-size: 2.2em; color: #fff; margin-bottom: 8px; }
+        .subtitle { color: #888; font-size: 1.1em; margin-bottom: 40px; }
+        .progress-section { background: #161616; border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid #222; }
+        .progress-bar-container { background: #222; border-radius: 12px; height: 32px; margin: 16px 0 8px 0; overflow: hidden; }
+        .progress-bar { height: 100%; border-radius: 12px; background: linear-gradient(90deg, #22c55e, #4ade80); display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; font-weight: 700; font-size: 0.9em; color: #0a0a0a; }
+        .progress-label { display: flex; justify-content: space-between; color: #888; font-size: 0.9em; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 24px; }
+        .stat { background: #1a1a1a; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #2a2a2a; }
+        .stat-number { font-size: 2em; font-weight: 800; color: #4ade80; }
+        .stat-label { color: #888; font-size: 0.85em; margin-top: 4px; }
+        h2 { font-size: 1.4em; color: #fff; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid #222; }
+        .phase { background: #161616; border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; border: 1px solid #222; }
+        .phase-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .phase-title { font-weight: 700; font-size: 1.05em; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-complete { background: #166534; color: #4ade80; }
+        .badge-active { background: #854d0e; color: #fbbf24; }
+        .badge-waiting { background: #1e3a5f; color: #60a5fa; }
+        .phase-desc { color: #999; font-size: 0.9em; }
+        .highlight-list { list-style: none; padding: 0; }
+        .highlight-list li { padding: 8px 0; border-bottom: 1px solid #1a1a1a; color: #ccc; font-size: 0.95em; }
+        .highlight-list li:last-child { border-bottom: none; }
+        .highlight-list li::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 12px; }
+        .highlight-list li.done::before { background: #4ade80; }
+        .highlight-list li.pending::before { background: #fbbf24; }
+        .highlight-list li.waiting::before { background: #60a5fa; }
+        .infra { background: #161616; border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; border: 1px solid #222; }
+        .infra-title { font-weight: 700; color: #4ade80; margin-bottom: 4px; }
+        .infra-detail { color: #888; font-size: 0.9em; }
+        .cost-callout { background: linear-gradient(135deg, #1a2a1a, #162016); border: 1px solid #2a4a2a; border-radius: 12px; padding: 24px; margin-top: 24px; text-align: center; }
+        .cost-callout .amount { font-size: 2.5em; font-weight: 800; color: #4ade80; }
+        .cost-callout .label { color: #888; }
+        .footer { text-align: center; color: #444; font-size: 0.8em; margin-top: 48px; padding-top: 24px; border-top: 1px solid #1a1a1a; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chubby Buttons Bookkeeping Automation</h1>
+        <p class="subtitle">From manual accounting to AI-powered monthly close. Built March/April 2026.</p>
+
+        <div class="progress-section">
+            <div style="font-weight: 700; font-size: 1.1em;">Overall Project Progress</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 92%;">92%</div>
+            </div>
+            <div class="progress-label">
+                <span>Started March 23, 2026</span>
+                <span>Core automation complete</span>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Make.com Scenarios</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">17</div>
+                    <div class="stat-label">FP Spreadsheet Tabs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">API Endpoints</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Notion Databases</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Completed Phases</h2>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 0: Discovery and Planning</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">Mapped HCA's entire manual workflow, identified automation opportunities, built the roadmap.</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 1: QuickBooks Foundation</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">Designed and implemented 15 bank rules to auto-categorize recurring transactions (Shopify, Amazon, insurance, subscriptions, ads).</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 2: Amazon Settlement Pipeline</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">Python webhook on Render pulls Amazon SP-API settlement data, aggregates fees, and posts balanced journal entries to QuickBooks. Includes deduplication via Data Store.</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 3: Vendor Invoice Capture</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">Email watchers on 3 inboxes auto-parse incoming invoices with AI and create bills in QuickBooks.</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 4: QuickBooks Bank Rules</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">15 of 16 rules live in QBO. Layer 1 of the 3-layer categorization system.</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 5: Financial Package Generator</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">17-tab Excel workbook generated from live QuickBooks data. Includes Dashboard, P&L, Trial Balance, Balance Sheet, reconciliation tabs for Amazon/PayPal/Shopify clearing, bank recon, credit card recon, inventory, and full general ledger. Deployed on Render, triggered by approval gate.</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 6A: Exception Queue and Monthly Close Hub</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">Notion-based Exception Queue for transactions the AI can't categorize. Monthly Close Checklist with 8 prerequisite steps and a human approval gate before the Financial Package is generated.</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 6B: AI Transaction Review</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">Claude AI scans QuickBooks daily for uncategorized transactions. High confidence categorizations are applied directly. Low confidence items get flagged to the Exception Queue with a plain English question for the owners.</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 6C: Inventory Tracking</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">Ron Hawk's warehouse inventory counts are captured from email and recorded in Notion automatically.</div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-title">Phase 6D: Shopify Connector</span>
+                <span class="badge badge-complete">Complete</span>
+            </div>
+            <div class="phase-desc">Native Intuit Shopify connector enabled in QuickBooks. Orders, fees, taxes, and payouts sync automatically.</div>
+        </div>
+
+        <h2>What's Still in Progress</h2>
+
+        <ul class="highlight-list">
+            <li class="waiting">HCA testing bank rules on April transactions and flipping auto-add ON</li>
+            <li class="waiting">HCA defining the month-end sales tax reconciliation process</li>
+            <li class="waiting">Jordan/Ali sign-off to activate the Amazon settlement scenario on its biweekly schedule</li>
+            <li class="pending">Automated inventory comparison (expected vs actual count with discrepancy flagging)</li>
+            <li class="pending">Auto-generate monthly checklist for new months (currently created manually)</li>
+            <li class="pending">Invite Jordan as a Notion user for direct assignments and notifications</li>
+        </ul>
+
+        <h2>How the Monthly Close Works Now</h2>
+
+        <ul class="highlight-list">
+            <li class="done">Transactions flow into QuickBooks from bank and credit card feeds daily</li>
+            <li class="done">Bank rules auto-categorize known patterns (Layer 1)</li>
+            <li class="done">AI scans daily and categorizes the rest or flags questions (Layer 2 and 3)</li>
+            <li class="done">Amazon settlement entries post automatically every two weeks</li>
+            <li class="done">Vendor invoices captured from email automatically</li>
+            <li class="done">Justin or Jordan answer any flagged questions in Notion</li>
+            <li class="done">Statement PDFs uploaded to Google Drive update the checklist automatically</li>
+            <li class="done">Jordan approves in Notion when everything is complete</li>
+            <li class="done">Financial Package generates automatically, saves to Drive, emails to the team</li>
+        </ul>
+
+        <h2>Infrastructure</h2>
+
+        <div class="infra">
+            <div class="infra-title">Render.com (2 services)</div>
+            <div class="infra-detail">Settlement webhook + Financial Package generator with 7 API endpoints</div>
+        </div>
+        <div class="infra">
+            <div class="infra-title">Make.com (12 scenarios)</div>
+            <div class="infra-detail">Email watchers, settlement pipeline, AI review, monthly close wiring, inventory capture</div>
+        </div>
+        <div class="infra">
+            <div class="infra-title">Notion (3 databases)</div>
+            <div class="infra-detail">Exception Queue, Monthly Close Checklist, Inventory Counts</div>
+        </div>
+        <div class="infra">
+            <div class="infra-title">GitHub (2 repos)</div>
+            <div class="infra-detail">Claude-Accountant1 (FP generator) and cb-settlement-webhook (Amazon pipeline)</div>
+        </div>
+
+        <div class="cost-callout">
+            <div class="label">Dedicated infrastructure cost for this project</div>
+            <div class="amount">~$14/mo</div>
+            <div class="label">Render hosting for 2 services. Make.com, Claude, and other tools are shared across Chubby Buttons projects.</div>
+        </div>
+
+        <div class="footer">
+            Chubby Buttons LLC | Built with Claude AI | Last updated April 1, 2026
+        </div>
+    </div>
+</body>
+</html>
