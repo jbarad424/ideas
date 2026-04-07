@@ -732,7 +732,11 @@ const ALL_IMAGES=[
   {id:'pathB3-mtb-8003',url:'https://files.catbox.moe/dm5kje.jpg',model:'FLUX Pro Fill g15',prompt:'Ref C arm crop, outpaint MTB',label:'PATH B v3: RefC MTB',context:'OUTPAINT V3: Ref C arm crop → MTB scene.'},
   {id:'pathB3-snow-8004',url:'https://files.catbox.moe/ccwz54.jpg',model:'FLUX Pro Fill g15',prompt:'Ref C arm crop, outpaint snowboard',label:'PATH B v3: RefC Snow',context:'OUTPAINT V3: Ref C arm crop → snowboard scene.'},
   {id:'pathB3-moto2-8005',url:'https://files.catbox.moe/fseea1.jpg',model:'FLUX Pro Fill g15',prompt:'Ref C crop 1 (350x250), outpaint moto',label:'PATH B v3: RefC Moto (alt crop)',context:'OUTPAINT V3: Different crop region (350x250) from Ref C. Same motorcycle prompt. Testing crop position.'},
-  {id:'pathB3-ski2-8006',url:'https://files.catbox.moe/6vrw34.jpg',model:'FLUX Pro Fill g15',prompt:'Ref C crop 3 (350x250), outpaint skiing',label:'PATH B v3: RefC Ski (alt crop)',context:'OUTPAINT V3: Third crop region from Ref C. Skiing prompt.'}
+  {id:'pathB3-ski2-8006',url:'https://files.catbox.moe/6vrw34.jpg',model:'FLUX Pro Fill g15',prompt:'Ref C crop 3 (350x250), outpaint skiing',label:'PATH B v3: RefC Ski (alt crop)',context:'OUTPAINT V3: Third crop region from Ref C. Skiing prompt.'},
+  // === KONTEXT LORA INPAINT: New approach — reference-aware masked inpainting ===
+  {id:'kontext-inpaint-8001',url:'https://files.catbox.moe/pyn6g6.jpg',model:'Kontext LoRA Inpaint',prompt:'CB2 on LEFT forearm via ref+mask, wide mask, g7.0',label:'Kontext Inpaint: Test 1',context:'NEW APPROACH — KONTEXT INPAINT: Uses fal-ai/flux-kontext-lora/inpaint with BOTH a reference image (Ref C) AND a forearm mask. Unlike Pipeline E (which warped the whole image), this is designed to apply the reference to ONLY the masked region. Base image is the clean motorcycle rider.'},
+  {id:'kontext-inpaint-8002',url:'https://files.catbox.moe/dfj7rz.jpg',model:'Kontext LoRA Inpaint',prompt:'CB2 on LEFT forearm via ref+mask, wide mask, g7.0, seed 8002',label:'Kontext Inpaint: Test 2',context:'Kontext inpaint test 2. Same wide mask, different seed. Testing consistency.'},
+  {id:'kontext-inpaint-8003',url:'https://files.catbox.moe/q1gb2p.jpg',model:'Kontext LoRA Inpaint',prompt:'CB2 on LEFT forearm via ref+mask, tight mask, g10.0',label:'Kontext Inpaint: Test 3 (tight mask)',context:'Kontext inpaint test 3. Tighter ellipse mask + higher guidance (10.0). Does a more precise mask improve CB2 placement?'}
 ];
 
 // Pre-seed Justin's existing feedback
