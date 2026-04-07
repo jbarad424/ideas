@@ -2,16 +2,35 @@
 
 ## 1. Project Overview
 
-AI product photography pipeline for Chubby Buttons CB2 — a wearable Bluetooth remote with 5 tactile buttons, worn on the forearm. We generate lifestyle marketing photos and videos of the CB2 on people doing action sports (motorcycle, skiing, snowboard, MTB). Justin Barad is co-founder; Jordan handles product photography. After testing 15+ approaches across 300+ images, the winning pipeline is reference-photo editing on FLUX 2 Flex with a generate-and-filter strategy — Justin reviews everything by eye.
+AI product photography pipeline for Chubby Buttons CB2 — a wearable Bluetooth remote with 5 tactile buttons, worn on the forearm. We generate lifestyle marketing photos and videos of the CB2 on people doing action sports (motorcycle, skiing, snowboard, MTB). Justin Barad is co-founder; Jordan handles product photography. After testing 18+ approaches across 340+ images, the winning pipeline uses GPT Image 1.5 (new as of April 7) or FLUX 2 Flex as the generation model, with Ref C reference photo and generate-and-filter strategy — Justin reviews everything by eye.
 
 ## 2. What Works (Production Pipeline)
 
 ### Step 1: Generate
-- **API:** `POST https://fal.run/fal-ai/flux-2-flex/edit`
+
+**Primary model (NEW — April 7): GPT Image 1.5**
+- **API:** `POST https://fal.run/fal-ai/gpt-image-1.5/edit`
 - **API key:** stored in `~/.claude/projects/-Users-justinbarad-Documents-Claude-Code-ideas/memory/project_architecture.md`
 - **Reference photo:** J&Mike Dual (Ref C) — Drive ID `1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7`
 - **URL:** `https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800`
-- **Key setting:** `guidance_scale: 7.0` (scored 96-100, 33% cheaper than Pro)
+- **Key settings:** `quality: "high"`, `input_fidelity: "high"` (preserves product details from reference)
+- **Request format:**
+  ```json
+  {
+    "image_urls": ["<ref_url>"],
+    "prompt": "<prompt>",
+    "size": "1024x1536",
+    "quality": "high",
+    "input_fidelity": "high"
+  }
+  ```
+- **Cost:** ~$0.10-0.20/image at high quality
+- **Why:** Justin said "quality of the images is amazing." Scored 89-90 on first motorcycle tests. Produces photographic-quality images that don't look "AI painting" or "cartoonish." The `input_fidelity: "high"` parameter preserves CB2 reference details better than any FLUX model.
+- **Note:** No seed parameter — every generation is unique. No guidance_scale control.
+
+**Secondary model: FLUX 2 Flex g7.0** (still valid, cheaper)
+- **API:** `POST https://fal.run/fal-ai/flux-2-flex/edit`
+- **Key setting:** `guidance_scale: 7.0` (scored 90-96, $0.05/MP)
 - **Request format:**
   ```json
   {
@@ -26,18 +45,35 @@ AI product photography pipeline for Chubby Buttons CB2 — a wearable Bluetooth 
   }
   ```
 
+**Other models tested (available via fal.ai, same API key):**
+- **FLUX 2 Pro** (`fal-ai/flux-2-pro/edit`): $0.03/MP, good photorealism but CB2 flipped perpendicular in test
+- **FLUX 2 Max** (`fal-ai/flux-2-max/edit`): $0.07/MP, best textures in FLUX family, CB2 placed above elbow in test
+- **Nano Banana Pro** (`fal-ai/nano-banana-pro/edit`): $0.15/image, reasoning-based, supports 14 refs, untested
+
 ### Prompt Structure
 Every prompt follows this skeleton. The **middle is locked** (never change the CB2 block). The **bookends are creative choices** — scene/setting and style/mood/camera can be varied freely per batch. Validated across 289 images with editorial, documentary, Sony A7IV, harsh midday, golden hour, and others — style variation does not affect CB2 hit rate.
 
 **Structure:** `[SCENE + SETTING] + [SUBJECT + ACTIVITY] + LOCKED CB2 BLOCK + waist-up + [STYLE/MOOD/CAMERA]`
 
-**Locked CB2 block (always use exactly this):**
+**Locked CB2 block (GPT Image 1.5 — reinforced version):**
+- Left arm: `the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons`
+- Right arm: `the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-down button closest to wrist, five round tactile buttons`
+
+**Locked CB2 block (FLUX 2 Flex — simpler version):**
 - Left arm: `wearing the wearable remote from image 1 on their LEFT forearm, volume-up button closest to wrist`
 - Right arm: `wearing the wearable remote from image 1 on their RIGHT forearm, volume-down button closest to wrist`
 
-**Example prompts:**
-- `Dramatic coastal highway at golden hour, motorcycle rider leaning into a turn, wearing the wearable remote from image 1 on their LEFT forearm, volume-up button closest to wrist, waist-up, adventure photography, sense of freedom`
-- `Steep powder run in bright alpine sun, skier carving through fresh powder, wearing the wearable remote from image 1 on their LEFT forearm, volume-up button closest to wrist, waist-up, Shot on Sony A7IV 135mm f/2.8, adrenaline`
+**Key prompt improvements discovered April 7:**
+- **"OVER the jacket sleeve"** — fixes bare skin / sleeve-ripped-off problem (major issue in earlier batches)
+- **"halfway between wrist and elbow"** — reinforces below-elbow placement (Justin's #1 complaint was above-elbow)
+- **"velcro strap wrapped fully around"** — fixes missing strap (Justin flagged in desert v1: "strap missing on upper part")
+- **"five round tactile buttons"** — prevents GPT Image 1.5 from generating 7-8 buttons (happened in night scene)
+- **Specific camera/lens** ("Shot on Sony A7R IV 85mm f/2.0") — more photographic than generic quality boosters
+- **Add imperfections** ("film grain, slight lens vignetting, chromatic aberration") — reduces AI-polished look
+
+**Example prompts (GPT Image 1.5):**
+- `Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain`
+- `Desert highway through red rock canyon, motorcycle rider on adventure bike, wearing textile riding jacket and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography`
 
 **What NOT to put in prompts:**
 - Colorway names or button colors (let the reference photo handle it)
@@ -45,6 +81,8 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 - Complex multi-detail instructions (earbuds + helmet + jacket — use two-pass instead)
 - "Product photography" (triggers sterile white-background aesthetic)
 - CB2 description before the scene (scene-first produces better results)
+- Generic quality boosters ("4K," "hyperrealistic," "ultra HD") — triggers over-polished CGI look
+- The word "photorealistic" — ironically triggers AI's idea of photorealistic, which is over-smoothed
 
 ### Arm Orientation Rule
 - LEFT arm: volume-up (+) closest to WRIST
@@ -69,12 +107,14 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 - Also available via fal.ai: Kling 3.0 Pro, Veo 3.1
 - Workflow: stills first → Justin picks winners → animate only approved images
 
-### Key Stats (April 7, 2026)
-- 300+ images generated, 270+ reviewed
-- 41 scored 90+, best: 100 (snowboard), 98 (motorcycle, MTB, skiing)
-- Orientation correct 65-70% with Ref C + arm rules
+### Key Stats (April 7, 2026 — end of session)
+- 340+ total images generated, 290+ reviewed
+- 20 new images generated this session (6 Flex moto, 2 two-pass, 4 model comparison, 8 GPT Image 1.5)
+- Best GPT Image 1.5 scores: 90 (coastal), 89 (desert) — with 4 more awaiting review
+- Top all-time: 100 (snowboard), 98 (motorcycle, MTB, skiing)
+- Orientation correct 65-70% with Ref C + arm rules (FLUX), ~50% with GPT Image 1.5 (small sample)
 - 13 test videos across 6 models
-- FLUX 2 Flex g7.0 validated as production model (90-96 scores, $0.02/MP)
+- **GPT Image 1.5 is the new photorealism champion** — Justin: "quality of the images is amazing"
 
 ## 3. What's Been Tried and Failed
 
@@ -130,33 +170,63 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 ## 5. Current Status and Next Steps
 
 ### What's Validated and Production-Ready
-- **FLUX 2 Flex g7.0** is the production model (scored 90-96 across 20 images, 33% cheaper than Pro)
-- **Ref C (J&Mike Dual)** is the production reference photo (65-70% correct orientation)
-- **Scene-first simple prompts** produce the best results
-- **Two-pass** works for adding helmets and earbuds to winning images
+- **GPT Image 1.5** is the new photorealism champion (scored 89-90 on motorcycle, Justin: "quality is amazing")
+- **FLUX 2 Flex g7.0** remains valid as cheaper alternative (scored 90-96, $0.05/MP vs ~$0.10-0.20 GPT)
+- **Ref C (J&Mike Dual)** is the production reference photo (works with both GPT Image 1.5 and FLUX)
+- **Reinforced prompt** with "OVER jacket sleeve," "halfway between wrist and elbow," "velcro strap wrapped fully around" — fixes bare skin, above-elbow, and missing strap problems
+- **Scene-first prompts** with specific camera/lens language produce the most photographic results
+- **Two-pass** works for adding helmets and earbuds to winning images (confirmed again this session)
 - **Gen-4 Turbo** (97) and **Gen-4.5** (94) are the production video models
 - **Generate-and-filter with human review** is the only reliable quality gate
+- **T-shirt bleed largely solved by prompting** — including "leather riding jacket" in prompt gets proper gear without needing jacket-specific reference photos
 
 ### Open Problems
-- **T-shirt bleed:** J&Mike wearing T-shirts → generated people often lack sport-appropriate gear. Fix requires sport-specific reference photos with correct clothing.
-- **Colorway control:** No reliable way to specify Hunter/Tron/Patriot from prompt alone. Multi-ref (J&Mike + colorway close-up) partially transfers color but doesn't improve orientation. Fix requires colorway-specific third-person reference photos.
-- **Hunter symbol fidelity:** All existing Hunter reference photos have old/faded symbol outlines and missing LED plastic. Generated Hunter images inherit these flaws.
+- **Above-elbow placement:** Still happens ~30-50% of the time even with "halfway between wrist and elbow" reinforcement. Justin's #1 complaint.
+- **Symbol clarity:** GPT Image 1.5 sometimes renders warped/unclear button symbols (Justin: "symbols are a little wart")
+- **Button count accuracy:** GPT Image 1.5 night scene generated 7-8 buttons instead of 5. Adding "five round tactile buttons" helps but not always.
+- **Colorway control:** No reliable way to specify Hunter/Tron/Patriot from prompt alone. Fix requires colorway-specific reference photos.
+- **Hunter symbol fidelity:** All existing Hunter reference photos have old/faded symbol outlines and missing LED plastic.
 - **Patriot coverage:** Zero third-person Patriot photos exist anywhere.
 
-### Latest Test Batch (April 7 — awaiting Justin's review)
-24 new images deployed to review page, testing remaining reference photo options:
-- **Mike Moto deep dive** (10 images): 10 different Mike Moto photos as solo refs on Flex g7.0. Only 3 of 45 Mike photos tested previously (one scored 99). IDs: mikemoto-2587 through mikemoto-2610.
-- **Tahoe bicyclist IMG_9733** (6 images): Tron cyclist with red helmet as ref. 4 MTB (sport-matched) + 2 skiing (cross-sport). IDs: tahoe-mtb-2001 through tahoe-ski-2011.
-- **Tahoe back-to-back IMG_0087** (4 images): Group photo as alternative to J&Mike Dual — motorcycle prompt completely reproduced the source photo (confirmed test #12 "copies original" failure). NOT viable. IDs: tahoe-b2b-moto-3001 through tahoe-b2b-snow-3004.
-- **Puffy vest J&Mike IMG_0084** (4 images): Same J&Mike dual pose but wearing puffy vests instead of T-shirts. KEY TEST — if vest clothing transfers, this could upgrade Ref C for winter sports without needing Jordan's reshoot. IDs: vest-moto-4001 through vest-ski-4011.
+### Latest Test Batch (April 7 — 4 images awaiting review)
+GPT Image 1.5 Round 2 with reinforced strap prompts (the most promising batch yet):
+- **gpt-coastal-v2-8501**: PCH golden hour, leather jacket, CB2 with strap visible, 5 buttons, lower forearm
+- **gpt-coastal-v3-8502**: Cliffside sunset, distressed leather, ocean below, CB2 with strap wrapping around arm
+- **gpt-desert-v2-8503**: Red rock mesas, dusty textile jacket, strap clearly visible, green buttons at mid-forearm — potentially best GPT 1.5 image yet
+- **gpt-forest-8504**: Pine forest morning mist, dark jacket, CB2 green buttons on lower forearm, editorial vibe
+
+### April 7 Session Results (This Session)
+
+**Model Comparison (4-way head-to-head, same prompt + Ref C):**
+| Model | Endpoint | Cost | Justin's Verdict |
+|-------|----------|------|-----------------|
+| FLUX 2 Flex g7.0 | `fal-ai/flux-2-flex/edit` | $0.05/MP | "Looks like a painting in a bad way, no CB visible" |
+| FLUX 2 Pro | `fal-ai/flux-2-pro/edit` | $0.03/MP | "Looks inspiring but CB2 flipped perpendicular" |
+| FLUX 2 Max | `fal-ai/flux-2-max/edit` | $0.07/MP | "Would be really cool if CB was below elbow" |
+| **GPT Image 1.5** | `fal-ai/gpt-image-1.5/edit` | ~$0.10-0.20 | **"Quality of images is amazing. Remote preserved."** |
+
+**GPT Image 1.5 Deep Dive (8 images, 2 rounds):**
+- Round 1 (basic reinforcement): Coastal 90, Desert 89, Alpine fail (above elbow), Night 0 (wrong product)
+- Round 2 (strap + button count reinforcement): 4 images awaiting review — look very strong
+
+**FLUX 2 Flex Motorcycle Batch (6 images):**
+- Desert 8104 strongest ("Strong. Right spot."), others had above-elbow or sleeve issues
+- Key learning: including "leather jacket" and "helmet" in prompt gets proper motorcycle gear ~83% of the time
+
+**Two-Pass Tests (2 images):**
+- Sunrise + helmet: CB2 survived, helmet added naturally, but above elbow
+- Alpine + earbuds: CB2 survived, earbuds not visible under helmet
 
 ### Next Session Priorities
-1. **Justin reviews 24 new images** — especially the puffy vest results (could eliminate need for some Jordan shots)
-2. **Jordan shoots 7 reference photos** — 3 Hunter (moto jacket, ski jacket, hiking gear) + 3 Patriot (same) + 1 Tron winter. Updated units with fresh symbols. Both arms. See jordan-shot-list.html. (May reduce if puffy vest test succeeds)
-3. **Build CREATE tab** — sport/colorway/vibe dropdowns → Make.com webhook → auto-generate → images appear in review page
-4. **Scale video production** — animate approved stills only with Gen-4 Turbo
-5. **Cancel Recraft subscription** ($25/mo, never used)
-6. **Fix feedback sync** — SYNC_URL points to wrong webhook (plan exists in luminous-bubbling-candy.md)
+1. **Justin reviews 4 GPT Image 1.5 Round 2 images** — desert v2 and coastal v2/v3 look very promising
+2. **Generate more GPT Image 1.5 images** if round 2 scores well — scale up the winning prompts across more scenes
+3. **Test GPT Image 1.5 on other sports** (skiing, snowboard, MTB) — only tested motorcycle so far
+4. **Jordan shoots 7 reference photos** — 3 Hunter + 3 Patriot + 1 Tron winter. See jordan-shot-list.html
+5. **Build CREATE tab** — sport/colorway/vibe dropdowns → auto-generate → review page
+6. **Scale video production** — animate approved stills only with Gen-4 Turbo
+7. **Cancel Recraft subscription** ($25/mo, never used)
+8. **Fix feedback sync** — SYNC_URL points to wrong webhook (plan exists in luminous-bubbling-candy.md)
+9. **Test Nano Banana Pro** (`fal-ai/nano-banana-pro/edit`) — reasoning-based, supports 14 refs, $0.15/image, untested
 
 ### Key Resources
 | Resource | Location |
@@ -172,10 +242,10 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 ### Sports Priority
 | Sport | Status | Notes |
 |-------|--------|-------|
-| Motorcycle coastal | Production-ready (98) | Best sport, needs helmet via two-pass |
-| Skiing | Production-ready (96) | Needs gloves in ref photo |
-| Snowboard | Production-ready (96-100) | Strong with Flex g7.0 |
-| MTB | Cracked (94-98) | Recently jumped from avg 34 to 94+ |
+| Motorcycle coastal | **Best sport** (90 GPT, 98 Flex) | GPT Image 1.5 producing magazine-quality shots. Helmet/jacket via prompting works. |
+| Skiing | Production-ready (96) | Needs GPT Image 1.5 testing. Needs gloves in ref photo. |
+| Snowboard | Production-ready (96-100) | Strong with Flex g7.0. Needs GPT Image 1.5 testing. |
+| MTB | Cracked (94-98) | Recently jumped from avg 34 to 94+. Needs GPT Image 1.5 testing. |
 | Hiking | Deprioritized | "People have headphones, don't need CB2 for hiking" — Justin |
 | Running | Deprioritized | Not core use case (no gloves needed) |
 | Fishing/ATV | Dropped | Not enough demand |

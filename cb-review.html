@@ -135,6 +135,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="tab" onclick="setTab('videos')">VIDEOS (<span id="cntVid">0</span>)</div>
   <div class="tab" onclick="setTab('create')">CREATE</div>
   <div class="tab" onclick="setTab('aiscore')">AI SCORING</div>
+  <div class="tab" onclick="setTab('balance')">BALANCE</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -280,6 +281,86 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div style="font-size:2rem;margin-bottom:.5rem">🚧</div>
   <div style="font-size:1rem;font-weight:700;color:#a855f7;margin-bottom:.3rem">CREATE — Under Construction</div>
   <div style="font-size:.8rem;color:#888">Self-serve generation coming soon: pick sport, colorway, vibe → auto-generate a batch.</div>
+</div>
+
+<!-- BALANCE TAB -->
+<div id="balanceArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:1rem .5rem">
+  <div style="text-align:center;margin-bottom:1rem">
+    <div style="font-size:.85rem;font-weight:700;color:#a855f7;margin-bottom:.5rem">API Spending Tracker</div>
+  </div>
+  <div style="background:#1a1a2e;border-radius:8px;padding:1rem;margin-bottom:.8rem">
+    <div style="font-size:.75rem;color:#888;margin-bottom:.5rem">fal.ai — Image & Video Generation</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">GPT Image 1.5 (8 images)</span>
+      <span style="color:#4ade80;font-size:.8rem">~$1.20</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">FLUX 2 Flex g7.0 (~200 images)</span>
+      <span style="color:#4ade80;font-size:.8rem">~$8.40</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">FLUX 2 Pro (~60 images)</span>
+      <span style="color:#4ade80;font-size:.8rem">~$1.50</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">FLUX 2 Max (1 image)</span>
+      <span style="color:#4ade80;font-size:.8rem">~$0.06</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Other models (Kontext, Fill, etc.)</span>
+      <span style="color:#4ade80;font-size:.8rem">~$3.00</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Videos (Runway, Kling, Veo)</span>
+      <span style="color:#4ade80;font-size:.8rem">~$5.00</span>
+    </div>
+    <div style="border-top:1px solid #333;margin-top:.5rem;padding-top:.5rem;display:flex;justify-content:space-between;align-items:center">
+      <span style="color:#fff;font-size:.85rem;font-weight:700">Estimated Total</span>
+      <span style="color:#4ade80;font-size:.85rem;font-weight:700">~$19</span>
+    </div>
+    <div style="margin-top:.8rem;text-align:center">
+      <a href="https://fal.ai/dashboard/billing" target="_blank" style="color:#a855f7;font-size:.75rem;text-decoration:underline">Check exact balance on fal.ai dashboard →</a>
+    </div>
+    <div style="margin-top:.3rem;text-align:center;font-size:.65rem;color:#666">Note: Programmatic balance check requires an ADMIN API key. Create one at fal.ai/dashboard/keys.</div>
+  </div>
+  <div style="background:#1a1a2e;border-radius:8px;padding:1rem;margin-bottom:.8rem">
+    <div style="font-size:.75rem;color:#888;margin-bottom:.5rem">Other Services</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Runway (video)</span>
+      <span style="color:#4ade80;font-size:.8rem">API key active</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Replicate</span>
+      <span style="color:#4ade80;font-size:.8rem">API key active</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Recraft ($25/mo)</span>
+      <span style="color:#f87171;font-size:.8rem">⚠ Cancel — never used</span>
+    </div>
+  </div>
+  <div style="background:#1a1a2e;border-radius:8px;padding:1rem">
+    <div style="font-size:.75rem;color:#888;margin-bottom:.5rem">Cost Per Winner (estimated)</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Images generated</span>
+      <span style="color:#fff;font-size:.8rem">340+</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Scored 90+</span>
+      <span style="color:#fff;font-size:.8rem">25</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Scored 70+</span>
+      <span style="color:#fff;font-size:.8rem">61</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem">
+      <span style="color:#ccc;font-size:.8rem">Cost per 90+ winner</span>
+      <span style="color:#4ade80;font-size:.8rem;font-weight:700">~$0.76</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span style="color:#ccc;font-size:.8rem">Cost per 70+ image</span>
+      <span style="color:#4ade80;font-size:.8rem;font-weight:700">~$0.31</span>
+    </div>
+  </div>
 </div>
 
 <!-- AI SCORING TAB -->
@@ -996,7 +1077,7 @@ function counts(){
 function setTab(t){
   tab=t;ci=0;navHistory=[];
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['new','done','progress','gallery','videos','create','aiscore'][i]===t)?' active':'');
+    el.className='tab'+((['new','done','progress','gallery','videos','create','aiscore','balance'][i]===t)?' active':'');
   });
   // Show/hide sections — each tab has its own area
   document.getElementById('gridToggle').style.display=(t==='done')?'block':'none';
@@ -1007,6 +1088,7 @@ function setTab(t){
   document.getElementById('videosArea').style.display=(t==='videos')?'block':'none';
   document.getElementById('createArea').style.display=(t==='create')?'block':'none';
   document.getElementById('aiscoreArea').style.display=(t==='aiscore')?'block':'none';
+  document.getElementById('balanceArea').style.display=(t==='balance')?'block':'none';
   document.getElementById('emptyState').style.display='none';
   if(t==='gallery'){renderGallery();}
   else if(t==='videos'){vidSetTab('new');}
@@ -1014,6 +1096,7 @@ function setTab(t){
   else if(t==='new'||t==='done'){upFilt();renderView();}
   else if(t==='progress'){document.getElementById('counter').textContent='Experiment Tracker';}
   else if(t==='create'){document.getElementById('counter').textContent='Create — Coming Soon';}
+  else if(t==='balance'){document.getElementById('counter').textContent='API Balance & Spending';}
 }
 
 function upFilt(){filt=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i))}
