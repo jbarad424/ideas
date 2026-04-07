@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T15:18:07.221Z",
+  "syncedAt": "2026-04-07T16:07:04.995Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6054,6 +6054,71 @@
           "text": "Unfortunately, the night sky, one with the lights in the city does not look anything like chubby buttons zero",
           "time": "2026-04-07T15:18:04.452Z",
           "num": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-coastal-v2-8501",
+      "url": "https://files.catbox.moe/vidx2b.png",
+      "model": "GPT Image 1.5",
+      "prompt": "PCH golden hour, leather jacket + helmet, CB2 with velcro strap wrapped fully around LEFT lower forearm OVER jacket, five round tactile buttons, Sony A7R IV 85mm, film grain",
+      "label": "GPT 1.5 R2: Coastal v2",
+      "context": "ROUND 2: Iterated on the 90-scoring coastal prompt. Added \"velcro strap wrapped fully around\" to fix the missing-strap issue from desert v1. Five buttons visible, strap showing, lower forearm over jacket.",
+      "comments": [
+        {
+          "text": "Well, I love everything about this photo. It’s the fact that I cannot make out the symbols at all, so unfortunately it doesn’t pass. Is there anyway we can preserve the symbols? Make sure it goes beneath the elbow and maybe not on like a one image output, but like if we cease statistically that we get better symbols and below the elbow for every X month images is that worth it I know that’s inefficient and I don’t wanna go there yet, but let me know what what do you think?",
+          "time": "2026-04-07T15:56:29.995Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-coastal-v3-8502",
+      "url": "https://files.catbox.moe/9k2qid.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Close-up side view, cliffside coastal road sunset, distressed leather jacket + matte black helmet, CB2 with strap wrapped fully around lower forearm OVER jacket, Canon R5 135mm, golden backlight",
+      "label": "GPT 1.5 R2: Coastal v3 Cliffside",
+      "context": "ROUND 2: Close-up side view variant of coastal scene. Distressed brown leather jacket. Ocean waves crashing below. CB2 strap visible wrapping around arm. Buttons distinguishable.",
+      "comments": [
+        {
+          "text": "Dope it’s really really good everything about it is great except that I cannot make out the symbols therefore it does not pass",
+          "time": "2026-04-07T15:56:51.613Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-desert-v2-8503",
+      "url": "https://files.catbox.moe/sbgszd.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Desert highway red rock mesas, ADV bike stopped, dusty textile jacket + helmet visor up, CB2 with strap wrapped fully around lower forearm OVER jacket, five buttons with symbols, Nikon Z9 70mm, documentary",
+      "label": "GPT 1.5 R2: Desert v2",
+      "context": "ROUND 2: Iterated on the 89-scoring desert prompt. Added strap reinforcement and five-button clarity. Strap clearly visible wrapping around arm. Green buttons distinguishable at mid-forearm. Potentially our best GPT 1.5 image — real ADV magazine quality.",
+      "comments": [
+        {
+          "text": "This is really cool otherwise it’ll be an amazing shot, but I cannot make out as symbols so it does not pass so it does not pass",
+          "time": "2026-04-07T15:57:15.142Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-forest-8504",
+      "url": "https://files.catbox.moe/nil1sn.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Mountain forest road morning mist, pine trees, dark riding jacket + helmet, CB2 with strap wrapped fully around lower forearm OVER jacket, five buttons, Sony A7R IV 85mm, morning mist, editorial",
+      "label": "GPT 1.5 R2: Forest Morning",
+      "context": "ROUND 2: New scene — pine forest road with morning mist. Dark jacket, CB2 with green buttons on lower forearm. Peaceful editorial vibe. Testing atmospheric/moody scene type with GPT 1.5.",
+      "comments": [
+        {
+          "text": "This is really cool. I love the vibe, but we cannot make out the symbols on the Chubby Buttons so it does not pass. It should be a little lower on the arm as well.",
+          "time": "2026-04-07T15:57:40.439Z",
+          "num": 1
+        },
+        {
+          "text": "Also, I can only see 1/2 of the strap",
+          "time": "2026-04-07T15:58:29.970Z",
+          "num": 2
         }
       ]
     },
