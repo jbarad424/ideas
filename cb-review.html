@@ -304,6 +304,10 @@ const ALL_VIDEOS=[
 ];
 
 const ALL_IMAGES=[
+  // === TEST: Two-pass clothing swap on existing winners ===
+  {id:'clothswap-moto-jacket',url:'https://files.catbox.moe/dvhmyj.jpg',model:'two-pass (FLUX edit)',prompt:'Base: refC-moto-s101 (90/100) → swap T-shirt to moto jacket + helmet',label:'CLOTHSWAP: Moto Jacket',context:'TWO-PASS CLOTHING SWAP: Took the 90/100 motorcycle image and asked FLUX to change clothing to armored moto jacket + helmet. Did the CB2 survive the full wardrobe change?'},
+  {id:'clothswap-ski-gloves',url:'https://files.catbox.moe/lzpgb3.jpg',model:'two-pass (FLUX edit)',prompt:'Base: refC-ski-s302 (~90/100) → add ski gloves to hands only',label:'CLOTHSWAP: Ski Gloves',context:'Two-pass: added ski gloves to the 90/100 skier. Agent noted CB2 survived but framing changed dramatically to a close-up. Compare against original.'},
+  {id:'clothswap-snow-earbuds',url:'https://files.catbox.moe/7zle0m.jpg',model:'two-pass (FLUX edit)',prompt:'Base: refC-snow-s404 (100/100) → add wireless earbuds',label:'CLOTHSWAP: Earbuds on 100-scorer',context:'Two-pass: added earbuds to the PERFECT 100/100 snowboarder. Agent noted jacket color changed to rainbow tie-dye (not requested) and CB2 is smaller. Did the edit make it worse?'},
   // === TEST: Mike Moto photos as primary ref (Tron + moto gear, third-person) ===
   {id:'mikeref-1-s1100',url:'https://files.catbox.moe/swu7op.jpg',model:'flux2-pro @image (Mike Moto ref)',prompt:'Moto coastal, Mike IMG_2568 as sole ref, seed 1100',label:'MIKE MOTO REF 1a (s1100)',context:'MIKE MOTO TEST: Using a single photo from the 45-photo Mike Moto shoot as the ONLY reference. These are third-person, Tron colorway, actual motorcycle gear. Does this give us correct clothing + Tron + good CB2 all at once?'},
   {id:'mikeref-1-s1101',url:'https://files.catbox.moe/6i8l0g.jpg',model:'flux2-pro @image (Mike Moto ref)',prompt:'Same ref, seed 1101',label:'MIKE MOTO REF 1b (s1101)',context:'Same Mike Moto ref (IMG_2568), different seed.'},
