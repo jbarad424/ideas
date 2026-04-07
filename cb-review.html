@@ -1408,12 +1408,15 @@ async function galGenerate(id,fidelity){
       allImgs.push(...imgs1,...imgs2);
     }
     if(!allImgs.length){status.innerHTML='No images returned.';return;}
+    status.innerHTML='Saving '+allImgs.length+' images permanently...';
+    // Upload to catbox for permanent URLs
+    const permUrls=await Promise.all(allImgs.map(im=>mmUploadCatbox(im.url).catch(()=>im.url)));
     const ts=Date.now();
     const added=[];
-    allImgs.forEach((im,idx)=>{
+    permUrls.forEach((url,idx)=>{
       const vid='mm-'+id+'-'+ts+'-'+idx;
       if(!ALL_IMAGES.find(i=>i.id===vid)){
-        const entry={id:vid,url:im.url,model:mdl.name+' (variation)',prompt:(modifier||'variation')+' of '+id,label:'VAR: '+(img.label||id),context:'Make More Like This from '+id+'. '+mdl.name+', fidelity='+fidelity+'.'};
+        const entry={id:vid,url:url,model:mdl.name+' (variation)',prompt:(modifier||'variation')+' of '+id,label:'VAR: '+(img.label||id),context:'Make More Like This from '+id+'. '+mdl.name+', fidelity='+fidelity+'.'};
         ALL_IMAGES.push(entry);
         added.push(entry);
       }
@@ -1421,7 +1424,7 @@ async function galGenerate(id,fidelity){
     mmSaveVariations(added);
     counts();
     status.innerHTML=added.length+' variation'+(added.length>1?'s':'')+' added to TO REVIEW!';
-    results.innerHTML=allImgs.map((im,idx)=>'<img src="'+im.url+'" alt="variation" style="border:2px solid #22c55e">').join('');
+    results.innerHTML=permUrls.map(url=>'<img src="'+url+'" alt="variation" style="border:2px solid #22c55e">').join('');
   }catch(e){
     if(e.message.includes('Failed to fetch')||e.message.includes('NetworkError')){
       status.innerHTML='CORS blocked. Use Claude Code to generate variations for now.';
@@ -1459,6 +1462,19 @@ async function mmPoll(endpoint,rid,key,statusEl){
     if(statusEl)statusEl.innerHTML='Generating... '+elapsed+'s ('+sd.status+')';
   }
   throw new Error('Timed out after 5 minutes');
+}
+
+async function mmUploadCatbox(falUrl){
+  // Download image as blob, then upload to catbox for permanent URL
+  const resp=await fetch(falUrl);
+  const blob=await resp.blob();
+  const fd=new FormData();
+  fd.append('reqtype','fileupload');
+  fd.append('fileToUpload',blob,'image.png');
+  const up=await fetch('https://catbox.moe/user/api.php',{method:'POST',body:fd});
+  const url=await up.text();
+  if(url.startsWith('https://'))return url.trim();
+  throw new Error('Catbox upload failed: '+url);
 }
 
 function mmSaveVariations(entries){
