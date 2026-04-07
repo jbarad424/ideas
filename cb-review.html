@@ -134,6 +134,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="tab" onclick="setTab('gallery')">GALLERY</div>
   <div class="tab" onclick="setTab('videos')">VIDEOS (<span id="cntVid">0</span>)</div>
   <div class="tab" onclick="setTab('create')">CREATE</div>
+  <div class="tab" onclick="setTab('aiscore')">AI SCORING</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -274,6 +275,31 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   </div>
 </div>
 
+<!-- CREATE TAB (Under Construction) -->
+<div id="createArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:2rem .5rem;text-align:center">
+  <div style="font-size:2rem;margin-bottom:.5rem">🚧</div>
+  <div style="font-size:1rem;font-weight:700;color:#a855f7;margin-bottom:.3rem">CREATE — Under Construction</div>
+  <div style="font-size:.8rem;color:#888">Self-serve generation coming soon: pick sport, colorway, vibe → auto-generate a batch.</div>
+</div>
+
+<!-- AI SCORING TAB -->
+<div id="aiscoreArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
+  <div style="text-align:center;margin-bottom:.8rem">
+    <div style="font-size:.85rem;font-weight:700;color:#a855f7">AI Scoring Validation</div>
+    <div style="font-size:.7rem;color:#888;margin-bottom:.5rem">Compare AI checklist scores against your ratings. Help calibrate the auto-filter.</div>
+  </div>
+  <div id="aiScorePlayer"></div>
+  <div class="comment-trail" id="aiScoreTrail"></div>
+  <div class="feedback-area">
+    <textarea id="aiScoreFb" placeholder="Do you agree with the AI's score? What did it get wrong?"></textarea>
+    <div class="submit-row"><button class="submit-btn" onclick="aiScoreSubmit()">Submit Feedback</button></div>
+  </div>
+  <div class="nav">
+    <button id="aiScorePrev" onclick="aiScoreGo(-1)">&larr; Prev</button>
+    <button id="aiScoreNext" onclick="aiScoreGo(1)">Next &rarr;</button>
+  </div>
+</div>
+
 <div class="btn-row">
   <button class="export-btn" onclick="syncFeedback()">Sync All to Claude</button>
   <button class="export-btn" onclick="exportAll()">Copy to Clipboard</button>
@@ -350,6 +376,13 @@ const ALL_IMAGES=[
   {id:'cb2-ski-1301',url:'https://files.catbox.moe/o14jfe.jpg',model:'flux2-pro (CB2-first)',prompt:'Remote from image 1 on LEFT forearm... skier on slope',label:'PROMPT: CB2-First Ski (s1301)',context:'CB2 first skiing. Agent noted this broke the scene — generated two people at a summit instead of skiing.'},
   {id:'scene-mtb-1302',url:'https://files.catbox.moe/84e9d7.jpg',model:'flux2-pro (scene-first)',prompt:'MTB on trail... remote from image 1',label:'PROMPT: Scene-First MTB (s1302)',context:'Scene-first MTB. Compare against cb2-mtb-1302.'},
   {id:'cb2-mtb-1302',url:'https://files.catbox.moe/rsa8ig.jpg',model:'flux2-pro (CB2-first)',prompt:'Remote from image 1 on LEFT forearm... MTB on trail',label:'PROMPT: CB2-First MTB (s1302)',context:'CB2 first MTB. Agent noted similar to scene-first but device slightly different shape/color.'},
+  // === TEST: Flex g7.0 multi-ref (J&Mike orientation + Mike Moto clothing/Tron) ===
+  {id:'flexmulti-moto-1600',url:'https://files.catbox.moe/mje3x2.jpg',model:'Flex g7.0 multi-ref',prompt:'Moto coastal, ref1=J&Mike ref2=Mike Moto (IMG_2592), seed 1600',label:'FLEX MULTI: Moto 1/3',context:'FLEX MULTI-REF: J&Mike for orientation + the Mike Moto photo that scored 99 for clothing/Tron. Does Flex g7.0 blend them better than Pro did? Looking for: moto gear + Tron colorway + correct orientation.'},
+  {id:'flexmulti-moto-1601',url:'https://files.catbox.moe/v6ppun.jpg',model:'Flex g7.0 multi-ref',prompt:'Same, seed 1601',label:'FLEX MULTI: Moto 2/3',context:'Flex multi-ref motorcycle, seed 1601.'},
+  {id:'flexmulti-moto-1602',url:'https://files.catbox.moe/lm5qu5.jpg',model:'Flex g7.0 multi-ref',prompt:'Same, seed 1602',label:'FLEX MULTI: Moto 3/3',context:'Flex multi-ref motorcycle, seed 1602.'},
+  {id:'flexmulti-ski-1603',url:'https://files.catbox.moe/j7nzuz.jpg',model:'Flex g7.0 multi-ref',prompt:'Skiing, ref1=J&Mike ref2=Mike Moto, seed 1603',label:'FLEX MULTI: Ski 1/3',context:'Flex multi-ref skiing — does motorcycle clothing leak into ski scene? Or does the prompt override the second ref clothing?'},
+  {id:'flexmulti-ski-1604',url:'https://files.catbox.moe/z42o8p.jpg',model:'Flex g7.0 multi-ref',prompt:'Same, seed 1604',label:'FLEX MULTI: Ski 2/3',context:'Flex multi-ref skiing, seed 1604.'},
+  {id:'flexmulti-ski-1605',url:'https://files.catbox.moe/ticu3j.jpg',model:'Flex g7.0 multi-ref',prompt:'Same, seed 1605',label:'FLEX MULTI: Ski 3/3',context:'Flex multi-ref skiing, seed 1605.'},
   // === TEST: FLUX 2 Flex vs Pro (cheaper, adjustable guidance/steps) ===
   {id:'flex-default',url:'https://files.catbox.moe/xasfeb.jpg',model:'FLUX 2 Flex (default)',prompt:'Moto coastal, guidance 3.5, steps 28',label:'FLEX: Default (g3.5 s28)',context:'FLUX 2 FLEX TEST: Same J&Mike ref, same prompt as Pro. Default settings. Flex is 33% cheaper ($0.02 vs $0.03/MP) and has adjustable guidance + steps. Does quality match Pro?'},
   {id:'flex-highguide',url:'https://files.catbox.moe/b80lk8.jpg',model:'FLUX 2 Flex (high guidance)',prompt:'Moto coastal, guidance 7.0, steps 28',label:'FLEX: High Guidance (g7.0 s28)',context:'Flex with guidance_scale doubled to 7.0. Higher guidance = more literal prompt adherence. Does this improve CB2 accuracy or make it worse?'},
@@ -864,7 +897,7 @@ function counts(){
 function setTab(t){
   tab=t;ci=0;navHistory=[];
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['new','done','progress','gallery','videos'][i]===t)?' active':'');
+    el.className='tab'+((['new','done','progress','gallery','videos','create','aiscore'][i]===t)?' active':'');
   });
   // Show/hide sections — each tab has its own area
   document.getElementById('gridToggle').style.display=(t==='done')?'block':'none';
@@ -873,11 +906,15 @@ function setTab(t){
   document.getElementById('progressArea').style.display=(t==='progress')?'block':'none';
   document.getElementById('galleryArea').style.display=(t==='gallery')?'block':'none';
   document.getElementById('videosArea').style.display=(t==='videos')?'block':'none';
+  document.getElementById('createArea').style.display=(t==='create')?'block':'none';
+  document.getElementById('aiscoreArea').style.display=(t==='aiscore')?'block':'none';
   document.getElementById('emptyState').style.display='none';
   if(t==='gallery'){renderGallery();}
   else if(t==='videos'){vidSetTab('new');}
-  else if(t!=='progress'){upFilt();renderView();}
-  else{document.getElementById('counter').textContent='Experiment Tracker';}
+  else if(t==='aiscore'){aiScoreRender();}
+  else if(t==='new'||t==='done'){upFilt();renderView();}
+  else if(t==='progress'){document.getElementById('counter').textContent='Experiment Tracker';}
+  else if(t==='create'){document.getElementById('counter').textContent='Create — Coming Soon';}
 }
 
 function upFilt(){filt=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i))}
