@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T13:29:06.574Z",
+  "syncedAt": "2026-04-07T13:46:19.919Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -5558,6 +5558,51 @@
         {
           "text": "I don't know what's happening here but looks like the guy's arm is broken and there's no remote. I give this a zero.",
           "time": "2026-04-07T13:29:03.348Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "kontext-inpaint-8001",
+      "url": "https://files.catbox.moe/pyn6g6.jpg",
+      "model": "Kontext LoRA Inpaint",
+      "prompt": "CB2 on LEFT forearm via ref+mask, wide mask, g7.0",
+      "label": "Kontext Inpaint: Test 1",
+      "context": "NEW APPROACH — KONTEXT INPAINT: Uses fal-ai/flux-kontext-lora/inpaint with BOTH a reference image (Ref C) AND a forearm mask. Unlike Pipeline E (which warped the whole image), this is designed to apply the reference to ONLY the masked region. Base image is the clean motorcycle rider.",
+      "comments": [
+        {
+          "text": "This looks fire. It looks like a chubby buttons, and the strap is right images. Interesting. I wish he was wearing a helmet, but it's fucking good. I give it a 96.",
+          "time": "2026-04-07T13:45:22.008Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "kontext-inpaint-8002",
+      "url": "https://files.catbox.moe/dfj7rz.jpg",
+      "model": "Kontext LoRA Inpaint",
+      "prompt": "CB2 on LEFT forearm via ref+mask, wide mask, g7.0, seed 8002",
+      "label": "Kontext Inpaint: Test 2",
+      "context": "Kontext inpaint test 2. Same wide mask, different seed. Testing consistency.",
+      "comments": [
+        {
+          "text": "Really cool I don't really see a difference between this and the one I just reviewed but it still looks great. Same answer, 97",
+          "time": "2026-04-07T13:45:49.575Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "kontext-inpaint-8003",
+      "url": "https://files.catbox.moe/q1gb2p.jpg",
+      "model": "Kontext LoRA Inpaint",
+      "prompt": "CB2 on LEFT forearm via ref+mask, tight mask, g10.0",
+      "label": "Kontext Inpaint: Test 3 (tight mask)",
+      "context": "Kontext inpaint test 3. Tighter ellipse mask + higher guidance (10.0). Does a more precise mask improve CB2 placement?",
+      "comments": [
+        {
+          "text": "Again, I don't really know what I'm looking for but these look like all three of the same photos and maybe you could tell me when you read this what I was looking for the differences but that's all looks fantastic. 97.",
+          "time": "2026-04-07T13:46:16.173Z",
           "num": 1
         }
       ]
