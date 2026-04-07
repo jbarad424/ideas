@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T18:05:16.990Z",
+  "syncedAt": "2026-04-07T18:06:46.625Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6283,6 +6283,21 @@
         {
           "text": "This also doesn't really look like our symbols unfortunately and there's half a strap not peeing so it's not a pass",
           "time": "2026-04-07T17:05:23.218Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "sym-ski-alpine-8803",
+      "url": "https://files.catbox.moe/folhk4.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Skier pausing at top of powder run, steep alpine terrain, insulated ski jacket and goggles on helmet, CB2 with geometric symbol buttons on LEFT lower forearm OVER jacket sleeve, Canon R5 85mm f/2.0, bright overcast, editorial sports photography",
+      "label": "Sym-Opt: Skiing Alpine",
+      "context": "OPTIMIZED SYMBOL BATCH: FIRST GPT Image 1.5 skiing test. Previous skiing images were all FLUX 2 Flex (scored 95-98). Testing whether GPT 1.5 photorealism translates to winter sports. quality:high, input_fidelity:high.",
+      "comments": [
+        {
+          "text": "This is really cool, but the symbol is not visible. I really just want the symbols to work otherwise this would be really dope.",
+          "time": "2026-04-07T18:05:57.026Z",
           "num": 1
         }
       ]
