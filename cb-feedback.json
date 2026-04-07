@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T13:16:02.480Z",
+  "syncedAt": "2026-04-07T13:29:06.574Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -5468,6 +5468,96 @@
         {
           "text": "Give this one out of 100 because it looks really strange almost like the beginning of AI meets where we're at today like it doesn't look like a person. It looks like a strange hallucination of a person and there's no chubby buttons remote.",
           "time": "2026-04-07T13:15:58.900Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB3-moto-8001",
+      "url": "https://files.catbox.moe/bq4k9p.jpg",
+      "model": "FLUX Pro Fill g15",
+      "prompt": "Ref C arm crop, outpaint motorcycle",
+      "label": "PATH B v3: RefC Moto",
+      "context": "OUTPAINT V3 — NEUTRAL SOURCE: Arm cropped from Ref C (J&Mike standing, NO sport context). 400x300 crop. Guidance 15. Key fix: source has no motorcycle/ski context to leak into scene.",
+      "comments": [
+        {
+          "text": "This looks really strange like two guys on a bicycle looks a little homoerotic one chubby buttons looks way too big and flat and the other one looks like a candy bar give us 10 out of 100",
+          "time": "2026-04-07T13:27:26.165Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB3-ski-8002",
+      "url": "https://files.catbox.moe/02uf9n.jpg",
+      "model": "FLUX Pro Fill g15",
+      "prompt": "Ref C arm crop, outpaint skiing",
+      "label": "PATH B v3: RefC Ski",
+      "context": "OUTPAINT V3: Ref C arm crop → skiing. No sport context to fight.",
+      "comments": [
+        {
+          "text": "This is really weird. There's some weird non-legible words on it and it looks like the back of a person fused with the front of a person and fourth person like this is zero this is zero out of 100.",
+          "time": "2026-04-07T13:27:47.649Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB3-mtb-8003",
+      "url": "https://files.catbox.moe/dm5kje.jpg",
+      "model": "FLUX Pro Fill g15",
+      "prompt": "Ref C arm crop, outpaint MTB",
+      "label": "PATH B v3: RefC MTB",
+      "context": "OUTPAINT V3: Ref C arm crop → MTB scene.",
+      "comments": [
+        {
+          "text": "Again, this weird kind of homoerotic not that I'm against that but it looks so strange the way that they're standing. One guy has a correct looking hunter Tron the front guy, but the back guy has like a strange hallucination on his arm. It's called it a zero.",
+          "time": "2026-04-07T13:28:14.082Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB3-snow-8004",
+      "url": "https://files.catbox.moe/ccwz54.jpg",
+      "model": "FLUX Pro Fill g15",
+      "prompt": "Ref C arm crop, outpaint snowboard",
+      "label": "PATH B v3: RefC Snow",
+      "context": "OUTPAINT V3: Ref C arm crop → snowboard scene.",
+      "comments": [
+        {
+          "text": "The chubby button is in fact preserved, but everything else looks really strange like the back of an arm in the front of a person I get this is zero",
+          "time": "2026-04-07T13:28:31.632Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB3-moto2-8005",
+      "url": "https://files.catbox.moe/fseea1.jpg",
+      "model": "FLUX Pro Fill g15",
+      "prompt": "Ref C crop 1 (350x250), outpaint moto",
+      "label": "PATH B v3: RefC Moto (alt crop)",
+      "context": "OUTPAINT V3: Different crop region (350x250) from Ref C. Same motorcycle prompt. Testing crop position.",
+      "comments": [
+        {
+          "text": "Chubby buttons look strange has six buttons and there's a weird guy yeah glued to another guy I give this is zero",
+          "time": "2026-04-07T13:28:48.733Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "pathB3-ski2-8006",
+      "url": "https://files.catbox.moe/6vrw34.jpg",
+      "model": "FLUX Pro Fill g15",
+      "prompt": "Ref C crop 3 (350x250), outpaint skiing",
+      "label": "PATH B v3: RefC Ski (alt crop)",
+      "context": "OUTPAINT V3: Third crop region from Ref C. Skiing prompt.",
+      "comments": [
+        {
+          "text": "I don't know what's happening here but looks like the guy's arm is broken and there's no remote. I give this a zero.",
+          "time": "2026-04-07T13:29:03.348Z",
           "num": 1
         }
       ]
