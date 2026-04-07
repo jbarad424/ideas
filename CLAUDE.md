@@ -34,18 +34,24 @@ Justin Barad, co-founder of Chubby Buttons. Prefers direct, no-BS communication.
 - Two-pass gear addition: proven for helmets (CB2 survives)
 - Colorway-specific prompting: DEAD (causes glowing/wrong colors)
 - Action shots with colorway in prompt: DEAD (10-22 avg)
+- FLUX 2 Flex g7.0: NEW PRODUCTION MODEL — scored 90-96, 33% cheaper than Pro
+- AI auto-scoring: DEAD (57-63% accuracy, filters out winners)
+- Prompt restructure (CB2-first): DEAD (scene-first wins)
+- Tahoe single-person refs: too constraining (copies original person)
+- Mike Moto refs: motorcycle gear transfers but hit rate lower than J&Mike
+- Hiking: DEPRIORITIZED (not core use case per Justin)
 
 ## API Keys
 Stored in local memory files (not in repo for security). Keys: fal.ai, Replicate, Runway Gen-4.
 Check ~/.claude/projects/-Users-justinbarad-Documents-Claude-Code-ideas/memory/project_architecture.md for keys.
 
 ## Next Session Priorities
-1. Take 3 new third-person photos (one per colorway, in sport gear — solves colorway + T-shirt + orientation)
-2. Test sport-specific refs from 290 Drive photos (Moto photoshoot, Tahoe)
+1. Switch production to FLUX 2 Flex g7.0 (validated: 90-96 scores, 33% cheaper)
+2. Jordan's shot list: 7 must-have photos (3 Hunter + 3 Patriot + 1 Tron winter) — see jordan-shot-list.html
 3. Build CREATE tab (sport/colorway/vibe dropdowns → auto-generate)
-4. Two-pass clothing swap test (change T-shirt to jacket on winners)
-5. Test FLUX 2 Flex (cheaper, adjustable parameters)
-6. Test prompt restructure: CB2 first, camera specs last
+4. Scale video production (Gen-4 Turbo scored 97, Gen-4.5 scored 94)
+5. Two-pass for small gear additions (helmets, earbuds — NOT full clothing swaps)
+6. Test Mike Moto photos as Tron motorcycle ref (gear transfers, lower hit rate)
 
 ## Key Resources
 - Review page: https://jbarad424.github.io/ideas/cb-review.html
