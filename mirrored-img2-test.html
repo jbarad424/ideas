@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mirrored Image 2 Test — April 8 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1600px;margin:0 auto;padding:1rem;background:#111;color:#eee;line-height:1.4}
+h1{font-size:1.3rem;margin-bottom:.3rem}
+.sub{color:#888;font-size:.8rem;margin-bottom:1rem}
+.summary{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:1rem;margin-bottom:1rem;font-size:.85rem}
+.summary h3{font-size:.9rem;margin-bottom:.5rem;color:#22c55e}
+.summary p{color:#ccc;margin-bottom:.5rem}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.6rem;font-size:.72rem}
+.legend .k{padding:.5rem;background:#0a0a0a;border:1px solid #333;border-radius:4px}
+.legend .k strong{display:block;margin-bottom:.2rem}
+.legend .k.v1 strong{color:#f59e0b}
+.legend .k.dual strong{color:#a855f7}
+.legend .k.mir strong{color:#22c55e}
+.pair{margin-bottom:1.4rem;border:1px solid #333;border-radius:8px;background:#1a1a1a;padding:1rem}
+.pair h2{font-size:1rem;margin-bottom:.6rem;color:#fff}
+.pair .meta{font-size:.72rem;color:#888;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid #333}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.65rem;font-weight:700;margin-right:.2rem;text-transform:uppercase}
+.t-hunter{background:#365314;color:#fde047}
+.t-patriot{background:#1e3a5f;color:#fff}
+.three-way{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.side{border:1px solid #333;border-radius:6px;overflow:hidden;background:#0a0a0a}
+.side .hdr{font-size:.72rem;padding:.45rem .65rem;background:#161616;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.side .hdr.v1{color:#f59e0b}
+.side .hdr.dual{color:#a855f7}
+.side .hdr.mir{color:#22c55e}
+.side img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;cursor:pointer;background:#000}
+.controls{padding:.5rem .7rem;display:flex;justify-content:space-between;align-items:center;gap:.4rem;background:#0a0a0a;border-top:1px solid #222}
+.score{display:inline-flex;gap:.15rem}
+.score span{width:1.3rem;height:1.3rem;border-radius:50%;background:#333;color:#888;display:flex;align-items:center;justify-content:center;font-size:.65rem;cursor:pointer}
+.score span.sel{background:#22c55e;color:#fff}
+.flags{display:flex;gap:.2rem}
+.flags button{padding:.25rem .4rem;background:#222;border:1px solid #444;color:#888;font-size:.6rem;cursor:pointer;border-radius:3px;white-space:nowrap}
+.flags button.on-flip{background:#dc2626;color:#fff;border-color:#dc2626;font-weight:700}
+.flags button.on-perp{background:#f59e0b;color:#fff;border-color:#f59e0b;font-weight:700}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;padding:2rem;cursor:pointer}
+.lightbox.on{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain}
+.export-btn{position:fixed;bottom:1rem;right:1rem;padding:.7rem 1.2rem;background:#22c55e;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,.5);font-size:.85rem}
+.verdict{padding:1rem;background:#0f0f0f;border:2px solid #22c55e;border-radius:6px;margin-bottom:1rem;font-size:.85rem}
+.verdict strong{color:#22c55e}
+</style>
+</head><body>
+
+<h1>Mirrored Image 2 Test — 3-Way Comparison</h1>
+<div class="sub">April 8 2026 · 6 regressed dual-ref pairs · Testing whether mirroring image 2 fixes "symbols should be flipped"</div>
+
+<div class="summary">
+<h3>Hypothesis</h3>
+<p>Dual-ref improved symbol clarity but regressed 6 pairs with the pattern "symbols should be flipped." Theory: the model is copying image 2's symbol layout literally without mirroring it when the device renders on the opposite arm. If we mirror image 2 horizontally (using the same sips flip trick), the symbol layout inverts — which should produce the correct orientation for whichever arm the scene is rendering on.</p>
+<p><strong>Only variable changed:</strong> image 2 URL swapped from the straight-on product ref to its horizontally-mirrored copy. Same image 1 (rotated h3/p4), same prompt, same seed, same arm lock.</p>
+<p><strong>For each pair</strong> flag the middle (original dual) with ↔ if symbols are flipped wrong, and score the right (mirrored img2) 1-5 for symbol clarity. If the right column is mostly 5s with no flips, the mirror-img2 fix works and we use it going forward.</p>
+<div class="legend">
+  <div class="k v1"><strong>V1 SINGLE-REF</strong>Baseline — h3/p4 alone, no image 2</div>
+  <div class="k dual"><strong>DUAL (original img2)</strong>What regressed — straight-on product ref</div>
+  <div class="k mir"><strong>DUAL (mirrored img2)</strong>NEW — product ref flipped horizontally</div>
+</div>
+</div>
+
+<div class="verdict" id="verdict">
+<strong>Running verdict:</strong> <span id="verdictText">Score and flag to see if mirror-img2 fixed the flip bug.</span>
+</div>
+
+<div id="content"></div>
+
+<button class="export-btn" onclick="exportResults()">📋 Export verdict</button>
+<div class="lightbox" id="lb"><img id="lbimg" src=""></div>
+
+<script>
+const DATA = [{"ref_id": "h3", "scene_id": "moto_s0", "colorway": "Hunter", "ref_name": "IMG_0534", "pair_name": "h3 + IMG_0529", "seed": 9101, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/5FiSNwhQExvJ4dU0bNoO3_7wjlzGxI.jpg", "dual_url": "https://v3b.fal.media/files/b/0a957771/IMTQCcm56_Mdz76-kuMI__JWlMxm2j.jpg", "mirror_url": "https://v3b.fal.media/files/b/0a957ac2/WNKweO5SWSIMsmTud4gpk_XH03Dpoc.jpg", "label": "h3_moto_s0"}, {"ref_id": "h3", "scene_id": "ski_s1", "colorway": "Hunter", "ref_name": "IMG_0534", "pair_name": "h3 + IMG_0529", "seed": 9302, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/O76RlcBGkgACopi-PmKqn_xk3WiF4v.jpg", "dual_url": "https://v3b.fal.media/files/b/0a957771/HydRq01KLiMJAMGXy5kQg_Il3tuPB8.jpg", "mirror_url": "https://v3b.fal.media/files/b/0a957ac2/nH9OGjT_2daOnaqOjWOks_gkktwQfK.jpg", "label": "h3_ski_s1"}, {"ref_id": "p4", "scene_id": "moto_s0", "colorway": "Patriot", "ref_name": "IMG_0550", "pair_name": "p4 + IMG_0513", "seed": 9101, "v1_url": "https://v3b.fal.media/files/b/0a9576ea/em2m3MQxcbj_FRbBj9xIf_IGmDdYoe.jpg", "dual_url": "https://v3b.fal.media/files/b/0a957773/TQQMrGslYGQyq_PeQkNSU_TrZxpkNJ.jpg", "mirror_url": "https://v3b.fal.media/files/b/0a957ac2/ftcw9h1a_UGileNaxtWZ7_rtOeNtWI.jpg", "label": "p4_moto_s0"}, {"ref_id": "p4", "scene_id": "mtb_s0", "colorway": "Patriot", "ref_name": "IMG_0550", "pair_name": "p4 + IMG_0513", "seed": 9201, "v1_url": "https://v3b.fal.media/files/b/0a9576ea/s9V40Y9m6O2FPdoJJseeP_yzRmXFm6.jpg", "dual_url": "https://v3b.fal.media/files/b/0a957773/NwpAjHjhbVOf-MVKuvnHN_1Rm2NkOF.jpg", "mirror_url": "https://v3b.fal.media/files/b/0a957ac2/UAJnUDA4pmUIec9I6vh9z_ko3MNpqI.jpg", "label": "p4_mtb_s0"}, {"ref_id": "p4", "scene_id": "ski_s0", "colorway": "Patriot", "ref_name": "IMG_0550", "pair_name": "p4 + IMG_0513", "seed": 9301, "v1_url": "https://v3b.fal.media/files/b/0a9576eb/y780v4X7ZfbpzDb9IZnLF_LNH3HCX7.jpg", "dual_url": "https://v3b.fal.media/files/b/0a957774/xdA29wgeGu19MUy-MKQAN_VlsicveX.jpg", "mirror_url": "https://v3b.fal.media/files/b/0a957ac2/FrkRUa5dibM_dawyyC-Dd_V9hmlfdM.jpg", "label": "p4_ski_s0"}, {"ref_id": "p4", "scene_id": "snow_s1", "colorway": "Patriot", "ref_name": "IMG_0550", "pair_name": "p4 + IMG_0513", "seed": 9402, "v1_url": "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg", "dual_url": "https://v3b.fal.media/files/b/0a957774/MCyw4XnXLvdYrQPPptl-u_RkhKVNa9.jpg", "mirror_url": "https://v3b.fal.media/files/b/0a957ac2/YeZo4PdDG1N_sybOkmcvR_hK5ZcXP4.jpg", "label": "p4_snow_s1"}];
+const SCORES_KEY='cb2_mirror2_scores';
+const FLAGS_KEY='cb2_mirror2_flags';
+const scores=JSON.parse(localStorage.getItem(SCORES_KEY)||'{}');
+const flags=JSON.parse(localStorage.getItem(FLAGS_KEY)||'{}');
+
+function setScore(key, n){
+  scores[key]=scores[key]===n?0:n;
+  localStorage.setItem(SCORES_KEY,JSON.stringify(scores));
+  render();updateVerdict();
+}
+function toggleFlag(key, type){
+  if(!flags[key])flags[key]={};
+  flags[key][type]=!flags[key][type];
+  if(!flags[key].flipped && !flags[key].perpendicular)delete flags[key];
+  localStorage.setItem(FLAGS_KEY,JSON.stringify(flags));
+  render();updateVerdict();
+}
+
+function updateVerdict(){
+  let mirRated=0, mirFive=0, mirFlipped=0;
+  DATA.forEach(d=>{
+    const mk=`${d.label}_mir`;
+    if(scores[mk]>0)mirRated++;
+    if(scores[mk]===5)mirFive++;
+    if(flags[mk] && flags[mk].flipped)mirFlipped++;
+  });
+  if(mirRated===0){
+    document.getElementById('verdictText').textContent='Score and flag to see if mirror-img2 fixed the flip bug.';
+    return;
+  }
+  let msg=`Mirror-img2: ${mirFive}/${DATA.length} perfect 5s · ${mirFlipped}/${DATA.length} still flipped. `;
+  if(mirFlipped===0 && mirFive>=4){
+    msg += '🟢 Mirror-img2 fix works — adopt it as production pattern.';
+  } else if(mirFlipped<=1 && mirFive>=3){
+    msg += '🟡 Partial fix — mostly works but some cases still broken.';
+  } else if(mirFlipped>=3){
+    msg += '🔴 Mirror-img2 did NOT fix the flip bug — model is doing something other than literal copy.';
+  } else {
+    msg += 'Mixed signal.';
+  }
+  document.getElementById('verdictText').textContent=msg;
+}
+
+function exportResults(){
+  const payload={
+    exportedAt:new Date().toISOString(),
+    test:'mirrored_img2_test',
+    scores:scores,
+    flags:flags,
+  };
+  const text=JSON.stringify(payload,null,2);
+  navigator.clipboard.writeText(text).then(()=>{
+    alert(`Copied ${Object.keys(scores).length} scores + ${Object.keys(flags).length} flags`);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    alert('Copied (fallback)');
+  });
+}
+
+function cell(d, variant, hdrClass, hdrLabel, url){
+  const key=`${d.label}_${variant}`;
+  const s=scores[key]||0;
+  const f=flags[key]||{};
+  return `<div class="side">
+    <div class="hdr ${hdrClass}">${hdrLabel}</div>
+    <img src="${url}" onclick="openLB('${url}')">
+    <div class="controls">
+      <div class="score" data-key="${key}">
+        ${[1,2,3,4,5].map(n=>`<span class="${s>=n?'sel':''}" data-n="${n}">${n}</span>`).join('')}
+      </div>
+      <div class="flags">
+        <button class="${f.flipped?'on-flip':''}" data-flag="flipped" data-key="${key}" title="Symbols flipped wrong for arm">↔flip</button>
+        <button class="${f.perpendicular?'on-perp':''}" data-flag="perpendicular" data-key="${key}" title="Perpendicular">⊥</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const c=document.getElementById('content');
+  c.innerHTML=DATA.map(d=>{
+    const cw=d.colorway==='Patriot'?'t-patriot':'t-hunter';
+    return `<div class="pair">
+      <h2>${d.ref_id.toUpperCase()} · ${d.scene_id} <span class="tag ${cw}">${d.colorway}</span></h2>
+      <div class="meta">${d.pair_name} · seed ${d.seed}</div>
+      <div class="three-way">
+        ${cell(d,'v1','v1','V1 single-ref',d.v1_url)}
+        ${cell(d,'dual','dual','DUAL (original img2)',d.dual_url)}
+        ${cell(d,'mir','mir','DUAL (MIRRORED img2)',d.mirror_url)}
+      </div>
+    </div>`;
+  }).join('');
+
+  c.querySelectorAll('.score').forEach(el=>{
+    el.querySelectorAll('span').forEach(s=>{
+      s.onclick=(e)=>{e.stopPropagation();setScore(el.dataset.key,parseInt(s.dataset.n));};
+    });
+  });
+  c.querySelectorAll('.flags button').forEach(b=>{
+    b.onclick=(e)=>{e.stopPropagation();toggleFlag(b.dataset.key,b.dataset.flag);};
+  });
+}
+
+function openLB(url){document.getElementById('lbimg').src=url;document.getElementById('lb').classList.add('on');}
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+
+render();
+updateVerdict();
+</script>
+</body></html>
