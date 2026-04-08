@@ -319,6 +319,14 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     </div>
     <button onclick="vidLabDismiss()" style="margin-top:.5rem;padding:.25rem .6rem;border-radius:6px;border:1px solid #333;background:transparent;color:#666;font-size:.6rem;cursor:pointer">Dismiss Source Image</button>
   </div>
+  <!-- Job History -->
+  <div id="vidJobHistory" style="display:none;background:#111;border:1px solid #222;border-radius:10px;padding:.6rem;margin-bottom:.6rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+      <div style="font-size:.7rem;font-weight:700;color:#f59e0b">Recent Video Jobs</div>
+      <button onclick="vidJobRefreshAll()" style="padding:.2rem .5rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.55rem;cursor:pointer;font-weight:600">Refresh All</button>
+    </div>
+    <div id="vidJobList" style="font-size:.6rem"></div>
+  </div>
   <div style="display:flex;gap:.3rem;justify-content:center;margin-bottom:.5rem">
     <button id="vidTabNew" class="active" onclick="vidSetTab('new')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">To Review (<span id="vidCntNew">0</span>)</button>
     <button id="vidTabDone" onclick="vidSetTab('done')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">Reviewed (<span id="vidCntDone">0</span>)</button>
@@ -1444,6 +1452,7 @@ function vidIsR(v){return getC(v.id).length>0;}
 function vidUpFilt(){vidFilt=vidTab==='new'?ALL_VIDEOS.filter(v=>!vidIsR(v)):ALL_VIDEOS.filter(v=>vidIsR(v));}
 
 function vidLabCheck(){
+  vidJobRender(); // Always render job history on tab load
   const src=localStorage.getItem('cb2_videolab_source');
   if(!src){document.getElementById('vidLabSource').style.display='none';return;}
   try{
@@ -1475,8 +1484,10 @@ function vidLabCheck(){
     }
   }catch(e){}
 }
-function vidLabResumePoll(statusUrl,resultUrl,platformName){
+function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
   const FAL='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
+  // Resolve requestId from localStorage if not passed (backward compat for resume-on-reload)
+  if(!requestId){const j=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');if(j)requestId=j.requestId;}
   let polls=0;
   const st=document.getElementById('vidLabStatus');
   const poller=setInterval(()=>{
@@ -1502,11 +1513,14 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName){
           }else{
             prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found.</span>';
           }
+          // Update Job History with final status
+          if(requestId)vidJobUpdate(requestId,{status:'COMPLETED',videoUrl:vidUrl||''});
         });
       }else if(s.status==='FAILED'){
         clearInterval(poller);
         localStorage.removeItem('cb2_videolab_job');
         prog.innerHTML='<span style="color:#ef4444;font-weight:700">FAILED</span> — '+(s.error||'unknown error');
+        if(requestId)vidJobUpdate(requestId,{status:'FAILED'});
       }
     }).catch(()=>{});
   },15000);
@@ -1515,6 +1529,58 @@ function vidLabDismiss(){
   localStorage.removeItem('cb2_videolab_source');
   localStorage.removeItem('cb2_videolab_job');
   document.getElementById('vidLabSource').style.display='none';
+}
+// === Job History — persists across reloads, nothing gets lost ===
+function vidJobLog(job){
+  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  jobs.unshift(job);
+  if(jobs.length>20)jobs.length=20; // keep last 20
+  localStorage.setItem('cb2_video_jobs',JSON.stringify(jobs));
+  vidJobRender();
+}
+function vidJobUpdate(requestId,updates){
+  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const j=jobs.find(j=>j.requestId===requestId);
+  if(j)Object.assign(j,updates);
+  localStorage.setItem('cb2_video_jobs',JSON.stringify(jobs));
+  vidJobRender();
+}
+function vidJobRender(){
+  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const panel=document.getElementById('vidJobHistory');
+  const list=document.getElementById('vidJobList');
+  if(!jobs.length){panel.style.display='none';return;}
+  panel.style.display='block';
+  list.innerHTML=jobs.map(j=>{
+    const age=Math.round((Date.now()-new Date(j.submitted).getTime())/60000);
+    const ageStr=age<60?age+'m ago':Math.round(age/60)+'h ago';
+    const statusColor=j.status==='COMPLETED'?'#22c55e':j.status==='FAILED'?'#ef4444':'#f59e0b';
+    const videoLink=j.videoUrl?'<a href="'+j.videoUrl+'" target="_blank" style="color:#06b6d4;margin-left:.3rem">Watch</a>':'';
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;border-bottom:1px solid #1a1a1a">'
+      +'<div><span style="color:#ccc">'+j.platform+'</span> <span style="color:#666">— '+(j.label||'unknown')+'</span></div>'
+      +'<div><span style="color:'+statusColor+';font-weight:600">'+(j.status||'PENDING')+'</span> <span style="color:#555">'+ageStr+'</span>'+videoLink+'</div>'
+      +'</div>';
+  }).join('');
+}
+function vidJobRefreshAll(){
+  const FAL='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
+  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const pending=jobs.filter(j=>j.status!=='COMPLETED'&&j.status!=='FAILED');
+  if(!pending.length){showToast('All jobs already finished');return;}
+  showToast('Checking '+pending.length+' pending job(s)...');
+  pending.forEach(j=>{
+    fetch(j.statusUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(s=>{
+      if(s.status==='COMPLETED'){
+        fetch(j.resultUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(res=>{
+          const vidUrl=res?.video?.url||res?.output?.video?.url;
+          vidJobUpdate(j.requestId,{status:'COMPLETED',videoUrl:vidUrl||''});
+          if(vidUrl)showToast(j.platform+' done! Tap Watch to view.');
+        });
+      }else{
+        vidJobUpdate(j.requestId,{status:s.status||'UNKNOWN'});
+      }
+    }).catch(()=>{});
+  });
 }
 function vidLabGenerate(platform){
   const src=JSON.parse(localStorage.getItem('cb2_videolab_source')||'null');
@@ -1553,17 +1619,20 @@ function vidLabGenerate(platform){
     const resultUrl=d.response_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid);
     // Save job state so it survives page reloads
     localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,submitted:new Date().toISOString()}));
+    // Log to Job History so it's never lost
+    vidJobLog({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,label:src.label,status:'IN_QUEUE',submitted:new Date().toISOString()});
     st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
       +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.2rem">Job Submitted!</div>'
       +'<div id="vidLabProgress" style="font-size:.65rem;color:#ccc">Status: IN_QUEUE — checking every 15s...</div>'
       +'<div style="font-size:.5rem;color:#666;margin-top:.3rem">Request: '+rid.slice(0,18)+'...</div></div>';
     // Start polling — reuses the same resume function
-    vidLabResumePoll(statusUrl,resultUrl,p.name);
+    vidLabResumePoll(statusUrl,resultUrl,p.name,rid);
   }).catch(e=>{
     st.innerHTML='<div style="color:#ef4444">Network error: '+e.message+'</div>';
     document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
   });
 }
+
 
 function vidSetTab(t){
   vidTab=t;vidIdx=0;
