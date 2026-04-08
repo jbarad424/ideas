@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reference Rotation A/B — April 8 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1500px;margin:0 auto;padding:1rem;background:#111;color:#eee;line-height:1.4}
+h1{font-size:1.3rem;margin-bottom:.3rem}
+.sub{color:#888;font-size:.8rem;margin-bottom:1rem}
+.filters{position:sticky;top:0;background:#111;padding:.8rem 0;border-bottom:1px solid #333;margin-bottom:1rem;z-index:10}
+.filters button{padding:.4rem .8rem;background:#222;color:#ccc;border:1px solid #444;border-radius:4px;cursor:pointer;margin-right:.3rem;font-size:.8rem}
+.filters button.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.ref-group{margin-bottom:2rem;border:1px solid #333;border-radius:6px;padding:1rem;background:#1a1a1a}
+.ref-header{display:flex;align-items:center;gap:1rem;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid #333}
+.ref-thumbs{display:flex;gap:.5rem}
+.ref-thumbs img{width:90px;height:90px;object-fit:cover;border-radius:4px;background:#222;border:2px solid #333}
+.ref-thumbs img.rotated{border-color:#f59e0b}
+.ref-info h2{font-size:1rem;margin-bottom:.2rem}
+.ref-info .meta{font-size:.75rem;color:#888}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.65rem;font-weight:700;margin-right:.2rem;text-transform:uppercase}
+.t-hunter{background:#365314;color:#fde047}
+.t-patriot{background:#1e3a5f;color:#fff}
+.t-product{background:#444;color:#ccc}
+.t-jacket{background:#6b21a8;color:#fff}
+.pair-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+.pair{border:1px solid #333;border-radius:4px;overflow:hidden;background:#0a0a0a}
+.pair-label{padding:.4rem .6rem;font-size:.75rem;color:#aaa;background:#161616;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+.pair-side{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#222}
+.side{background:#0a0a0a;position:relative}
+.side img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;cursor:pointer}
+.side-badge{position:absolute;top:.4rem;left:.4rem;padding:.15rem .5rem;border-radius:3px;font-size:.65rem;font-weight:700;text-transform:uppercase;z-index:2}
+.badge-orig{background:#444;color:#ccc}
+.badge-rot{background:#f59e0b;color:#000}
+.side-controls{padding:.4rem .5rem;display:flex;justify-content:space-between;align-items:center;gap:.4rem;background:#0a0a0a;border-top:1px solid #222}
+.score{display:inline-flex;gap:.15rem}
+.score span{width:1.2rem;height:1.2rem;border-radius:50%;background:#333;color:#888;display:flex;align-items:center;justify-content:center;font-size:.6rem;cursor:pointer}
+.score span.sel{background:#22c55e;color:#fff}
+.flags{display:flex;gap:.25rem}
+.flags button{padding:.25rem .4rem;background:#222;border:1px solid #444;color:#888;font-size:.6rem;cursor:pointer;border-radius:3px;white-space:nowrap}
+.flags button.on-rot{background:#f59e0b;color:#000;border-color:#f59e0b;font-weight:700}
+.flags button.on-perp{background:#dc2626;color:#fff;border-color:#dc2626;font-weight:700}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;padding:2rem;cursor:pointer}
+.lightbox.on{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain}
+.summary{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:1rem;margin-bottom:1rem;font-size:.85rem}
+.summary h3{font-size:.9rem;margin-bottom:.5rem;color:#f59e0b}
+.verdict-box{background:#1a1a1a;border:1px solid #22c55e;border-radius:6px;padding:1rem;margin-bottom:1rem;font-size:.85rem;display:none}
+.verdict-box.on{display:block}
+.verdict-box h3{color:#22c55e;font-size:.95rem;margin-bottom:.5rem}
+.verdict-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.5rem;margin-top:.5rem}
+.stat{background:#0a0a0a;border:1px solid #333;padding:.5rem;border-radius:4px;text-align:center}
+.stat .n{font-size:1.2rem;font-weight:700;color:#fff}
+.stat .l{font-size:.65rem;color:#888;text-transform:uppercase}
+.stat.win{border-color:#22c55e}
+.stat.win .n{color:#22c55e}
+.export-btn{position:fixed;bottom:1rem;right:1rem;padding:.7rem 1.2rem;background:#22c55e;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,.5);font-size:.85rem}
+.export-btn:hover{background:#16a34a}
+@media(min-width:900px){.pair-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.verdict-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head><body>
+
+<h1>Reference Rotation A/B — Original vs Rotated 180°</h1>
+<div class="sub">April 8 2026 · 12 refs × 2 sports × 2 scenes = 48 paired gens · Nano Banana Pro · pure A/B (identical prompts + seeds)</div>
+
+<div class="summary">
+<h3>Hypothesis</h3>
+<p>In the first ref A/B test, <strong>35/48 gens (73%)</strong> were flagged ↻ 180° — the CB2 rendered upside-down. Rotating each reference photo 180° before generation should fix the orientation. This page is the pure A/B: identical prompts, identical seeds, only the reference photo orientation differs. Score both sides 1-5 and flag which still come out wrong. If rotated beats original on most pairs, reference orientation is the bug and we lock in rotated refs as production.</p>
+</div>
+
+<div class="verdict-box" id="verdict"></div>
+
+<div class="filters">
+<button class="on" data-filter="all">All 48 pairs</button>
+<button data-filter="Patriot">Patriot only</button>
+<button data-filter="Hunter">Hunter only</button>
+<button data-filter="product">Product refs only</button>
+<button data-filter="jacket">Jacket refs only</button>
+<button data-filter="moto">Moto only</button>
+<button data-filter="mtb">MTB only</button>
+</div>
+
+<div id="content"></div>
+
+<button class="export-btn" onclick="exportResults()">📋 Export A/B verdict</button>
+
+<div class="lightbox" id="lb"><img id="lbimg" src=""></div>
+
+<script>
+const DATA = [{"label": "h1_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "h1", "ref_name": "IMG_0525_Hunter_Product_A", "ref_file_id": "1PL5wh4AifIvoPNPcaUEX04iLp-z5xIoR", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/gtakqp.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573fb/LxvGmkshCQ_kjGIijZkFM_LvegCBWs.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957618/UtFyCzTo2yo_WxO2RuIxy_qohLU27B.jpg"}, {"label": "h1_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "h1", "ref_name": "IMG_0525_Hunter_Product_A", "ref_file_id": "1PL5wh4AifIvoPNPcaUEX04iLp-z5xIoR", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/gtakqp.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573fc/RiD4jixIRiAaSGAV9jTxV_3taz9PGh.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957619/rin66_fBKaLzUBoMk5qmb_VTXVtw2F.jpg"}, {"label": "h1_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "h1", "ref_name": "IMG_0525_Hunter_Product_A", "ref_file_id": "1PL5wh4AifIvoPNPcaUEX04iLp-z5xIoR", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/gtakqp.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573fc/XHbiYnvcdrtM9BeSYjmTI_kUVZYEuy.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957619/SXXGt-VzDaeu3RkgaX_j__ljLILVXZ.jpg"}, {"label": "h1_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "h1", "ref_name": "IMG_0525_Hunter_Product_A", "ref_file_id": "1PL5wh4AifIvoPNPcaUEX04iLp-z5xIoR", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/gtakqp.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957478/F16eWyoDdw1Iaj9lgOylS_EttLGQPe.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761a/9XWx8_shrN11p70SDTdrN_J7jvf9Em.jpg"}, {"label": "h2_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "h2", "ref_name": "IMG_0529_Hunter_Product_B", "ref_file_id": "1fIbI_i90IURqMSPUIS4c-jZB4ANbXYAk", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/0n5srf.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573fd/fIS1-X5SNMJOlKWhCqRKP_8UGokYwM.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761a/P40-1VntckfOx4Sv1yYiU_b0dMvnAN.jpg"}, {"label": "h2_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "h2", "ref_name": "IMG_0529_Hunter_Product_B", "ref_file_id": "1fIbI_i90IURqMSPUIS4c-jZB4ANbXYAk", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/0n5srf.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573fe/C3WFbfgOeYUZbIQHRHXFK_8kcFcjk5.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761a/UkCPbjORLXoeQDuPZVGxu_wMrYpJ6x.jpg"}, {"label": "h2_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "h2", "ref_name": "IMG_0529_Hunter_Product_B", "ref_file_id": "1fIbI_i90IURqMSPUIS4c-jZB4ANbXYAk", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/0n5srf.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573ff/Y4ny1OrtzbUkEX18Tr9ad_Yproi4In.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761a/EGPmbx2wigTUlsgqSV1fr_VliBEVsA.jpg"}, {"label": "h2_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "h2", "ref_name": "IMG_0529_Hunter_Product_B", "ref_file_id": "1fIbI_i90IURqMSPUIS4c-jZB4ANbXYAk", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/0n5srf.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957400/rePA9BGc0_TQnRM1ZHfO6_L6XVgEYa.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761b/ZkKR9QvBqGOwc7_DN10ma_OTfLu9UD.jpg"}, {"label": "h3_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_file_id": "1KeaKD9RwJopY0c_dHTgUiiV-a-Wyh327", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/08ekrc.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957400/U2I6hKwMIU7zy2uvJigwy_PkvgyKo6.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761c/98s8x5_b9SRHWrjorME2y_y4CUi6pL.jpg"}, {"label": "h3_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_file_id": "1KeaKD9RwJopY0c_dHTgUiiV-a-Wyh327", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/08ekrc.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957400/nL1b0vNXn5RMr7m4aTrUJ_38erGEjW.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761c/aT26PJ16FEPXVuS-WWh86_D4alUKgL.jpg"}, {"label": "h3_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_file_id": "1KeaKD9RwJopY0c_dHTgUiiV-a-Wyh327", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/08ekrc.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957401/EsndciIT4xagNCzL7B1Pa_9GemUTwu.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761c/lpGLKDjC8b3Fxu52Lp_nt_G7cJ3Gg6.jpg"}, {"label": "h3_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_file_id": "1KeaKD9RwJopY0c_dHTgUiiV-a-Wyh327", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/08ekrc.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957402/ee9oq6NdlT3siOrMjf7vv_kZivoM2a.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761d/5c0ekFrHlIlUo0ARZy4mE_68UXt5QA.jpg"}, {"label": "h4_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "h4", "ref_name": "IMG_0541_Hunter_Jacket_B", "ref_file_id": "18A5vhpJYrzCTVkJJF4K2-ctv55o3lzh9", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/ew1f53.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957403/4woCBPBBfQocWqj5LK2UY_e11rXw1h.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761d/hGOfk02XYbz8curMLjSvZ_LFLdDrij.jpg"}, {"label": "h4_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "h4", "ref_name": "IMG_0541_Hunter_Jacket_B", "ref_file_id": "18A5vhpJYrzCTVkJJF4K2-ctv55o3lzh9", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/ew1f53.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957403/DscidYXiMleLBz0JjmijX_0De0uHkf.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761f/DWYHavSdAVKeLOWGdHpe7_gUPWLyBJ.jpg"}, {"label": "h4_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "h4", "ref_name": "IMG_0541_Hunter_Jacket_B", "ref_file_id": "18A5vhpJYrzCTVkJJF4K2-ctv55o3lzh9", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/ew1f53.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957403/SP12SlfsMtttlcMgbL3oH_zmbQhfdG.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95761f/RvYEXsOrAcKILi-p6G8HV_Ktxoevtt.jpg"}, {"label": "h4_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "h4", "ref_name": "IMG_0541_Hunter_Jacket_B", "ref_file_id": "18A5vhpJYrzCTVkJJF4K2-ctv55o3lzh9", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/ew1f53.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957404/6CrjxgLqcpjsSnujCXlkD_FbnhNQe1.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957620/866kBrtde3CG9_tB2GaG6_EfBJpmzA.jpg"}, {"label": "h5_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_file_id": "1gQT2_r9UFOVCu3fHk7SmSvzmryfmRYFr", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/gf5am5.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957405/AaQzNnhCxhtjO95fR498N_yp6kaxdN.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957620/OZFjSSQVpKTGd-dwQJWnE_G776ha32.jpg"}, {"label": "h5_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_file_id": "1gQT2_r9UFOVCu3fHk7SmSvzmryfmRYFr", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/gf5am5.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957406/MdqzQtR9Thv9BCz95AwxT_pOK916tL.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957620/GzSwUIb8J7czzV2KdlSRx_NtF8YioP.jpg"}, {"label": "h5_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_file_id": "1gQT2_r9UFOVCu3fHk7SmSvzmryfmRYFr", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/gf5am5.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957406/C3FZpemLdphawiQ11y55A_Xndtiid3.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957622/uHMf--gH_i3GwunyjA-tM_txuGKQ5T.jpg"}, {"label": "h5_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_file_id": "1gQT2_r9UFOVCu3fHk7SmSvzmryfmRYFr", "ref_colorway": "Hunter", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/gf5am5.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957407/0HUC2gnO1n1ETfA5PgVE1_LoaZe7Ip.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957622/lgmup31tZssl_L2QC62Xr_KK7xi26a.jpg"}, {"label": "h6_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "h6", "ref_name": "IMG_0566_Hunter_Product_C", "ref_file_id": "10yVW3qgOSMd2AGu-40Lo2LPBEt_vRdKA", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/x78opz.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957407/Z6e8FZxmoO3XS8lyErzqw_8GK5U9eV.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957623/zkee0h53UiX9XYP3EOeqR_XZ0IdQJP.jpg"}, {"label": "h6_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "h6", "ref_name": "IMG_0566_Hunter_Product_C", "ref_file_id": "10yVW3qgOSMd2AGu-40Lo2LPBEt_vRdKA", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/x78opz.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957408/GnKuhv85Jx1twzMDOcKam_bIJNDXJF.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957623/ge6VEJtXmo3mt3EwyB6e2_bxFPZryv.jpg"}, {"label": "h6_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "h6", "ref_name": "IMG_0566_Hunter_Product_C", "ref_file_id": "10yVW3qgOSMd2AGu-40Lo2LPBEt_vRdKA", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/x78opz.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957408/xdpOfevDCm4kJAk89AxQP_H9JHdhfD.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957624/PFQJiCUU4XN1xzRiqcIrc_dMJTVVhm.jpg"}, {"label": "h6_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "h6", "ref_name": "IMG_0566_Hunter_Product_C", "ref_file_id": "10yVW3qgOSMd2AGu-40Lo2LPBEt_vRdKA", "ref_colorway": "Hunter", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/x78opz.jpg", "orig_url": "https://v3b.fal.media/files/b/0a957409/FYEOA_VgFtbLne_00nGgd_FGDGTjYu.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957624/I9ji-0kXaAfwsctULjf1r_bkudAQzz.jpg"}, {"label": "p1_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "p1", "ref_name": "IMG_0513_Patriot_Product_A", "ref_file_id": "1ASyvicax7lM9gQm45YDUAQjGpPKu53HR", "ref_colorway": "Patriot", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/1095zg.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f2/CGRf1RJDYcGsvXryv7wCv_Y4hvJVcQ.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95760e/fn2Uc4EH4uZpFUAYN2PsR_8BFtVHph.jpg"}, {"label": "p1_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "p1", "ref_name": "IMG_0513_Patriot_Product_A", "ref_file_id": "1ASyvicax7lM9gQm45YDUAQjGpPKu53HR", "ref_colorway": "Patriot", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/1095zg.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f2/wKGsFwf_aMpwSlj0XVens_2clAYdK0.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95760e/0Y8Ft5hAZNmoit0KBBIJy_Qh7Ds8o3.jpg"}, {"label": "p1_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "p1", "ref_name": "IMG_0513_Patriot_Product_A", "ref_file_id": "1ASyvicax7lM9gQm45YDUAQjGpPKu53HR", "ref_colorway": "Patriot", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/1095zg.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f2/onR6t_6xtDO6lxhkLFKrA_yCmDihNh.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95760e/UGjWx9-GMQMPyjEKa-fet_ciArcHnh.jpg"}, {"label": "p1_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "p1", "ref_name": "IMG_0513_Patriot_Product_A", "ref_file_id": "1ASyvicax7lM9gQm45YDUAQjGpPKu53HR", "ref_colorway": "Patriot", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/1095zg.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f2/1bmrj8zniJ4_RIra38rxT_pYKHnJrJ.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95760e/zT45I91Awjtqv9tLVxsZy_KUHUTA7m.jpg"}, {"label": "p2_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "p2", "ref_name": "IMG_0517_Patriot_Product_B", "ref_file_id": "1a7UDcAAH1i4KDjdHSwdpgQSICduohbNa", "ref_colorway": "Patriot", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/cv6cl8.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f2/C0znJV9S4-WjRit92lUGv_uc171ql6.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95760e/fzvDh9K3AyFaVmQfVEZFi_Iga5kIwB.jpg"}, {"label": "p2_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "p2", "ref_name": "IMG_0517_Patriot_Product_B", "ref_file_id": "1a7UDcAAH1i4KDjdHSwdpgQSICduohbNa", "ref_colorway": "Patriot", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/cv6cl8.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f2/czWkQzNqMtuOisK01mQ2-_0JtJZXSE.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95760e/QH3icDgFI0P6e3QJtAqBC_4UmExPB7.jpg"}, {"label": "p2_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "p2", "ref_name": "IMG_0517_Patriot_Product_B", "ref_file_id": "1a7UDcAAH1i4KDjdHSwdpgQSICduohbNa", "ref_colorway": "Patriot", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/cv6cl8.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f2/oTpMucm4BzS4A4fRPgVdq_cztsmWdr.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95760e/rSFNiRU7jfHcCU84w5wrA_Our1YXgg.jpg"}, {"label": "p2_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "p2", "ref_name": "IMG_0517_Patriot_Product_B", "ref_file_id": "1a7UDcAAH1i4KDjdHSwdpgQSICduohbNa", "ref_colorway": "Patriot", "ref_type": "product", "ref_rotated_url": "https://files.catbox.moe/cv6cl8.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f2/xAzOnN_QM6ymIJoWkYQt-_wiSN9Mru.jpg", "rot_url": "https://v3b.fal.media/files/b/0a95760e/OI08x4ydr3TOtATDastEg_Kz5WJwx0.jpg"}, {"label": "p3_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "p3", "ref_name": "IMG_0546_Patriot_Jacket_A", "ref_file_id": "1BcqhrqdrEgK27Y5cfYA8qfzSkFcHR-L7", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/pw5dgo.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f4/isJ6FLTCKtnRzPZzq78_8_9jUnB8Me.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957611/bPjZ-vEdVHzpWUCAS390O_CFyGqgk5.jpg"}, {"label": "p3_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "p3", "ref_name": "IMG_0546_Patriot_Jacket_A", "ref_file_id": "1BcqhrqdrEgK27Y5cfYA8qfzSkFcHR-L7", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/pw5dgo.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f4/4L0xFYTMS5ZuewXSysU8n_iq9ReIKg.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957611/Tro4GEUQmnIMtsqh25JEa_O5lV5DwL.jpg"}, {"label": "p3_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "p3", "ref_name": "IMG_0546_Patriot_Jacket_A", "ref_file_id": "1BcqhrqdrEgK27Y5cfYA8qfzSkFcHR-L7", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/pw5dgo.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f4/VQWXmuV9L6VGeJXNVov4I_c1bhU70d.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957611/N0EHhJc9BYcqHOwfhd4WY_sJLjvCuk.jpg"}, {"label": "p3_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "p3", "ref_name": "IMG_0546_Patriot_Jacket_A", "ref_file_id": "1BcqhrqdrEgK27Y5cfYA8qfzSkFcHR-L7", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/pw5dgo.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f5/QaHoxfEH-GjXitTCgWAg8_Pt4dlPPh.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957611/x1MPgYFsKXMXGdCXh3K63_K2HHfFEw.jpg"}, {"label": "p4_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_file_id": "1TnipKYiHCOBm1wBloxLhFDSzoddxOUXQ", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/ly9vdu.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f5/78nWRqP7HYoZifDHXK7ZS_kDZBIc1U.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957611/3H4MD_vHn0zM7iBOm-MuN_zTPpxJZ1.jpg"}, {"label": "p4_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_file_id": "1TnipKYiHCOBm1wBloxLhFDSzoddxOUXQ", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/ly9vdu.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f6/XvLYrqaepryNHR7UyiK6v_2XeigQQc.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957612/r9DatQNaI1qkUhR1V89yb_BGSCDF97.jpg"}, {"label": "p4_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_file_id": "1TnipKYiHCOBm1wBloxLhFDSzoddxOUXQ", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/ly9vdu.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f6/W2ArXQ6cYl-KKrI4U4AgP_AXxWxAFJ.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957613/C04geGrHl4IJawOkfUVV4_6sPYxZhL.jpg"}, {"label": "p4_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_file_id": "1TnipKYiHCOBm1wBloxLhFDSzoddxOUXQ", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/ly9vdu.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f7/p4geIDyZXEHvnpevYIhFX_jVz8YaNF.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957613/qZ5d7usK5zZQq2PR_-SLH_sLyckHVg.jpg"}, {"label": "p5_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_file_id": "1jvilgmnPXDnfG9Mf5kXfPMcXLHV_6GjY", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/nnxm73.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f7/xFOGzKXotOIIW9z_oS9rW_z8juCK2S.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957614/33N9oLOGIbX4sLxZofClt_OjdyxUJ4.jpg"}, {"label": "p5_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_file_id": "1jvilgmnPXDnfG9Mf5kXfPMcXLHV_6GjY", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/nnxm73.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f8/w6TXW-KK9Mt00Qjeektoi_Ipcyc70l.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957653/J6bZ5nl8WkhDELzO8GwBT_GLgFKnER.jpg"}, {"label": "p5_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_file_id": "1jvilgmnPXDnfG9Mf5kXfPMcXLHV_6GjY", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/nnxm73.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f8/yr7C7_vjOg8rq8OP2WcGj_MUWxbb0W.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957615/v9xue7d6rR8aEjy0tR7R6_NcxGYqXK.jpg"}, {"label": "p5_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_file_id": "1jvilgmnPXDnfG9Mf5kXfPMcXLHV_6GjY", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/nnxm73.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f9/AhMxHFcmpBymD7NLeTVwg_6W8oYsfb.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957616/cEt54iUYqGyTGGN5jU5C9_UT72bEWF.jpg"}, {"label": "p6_moto_s0", "sport": "moto", "scene_idx": 0, "ref_id": "p6", "ref_name": "IMG_0560_Patriot_Jacket_D", "ref_file_id": "13O__D25OOqcvZ4XGCwifgUZsac67bMDz", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/dtukcv.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573f9/VF6KJE_edWXV0Cr-y7h5O_KYmFvDzv.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957617/7d653XcBXjcxpFfmgRZ0O_a7qbmaHp.jpg"}, {"label": "p6_moto_s1", "sport": "moto", "scene_idx": 1, "ref_id": "p6", "ref_name": "IMG_0560_Patriot_Jacket_D", "ref_file_id": "13O__D25OOqcvZ4XGCwifgUZsac67bMDz", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/dtukcv.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573fa/6dpv6zjrFcUsiLrDh7VNS_xBewMhCQ.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957617/3BF0S_Tm0N6gEUnaWeiwh_JF04THNh.jpg"}, {"label": "p6_mtb_s0", "sport": "mtb", "scene_idx": 0, "ref_id": "p6", "ref_name": "IMG_0560_Patriot_Jacket_D", "ref_file_id": "13O__D25OOqcvZ4XGCwifgUZsac67bMDz", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/dtukcv.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573fa/mgNsGMN7BouEWYTrj3zho_UZvhCTh9.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957618/nUyfrb_e88l0NkE1eilh7_XLnpwZc9.jpg"}, {"label": "p6_mtb_s1", "sport": "mtb", "scene_idx": 1, "ref_id": "p6", "ref_name": "IMG_0560_Patriot_Jacket_D", "ref_file_id": "13O__D25OOqcvZ4XGCwifgUZsac67bMDz", "ref_colorway": "Patriot", "ref_type": "jacket", "ref_rotated_url": "https://files.catbox.moe/dtukcv.jpg", "orig_url": "https://v3b.fal.media/files/b/0a9573fa/4Na0wIbIKEGNuRk45grFQ_Y1TrFAWq.jpg", "rot_url": "https://v3b.fal.media/files/b/0a957618/EJoyWvmGWQUzNvreF5Xbu_RLyRmJzv.jpg"}];
+const SCORES_KEY='cb2_refabrot_scores';
+const FLAGS_KEY='cb2_refabrot_flags';
+const scores=JSON.parse(localStorage.getItem(SCORES_KEY)||'{}');
+const flags=JSON.parse(localStorage.getItem(FLAGS_KEY)||'{}');
+let currentFilter='all';
+
+// scores[label] = {orig: 0-5, rot: 0-5}
+// flags[label] = {orig: {rotate180, perpendicular}, rot: {rotate180, perpendicular}}
+
+function setScore(label, side, n){
+  if(!scores[label])scores[label]={orig:0,rot:0};
+  scores[label][side]=scores[label][side]===n?0:n;
+  localStorage.setItem(SCORES_KEY,JSON.stringify(scores));
+  render(currentFilter);
+  renderVerdict();
+}
+function toggleFlag(label, side, type){
+  if(!flags[label])flags[label]={orig:{},rot:{}};
+  if(!flags[label][side])flags[label][side]={};
+  flags[label][side][type]=!flags[label][side][type];
+  if(!flags[label].orig.rotate180 && !flags[label].orig.perpendicular && !flags[label].rot.rotate180 && !flags[label].rot.perpendicular)delete flags[label];
+  localStorage.setItem(FLAGS_KEY,JSON.stringify(flags));
+  render(currentFilter);
+  renderVerdict();
+}
+
+function renderVerdict(){
+  const box=document.getElementById('verdict');
+  // Count which side wins per pair
+  let origWin=0, rotWin=0, tie=0, rated=0;
+  let origFlagsRot=0, rotFlagsRot=0, origFlagsPerp=0, rotFlagsPerp=0;
+  DATA.forEach(p=>{
+    const s=scores[p.label]||{orig:0,rot:0};
+    if(s.orig>0||s.rot>0){
+      rated++;
+      if(s.orig>s.rot)origWin++;
+      else if(s.rot>s.orig)rotWin++;
+      else tie++;
+    }
+    const f=flags[p.label]||{};
+    if(f.orig){
+      if(f.orig.rotate180)origFlagsRot++;
+      if(f.orig.perpendicular)origFlagsPerp++;
+    }
+    if(f.rot){
+      if(f.rot.rotate180)rotFlagsRot++;
+      if(f.rot.perpendicular)rotFlagsPerp++;
+    }
+  });
+  if(rated===0 && origFlagsRot===0 && rotFlagsRot===0){box.classList.remove('on');return;}
+  box.classList.add('on');
+  const verdict = rotWin>origWin ? '🎯 ROTATED WINS — lock in rotated refs as production' : (origWin>rotWin ? '⚠ ORIGINAL WINS — rotation theory was wrong' : '🤔 Tie so far');
+  box.innerHTML = `
+    <h3>${verdict}</h3>
+    <div class="verdict-grid">
+      <div class="stat ${origWin>rotWin?'win':''}"><div class="n">${origWin}</div><div class="l">Orig wins</div></div>
+      <div class="stat ${rotWin>origWin?'win':''}"><div class="n">${rotWin}</div><div class="l">Rot wins</div></div>
+      <div class="stat"><div class="n">${tie}</div><div class="l">Tied</div></div>
+      <div class="stat"><div class="n">${rated}/48</div><div class="l">Pairs rated</div></div>
+      <div class="stat"><div class="n">${origFlagsRot}</div><div class="l">Orig ↻180 flags</div></div>
+      <div class="stat ${rotFlagsRot<origFlagsRot?'win':''}"><div class="n">${rotFlagsRot}</div><div class="l">Rot ↻180 flags</div></div>
+      <div class="stat"><div class="n">${origFlagsPerp}</div><div class="l">Orig ⊥ flags</div></div>
+      <div class="stat ${rotFlagsPerp<origFlagsPerp?'win':''}"><div class="n">${rotFlagsPerp}</div><div class="l">Rot ⊥ flags</div></div>
+    </div>
+  `;
+}
+
+function exportResults(){
+  let origWin=0, rotWin=0, tie=0, rated=0;
+  DATA.forEach(p=>{
+    const s=scores[p.label]||{orig:0,rot:0};
+    if(s.orig>0||s.rot>0){
+      rated++;
+      if(s.orig>s.rot)origWin++;
+      else if(s.rot>s.orig)rotWin++;
+      else tie++;
+    }
+  });
+  const payload={
+    exportedAt:new Date().toISOString(),
+    test:'ref_ab_rotated',
+    pairs:48,
+    rated:rated,
+    origWin:origWin,
+    rotWin:rotWin,
+    tie:tie,
+    scores:scores,
+    flags:flags,
+    verdict: rotWin>origWin ? 'ROTATED_WINS' : (origWin>rotWin ? 'ORIGINAL_WINS' : 'TIE')
+  };
+  const text=JSON.stringify(payload,null,2);
+  navigator.clipboard.writeText(text).then(()=>{
+    alert(`Copied verdict:\n· ${rated}/48 pairs rated\n· Rotated wins: ${rotWin}\n· Original wins: ${origWin}\n· Tied: ${tie}\n\nPaste in chat.`);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    alert('Copied (fallback)');
+  });
+}
+
+function render(filter){
+  currentFilter=filter;
+  const groups={};
+  DATA.forEach(p=>{
+    if(filter==='Patriot' && p.ref_colorway!=='Patriot')return;
+    if(filter==='Hunter' && p.ref_colorway!=='Hunter')return;
+    if(filter==='product' && p.ref_type!=='product')return;
+    if(filter==='jacket' && p.ref_type!=='jacket')return;
+    if(filter==='moto' && p.sport!=='moto')return;
+    if(filter==='mtb' && p.sport!=='mtb')return;
+    const k=p.ref_id;
+    if(!groups[k])groups[k]={ref_id:p.ref_id,ref_name:p.ref_name,ref_file_id:p.ref_file_id,ref_colorway:p.ref_colorway,ref_type:p.ref_type,ref_rotated_url:p.ref_rotated_url,items:[]};
+    groups[k].items.push(p);
+  });
+  const c=document.getElementById('content');
+  c.innerHTML='';
+  Object.values(groups).forEach(g=>{
+    const div=document.createElement('div');
+    div.className='ref-group';
+    const cw=g.ref_colorway.toLowerCase().includes('patriot')?'t-patriot':'t-hunter';
+    const tt=g.ref_type==='product'?'t-product':'t-jacket';
+    div.innerHTML=`
+      <div class="ref-header">
+        <div class="ref-thumbs">
+          <img src="https://lh3.googleusercontent.com/d/${g.ref_file_id}=w400" onerror="this.style.display='none'" title="Original ref">
+          <img class="rotated" src="${g.ref_rotated_url}" onerror="this.style.display='none'" title="Rotated 180° ref">
+        </div>
+        <div class="ref-info">
+          <h2>${g.ref_name}</h2>
+          <div class="meta"><span class="tag ${cw}">${g.ref_colorway}</span><span class="tag ${tt}">${g.ref_type}</span> · ${g.items.length} pairs</div>
+        </div>
+      </div>
+      <div class="pair-grid">
+        ${g.items.map(p=>{
+          const s=scores[p.label]||{orig:0,rot:0};
+          const f=flags[p.label]||{orig:{},rot:{}};
+          const origS=s.orig||0, rotS=s.rot||0;
+          const origF=f.orig||{}, rotF=f.rot||{};
+          return `<div class="pair">
+            <div class="pair-label"><span>${p.sport} · scene ${p.scene_idx+1}</span><span style="color:#666">seed ${p.scene_idx===0?(p.sport==='moto'?9101:9201):(p.sport==='moto'?9102:9202)}</span></div>
+            <div class="pair-side">
+              <div class="side">
+                <div class="side-badge badge-orig">Original</div>
+                <img src="${p.orig_url}" onclick="openLB('${p.orig_url}')">
+                <div class="side-controls">
+                  <div class="score" data-label="${p.label}" data-side="orig">
+                    ${[1,2,3,4,5].map(n=>`<span class="${origS>=n?'sel':''}" data-n="${n}">${n}</span>`).join('')}
+                  </div>
+                  <div class="flags">
+                    <button class="${origF.rotate180?'on-rot':''}" data-flag="rotate180" data-label="${p.label}" data-side="orig" title="Upside-down">↻180</button>
+                    <button class="${origF.perpendicular?'on-perp':''}" data-flag="perpendicular" data-label="${p.label}" data-side="orig" title="Perpendicular">⊥</button>
+                  </div>
+                </div>
+              </div>
+              <div class="side">
+                <div class="side-badge badge-rot">Rotated</div>
+                <img src="${p.rot_url}" onclick="openLB('${p.rot_url}')">
+                <div class="side-controls">
+                  <div class="score" data-label="${p.label}" data-side="rot">
+                    ${[1,2,3,4,5].map(n=>`<span class="${rotS>=n?'sel':''}" data-n="${n}">${n}</span>`).join('')}
+                  </div>
+                  <div class="flags">
+                    <button class="${rotF.rotate180?'on-rot':''}" data-flag="rotate180" data-label="${p.label}" data-side="rot" title="Upside-down">↻180</button>
+                    <button class="${rotF.perpendicular?'on-perp':''}" data-flag="perpendicular" data-label="${p.label}" data-side="rot" title="Perpendicular">⊥</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    `;
+    c.appendChild(div);
+  });
+  c.querySelectorAll('.score').forEach(el=>{
+    el.querySelectorAll('span').forEach(s=>{
+      s.onclick=(e)=>{
+        e.stopPropagation();
+        setScore(el.dataset.label, el.dataset.side, parseInt(s.dataset.n));
+      };
+    });
+  });
+  c.querySelectorAll('.flags button').forEach(b=>{
+    b.onclick=(e)=>{
+      e.stopPropagation();
+      toggleFlag(b.dataset.label, b.dataset.side, b.dataset.flag);
+    };
+  });
+}
+
+function openLB(url){document.getElementById('lbimg').src=url;document.getElementById('lb').classList.add('on');}
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+
+document.querySelectorAll('.filters button').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    render(b.dataset.filter);
+  };
+});
+
+render('all');
+renderVerdict();
+</script>
+
+</body></html>
