@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-08T02:50:21.573Z",
+  "syncedAt": "2026-04-08T02:59:23.494Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -7453,6 +7453,96 @@
         {
           "text": "Cool photo, but the simples needs to be flipped for the red arm",
           "time": "2026-04-08T02:50:16.597Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v4-ski-50001",
+      "url": "https://files.catbox.moe/ahp2xb.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Skier powder carve. V4: PLUS at wrist, MINUS at elbow, LED at wrist. 108×39mm. Dual-ref w=1600 + product front.",
+      "label": "V4: Skiing",
+      "context": "V4 FINAL ORIENTATION: Justin confirmed LEFT arm = PLUS (+) closest to wrist, MINUS (−) closest to elbow. LED window at wrist (same end as PLUS). V3 had it backwards. This is the definitive orientation.",
+      "comments": [
+        {
+          "text": "Can't really see the symbols but because he's shredding and it's so far away it doesn't really matter. Remote should be a little bit smaller but it's pretty OK give it a 92.",
+          "time": "2026-04-08T02:57:52.382Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v4-snow-50002",
+      "url": "https://files.catbox.moe/o8hlgf.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Snowboarder deep powder. Same V4 orientation.",
+      "label": "V4: Snowboard",
+      "context": "V4 FINAL: Snowboard. V1=84 (too big, flipped). V3=wrong orientation. V4 has correct PLUS-at-wrist.",
+      "comments": [
+        {
+          "text": "They're a little too large, and the symbols are in fact flipped on the left arm should be there should be the other way around",
+          "time": "2026-04-08T02:58:14.467Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v4-mtb-50003",
+      "url": "https://files.catbox.moe/fuljs1.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "MTB rocky forest descent. Same V4 orientation.",
+      "label": "V4: MTB",
+      "context": "V4 FINAL: MTB. V1=74 (too large). V3=95 (symbols not visible from distance). V4 has correct orientation + real dimensions.",
+      "comments": [
+        {
+          "text": "Can't see the symbols, but because it's so far away, it doesn't matter also the remote is really big. This might be a fail.",
+          "time": "2026-04-08T02:58:30.750Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v4-desert-50004",
+      "url": "https://files.catbox.moe/0nb5x0.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Moto desert red rock canyon. Same V4 orientation.",
+      "label": "V4: Moto Desert",
+      "context": "V4 FINAL: Desert moto. V1=84 (flipped 180°). V3=flipped. V4 has correct PLUS-at-wrist orientation.",
+      "comments": [
+        {
+          "text": "We have our very first hundred percent right here looks fantastic",
+          "time": "2026-04-08T02:58:49.631Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v4-night-50005",
+      "url": "https://files.catbox.moe/53c59z.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Moto coastal blue hour. Same V4 orientation.",
+      "label": "V4: Moto Night",
+      "context": "V4 FINAL: Night moto. V1=85 (flipped). V3=\"minus by wrist should not be.\" V4 has correct PLUS-at-wrist.",
+      "comments": [
+        {
+          "text": "This is above the elbow and the symbols are flipped in the wrong direction, so it's a fail, and their boat looks a little too large",
+          "time": "2026-04-08T02:59:09.332Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v4-bc-50006",
+      "url": "https://files.catbox.moe/kneafp.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Backcountry skier summit ridge. Same V4 orientation.",
+      "label": "V4: Ski Backcountry",
+      "context": "V4 FINAL: Backcountry editorial. V1=LED wrong side. V3=flipped. V4 has correct orientation.",
+      "comments": [
+        {
+          "text": "You can't see any road here at all total fail",
+          "time": "2026-04-08T02:59:20.850Z",
           "num": 1
         }
       ]
