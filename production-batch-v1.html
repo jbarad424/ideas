@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Production Batch V1 — April 8 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1500px;margin:0 auto;padding:1rem;background:#111;color:#eee;line-height:1.4}
+h1{font-size:1.3rem;margin-bottom:.3rem}
+.sub{color:#888;font-size:.8rem;margin-bottom:1rem}
+.filters{position:sticky;top:0;background:#111;padding:.8rem 0;border-bottom:1px solid #333;margin-bottom:1rem;z-index:10;display:flex;flex-wrap:wrap;gap:.4rem}
+.filters .grp{display:flex;gap:.2rem;align-items:center}
+.filters .lbl{color:#666;font-size:.7rem;text-transform:uppercase;margin-right:.3rem}
+.filters button{padding:.35rem .7rem;background:#222;color:#ccc;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:.75rem}
+.filters button.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.group{margin-bottom:2rem;border:1px solid #333;border-radius:6px;padding:1rem;background:#1a1a1a}
+.group h2{font-size:1rem;margin-bottom:.5rem;color:#fff}
+.group .meta{font-size:.75rem;color:#888;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid #333}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.65rem;font-weight:700;margin-right:.2rem;text-transform:uppercase}
+.t-hunter{background:#365314;color:#fde047}
+.t-patriot{background:#1e3a5f;color:#fff}
+.t-left{background:#0ea5e9;color:#fff}
+.t-right{background:#a855f7;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.card{border:1px solid #333;border-radius:6px;overflow:hidden;background:#0a0a0a}
+.card img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;cursor:pointer}
+.card .lbl{padding:.4rem .6rem;font-size:.72rem;color:#aaa;background:#161616;display:flex;justify-content:space-between;align-items:center;gap:.3rem}
+.card .sub2{padding:0 .6rem;font-size:.65rem;color:#666}
+.score{display:inline-flex;gap:.15rem}
+.score span{width:1.3rem;height:1.3rem;border-radius:50%;background:#333;color:#888;display:flex;align-items:center;justify-content:center;font-size:.65rem;cursor:pointer}
+.score span.sel{background:#22c55e;color:#fff}
+.card .controls{padding:.4rem .6rem;display:flex;justify-content:space-between;align-items:center;gap:.3rem;background:#0a0a0a;border-top:1px solid #222}
+.flags{display:flex;gap:.2rem}
+.flags button{padding:.25rem .35rem;background:#222;border:1px solid #444;color:#888;font-size:.6rem;cursor:pointer;border-radius:3px;white-space:nowrap}
+.flags button.on-rot{background:#f59e0b;color:#000;border-color:#f59e0b;font-weight:700}
+.flags button.on-perp{background:#dc2626;color:#fff;border-color:#dc2626;font-weight:700}
+.flags button.on-arm{background:#a855f7;color:#fff;border-color:#a855f7;font-weight:700}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;padding:2rem;cursor:pointer}
+.lightbox.on{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain}
+.summary{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:1rem;margin-bottom:1rem;font-size:.85rem}
+.summary h3{font-size:.9rem;margin-bottom:.5rem;color:#22c55e}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem}
+.stat{background:#0a0a0a;border:1px solid #333;padding:.5rem;border-radius:4px;text-align:center}
+.stat .n{font-size:1.2rem;font-weight:700;color:#fff}
+.stat .l{font-size:.6rem;color:#888;text-transform:uppercase}
+.export-btn{position:fixed;bottom:1rem;right:1rem;padding:.7rem 1.2rem;background:#22c55e;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,.5);font-size:.85rem}
+</style>
+</head><body>
+
+<h1>Production Batch V1 — Rotated Winners × All Sports</h1>
+<div class="sub">April 8 2026 · 4 winning refs × 4 sports × 2 scenes = 32 gens · Nano Banana Pro · arm-locked per scene</div>
+
+<div class="summary">
+<h3>Goal</h3>
+<p>First production validation after the rotation A/B (26-2 rotated wins). Test the 4 top refs (h3, h5, p4, p5) across moto + mtb (to confirm they hold) + ski + snowboard (to prove they generalize). Every prompt locks LEFT or RIGHT arm explicitly per scene to close the "both sides look good → wrong arm" escape hatch. Score 1-5 and flag remaining failures. Winner refs get locked in as the production library.</p>
+<div class="stats">
+  <div class="stat"><div class="n" id="sTotal">0</div><div class="l">Total</div></div>
+  <div class="stat"><div class="n" id="sRated">0</div><div class="l">Rated</div></div>
+  <div class="stat"><div class="n" id="sFives">0</div><div class="l">Scored 5</div></div>
+  <div class="stat"><div class="n" id="sFlagged">0</div><div class="l">Flagged</div></div>
+</div>
+</div>
+
+<div class="filters">
+<div class="grp"><span class="lbl">Sport</span>
+<button class="on" data-fsport="all">All</button>
+<button data-fsport="moto">Moto</button>
+<button data-fsport="mtb">MTB</button>
+<button data-fsport="ski">Ski</button>
+<button data-fsport="snow">Snow</button>
+</div>
+<div class="grp"><span class="lbl">Ref</span>
+<button class="on" data-fref="all">All</button>
+<button data-fref="h3">h3</button>
+<button data-fref="h5">h5</button>
+<button data-fref="p4">p4</button>
+<button data-fref="p5">p5</button>
+</div>
+<div class="grp"><span class="lbl">Group by</span>
+<button class="on" data-grp="sport">Sport</button>
+<button data-grp="ref">Ref</button>
+</div>
+</div>
+
+<div id="content"></div>
+
+<button class="export-btn" onclick="exportResults()">📋 Export verdict</button>
+<div class="lightbox" id="lb"><img id="lbimg" src=""></div>
+
+<script>
+const DATA = [{"label": "h3_moto_s0", "sport": "moto", "scene_id": "moto_s0", "seed": 9101, "arm": "LEFT", "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h3.jpg", "url": "https://v3b.fal.media/files/b/0a9576e5/5FiSNwhQExvJ4dU0bNoO3_7wjlzGxI.jpg", "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain"}, {"label": "h3_moto_s1", "sport": "moto", "scene_id": "moto_s1", "seed": 9102, "arm": "LEFT", "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h3.jpg", "url": "https://v3b.fal.media/files/b/0a9576e5/Kx_OhUQHzVY7bLArNarDS_YzMIOyuk.jpg", "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography"}, {"label": "h5_moto_s0", "sport": "moto", "scene_id": "moto_s0", "seed": 9101, "arm": "LEFT", "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h5.jpg", "url": "https://v3b.fal.media/files/b/0a9576e7/TUEOq8WM3lFm4DlvnmMZH_YAfUTHcq.jpg", "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain"}, {"label": "h5_moto_s1", "sport": "moto", "scene_id": "moto_s1", "seed": 9102, "arm": "LEFT", "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h5.jpg", "url": "https://v3b.fal.media/files/b/0a9576e7/tqrooOj9UBfxktD7R5Ufv_AoHuXPBj.jpg", "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography"}, {"label": "p4_moto_s0", "sport": "moto", "scene_id": "moto_s0", "seed": 9101, "arm": "LEFT", "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p4.jpg", "url": "https://v3b.fal.media/files/b/0a9576ea/em2m3MQxcbj_FRbBj9xIf_IGmDdYoe.jpg", "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain"}, {"label": "p4_moto_s1", "sport": "moto", "scene_id": "moto_s1", "seed": 9102, "arm": "LEFT", "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p4.jpg", "url": "https://v3b.fal.media/files/b/0a9576ea/WttMqvG2HnO2FpqdAYrfk_vumDm7qI.jpg", "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography"}, {"label": "p5_moto_s0", "sport": "moto", "scene_id": "moto_s0", "seed": 9101, "arm": "LEFT", "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p5.jpg", "url": "https://v3b.fal.media/files/b/0a9576ed/dDPA24L3CHESIqhgNUrYd_IfaOZW2N.jpg", "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain"}, {"label": "p5_moto_s1", "sport": "moto", "scene_id": "moto_s1", "seed": 9102, "arm": "LEFT", "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p5.jpg", "url": "https://v3b.fal.media/files/b/0a9576ee/I4sPAsexnK3IUlo_HQY_l_w67PcLPr.jpg", "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography"}, {"label": "h3_mtb_s0", "sport": "mtb", "scene_id": "mtb_s0", "seed": 9201, "arm": "LEFT", "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h3.jpg", "url": "https://v3b.fal.media/files/b/0a9576e5/yGrY440QfANH7gmdEbtjs_89eCfYaZ.jpg", "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain"}, {"label": "h3_mtb_s1", "sport": "mtb", "scene_id": "mtb_s1", "seed": 9202, "arm": "LEFT", "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h3.jpg", "url": "https://v3b.fal.media/files/b/0a9576e5/_6-ng0U4RxifF4DUBII_w_7Ddwllhg.jpg", "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography"}, {"label": "h5_mtb_s0", "sport": "mtb", "scene_id": "mtb_s0", "seed": 9201, "arm": "LEFT", "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h5.jpg", "url": "https://v3b.fal.media/files/b/0a9576e7/MDllnhK46wnYzvSwKE5P7_XKMxFh0v.jpg", "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain"}, {"label": "h5_mtb_s1", "sport": "mtb", "scene_id": "mtb_s1", "seed": 9202, "arm": "LEFT", "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h5.jpg", "url": "https://v3b.fal.media/files/b/0a9576e8/c2Dt32hDk3ixTOVwwJV-q_2xGjIaYV.jpg", "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography"}, {"label": "p4_mtb_s0", "sport": "mtb", "scene_id": "mtb_s0", "seed": 9201, "arm": "LEFT", "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p4.jpg", "url": "https://v3b.fal.media/files/b/0a9576ea/s9V40Y9m6O2FPdoJJseeP_yzRmXFm6.jpg", "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain"}, {"label": "p4_mtb_s1", "sport": "mtb", "scene_id": "mtb_s1", "seed": 9202, "arm": "LEFT", "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p4.jpg", "url": "https://v3b.fal.media/files/b/0a9576ea/cedHYRGZpr5V9zpgcQLF1_VnV1GNoy.jpg", "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography"}, {"label": "p5_mtb_s0", "sport": "mtb", "scene_id": "mtb_s0", "seed": 9201, "arm": "LEFT", "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p5.jpg", "url": "https://v3b.fal.media/files/b/0a9576ee/zDxeYmmwVKdB8woiueURL_qPNmEnFZ.jpg", "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain"}, {"label": "p5_mtb_s1", "sport": "mtb", "scene_id": "mtb_s1", "seed": 9202, "arm": "LEFT", "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p5.jpg", "url": "https://v3b.fal.media/files/b/0a9576ee/2RQ7RVI7hvP1Ar0olvuyr_663gW5DH.jpg", "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography"}, {"label": "h3_ski_s0", "sport": "ski", "scene_id": "ski_s0", "seed": 9301, "arm": "RIGHT", "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h3.jpg", "url": "https://v3b.fal.media/files/b/0a9576e5/KA--43aes4b4Z-8LctBzE_gG1geBD8.jpg", "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain"}, {"label": "h3_ski_s1", "sport": "ski", "scene_id": "ski_s1", "seed": 9302, "arm": "RIGHT", "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h3.jpg", "url": "https://v3b.fal.media/files/b/0a9576e5/O76RlcBGkgACopi-PmKqn_xk3WiF4v.jpg", "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography"}, {"label": "h5_ski_s0", "sport": "ski", "scene_id": "ski_s0", "seed": 9301, "arm": "RIGHT", "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h5.jpg", "url": "https://v3b.fal.media/files/b/0a9576e8/B1Y3KQHJD0FJL9gflg2bl_cc5DhJIr.jpg", "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain"}, {"label": "h5_ski_s1", "sport": "ski", "scene_id": "ski_s1", "seed": 9302, "arm": "RIGHT", "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h5.jpg", "url": "https://v3b.fal.media/files/b/0a9576e9/3aZPSMlaxp6nauZY4ocgF_QhugsaIv.jpg", "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography"}, {"label": "p4_ski_s0", "sport": "ski", "scene_id": "ski_s0", "seed": 9301, "arm": "RIGHT", "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p4.jpg", "url": "https://v3b.fal.media/files/b/0a9576eb/y780v4X7ZfbpzDb9IZnLF_LNH3HCX7.jpg", "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain"}, {"label": "p4_ski_s1", "sport": "ski", "scene_id": "ski_s1", "seed": 9302, "arm": "RIGHT", "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p4.jpg", "url": "https://v3b.fal.media/files/b/0a9576ec/yyTAmZFItSMIsqvj09DlW_MMnSoRu0.jpg", "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography"}, {"label": "p5_ski_s0", "sport": "ski", "scene_id": "ski_s0", "seed": 9301, "arm": "RIGHT", "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p5.jpg", "url": "https://v3b.fal.media/files/b/0a9576ef/Sa_2siuZnPEbej6em8j2D_aHiu7N9q.jpg", "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain"}, {"label": "p5_ski_s1", "sport": "ski", "scene_id": "ski_s1", "seed": 9302, "arm": "RIGHT", "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p5.jpg", "url": "https://v3b.fal.media/files/b/0a9576f0/e8o8iZPtrH7WmKGtk-_JI_pNOwVYP9.jpg", "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography"}, {"label": "h3_snow_s0", "sport": "snow", "scene_id": "snow_s0", "seed": 9401, "arm": "LEFT", "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h3.jpg", "url": "https://v3b.fal.media/files/b/0a9576e5/cNrYU_JGUwbLR_jMq-LvA_cMAotBoD.jpg", "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain"}, {"label": "h3_snow_s1", "sport": "snow", "scene_id": "snow_s1", "seed": 9402, "arm": "LEFT", "ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h3.jpg", "url": "https://v3b.fal.media/files/b/0a9576e5/fHiqQYbCLi4xbQqm1UbCz_XQ2nSVj2.jpg", "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography"}, {"label": "h5_snow_s0", "sport": "snow", "scene_id": "snow_s0", "seed": 9401, "arm": "LEFT", "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h5.jpg", "url": "https://v3b.fal.media/files/b/0a9576e9/DXwOivNtNwezUZHuUd2YB_N6axDL99.jpg", "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain"}, {"label": "h5_snow_s1", "sport": "snow", "scene_id": "snow_s1", "seed": 9402, "arm": "LEFT", "ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "ref_colorway": "Hunter", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/h5.jpg", "url": "https://v3b.fal.media/files/b/0a9576ea/WGj1jQxGEe39bEG0eXkAg_5DeK01h6.jpg", "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography"}, {"label": "p4_snow_s0", "sport": "snow", "scene_id": "snow_s0", "seed": 9401, "arm": "LEFT", "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p4.jpg", "url": "https://v3b.fal.media/files/b/0a9576ec/mSZHUiHONdE6c6e0ncT7u_Nee5vJXs.jpg", "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain"}, {"label": "p4_snow_s1", "sport": "snow", "scene_id": "snow_s1", "seed": 9402, "arm": "LEFT", "ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p4.jpg", "url": "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg", "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography"}, {"label": "p5_snow_s0", "sport": "snow", "scene_id": "snow_s0", "seed": 9401, "arm": "LEFT", "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p5.jpg", "url": "https://v3b.fal.media/files/b/0a9576f0/-ZPfGR4YjFukISYiMQuWQ_4Lr9wbLA.jpg", "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain"}, {"label": "p5_snow_s1", "sport": "snow", "scene_id": "snow_s1", "seed": 9402, "arm": "LEFT", "ref_id": "p5", "ref_name": "IMG_0556_Patriot_Jacket_C", "ref_colorway": "Patriot", "ref_url": "https://jbarad424.github.io/ideas/rotated-refs/p5.jpg", "url": "https://v3b.fal.media/files/b/0a9576f0/RTHZUiIm74DqIYjh76Q3X_2UYw3ejH.jpg", "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography"}];
+const SCORES_KEY='cb2_prodbatch_v1_scores';
+const FLAGS_KEY='cb2_prodbatch_v1_flags';
+const scores=JSON.parse(localStorage.getItem(SCORES_KEY)||'{}');
+const flags=JSON.parse(localStorage.getItem(FLAGS_KEY)||'{}');
+let fSport='all', fRef='all', grpBy='sport';
+
+const SPORT_LABELS={moto:'Motorcycle',mtb:'MTB',ski:'Ski',snow:'Snowboard'};
+
+function setScore(label, n){
+  scores[label]=scores[label]===n?0:n;
+  localStorage.setItem(SCORES_KEY,JSON.stringify(scores));
+  render();
+  renderStats();
+}
+function toggleFlag(label, type){
+  if(!flags[label])flags[label]={};
+  flags[label][type]=!flags[label][type];
+  if(!flags[label].rotate180 && !flags[label].perpendicular && !flags[label].wrongArm)delete flags[label];
+  localStorage.setItem(FLAGS_KEY,JSON.stringify(flags));
+  render();
+  renderStats();
+}
+
+function renderStats(){
+  const filtered=DATA.filter(d=>(fSport==='all'||d.sport===fSport)&&(fRef==='all'||d.ref_id===fRef));
+  document.getElementById('sTotal').textContent=filtered.length;
+  document.getElementById('sRated').textContent=filtered.filter(d=>scores[d.label]>0).length;
+  document.getElementById('sFives').textContent=filtered.filter(d=>scores[d.label]===5).length;
+  document.getElementById('sFlagged').textContent=filtered.filter(d=>flags[d.label]).length;
+}
+
+function exportResults(){
+  const payload={
+    exportedAt:new Date().toISOString(),
+    test:'production_batch_v1',
+    total:DATA.length,
+    scores:scores,
+    flags:flags,
+  };
+  const text=JSON.stringify(payload,null,2);
+  navigator.clipboard.writeText(text).then(()=>{
+    alert(`Copied ${Object.keys(scores).length} scores + ${Object.keys(flags).length} flags`);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    alert('Copied (fallback)');
+  });
+}
+
+function render(){
+  const filtered=DATA.filter(d=>(fSport==='all'||d.sport===fSport)&&(fRef==='all'||d.ref_id===fRef));
+  const groups={};
+  filtered.forEach(d=>{
+    const k=grpBy==='sport'?d.sport:d.ref_id;
+    if(!groups[k])groups[k]={key:k,items:[]};
+    groups[k].items.push(d);
+  });
+  const c=document.getElementById('content');
+  c.innerHTML='';
+  const order=grpBy==='sport'?['moto','mtb','ski','snow']:['h3','h5','p4','p5'];
+  order.forEach(k=>{
+    const g=groups[k];
+    if(!g)return;
+    const div=document.createElement('div');
+    div.className='group';
+    const first=g.items[0];
+    let title, meta;
+    if(grpBy==='sport'){
+      title=SPORT_LABELS[k]||k;
+      meta=`${g.items.length} gens across ${new Set(g.items.map(x=>x.ref_id)).size} refs`;
+    } else {
+      title=`Ref ${k.toUpperCase()} — ${first.ref_name}`;
+      const cw=first.ref_colorway==='Patriot'?'t-patriot':'t-hunter';
+      meta=`<span class="tag ${cw}">${first.ref_colorway}</span> ${g.items.length} gens across ${new Set(g.items.map(x=>x.sport)).size} sports`;
+    }
+    div.innerHTML=`<h2>${title}</h2><div class="meta">${meta}</div><div class="grid">${g.items.map(d=>{
+      const s=scores[d.label]||0;
+      const f=flags[d.label]||{};
+      const armTag=d.arm==='LEFT'?'t-left':'t-right';
+      const cw=d.ref_colorway==='Patriot'?'t-patriot':'t-hunter';
+      return `<div class="card">
+        <img src="${d.url}" onclick="openLB('${d.url}')">
+        <div class="lbl">
+          <span><strong>${d.scene_id}</strong> · ${d.ref_id}</span>
+          <span><span class="tag ${cw}">${d.ref_colorway}</span><span class="tag ${armTag}">${d.arm}</span></span>
+        </div>
+        <div class="sub2">seed ${d.seed}</div>
+        <div class="controls">
+          <div class="score" data-label="${d.label}">
+            ${[1,2,3,4,5].map(n=>`<span class="${s>=n?'sel':''}" data-n="${n}">${n}</span>`).join('')}
+          </div>
+          <div class="flags">
+            <button class="${f.rotate180?'on-rot':''}" data-flag="rotate180" data-label="${d.label}" title="Upside-down">↻180</button>
+            <button class="${f.perpendicular?'on-perp':''}" data-flag="perpendicular" data-label="${d.label}" title="Perpendicular">⊥</button>
+            <button class="${f.wrongArm?'on-arm':''}" data-flag="wrongArm" data-label="${d.label}" title="Wrong arm (not the locked arm)">⤫arm</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}</div>`;
+    c.appendChild(div);
+  });
+  c.querySelectorAll('.score').forEach(el=>{
+    el.querySelectorAll('span').forEach(s=>{
+      s.onclick=(e)=>{e.stopPropagation();setScore(el.dataset.label,parseInt(s.dataset.n));};
+    });
+  });
+  c.querySelectorAll('.flags button').forEach(b=>{
+    b.onclick=(e)=>{e.stopPropagation();toggleFlag(b.dataset.label,b.dataset.flag);};
+  });
+}
+
+function openLB(url){document.getElementById('lbimg').src=url;document.getElementById('lb').classList.add('on');}
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+
+document.querySelectorAll('.filters button').forEach(b=>{
+  b.onclick=()=>{
+    if(b.dataset.fsport){document.querySelectorAll('[data-fsport]').forEach(x=>x.classList.remove('on'));b.classList.add('on');fSport=b.dataset.fsport;}
+    if(b.dataset.fref){document.querySelectorAll('[data-fref]').forEach(x=>x.classList.remove('on'));b.classList.add('on');fRef=b.dataset.fref;}
+    if(b.dataset.grp){document.querySelectorAll('[data-grp]').forEach(x=>x.classList.remove('on'));b.classList.add('on');grpBy=b.dataset.grp;}
+    render();
+    renderStats();
+  };
+});
+
+render();
+renderStats();
+</script>
+</body></html>
