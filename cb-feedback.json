@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-08T02:18:04.640Z",
+  "syncedAt": "2026-04-08T02:24:08.732Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -7198,6 +7198,96 @@
         {
           "text": "It's flipped around, unfortunately, but looks really good. 92%.",
           "time": "2026-04-08T02:15:33.095Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "symfix-ski-20001",
+      "url": "https://files.catbox.moe/cndu2y.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Skier carving powder, bright ski jacket, helmet/goggles, dual-ref (Ref C w=1600 + product front), explicit symbol text in prompt.",
+      "label": "SYMFIX: Skiing",
+      "context": "SYMBOL FIX BATCH: All 3 fixes applied — Ref C at w=1600, cb2-ref-front.jpg as image 2, explicit PLUS/REWIND/PLAY-PAUSE/FF/MINUS in prompt. NB Pro $0.15/image. Do the symbols carry across different sports?",
+      "comments": [
+        {
+          "text": "A little far away from the skier and the remote is a little big but this is pretty cool. I give an 88.",
+          "time": "2026-04-08T02:21:43.145Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "symfix-snow-20002",
+      "url": "https://files.catbox.moe/ciy4nk.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Snowboarder slashing deep powder, insulated jacket, helmet, dual-ref + explicit symbols.",
+      "label": "SYMFIX: Snowboard",
+      "context": "SYMBOL FIX BATCH: Snowboard with triple symbol fix. Compare symbol clarity against earlier NB Pro snowboard (10503/10504) which used Ref C at w=800 and no symbol text.",
+      "comments": [
+        {
+          "text": "You almost nailed the play pause symbol, but the remote looks a little too big. I give us an 84.",
+          "time": "2026-04-08T02:22:12.960Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "symfix-mtb-20003",
+      "url": "https://files.catbox.moe/xopi1g.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "MTB descending rocky forest trail, full-face helmet, dual-ref + explicit symbols.",
+      "label": "SYMFIX: MTB",
+      "context": "SYMBOL FIX BATCH: MTB with triple symbol fix. MTB is the hardest sport — handlebars often obscure the forearm. Compare against earlier NB Pro MTB (10505/10506).",
+      "comments": [
+        {
+          "text": "This is not bad just the remote is a little too large for the aspect ratio just it's a little too big for the arm and give it like a 74",
+          "time": "2026-04-08T02:22:41.265Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "symfix-desert-20004",
+      "url": "https://files.catbox.moe/b652jm.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Motorcycle rider desert highway red rock canyon, textile jacket, helmet, dual-ref + explicit symbols.",
+      "label": "SYMFIX: Moto Desert",
+      "context": "SYMBOL FIX BATCH: Desert motorcycle with triple symbol fix. New scene — red rock canyon. Compare against earlier GPT desert (89 score) and NB Pro coastal (99 score).",
+      "comments": [
+        {
+          "text": "This would've been perfect if it's just flipped 180° but otherwise it's pretty damn good given 84",
+          "time": "2026-04-08T02:23:07.862Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "symfix-night-20005",
+      "url": "https://files.catbox.moe/13tuk4.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Motorcycle rider coastal highway blue hour dusk, leather jacket, visor up, city lights, dual-ref + explicit symbols.",
+      "label": "SYMFIX: Moto Night",
+      "context": "SYMBOL FIX BATCH: Night motorcycle — hardest lighting for CB2. GPT night scene scored 0 (wrong product). Can NB Pro + symbol fix render the CB2 correctly at night?",
+      "comments": [
+        {
+          "text": "The symbols are flipped unfortunately, but it looks really cool. Otherwise I give it an 85.",
+          "time": "2026-04-08T02:23:25.744Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "symfix-backcountry-20006",
+      "url": "https://files.catbox.moe/llafvv.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Backcountry skier at summit ridge, panorama, puffy down jacket, goggles pushed up, ski poles, dual-ref + explicit symbols.",
+      "label": "SYMFIX: Ski Backcountry",
+      "context": "SYMBOL FIX BATCH: Editorial/lifestyle skiing — not action, but standing at summit. Tests if CB2 is visible when the arm isnt in motion. Lifestyle marketing angle.",
+      "comments": [
+        {
+          "text": "This is pretty good as the right size and there's some difference with the LED screen. I would rather the LED window needs to be on the other side but then I think that the pause has the pause first and then the play but it's pretty good. I give a lot of 95.",
+          "time": "2026-04-08T02:24:03.261Z",
           "num": 1
         }
       ]
