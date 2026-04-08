@@ -321,9 +321,11 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
         <div id="vidLabMeta" style="font-size:.6rem;color:#888;margin-bottom:.4rem"></div>
         <div style="font-size:.6rem;color:#06b6d4;font-weight:600;margin-bottom:.3rem">Choose a platform to animate:</div>
         <div style="display:flex;gap:.3rem;flex-wrap:wrap" id="vidLabPlatforms">
-          <button onclick="vidLabGenerate('runway')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.6rem;cursor:pointer;font-weight:600">Runway Gen-4 Turbo</button>
-          <button onclick="vidLabGenerate('kling')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Kling 3.0 Pro</button>
-          <button onclick="vidLabGenerate('veo')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.6rem;cursor:pointer;font-weight:600">Veo 3.1</button>
+          <button onclick="vidLabGenerate('kling')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Kling 3.0 Pro <span style="color:#888;font-weight:400">15s/60fps/$1.50</span></button>
+          <button onclick="vidLabGenerate('veo-lite')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.6rem;cursor:pointer;font-weight:600">Veo 3.1 Lite <span style="color:#888;font-weight:400">8s/$0.40</span></button>
+          <button onclick="vidLabGenerate('wan')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #06b6d4;background:transparent;color:#06b6d4;font-size:.6rem;cursor:pointer;font-weight:600">Wan 2.7 Ref <span style="color:#888;font-weight:400">15s/$1.00</span></button>
+          <button onclick="vidLabGenerate('sora')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #ec4899;background:transparent;color:#ec4899;font-size:.6rem;cursor:pointer;font-weight:600">Sora 2 Pro <span style="color:#888;font-weight:400">20s/$5.00</span></button>
+          <button onclick="vidLabGenerate('runway')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.6rem;cursor:pointer;font-weight:600">Runway Gen-4T <span style="color:#888;font-weight:400">10s/$0.50</span></button>
         </div>
         <div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.3rem"></div>
       </div>
@@ -1384,9 +1386,20 @@ function vidLabDismiss(){
 function vidLabGenerate(platform){
   const src=JSON.parse(localStorage.getItem('cb2_videolab_source')||'null');
   if(!src){showToast('No source image');return;}
-  const names={runway:'Runway Gen-4 Turbo',kling:'Kling 3.0 Pro',veo:'Veo 3.1'};
-  document.getElementById('vidLabStatus').innerHTML='<span style="color:#a855f7">Use Claude Code to generate: tell Claude "animate '+src.label+' with '+names[platform]+'"</span>';
-  showToast('Copy the command from the Video Lab panel to Claude Code');
+  const info={
+    kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',dur:'15s',cost:'~$1.50'},
+    'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',dur:'8s',cost:'~$0.40'},
+    wan:{name:'Wan 2.7 Ref-to-Video',endpoint:'fal-ai/wan/v2.7/reference-to-video',dur:'15s',cost:'~$1.00'},
+    sora:{name:'Sora 2 Pro',endpoint:'fal-ai/sora-2/image-to-video/pro',dur:'20s',cost:'~$5.00'},
+    runway:{name:'Runway Gen-4 Turbo',endpoint:'runway-api (direct)',dur:'10s',cost:'~$0.50'}
+  };
+  const p=info[platform]||info.kling;
+  document.getElementById('vidLabStatus').innerHTML='<div style="background:#111;border:1px solid #333;border-radius:6px;padding:.4rem;margin-top:.2rem;text-align:left">'
+    +'<div style="font-size:.6rem;color:#a855f7;font-weight:700;margin-bottom:.2rem">'+p.name+' ('+p.dur+', '+p.cost+')</div>'
+    +'<div style="font-size:.55rem;color:#888;margin-bottom:.2rem">Endpoint: <code style="color:#06b6d4">'+p.endpoint+'</code></div>'
+    +'<div style="font-size:.6rem;color:#ccc">Tell Claude: <strong>"animate '+src.label+' with '+p.name+'"</strong></div>'
+    +'</div>';
+  showToast('Tell Claude Code to animate with '+p.name);
 }
 
 function vidSetTab(t){
