@@ -146,17 +146,18 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 - Also available via fal.ai: Kling 3.0 Pro, Veo 3.1
 - Workflow: stills first → Justin picks winners → animate only approved images
 
-### Key Stats (April 7, 2026 — end of continued session)
-- 385+ total images generated, 290+ reviewed
-- ~65 new images generated April 7 total (across two sessions): 6 Flex moto, 2 two-pass, 4 model comparison, 8 GPT Image 1.5, 19 pipeline tests, 7 micro-inpainting, ~19 other
-- New all-time highs: **100** (NB2 skiing), **99** (GPT masked inpaint motorcycle, NB Pro coastal)
-- Top all-time: 100 (snowboard, NB2 skiing), 99 (GPT masked inpaint, NB Pro coastal), 98 (motorcycle, MTB, skiing)
+### Key Stats (April 7, 2026 — end of third session)
+- 410+ total images generated, 290+ reviewed, 25 new images awaiting review
+- ~90 new images generated April 7 total (across three sessions): 6 Flex moto, 2 two-pass, 4 model comparison, 8 GPT Image 1.5, 19 pipeline tests, 7 micro-inpainting, 20 NB Pro action batch (ski/sled/moto/MTB × 5), 5 motorcycle-with-gloves, ~19 other
+- New all-time highs: **100** (NB2 skiing, V4 moto desert), **99** (GPT masked inpaint motorcycle, NB Pro coastal)
+- Top all-time: 100 (snowboard, NB2 skiing, V4 moto desert), 99 (GPT masked inpaint, NB Pro coastal), 98 (motorcycle, MTB, skiing)
 - 5 parallel research agents completed: product placement models, compositing, Jordan shot list, micro-inpainting, FLUX-to-photorealism
 - 5 parallel pipeline tests completed: GPT masked inpaint, Nano Banana Pro, Nano Banana 2, FLUX-to-GPT enhancement, Fibo Edit
 - Orientation correct 65-70% with Ref C + arm rules (FLUX), ~50% with GPT Image 1.5 (small sample)
-- 13 test videos across 6 models
+- 14 test videos across 6 models (Kling 3.0 Pro V4 desert added)
 - **4 production-quality models validated:** GPT Image 1.5, FLUX 2 Flex, Nano Banana Pro, Nano Banana 2
 - **Above-elbow placement solved** via GPT masked inpainting (on GPT-generated scenes only)
+- **Review page UX major upgrade:** Gallery filter toggles, voice-dictated score parser rewrite, Video Lab with real fal.ai submissions + Job History persistence
 
 ## 3. What's Been Tried and Failed
 
@@ -288,15 +289,62 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 - **Fibo Edit** — text-only, no reference support, same as Pipeline C failure (see failed #20)
 - **Compositing CB2 from FLUX onto GPT scene** — geometric mismatch, dead on arrival (see failed #21)
 
+### Third Session — Review Page UX Overhaul + New Batches
+
+**Gallery Filter UX Fix:**
+- Filters changed from confusing ✓/✗ icons to clear "Accepted"/"Rejected" text labels
+- Toggle behavior: clicking same filter resets to 'all', no separate All button needed
+- Added hint text: "Tap a filter to toggle it on/off"
+
+**galScore() Voice Parser Rewrite:**
+- Complete rewrite to handle Justin's voice-dictated reviews (Siri transcription)
+- Priority-ranked candidate system with 8+ regex patterns: "give this 90", "like a 98", "100 percent", "close to 100", "this is like 100", "get this to 96", etc.
+- Fixed critical bug: "100 percent", "this is like 100" were parsing as 50 (keyword default). Now correctly parse as 100.
+- Word-number mapping: "hundred percent" → 100, "five out of 100" → 5
+- "Final score: X" manual override as highest priority
+
+**Video Lab — Real API Submissions from Browser:**
+- Video Lab now makes real fetch() calls to fal.ai queue API directly from the browser (CORS allowed from jbarad424.github.io)
+- Supports Kling 3.0 Pro, Veo 3.1 Lite, Sora 2 Pro; Runway still requires Claude Code
+- Added directorial cues textarea for custom prompts
+- Fixed image display glitch on tab switch (src='' then setTimeout to set URL)
+- Active job state persists in localStorage (`cb2_videolab_job`) — survives page reloads
+- **Job History panel** — persistent log of all submissions in localStorage (`cb2_video_jobs`, up to 20)
+  - Every submission logged with requestId, statusUrl, platform, label, timestamp
+  - Status auto-updates on COMPLETED/FAILED via polling
+  - "Refresh All" button batch-checks all pending jobs
+  - "Watch" link appears for completed videos
+  - Nothing gets lost even if polling breaks or page reloads
+
+**fal.ai Queue API Key Learnings:**
+- Submit: POST to `queue.fal.run/{endpoint}` — returns `request_id`, `status_url`, `response_url`
+- Status check: GET (not POST!) to `status_url` — POST re-queues the job
+- Result: GET to `response_url` — returns video URL in `res.video.url` or `res.output.video.url`
+- Status URLs use a SHORTER base path than submit URL (e.g., `/fal-ai/kling-video/requests/{id}/status` not `/fal-ai/kling-video/v3/pro/image-to-video/requests/{id}/status`). Always use the URLs returned by the API.
+- Jobs complete and charge even if the UI loses track. Job History solves this visibility problem.
+
+**New Images Generated (25 total, awaiting Justin's review):**
+- 20 NB Pro dual-ref action batch: ski (7001-7005), snowmobile (7001-7005), motorcycle (7001-7005), MTB (7001-7005)
+- 5 motorcycle-with-gloves (8001-8005) — leather riding gloves added to prompt
+
+**Kling 3.0 Pro Video:**
+- Animated V4 Moto Desert (100-scored image) — completed, added to ALL_VIDEOS as vid-kling3-v4desert
+
+**Prompt Template Updates:**
+- All motorcycle prompts now include "thick leather riding gloves"
+- "Wireless earbuds" / "AirPods" removed from all prompts permanently (float on face, look Photoshopped)
+- MANDATORY per-sport gear list added to CLAUDE.md
+
 ### Next Session Priorities
-1. **Scale production across all 4 validated models** — GPT Image 1.5, Nano Banana Pro, Nano Banana 2, FLUX 2 Flex all work. Generate batches across all sports (skiing, snowboard, MTB still need more coverage from newer models).
-2. **Use GPT masked inpainting on best GPT-generated scenes** — apply the 99-scoring pipeline to new GPT scenes to fix above-elbow placement
-3. **Jordan shoots 7 reference photos** — 3 Hunter + 3 Patriot + 1 Tron winter. See jordan-shot-list.html
-4. **Build CREATE tab** — sport/colorway/vibe dropdowns → auto-generate → review page
-5. **Scale video production** — animate approved stills only with Gen-4 Turbo
-6. **Cancel Recraft subscription** ($25/mo, never used)
+1. **Justin reviews 25 new images** — 20 action batch + 5 gloves moto in TO REVIEW tab
+2. **Scale production across all 4 validated models** — GPT Image 1.5, Nano Banana Pro, Nano Banana 2, FLUX 2 Flex all work. Generate batches across all sports.
+3. **Use GPT masked inpainting on best GPT-generated scenes** — apply the 99-scoring pipeline to new GPT scenes to fix above-elbow placement
+4. **Jordan shoots 7 reference photos** — 3 Hunter + 3 Patriot + 1 Tron winter. See jordan-shot-list.html
+5. **Build CREATE tab** — sport/colorway/vibe dropdowns → auto-generate → review page
+6. **Scale video production** — animate approved stills with Kling 3.0 Pro (now submittable from Video Lab) and Gen-4 Turbo
 7. **Fix feedback sync** — SYNC_URL points to wrong webhook (plan exists in luminous-bubbling-candy.md)
 8. **Test Nano Banana Pro with multiple reference images** — supports up to 14 refs, only tested with single Ref C so far. Could improve CB2 fidelity with additional product photos.
+9. **Cancel Recraft subscription** ($25/mo, never used)
 
 ### Key Resources
 | Resource | Location |
@@ -312,10 +360,11 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 ### Sports Priority
 | Sport | Status | Notes |
 |-------|--------|-------|
-| Motorcycle coastal | **Best sport** (99 GPT masked inpaint, 90 GPT, 98 Flex) | GPT masked inpainting scored 99. Magazine-quality shots across all models. |
-| Skiing | **All-time high** (100 NB2, 96 Flex) | Nano Banana 2 scored 100. Needs gloves in ref photo. |
+| Motorcycle coastal | **Best sport** (100 V4 desert, 99 GPT masked inpaint, 90 GPT, 98 Flex) | 5 new gloves-added images awaiting review. All prompts now include leather riding gloves. |
+| Skiing | **All-time high** (100 NB2, 96 Flex) | 5 new NB Pro dual-ref images awaiting review. Needs gloves in ref photo. |
 | Snowboard | Production-ready (96-100) | Strong with Flex g7.0. Needs NB Pro/NB2 testing. |
-| MTB | Cracked (94-98) | Recently jumped from avg 34 to 94+. Needs NB Pro/NB2 testing. |
+| MTB | Cracked (94-98) | 5 new NB Pro dual-ref images awaiting review. Recently jumped from avg 34 to 94+. |
+| Snowmobile | New — testing | 5 new NB Pro dual-ref images awaiting first review. Added snowmobile detection to galDetectSport(). |
 | Hiking | Deprioritized | "People have headphones, don't need CB2 for hiking" — Justin |
 | Running | Deprioritized | Not core use case (no gloves needed) |
 | Fishing/ATV | Dropped | Not enough demand |
