@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CB2 Reference Photo Meta-Analysis — April 8 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1500px;margin:0 auto;padding:1rem;background:#111;color:#eee;line-height:1.4}
+h1{font-size:1.3rem;margin-bottom:.3rem}
+.sub{color:#888;font-size:.8rem;margin-bottom:1rem}
+.intro{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:1rem;margin-bottom:1rem;font-size:.85rem}
+.intro p{color:#ccc;margin-bottom:.5rem}
+.intro strong{color:#22c55e}
+.section{margin-bottom:2rem}
+.section h2{font-size:1.1rem;margin-bottom:.4rem;color:#fff;padding:.5rem 0;border-bottom:1px solid #333}
+.section .hint{color:#888;font-size:.75rem;margin-bottom:.8rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.8rem}
+.card{border:1px solid #333;border-radius:8px;overflow:hidden;background:#0f0f0f}
+.card .hdr{padding:.5rem .7rem;background:#161616;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+.card .hdr .id{font-size:.95rem;font-weight:700;color:#fff}
+.card .hdr .name{font-size:.65rem;color:#666;margin-top:.1rem}
+.card .imgs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#333}
+.card .imgwrap{background:#000;display:flex;align-items:center;justify-content:center}
+.card .imgwrap img{width:100%;display:block;aspect-ratio:1/1.3;object-fit:cover;cursor:pointer}
+.card .imgwrap .placeholder{color:#444;font-size:.7rem;padding:1rem;text-align:center;width:100%;aspect-ratio:1/1.3;display:flex;align-items:center;justify-content:center}
+.card .lbl{padding:.3rem .5rem;font-size:.6rem;color:#888;text-align:center;background:#0a0a0a}
+.card .body{padding:.6rem .8rem;font-size:.72rem;color:#ccc}
+.card .body .cap{color:#666;font-size:.62rem;margin-top:.4rem;font-style:italic}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:3px;font-size:.6rem;font-weight:700;text-transform:uppercase}
+.b-strong{background:#166534;color:#fff}
+.b-kept{background:#1e40af;color:#fff}
+.b-mixed{background:#a16207;color:#fff}
+.b-killed{background:#7f1d1d;color:#fff}
+.b-hunter{background:#365314;color:#fde047;padding:.1rem .35rem;font-size:.55rem;border-radius:3px;font-weight:700;margin-left:.3rem}
+.b-patriot{background:#1e3a5f;color:#fff;padding:.1rem .35rem;font-size:.55rem;border-radius:3px;font-weight:700;margin-left:.3rem}
+.b-tron{background:#0891b2;color:#fff;padding:.1rem .35rem;font-size:.55rem;border-radius:3px;font-weight:700;margin-left:.3rem}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;padding:2rem;cursor:pointer}
+.lightbox.on{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain}
+.legend{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.8rem;font-size:.7rem}
+.legend .k{padding:.5rem;background:#0a0a0a;border:1px solid #333;border-radius:4px;text-align:center}
+</style>
+</head><body>
+
+<h1>CB2 Reference Photo Meta-Analysis</h1>
+<div class="sub">April 8 2026 · 12 A/B refs + Ref C · Status + best-known gen per ref</div>
+
+<div class="intro">
+<p><strong>Why this page exists:</strong> Look at the reference photos. Find what the winners have in common. Then shoot similar photos for Tron (and any future colorway) and we're done. Justin's eyes are better than mine for spotting the pattern, so I'm not going to tell you what I think it is — I'm going to show you the data.</p>
+<p><strong>Each card shows:</strong> the original reference photo on the left, the best-known production gen from that ref on the right (if any), and a one-line verdict from session data. Cards are grouped by status.</p>
+<p><strong>What to look for:</strong> camera angle, crop tightness, how much of the strap is visible, whether the model is wearing the device over a jacket or bare skin, device orientation on the arm, background clutter, lighting direction. Any of those could be the deciding factor.</p>
+<div class="legend">
+  <div class="k"><span class="badge b-strong">STRONG WIN</span><br>Production workhorse</div>
+  <div class="k"><span class="badge b-kept">KEPT</span><br>A/B winner, not stress-tested</div>
+  <div class="k"><span class="badge b-mixed">MIXED</span><br>Works sometimes, unreliable</div>
+  <div class="k"><span class="badge b-killed">KILLED</span><br>Never use as placement ref</div>
+</div>
+</div>
+
+<div id="content"></div>
+
+<div class="lightbox" id="lb"><img id="lbimg" src=""></div>
+
+<script>
+const DATA = [{"id": "h3", "name": "IMG_0534_Hunter_Jacket_A", "colorway": "Hunter", "type": "jacket", "drive_url": "https://lh3.googleusercontent.com/d/1KeaKD9RwJopY0c_dHTgUiiV-a-Wyh327=w800", "status_class": "strong", "status_label": "STRONG WIN", "verdict": "Stance-controllable. Multiple production wins. THE workhorse.", "best_gen_url": "https://v3b.fal.media/files/b/0a957771/6tIHlS5KOC3M9MHlE2KG7_9eYF0oWM.jpg", "best_gen_caption": "h3_moto_s1 dual-ref \u00b7 Justin: \"perfect\""}, {"id": "p4", "name": "IMG_0550_Patriot_Jacket_B", "colorway": "Patriot", "type": "jacket", "drive_url": "https://lh3.googleusercontent.com/d/1TnipKYiHCOBm1wBloxLhFDSzoddxOUXQ=w800", "status_class": "strong", "status_label": "STRONG WIN", "verdict": "Multiple production wins. Dual-ref improves it further.", "best_gen_url": "https://v3b.fal.media/files/b/0a957774/xvYm71FebuQM8N7oGqCgu_453I7qvW.jpg", "best_gen_caption": "p4_snow_s0 dual-ref \u00b7 Justin: \"PERFECT, even better than V1\""}, {"id": "h6", "name": "IMG_0566_Hunter_Product_C", "colorway": "Hunter", "type": "product", "drive_url": "https://lh3.googleusercontent.com/d/10yVW3qgOSMd2AGu-40Lo2LPBEt_vRdKA=w800", "status_class": "kept", "status_label": "KEPT", "verdict": "Won rotation A/B. Not yet tested in production batches.", "best_gen_url": "", "best_gen_caption": "Not yet tested in production batches \u2014 A/B win only"}, {"id": "p6", "name": "IMG_0560_Patriot_Jacket_D", "colorway": "Patriot", "type": "jacket", "drive_url": "https://lh3.googleusercontent.com/d/13O__D25OOqcvZ4XGCwifgUZsac67bMDz=w800", "status_class": "kept", "status_label": "KEPT", "verdict": "Won rotation A/B. Not yet tested in production batches.", "best_gen_url": "", "best_gen_caption": "Not yet tested in production batches \u2014 A/B win only"}, {"id": "h2", "name": "IMG_0529_Hunter_Product_B", "colorway": "Hunter", "type": "product", "drive_url": "https://lh3.googleusercontent.com/d/1fIbI_i90IURqMSPUIS4c-jZB4ANbXYAk=w800", "status_class": "mixed", "status_label": "MIXED", "verdict": "Mixed in A/B as placement ref. Works fine as dual-ref symbol ref.", "best_gen_url": "", "best_gen_caption": "Mixed in A/B. NOTE: this is IMG_0529, used as image 2 for h3 dual-ref (symbol ref role works)"}, {"id": "h5", "name": "IMG_0542_Hunter_Jacket_C", "colorway": "Hunter", "type": "jacket", "drive_url": "https://lh3.googleusercontent.com/d/1gQT2_r9UFOVCu3fHk7SmSvzmryfmRYFr=w800", "status_class": "mixed", "status_label": "MIXED", "verdict": "Non-snow only. Stance-immune. Garbled symbols on snow.", "best_gen_url": "https://v3b.fal.media/files/b/0a9576e9/DXwOivNtNwezUZHuUd2YB_N6axDL99.jpg", "best_gen_caption": "h5_snow_s0 V1 \u00b7 mixed \u2014 Justin: symbols garbled on snow"}, {"id": "p2", "name": "IMG_0517_Patriot_Product_B", "colorway": "Patriot", "type": "product", "drive_url": "https://lh3.googleusercontent.com/d/1a7UDcAAH1i4KDjdHSwdpgQSICduohbNa=w800", "status_class": "mixed", "status_label": "MIXED", "verdict": "Mixed in A/B, never pushed to production.", "best_gen_url": "", "best_gen_caption": "Mixed in A/B, not used in batches"}, {"id": "p3", "name": "IMG_0546_Patriot_Jacket_A", "colorway": "Patriot", "type": "jacket", "drive_url": "https://lh3.googleusercontent.com/d/1BcqhrqdrEgK27Y5cfYA8qfzSkFcHR-L7=w800", "status_class": "mixed", "status_label": "MIXED", "verdict": "Mixed in A/B, never pushed to production.", "best_gen_url": "", "best_gen_caption": "Mixed in A/B, not used in batches"}, {"id": "h1", "name": "IMG_0525_Hunter_Product_A", "colorway": "Hunter", "type": "product", "drive_url": "https://lh3.googleusercontent.com/d/1PL5wh4AifIvoPNPcaUEX04iLp-z5xIoR=w800", "status_class": "killed", "status_label": "KILLED", "verdict": "3 rot=1 fails in A/B. Cannot be used as placement ref.", "best_gen_url": "", "best_gen_caption": "KILLED \u2014 3 rot=1 fails in A/B"}, {"id": "h4", "name": "IMG_0541_Hunter_Jacket_B", "colorway": "Hunter", "type": "jacket", "drive_url": "https://lh3.googleusercontent.com/d/18A5vhpJYrzCTVkJJF4K2-ctv55o3lzh9=w800", "status_class": "killed", "status_label": "KILLED", "verdict": "3 rot=1 fails in A/B. Cannot be used as placement ref.", "best_gen_url": "", "best_gen_caption": "KILLED \u2014 3 rot=1 fails in A/B"}, {"id": "p1", "name": "IMG_0513_Patriot_Product_A", "colorway": "Patriot", "type": "product", "drive_url": "https://lh3.googleusercontent.com/d/1ASyvicax7lM9gQm45YDUAQjGpPKu53HR=w800", "status_class": "killed", "status_label": "KILLED-PLACEMENT", "verdict": "3 rot=1 fails in A/B. Works ok as dual-ref symbol ref (image 2).", "best_gen_url": "", "best_gen_caption": "KILLED as placement ref \u2014 3 rot=1 fails. NOTE: this is IMG_0513, still used as image 2 for p4 dual-ref (symbol ref role works)"}, {"id": "p5", "name": "IMG_0556_Patriot_Jacket_C", "colorway": "Patriot", "type": "jacket", "drive_url": "https://lh3.googleusercontent.com/d/1jvilgmnPXDnfG9Mf5kXfPMcXLHV_6GjY=w800", "status_class": "killed", "status_label": "KILLED", "verdict": "3 perp + 3 wrongArm in V1. Worst performer in production batch.", "best_gen_url": "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg", "best_gen_caption": "KILLED \u2014 3 perp + 3 wrongArm out of 8 in V1"}];
+
+function groupBy(arr, key){
+  const out={};
+  arr.forEach(d=>{
+    if(!out[d[key]])out[d[key]]=[];
+    out[d[key]].push(d);
+  });
+  return out;
+}
+
+function card(d){
+  const cwTag = d.colorway === 'Patriot' ? 'b-patriot' : (d.colorway === 'Hunter' ? 'b-hunter' : 'b-tron');
+  const bestImg = d.best_gen_url
+    ? `<div class="imgwrap"><img src="${d.best_gen_url}" onclick="openLB('${d.best_gen_url}')"></div>`
+    : `<div class="imgwrap"><div class="placeholder">No production gen</div></div>`;
+  return `<div class="card">
+    <div class="hdr">
+      <div>
+        <div class="id">${d.id.toUpperCase()} <span class="badge b-${d.status_class}">${d.status_label}</span><span class="badge ${cwTag}">${d.colorway}</span></div>
+        <div class="name">${d.name} · ${d.type}</div>
+      </div>
+    </div>
+    <div class="imgs">
+      <div class="imgwrap"><img src="${d.drive_url}" onclick="openLB('${d.drive_url}')"></div>
+      ${bestImg}
+    </div>
+    <div class="lbl" style="display:grid;grid-template-columns:1fr 1fr;gap:1px">
+      <div>← REFERENCE PHOTO</div>
+      <div>BEST GEN →</div>
+    </div>
+    <div class="body">
+      ${d.verdict}
+      ${d.best_gen_caption ? `<div class="cap">${d.best_gen_caption}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function render(){
+  const groups = groupBy(DATA, 'status_class');
+  const order = ['strong', 'kept', 'mixed', 'killed'];
+  const labels = {
+    strong: ['Strong Winners (production workhorses)', 'These are the refs you actually want Jordan to replicate for other colorways. What do they have in common?'],
+    kept: ['Kept but Not Stress-Tested', 'Won the A/B test, but haven\'t been through production batches. Should work.'],
+    mixed: ['Mixed (works sometimes, unreliable)', 'These have quirks — h5 is non-snow, h2/p1 work as dual-ref symbol refs only, etc.'],
+    killed: ['Killed (never use as placement reference)', 'What do the losers have in common? Whatever it is, avoid it when shooting new colorways.'],
+  };
+  let html = '';
+  order.forEach(status => {
+    if(!groups[status]) return;
+    const [title, hint] = labels[status];
+    html += `<div class="section">
+      <h2>${title}</h2>
+      <div class="hint">${hint}</div>
+      <div class="grid">${groups[status].map(card).join('')}</div>
+    </div>`;
+  });
+  document.getElementById('content').innerHTML = html;
+}
+
+function openLB(url){document.getElementById('lbimg').src=url;document.getElementById('lb').classList.add('on');}
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+
+render();
+</script>
+</body></html>
