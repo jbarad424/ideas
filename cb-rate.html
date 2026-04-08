@@ -78,10 +78,13 @@ body{display:flex;flex-direction:column;touch-action:none}
 .summary .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.3rem}
 .summary .grid img{width:100%;aspect-ratio:3/4;object-fit:cover;background:#000;border-radius:4px;cursor:pointer}
 
-/* Lightbox */
-.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;padding:1rem;cursor:pointer}
+/* Lightbox — supports pinch zoom + pan */
+.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:100;justify-content:center;align-items:center;padding:0;overflow:hidden;touch-action:none}
 .lb.on{display:flex}
-.lb img{max-width:100%;max-height:100%;object-fit:contain}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;will-change:transform;transition:transform .2s ease-out;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.lb.dragging img{transition:none}
+.lb .lbClose{position:absolute;top:.6rem;right:.6rem;width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;border:none;font-size:1.3rem;font-weight:700;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+.lb .lbHint{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-size:.65rem;color:rgba(255,255,255,.5);pointer-events:none;white-space:nowrap;text-align:center}
 
 /* Empty state */
 .empty{display:none;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#666;padding:2rem;text-align:center}
@@ -93,6 +96,12 @@ body{display:flex;flex-direction:column;touch-action:none}
 /* Toast */
 .toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:.6rem 1rem;border-radius:999px;font-size:.8rem;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
 .toast.on{opacity:1}
+
+/* Backup reminder banner */
+.backup-banner{position:fixed;bottom:7.5rem;left:.8rem;right:.8rem;background:#f59e0b;color:#000;padding:.75rem 1rem;border-radius:10px;font-size:.8rem;font-weight:700;display:none;justify-content:space-between;align-items:center;gap:.5rem;z-index:40;box-shadow:0 6px 20px rgba(0,0,0,.6);cursor:pointer}
+.backup-banner.on{display:flex}
+.backup-banner .msg{flex:1}
+.backup-banner .x{background:rgba(0,0,0,.2);border:none;color:#000;width:1.8rem;height:1.8rem;border-radius:50%;font-weight:900;cursor:pointer;font-size:.9rem;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 
 /* Desktop hints */
 .hints{position:fixed;bottom:.4rem;left:50%;transform:translateX(-50%);font-size:.6rem;color:#444;pointer-events:none;white-space:nowrap}
@@ -132,7 +141,7 @@ body{display:flex;flex-direction:column;touch-action:none}
   <button class="btn-yes" id="btnYes">✓</button>
 </div>
 
-<div class="hints">Y / → = yes &nbsp;·&nbsp; N / ← = no &nbsp;·&nbsp; U = undo &nbsp;·&nbsp; F = full image</div>
+<div class="hints">Y / → = yes &nbsp;·&nbsp; N / ← = no &nbsp;·&nbsp; U = undo &nbsp;·&nbsp; F / double-tap = zoom</div>
 
 <div class="summary" id="summary">
   <h1>Your ratings</h1>
@@ -158,7 +167,16 @@ body{display:flex;flex-direction:column;touch-action:none}
   </div>
 </div>
 
-<div class="lb" id="lb"><img id="lbImg"></div>
+<div class="lb" id="lb">
+  <button class="lbClose" onclick="closeLB()">✕</button>
+  <img id="lbImg">
+  <div class="lbHint">Pinch to zoom · double-tap to toggle · tap ✕ to close</div>
+</div>
+
+<div class="backup-banner" id="backupBanner" onclick="copyJson()">
+  <span class="msg" id="backupMsg">📋 Back up ratings (tap)</span>
+  <button class="x" onclick="event.stopPropagation();dismissBackup()">✕</button>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -171,12 +189,40 @@ let state = loadState();
 function loadState(){
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const s = JSON.parse(raw);
+      if (typeof s.lastBackupCount !== 'number') s.lastBackupCount = 0;
+      return s;
+    }
   } catch(e) {}
-  return {yes: {}, no: {}, order: {}, history: []};
+  return {yes: {}, no: {}, order: {}, history: [], lastBackupCount: 0};
 }
 function saveState(){
   localStorage.setItem(KEY, JSON.stringify(state));
+}
+
+function getTotalRated(){
+  return Object.keys(state.yes).length + Object.keys(state.no).length;
+}
+
+const BACKUP_THRESHOLD = 50;
+function checkBackupReminder(){
+  const total = getTotalRated();
+  const pending = total - (state.lastBackupCount || 0);
+  const banner = document.getElementById('backupBanner');
+  if (!banner) return;
+  if (pending >= BACKUP_THRESHOLD){
+    banner.classList.add('on');
+    document.getElementById('backupMsg').textContent = `📋 Back up ${pending} new ratings (tap)`;
+  } else {
+    banner.classList.remove('on');
+  }
+}
+function dismissBackup(){
+  // Snooze — treat "now" as the new baseline so the next reminder is after 50 more
+  state.lastBackupCount = getTotalRated();
+  saveState();
+  document.getElementById('backupBanner').classList.remove('on');
 }
 
 function shuffle(arr){
@@ -283,10 +329,13 @@ function renderStack(){
 // Swipe drag ===
 function attachDrag(card){
   let startX = 0, startY = 0, currX = 0, currY = 0, dragging = false;
+  let lastTapTime = 0;
   const yesOv = card.querySelector('.overlay.yes');
   const noOv = card.querySelector('.overlay.no');
 
   function onDown(e){
+    // Two-finger gesture → ignore swipe entirely (avoid fighting pinch on card image)
+    if (e.touches && e.touches.length > 1){ dragging = false; return; }
     const t = e.touches ? e.touches[0] : e;
     startX = t.clientX;
     startY = t.clientY;
@@ -297,6 +346,7 @@ function attachDrag(card){
   }
   function onMove(e){
     if (!dragging) return;
+    if (e.touches && e.touches.length > 1){ dragging = false; card.classList.remove('drag'); return; }
     const t = e.touches ? e.touches[0] : e;
     currX = t.clientX - startX;
     currY = t.clientY - startY;
@@ -312,15 +362,31 @@ function attachDrag(card){
     dragging = false;
     card.classList.remove('drag');
     const threshold = 100;
+    const moved = Math.abs(currX) > 6 || Math.abs(currY) > 6;
     if (currX > threshold){
       flyOut(card, 'yes');
-    } else if (currX < -threshold){
+      return;
+    }
+    if (currX < -threshold){
       flyOut(card, 'no');
-    } else {
-      card.classList.add('snap');
-      card.style.transform = '';
-      yesOv.style.opacity = 0;
-      noOv.style.opacity = 0;
+      return;
+    }
+    // Snap back
+    card.classList.add('snap');
+    card.style.transform = '';
+    yesOv.style.opacity = 0;
+    noOv.style.opacity = 0;
+    // Double-tap → open lightbox at full-res for zoom
+    if (!moved){
+      const now = Date.now();
+      if (now - lastTapTime < 320){
+        const id = card.dataset.id;
+        const item = CORPUS.find(c => c.id === id);
+        if (item) openLB(item.url);
+        lastTapTime = 0;
+      } else {
+        lastTapTime = now;
+      }
     }
   }
   card.addEventListener('touchstart', onDown, {passive: true});
@@ -359,6 +425,7 @@ function commit(id, action){
   if (state.history.length > 1000) state.history.shift();
   saveState();
   updateProgress();
+  checkBackupReminder();
 }
 
 function actionButton(action){
@@ -410,11 +477,12 @@ document.getElementById('btnSummary').onclick = showSummary;
 
 function confirmReset(){
   if (!confirm('Clear ALL ratings? This cannot be undone.')) return;
-  state = {yes: {}, no: {}, order: {}, history: []};
+  state = {yes: {}, no: {}, order: {}, history: [], lastBackupCount: 0};
   saveState();
   hideSummary();
   renderStack();
   updateProgress();
+  checkBackupReminder();
   toast('Reset');
 }
 
@@ -490,6 +558,10 @@ function copyJson(){
     }).filter(Boolean),
   };
   copyText(JSON.stringify(payload, null, 2), `Copied ${payload.yes.length} yes + ${payload.no.length} no`);
+  // Mark as backed up — dismiss reminder until next 50
+  state.lastBackupCount = getTotalRated();
+  saveState();
+  checkBackupReminder();
 }
 
 function copyText(text, msg){
@@ -506,15 +578,144 @@ function fallbackCopy(text, msg){
   ta.remove();
 }
 
-// Lightbox ===
+// Lightbox with pinch zoom + pan ===
+let lbScale = 1, lbTx = 0, lbTy = 0;
+let lbPinchDist = 0, lbPinchScale = 1;
+let lbPinchMidX = 0, lbPinchMidY = 0;
+let lbPanX = 0, lbPanY = 0;
+let lbTouches = 0;
+let lbMoved = false;
+let lbTouchStart = 0;
+let lbLastTap = 0;
+const lbEl = document.getElementById('lb');
+const lbImgEl = document.getElementById('lbImg');
+
+function lbDist(t1, t2){
+  const dx = t1.clientX - t2.clientX;
+  const dy = t1.clientY - t2.clientY;
+  return Math.sqrt(dx*dx + dy*dy);
+}
+function lbApply(smooth){
+  if (smooth) lbEl.classList.remove('dragging');
+  else lbEl.classList.add('dragging');
+  lbImgEl.style.transform = `translate(${lbTx}px, ${lbTy}px) scale(${lbScale})`;
+}
+function lbReset(smooth){
+  lbScale = 1; lbTx = 0; lbTy = 0;
+  lbApply(smooth !== false);
+}
+function lbClamp(){
+  // Keep image roughly on-screen when zoomed (soft bounds)
+  const rect = lbImgEl.getBoundingClientRect();
+  const parentRect = lbEl.getBoundingClientRect();
+  const halfW = (rect.width - parentRect.width) / 2;
+  const halfH = (rect.height - parentRect.height) / 2;
+  if (halfW > 0){
+    lbTx = Math.max(-halfW, Math.min(halfW, lbTx));
+  } else {
+    lbTx = 0;
+  }
+  if (halfH > 0){
+    lbTy = Math.max(-halfH, Math.min(halfH, lbTy));
+  } else {
+    lbTy = 0;
+  }
+}
+
 function openLB(url){
-  document.getElementById('lbImg').src = url;
-  document.getElementById('lb').classList.add('on');
+  lbImgEl.src = url;
+  lbEl.classList.add('on');
+  lbReset(false);
 }
 function closeLB(){
-  document.getElementById('lb').classList.remove('on');
+  lbEl.classList.remove('on');
+  lbReset(false);
 }
-document.getElementById('lb').onclick = closeLB;
+
+lbEl.addEventListener('touchstart', (e) => {
+  lbTouches = e.touches.length;
+  lbMoved = false;
+  if (e.touches.length === 2){
+    lbPinchDist = lbDist(e.touches[0], e.touches[1]);
+    lbPinchScale = lbScale;
+    lbPinchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    lbPinchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    e.preventDefault();
+  } else if (e.touches.length === 1){
+    lbTouchStart = Date.now();
+    if (lbScale > 1){
+      lbPanX = e.touches[0].clientX - lbTx;
+      lbPanY = e.touches[0].clientY - lbTy;
+    }
+  }
+}, {passive: false});
+
+lbEl.addEventListener('touchmove', (e) => {
+  if (e.touches.length === 2){
+    e.preventDefault();
+    lbMoved = true;
+    const d = lbDist(e.touches[0], e.touches[1]);
+    lbScale = Math.max(1, Math.min(5, lbPinchScale * (d / lbPinchDist)));
+    lbApply(false);
+  } else if (e.touches.length === 1 && lbScale > 1){
+    e.preventDefault();
+    lbMoved = true;
+    lbTx = e.touches[0].clientX - lbPanX;
+    lbTy = e.touches[0].clientY - lbPanY;
+    lbClamp();
+    lbApply(false);
+  }
+}, {passive: false});
+
+lbEl.addEventListener('touchend', (e) => {
+  const prevTouches = lbTouches;
+  lbTouches = e.touches.length;
+  if (lbTouches === 0){
+    // Snap to 1x if we rubber-banded below
+    if (lbScale < 1.05){
+      lbScale = 1; lbTx = 0; lbTy = 0;
+      lbApply(true);
+    } else {
+      // Clamp pan within bounds with animation
+      lbClamp();
+      lbApply(true);
+    }
+    // Tap / double-tap detection (only for single-finger taps with no movement)
+    if (!lbMoved && prevTouches === 1){
+      const now = Date.now();
+      const short = now - lbTouchStart < 300;
+      const isDouble = now - lbLastTap < 320;
+      if (isDouble){
+        if (lbScale > 1){ lbReset(true); }
+        else { lbScale = 2.5; lbApply(true); }
+        lbLastTap = 0;
+      } else {
+        lbLastTap = now;
+        // Single tap at 1x → close (after giving double-tap a chance)
+        if (lbScale <= 1.01 && short){
+          setTimeout(() => {
+            if (Date.now() - lbLastTap >= 300 && lbScale <= 1.01){
+              closeLB();
+            }
+          }, 330);
+        }
+      }
+    }
+  }
+}, {passive: false});
+
+// Desktop click → close when at 1x (ignores touch-synthesized clicks)
+lbEl.addEventListener('click', (e) => {
+  if (e.detail === 0) return; // synthetic
+  if (e.target === lbEl && lbScale <= 1.01){
+    closeLB();
+  }
+});
+
+// Prevent iOS gesture zoom on the lightbox (we handle it manually)
+lbEl.addEventListener('gesturestart', (e) => e.preventDefault());
+lbEl.addEventListener('gesturechange', (e) => e.preventDefault());
+lbEl.addEventListener('gestureend', (e) => e.preventDefault());
 
 // Toast ===
 let toastTimer = null;
@@ -529,6 +730,7 @@ function toast(msg){
 // Init ===
 renderStack();
 updateProgress();
+checkBackupReminder();
 </script>
 </body>
 </html>
