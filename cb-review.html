@@ -307,6 +307,18 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
         <div id="vidLabMeta" style="font-size:.6rem;color:#888;margin-bottom:.5rem"></div>
         <div style="font-size:.65rem;color:#ccc;font-weight:600;margin-bottom:.3rem">Direction (optional):</div>
         <textarea id="vidLabDirection" placeholder="e.g. slow pan right, rider speeds away into sunset, dramatic camera shake, dust flying..." style="width:100%;min-height:50px;background:#111;border:1px solid #333;border-radius:6px;color:#fff;font-size:.7rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box"></textarea>
+        <div style="display:flex;gap:.3rem;margin-top:.3rem;align-items:center">
+          <button onclick="vidLabRefine()" id="vidLabRefineBtn" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #d97757;background:transparent;color:#d97757;font-size:.65rem;cursor:pointer;font-weight:600">✨ Refine with Claude</button>
+          <div id="vidLabRefineStatus" style="font-size:.55rem;color:#888"></div>
+        </div>
+        <div id="vidLabRefinedBox" style="display:none;margin-top:.4rem;background:#1a1410;border:1px solid #d97757;border-radius:6px;padding:.5rem">
+          <div style="font-size:.55rem;color:#d97757;font-weight:700;margin-bottom:.2rem">CLAUDE'S REFINED PROMPT:</div>
+          <div id="vidLabRefinedText" style="font-size:.7rem;color:#fff;line-height:1.4;white-space:pre-wrap"></div>
+          <div style="display:flex;gap:.3rem;margin-top:.4rem">
+            <button onclick="vidLabApplyRefined()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Use This</button>
+            <button onclick="vidLabRefine()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.6rem;cursor:pointer">Try Again</button>
+          </div>
+        </div>
         <div style="font-size:.65rem;color:#06b6d4;font-weight:600;margin:.4rem 0 .3rem">Pick a platform to generate:</div>
         <div style="display:flex;gap:.3rem;flex-wrap:wrap" id="vidLabPlatforms">
           <button onclick="vidLabGenerate('kling')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #22c55e;background:transparent;color:#22c55e;font-size:.65rem;cursor:pointer;font-weight:600">Kling 3.0 Pro<br><span style="color:#888;font-weight:400;font-size:.5rem">10s · $1.50</span></button>
@@ -1502,7 +1514,28 @@ let vidTab='new'; // 'new' or 'done'
 let vidFilt=[];
 
 function vidIsR(v){return getC(v.id).length>0;}
-function vidUpFilt(){vidFilt=vidTab==='new'?ALL_VIDEOS.filter(v=>!vidIsR(v)):ALL_VIDEOS.filter(v=>vidIsR(v));}
+// Pull completed Video Lab jobs out of localStorage and shape them like ALL_VIDEOS entries
+// so the review UI (TO REVIEW / REVIEWED, comment trail, counts) picks them up automatically.
+function vidLiveVideos(){
+  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  return jobs
+    .filter(j=>j.status==='COMPLETED'&&j.videoUrl)
+    .map(j=>({
+      id:'live-'+j.requestId,
+      url:j.videoUrl,
+      model:j.platform,
+      prompt:j.prompt||'(no cues)',
+      label:'[NEW] '+(j.label||'Video Lab job'),
+      context:'Generated from Video Lab on '+new Date(j.submitted).toLocaleString()
+              +'. Source: '+(j.label||'unknown')
+              +(j.model?' ('+j.model+')':'')
+              +'. Prompt: '+(j.prompt||'(none)')
+    }));
+}
+function vidUpFilt(){
+  const merged=[...vidLiveVideos(),...ALL_VIDEOS];
+  vidFilt=vidTab==='new'?merged.filter(v=>!vidIsR(v)):merged.filter(v=>vidIsR(v));
+}
 
 function vidLabCheck(){
   vidJobRender(); // Always render job history on tab load
@@ -1597,6 +1630,15 @@ function vidJobUpdate(requestId,updates){
   if(j)Object.assign(j,updates);
   localStorage.setItem('cb2_video_jobs',JSON.stringify(jobs));
   vidJobRender();
+  // If a job just completed, re-render the Videos tab so the new video pops
+  // into TO REVIEW without a page reload. Guarded so this never throws even
+  // if the tab isn't mounted or vidUpFilt isn't defined yet.
+  try{
+    const vArea=document.getElementById('videosArea');
+    if(vArea&&vArea.style.display!=='none'&&typeof vidUpFilt==='function'){
+      vidUpFilt();vidRender();
+    }
+  }catch(e){}
 }
 function vidJobRender(){
   const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
@@ -1673,7 +1715,7 @@ function vidLabGenerate(platform){
     // Save job state so it survives page reloads
     localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,submitted:new Date().toISOString()}));
     // Log to Job History so it's never lost
-    vidJobLog({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,label:src.label,status:'IN_QUEUE',submitted:new Date().toISOString()});
+    vidJobLog({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,label:src.label,model:src.model,sourceUrl:src.url,prompt:prompt,status:'IN_QUEUE',submitted:new Date().toISOString()});
     st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
       +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.2rem">Job Submitted!</div>'
       +'<div id="vidLabProgress" style="font-size:.65rem;color:#ccc">Status: IN_QUEUE — checking every 15s...</div>'
@@ -1684,6 +1726,93 @@ function vidLabGenerate(platform){
     st.innerHTML='<div style="color:#ef4444">Network error: '+e.message+'</div>';
     document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
   });
+}
+
+// === Claude prompt refiner — rewrites rough cues into Kling-optimized prompts ===
+// Key is stored in browser localStorage so it never hits the public repo.
+// First use: a prompt() asks for the key, then persists it on this device.
+function vidLabGetAnthKey(){
+  let k=localStorage.getItem('cb2_anth_key');
+  if(!k){
+    k=prompt('Paste your Anthropic API key (sk-ant-api…). Stored locally in this browser only.');
+    if(k&&k.trim().startsWith('sk-ant-')){localStorage.setItem('cb2_anth_key',k.trim());return k.trim();}
+    return null;
+  }
+  return k;
+}
+const KLING_SYSTEM_PROMPT=`You are a video prompt engineer for Kling 3.0 Pro, Veo 3.1, and Sora 2. You rewrite a user's rough cue into a tight image-to-video prompt that follows proven best practices.
+
+CRITICAL RULES for this product (CB2 wearable remote on forearm):
+- The CB2 must stay perfectly stationary on the forearm. NEVER describe hands touching, pressing, or reaching for it. Describing "he hits the button" causes models to hallucinate extra hands coming from off-screen.
+- The rider's existing pose (both hands on handlebars/poles/handlebar grip) is the right pose. Keep it.
+- If the user wants "music starts playing" or "he activates the remote," reframe it as environmental/ambient change: the camera moves, the rider's expression shifts, dust/wind/light changes — NOT a hand motion.
+
+KLING BEST PRACTICES:
+- ONE primary action or camera movement. Do not chain multiple events.
+- Describe CAMERA motion explicitly: "slow dolly in", "tracking shot from left at speed", "static 85mm lock-off", "slight handheld shake". Be concrete.
+- Describe ENVIRONMENTAL motion: wind in jacket, dust swirling, leaves falling, light shifting, snow flurries.
+- Use present tense, active voice.
+- Avoid ambiguous pronouns ("he," "it") when there's only one subject — use "the rider" / "the skier."
+- Keep under ~100 words.
+- No stage directions, no ALL CAPS, no emojis.
+
+OUTPUT FORMAT: Return ONLY the refined prompt text — no preamble, no explanation, no "here is the refined prompt:" header. Just the prompt itself.`;
+
+function vidLabRefine(){
+  const raw=(document.getElementById('vidLabDirection')?.value||'').trim();
+  if(!raw){showToast('Type some cues first');return;}
+  const key=vidLabGetAnthKey();
+  if(!key){showToast('No API key provided');return;}
+  const btn=document.getElementById('vidLabRefineBtn');
+  const status=document.getElementById('vidLabRefineStatus');
+  btn.disabled=true;btn.style.opacity='.5';
+  status.textContent='Refining…';
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':key,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify({
+      model:'claude-sonnet-4-6',
+      max_tokens:400,
+      system:KLING_SYSTEM_PROMPT,
+      messages:[{role:'user',content:'Rough cue:\n'+raw}]
+    })
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    btn.disabled=false;btn.style.opacity='1';
+    if(d.error){
+      // If auth failed, clear the stored key so next click re-prompts
+      if(d.error.type==='authentication_error'||(d.error.message||'').toLowerCase().includes('auth')){
+        localStorage.removeItem('cb2_anth_key');
+        status.textContent='Auth failed — key cleared, click again to paste a new one';
+      }else{
+        status.textContent='Error: '+(d.error.message||'unknown');
+      }
+      return;
+    }
+    const refined=d.content?.[0]?.text?.trim();
+    if(!refined){status.textContent='No output returned';return;}
+    status.textContent='Done ('+(d.usage?.output_tokens||'?')+' tokens)';
+    document.getElementById('vidLabRefinedBox').style.display='block';
+    document.getElementById('vidLabRefinedText').textContent=refined;
+  })
+  .catch(e=>{
+    btn.disabled=false;btn.style.opacity='1';
+    status.textContent='Network error: '+e.message;
+  });
+}
+function vidLabApplyRefined(){
+  const refined=document.getElementById('vidLabRefinedText').textContent;
+  if(!refined)return;
+  document.getElementById('vidLabDirection').value=refined;
+  document.getElementById('vidLabRefinedBox').style.display='none';
+  document.getElementById('vidLabRefineStatus').textContent='Applied ✓';
+  showToast('Refined prompt applied');
 }
 
 
@@ -1698,8 +1827,9 @@ function vidSetTab(t){
 
 function vidRender(){
   // Update counts but don't re-filter (filtering happens in vidSetTab and vidGo)
-  document.getElementById('vidCntNew').textContent=ALL_VIDEOS.filter(v=>!vidIsR(v)).length;
-  document.getElementById('vidCntDone').textContent=ALL_VIDEOS.filter(v=>vidIsR(v)).length;
+  const merged=[...vidLiveVideos(),...ALL_VIDEOS];
+  document.getElementById('vidCntNew').textContent=merged.filter(v=>!vidIsR(v)).length;
+  document.getElementById('vidCntDone').textContent=merged.filter(v=>vidIsR(v)).length;
   if(!vidFilt.length){
     document.getElementById('counter').textContent=vidTab==='new'?'All videos reviewed!':'No reviewed videos yet.';
     document.getElementById('vidPlayer').innerHTML='';
