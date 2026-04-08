@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-08T02:24:08.732Z",
+  "syncedAt": "2026-04-08T02:50:20.034Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -7288,6 +7288,171 @@
         {
           "text": "This is pretty good as the right size and there's some difference with the LED screen. I would rather the LED window needs to be on the other side but then I think that the pause has the pause first and then the play but it's pretty good. I give a lot of 95.",
           "time": "2026-04-08T02:24:03.261Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v2-ski-30001",
+      "url": "https://files.catbox.moe/uue6kn.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Skier carving powder, dual-ref w=1600 + product front, real dimensions 108×39mm, LED window closest to elbow, explicit symbols PLUS/FF/PLAY-PAUSE/REW/MINUS.",
+      "label": "V2: Skiing",
+      "context": "SYMFIX V2: Fixed from V1 feedback — real CB2 dimensions (108mm×39mm ≈ 4\"×1.5\"), LED window closest to elbow (fixes 180° flip), correct button order from engineering drawing. Triple symbol fix retained.",
+      "comments": [
+        {
+          "text": "Remote still looks a little too big but at this this distance from the symbols, I guess it doesn't really matter if it like an 89",
+          "time": "2026-04-08T02:45:38.732Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v2-snow-30002",
+      "url": "https://files.catbox.moe/egqurz.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Snowboarder deep powder slash, same V2 prompt structure.",
+      "label": "V2: Snowboard",
+      "context": "SYMFIX V2: Snowboard with real dimensions + LED window orientation fix. Compare against V1 snowboard (84 score, \"remote too big\").",
+      "comments": [
+        {
+          "text": "This is terrible. This is not even our remote fail.",
+          "time": "2026-04-08T02:45:59.614Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v2-mtb-30003",
+      "url": "https://files.catbox.moe/sc294w.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "MTB rocky forest descent, same V2 prompt structure.",
+      "label": "V2: MTB",
+      "context": "SYMFIX V2: MTB with real dimensions + LED window fix. V1 scored 74 (\"remote too large for the arm\"). Does specifying 108×39mm fix the sizing?",
+      "comments": [
+        {
+          "text": "It's pretty cool. The remote is a little too big and the guy is pretty far away. I would make their about 70% of the size.",
+          "time": "2026-04-08T02:46:30.281Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v2-desert-30004",
+      "url": "https://files.catbox.moe/kpymxq.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Moto desert red rock canyon, same V2 prompt structure.",
+      "label": "V2: Moto Desert",
+      "context": "SYMFIX V2: Desert motorcycle with real dimensions + LED window fix. V1 scored 84 (\"perfect if flipped 180°\"). LED window = elbow should fix the flip.",
+      "comments": [
+        {
+          "text": "Oh no, what's happening? This doesn't even look like our remote at all.",
+          "time": "2026-04-08T02:46:42.262Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v2-bc-30006",
+      "url": "https://files.catbox.moe/t8gqas.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Backcountry skier summit ridge, same V2 prompt structure.",
+      "label": "V2: Ski Backcountry",
+      "context": "SYMFIX V2: Backcountry skiing editorial. V1 had \"LED window on wrong side.\" Does \"LED window closest to elbow\" fix it?",
+      "comments": [
+        {
+          "text": "Now I see two LED lights on the thing instead of just one and two CB symbols when they should just be one and it's also not in the right orientation should be flipped for the right arm",
+          "time": "2026-04-08T02:48:29.982Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v3-ski-40001",
+      "url": "https://files.catbox.moe/16e8f6.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Skier powder carve. V3: CORRECTED orientation — LED+logo at WRIST, MINUS at wrist, PLUS at elbow. Real dims 108×39mm. Dual-ref w=1600 + product front.",
+      "label": "V3: Skiing",
+      "context": "V3 CORRECTED: Justin confirmed LEFT arm = LED window at WRIST, MINUS closest to wrist, PLUS at elbow. Previous V2 had it backwards. Real dimensions from engineering drawing. Does the corrected orientation finally nail it?",
+      "comments": [
+        {
+          "text": "The symbols are lost a little bit and it looks a little big. I give it an 80.",
+          "time": "2026-04-08T02:48:48.663Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v3-snow-40002",
+      "url": "https://files.catbox.moe/emwmny.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Snowboarder deep powder. Same V3 corrected orientation.",
+      "label": "V3: Snowboard",
+      "context": "V3 CORRECTED: Snowboard with the right LEFT arm orientation. V1=84 (too big, flipped). V2=pending. V3 has correct LED window + button order.",
+      "comments": [
+        {
+          "text": "The remote is way too big. It's about 30% size and it needs to be in the symbols are not in the right or correct orientation.",
+          "time": "2026-04-08T02:49:07.398Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v3-mtb-40003",
+      "url": "https://files.catbox.moe/orj6vw.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "MTB rocky forest descent. Same V3 corrected orientation.",
+      "label": "V3: MTB",
+      "context": "V3 CORRECTED: MTB with correct orientation + real dimensions. V1=74 (too large). Does 108×39mm + corrected button order fix the sizing and flip?",
+      "comments": [
+        {
+          "text": "This is fine because you can barely see the symbols from the vantage point. Give it a 95.",
+          "time": "2026-04-08T02:49:23.430Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v3-desert-40004",
+      "url": "https://files.catbox.moe/ef3hag.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Moto desert red rock canyon. Same V3 corrected orientation.",
+      "label": "V3: Moto Desert",
+      "context": "V3 CORRECTED: Desert moto. V1=84 (\"perfect if flipped 180°\"). Now with LED window at wrist + MINUS at wrist. Should fix the flip.",
+      "comments": [
+        {
+          "text": "This is flipped, unfortunately",
+          "time": "2026-04-08T02:49:36.430Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v3-night-40005",
+      "url": "https://files.catbox.moe/s04rk8.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Moto coastal blue hour dusk. Same V3 corrected orientation.",
+      "label": "V3: Moto Night",
+      "context": "V3 CORRECTED: Night motorcycle — hardest lighting. V1=85 (\"symbols flipped\"). Now with correct orientation. Does it work at night?",
+      "comments": [
+        {
+          "text": "This is also flipped unfortunately it's the left arm and the minus symbol is by the wrist, which should not be",
+          "time": "2026-04-08T02:49:58.215Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "v3-bc-40006",
+      "url": "https://files.catbox.moe/5n6bh8.jpg",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Backcountry skier summit ridge. Same V3 corrected orientation.",
+      "label": "V3: Ski Backcountry",
+      "context": "V3 CORRECTED: Backcountry editorial. V1 had LED window on wrong side. Now corrected to wrist side.",
+      "comments": [
+        {
+          "text": "Cool photo, but the simples needs to be flipped for the red arm",
+          "time": "2026-04-08T02:50:16.597Z",
           "num": 1
         }
       ]
