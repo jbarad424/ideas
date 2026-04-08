@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dual-Ref Test — April 8 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1500px;margin:0 auto;padding:1rem;background:#111;color:#eee;line-height:1.4}
+h1{font-size:1.3rem;margin-bottom:.3rem}
+.sub{color:#888;font-size:.8rem;margin-bottom:1rem}
+.summary{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:1rem;margin-bottom:1rem;font-size:.85rem}
+.summary h3{font-size:.9rem;margin-bottom:.5rem;color:#22c55e}
+.summary p{color:#ccc;margin-bottom:.5rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem}
+.stat{background:#0a0a0a;border:1px solid #333;padding:.5rem;border-radius:4px;text-align:center}
+.stat .n{font-size:1.2rem;font-weight:700;color:#fff}
+.stat .l{font-size:.6rem;color:#888;text-transform:uppercase}
+.section{margin-bottom:2rem;border:1px solid #333;border-radius:8px;background:#1a1a1a;padding:1rem}
+.section > h2{font-size:1.1rem;margin-bottom:.4rem;color:#fff}
+.section > .desc{font-size:.78rem;color:#888;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid #333}
+.filters{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.8rem}
+.filters button{padding:.3rem .6rem;background:#222;color:#ccc;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:.7rem}
+.filters button.on{background:#2563eb;color:#fff;border-color:#2563eb}
+.pair{margin-bottom:1rem;border:1px solid #333;border-radius:6px;background:#0f0f0f;padding:.7rem}
+.pair h3{font-size:.85rem;margin-bottom:.4rem;color:#fff}
+.pair .meta{font-size:.68rem;color:#888;margin-bottom:.6rem}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.6rem;font-weight:700;margin-left:.2rem;text-transform:uppercase}
+.t-hunter{background:#365314;color:#fde047}
+.t-patriot{background:#1e3a5f;color:#fff}
+.t-tron{background:#0891b2;color:#fff}
+.t-left{background:#0ea5e9;color:#fff}
+.t-right{background:#a855f7;color:#fff}
+.t-dual{background:#22c55e;color:#000}
+.t-single{background:#f59e0b;color:#000}
+.side-by-side{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.side{border:1px solid #333;border-radius:5px;overflow:hidden;background:#0a0a0a}
+.side .hdr{font-size:.7rem;padding:.4rem .6rem;background:#161616;color:#aaa;display:flex;justify-content:space-between;align-items:center}
+.side .hdr.old{color:#f59e0b}
+.side .hdr.new{color:#22c55e}
+.side img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;cursor:pointer;background:#000}
+.controls{padding:.4rem .6rem;display:flex;justify-content:space-between;align-items:center;gap:.3rem;background:#0a0a0a;border-top:1px solid #222}
+.score{display:inline-flex;gap:.1rem}
+.score span{width:1.2rem;height:1.2rem;border-radius:50%;background:#333;color:#888;display:flex;align-items:center;justify-content:center;font-size:.6rem;cursor:pointer}
+.score span.sel{background:#22c55e;color:#fff}
+.flags{display:flex;gap:.15rem}
+.flags button{padding:.2rem .3rem;background:#222;border:1px solid #444;color:#888;font-size:.55rem;cursor:pointer;border-radius:3px;white-space:nowrap}
+.flags button.on-perp{background:#dc2626;color:#fff;border-color:#dc2626;font-weight:700}
+.flags button.on-arm{background:#a855f7;color:#fff;border-color:#a855f7;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem}
+.card{border:1px solid #333;border-radius:6px;overflow:hidden;background:#0a0a0a}
+.card img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;cursor:pointer;background:#000}
+.card .lbl{padding:.4rem .6rem;font-size:.72rem;color:#aaa;background:#161616}
+.card .sub2{padding:0 .6rem;font-size:.62rem;color:#666}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;padding:2rem;cursor:pointer}
+.lightbox.on{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain}
+.export-btn{position:fixed;bottom:1rem;right:1rem;padding:.7rem 1.2rem;background:#22c55e;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,.5);font-size:.85rem}
+</style>
+</head><body>
+
+<h1>Dual-Ref Test — Symbol Clarity Push</h1>
+<div class="sub">April 8 2026 · 3 ref pairs × 4 sports × 2 scenes = 24 gens · Nano Banana Pro</div>
+
+<div class="summary">
+<h3>Hypothesis</h3>
+<p>Production batch V1 capped symbol clarity at 4/5 (14 fours vs 8 fives — "slightly out of focus"). CLAUDE.md calls for dual-ref: <strong>image 1</strong> = rotated winner for placement geometry, <strong>image 2</strong> = clean straight-on product close-up for symbol reference. Prompt explicitly says "button symbols matching the product close-up in image 2."</p>
+<p><strong>Pairs tested:</strong> h3 + IMG_0529 (Hunter product B) · p4 + IMG_0513 (Patriot product A) · Tron_Landscape + T3 (first signal on flagship — no on-jacket Tron ref exists yet).</p>
+<p><strong>Scoring:</strong> 1-5 = symbol clarity only (5 = perfect, 4 = slightly blurry). Snow arm is now RIGHT (flipped after V1).</p>
+<div class="stats">
+  <div class="stat"><div class="n" id="sTotal">0</div><div class="l">Total</div></div>
+  <div class="stat"><div class="n" id="sRated">0</div><div class="l">Rated</div></div>
+  <div class="stat"><div class="n" id="sFives">0</div><div class="l">Dual-ref 5s</div></div>
+  <div class="stat"><div class="n" id="sFlagged">0</div><div class="l">Flagged</div></div>
+</div>
+</div>
+
+<div class="filters">
+<button class="on" data-fsport="all">All sports</button>
+<button data-fsport="moto">Moto</button>
+<button data-fsport="mtb">MTB</button>
+<button data-fsport="ski">Ski</button>
+<button data-fsport="snow">Snow</button>
+</div>
+
+<div id="content"></div>
+
+<button class="export-btn" onclick="exportResults()">📋 Export verdict</button>
+<div class="lightbox" id="lb"><img id="lbimg" src=""></div>
+
+<script>
+const DATA = {"h3_pairs": [{"pair_id": "h3+0529", "v1_ref_id": "h3", "colorway": "Hunter", "img2_name": "IMG_0529", "sport": "moto", "scene_id": "moto_s0", "arm": "LEFT", "seed": 9101, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/5FiSNwhQExvJ4dU0bNoO3_7wjlzGxI.jpg", "new_url": "https://v3b.fal.media/files/b/0a957771/IMTQCcm56_Mdz76-kuMI__JWlMxm2j.jpg", "label": "h3+0529_moto_s0"}, {"pair_id": "h3+0529", "v1_ref_id": "h3", "colorway": "Hunter", "img2_name": "IMG_0529", "sport": "moto", "scene_id": "moto_s1", "arm": "LEFT", "seed": 9102, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/Kx_OhUQHzVY7bLArNarDS_YzMIOyuk.jpg", "new_url": "https://v3b.fal.media/files/b/0a957771/6tIHlS5KOC3M9MHlE2KG7_9eYF0oWM.jpg", "label": "h3+0529_moto_s1"}, {"pair_id": "h3+0529", "v1_ref_id": "h3", "colorway": "Hunter", "img2_name": "IMG_0529", "sport": "mtb", "scene_id": "mtb_s0", "arm": "LEFT", "seed": 9201, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/yGrY440QfANH7gmdEbtjs_89eCfYaZ.jpg", "new_url": "https://v3b.fal.media/files/b/0a957771/eBkFoiELA1AdCzgprpwsQ_8ID7PmCV.jpg", "label": "h3+0529_mtb_s0"}, {"pair_id": "h3+0529", "v1_ref_id": "h3", "colorway": "Hunter", "img2_name": "IMG_0529", "sport": "mtb", "scene_id": "mtb_s1", "arm": "LEFT", "seed": 9202, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/_6-ng0U4RxifF4DUBII_w_7Ddwllhg.jpg", "new_url": "https://v3b.fal.media/files/b/0a957771/K74qKbisIMS9jaWropFfW_XC6QL9GF.jpg", "label": "h3+0529_mtb_s1"}, {"pair_id": "h3+0529", "v1_ref_id": "h3", "colorway": "Hunter", "img2_name": "IMG_0529", "sport": "ski", "scene_id": "ski_s0", "arm": "RIGHT", "seed": 9301, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/KA--43aes4b4Z-8LctBzE_gG1geBD8.jpg", "new_url": "https://v3b.fal.media/files/b/0a957771/D_QuR3COpIk0Sz8T8AWPH_ANbTHxn4.jpg", "label": "h3+0529_ski_s0"}, {"pair_id": "h3+0529", "v1_ref_id": "h3", "colorway": "Hunter", "img2_name": "IMG_0529", "sport": "ski", "scene_id": "ski_s1", "arm": "RIGHT", "seed": 9302, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/O76RlcBGkgACopi-PmKqn_xk3WiF4v.jpg", "new_url": "https://v3b.fal.media/files/b/0a957771/HydRq01KLiMJAMGXy5kQg_Il3tuPB8.jpg", "label": "h3+0529_ski_s1"}, {"pair_id": "h3+0529", "v1_ref_id": "h3", "colorway": "Hunter", "img2_name": "IMG_0529", "sport": "snow", "scene_id": "snow_s0", "arm": "RIGHT", "seed": 9401, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/cNrYU_JGUwbLR_jMq-LvA_cMAotBoD.jpg", "new_url": "https://v3b.fal.media/files/b/0a957771/JrauH3lzdrC4QDejtmlm2_mvALLX8v.jpg", "label": "h3+0529_snow_s0"}, {"pair_id": "h3+0529", "v1_ref_id": "h3", "colorway": "Hunter", "img2_name": "IMG_0529", "sport": "snow", "scene_id": "snow_s1", "arm": "RIGHT", "seed": 9402, "v1_url": "https://v3b.fal.media/files/b/0a9576e5/fHiqQYbCLi4xbQqm1UbCz_XQ2nSVj2.jpg", "new_url": "https://v3b.fal.media/files/b/0a957771/siROpNGpyCnFB6Jx4TuZl_4jOHasG5.jpg", "label": "h3+0529_snow_s1"}], "p4_pairs": [{"pair_id": "p4+0513", "v1_ref_id": "p4", "colorway": "Patriot", "img2_name": "IMG_0513", "sport": "moto", "scene_id": "moto_s0", "arm": "LEFT", "seed": 9101, "v1_url": "https://v3b.fal.media/files/b/0a9576ea/em2m3MQxcbj_FRbBj9xIf_IGmDdYoe.jpg", "new_url": "https://v3b.fal.media/files/b/0a957773/TQQMrGslYGQyq_PeQkNSU_TrZxpkNJ.jpg", "label": "p4+0513_moto_s0"}, {"pair_id": "p4+0513", "v1_ref_id": "p4", "colorway": "Patriot", "img2_name": "IMG_0513", "sport": "moto", "scene_id": "moto_s1", "arm": "LEFT", "seed": 9102, "v1_url": "https://v3b.fal.media/files/b/0a9576ea/WttMqvG2HnO2FpqdAYrfk_vumDm7qI.jpg", "new_url": "https://v3b.fal.media/files/b/0a957773/THvH4BQf69feNtiZPStih_HKRk7tB2.jpg", "label": "p4+0513_moto_s1"}, {"pair_id": "p4+0513", "v1_ref_id": "p4", "colorway": "Patriot", "img2_name": "IMG_0513", "sport": "mtb", "scene_id": "mtb_s0", "arm": "LEFT", "seed": 9201, "v1_url": "https://v3b.fal.media/files/b/0a9576ea/s9V40Y9m6O2FPdoJJseeP_yzRmXFm6.jpg", "new_url": "https://v3b.fal.media/files/b/0a957773/NwpAjHjhbVOf-MVKuvnHN_1Rm2NkOF.jpg", "label": "p4+0513_mtb_s0"}, {"pair_id": "p4+0513", "v1_ref_id": "p4", "colorway": "Patriot", "img2_name": "IMG_0513", "sport": "mtb", "scene_id": "mtb_s1", "arm": "LEFT", "seed": 9202, "v1_url": "https://v3b.fal.media/files/b/0a9576ea/cedHYRGZpr5V9zpgcQLF1_VnV1GNoy.jpg", "new_url": "https://v3b.fal.media/files/b/0a957773/G1QAz23UwvkRPElxzTzLu_BLiySnFD.jpg", "label": "p4+0513_mtb_s1"}, {"pair_id": "p4+0513", "v1_ref_id": "p4", "colorway": "Patriot", "img2_name": "IMG_0513", "sport": "ski", "scene_id": "ski_s0", "arm": "RIGHT", "seed": 9301, "v1_url": "https://v3b.fal.media/files/b/0a9576eb/y780v4X7ZfbpzDb9IZnLF_LNH3HCX7.jpg", "new_url": "https://v3b.fal.media/files/b/0a957774/xdA29wgeGu19MUy-MKQAN_VlsicveX.jpg", "label": "p4+0513_ski_s0"}, {"pair_id": "p4+0513", "v1_ref_id": "p4", "colorway": "Patriot", "img2_name": "IMG_0513", "sport": "ski", "scene_id": "ski_s1", "arm": "RIGHT", "seed": 9302, "v1_url": "https://v3b.fal.media/files/b/0a9576ec/yyTAmZFItSMIsqvj09DlW_MMnSoRu0.jpg", "new_url": "https://v3b.fal.media/files/b/0a957774/YPWnlPmLJJGjjqhHczM3G_bOLn1l3k.jpg", "label": "p4+0513_ski_s1"}, {"pair_id": "p4+0513", "v1_ref_id": "p4", "colorway": "Patriot", "img2_name": "IMG_0513", "sport": "snow", "scene_id": "snow_s0", "arm": "RIGHT", "seed": 9401, "v1_url": "https://v3b.fal.media/files/b/0a9576ec/mSZHUiHONdE6c6e0ncT7u_Nee5vJXs.jpg", "new_url": "https://v3b.fal.media/files/b/0a957774/xvYm71FebuQM8N7oGqCgu_453I7qvW.jpg", "label": "p4+0513_snow_s0"}, {"pair_id": "p4+0513", "v1_ref_id": "p4", "colorway": "Patriot", "img2_name": "IMG_0513", "sport": "snow", "scene_id": "snow_s1", "arm": "RIGHT", "seed": 9402, "v1_url": "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg", "new_url": "https://v3b.fal.media/files/b/0a957774/MCyw4XnXLvdYrQPPptl-u_RkhKVNa9.jpg", "label": "p4+0513_snow_s1"}], "tron_gens": [{"colorway": "Tron", "sport": "moto", "scene_id": "moto_s0", "arm": "LEFT", "seed": 9101, "url": "https://v3b.fal.media/files/b/0a957776/3R1x7zi2zxA1burhqjdA__anuKvKj6.jpg", "label": "tron_moto_s0"}, {"colorway": "Tron", "sport": "moto", "scene_id": "moto_s1", "arm": "LEFT", "seed": 9102, "url": "https://v3b.fal.media/files/b/0a957776/pSVJ8HUNoVgOztcr4Trco_bPD6wz0g.jpg", "label": "tron_moto_s1"}, {"colorway": "Tron", "sport": "mtb", "scene_id": "mtb_s0", "arm": "LEFT", "seed": 9201, "url": "https://v3b.fal.media/files/b/0a957776/CU_U8pyNl_nmBgzK9XrrX_3Sw4zVfM.jpg", "label": "tron_mtb_s0"}, {"colorway": "Tron", "sport": "mtb", "scene_id": "mtb_s1", "arm": "LEFT", "seed": 9202, "url": "https://v3b.fal.media/files/b/0a957777/dyOlCeAuPIgCzNaiEKEsG_abUXso7Z.jpg", "label": "tron_mtb_s1"}, {"colorway": "Tron", "sport": "ski", "scene_id": "ski_s0", "arm": "RIGHT", "seed": 9301, "url": "https://v3b.fal.media/files/b/0a957777/X7C27BywXyzcxfxQPjpxi_oEqLXs9w.jpg", "label": "tron_ski_s0"}, {"colorway": "Tron", "sport": "ski", "scene_id": "ski_s1", "arm": "RIGHT", "seed": 9302, "url": "https://v3b.fal.media/files/b/0a957777/-9z7HP3_cKSzEsIIrbV3X_YFdsHmvl.jpg", "label": "tron_ski_s1"}, {"colorway": "Tron", "sport": "snow", "scene_id": "snow_s0", "arm": "RIGHT", "seed": 9401, "url": "https://v3b.fal.media/files/b/0a957778/D5uKDewduPkCMBo-AB5-j_8M0zFGrp.jpg", "label": "tron_snow_s0"}, {"colorway": "Tron", "sport": "snow", "scene_id": "snow_s1", "arm": "RIGHT", "seed": 9402, "url": "https://v3b.fal.media/files/b/0a957778/rs3Dxn7onmlT8gRNwzzVU_tA90Iqtm.jpg", "label": "tron_snow_s1"}]};
+const SCORES_KEY='cb2_dualref_scores';
+const FLAGS_KEY='cb2_dualref_flags';
+const scores=JSON.parse(localStorage.getItem(SCORES_KEY)||'{}');
+const flags=JSON.parse(localStorage.getItem(FLAGS_KEY)||'{}');
+let fSport='all';
+
+const SPORT_LABELS={moto:'Motorcycle',mtb:'MTB',ski:'Ski',snow:'Snowboard'};
+
+function setScore(label, n){
+  scores[label]=scores[label]===n?0:n;
+  localStorage.setItem(SCORES_KEY,JSON.stringify(scores));
+  render();renderStats();
+}
+function toggleFlag(label, type){
+  if(!flags[label])flags[label]={};
+  flags[label][type]=!flags[label][type];
+  if(!flags[label].perpendicular && !flags[label].wrongArm)delete flags[label];
+  localStorage.setItem(FLAGS_KEY,JSON.stringify(flags));
+  render();renderStats();
+}
+
+function renderStats(){
+  const all=[...DATA.h3_pairs, ...DATA.p4_pairs, ...DATA.tron_gens];
+  document.getElementById('sTotal').textContent=all.length;
+  document.getElementById('sRated').textContent=all.filter(d=>scores[d.label]>0).length;
+  document.getElementById('sFives').textContent=all.filter(d=>scores[d.label]===5).length;
+  document.getElementById('sFlagged').textContent=all.filter(d=>flags[d.label]).length;
+}
+
+function exportResults(){
+  const payload={
+    exportedAt:new Date().toISOString(),
+    test:'dual_ref_test',
+    scores:scores,
+    flags:flags,
+  };
+  const text=JSON.stringify(payload,null,2);
+  navigator.clipboard.writeText(text).then(()=>{
+    alert(`Copied ${Object.keys(scores).length} scores + ${Object.keys(flags).length} flags`);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    alert('Copied (fallback)');
+  });
+}
+
+function renderPair(d){
+  const s=scores[d.label]||0;
+  const f=flags[d.label]||{};
+  const cw=d.colorway==='Patriot'?'t-patriot':'t-hunter';
+  const armTag=d.arm==='LEFT'?'t-left':'t-right';
+  return `<div class="pair" data-sport="${d.sport}">
+    <h3>${d.v1_ref_id.toUpperCase()} · ${d.scene_id} <span class="tag ${cw}">${d.colorway}</span><span class="tag ${armTag}">${d.arm}</span></h3>
+    <div class="meta">seed ${d.seed} · image 2 = ${d.img2_name}</div>
+    <div class="side-by-side">
+      <div class="side">
+        <div class="hdr old">V1 single-ref <span class="tag t-single">SINGLE</span></div>
+        <img src="${d.v1_url}" onclick="openLB('${d.v1_url}')">
+      </div>
+      <div class="side">
+        <div class="hdr new">NEW dual-ref <span class="tag t-dual">DUAL</span></div>
+        <img src="${d.new_url}" onclick="openLB('${d.new_url}')">
+        <div class="controls">
+          <div class="score" data-label="${d.label}">
+            ${[1,2,3,4,5].map(n=>`<span class="${s>=n?'sel':''}" data-n="${n}">${n}</span>`).join('')}
+          </div>
+          <div class="flags">
+            <button class="${f.perpendicular?'on-perp':''}" data-flag="perpendicular" data-label="${d.label}" title="Perpendicular">⊥</button>
+            <button class="${f.wrongArm?'on-arm':''}" data-flag="wrongArm" data-label="${d.label}" title="Wrong arm">⤫arm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderTronCard(d){
+  const s=scores[d.label]||0;
+  const f=flags[d.label]||{};
+  const armTag=d.arm==='LEFT'?'t-left':'t-right';
+  return `<div class="card" data-sport="${d.sport}">
+    <img src="${d.url}" onclick="openLB('${d.url}')">
+    <div class="lbl"><strong>${d.scene_id}</strong> <span class="tag t-tron">TRON</span><span class="tag ${armTag}">${d.arm}</span></div>
+    <div class="sub2">seed ${d.seed}</div>
+    <div class="controls">
+      <div class="score" data-label="${d.label}">
+        ${[1,2,3,4,5].map(n=>`<span class="${s>=n?'sel':''}" data-n="${n}">${n}</span>`).join('')}
+      </div>
+      <div class="flags">
+        <button class="${f.perpendicular?'on-perp':''}" data-flag="perpendicular" data-label="${d.label}" title="Perpendicular">⊥</button>
+        <button class="${f.wrongArm?'on-arm':''}" data-flag="wrongArm" data-label="${d.label}" title="Wrong arm">⤫arm</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const c=document.getElementById('content');
+  const h3Items=DATA.h3_pairs.filter(d=>fSport==='all'||d.sport===fSport);
+  const p4Items=DATA.p4_pairs.filter(d=>fSport==='all'||d.sport===fSport);
+  const tronItems=DATA.tron_gens.filter(d=>fSport==='all'||d.sport===fSport);
+
+  c.innerHTML=`
+    <div class="section">
+      <h2>Hunter · h3 + IMG_0529</h2>
+      <div class="desc">Rotated h3 placement ref + clean Hunter product B as symbol ref. Compare V1 single-ref (left) to new dual-ref (right). Looking for 4→5 clarity jump.</div>
+      ${h3Items.map(renderPair).join('')}
+    </div>
+    <div class="section">
+      <h2>Patriot · p4 + IMG_0513</h2>
+      <div class="desc">Rotated p4 placement ref + clean Patriot product A as symbol ref. Watch for perpendicular flags — V1 showed all 4 perp failures were on Patriot refs, so if dual-ref fixes that too, even better.</div>
+      ${p4Items.map(renderPair).join('')}
+    </div>
+    <div class="section">
+      <h2>Tron · Landscape-30 + T3 <span class="tag t-tron">FLAGSHIP</span></h2>
+      <div class="desc">First Tron signal ever. No on-jacket Tron ref exists — testing with two product renders as the pair. If this looks bad, Jordan should shoot Tron on a sleeve from the same angle as IMG_0534 (h3) and IMG_0550 (p4).</div>
+      <div class="grid">${tronItems.map(renderTronCard).join('')}</div>
+    </div>
+  `;
+
+  c.querySelectorAll('.score').forEach(el=>{
+    el.querySelectorAll('span').forEach(s=>{
+      s.onclick=(e)=>{e.stopPropagation();setScore(el.dataset.label,parseInt(s.dataset.n));};
+    });
+  });
+  c.querySelectorAll('.flags button').forEach(b=>{
+    b.onclick=(e)=>{e.stopPropagation();toggleFlag(b.dataset.label,b.dataset.flag);};
+  });
+}
+
+function openLB(url){document.getElementById('lbimg').src=url;document.getElementById('lb').classList.add('on');}
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+
+document.querySelectorAll('.filters button').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    fSport=b.dataset.fsport;
+    render();renderStats();
+  };
+});
+
+render();
+renderStats();
+</script>
+</body></html>
