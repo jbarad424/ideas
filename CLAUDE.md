@@ -84,14 +84,14 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 
 **Structure:** `[SCENE + SETTING] + [SUBJECT + ACTIVITY] + LOCKED CB2 BLOCK + waist-up + [STYLE/MOOD/CAMERA]`
 
-**Locked CB2 block (CORRECTED — Nano Banana Pro / GPT Image 1.5 with dual-ref + explicit symbols):**
-- Left arm: `the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window and Chubby Buttons logo closest to WRIST, MINUS button closest to wrist, PLUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols matching the product in image 2`
-- Right arm: `the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to ELBOW, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2`
+**Locked CB2 block (Nano Banana Pro / GPT Image 1.5 with dual-ref + explicit symbols):**
+- Left arm: `the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2`
+- Right arm: `the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to ELBOW, MINUS button closest to wrist, PLUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols matching the product in image 2`
 - **Requires dual-ref:** image 1 = Ref C at w=1600, image 2 = cb2-ref-front.jpg (product close-up with clear symbols)
 
 **Locked CB2 block (FLUX 2 Flex — simpler version):**
-- Left arm: `wearing the wearable remote from image 1 on their LEFT forearm, MINUS button closest to wrist, LED window closest to wrist`
-- Right arm: `wearing the wearable remote from image 1 on their RIGHT forearm, PLUS button closest to wrist, LED window closest to elbow`
+- Left arm: `wearing the wearable remote from image 1 on their LEFT forearm, PLUS button closest to wrist, LED window closest to wrist`
+- Right arm: `wearing the wearable remote from image 1 on their RIGHT forearm, MINUS button closest to wrist, LED window closest to elbow`
 
 **Key prompt improvements discovered April 7:**
 - **"OVER the jacket sleeve"** — fixes bare skin / sleeve-ripped-off problem (major issue in earlier batches)
@@ -114,11 +114,12 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 - Generic quality boosters ("4K," "hyperrealistic," "ultra HD") — triggers over-polished CGI look
 - The word "photorealistic" — ironically triggers AI's idea of photorealistic, which is over-smoothed
 
-### Arm Orientation Rule (CORRECTED April 7 — confirmed by Justin with engineering drawing + product photo)
-- **LEFT arm:** LED window + Chubby Buttons logo closest to WRIST. Button order wrist→elbow: MINUS (−), REWIND (◁◁), PLAY/PAUSE (≡▷), FAST-FORWARD (▷▷), PLUS (+). MINUS closest to wrist, PLUS closest to elbow.
-- **RIGHT arm:** LED window closest to ELBOW. Button order wrist→elbow: PLUS (+), FAST-FORWARD (▷▷), PLAY/PAUSE (≡▷), REWIND (◁◁), MINUS (−). PLUS closest to wrist, MINUS closest to elbow.
+### Arm Orientation Rule (CONFIRMED April 7 — verified by Justin with engineering drawing, product photo, and 3 rounds of testing)
+- **LEFT arm (wrist→elbow):** PLUS (+), FAST-FORWARD (▷▷), PLAY/PAUSE (≡▷), REWIND (◁◁), MINUS (−). LED window at WRIST (same end as PLUS).
+- **RIGHT arm (wrist→elbow):** MINUS (−), REWIND (◁◁), PLAY/PAUSE (≡▷), FAST-FORWARD (▷▷), PLUS (+). LED window at ELBOW (same end as PLUS).
+- **Key rule:** LED window is ALWAYS on the PLUS end of the device. PLUS is closest to wrist on LEFT arm, closest to elbow on RIGHT arm.
 - **Device dimensions:** 108mm × 39mm (≈ 4.25" × 1.5"). NOT 3 inches.
-- **Previous rule was WRONG** — old rule said "volume-up (+) closest to WRIST" for LEFT arm. The correct rule is MINUS closest to wrist on LEFT arm.
+- **WARNING:** A previous session incorrectly reversed this to "MINUS closest to wrist on LEFT arm" — that is WRONG. Justin confirmed in V3 feedback: "minus symbol is by the wrist, which should not be" (on left arm).
 
 ### Step 2 (optional): Two-Pass Gear Addition
 - Run a winning image through FLUX edit again to add helmet or earbuds
