@@ -102,13 +102,20 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 - **Add imperfections** ("film grain, slight lens vignetting, chromatic aberration") — reduces AI-polished look
 
 **Example prompts (GPT Image 1.5):**
-- `Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain`
-- `Desert highway through red rock canyon, motorcycle rider on adventure bike, wearing textile riding jacket and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography`
+- `Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain`
+- `Desert highway through red rock canyon, motorcycle rider on adventure bike, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography`
+
+**MANDATORY per-sport gear (always include in prompts):**
+- **Motorcycle:** leather riding gloves, full-face helmet, leather/textile riding jacket with armor
+- **Skiing:** ski gloves, helmet, goggles, ski jacket
+- **Snowboard:** gloves, helmet, snowboard jacket
+- **MTB:** full-face DH helmet, gloves, jersey/armor
+- **Snowmobile:** snowmobile gloves, full-face helmet, snowmobile suit
 
 **What NOT to put in prompts:**
 - Colorway names or button colors (let the reference photo handle it)
 - "Bright button icons" or "clearly visible symbols" (causes glowing)
-- Complex multi-detail instructions (earbuds + helmet + jacket — use two-pass instead)
+- "Wireless earbuds" or "AirPods" — they float on the face or look comically Photoshopped. If wearing a helmet, earbuds are invisible anyway (implied by use case). Drop from all prompts.
 - "Product photography" (triggers sterile white-background aesthetic)
 - CB2 description before the scene (scene-first produces better results)
 - Generic quality boosters ("4K," "hyperrealistic," "ultra HD") — triggers over-polished CGI look

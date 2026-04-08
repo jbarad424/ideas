@@ -1444,22 +1444,70 @@ function vidLabCheck(){
     const img=JSON.parse(src);
     const panel=document.getElementById('vidLabSource');
     panel.style.display='block';
-    // Force image load by setting src after display
     const imgEl=document.getElementById('vidLabImg');
     imgEl.src='';
     setTimeout(()=>{imgEl.src=img.url;},50);
     document.getElementById('vidLabLabel').textContent=img.label;
     document.getElementById('vidLabMeta').textContent=img.model+' — Score: '+Math.round(img.score)+'/100';
-    // Reset platform buttons and status
-    document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
-    document.getElementById('vidLabStatus').innerHTML='';
-    // Clear direction field
-    const dirField=document.getElementById('vidLabDirection');
-    if(dirField)dirField.value='';
+    // Check for active job to resume polling
+    const job=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');
+    if(job&&job.statusUrl){
+      // Resume polling an active job
+      document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=true;b.style.opacity='.4';});
+      const st=document.getElementById('vidLabStatus');
+      st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
+        +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.2rem">'+job.platform+' — Resuming...</div>'
+        +'<div id="vidLabProgress" style="font-size:.65rem;color:#ccc">Reconnecting to job...</div>'
+        +'<div style="font-size:.5rem;color:#666;margin-top:.3rem">Request: '+job.requestId.slice(0,18)+'...</div></div>';
+      vidLabResumePoll(job.statusUrl,job.resultUrl,job.platform);
+    }else{
+      // No active job — show fresh UI
+      document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+      document.getElementById('vidLabStatus').innerHTML='';
+      const dirField=document.getElementById('vidLabDirection');
+      if(dirField)dirField.value='';
+    }
   }catch(e){}
+}
+function vidLabResumePoll(statusUrl,resultUrl,platformName){
+  const FAL='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
+  let polls=0;
+  const st=document.getElementById('vidLabStatus');
+  const poller=setInterval(()=>{
+    polls++;
+    fetch(statusUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(s=>{
+      const prog=document.getElementById('vidLabProgress');
+      if(!prog){clearInterval(poller);return;}
+      prog.textContent='Status: '+(s.status||'checking')+' — poll #'+polls;
+      if(s.status==='COMPLETED'){
+        clearInterval(poller);
+        localStorage.removeItem('cb2_videolab_job');
+        prog.innerHTML='<span style="color:#22c55e;font-weight:700">COMPLETED!</span> Fetching video...';
+        fetch(resultUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(res=>{
+          const vidUrl=res?.video?.url||res?.output?.video?.url;
+          if(vidUrl){
+            prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done!</span> Video ready below.';
+            const preview=document.createElement('div');
+            preview.style.cssText='margin-top:.5rem';
+            preview.innerHTML='<video controls playsinline autoplay loop style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
+              +'<div style="font-size:.55rem;color:#888;margin-top:.2rem;word-break:break-all">'+vidUrl+'</div>';
+            st.appendChild(preview);
+            showToast('Video ready! '+platformName+' completed');
+          }else{
+            prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found.</span>';
+          }
+        });
+      }else if(s.status==='FAILED'){
+        clearInterval(poller);
+        localStorage.removeItem('cb2_videolab_job');
+        prog.innerHTML='<span style="color:#ef4444;font-weight:700">FAILED</span> — '+(s.error||'unknown error');
+      }
+    }).catch(()=>{});
+  },15000);
 }
 function vidLabDismiss(){
   localStorage.removeItem('cb2_videolab_source');
+  localStorage.removeItem('cb2_videolab_job');
   document.getElementById('vidLabSource').style.display='none';
 }
 function vidLabGenerate(platform){
@@ -1497,43 +1545,14 @@ function vidLabGenerate(platform){
     // Use the URLs returned by fal.ai (they use a shorter base path than the submit endpoint)
     const statusUrl=d.status_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid+'/status');
     const resultUrl=d.response_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid);
+    // Save job state so it survives page reloads
+    localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,submitted:new Date().toISOString()}));
     st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
       +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.2rem">Job Submitted!</div>'
       +'<div id="vidLabProgress" style="font-size:.65rem;color:#ccc">Status: IN_QUEUE — checking every 15s...</div>'
       +'<div style="font-size:.5rem;color:#666;margin-top:.3rem">Request: '+rid.slice(0,18)+'...</div></div>';
-    // Poll for completion using GET on the status URL
-    let polls=0;
-    const poller=setInterval(()=>{
-      polls++;
-      fetch(statusUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(s=>{
-        const prog=document.getElementById('vidLabProgress');
-        if(!prog){clearInterval(poller);return;}
-        prog.textContent='Status: '+(s.status||'checking')+' — poll #'+polls;
-        if(s.status==='COMPLETED'){
-          clearInterval(poller);
-          prog.innerHTML='<span style="color:#22c55e;font-weight:700">COMPLETED!</span> Fetching video...';
-          // Fetch result via GET on response URL
-          fetch(resultUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(res=>{
-            const vidUrl=res?.video?.url||res?.output?.video?.url;
-            if(vidUrl){
-              prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done!</span> Video ready below.';
-              // Show video inline
-              const preview=document.createElement('div');
-              preview.style.cssText='margin-top:.5rem';
-              preview.innerHTML='<video controls playsinline autoplay loop style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
-                +'<div style="font-size:.55rem;color:#888;margin-top:.2rem;word-break:break-all">'+vidUrl+'</div>';
-              st.appendChild(preview);
-              showToast('Video ready! '+p.name+' completed');
-            }else{
-              prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found. Tell Claude Code to check request '+rid+'</span>';
-            }
-          });
-        }else if(s.status==='FAILED'){
-          clearInterval(poller);
-          prog.innerHTML='<span style="color:#ef4444;font-weight:700">FAILED</span> — '+(s.error||'unknown error');
-        }
-      }).catch(()=>{});
-    },15000);
+    // Start polling — reuses the same resume function
+    vidLabResumePoll(statusUrl,resultUrl,p.name);
   }).catch(e=>{
     st.innerHTML='<div style="color:#ef4444">Network error: '+e.message+'</div>';
     document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
