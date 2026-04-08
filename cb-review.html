@@ -298,25 +298,26 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <!-- VIDEOS TAB -->
 <div id="videosArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
-  <div id="vidLabSource" style="display:none;background:#0a1a2a;border:1px solid #06b6d4;border-radius:10px;padding:.6rem;margin-bottom:.6rem">
-    <div style="font-size:.7rem;font-weight:700;color:#06b6d4;margin-bottom:.4rem">Video Lab — Source Image</div>
+  <div id="vidLabSource" style="display:none;background:#0a1a2a;border:2px solid #06b6d4;border-radius:12px;padding:.8rem;margin-bottom:.8rem">
+    <div style="font-size:.8rem;font-weight:700;color:#06b6d4;margin-bottom:.5rem">Video Lab</div>
     <div style="display:flex;gap:.6rem;align-items:flex-start">
-      <img id="vidLabImg" src="" style="width:120px;border-radius:6px;flex-shrink:0">
-      <div>
-        <div id="vidLabLabel" style="font-size:.7rem;color:#ccc;margin-bottom:.2rem"></div>
-        <div id="vidLabMeta" style="font-size:.6rem;color:#888;margin-bottom:.4rem"></div>
-        <div style="font-size:.6rem;color:#06b6d4;font-weight:600;margin-bottom:.3rem">Choose a platform to animate:</div>
+      <img id="vidLabImg" src="" style="width:140px;border-radius:8px;flex-shrink:0">
+      <div style="flex:1">
+        <div id="vidLabLabel" style="font-size:.75rem;color:#fff;font-weight:600;margin-bottom:.2rem"></div>
+        <div id="vidLabMeta" style="font-size:.6rem;color:#888;margin-bottom:.5rem"></div>
+        <div style="font-size:.65rem;color:#ccc;font-weight:600;margin-bottom:.3rem">Direction (optional):</div>
+        <textarea id="vidLabDirection" placeholder="e.g. slow pan right, rider speeds away into sunset, dramatic camera shake, dust flying..." style="width:100%;min-height:50px;background:#111;border:1px solid #333;border-radius:6px;color:#fff;font-size:.7rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box"></textarea>
+        <div style="font-size:.65rem;color:#06b6d4;font-weight:600;margin:.4rem 0 .3rem">Pick a platform to generate:</div>
         <div style="display:flex;gap:.3rem;flex-wrap:wrap" id="vidLabPlatforms">
-          <button onclick="vidLabGenerate('kling')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Kling 3.0 Pro <span style="color:#888;font-weight:400">15s/60fps/$1.50</span></button>
-          <button onclick="vidLabGenerate('veo-lite')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.6rem;cursor:pointer;font-weight:600">Veo 3.1 Lite <span style="color:#888;font-weight:400">8s/$0.40</span></button>
-          <button onclick="vidLabGenerate('wan')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #06b6d4;background:transparent;color:#06b6d4;font-size:.6rem;cursor:pointer;font-weight:600">Wan 2.7 Ref <span style="color:#888;font-weight:400">15s/$1.00</span></button>
-          <button onclick="vidLabGenerate('sora')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #ec4899;background:transparent;color:#ec4899;font-size:.6rem;cursor:pointer;font-weight:600">Sora 2 Pro <span style="color:#888;font-weight:400">20s/$5.00</span></button>
-          <button onclick="vidLabGenerate('runway')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.6rem;cursor:pointer;font-weight:600">Runway Gen-4T <span style="color:#888;font-weight:400">10s/$0.50</span></button>
+          <button onclick="vidLabGenerate('kling')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #22c55e;background:transparent;color:#22c55e;font-size:.65rem;cursor:pointer;font-weight:600">Kling 3.0 Pro<br><span style="color:#888;font-weight:400;font-size:.5rem">10s · $1.50</span></button>
+          <button onclick="vidLabGenerate('veo-lite')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.65rem;cursor:pointer;font-weight:600">Veo 3.1 Lite<br><span style="color:#888;font-weight:400;font-size:.5rem">8s · $0.40</span></button>
+          <button onclick="vidLabGenerate('sora')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #ec4899;background:transparent;color:#ec4899;font-size:.65rem;cursor:pointer;font-weight:600">Sora 2 Pro<br><span style="color:#888;font-weight:400;font-size:.5rem">16s · $5.00</span></button>
+          <button onclick="vidLabGenerate('runway')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #a855f7;background:transparent;color:#a855f7;font-size:.65rem;cursor:pointer;font-weight:600">Runway Gen-4T<br><span style="color:#888;font-weight:400;font-size:.5rem">10s · $0.50</span></button>
         </div>
-        <div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.3rem"></div>
+        <div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.4rem"></div>
       </div>
     </div>
-    <button onclick="vidLabDismiss()" style="margin-top:.4rem;padding:.2rem .5rem;border-radius:5px;border:1px solid #333;background:transparent;color:#666;font-size:.55rem;cursor:pointer">Dismiss</button>
+    <button onclick="vidLabDismiss()" style="margin-top:.5rem;padding:.25rem .6rem;border-radius:6px;border:1px solid #333;background:transparent;color:#666;font-size:.6rem;cursor:pointer">Dismiss Source Image</button>
   </div>
   <div style="display:flex;gap:.3rem;justify-content:center;margin-bottom:.5rem">
     <button id="vidTabNew" class="active" onclick="vidSetTab('new')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">To Review (<span id="vidCntNew">0</span>)</button>
@@ -1413,13 +1414,23 @@ function vidUpFilt(){vidFilt=vidTab==='new'?ALL_VIDEOS.filter(v=>!vidIsR(v)):ALL
 
 function vidLabCheck(){
   const src=localStorage.getItem('cb2_videolab_source');
-  if(!src)return;
+  if(!src){document.getElementById('vidLabSource').style.display='none';return;}
   try{
     const img=JSON.parse(src);
-    document.getElementById('vidLabSource').style.display='block';
-    document.getElementById('vidLabImg').src=img.url;
+    const panel=document.getElementById('vidLabSource');
+    panel.style.display='block';
+    // Force image load by setting src after display
+    const imgEl=document.getElementById('vidLabImg');
+    imgEl.src='';
+    setTimeout(()=>{imgEl.src=img.url;},50);
     document.getElementById('vidLabLabel').textContent=img.label;
     document.getElementById('vidLabMeta').textContent=img.model+' — Score: '+Math.round(img.score)+'/100';
+    // Reset platform buttons and status
+    document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+    document.getElementById('vidLabStatus').innerHTML='';
+    // Clear direction field
+    const dirField=document.getElementById('vidLabDirection');
+    if(dirField)dirField.value='';
   }catch(e){}
 }
 function vidLabDismiss(){
@@ -1429,30 +1440,78 @@ function vidLabDismiss(){
 function vidLabGenerate(platform){
   const src=JSON.parse(localStorage.getItem('cb2_videolab_source')||'null');
   if(!src){showToast('No source image');return;}
+  const FAL='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
+  const dir=(document.getElementById('vidLabDirection')?.value||'').trim();
+  const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
+  const prompt=dir?dir+'. '+basePrompt:basePrompt;
   const info={
-    kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',dur:'15s',cost:'~$1.50'},
-    'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',dur:'8s',cost:'~$0.40'},
-    wan:{name:'Wan 2.7 Ref-to-Video',endpoint:'fal-ai/wan/v2.7/reference-to-video',dur:'15s',cost:'~$1.00'},
-    sora:{name:'Sora 2 Pro',endpoint:'fal-ai/sora-2/image-to-video/pro',dur:'20s',cost:'~$5.00'},
-    runway:{name:'Runway Gen-4 Turbo',endpoint:'runway-api (direct)',dur:'10s',cost:'~$0.50'}
+    kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',cost:'~$1.50',
+      body:{image_url:src.url,prompt:prompt,duration:'10',aspect_ratio:'9:16'}},
+    'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',cost:'~$0.40',
+      body:{image_url:src.url,prompt:prompt,duration:'8s',aspect_ratio:'9:16'}},
+    sora:{name:'Sora 2 Pro',endpoint:'fal-ai/sora-2/image-to-video/pro',cost:'~$5.00',
+      body:{image_url:src.url,prompt:prompt,duration:16,aspect_ratio:'9:16'}},
+    runway:{name:'Runway Gen-4T',endpoint:null,cost:'~$0.50',body:null}
   };
   const p=info[platform]||info.kling;
-  // Disable all platform buttons to show selection happened
+  if(!p.endpoint){
+    document.getElementById('vidLabStatus').innerHTML='<div style="color:#f59e0b;font-size:.65rem;margin-top:.3rem">Runway requires direct API — tell Claude Code: <strong>"animate '+src.label+' with Runway Gen-4 Turbo"</strong></div>';
+    return;
+  }
+  // Disable buttons, show submitting state
   document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=true;b.style.opacity='.4';});
-  // Show clear confirmation with command to copy
-  const cmd='animate '+src.label+' with '+p.name;
-  document.getElementById('vidLabStatus').innerHTML=
-    '<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;margin-top:.3rem;text-align:center">'
-    +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.3rem">Selected: '+p.name+'</div>'
-    +'<div style="font-size:.65rem;color:#ccc;margin-bottom:.4rem">'+p.dur+' video for '+p.cost+'</div>'
-    +'<div style="font-size:.65rem;color:#f59e0b;font-weight:600;margin-bottom:.3rem">Next step: Tell Claude Code in chat:</div>'
-    +'<div onclick="navigator.clipboard.writeText(\''+cmd.replace(/'/g,"\\'")+'\');this.style.borderColor=\'#22c55e\';this.querySelector(\'.cp\').textContent=\'Copied!\'" style="background:#111;border:2px solid #333;border-radius:6px;padding:.4rem .6rem;cursor:pointer;transition:border-color .2s">'
-    +'<div style="font-size:.75rem;color:#fff;font-weight:600">"'+cmd+'"</div>'
-    +'<div class="cp" style="font-size:.5rem;color:#888;margin-top:.2rem">Tap to copy command</div>'
-    +'</div>'
-    +'<div style="font-size:.5rem;color:#666;margin-top:.4rem">Claude will submit the job, add the video here when done, and you can review it.</div>'
-    +'</div>';
-  showToast('Selected '+p.name+' — copy the command and tell Claude Code');
+  const st=document.getElementById('vidLabStatus');
+  st.innerHTML='<div style="background:#1a1030;border:2px solid #a855f7;border-radius:8px;padding:.6rem;text-align:center">'
+    +'<div style="font-size:.8rem;color:#a855f7;font-weight:700">Submitting to '+p.name+'...</div>'
+    +'<div style="font-size:.6rem;color:#888;margin-top:.2rem">'+p.cost+' per video</div></div>';
+
+  fetch('https://queue.fal.run/'+p.endpoint,{method:'POST',headers:{'Authorization':'Key '+FAL,'Content-Type':'application/json'},body:JSON.stringify(p.body)})
+  .then(r=>r.json()).then(d=>{
+    if(!d.request_id){st.innerHTML='<div style="color:#ef4444">Error: '+JSON.stringify(d).slice(0,200)+'</div>';return;}
+    const rid=d.request_id;
+    const statusUrl='https://queue.fal.run/'+p.endpoint+'/requests/'+rid+'/status';
+    const resultUrl=d.response_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid);
+    st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
+      +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.2rem">Job Submitted!</div>'
+      +'<div id="vidLabProgress" style="font-size:.65rem;color:#ccc">Status: IN_QUEUE — checking every 15s...</div>'
+      +'<div style="font-size:.5rem;color:#666;margin-top:.3rem">Request: '+rid.slice(0,18)+'...</div></div>';
+    // Poll for completion
+    let polls=0;
+    const poller=setInterval(()=>{
+      polls++;
+      fetch(statusUrl,{method:'POST',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(s=>{
+        const prog=document.getElementById('vidLabProgress');
+        if(!prog){clearInterval(poller);return;}
+        prog.textContent='Status: '+(s.status||'checking')+' — poll #'+polls;
+        if(s.status==='COMPLETED'){
+          clearInterval(poller);
+          prog.innerHTML='<span style="color:#22c55e;font-weight:700">COMPLETED!</span> Fetching video...';
+          // Fetch result
+          fetch(resultUrl,{method:'POST',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(res=>{
+            const vidUrl=res?.video?.url||res?.output?.video?.url;
+            if(vidUrl){
+              prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done!</span> Video ready below.';
+              // Show video inline
+              const preview=document.createElement('div');
+              preview.style.cssText='margin-top:.5rem';
+              preview.innerHTML='<video controls playsinline autoplay loop style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
+                +'<div style="font-size:.55rem;color:#888;margin-top:.2rem;word-break:break-all">'+vidUrl+'</div>';
+              st.appendChild(preview);
+              showToast('Video ready! '+p.name+' completed');
+            }else{
+              prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found. Tell Claude Code to check request '+rid+'</span>';
+            }
+          });
+        }else if(s.status==='FAILED'){
+          clearInterval(poller);
+          prog.innerHTML='<span style="color:#ef4444;font-weight:700">FAILED</span> — '+(s.error||'unknown error');
+        }
+      }).catch(()=>{});
+    },15000);
+  }).catch(e=>{
+    st.innerHTML='<div style="color:#ef4444">Network error: '+e.message+'</div>';
+    document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+  });
 }
 
 function vidSetTab(t){
@@ -1709,12 +1768,11 @@ function galSendToVideoLab(id){
   const img=ALL_IMAGES.find(i=>i.id===id);if(!img)return;
   // Close the overlay
   const ov=document.querySelector('.gal-overlay');if(ov)ov.remove();
-  // Switch to VIDEOS tab and store the selected image for video creation
+  // Store the selected image for video creation
   localStorage.setItem('cb2_videolab_source',JSON.stringify({id:img.id,url:img.url,label:img.label,model:img.model,score:galScore(img.id)}));
-  tab='videos';
-  document.querySelectorAll('.tab').forEach((el,i)=>{el.className='tab'+((['new','done','progress','gallery','videos','aiscore'][i]===tab)?' active':'');});
-  renderView();
-  showToast('Photo loaded in Video tab — choose a platform to animate');
+  // Switch to VIDEOS tab
+  setTab('videos');
+  showToast('Photo loaded — add direction and pick a platform');
 }
 
 function galToggleMM(id){
