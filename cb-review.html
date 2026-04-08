@@ -86,6 +86,11 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .gal-overlay .gal-dl{display:inline-block;margin-top:.5rem;padding:.3rem .8rem;border-radius:6px;border:1px solid #22c55e;color:#22c55e;font-size:.7rem;text-decoration:none}
 .gal-mm{display:inline-block;margin-top:.4rem;margin-left:.5rem;padding:.3rem .8rem;border-radius:6px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.7rem;cursor:pointer;font-weight:600}
 .gal-mm:hover{background:#1a1030}
+.gal-vidlab{display:inline-block;margin-top:.4rem;margin-left:.5rem;padding:.3rem .8rem;border-radius:6px;border:1px solid #06b6d4;background:transparent;color:#06b6d4;font-size:.7rem;cursor:pointer;font-weight:600}
+.gal-vidlab:hover{background:#0a1a2a}
+.gal-score-edit{cursor:pointer;transition:opacity .15s}
+.gal-score-edit:hover{opacity:.7}
+.gal-score-input{background:#111;border:2px solid #a855f7;color:#fff;font-size:.9rem;font-weight:700;width:3.5rem;text-align:center;border-radius:4px;padding:.1rem;outline:none}
 .mm-panel{margin-top:.6rem;width:100%;max-width:500px;text-align:left}
 .mm-panel input{width:100%;padding:.4rem .6rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.7rem;box-sizing:border-box}
 .mm-panel input::placeholder{color:#555}
@@ -261,45 +266,70 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <!-- GALLERY/ARCHIVE TAB -->
 <div id="galleryArea" style="display:none;width:100%;max-width:900px;margin:0 auto;padding:0 .5rem">
-  <div style="text-align:center;margin-bottom:.8rem">
-    <!-- Status filter row -->
-    <div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:.5rem 0 .3rem">
-      <button class="gal-filter on" onclick="galSetStatus('all')" data-st="all">All Reviewed</button>
-      <button class="gal-filter" onclick="galSetStatus('accepted')" data-st="accepted"><span style="color:#22c55e">&#10003;</span> Accepted</button>
-      <button class="gal-filter" onclick="galSetStatus('rejected')" data-st="rejected"><span style="color:#ef4444">&#10007;</span> Rejected</button>
+  <div style="margin-bottom:.6rem">
+    <!-- Compact filter bar -->
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.4rem;background:#111;border-radius:8px;border:1px solid #222">
+      <!-- Status -->
+      <div style="display:flex;gap:.25rem;align-items:center">
+        <span style="font-size:.5rem;color:#666;font-weight:700;text-transform:uppercase;margin-right:.2rem">Status</span>
+        <button class="gal-filter on" onclick="galSetStatus('all')" data-st="all" style="padding:.25rem .5rem;font-size:.6rem">All</button>
+        <button class="gal-filter" onclick="galSetStatus('accepted')" data-st="accepted" style="padding:.25rem .5rem;font-size:.6rem;color:#22c55e;border-color:#22c55e">&#10003;</button>
+        <button class="gal-filter" onclick="galSetStatus('rejected')" data-st="rejected" style="padding:.25rem .5rem;font-size:.6rem;color:#ef4444;border-color:#ef4444">&#10007;</button>
+      </div>
+      <div style="width:1px;height:20px;background:#333"></div>
+      <!-- Score -->
+      <div style="display:flex;gap:.25rem;align-items:center">
+        <span style="font-size:.5rem;color:#666;font-weight:700;text-transform:uppercase;margin-right:.2rem">Score</span>
+        <button class="gal-filter gal-score-f on" onclick="galSetScore('all')" data-sf="all" style="padding:.25rem .5rem;font-size:.6rem">All</button>
+        <button class="gal-filter gal-score-f" onclick="galSetScore('90+')" data-sf="90+" style="padding:.25rem .5rem;font-size:.6rem">90+</button>
+        <button class="gal-filter gal-score-f" onclick="galSetScore('70-89')" data-sf="70-89" style="padding:.25rem .5rem;font-size:.6rem">70-89</button>
+        <button class="gal-filter gal-score-f" onclick="galSetScore('under70')" data-sf="under70" style="padding:.25rem .5rem;font-size:.6rem">&lt;70</button>
+      </div>
+      <div style="width:1px;height:20px;background:#333"></div>
+      <!-- Sport -->
+      <div style="display:flex;gap:.25rem;align-items:center">
+        <span style="font-size:.5rem;color:#666;font-weight:700;text-transform:uppercase;margin-right:.2rem">Sport</span>
+        <button class="gal-filter gal-sport-f on" onclick="galSetSport('all')" data-sp="all" style="padding:.25rem .5rem;font-size:.6rem">All</button>
+        <button class="gal-filter gal-sport-f" onclick="galSetSport('motorcycle')" data-sp="motorcycle" style="padding:.25rem .5rem;font-size:.6rem">Moto</button>
+        <button class="gal-filter gal-sport-f" onclick="galSetSport('skiing')" data-sp="skiing" style="padding:.25rem .5rem;font-size:.6rem">Ski</button>
+        <button class="gal-filter gal-sport-f" onclick="galSetSport('snowboard')" data-sp="snowboard" style="padding:.25rem .5rem;font-size:.6rem">Snow</button>
+        <button class="gal-filter gal-sport-f" onclick="galSetSport('mtb')" data-sp="mtb" style="padding:.25rem .5rem;font-size:.6rem">MTB</button>
+      </div>
+      <div style="width:1px;height:20px;background:#333"></div>
+      <!-- Model -->
+      <div style="display:flex;gap:.25rem;align-items:center">
+        <span style="font-size:.5rem;color:#666;font-weight:700;text-transform:uppercase;margin-right:.2rem">Model</span>
+        <button class="gal-filter gal-model-f on" onclick="galSetModel('all')" data-md="all" style="padding:.25rem .5rem;font-size:.6rem">All</button>
+        <button class="gal-filter gal-model-f" onclick="galSetModel('gpt')" data-md="gpt" style="padding:.25rem .5rem;font-size:.6rem">GPT</button>
+        <button class="gal-filter gal-model-f" onclick="galSetModel('flex')" data-md="flex" style="padding:.25rem .5rem;font-size:.6rem">FLUX</button>
+        <button class="gal-filter gal-model-f" onclick="galSetModel('nbpro')" data-md="nbpro" style="padding:.25rem .5rem;font-size:.6rem">NB Pro</button>
+        <button class="gal-filter gal-model-f" onclick="galSetModel('nb2')" data-md="nb2" style="padding:.25rem .5rem;font-size:.6rem">NB2</button>
+      </div>
     </div>
-    <!-- Score filter row -->
-    <div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:.3rem 0">
-      <button class="gal-filter gal-score-f on" onclick="galSetScore('all')" data-sf="all">Any Score</button>
-      <button class="gal-filter gal-score-f" onclick="galSetScore('90+')" data-sf="90+"><span style="color:#22c55e">90+</span></button>
-      <button class="gal-filter gal-score-f" onclick="galSetScore('70-89')" data-sf="70-89"><span style="color:#f59e0b">70-89</span></button>
-      <button class="gal-filter gal-score-f" onclick="galSetScore('under70')" data-sf="under70"><span style="color:#ef4444">&lt;70</span></button>
-    </div>
-    <!-- Sport filter row -->
-    <div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:.3rem 0">
-      <button class="gal-filter gal-sport-f on" onclick="galSetSport('all')" data-sp="all">All Sports</button>
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('motorcycle')" data-sp="motorcycle">Motorcycle</button>
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('skiing')" data-sp="skiing">Skiing</button>
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('snowboard')" data-sp="snowboard">Snowboard</button>
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('mtb')" data-sp="mtb">MTB</button>
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('other')" data-sp="other">Other</button>
-    </div>
-    <!-- Model filter row -->
-    <div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:.3rem 0">
-      <button class="gal-filter gal-model-f on" onclick="galSetModel('all')" data-md="all">All Models</button>
-      <button class="gal-filter gal-model-f" onclick="galSetModel('gpt')" data-md="gpt">GPT Image 1.5</button>
-      <button class="gal-filter gal-model-f" onclick="galSetModel('flex')" data-md="flex">FLUX Flex</button>
-      <button class="gal-filter gal-model-f" onclick="galSetModel('nbpro')" data-md="nbpro">NB Pro</button>
-      <button class="gal-filter gal-model-f" onclick="galSetModel('nb2')" data-md="nb2">NB 2</button>
-      <button class="gal-filter gal-model-f" onclick="galSetModel('other-model')" data-md="other-model">Other</button>
-    </div>
-    <a href="https://drive.google.com/drive/folders/10pn4wAdAwkIxj0xcFHfc8s8T7pphkC-o" target="_blank" style="font-size:.65rem;color:#888;text-decoration:underline;margin-top:.3rem;display:inline-block">Open Google Drive Folders</a>
   </div>
   <div id="galGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem"></div>
 </div>
 
 <!-- VIDEOS TAB -->
 <div id="videosArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
+  <div id="vidLabSource" style="display:none;background:#0a1a2a;border:1px solid #06b6d4;border-radius:10px;padding:.6rem;margin-bottom:.6rem">
+    <div style="font-size:.7rem;font-weight:700;color:#06b6d4;margin-bottom:.4rem">Video Lab — Source Image</div>
+    <div style="display:flex;gap:.6rem;align-items:flex-start">
+      <img id="vidLabImg" src="" style="width:120px;border-radius:6px;flex-shrink:0">
+      <div>
+        <div id="vidLabLabel" style="font-size:.7rem;color:#ccc;margin-bottom:.2rem"></div>
+        <div id="vidLabMeta" style="font-size:.6rem;color:#888;margin-bottom:.4rem"></div>
+        <div style="font-size:.6rem;color:#06b6d4;font-weight:600;margin-bottom:.3rem">Choose a platform to animate:</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap" id="vidLabPlatforms">
+          <button onclick="vidLabGenerate('runway')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.6rem;cursor:pointer;font-weight:600">Runway Gen-4 Turbo</button>
+          <button onclick="vidLabGenerate('kling')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Kling 3.0 Pro</button>
+          <button onclick="vidLabGenerate('veo')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.6rem;cursor:pointer;font-weight:600">Veo 3.1</button>
+        </div>
+        <div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.3rem"></div>
+      </div>
+    </div>
+    <button onclick="vidLabDismiss()" style="margin-top:.4rem;padding:.2rem .5rem;border-radius:5px;border:1px solid #333;background:transparent;color:#666;font-size:.55rem;cursor:pointer">Dismiss</button>
+  </div>
   <div style="display:flex;gap:.3rem;justify-content:center;margin-bottom:.5rem">
     <button id="vidTabNew" class="active" onclick="vidSetTab('new')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">To Review (<span id="vidCntNew">0</span>)</button>
     <button id="vidTabDone" onclick="vidSetTab('done')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">Reviewed (<span id="vidCntDone">0</span>)</button>
@@ -1135,7 +1165,7 @@ function setTab(t){
   document.getElementById('aiscoreArea').style.display=(t==='aiscore')?'block':'none';
   document.getElementById('emptyState').style.display='none';
   if(t==='gallery'){renderGallery();}
-  else if(t==='videos'){vidSetTab('new');}
+  else if(t==='videos'){vidLabCheck();vidSetTab('new');}
   else if(t==='aiscore'){aiScoreRender();}
   else if(t==='new'||t==='done'){upFilt();renderView();}
   else if(t==='progress'){document.getElementById('counter').textContent='Experiment Tracker';}
@@ -1336,6 +1366,29 @@ let vidFilt=[];
 function vidIsR(v){return getC(v.id).length>0;}
 function vidUpFilt(){vidFilt=vidTab==='new'?ALL_VIDEOS.filter(v=>!vidIsR(v)):ALL_VIDEOS.filter(v=>vidIsR(v));}
 
+function vidLabCheck(){
+  const src=localStorage.getItem('cb2_videolab_source');
+  if(!src)return;
+  try{
+    const img=JSON.parse(src);
+    document.getElementById('vidLabSource').style.display='block';
+    document.getElementById('vidLabImg').src=img.url;
+    document.getElementById('vidLabLabel').textContent=img.label;
+    document.getElementById('vidLabMeta').textContent=img.model+' — Score: '+Math.round(img.score)+'/100';
+  }catch(e){}
+}
+function vidLabDismiss(){
+  localStorage.removeItem('cb2_videolab_source');
+  document.getElementById('vidLabSource').style.display='none';
+}
+function vidLabGenerate(platform){
+  const src=JSON.parse(localStorage.getItem('cb2_videolab_source')||'null');
+  if(!src){showToast('No source image');return;}
+  const names={runway:'Runway Gen-4 Turbo',kling:'Kling 3.0 Pro',veo:'Veo 3.1'};
+  document.getElementById('vidLabStatus').innerHTML='<span style="color:#a855f7">Use Claude Code to generate: tell Claude "animate '+src.label+' with '+names[platform]+'"</span>';
+  showToast('Copy the command from the Video Lab panel to Claude Code');
+}
+
 function vidSetTab(t){
   vidTab=t;vidIdx=0;
   document.getElementById('vidTabNew').style.borderColor=t==='new'?'#a855f7':'#333';
@@ -1501,10 +1554,13 @@ function galOpen(id){
     +'<img src="'+img.url+'" alt="">'
     +'<div class="gal-info">'
     +'<div style="font-size:.9rem;font-weight:700;margin-bottom:.3rem">'+img.label+'</div>'
-    +'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+' — Score: <strong style="color:'+(s>=90?'#22c55e':s>=70?'#f59e0b':s>=50?'#3b82f6':'#ef4444')+'">'+Math.round(s)+'/100</strong></div>'
+    +'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+' — Score: <strong class="gal-score-edit" onclick="galEditScore(\''+img.id+'\',this)" style="color:'+(s>=90?'#22c55e':s>=70?'#f59e0b':s>=50?'#3b82f6':'#ef4444')+'">'+Math.round(s)+'/100</strong> <span style="font-size:.55rem;color:#555">(click to edit)</span></div>'
     +'<div style="font-size:.7rem;color:#aaa;max-height:200px;overflow-y:auto;text-align:left;background:#111;padding:.5rem;border-radius:6px">'+comment+'</div>'
+    +'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
     +'<a class="gal-dl" href="'+img.url+'" download target="_blank">Download Full Resolution</a>'
+    +'<button class="gal-vidlab" onclick="galSendToVideoLab(\''+img.id+'\')">Send to Video Lab</button>'
     +'<button class="gal-mm" onclick="galToggleMM(\''+img.id+'\')">Make More Like This</button>'
+    +'</div>'
     +'<div id="mmPanel-'+img.id+'" class="mm-panel" style="display:none">'
     +'<div style="font-size:.6rem;color:#a855f7;margin-bottom:.3rem">Using: '+mmDetectModel(img.model).name+'</div>'
     +'<input id="mmText-'+img.id+'" type="text" placeholder="Optional: more snow, change to sunset, zoom closer...">'
@@ -1517,6 +1573,49 @@ function galOpen(id){
     +'</div>'
     +'</div>';
   document.body.appendChild(ov);
+}
+
+function galEditScore(id,el){
+  const current=galScore(id);
+  const parent=el.parentElement;
+  el.style.display='none';
+  // Hide the "(click to edit)" hint
+  const hint=parent.querySelector('span');
+  if(hint)hint.style.display='none';
+  const inp=document.createElement('input');
+  inp.type='number';inp.min='0';inp.max='100';inp.value=Math.round(current);
+  inp.className='gal-score-input';
+  parent.insertBefore(inp,el.nextSibling);
+  inp.focus();inp.select();
+  function save(){
+    const v=Math.max(0,Math.min(100,parseInt(inp.value)||0));
+    // Save as "Final score: X" comment which galScore() reads first
+    const d=D();
+    if(!d[id])d[id]={comments:[]};
+    d[id].comments.push({num:(d[id].comments.length||0)+1,text:'Final score: '+v,time:new Date().toISOString()});
+    localStorage.setItem('cb2_fb',JSON.stringify(d));
+    inp.remove();
+    el.textContent=v+'/100';
+    el.style.color=v>=90?'#22c55e':v>=70?'#f59e0b':v>=50?'#3b82f6':'#ef4444';
+    el.style.display='';
+    if(hint)hint.style.display='';
+    renderGallery();
+    showToast('Score set to '+v+' — hit Sync to push to cloud');
+  }
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')save();if(e.key==='Escape'){inp.remove();el.style.display='';if(hint)hint.style.display='';}});
+  inp.addEventListener('blur',save);
+}
+
+function galSendToVideoLab(id){
+  const img=ALL_IMAGES.find(i=>i.id===id);if(!img)return;
+  // Close the overlay
+  const ov=document.querySelector('.gal-overlay');if(ov)ov.remove();
+  // Switch to VIDEOS tab and store the selected image for video creation
+  localStorage.setItem('cb2_videolab_source',JSON.stringify({id:img.id,url:img.url,label:img.label,model:img.model,score:galScore(img.id)}));
+  tab='videos';
+  document.querySelectorAll('.tab').forEach((el,i)=>{el.className='tab'+((['new','done','progress','gallery','videos','aiscore'][i]===tab)?' active':'');});
+  renderView();
+  showToast('Photo loaded in Video tab — choose a platform to animate');
 }
 
 function galToggleMM(id){
