@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Snow Arm-Flip Test — LEFT vs RIGHT · April 8 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1400px;margin:0 auto;padding:1rem;background:#111;color:#eee;line-height:1.4}
+h1{font-size:1.3rem;margin-bottom:.3rem}
+.sub{color:#888;font-size:.8rem;margin-bottom:1rem}
+.summary{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:1rem;margin-bottom:1rem;font-size:.85rem}
+.summary h3{font-size:.9rem;margin-bottom:.5rem;color:#22c55e}
+.summary p{color:#ccc;margin-bottom:.5rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem}
+.stat{background:#0a0a0a;border:1px solid #333;padding:.5rem;border-radius:4px;text-align:center}
+.stat .n{font-size:1.2rem;font-weight:700;color:#fff}
+.stat .l{font-size:.6rem;color:#888;text-transform:uppercase}
+.pair{margin-bottom:1.6rem;border:1px solid #333;border-radius:8px;background:#1a1a1a;padding:1rem}
+.pair h2{font-size:1rem;margin-bottom:.6rem;color:#fff}
+.pair .meta{font-size:.72rem;color:#888;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid #333}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.65rem;font-weight:700;margin-right:.2rem;text-transform:uppercase}
+.t-hunter{background:#365314;color:#fde047}
+.t-patriot{background:#1e3a5f;color:#fff}
+.t-left{background:#0ea5e9;color:#fff}
+.t-right{background:#a855f7;color:#fff}
+.side-by-side{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.side{border:1px solid #333;border-radius:6px;overflow:hidden;background:#0a0a0a}
+.side h3{font-size:.75rem;padding:.5rem .7rem;background:#161616;color:#aaa;display:flex;justify-content:space-between;align-items:center}
+.side h3.old{color:#f59e0b}
+.side h3.new{color:#22c55e}
+.side img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;cursor:pointer;background:#000}
+.side .sub2{padding:.4rem .7rem;font-size:.65rem;color:#666;background:#0a0a0a}
+.controls{padding:.5rem .7rem;display:flex;justify-content:space-between;align-items:center;gap:.4rem;background:#0a0a0a;border-top:1px solid #222}
+.score{display:inline-flex;gap:.15rem}
+.score span{width:1.3rem;height:1.3rem;border-radius:50%;background:#333;color:#888;display:flex;align-items:center;justify-content:center;font-size:.65rem;cursor:pointer}
+.score span.sel{background:#22c55e;color:#fff}
+.flags{display:flex;gap:.2rem}
+.flags button{padding:.25rem .35rem;background:#222;border:1px solid #444;color:#888;font-size:.6rem;cursor:pointer;border-radius:3px;white-space:nowrap}
+.flags button.on-perp{background:#dc2626;color:#fff;border-color:#dc2626;font-weight:700}
+.flags button.on-arm{background:#a855f7;color:#fff;border-color:#a855f7;font-weight:700}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;padding:2rem;cursor:pointer}
+.lightbox.on{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain}
+.export-btn{position:fixed;bottom:1rem;right:1rem;padding:.7rem 1.2rem;background:#22c55e;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,.5);font-size:.85rem}
+</style>
+</head><body>
+
+<h1>Snow Arm-Flip Test — LEFT (V1) vs RIGHT (new)</h1>
+<div class="sub">April 8 2026 · 3 refs (h3, h5, p4) × 2 snow scenes · Nano Banana Pro</div>
+
+<div class="summary">
+<h3>Hypothesis</h3>
+<p>V1 locked snowboard to LEFT arm and got 3/8 wrongArm failures — the model kept moving the CB2 to the more-visible right arm because regular stance hides the rider's left arm behind the body. This test re-runs h3, h5, p4 with RIGHT arm locked. Same refs, same scenes, same seeds — only the arm prompt flipped.</p>
+<p><strong>What to look for:</strong> If RIGHT produces zero wrongArm flags and the symbols read cleanly, lock snow=RIGHT as the permanent default. If RIGHT still wrongArms, the bug is deeper than stance visibility.</p>
+<div class="stats">
+  <div class="stat"><div class="n" id="sTotal">0</div><div class="l">Pairs</div></div>
+  <div class="stat"><div class="n" id="sRated">0</div><div class="l">RIGHT Rated</div></div>
+  <div class="stat"><div class="n" id="sFives">0</div><div class="l">RIGHT 5s</div></div>
+  <div class="stat"><div class="n" id="sFlagged">0</div><div class="l">RIGHT Flagged</div></div>
+</div>
+</div>
+
+<div id="content"></div>
+
+<button class="export-btn" onclick="exportResults()">📋 Export verdict</button>
+<div class="lightbox" id="lb"><img id="lbimg" src=""></div>
+
+<script>
+const DATA = [{"ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "colorway": "Hunter", "scene_id": "snow_s0", "seed": 9401, "left_url": "https://v3b.fal.media/files/b/0a9576e5/cNrYU_JGUwbLR_jMq-LvA_cMAotBoD.jpg", "right_url": "https://v3b.fal.media/files/b/0a957770/1djetfUydRIiEFqwYDza9_4F86SfEK.jpg", "label": "h3_snow_s0"}, {"ref_id": "h3", "ref_name": "IMG_0534_Hunter_Jacket_A", "colorway": "Hunter", "scene_id": "snow_s1", "seed": 9402, "left_url": "https://v3b.fal.media/files/b/0a9576e5/fHiqQYbCLi4xbQqm1UbCz_XQ2nSVj2.jpg", "right_url": "https://v3b.fal.media/files/b/0a957770/h6c4WaKnne54oefge_39Q_XDkGu7IW.jpg", "label": "h3_snow_s1"}, {"ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "colorway": "Hunter", "scene_id": "snow_s0", "seed": 9401, "left_url": "https://v3b.fal.media/files/b/0a9576e9/DXwOivNtNwezUZHuUd2YB_N6axDL99.jpg", "right_url": "https://v3b.fal.media/files/b/0a957770/sATF6gmx0SjHUqZLi8AkM_S10aXiK9.jpg", "label": "h5_snow_s0"}, {"ref_id": "h5", "ref_name": "IMG_0542_Hunter_Jacket_C", "colorway": "Hunter", "scene_id": "snow_s1", "seed": 9402, "left_url": "https://v3b.fal.media/files/b/0a9576ea/WGj1jQxGEe39bEG0eXkAg_5DeK01h6.jpg", "right_url": "https://v3b.fal.media/files/b/0a957770/aJKPQBR3wSlJpr_O9V7EG_Jiwzmpfq.jpg", "label": "h5_snow_s1"}, {"ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "colorway": "Patriot", "scene_id": "snow_s0", "seed": 9401, "left_url": "https://v3b.fal.media/files/b/0a9576ec/mSZHUiHONdE6c6e0ncT7u_Nee5vJXs.jpg", "right_url": "https://v3b.fal.media/files/b/0a957770/EQcNPuAefQhTM8eUF-Ure_9v2ZuvYU.jpg", "label": "p4_snow_s0"}, {"ref_id": "p4", "ref_name": "IMG_0550_Patriot_Jacket_B", "colorway": "Patriot", "scene_id": "snow_s1", "seed": 9402, "left_url": "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg", "right_url": "https://v3b.fal.media/files/b/0a957770/OqVDBPOLW1j5tqchLxhr__siEaxg2j.jpg", "label": "p4_snow_s1"}];
+const SCORES_KEY='cb2_snow_flip_scores';
+const FLAGS_KEY='cb2_snow_flip_flags';
+const scores=JSON.parse(localStorage.getItem(SCORES_KEY)||'{}');
+const flags=JSON.parse(localStorage.getItem(FLAGS_KEY)||'{}');
+
+function setScore(label, n){
+  scores[label]=scores[label]===n?0:n;
+  localStorage.setItem(SCORES_KEY,JSON.stringify(scores));
+  render();renderStats();
+}
+function toggleFlag(label, type){
+  if(!flags[label])flags[label]={};
+  flags[label][type]=!flags[label][type];
+  if(!flags[label].perpendicular && !flags[label].wrongArm)delete flags[label];
+  localStorage.setItem(FLAGS_KEY,JSON.stringify(flags));
+  render();renderStats();
+}
+
+function renderStats(){
+  document.getElementById('sTotal').textContent=DATA.length;
+  document.getElementById('sRated').textContent=DATA.filter(d=>scores[d.label]>0).length;
+  document.getElementById('sFives').textContent=DATA.filter(d=>scores[d.label]===5).length;
+  document.getElementById('sFlagged').textContent=DATA.filter(d=>flags[d.label]).length;
+}
+
+function exportResults(){
+  const payload={
+    exportedAt:new Date().toISOString(),
+    test:'snow_arm_flip',
+    total:DATA.length,
+    scores:scores,
+    flags:flags,
+  };
+  const text=JSON.stringify(payload,null,2);
+  navigator.clipboard.writeText(text).then(()=>{
+    alert(`Copied ${Object.keys(scores).length} scores + ${Object.keys(flags).length} flags`);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    alert('Copied (fallback)');
+  });
+}
+
+function render(){
+  const c=document.getElementById('content');
+  c.innerHTML='';
+  DATA.forEach(d=>{
+    const s=scores[d.label]||0;
+    const f=flags[d.label]||{};
+    const cw=d.colorway==='Patriot'?'t-patriot':'t-hunter';
+    const div=document.createElement('div');
+    div.className='pair';
+    div.innerHTML=`
+      <h2>${d.ref_id.toUpperCase()} · ${d.scene_id} <span class="tag ${cw}">${d.colorway}</span></h2>
+      <div class="meta">${d.ref_name} · seed ${d.seed}</div>
+      <div class="side-by-side">
+        <div class="side">
+          <h3 class="old">V1 · LEFT arm <span class="tag t-left">LEFT</span></h3>
+          <img src="${d.left_url}" onclick="openLB('${d.left_url}')">
+          <div class="sub2">Original locked LEFT — expect wrongArm</div>
+        </div>
+        <div class="side">
+          <h3 class="new">NEW · RIGHT arm <span class="tag t-right">RIGHT</span></h3>
+          <img src="${d.right_url}" onclick="openLB('${d.right_url}')">
+          <div class="sub2">Flipped lock</div>
+          <div class="controls">
+            <div class="score" data-label="${d.label}">
+              ${[1,2,3,4,5].map(n=>`<span class="${s>=n?'sel':''}" data-n="${n}">${n}</span>`).join('')}
+            </div>
+            <div class="flags">
+              <button class="${f.perpendicular?'on-perp':''}" data-flag="perpendicular" data-label="${d.label}" title="Perpendicular">⊥</button>
+              <button class="${f.wrongArm?'on-arm':''}" data-flag="wrongArm" data-label="${d.label}" title="Wrong arm (not the locked arm)">⤫arm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    c.appendChild(div);
+  });
+  c.querySelectorAll('.score').forEach(el=>{
+    el.querySelectorAll('span').forEach(s=>{
+      s.onclick=(e)=>{e.stopPropagation();setScore(el.dataset.label,parseInt(s.dataset.n));};
+    });
+  });
+  c.querySelectorAll('.flags button').forEach(b=>{
+    b.onclick=(e)=>{e.stopPropagation();toggleFlag(b.dataset.label,b.dataset.flag);};
+  });
+}
+
+function openLB(url){document.getElementById('lbimg').src=url;document.getElementById('lb').classList.add('on');}
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+
+render();
+renderStats();
+</script>
+</body></html>
