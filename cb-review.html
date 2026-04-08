@@ -267,45 +267,31 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <!-- GALLERY/ARCHIVE TAB -->
 <div id="galleryArea" style="display:none;width:100%;max-width:900px;margin:0 auto;padding:0 .5rem">
   <div style="margin-bottom:.6rem">
-    <!-- Compact filter bar -->
-    <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.4rem;background:#111;border-radius:8px;border:1px solid #222">
+    <!-- Filter bar — tap any button to filter, tap again to clear -->
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.5rem;background:#111;border-radius:10px;border:1px solid #222">
       <!-- Status -->
-      <div style="display:flex;gap:.25rem;align-items:center">
-        <span style="font-size:.5rem;color:#666;font-weight:700;text-transform:uppercase;margin-right:.2rem">Status</span>
-        <button class="gal-filter on" onclick="galSetStatus('all')" data-st="all" style="padding:.25rem .5rem;font-size:.6rem">All</button>
-        <button class="gal-filter" onclick="galSetStatus('accepted')" data-st="accepted" style="padding:.25rem .5rem;font-size:.6rem;color:#22c55e;border-color:#22c55e">&#10003;</button>
-        <button class="gal-filter" onclick="galSetStatus('rejected')" data-st="rejected" style="padding:.25rem .5rem;font-size:.6rem;color:#ef4444;border-color:#ef4444">&#10007;</button>
-      </div>
-      <div style="width:1px;height:20px;background:#333"></div>
+      <button class="gal-filter on" onclick="galSetStatus('all')" data-st="all" style="padding:.3rem .6rem;font-size:.65rem">All</button>
+      <button class="gal-filter" onclick="galSetStatus('accepted')" data-st="accepted" style="padding:.3rem .6rem;font-size:.65rem;color:#22c55e;border-color:#22c55e">Accepted</button>
+      <button class="gal-filter" onclick="galSetStatus('rejected')" data-st="rejected" style="padding:.3rem .6rem;font-size:.65rem;color:#ef4444;border-color:#ef4444">Rejected</button>
+      <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
       <!-- Score -->
-      <div style="display:flex;gap:.25rem;align-items:center">
-        <span style="font-size:.5rem;color:#666;font-weight:700;text-transform:uppercase;margin-right:.2rem">Score</span>
-        <button class="gal-filter gal-score-f on" onclick="galSetScore('all')" data-sf="all" style="padding:.25rem .5rem;font-size:.6rem">All</button>
-        <button class="gal-filter gal-score-f" onclick="galSetScore('90+')" data-sf="90+" style="padding:.25rem .5rem;font-size:.6rem">90+</button>
-        <button class="gal-filter gal-score-f" onclick="galSetScore('70-89')" data-sf="70-89" style="padding:.25rem .5rem;font-size:.6rem">70-89</button>
-        <button class="gal-filter gal-score-f" onclick="galSetScore('under70')" data-sf="under70" style="padding:.25rem .5rem;font-size:.6rem">&lt;70</button>
-      </div>
-      <div style="width:1px;height:20px;background:#333"></div>
+      <button class="gal-filter gal-score-f" onclick="galSetScore('90+')" data-sf="90+" style="padding:.3rem .6rem;font-size:.65rem">90+</button>
+      <button class="gal-filter gal-score-f" onclick="galSetScore('70-89')" data-sf="70-89" style="padding:.3rem .6rem;font-size:.65rem">70-89</button>
+      <button class="gal-filter gal-score-f" onclick="galSetScore('under70')" data-sf="under70" style="padding:.3rem .6rem;font-size:.65rem">&lt;70</button>
+      <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
       <!-- Sport -->
-      <div style="display:flex;gap:.25rem;align-items:center">
-        <span style="font-size:.5rem;color:#666;font-weight:700;text-transform:uppercase;margin-right:.2rem">Sport</span>
-        <button class="gal-filter gal-sport-f on" onclick="galSetSport('all')" data-sp="all" style="padding:.25rem .5rem;font-size:.6rem">All</button>
-        <button class="gal-filter gal-sport-f" onclick="galSetSport('motorcycle')" data-sp="motorcycle" style="padding:.25rem .5rem;font-size:.6rem">Moto</button>
-        <button class="gal-filter gal-sport-f" onclick="galSetSport('skiing')" data-sp="skiing" style="padding:.25rem .5rem;font-size:.6rem">Ski</button>
-        <button class="gal-filter gal-sport-f" onclick="galSetSport('snowboard')" data-sp="snowboard" style="padding:.25rem .5rem;font-size:.6rem">Snow</button>
-        <button class="gal-filter gal-sport-f" onclick="galSetSport('mtb')" data-sp="mtb" style="padding:.25rem .5rem;font-size:.6rem">MTB</button>
-      </div>
-      <div style="width:1px;height:20px;background:#333"></div>
+      <button class="gal-filter gal-sport-f" onclick="galSetSport('motorcycle')" data-sp="motorcycle" style="padding:.3rem .6rem;font-size:.65rem">Moto</button>
+      <button class="gal-filter gal-sport-f" onclick="galSetSport('skiing')" data-sp="skiing" style="padding:.3rem .6rem;font-size:.65rem">Ski</button>
+      <button class="gal-filter gal-sport-f" onclick="galSetSport('snowboard')" data-sp="snowboard" style="padding:.3rem .6rem;font-size:.65rem">Snow</button>
+      <button class="gal-filter gal-sport-f" onclick="galSetSport('mtb')" data-sp="mtb" style="padding:.3rem .6rem;font-size:.65rem">MTB</button>
+      <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
       <!-- Model -->
-      <div style="display:flex;gap:.25rem;align-items:center">
-        <span style="font-size:.5rem;color:#666;font-weight:700;text-transform:uppercase;margin-right:.2rem">Model</span>
-        <button class="gal-filter gal-model-f on" onclick="galSetModel('all')" data-md="all" style="padding:.25rem .5rem;font-size:.6rem">All</button>
-        <button class="gal-filter gal-model-f" onclick="galSetModel('gpt')" data-md="gpt" style="padding:.25rem .5rem;font-size:.6rem">GPT</button>
-        <button class="gal-filter gal-model-f" onclick="galSetModel('flex')" data-md="flex" style="padding:.25rem .5rem;font-size:.6rem">FLUX</button>
-        <button class="gal-filter gal-model-f" onclick="galSetModel('nbpro')" data-md="nbpro" style="padding:.25rem .5rem;font-size:.6rem">NB Pro</button>
-        <button class="gal-filter gal-model-f" onclick="galSetModel('nb2')" data-md="nb2" style="padding:.25rem .5rem;font-size:.6rem">NB2</button>
-      </div>
+      <button class="gal-filter gal-model-f" onclick="galSetModel('gpt')" data-md="gpt" style="padding:.3rem .6rem;font-size:.65rem">GPT</button>
+      <button class="gal-filter gal-model-f" onclick="galSetModel('flex')" data-md="flex" style="padding:.3rem .6rem;font-size:.65rem">FLUX</button>
+      <button class="gal-filter gal-model-f" onclick="galSetModel('nbpro')" data-md="nbpro" style="padding:.3rem .6rem;font-size:.65rem">NB Pro</button>
+      <button class="gal-filter gal-model-f" onclick="galSetModel('nb2')" data-md="nb2" style="padding:.3rem .6rem;font-size:.65rem">NB2</button>
     </div>
+    <div style="text-align:center;margin-top:.3rem;font-size:.55rem;color:#555">Tap a filter to toggle it on/off. Active filters are highlighted purple.</div>
   </div>
   <div id="galGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem"></div>
 </div>
@@ -1352,6 +1338,7 @@ function galDetectSport(img){
   if(/moto|motorcycle|highway|rider|riding|cruising|handlebars|biker|desert highway|pch|coastal highway/.test(t))return 'motorcycle';
   if(/ski(?!p)|skiing|powder|slalom|slope|mountain slope|ski poles/.test(t))return 'skiing';
   if(/snowboard|terrain park|half-?pipe|snow.*board/.test(t))return 'snowboard';
+  if(/snowmobile|sled|snow machine/.test(t))return 'snowmobile';
   if(/mtb|mountain bik|trail|enduro|downhill/.test(t))return 'mtb';
   if(/hik|run|fish|atv|casual/.test(t))return 'other';
   return 'other';
@@ -1369,34 +1356,50 @@ function galDetectModel(img){
 function galIsAccepted(img){
   const cs=getC(img.id);if(!cs.length)return null;
   const txt=cs.map(c=>c.text).join(' ').toLowerCase();
-  if(/does not pass|doesn't pass|not pass|rejected|does not work|doesn't work/.test(txt))return false;
+  if(/does not pass|doesn't pass|not pass|rejected|does not work|doesn't work|total fail/.test(txt))return false;
   const s=galScore(img.id);
-  if(s>=70)return true;
-  if(s<50)return false;
-  // Ambiguous — check for positive/negative keywords
-  if(/\bgreat\b|\blove\b|\bamazing\b|\bperfect\b|\bnailed\b|\bfire\b|\bfantastic\b|\bunbelievable\b|\bcool\b/.test(txt))return true;
-  if(/\bfail\b|\bbad\b|\bwrong\b|\bmissing\b|\bgarbled\b/.test(txt))return false;
+  if(s>=75)return true;
+  if(s<40)return false;
+  // Ambiguous zone (40-74) — check for positive/negative keywords
+  if(/\bgreat\b|\blove\b|\bamazing\b|\bperfect\b|\bnailed\b|\bfire\b|\bfantastic\b|\bunbelievable\b|\bcool\b|\bawesome\b|\bpromising\b/.test(txt))return true;
+  if(/\bfail\b|\bbad\b|\bwrong\b|\bmissing\b|\bgarbled\b|\bstrange\b|\bweird\b|\bnightmare\b/.test(txt))return false;
   return null;
 }
 
 function galSetStatus(mode){
-  galStatusMode=mode;
-  document.querySelectorAll('[data-st]').forEach(b=>b.className='gal-filter'+(b.dataset.st===mode?' on':''));
+  galStatusMode=galStatusMode===mode?'all':mode;
+  document.querySelectorAll('[data-st]').forEach(b=>{
+    const on=b.dataset.st===galStatusMode;
+    b.className='gal-filter'+(on?' on':'');
+    if(!on&&b.dataset.st==='accepted'){b.style.color='#22c55e';b.style.borderColor='#22c55e';}
+    else if(!on&&b.dataset.st==='rejected'){b.style.color='#ef4444';b.style.borderColor='#ef4444';}
+    else if(on&&b.dataset.st!=='all'){b.style.color='#fff';b.style.borderColor='#a855f7';}
+    else{b.style.color='';b.style.borderColor='';}
+  });
   renderGallery();
 }
 function galSetScore(mode){
-  galScoreMode=mode;
-  document.querySelectorAll('.gal-score-f').forEach(b=>b.className='gal-filter gal-score-f'+(b.dataset.sf===mode?' on':''));
+  galScoreMode=galScoreMode===mode?'all':mode;
+  document.querySelectorAll('.gal-score-f').forEach(b=>{
+    const on=b.dataset.sf===galScoreMode;
+    b.className='gal-filter gal-score-f'+(on?' on':'');
+  });
   renderGallery();
 }
 function galSetSport(mode){
-  galSportMode=mode;
-  document.querySelectorAll('.gal-sport-f').forEach(b=>b.className='gal-filter gal-sport-f'+(b.dataset.sp===mode?' on':''));
+  galSportMode=galSportMode===mode?'all':mode;
+  document.querySelectorAll('.gal-sport-f').forEach(b=>{
+    const on=b.dataset.sp===galSportMode;
+    b.className='gal-filter gal-sport-f'+(on?' on':'');
+  });
   renderGallery();
 }
 function galSetModel(mode){
-  galModelMode=mode;
-  document.querySelectorAll('.gal-model-f').forEach(b=>b.className='gal-filter gal-model-f'+(b.dataset.md===mode?' on':''));
+  galModelMode=galModelMode===mode?'all':mode;
+  document.querySelectorAll('.gal-model-f').forEach(b=>{
+    const on=b.dataset.md===galModelMode;
+    b.className='gal-filter gal-model-f'+(on?' on':'');
+  });
   renderGallery();
 }
 
@@ -1434,12 +1437,22 @@ function vidLabGenerate(platform){
     runway:{name:'Runway Gen-4 Turbo',endpoint:'runway-api (direct)',dur:'10s',cost:'~$0.50'}
   };
   const p=info[platform]||info.kling;
-  document.getElementById('vidLabStatus').innerHTML='<div style="background:#111;border:1px solid #333;border-radius:6px;padding:.4rem;margin-top:.2rem;text-align:left">'
-    +'<div style="font-size:.6rem;color:#a855f7;font-weight:700;margin-bottom:.2rem">'+p.name+' ('+p.dur+', '+p.cost+')</div>'
-    +'<div style="font-size:.55rem;color:#888;margin-bottom:.2rem">Endpoint: <code style="color:#06b6d4">'+p.endpoint+'</code></div>'
-    +'<div style="font-size:.6rem;color:#ccc">Tell Claude: <strong>"animate '+src.label+' with '+p.name+'"</strong></div>'
+  // Disable all platform buttons to show selection happened
+  document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=true;b.style.opacity='.4';});
+  // Show clear confirmation with command to copy
+  const cmd='animate '+src.label+' with '+p.name;
+  document.getElementById('vidLabStatus').innerHTML=
+    '<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;margin-top:.3rem;text-align:center">'
+    +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.3rem">Selected: '+p.name+'</div>'
+    +'<div style="font-size:.65rem;color:#ccc;margin-bottom:.4rem">'+p.dur+' video for '+p.cost+'</div>'
+    +'<div style="font-size:.65rem;color:#f59e0b;font-weight:600;margin-bottom:.3rem">Next step: Tell Claude Code in chat:</div>'
+    +'<div onclick="navigator.clipboard.writeText(\''+cmd.replace(/'/g,"\\'")+'\');this.style.borderColor=\'#22c55e\';this.querySelector(\'.cp\').textContent=\'Copied!\'" style="background:#111;border:2px solid #333;border-radius:6px;padding:.4rem .6rem;cursor:pointer;transition:border-color .2s">'
+    +'<div style="font-size:.75rem;color:#fff;font-weight:600">"'+cmd+'"</div>'
+    +'<div class="cp" style="font-size:.5rem;color:#888;margin-top:.2rem">Tap to copy command</div>'
+    +'</div>'
+    +'<div style="font-size:.5rem;color:#666;margin-top:.4rem">Claude will submit the job, add the video here when done, and you can review it.</div>'
     +'</div>';
-  showToast('Tell Claude Code to animate with '+p.name);
+  showToast('Selected '+p.name+' — copy the command and tell Claude Code');
 }
 
 function vidSetTab(t){
@@ -1511,38 +1524,71 @@ function vidSubmit(){
 function galScore(id){
   const cs=getC(id);if(!cs.length)return 50;
   const txt=cs.map(c=>c.text).join(' ').toLowerCase();
-  // Word-number mapping
-  const wordNums={'zero':0,'one':1,'two':2,'three':3,'five':5,'seven':7,'ten':10,'fifteen':15,'seventeen':17,'twenty':20,'thirty':30,'thirty five':35,'forty':40,'fifty':50,'fifty five':55,'sixty':60,'sixty five':65,'seventy':70,'seventy five':75,'eighty':80,'eighty five':85,'ninety':90,'ninety five':95};
-  // 1. Check for "Final score: X" tag (our manual fixes)
+  const wordNums={'zero':0,'one':1,'two':2,'three':3,'five':5,'seven':7,'eight':8,'ten':10,'twelve':12,'fifteen':15,'seventeen':17,'eighteen':18,'twenty':20,'twenty two':22,'twenty five':25,'twenty eight':28,'thirty':30,'thirty five':35,'thirty eight':38,'forty':40,'forty two':42,'forty five':45,'fifty':50,'fifty five':55,'sixty':60,'sixty two':62,'sixty four':64,'sixty five':65,'seventy':70,'seventy two':72,'seventy five':75,'seventy eight':78,'seventy nine':79,'eighty':80,'eighty two':82,'eighty four':84,'eighty five':85,'eighty six':86,'eighty seven':87,'eighty eight':88,'eighty nine':89,'ninety':90,'ninety two':92,'ninety three':93,'ninety four':94,'ninety five':95,'ninety six':96,'ninety seven':97,'ninety eight':98,'ninety nine':99,'hundred':100};
+  function fix(v){if(v>=0&&v<=100)return v;if(v>100&&v<10000)return Math.min(100,parseInt(String(Math.round(v)).slice(0,2)));return null;}
+
+  // 1. "Final score: X" (manual override) — highest priority
   const finalTag=txt.match(/final score:\s*(\d+)/);
   if(finalTag)return Math.max(0,Math.min(100,parseInt(finalTag[1])));
-  // 2. Check for word-number scores: "five out of 100" (before numeric to avoid "100" capture)
+
+  // 2. Word-number scores: "five out of 100", "zero out of 100", "hundred percent"
   for(const[w,n]of Object.entries(wordNums)){
-    if(txt.includes(w+' out of 100')||txt.includes(w+'/100'))return n;
+    if(txt.includes(w+' out of 100')||txt.includes(w+'/100')||txt.includes(w+' percent'))return n;
   }
-  // 3. Check for "give/giving/get it/this/us NUMBER" verdicts — take the LAST one
-  const verdicts=[...txt.matchAll(/(?:give|giving|get|gave)\s+(?:this|it|us|that)?\s*(?:like\s+)?(?:an?\s+)?(?:like\s+)?(\d{1,3}(?:\.\d+)?)/g)];
-  // 4. Check for "NUMBER out of 100" or "NUMBER/100" — take the LAST one (allow 4+ digits for speech artifacts like "9392")
-  const explicit=[...txt.matchAll(/(\d{1,5}(?:\.\d+)?)\s*(?:out of 100|\/\s*100|at 100)/g)];
-  // Prefer verdicts (final judgment) over explicit mentions
-  if(verdicts.length>0){
-    const v=parseFloat(verdicts[verdicts.length-1][1]);
-    if(v>=0&&v<=100)return v;
-    if(v>100&&v<10000){const s=String(Math.round(v));return Math.min(100,parseInt(s.slice(0,2)));} // "9392"→93
+
+  // 3. Collect ALL numeric score candidates
+  let cands=[];
+
+  // 3a. "give/get [pronoun] [filler] NUMBER" — broad verdict match
+  for(const m of txt.matchAll(/(?:give|giving|get|gave)\s+(?:this|it|us|that|him|her|to)[\s\w]{0,20}?(\d{1,3}(?:\.\d+)?)/g)){
+    const v=fix(parseFloat(m[1]));if(v!==null)cands.push({v,p:1,i:m.index});
   }
-  if(explicit.length>0){
-    const v=parseFloat(explicit[explicit.length-1][1]);
-    if(v<0)return 0;
-    if(v>100&&v<10000){const s=String(Math.round(v));return Math.min(100,parseInt(s.slice(0,2)));} // "9392"→93
-    return Math.max(0,Math.min(100,v));
+  // 3b. "NUMBER out of 100" / "NUMBER/100" / "NUMBER at 100"
+  for(const m of txt.matchAll(/(\d{1,5}(?:\.\d+)?)\s*(?:out of 100|\/\s*100|at 100)/g)){
+    const v=fix(parseFloat(m[1]));if(v!==null)cands.push({v,p:1,i:m.index});
   }
-  // 5. Keyword scoring — with word boundaries to avoid "not perfect" matching "perfect"
-  if(/\bslam dunk\b|\bfucking awesome\b|\bpretty fucking\b|\bspeechless\b/.test(txt))return 95;
-  if(/\bdamn good\b|\bdamn close\b|\bpretty great\b|\breally good\b|\bexcellent\b|\bpretty fire\b|\bfire\b/.test(txt))return 88;
-  if(/\bpretty good\b|\bdecent\b|\bnot bad\b|\bgetting there\b|\bgetting somewhere\b/.test(txt))return 75;
-  if(/\btotal fail\b|\bterrible\b|\bnightmare\b|\bhorrible\b|\bvomit\b|\breally bad\b|\bcomically bad\b/.test(txt))return 10;
-  if(/\bno remote\b|\bnothing visible\b|\bno chubby\b/.test(txt))return 0;
-  if(/\bfail\b/.test(txt))return 10;
+  // 3c. "NUMBER percent" / "NUMBER%"
+  for(const m of txt.matchAll(/(\d{1,3})\s*(?:percent|%)/g)){
+    const v=fix(parseInt(m[1]));if(v!==null)cands.push({v,p:1,i:m.index});
+  }
+  // 3d. "this is [like] [a] NUMBER" (but not "this is 5 buttons")
+  for(const m of txt.matchAll(/(?:this|that'?s?|it'?s?)\s+(?:is\s+)?(?:like\s+)?(?:a\s+)?(\d{1,3})(?!\s*(?:button|remote|image|photo|person|guy|arm|strap|ref|px|mp|x\d))/g)){
+    const v=fix(parseFloat(m[1]));if(v!==null&&v>=10)cands.push({v,p:2,i:m.index});
+  }
+  // 3e. "close to NUMBER" / "dare I say NUMBER"
+  for(const m of txt.matchAll(/(?:close to|dare.*?say)\s+(\d{1,3})/g)){
+    const v=fix(parseInt(m[1]));if(v!==null)cands.push({v,p:2,i:m.index});
+  }
+  // 3f. "like [a] NUMBER" standalone (min 10 to skip "like 5 buttons")
+  for(const m of txt.matchAll(/like\s+(?:a\s+)?(\d{1,3}(?:\.\d+)?)(?!\s*(?:button|remote|image|photo|person|guy|arm|strap|ref|px|mp|x\d|time|hour|day))/g)){
+    const v=fix(parseFloat(m[1]));if(v!==null&&v>=10)cands.push({v,p:3,i:m.index});
+  }
+  // 3g. "NUMBER score" / "score of NUMBER"
+  for(const m of txt.matchAll(/(\d{1,3})\s+score|score[\s:]+(?:of\s+)?(\d{1,3})/g)){
+    const v=fix(parseInt(m[1]||m[2]));if(v!==null)cands.push({v,p:1,i:m.index});
+  }
+  // 3h. "I'd say NUMBER" / "probably NUMBER"
+  for(const m of txt.matchAll(/(?:i'?d?\s+(?:say|call)|probably)\s+(?:like\s+)?(?:a\s+)?(\d{1,3})/g)){
+    const v=fix(parseInt(m[1]));if(v!==null)cands.push({v,p:2,i:m.index});
+  }
+
+  // Take LAST candidate at best priority (last = final judgment)
+  if(cands.length){
+    cands.sort((a,b)=>a.p-b.p);
+    const bp=cands[0].p;
+    const best=cands.filter(c=>c.p===bp);
+    return best[best.length-1].v;
+  }
+
+  // 4. Keyword scoring for comments with no numbers
+  if(/\bslam dunk\b|\bfucking awesome\b|\bpretty fucking (?:cool|awesome|great)\b|\bspeechless\b/.test(txt))return 96;
+  if(/\bperfect\b|\bnailed\b|\bunbelievable\b|\bincredible\b|\bamazing\b/.test(txt))return 93;
+  if(/\bdamn good\b|\bdamn close\b|\breally great\b|\bexcellent\b|\bfantastic\b|\bpretty fire\b|\bfire\b|\breally cool\b|\bpretty cool\b/.test(txt))return 88;
+  if(/\bpretty good\b|\bdecent\b|\bnot bad\b|\bgetting there\b|\bgetting somewhere\b|\bshowing promise\b|\blooks good\b|\breally good\b/.test(txt))return 75;
+  if(/\bpretty bad\b|\btotal fail\b|\bterrible\b|\bnightmare\b|\bhorrible\b|\bvomit\b|\breally bad\b|\bcomically bad\b/.test(txt))return 10;
+  if(/\bno remote\b|\bnothing visible\b|\bno chubby\b|\bnot even close\b|\bdon'?t see\b/.test(txt))return 5;
+  if(/\bfail\b|\bnot our (?:remote|product)\b|\blooks nothing\b/.test(txt))return 10;
+  if(/\bdoes not pass\b|\bdoesn'?t pass\b/.test(txt))return 35;
   return 50;
 }
 
