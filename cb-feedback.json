@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-07T21:17:27.916Z",
+  "syncedAt": "2026-04-08T01:22:55.897Z",
   "images": [
     {
       "id": "flex7-moto-2000",
@@ -6888,121 +6888,211 @@
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589419542-0",
-      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "id": "nbpro-ski-1-10501",
+      "url": "https://files.catbox.moe/8qzgwi.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Skier carving powder, ski jacket, helmet, goggles, Ref C, locked CB2 block.",
+      "label": "NB PRO: Skiing #1",
+      "context": "NB PRO SCALE-UP: First NB Pro skiing test. CB2 visible on left forearm over olive puffy jacket sleeve, green buttons, lower forearm placement. Dynamic powder spray action shot.",
       "comments": [
         {
-          "text": "excellent, 90",
-          "time": "2026-04-07T19:20:37.937Z",
+          "text": "Looks fantastic. The symbols are not right and that’s my fault with the reference photo 100%.",
+          "time": "2026-04-07T22:08:48.312Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589419542-1",
-      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "id": "nbpro-ski-2-10502",
+      "url": "https://files.catbox.moe/vxqxbh.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Same skiing prompt, second output.",
+      "label": "NB PRO: Skiing #2",
+      "context": "NB PRO SKIING: Colorful jacket, full-face helmet, aggressive carve. Device partially obscured by snow spray and motion.",
+      "comments": [
+        {
+          "text": "Fantastic! 100%",
+          "time": "2026-04-07T22:09:04.857Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nbpro-snow-1-10503",
+      "url": "https://files.catbox.moe/8nv4if.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Snowboarder standing with board, puffy jacket, beanie + goggles, Ref C.",
+      "label": "NB PRO: Snowboard #1",
+      "context": "NB PRO SNOWBOARD: CB2 clearly visible on left lower forearm with 5 dark buttons, strap wrapped over sleeve. Mountain peaks behind. Very clean placement and editorial composition.",
+      "comments": [
+        {
+          "text": "Almost! Symbols faded… 94",
+          "time": "2026-04-07T22:10:52.504Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nbpro-snow-2-10504",
+      "url": "https://files.catbox.moe/751ktb.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Same snowboard prompt, second output.",
+      "label": "NB PRO: Snowboard #2",
+      "context": "NB PRO SNOWBOARD: Holding board vertically, orange jacket, gray beanie. CB2 visible on left lower forearm with buttons visible, over jacket sleeve. Clean editorial composition.",
+      "comments": [
+        {
+          "text": "I give it a 92, symbols aren’t legible, but at this point I’m just so impressed with the photo",
+          "time": "2026-04-07T22:12:12.949Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nbpro-mtb-1-10505",
+      "url": "https://files.catbox.moe/2c1rkn.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Mountain biker descending rocky forest trail, MTB jersey, full-face helmet, Ref C.",
+      "label": "NB PRO: MTB #1",
+      "context": "NB PRO MTB: Incredible photorealism but CB2 not clearly visible — forearms covered by gloves and obscured by handlebar grip. Miss on CB2 presence.",
+      "comments": [
+        {
+          "text": "I was the symbols were a little more clear, but it’s pretty damn good photo I 91",
+          "time": "2026-04-08T01:22:49.791Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nbpro-mtb-2-10506",
+      "url": "https://files.catbox.moe/5wkd2m.png",
+      "model": "Nano Banana Pro (Gemini 3 Pro)",
+      "prompt": "Same MTB prompt, second output.",
+      "label": "NB PRO: MTB #2",
+      "context": "NB PRO MTB: CB2 visible on left forearm — green buttons visible, lower forearm over sleeve. Full body action shot with dust cloud.",
+      "comments": [
+        {
+          "text": "95%",
+          "time": "2026-04-07T22:19:29.071Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "nb2-snow-3-10601",
+      "url": "https://files.catbox.moe/u2oefr.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Snowboarder carving deep powder, insulated jacket, helmet, Ref C.",
+      "label": "NB2: Snowboard #1",
+      "context": "NB2 SNOWBOARD: First NB2 snowboard test. Small device visible on left lower forearm area with green/olive color. Dynamic spray. CB2 small but present.",
       "comments": [
         {
           "text": "Rejected",
-          "time": "2026-04-07T19:20:47.636Z",
+          "time": "2026-04-07T22:19:41.374Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589531515-0",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "id": "nb2-snow-4-10602",
+      "url": "https://files.catbox.moe/pxduuy.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Same snowboard prompt, second output.",
+      "label": "NB2: Snowboard #2",
+      "context": "NB2 SNOWBOARD: Deep carve in powder. Device on forearm hard to see — obscured by powder spray. Very photographic quality.",
       "comments": [
         {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:56.418Z",
+          "text": "99 percent!",
+          "time": "2026-04-07T22:20:05.869Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589531515-1",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "id": "nb2-mtb-3-10603",
+      "url": "https://files.catbox.moe/irmd14.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Mountain biker descending dusty trail, full-face helmet, Ref C.",
+      "label": "NB2: MTB #1",
+      "context": "NB2 MTB: First NB2 MTB test. Small green device visible on left forearm near wrist. Golden hour light, incredible photorealism.",
       "comments": [
         {
-          "text": "nice. 85",
-          "time": "2026-04-07T19:21:13.486Z",
+          "text": "Can’t really see symbols.. 90",
+          "time": "2026-04-07T22:20:41.453Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-refC-snow-s404-1775589559647-0",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "id": "nb2-mtb-4-10604",
+      "url": "https://files.catbox.moe/ovobup.png",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash)",
+      "prompt": "Same MTB prompt, second output.",
+      "label": "NB2: MTB #2",
+      "context": "NB2 MTB: Aggressive descent, full-face helmet. Dark device visible on left forearm. Golden hour backlight, very cinematic.",
       "comments": [
         {
-          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
-          "time": "2026-04-07T19:21:34.619Z",
+          "text": "Symbols could be clearer…but it’s \nGreat shot! 89",
+          "time": "2026-04-07T22:21:18.531Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-refC-snow-s404-1775589559647-1",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "id": "mask-desert-clean-10701",
+      "url": "https://files.catbox.moe/v94vvi.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Clean desert highway scene (no CB2) — base for masked inpainting.",
+      "label": "MASK: Desert Clean Base",
+      "context": "GPT MASKED INPAINTING: Clean desert base scene. Textile jacket + helmet, red rock canyon. No CB2 — this is the canvas for the inpainting step.",
       "comments": [
         {
-          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
-          "time": "2026-04-07T19:21:47.035Z",
+          "text": "No remote visible fail",
+          "time": "2026-04-07T22:21:42.862Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-refC-snow-s404-1775589600635-0",
-      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "id": "mask-desert-result-10702",
+      "url": "https://files.catbox.moe/lslkc1.png",
+      "model": "GPT Image 1.5 (masked inpaint)",
+      "prompt": "Masked inpainting — CB2 placed into forearm mask on desert scene, Ref C + input_fidelity:high.",
+      "label": "MASK: Desert Result",
+      "context": "GPT MASKED INPAINTING RESULT: CB2 clearly visible on left lower forearm over jacket sleeve. Green buttons visible, 5 buttons, strap present. Device naturally integrated. Position good — below elbow. Scene preserved perfectly from clean base.",
       "comments": [
         {
-          "text": "This is cool yeah I really like this one great 95",
-          "time": "2026-04-07T19:22:10.501Z",
+          "text": "This is above the elbow, so it’s not a pass",
+          "time": "2026-04-07T22:22:04.935Z",
           "num": 1
         }
       ]
     },
     {
-      "id": "mm-refC-snow-s404-1775589600635-1",
-      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "id": "mask-alpine-clean-10703",
+      "url": "https://files.catbox.moe/thmktm.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Clean alpine road scene (no CB2) — base for masked inpainting.",
+      "label": "MASK: Alpine Clean Base",
+      "context": "GPT MASKED INPAINTING: Clean alpine base scene. Leather jacket + helmet, mountain peaks + pine trees. No CB2.",
       "comments": [
         {
-          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
-          "time": "2026-04-07T19:22:36.702Z",
+          "text": "There is no remote visible. This is not a pass.",
+          "time": "2026-04-07T22:22:19.473Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mask-alpine-result-10704",
+      "url": "https://files.catbox.moe/a6ufo9.png",
+      "model": "GPT Image 1.5 (masked inpaint)",
+      "prompt": "Masked inpainting — CB2 placed into forearm mask on alpine scene, Ref C + input_fidelity:high.",
+      "label": "MASK: Alpine Result",
+      "context": "GPT MASKED INPAINTING RESULT: CB2 visible on forearm over leather jacket sleeve. Green buttons visible, strap present. Lower forearm near wrist. Scene integrity maintained. Slightly dark/blended with jacket but identifiable.",
+      "comments": [
+        {
+          "text": "The remote is above the elbow and it’s facing in the wrong direction perpendicularly this is a fail",
+          "time": "2026-04-07T22:22:35.143Z",
           "num": 1
         }
       ]
@@ -7268,6 +7358,126 @@
         {
           "text": "This is pretty weird. The remote is kind of wobbles around. Looks like it's being reanimated with every time that he's moving. I get this 42 out of 100.",
           "time": "2026-04-06T22:27:31.988Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-0",
+      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "excellent, 90",
+          "time": "2026-04-07T19:20:37.937Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-1",
+      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:47.636Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-0",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:56.418Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-1",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "nice. 85",
+          "time": "2026-04-07T19:21:13.486Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-0",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
+          "time": "2026-04-07T19:21:34.619Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-1",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
+          "time": "2026-04-07T19:21:47.035Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-0",
+      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "This is cool yeah I really like this one great 95",
+          "time": "2026-04-07T19:22:10.501Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-1",
+      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
+          "time": "2026-04-07T19:22:36.702Z",
           "num": 1
         }
       ]
