@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Snow Goofy Stance Test — April 8 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:1400px;margin:0 auto;padding:1rem;background:#111;color:#eee;line-height:1.4}
+h1{font-size:1.3rem;margin-bottom:.3rem}
+.sub{color:#888;font-size:.8rem;margin-bottom:1rem}
+.summary{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:1rem;margin-bottom:1rem;font-size:.85rem}
+.summary h3{font-size:.9rem;margin-bottom:.5rem;color:#22c55e}
+.summary p{color:#ccc;margin-bottom:.5rem}
+.pair{margin-bottom:1.4rem;border:1px solid #333;border-radius:8px;background:#1a1a1a;padding:1rem}
+.pair h2{font-size:1rem;margin-bottom:.6rem;color:#fff}
+.pair .meta{font-size:.72rem;color:#888;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid #333}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.65rem;font-weight:700;margin-right:.2rem;text-transform:uppercase}
+.t-hunter{background:#365314;color:#fde047}
+.t-patriot{background:#1e3a5f;color:#fff}
+.t-reg{background:#f59e0b;color:#000}
+.t-goofy{background:#22c55e;color:#000}
+.side-by-side{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.side{border:1px solid #333;border-radius:6px;overflow:hidden;background:#0a0a0a}
+.side .hdr{font-size:.72rem;padding:.45rem .65rem;background:#161616;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.side .hdr.reg{color:#f59e0b}
+.side .hdr.goofy{color:#22c55e}
+.side img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;cursor:pointer;background:#000}
+.controls{padding:.5rem .7rem;display:flex;justify-content:space-between;align-items:center;gap:.4rem;background:#0a0a0a;border-top:1px solid #222}
+.arm-pick{display:flex;gap:.2rem;font-size:.6rem}
+.arm-pick button{padding:.25rem .45rem;background:#222;border:1px solid #444;color:#888;cursor:pointer;border-radius:3px;font-weight:700}
+.arm-pick button.on-l{background:#0ea5e9;color:#fff;border-color:#0ea5e9}
+.arm-pick button.on-r{background:#a855f7;color:#fff;border-color:#a855f7}
+.score{display:inline-flex;gap:.15rem}
+.score span{width:1.3rem;height:1.3rem;border-radius:50%;background:#333;color:#888;display:flex;align-items:center;justify-content:center;font-size:.65rem;cursor:pointer}
+.score span.sel{background:#22c55e;color:#fff}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;padding:2rem;cursor:pointer}
+.lightbox.on{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain}
+.export-btn{position:fixed;bottom:1rem;right:1rem;padding:.7rem 1.2rem;background:#22c55e;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,.5);font-size:.85rem}
+.verdict{padding:1rem;background:#0f0f0f;border:2px solid #22c55e;border-radius:6px;margin-bottom:1rem;font-size:.85rem}
+.verdict strong{color:#22c55e}
+</style>
+</head><body>
+
+<h1>Snow Goofy Stance Test — Regular vs Goofy</h1>
+<div class="sub">April 8 2026 · Testing whether body orientation flips the visible arm</div>
+
+<div class="summary">
+<h3>Hypothesis</h3>
+<p>Prompt text ignored. Ref mirror ignored. 17/18 snow outputs pin to subject's LEFT arm. The likely driver is a scene/pose prior: regular stance snowboarder = left foot forward = left arm near camera. If that's right, GOOFY stance (right foot forward) should flip the body and put the right arm near camera — giving us a natural, in-world lever for arm selection without fighting the model.</p>
+<p><strong>Only variable changed:</strong> prompt says "goofy stance with right foot forward" instead of "regular stance". Same refs (h3, h5, p4), same seeds, same LEFT arm prompt text. If the goofy side shows RIGHT arm, the test worked.</p>
+<p><strong>Tap L/R under each image</strong> to mark which arm the CB2 actually landed on.</p>
+</div>
+
+<div class="verdict" id="verdict">
+<strong>Running verdict:</strong> <span id="verdictText">Mark arms to see if goofy flips the arm.</span>
+</div>
+
+<div id="content"></div>
+
+<button class="export-btn" onclick="exportResults()">📋 Export verdict</button>
+<div class="lightbox" id="lb"><img id="lbimg" src=""></div>
+
+<script>
+const DATA = [{"ref_id": "h3", "ref_name": "IMG_0534_Hunter_A", "colorway": "Hunter", "scene_id": "snow_s0", "seed": 9401, "regular_url": "https://v3b.fal.media/files/b/0a9576e5/cNrYU_JGUwbLR_jMq-LvA_cMAotBoD.jpg", "goofy_url": "https://v3b.fal.media/files/b/0a957955/FPSMllVXtlo4_UhdPg7Sr_BNOhlJEt.jpg", "label": "h3_snow_s0"}, {"ref_id": "h3", "ref_name": "IMG_0534_Hunter_A", "colorway": "Hunter", "scene_id": "snow_s1", "seed": 9402, "regular_url": "https://v3b.fal.media/files/b/0a9576e5/fHiqQYbCLi4xbQqm1UbCz_XQ2nSVj2.jpg", "goofy_url": "https://v3b.fal.media/files/b/0a957955/LqBWIUUbpEkzpF5378Pv0_j8j6l7ru.jpg", "label": "h3_snow_s1"}, {"ref_id": "h5", "ref_name": "IMG_0542_Hunter_C", "colorway": "Hunter", "scene_id": "snow_s0", "seed": 9401, "regular_url": "https://v3b.fal.media/files/b/0a9576e9/DXwOivNtNwezUZHuUd2YB_N6axDL99.jpg", "goofy_url": "https://v3b.fal.media/files/b/0a957955/jrsqJdbfJzGdRY2Do89_C_c3UipzlL.jpg", "label": "h5_snow_s0"}, {"ref_id": "h5", "ref_name": "IMG_0542_Hunter_C", "colorway": "Hunter", "scene_id": "snow_s1", "seed": 9402, "regular_url": "https://v3b.fal.media/files/b/0a9576ea/WGj1jQxGEe39bEG0eXkAg_5DeK01h6.jpg", "goofy_url": "https://v3b.fal.media/files/b/0a957955/93XmT3FJD1TdR7vcWB7OD_3Vl4pW5E.jpg", "label": "h5_snow_s1"}, {"ref_id": "p4", "ref_name": "IMG_0550_Patriot_B", "colorway": "Patriot", "scene_id": "snow_s0", "seed": 9401, "regular_url": "https://v3b.fal.media/files/b/0a9576ec/mSZHUiHONdE6c6e0ncT7u_Nee5vJXs.jpg", "goofy_url": "https://v3b.fal.media/files/b/0a957955/FgCuR_a40BeSR1ZtAz2Bc_lCDpIg7h.jpg", "label": "p4_snow_s0"}, {"ref_id": "p4", "ref_name": "IMG_0550_Patriot_B", "colorway": "Patriot", "scene_id": "snow_s1", "seed": 9402, "regular_url": "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg", "goofy_url": "https://v3b.fal.media/files/b/0a957955/YXVNIg8gnTQBGcfBaBUyJ_px13Bt8g.jpg", "label": "p4_snow_s1"}];
+const SCORES_KEY='cb2_snow_goofy_scores';
+const ARMS_KEY='cb2_snow_goofy_arms';
+const scores=JSON.parse(localStorage.getItem(SCORES_KEY)||'{}');
+const arms=JSON.parse(localStorage.getItem(ARMS_KEY)||'{}');
+
+function setScore(key, n){
+  scores[key]=scores[key]===n?0:n;
+  localStorage.setItem(SCORES_KEY,JSON.stringify(scores));
+  render();updateVerdict();
+}
+function setArm(key, val){
+  arms[key]=arms[key]===val?'':val;
+  localStorage.setItem(ARMS_KEY,JSON.stringify(arms));
+  render();updateVerdict();
+}
+
+function updateVerdict(){
+  let regL=0, regR=0, goofyL=0, goofyR=0;
+  DATA.forEach(d=>{
+    if(arms[`${d.label}_reg`]==='L')regL++;
+    if(arms[`${d.label}_reg`]==='R')regR++;
+    if(arms[`${d.label}_goofy`]==='L')goofyL++;
+    if(arms[`${d.label}_goofy`]==='R')goofyR++;
+  });
+  const marked=regL+regR+goofyL+goofyR;
+  if(marked===0){
+    document.getElementById('verdictText').textContent='Mark arms to see if goofy flips the arm.';
+    return;
+  }
+  let text=`Regular stance: ${regL}L / ${regR}R · Goofy stance: ${goofyL}L / ${goofyR}R. `;
+  if(goofyR >= 4 && regL >= 4){
+    text += '🟢 Goofy flips the arm. Stance is the lever we needed.';
+  } else if(goofyR > goofyL){
+    text += '🟡 Goofy mostly flips — partial signal.';
+  } else if(goofyL === regL){
+    text += '🔴 Goofy did NOT flip — stance prior is weaker than body/scene prior. Fall back to two-step inpaint.';
+  } else {
+    text += 'Mixed signal.';
+  }
+  document.getElementById('verdictText').textContent=text;
+}
+
+function exportResults(){
+  const payload={
+    exportedAt:new Date().toISOString(),
+    test:'snow_goofy_test',
+    arms:arms,
+    scores:scores,
+  };
+  const text=JSON.stringify(payload,null,2);
+  navigator.clipboard.writeText(text).then(()=>{
+    alert(`Copied ${Object.keys(arms).length} arm marks + ${Object.keys(scores).length} scores`);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    alert('Copied (fallback)');
+  });
+}
+
+function cell(d, variant, hdrClass, hdrLabel, url){
+  const key=`${d.label}_${variant}`;
+  const s=scores[key]||0;
+  const a=arms[key]||'';
+  return `<div class="side">
+    <div class="hdr ${hdrClass}">${hdrLabel}</div>
+    <img src="${url}" onclick="openLB('${url}')">
+    <div class="controls">
+      <div class="arm-pick">
+        <button class="${a==='L'?'on-l':''}" data-key="${key}" data-arm="L">L</button>
+        <button class="${a==='R'?'on-r':''}" data-key="${key}" data-arm="R">R</button>
+      </div>
+      <div class="score" data-key="${key}">
+        ${[1,2,3,4,5].map(n=>`<span class="${s>=n?'sel':''}" data-n="${n}">${n}</span>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const c=document.getElementById('content');
+  c.innerHTML=DATA.map(d=>{
+    const cw=d.colorway==='Patriot'?'t-patriot':'t-hunter';
+    return `<div class="pair">
+      <h2>${d.ref_id.toUpperCase()} · ${d.scene_id} <span class="tag ${cw}">${d.colorway}</span></h2>
+      <div class="meta">${d.ref_name} · seed ${d.seed}</div>
+      <div class="side-by-side">
+        ${cell(d,'reg','reg','REGULAR stance (V1)',d.regular_url)}
+        ${cell(d,'goofy','goofy','GOOFY stance (new)',d.goofy_url)}
+      </div>
+    </div>`;
+  }).join('');
+
+  c.querySelectorAll('.score').forEach(el=>{
+    el.querySelectorAll('span').forEach(s=>{
+      s.onclick=(e)=>{e.stopPropagation();setScore(el.dataset.key,parseInt(s.dataset.n));};
+    });
+  });
+  c.querySelectorAll('.arm-pick button').forEach(b=>{
+    b.onclick=(e)=>{e.stopPropagation();setArm(b.dataset.key,b.dataset.arm);};
+  });
+}
+
+function openLB(url){document.getElementById('lbimg').src=url;document.getElementById('lb').classList.add('on');}
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+
+render();
+updateVerdict();
+</script>
+</body></html>
