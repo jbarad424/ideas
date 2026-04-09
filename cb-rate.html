@@ -17,6 +17,7 @@ body{display:flex;flex-direction:column;touch-action:none}
 .prog{flex:1;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
 .prog .y{color:#22c55e;margin-right:.3rem}
 .prog .n{color:#ef4444;margin-left:.3rem}
+.prog .s{color:#fbbf24;margin-left:.3rem}
 .top button{background:#1a1a1a;color:#ccc;border:1px solid #333;padding:.35rem .55rem;border-radius:4px;font-size:.75rem;cursor:pointer;font-weight:600}
 .top button:hover{background:#252525}
 .top button.danger{color:#ef4444}
@@ -35,19 +36,20 @@ body{display:flex;flex-direction:column;touch-action:none}
 .card .overlay .stamp{font-size:3rem;font-weight:900;padding:1rem 2rem;border:.4rem solid;border-radius:16px;letter-spacing:.2em;transform:rotate(-20deg);text-transform:uppercase}
 .card .overlay.yes .stamp{color:#22c55e;border-color:#22c55e}
 .card .overlay.no .stamp{color:#ef4444;border-color:#ef4444}
+.card .overlay.super .stamp{color:#fbbf24;border-color:#fbbf24;transform:rotate(-8deg);font-size:2.4rem;text-shadow:0 0 24px rgba(251,191,36,.6);box-shadow:0 0 36px rgba(251,191,36,.4)}
 .card .meta{background:#0a0a0a;padding:.5rem .75rem;font-size:.7rem;color:#888;flex-shrink:0;border-top:1px solid #222;display:flex;justify-content:space-between;align-items:center;gap:.5rem}
 .card .meta .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
 .card .meta .sport{background:#1a1a1a;color:#888;padding:.15rem .45rem;border-radius:3px;font-weight:600;text-transform:uppercase;font-size:.6rem;flex-shrink:0}
 
 /* Action buttons */
-.actions{display:flex;justify-content:space-around;align-items:center;padding:1rem .8rem 1.2rem;gap:.8rem;background:#0a0a0a;border-top:1px solid #222;flex-shrink:0}
+.actions{display:flex;justify-content:space-around;align-items:center;padding:1rem .8rem 1.2rem;gap:.7rem;background:#0a0a0a;border-top:1px solid #222;flex-shrink:0}
 .actions button{border:none;border-radius:50%;cursor:pointer;transition:transform .1s,background .1s;display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 4px 16px rgba(0,0,0,.4)}
 .actions button:active{transform:scale(.92)}
-.btn-no{width:4rem;height:4rem;background:#ef4444;color:#fff;font-size:1.8rem}
+.btn-no{width:4rem;height:4rem;background:#ef4444;color:#fff;font-size:1.7rem}
 .btn-no:hover{background:#dc2626}
-.btn-undo{width:3rem;height:3rem;background:#1a1a1a;color:#888;font-size:1.2rem;border:1px solid #333!important}
-.btn-undo:hover{background:#252525}
-.btn-yes{width:4rem;height:4rem;background:#22c55e;color:#fff;font-size:1.8rem}
+.btn-super{width:3.4rem;height:3.4rem;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#fff;font-size:1.4rem;box-shadow:0 4px 18px rgba(251,191,36,.5)}
+.btn-super:hover{background:linear-gradient(135deg,#fcd34d,#fbbf24)}
+.btn-yes{width:4rem;height:4rem;background:#22c55e;color:#fff;font-size:1.7rem}
 .btn-yes:hover{background:#16a34a}
 
 /* Summary screen */
@@ -55,11 +57,13 @@ body{display:flex;flex-direction:column;touch-action:none}
 .summary.on{display:flex}
 .summary h1{font-size:1.5rem;margin-bottom:.3rem}
 .summary .sub{color:#888;font-size:.85rem;margin-bottom:1.5rem}
-.summary .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.5rem}
-.summary .stat{background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:.8rem;text-align:center}
-.summary .stat .num{font-size:1.8rem;font-weight:900;font-variant-numeric:tabular-nums}
+.summary .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:1.5rem}
+.summary .stat{background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:.7rem .4rem;text-align:center}
+.summary .stat .num{font-size:1.6rem;font-weight:900;font-variant-numeric:tabular-nums}
 .summary .stat.yes .num{color:#22c55e}
 .summary .stat.no .num{color:#ef4444}
+.summary .stat.super .num{color:#fbbf24}
+.summary .stat.super{border-color:#fbbf24}
 .summary .stat .lbl{font-size:.65rem;color:#888;text-transform:uppercase;margin-top:.2rem}
 .summary .by-sport{background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:1rem;margin-bottom:1rem}
 .summary .by-sport h3{font-size:.8rem;margin-bottom:.6rem;color:#aaa;text-transform:uppercase;letter-spacing:.05em}
@@ -76,7 +80,10 @@ body{display:flex;flex-direction:column;touch-action:none}
 .summary .gallery-tabs button.on{background:#22c55e;color:#000;border-color:#22c55e}
 .summary .gallery-tabs button.on.nope{background:#ef4444;color:#fff;border-color:#ef4444}
 .summary .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.3rem}
-.summary .grid img{width:100%;aspect-ratio:3/4;object-fit:cover;background:#000;border-radius:4px;cursor:pointer}
+.summary .grid .thumb{position:relative;width:100%;aspect-ratio:3/4;background:#000;border-radius:4px;overflow:hidden;cursor:pointer}
+.summary .grid .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.summary .grid .thumb.super{box-shadow:0 0 0 2px #fbbf24}
+.summary .grid .thumb .badge{position:absolute;top:.2rem;right:.2rem;background:#fbbf24;color:#000;font-size:.7rem;width:1.1rem;height:1.1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
 
 /* Lightbox — supports pinch zoom + pan */
 .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:100;justify-content:center;align-items:center;padding:0;overflow:hidden;touch-action:none}
@@ -122,7 +129,8 @@ body{display:flex;flex-direction:column;touch-action:none}
     <option value="run">Run</option>
     <option value="other">Other</option>
   </select>
-  <div class="prog"><span class="y" id="pY">0</span>/<span id="pTotal">0</span><span class="n" id="pN">0</span></div>
+  <div class="prog"><span class="y" id="pY">0</span>/<span id="pTotal">0</span><span class="n" id="pN">0</span><span class="s" id="pS">⭐0</span></div>
+  <button id="btnUndoTop" title="Undo (U)">↺</button>
   <button id="btnSummary">📊</button>
   <button id="btnReset" class="danger" title="Reset (clears all ratings)">🗑</button>
 </div>
@@ -137,22 +145,24 @@ body{display:flex;flex-direction:column;touch-action:none}
 
 <div class="actions">
   <button class="btn-no" id="btnNo">✕</button>
-  <button class="btn-undo" id="btnUndo">↺</button>
+  <button class="btn-super" id="btnSuper" title="Super-like (S or swipe up)">⭐</button>
   <button class="btn-yes" id="btnYes">✓</button>
 </div>
 
-<div class="hints">Y / → = yes &nbsp;·&nbsp; N / ← = no &nbsp;·&nbsp; U = undo &nbsp;·&nbsp; F / double-tap = zoom</div>
+<div class="hints">Y / → = yes &nbsp;·&nbsp; N / ← = no &nbsp;·&nbsp; <span style="color:#fbbf24">S / ↑ = ⭐ super</span> &nbsp;·&nbsp; U = undo &nbsp;·&nbsp; F / double-tap = zoom</div>
 
 <div class="summary" id="summary">
   <h1>Your ratings</h1>
   <div class="sub" id="summSub">Fresh threshold — what would you actually use in marketing today?</div>
   <div class="stats">
+    <div class="stat super"><div class="num" id="sS">0</div><div class="lbl">⭐ Super</div></div>
     <div class="stat yes"><div class="num" id="sY">0</div><div class="lbl">Yes</div></div>
     <div class="stat no"><div class="num" id="sN">0</div><div class="lbl">No</div></div>
-    <div class="stat"><div class="num" id="sR">0</div><div class="lbl">Remaining</div></div>
+    <div class="stat"><div class="num" id="sR">0</div><div class="lbl">Left</div></div>
   </div>
   <div class="by-sport" id="bySport"></div>
   <div class="actionbar">
+    <button onclick="copySuper()" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000">⭐ Copy SUPER urls</button>
     <button onclick="copyYes()">📋 Copy YES urls</button>
     <button onclick="copyJson()" class="alt">📋 Copy full JSON</button>
     <button onclick="hideSummary()" class="alt">← Back to rating</button>
@@ -160,7 +170,8 @@ body{display:flex;flex-direction:column;touch-action:none}
   </div>
   <div class="gallery">
     <div class="gallery-tabs">
-      <button class="on" data-gt="yes" onclick="showGallery('yes')">Yes pile</button>
+      <button class="on" data-gt="super" onclick="showGallery('super')" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000;border-color:#fbbf24">⭐ Super pile</button>
+      <button data-gt="yes" onclick="showGallery('yes')">Yes pile</button>
       <button class="nope" data-gt="no" onclick="showGallery('no')">No pile</button>
     </div>
     <div class="grid" id="grid"></div>
@@ -191,11 +202,13 @@ function loadState(){
     const raw = localStorage.getItem(KEY);
     if (raw) {
       const s = JSON.parse(raw);
+      // Migrations — additive only, never overwrite existing fields
       if (typeof s.lastBackupCount !== 'number') s.lastBackupCount = 0;
+      if (!s.superlike || typeof s.superlike !== 'object') s.superlike = {};
       return s;
     }
   } catch(e) {}
-  return {yes: {}, no: {}, order: {}, history: [], lastBackupCount: 0};
+  return {yes: {}, no: {}, superlike: {}, order: {}, history: [], lastBackupCount: 0};
 }
 function saveState(){
   localStorage.setItem(KEY, JSON.stringify(state));
@@ -255,13 +268,15 @@ function getUnrated(){
 
 function updateProgress(){
   const pool = getPool();
-  let y = 0, n = 0;
+  let y = 0, n = 0, s = 0;
   pool.forEach(i => {
+    if (state.superlike[i.id]) s++;
     if (state.yes[i.id]) y++;
     else if (state.no[i.id]) n++;
   });
   document.getElementById('pY').textContent = y;
   document.getElementById('pN').textContent = n;
+  document.getElementById('pS').textContent = '⭐' + s;
   document.getElementById('pTotal').textContent = pool.length;
 }
 
@@ -277,6 +292,7 @@ function buildCard(item){
       <img src="${item.url}" alt="" draggable="false">
       <div class="overlay yes"><div class="stamp">YES</div></div>
       <div class="overlay no"><div class="stamp">NO</div></div>
+      <div class="overlay super"><div class="stamp">⭐ SUPER</div></div>
     </div>
     <div class="meta">
       <span class="lbl">${escapeHtml(item.label || item.id)}</span>
@@ -332,6 +348,7 @@ function attachDrag(card){
   let lastTapTime = 0;
   const yesOv = card.querySelector('.overlay.yes');
   const noOv = card.querySelector('.overlay.no');
+  const superOv = card.querySelector('.overlay.super');
 
   function onDown(e){
     // Two-finger gesture → ignore swipe entirely (avoid fighting pinch on card image)
@@ -350,24 +367,42 @@ function attachDrag(card){
     const t = e.touches ? e.touches[0] : e;
     currX = t.clientX - startX;
     currY = t.clientY - startY;
-    const rot = currX * 0.08;
-    card.style.transform = `translate(${currX}px, ${currY}px) rotate(${rot}deg)`;
-    const frac = Math.min(Math.abs(currX) / 140, 1);
-    if (currX > 0){ yesOv.style.opacity = frac; noOv.style.opacity = 0; }
-    else { noOv.style.opacity = frac; yesOv.style.opacity = 0; }
+    // If upward dominant motion, treat as super-like preview
+    const upDominant = currY < -30 && Math.abs(currY) > Math.abs(currX) * 1.2;
+    if (upDominant){
+      const rot = 0;
+      card.style.transform = `translate(${currX*0.5}px, ${currY}px) rotate(${rot}deg)`;
+      const frac = Math.min(Math.abs(currY) / 140, 1);
+      superOv.style.opacity = frac;
+      yesOv.style.opacity = 0;
+      noOv.style.opacity = 0;
+    } else {
+      const rot = currX * 0.08;
+      card.style.transform = `translate(${currX}px, ${currY}px) rotate(${rot}deg)`;
+      const frac = Math.min(Math.abs(currX) / 140, 1);
+      if (currX > 0){ yesOv.style.opacity = frac; noOv.style.opacity = 0; }
+      else { noOv.style.opacity = frac; yesOv.style.opacity = 0; }
+      superOv.style.opacity = 0;
+    }
     if (e.cancelable) e.preventDefault();
   }
   function onUp(){
     if (!dragging) return;
     dragging = false;
     card.classList.remove('drag');
-    const threshold = 100;
+    const xThreshold = 100;
+    const yThreshold = 110;
     const moved = Math.abs(currX) > 6 || Math.abs(currY) > 6;
-    if (currX > threshold){
+    // Super-like wins if upward motion is dominant + over threshold
+    if (currY < -yThreshold && Math.abs(currY) > Math.abs(currX) * 0.9){
+      flyOut(card, 'super');
+      return;
+    }
+    if (currX > xThreshold){
       flyOut(card, 'yes');
       return;
     }
-    if (currX < -threshold){
+    if (currX < -xThreshold){
       flyOut(card, 'no');
       return;
     }
@@ -376,6 +411,7 @@ function attachDrag(card){
     card.style.transform = '';
     yesOv.style.opacity = 0;
     noOv.style.opacity = 0;
+    superOv.style.opacity = 0;
     // Double-tap → open lightbox at full-res for zoom
     if (!moved){
       const now = Date.now();
@@ -400,9 +436,14 @@ function attachDrag(card){
 function flyOut(card, action){
   const id = card.dataset.id;
   card.classList.add('fly');
-  const dir = action === 'yes' ? 1 : -1;
-  const w = window.innerWidth + 300;
-  card.style.transform = `translate(${dir*w}px, 60px) rotate(${dir*30}deg)`;
+  if (action === 'super'){
+    const h = window.innerHeight + 300;
+    card.style.transform = `translate(0, ${-h}px) rotate(0deg) scale(1.1)`;
+  } else {
+    const dir = action === 'yes' ? 1 : -1;
+    const w = window.innerWidth + 300;
+    card.style.transform = `translate(${dir*w}px, 60px) rotate(${dir*30}deg)`;
+  }
   card.querySelector('.overlay.'+action).style.opacity = 1;
   // Commit state
   commit(id, action);
@@ -414,12 +455,19 @@ function flyOut(card, action){
 function commit(id, action){
   const item = CORPUS.find(c => c.id === id);
   if (!item) return;
-  if (action === 'yes'){
+  if (action === 'super'){
+    // Super-like is a YES with a flag — always also goes into yes pile
+    state.superlike[id] = true;
     state.yes[id] = true;
     delete state.no[id];
+  } else if (action === 'yes'){
+    state.yes[id] = true;
+    delete state.no[id];
+    delete state.superlike[id];
   } else {
     state.no[id] = true;
     delete state.yes[id];
+    delete state.superlike[id];
   }
   state.history.push({id, action, sport: item.sport});
   if (state.history.length > 1000) state.history.shift();
@@ -438,7 +486,7 @@ function undo(){
   const last = state.history.pop();
   delete state.yes[last.id];
   delete state.no[last.id];
-  // Put it back at the front of its sport's order? It's already in there — just re-render.
+  delete state.superlike[last.id];
   saveState();
   renderStack();
   updateProgress();
@@ -455,6 +503,7 @@ document.addEventListener('keydown', (e) => {
   const k = e.key.toLowerCase();
   if (k === 'y' || k === 'arrowright' || k === 'l'){ e.preventDefault(); actionButton('yes'); }
   else if (k === 'n' || k === 'arrowleft' || k === 'h'){ e.preventDefault(); actionButton('no'); }
+  else if (k === 's' || k === 'arrowup'){ e.preventDefault(); actionButton('super'); }
   else if (k === 'u' || k === 'z'){ e.preventDefault(); undo(); }
   else if (k === 'f' || k === 'o'){
     if (topCardEl){
@@ -467,7 +516,8 @@ document.addEventListener('keydown', (e) => {
 
 document.getElementById('btnYes').onclick = () => actionButton('yes');
 document.getElementById('btnNo').onclick = () => actionButton('no');
-document.getElementById('btnUndo').onclick = undo;
+document.getElementById('btnSuper').onclick = () => actionButton('super');
+document.getElementById('btnUndoTop').onclick = undo;
 document.getElementById('sport').onchange = () => {
   renderStack();
   updateProgress();
@@ -477,7 +527,7 @@ document.getElementById('btnSummary').onclick = showSummary;
 
 function confirmReset(){
   if (!confirm('Clear ALL ratings? This cannot be undone.')) return;
-  state = {yes: {}, no: {}, order: {}, history: [], lastBackupCount: 0};
+  state = {yes: {}, no: {}, superlike: {}, order: {}, history: [], lastBackupCount: 0};
   saveState();
   hideSummary();
   renderStack();
@@ -490,11 +540,13 @@ function confirmReset(){
 function showSummary(){
   document.getElementById('summary').classList.add('on');
   const pool = getPool();
-  let y = 0, n = 0;
+  let y = 0, n = 0, su = 0;
   pool.forEach(i => {
+    if (state.superlike[i.id]) su++;
     if (state.yes[i.id]) y++;
     else if (state.no[i.id]) n++;
   });
+  document.getElementById('sS').textContent = su;
   document.getElementById('sY').textContent = y;
   document.getElementById('sN').textContent = n;
   document.getElementById('sR').textContent = pool.length - y - n;
@@ -502,8 +554,9 @@ function showSummary(){
   // By-sport breakdown (across all corpus, not just current filter)
   const bySport = {};
   CORPUS.forEach(i => {
-    if (!bySport[i.sport]) bySport[i.sport] = {y:0, n:0, t:0};
+    if (!bySport[i.sport]) bySport[i.sport] = {y:0, n:0, su:0, t:0};
     bySport[i.sport].t++;
+    if (state.superlike[i.id]) bySport[i.sport].su++;
     if (state.yes[i.id]) bySport[i.sport].y++;
     else if (state.no[i.id]) bySport[i.sport].n++;
   });
@@ -512,15 +565,18 @@ function showSummary(){
     '<h3>By sport (all filters)</h3>' +
     sports.map(s => {
       const b = bySport[s];
-      return `<div class="row"><span>${s}</span><span style="color:#22c55e">${b.y} yes</span><span style="color:#ef4444">${b.n} no</span><span style="color:#666">${b.t - b.y - b.n} left</span></div>`;
+      return `<div class="row"><span>${s}</span><span style="color:#fbbf24">⭐${b.su}</span><span style="color:#22c55e">${b.y} yes</span><span style="color:#ef4444">${b.n} no</span><span style="color:#666">${b.t - b.y - b.n} left</span></div>`;
     }).join('');
 
-  showGallery('yes');
+  showGallery('super');
 }
 
 function showGallery(which){
   document.querySelectorAll('.gallery-tabs button').forEach(b => b.classList.toggle('on', b.dataset.gt === which));
-  const pile = which === 'yes' ? state.yes : state.no;
+  let pile;
+  if (which === 'super') pile = state.superlike;
+  else if (which === 'yes') pile = state.yes;
+  else pile = state.no;
   const ids = Object.keys(pile);
   const items = ids.map(id => CORPUS.find(c => c.id === id)).filter(Boolean);
   // Respect current sport filter in the gallery too
@@ -528,10 +584,14 @@ function showGallery(which){
   const filtered = sport === 'all' ? items : items.filter(i => i.sport === sport);
   const grid = document.getElementById('grid');
   if (filtered.length === 0){
-    grid.innerHTML = `<div style="color:#666;font-size:.8rem;padding:1rem">Nothing in this pile for this filter.</div>`;
+    const labels = {super: 'No super-likes yet — swipe up or hit ⭐ on the cream of the crop.', yes: 'No yes ratings yet for this filter.', no: 'No no ratings yet for this filter.'};
+    grid.innerHTML = `<div style="color:#666;font-size:.8rem;padding:1rem">${labels[which]}</div>`;
     return;
   }
-  grid.innerHTML = filtered.map(i => `<img src="${i.url}" onclick="openLB('${i.url}')" title="${escapeHtml(i.label)}">`).join('');
+  grid.innerHTML = filtered.map(i => {
+    const isSuper = !!state.superlike[i.id];
+    return `<div class="thumb${isSuper ? ' super' : ''}" onclick="openLB('${i.url}')" title="${escapeHtml(i.label)}"><img src="${i.url}">${isSuper ? '<div class="badge">⭐</div>' : ''}</div>`;
+  }).join('');
 }
 
 function hideSummary(){
@@ -544,20 +604,28 @@ function copyYes(){
   copyText(text, `Copied ${urls.length} YES urls`);
 }
 
+function copySuper(){
+  const urls = Object.keys(state.superlike).map(id => CORPUS.find(c => c.id === id)?.url).filter(Boolean);
+  if (urls.length === 0){ toast('No super-likes yet'); return; }
+  const text = urls.join('\n');
+  copyText(text, `Copied ${urls.length} ⭐ SUPER urls`);
+}
+
 function copyJson(){
+  const mapItem = (id) => {
+    const c = CORPUS.find(c => c.id === id);
+    if (!c) return null;
+    return {id, url: c.url, label: c.label, sport: c.sport, super: !!state.superlike[id]};
+  };
   const payload = {
     exportedAt: new Date().toISOString(),
     total: CORPUS.length,
-    yes: Object.keys(state.yes).map(id => {
-      const c = CORPUS.find(c => c.id === id);
-      return c ? {id, url: c.url, label: c.label, sport: c.sport} : null;
-    }).filter(Boolean),
-    no: Object.keys(state.no).map(id => {
-      const c = CORPUS.find(c => c.id === id);
-      return c ? {id, url: c.url, label: c.label, sport: c.sport} : null;
-    }).filter(Boolean),
+    superCount: Object.keys(state.superlike).length,
+    yes: Object.keys(state.yes).map(mapItem).filter(Boolean),
+    no: Object.keys(state.no).map(mapItem).filter(Boolean),
+    superlike: Object.keys(state.superlike).map(mapItem).filter(Boolean),
   };
-  copyText(JSON.stringify(payload, null, 2), `Copied ${payload.yes.length} yes + ${payload.no.length} no`);
+  copyText(JSON.stringify(payload, null, 2), `Copied ${payload.yes.length} yes (${payload.superCount} ⭐) + ${payload.no.length} no`);
   // Mark as backed up — dismiss reminder until next 50
   state.lastBackupCount = getTotalRated();
   saveState();
