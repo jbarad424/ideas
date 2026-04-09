@@ -2,8 +2,8 @@
   "meta": {
     "generated": "2026-04-09T02:44:08.798885+00:00Z",
     "total": 694,
-    "substantive_count": 648,
-    "short_count": 46,
+    "substantive_count": 669,
+    "short_count": 25,
     "inherited_count": 107,
     "sources": {
       "results_file:ref_ab_test_results.json": 52,
@@ -16,9 +16,11 @@
       "results_file:snow_goofy_test_results.json": 6,
       "results_file:mirrored_img2_test_results.json": 6
     },
-    "note": "Source of truth for CB2 AI Creative Lab generation prompts. Results files (*_results.json) have full 500+ char prompts with seed+ref+arm metadata for the Apr 8 production batches (v1, rot, refab, dual, snow). cb-review.html covers the older batches with shorter but exact prompts (20-120 chars \u2014 that is the literal text sent to the API during that era). Sibling-inherit was used to copy canonical prompts to \"Same as X\" placeholder entries within the same (prefix, sport) subgroup.",
+    "note": "Source of truth for CB2 AI Creative Lab generation prompts. Results files (*_results.json) have full 500+ char prompts with seed+ref+arm metadata for the Apr 8 production batches (v1, rot, refab, dual, snow). cb-review.html covers the older batches with shorter but exact prompts (20-120 chars — that is the literal text sent to the API during that era). Sibling-inherit was used to copy canonical prompts to \"Same as X\" placeholder entries within the same (prefix, sport) subgroup.",
     "shell_mined_overwrites": 19,
-    "shell_mined_seed_backfills": 50
+    "shell_mined_seed_backfills": 50,
+    "patched_ref_canonical": 21,
+    "last_patched": "2026-04-09T10:57:32.471886+00:00"
   },
   "items": {
     "https://v3b.fal.media/files/b/0a9573f2/xAzOnN_QM6ymIJoWkYQt-_wiSN9Mru.jpg": {
@@ -1320,7 +1322,7 @@
     "https://files.catbox.moe/dvhmyj.jpg": {
       "url": "https://files.catbox.moe/dvhmyj.jpg",
       "id_from_review": "clothswap-moto-jacket",
-      "prompt": "Base: refC-moto-s101 (90/100) \u2192 swap T-shirt to moto jacket + helmet",
+      "prompt": "Base: refC-moto-s101 (90/100) → swap T-shirt to moto jacket + helmet",
       "model": "two-pass (FLUX edit)",
       "label": "CLOTHSWAP: Moto Jacket",
       "source": "cb-review.html",
@@ -1330,7 +1332,7 @@
     "https://files.catbox.moe/lzpgb3.jpg": {
       "url": "https://files.catbox.moe/lzpgb3.jpg",
       "id_from_review": "clothswap-ski-gloves",
-      "prompt": "Base: refC-ski-s302 (~90/100) \u2192 add ski gloves to hands only",
+      "prompt": "Base: refC-ski-s302 (~90/100) → add ski gloves to hands only",
       "model": "two-pass (FLUX edit)",
       "label": "CLOTHSWAP: Ski Gloves",
       "source": "cb-review.html",
@@ -1340,7 +1342,7 @@
     "https://files.catbox.moe/7zle0m.jpg": {
       "url": "https://files.catbox.moe/7zle0m.jpg",
       "id_from_review": "clothswap-snow-earbuds",
-      "prompt": "Base: refC-snow-s404 (100/100) \u2192 add wireless earbuds",
+      "prompt": "Base: refC-snow-s404 (100/100) → add wireless earbuds",
       "model": "two-pass (FLUX edit)",
       "label": "CLOTHSWAP: Earbuds on 100-scorer",
       "source": "cb-review.html",
@@ -1476,7 +1478,7 @@
     "https://files.catbox.moe/ugkn7k.jpg": {
       "url": "https://files.catbox.moe/ugkn7k.jpg",
       "id_from_review": "flex-twopass-jacket",
-      "prompt": "Base: flex7-moto-2004 (90/100) \u2192 add leather motorcycle jacket",
+      "prompt": "Base: flex7-moto-2004 (90/100) → add leather motorcycle jacket",
       "model": "Flex g7.0 two-pass",
       "label": "FLEX 2PASS: Moto Jacket",
       "source": "cb-review.html",
@@ -1487,20 +1489,20 @@
     "https://files.catbox.moe/6q32e6.jpg": {
       "url": "https://files.catbox.moe/6q32e6.jpg",
       "id_from_review": "flex-twopass-helmet",
-      "prompt": "Base: flex7-moto-2004 (90/100) \u2192 add leather motorcycle jacket",
+      "prompt": "Base: flex7-moto-2004 (90/100) → add leather motorcycle jacket",
       "model": "Flex g7.0 two-pass",
       "label": "FLEX 2PASS: Helmet Only",
       "source": "cb-review.html",
       "id": "flex-twopass-helmet",
       "sport": "moto",
       "prompt_inherited_from": "flex-twopass-jacket",
-      "prompt_original": "Base: flex7-moto-2004 \u2192 add helmet only",
+      "prompt_original": "Base: flex7-moto-2004 → add helmet only",
       "seed": "42"
     },
     "https://files.catbox.moe/lrm0gm.jpg": {
       "url": "https://files.catbox.moe/lrm0gm.jpg",
       "id_from_review": "flex-twopass-goggles",
-      "prompt": "Base: flex7-ski-2011 (93/100) \u2192 add ski goggles on forehead",
+      "prompt": "Base: flex7-ski-2011 (93/100) → add ski goggles on forehead",
       "model": "Flex g7.0 two-pass",
       "label": "FLEX 2PASS: Ski Goggles",
       "source": "cb-review.html",
@@ -1511,7 +1513,7 @@
     "https://files.catbox.moe/p212yj.jpg": {
       "url": "https://files.catbox.moe/p212yj.jpg",
       "id_from_review": "flex-twopass-neckguard",
-      "prompt": "Base: flex7-moto-2004 \u2192 add neck guard only",
+      "prompt": "Base: flex7-moto-2004 → add neck guard only",
       "model": "Flex g7.0 two-pass",
       "label": "FLEX 2PASS: Neck Guard",
       "source": "cb-review.html",
@@ -1590,7 +1592,7 @@
     "https://files.catbox.moe/xasfeb.jpg": {
       "url": "https://files.catbox.moe/xasfeb.jpg",
       "id_from_review": "flex-default",
-      "prompt": "Base: flex7-moto-2004 (90/100) \u2192 add leather motorcycle jacket",
+      "prompt": "Base: flex7-moto-2004 (90/100) → add leather motorcycle jacket",
       "model": "FLUX 2 Flex (default)",
       "label": "FLEX: Default (g3.5 s28)",
       "source": "cb-review.html",
@@ -1602,7 +1604,7 @@
     "https://files.catbox.moe/b80lk8.jpg": {
       "url": "https://files.catbox.moe/b80lk8.jpg",
       "id_from_review": "flex-highguide",
-      "prompt": "Base: flex7-moto-2004 (90/100) \u2192 add leather motorcycle jacket",
+      "prompt": "Base: flex7-moto-2004 (90/100) → add leather motorcycle jacket",
       "model": "FLUX 2 Flex (high guidance)",
       "label": "FLEX: High Guidance (g7.0 s28)",
       "source": "cb-review.html",
@@ -1614,7 +1616,7 @@
     "https://files.catbox.moe/0tfsfw.jpg": {
       "url": "https://files.catbox.moe/0tfsfw.jpg",
       "id_from_review": "flex-moresteps",
-      "prompt": "Base: flex7-moto-2004 (90/100) \u2192 add leather motorcycle jacket",
+      "prompt": "Base: flex7-moto-2004 (90/100) → add leather motorcycle jacket",
       "model": "FLUX 2 Flex (more steps)",
       "label": "FLEX: More Steps (g3.5 s50)",
       "source": "cb-review.html",
@@ -1626,7 +1628,7 @@
     "https://files.catbox.moe/ydxypo.jpg": {
       "url": "https://files.catbox.moe/ydxypo.jpg",
       "id_from_review": "flex-highboth",
-      "prompt": "Base: flex7-moto-2004 (90/100) \u2192 add leather motorcycle jacket",
+      "prompt": "Base: flex7-moto-2004 (90/100) → add leather motorcycle jacket",
       "model": "FLUX 2 Flex (high both)",
       "label": "FLEX: High Both (g7.0 s50)",
       "source": "cb-review.html",
@@ -1785,7 +1787,7 @@
       "id_from_review": "action-moto-s900",
       "prompt": "Moto leaning into turn, speed blur, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Moto Turn \u2014 Hunter",
+      "label": "ACTION: Moto Turn — Hunter",
       "source": "cb-review.html",
       "id": "action-moto-s900",
       "sport": "moto",
@@ -1796,7 +1798,7 @@
       "id_from_review": "action-moto-s901",
       "prompt": "Moto at speed, wind in jacket, Tron black/cyan",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Moto Speed \u2014 Tron",
+      "label": "ACTION: Moto Speed — Tron",
       "source": "cb-review.html",
       "id": "action-moto-s901",
       "sport": "moto",
@@ -1807,7 +1809,7 @@
       "id_from_review": "action-moto-s902",
       "prompt": "Moto leaning into turn, speed blur, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Moto POV \u2014 Patriot",
+      "label": "ACTION: Moto POV — Patriot",
       "source": "cb-review.html",
       "id": "action-moto-s902",
       "sport": "moto",
@@ -1820,7 +1822,7 @@
       "id_from_review": "action-moto-s903",
       "prompt": "Moto desert highway, dust trail, Tron black/cyan",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Moto Desert \u2014 Tron",
+      "label": "ACTION: Moto Desert — Tron",
       "source": "cb-review.html",
       "id": "action-moto-s903",
       "sport": "moto",
@@ -1831,7 +1833,7 @@
       "id_from_review": "action-moto-s904",
       "prompt": "Moto cresting mountain pass, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Moto Pass \u2014 Hunter",
+      "label": "ACTION: Moto Pass — Hunter",
       "source": "cb-review.html",
       "id": "action-moto-s904",
       "sport": "moto",
@@ -1842,7 +1844,7 @@
       "id_from_review": "action-ski-s910",
       "prompt": "Skier carving powder at speed, Tron black/cyan",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Ski Powder \u2014 Tron",
+      "label": "ACTION: Ski Powder — Tron",
       "source": "cb-review.html",
       "id": "action-ski-s910",
       "sport": "ski",
@@ -1853,7 +1855,7 @@
       "id_from_review": "action-ski-s911",
       "prompt": "Skier launching off jump, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Ski Jump \u2014 Hunter",
+      "label": "ACTION: Ski Jump — Hunter",
       "source": "cb-review.html",
       "id": "action-ski-s911",
       "sport": "ski",
@@ -1864,7 +1866,7 @@
       "id_from_review": "action-ski-s912",
       "prompt": "Skier racing through trees, Patriot white/navy",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Ski Trees \u2014 Patriot",
+      "label": "ACTION: Ski Trees — Patriot",
       "source": "cb-review.html",
       "id": "action-ski-s912",
       "sport": "ski",
@@ -1875,7 +1877,7 @@
       "id_from_review": "action-ski-s913",
       "prompt": "Skier at summit looking down, Tron black/cyan",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Ski Summit \u2014 Tron",
+      "label": "ACTION: Ski Summit — Tron",
       "source": "cb-review.html",
       "id": "action-ski-s913",
       "sport": "ski",
@@ -1886,7 +1888,7 @@
       "id_from_review": "action-snow-s920",
       "prompt": "Snowboarder halfpipe trick, airborne, Tron black/cyan",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Snow Halfpipe \u2014 Tron",
+      "label": "ACTION: Snow Halfpipe — Tron",
       "source": "cb-review.html",
       "id": "action-snow-s920",
       "sport": "snow",
@@ -1897,7 +1899,7 @@
       "id_from_review": "action-snow-s921",
       "prompt": "Snowboarder deep powder carve, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Snow Powder \u2014 Hunter",
+      "label": "ACTION: Snow Powder — Hunter",
       "source": "cb-review.html",
       "id": "action-snow-s921",
       "sport": "snow",
@@ -1908,7 +1910,7 @@
       "id_from_review": "action-snow-s922",
       "prompt": "Snowboarder steep chute, Patriot white/navy",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Snow Chute \u2014 Patriot",
+      "label": "ACTION: Snow Chute — Patriot",
       "source": "cb-review.html",
       "id": "action-snow-s922",
       "sport": "snow",
@@ -1919,7 +1921,7 @@
       "id_from_review": "action-mtb-s930",
       "prompt": "MTB rocky singletrack at speed, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: MTB Jump \u2014 Tron",
+      "label": "ACTION: MTB Jump — Tron",
       "source": "cb-review.html",
       "id": "action-mtb-s930",
       "sport": "mtb",
@@ -1932,7 +1934,7 @@
       "id_from_review": "action-mtb-s931",
       "prompt": "MTB rocky singletrack at speed, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: MTB Singletrack \u2014 Hunter",
+      "label": "ACTION: MTB Singletrack — Hunter",
       "source": "cb-review.html",
       "id": "action-mtb-s931",
       "sport": "mtb",
@@ -1943,7 +1945,7 @@
       "id_from_review": "action-mtb-s932",
       "prompt": "MTB cornering on berm, Patriot white/navy",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: MTB Berm \u2014 Patriot",
+      "label": "ACTION: MTB Berm — Patriot",
       "source": "cb-review.html",
       "id": "action-mtb-s932",
       "sport": "mtb",
@@ -1954,7 +1956,7 @@
       "id_from_review": "action-mtb-s933",
       "prompt": "MTB steep descent, valley view, Tron black/cyan",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: MTB Descent \u2014 Tron",
+      "label": "ACTION: MTB Descent — Tron",
       "source": "cb-review.html",
       "id": "action-mtb-s933",
       "sport": "mtb",
@@ -1965,7 +1967,7 @@
       "id_from_review": "action-hike-s940",
       "prompt": "Hiker summit celebration, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Summit Celebrate \u2014 Hunter",
+      "label": "ACTION: Summit Celebrate — Hunter",
       "source": "cb-review.html",
       "id": "action-hike-s940",
       "sport": "hike",
@@ -1976,7 +1978,7 @@
       "id_from_review": "action-run-s941",
       "prompt": "Trail runner sprinting ridge, Tron black/cyan",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Ridge Run \u2014 Tron",
+      "label": "ACTION: Ridge Run — Tron",
       "source": "cb-review.html",
       "id": "action-run-s941",
       "sport": "run",
@@ -1987,7 +1989,7 @@
       "id_from_review": "action-fish-s950",
       "prompt": "Reeling in catch on boat, Hunter green/yellow",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Fishing Catch \u2014 Hunter",
+      "label": "ACTION: Fishing Catch — Hunter",
       "source": "cb-review.html",
       "id": "action-fish-s950",
       "sport": "other",
@@ -1998,7 +2000,7 @@
       "id_from_review": "action-fish-s951",
       "prompt": "Fly casting mountain stream, Tron black/cyan",
       "model": "flux2-pro @image (Ref C)",
-      "label": "ACTION: Fly Fishing \u2014 Tron",
+      "label": "ACTION: Fly Fishing — Tron",
       "source": "cb-review.html",
       "id": "action-fish-s951",
       "sport": "other",
@@ -2007,7 +2009,7 @@
     "https://files.catbox.moe/op5aju.jpg": {
       "url": "https://files.catbox.moe/op5aju.jpg",
       "id_from_review": "twopass-flux-moto",
-      "prompt": "Base: refC-moto-s101 (90/100) \u2192 FLUX edit added helmet",
+      "prompt": "Base: refC-moto-s101 (90/100) → FLUX edit added helmet",
       "model": "two-pass (FLUX edit)",
       "label": "TWO-PASS: Moto + Helmet (FLUX)",
       "source": "cb-review.html",
@@ -2017,7 +2019,7 @@
     "https://files.catbox.moe/1lkfuw.jpg": {
       "url": "https://files.catbox.moe/1lkfuw.jpg",
       "id_from_review": "twopass-kontext-moto",
-      "prompt": "Base: refC-moto-s101 \u2192 Kontext added helmet",
+      "prompt": "Base: refC-moto-s101 → Kontext added helmet",
       "model": "two-pass (Kontext)",
       "label": "TWO-PASS: Moto + Helmet (Kontext)",
       "source": "cb-review.html",
@@ -2027,7 +2029,7 @@
     "https://files.catbox.moe/zcboii.jpg": {
       "url": "https://files.catbox.moe/zcboii.jpg",
       "id_from_review": "twopass-kontext-ski",
-      "prompt": "Base: refC-ski-s303 (98/100) \u2192 Kontext added gloves",
+      "prompt": "Base: refC-ski-s303 (98/100) → Kontext added gloves",
       "model": "two-pass (Kontext)",
       "label": "TWO-PASS: Skier + Gloves (Kontext)",
       "source": "cb-review.html",
@@ -2037,9 +2039,9 @@
     "https://files.catbox.moe/mx6xxj.jpg": {
       "url": "https://files.catbox.moe/mx6xxj.jpg",
       "id_from_review": "twopass-flux-ski",
-      "prompt": "Base: refC-ski-s303 \u2192 FLUX edit added gloves",
+      "prompt": "Base: refC-ski-s303 → FLUX edit added gloves",
       "model": "two-pass (FLUX edit)",
-      "label": "TWO-PASS: Skier + Gloves (FLUX) \u2014 CB2 LOST",
+      "label": "TWO-PASS: Skier + Gloves (FLUX) — CB2 LOST",
       "source": "cb-review.html",
       "id": "twopass-flux-ski",
       "sport": "ski"
@@ -2217,7 +2219,7 @@
     "https://files.catbox.moe/kb21ox.jpg": {
       "url": "https://files.catbox.moe/kb21ox.jpg",
       "id_from_review": "samfix-refC1",
-      "prompt": "ref-C1 with CB2 rotated 180\u00b0 by fix-orientation.py",
+      "prompt": "ref-C1 with CB2 rotated 180° by fix-orientation.py",
       "model": "SAM rotation fix",
       "label": "SAM FIX: ref-C1 (was ~95-98 if flipped)",
       "source": "cb-review.html",
@@ -2227,7 +2229,7 @@
     "https://files.catbox.moe/9ixnbr.jpg": {
       "url": "https://files.catbox.moe/9ixnbr.jpg",
       "id_from_review": "samfix-refA1",
-      "prompt": "ref-A1 with CB2 rotated 180\u00b0 by fix-orientation.py",
+      "prompt": "ref-A1 with CB2 rotated 180° by fix-orientation.py",
       "model": "SAM rotation fix",
       "label": "SAM FIX: ref-A1 (was ~92 if flipped)",
       "source": "cb-review.html",
@@ -2237,7 +2239,7 @@
     "https://files.catbox.moe/dyrw7t.jpg": {
       "url": "https://files.catbox.moe/dyrw7t.jpg",
       "id_from_review": "samfix-motoS103",
-      "prompt": "refC-moto-s103 with CB2 rotated 180\u00b0",
+      "prompt": "refC-moto-s103 with CB2 rotated 180°",
       "model": "SAM rotation fix",
       "label": "SAM FIX: moto-s103 (was 75, symbols garbled)",
       "source": "cb-review.html",
@@ -2579,212 +2581,359 @@
     "https://files.catbox.moe/gasx8y.jpg": {
       "url": "https://files.catbox.moe/gasx8y.jpg",
       "id_from_review": "ref-A1",
-      "prompt": "Motorcycle coastal + exact layout spec",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST A: Hunter Arm Outside 1/6",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-A1",
-      "sport": "moto"
+      "sport": "moto",
+      "prompt_original": "Motorcycle coastal + exact layout spec",
+      "ref": {
+        "name": "Hunter Arm Outside",
+        "role": "third-person arm photo",
+        "catbox_url": "https://files.catbox.moe/t2nesw.jpg"
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/2ao08m.jpg": {
       "url": "https://files.catbox.moe/2ao08m.jpg",
       "id_from_review": "ref-A2",
-      "prompt": "Same coastal prompt",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST A: Hunter Arm Outside 2/6",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-A2",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same coastal prompt",
+      "ref": {
+        "name": "Hunter Arm Outside",
+        "role": "third-person arm photo",
+        "catbox_url": "https://files.catbox.moe/t2nesw.jpg"
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/vkmtt0.jpg": {
       "url": "https://files.catbox.moe/vkmtt0.jpg",
       "id_from_review": "ref-A3",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST A: Hunter Arm Outside 3/6",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-A3",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Hunter Arm Outside",
+        "role": "third-person arm photo",
+        "catbox_url": "https://files.catbox.moe/t2nesw.jpg"
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/asr5a1.jpg": {
       "url": "https://files.catbox.moe/asr5a1.jpg",
       "id_from_review": "ref-A4",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST A: Hunter Arm Outside 4/6",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-A4",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Hunter Arm Outside",
+        "role": "third-person arm photo",
+        "catbox_url": "https://files.catbox.moe/t2nesw.jpg"
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/1esud0.jpg": {
       "url": "https://files.catbox.moe/1esud0.jpg",
       "id_from_review": "ref-A5",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST A: Hunter Arm Outside 5/6",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-A5",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Hunter Arm Outside",
+        "role": "third-person arm photo",
+        "catbox_url": "https://files.catbox.moe/t2nesw.jpg"
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/ls9164.jpg": {
       "url": "https://files.catbox.moe/ls9164.jpg",
       "id_from_review": "ref-A6",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST A: Hunter Arm Outside 6/6",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-A6",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Hunter Arm Outside",
+        "role": "third-person arm photo",
+        "catbox_url": "https://files.catbox.moe/t2nesw.jpg"
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/ft8dv5.jpg": {
       "url": "https://files.catbox.moe/ft8dv5.jpg",
       "id_from_review": "ref-B1",
-      "prompt": "Motorcycle coastal + exact layout spec",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST B: Moto Close Up 1/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-B1",
-      "sport": "moto"
+      "sport": "moto",
+      "prompt_original": "Motorcycle coastal + exact layout spec",
+      "ref": {
+        "name": "Motorcycle Close Up",
+        "role": "real moto forearm photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/3gmr6h.jpg": {
       "url": "https://files.catbox.moe/3gmr6h.jpg",
       "id_from_review": "ref-B2",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST B: Moto Close Up 2/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-B2",
-      "sport": "moto"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Motorcycle Close Up",
+        "role": "real moto forearm photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/vq0zj0.jpg": {
       "url": "https://files.catbox.moe/vq0zj0.jpg",
       "id_from_review": "ref-B3",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST B: Moto Close Up 3/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-B3",
-      "sport": "moto"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Motorcycle Close Up",
+        "role": "real moto forearm photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/crepyb.jpg": {
       "url": "https://files.catbox.moe/crepyb.jpg",
       "id_from_review": "ref-B4",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST B: Moto Close Up 4/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-B4",
-      "sport": "moto"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Motorcycle Close Up",
+        "role": "real moto forearm photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/qo9pfl.jpg": {
       "url": "https://files.catbox.moe/qo9pfl.jpg",
       "id_from_review": "ref-B5",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST B: Moto Close Up 5/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-B5",
-      "sport": "moto"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Motorcycle Close Up",
+        "role": "real moto forearm photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/19gt6r.jpg": {
       "url": "https://files.catbox.moe/19gt6r.jpg",
       "id_from_review": "ref-C1",
-      "prompt": "Motorcycle coastal + exact layout spec",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST C: J&Mike Dual 1/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-C1",
-      "sport": "moto"
+      "sport": "moto",
+      "prompt_original": "Motorcycle coastal + exact layout spec",
+      "ref": {
+        "name": "J&Mike Dual",
+        "role": "two-person dual CB2 photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/llwi3d.jpg": {
       "url": "https://files.catbox.moe/llwi3d.jpg",
       "id_from_review": "ref-C2",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST C: J&Mike Dual 2/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-C2",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "J&Mike Dual",
+        "role": "two-person dual CB2 photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/5awevk.jpg": {
       "url": "https://files.catbox.moe/5awevk.jpg",
       "id_from_review": "ref-C3",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST C: J&Mike Dual 3/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-C3",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "J&Mike Dual",
+        "role": "two-person dual CB2 photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/yp5buw.jpg": {
       "url": "https://files.catbox.moe/yp5buw.jpg",
       "id_from_review": "ref-C4",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST C: J&Mike Dual 4/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-C4",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "J&Mike Dual",
+        "role": "two-person dual CB2 photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/z1qfov.jpg": {
       "url": "https://files.catbox.moe/z1qfov.jpg",
       "id_from_review": "ref-C5",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST C: J&Mike Dual 5/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-C5",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "J&Mike Dual",
+        "role": "two-person dual CB2 photo",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/lp1iu3.jpg": {
       "url": "https://files.catbox.moe/lp1iu3.jpg",
       "id_from_review": "ref-D1",
-      "prompt": "Motorcycle coastal + exact layout spec",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST D: Original Product (CONTROL) 1/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-D1",
-      "sport": "moto"
+      "sport": "moto",
+      "prompt_original": "Motorcycle coastal + exact layout spec",
+      "ref": {
+        "name": "Original Product Front",
+        "role": "standing product control",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/aq8cfi.jpg": {
       "url": "https://files.catbox.moe/aq8cfi.jpg",
       "id_from_review": "ref-D2",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST D: Original Product (CONTROL) 2/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-D2",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Original Product Front",
+        "role": "standing product control",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/pqatt1.jpg": {
       "url": "https://files.catbox.moe/pqatt1.jpg",
       "id_from_review": "ref-D3",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST D: Original Product (CONTROL) 3/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-D3",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Original Product Front",
+        "role": "standing product control",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/kb3iuo.jpg": {
       "url": "https://files.catbox.moe/kb3iuo.jpg",
       "id_from_review": "ref-D4",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST D: Original Product (CONTROL) 4/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-D4",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Original Product Front",
+        "role": "standing product control",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/0ygcz7.jpg": {
       "url": "https://files.catbox.moe/0ygcz7.jpg",
       "id_from_review": "ref-D5",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "model": "flux2-pro @image",
       "label": "REF TEST D: Original Product (CONTROL) 5/5",
-      "source": "cb-review.html",
+      "source": "transcript_manual:ref_test_canonical",
       "id": "ref-D5",
-      "sport": "other"
+      "sport": "moto",
+      "prompt_original": "Same",
+      "ref": {
+        "name": "Original Product Front",
+        "role": "standing product control",
+        "catbox_url": null
+      },
+      "experiment": "REF TEST — FLUX 2 Pro reference photo A/B/C/D comparison"
     },
     "https://files.catbox.moe/c5n4ci.jpg": {
       "url": "https://files.catbox.moe/c5n4ci.jpg",
@@ -3243,7 +3392,7 @@
     "https://files.catbox.moe/vsfh8f.jpg": {
       "url": "https://files.catbox.moe/vsfh8f.jpg",
       "id_from_review": "kontext-flip",
-      "prompt": "Took D2 Coastal 3 (~95/100) and asked Kontext: \"Rotate button symbols 180\u00b0 so minus is closest to wrist. Keep everything else identical.\"",
+      "prompt": "Took D2 Coastal 3 (~95/100) and asked Kontext: \"Rotate button symbols 180° so minus is closest to wrist. Keep everything else identical.\"",
       "model": "kontext-pro (post-process)",
       "label": "FLIP FIX: Kontext rotation of D2 Coastal 3",
       "source": "cb-review.html",
@@ -3303,7 +3452,7 @@
     "https://files.catbox.moe/tyvssy.jpg": {
       "url": "https://files.catbox.moe/tyvssy.jpg",
       "id_from_review": "pipeF-moto",
-      "prompt": "On-arm close-up ref \u2192 Kontext Pro: \"Keep this exact product on forearm. Change background to motorcycle riding, cherry blossom road, gripping handlebars.\"",
+      "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to motorcycle riding, cherry blossom road, gripping handlebars.\"",
       "model": "kontext-pro (scene-swap)",
       "label": "PIPE F: Motorcycle spring (Kontext scene-swap)",
       "source": "cb-review.html",
@@ -3313,7 +3462,7 @@
     "https://files.catbox.moe/op8i10.jpg": {
       "url": "https://files.catbox.moe/op8i10.jpg",
       "id_from_review": "pipeF-mtb",
-      "prompt": "On-arm close-up ref \u2192 Kontext Pro: \"Keep this exact product on forearm. Change background to MTB trail, gripping bike handlebars, pine forest.\"",
+      "prompt": "On-arm close-up ref → Kontext Pro: \"Keep this exact product on forearm. Change background to MTB trail, gripping bike handlebars, pine forest.\"",
       "model": "kontext-pro (scene-swap)",
       "label": "PIPE F: MTB trail (Kontext scene-swap)",
       "source": "cb-review.html",
@@ -3323,7 +3472,7 @@
     "https://files.catbox.moe/up0g47.jpg": {
       "url": "https://files.catbox.moe/up0g47.jpg",
       "id_from_review": "pipeF-snowmo",
-      "prompt": "Horizontal arm ref \u2192 Kontext Pro: \"Keep product on forearm. Change to snowmobile rider, snowy trail, winter gear.\"",
+      "prompt": "Horizontal arm ref → Kontext Pro: \"Keep product on forearm. Change to snowmobile rider, snowy trail, winter gear.\"",
       "model": "kontext-pro (scene-swap)",
       "label": "PIPE F: Snowmobile (Kontext scene-swap)",
       "source": "cb-review.html",
@@ -3333,7 +3482,7 @@
     "https://files.catbox.moe/vke9y5.jpg": {
       "url": "https://files.catbox.moe/vke9y5.jpg",
       "id_from_review": "pipeF-moto-product",
-      "prompt": "Product front photo \u2192 Kontext Pro: \"Show this product strapped to motorcycle riders forearm, gripping handlebars, cherry blossoms, all 5 buttons visible.\"",
+      "prompt": "Product front photo → Kontext Pro: \"Show this product strapped to motorcycle riders forearm, gripping handlebars, cherry blossoms, all 5 buttons visible.\"",
       "model": "kontext-pro (scene-swap)",
       "label": "PIPE F: Motorcycle (product as input)",
       "source": "cb-review.html",
@@ -3617,7 +3766,7 @@
       "id_from_review": "pipeC-motoc",
       "prompt": "Step 1: BFL generated clean motorcycle close-up scene (spring, cherry blossoms). Step 2: SAM 3 detected arm region (\"arm in leather jacket sleeve\"). Step 3: Fill Pro inpainted CB2 into SAM-derived forearm mask.",
       "model": "SAM3 + Fill Pro",
-      "label": "PIPE C: Motorcycle close-up (SAM\u2192Fill)",
+      "label": "PIPE C: Motorcycle close-up (SAM→Fill)",
       "source": "cb-review.html",
       "id": "pipeC-motoc",
       "sport": "moto"
@@ -3627,7 +3776,7 @@
       "id_from_review": "pipeC-moto",
       "prompt": "Clean motorcycle riding scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
       "model": "SAM3 + Fill Pro",
-      "label": "PIPE C: Motorcycle riding (SAM\u2192Fill)",
+      "label": "PIPE C: Motorcycle riding (SAM→Fill)",
       "source": "cb-review.html",
       "id": "pipeC-moto",
       "sport": "moto"
@@ -3637,7 +3786,7 @@
       "id_from_review": "pipeC-snowmo",
       "prompt": "Clean snowmobile POV scene + SAM 3 forearm mask + Fill Pro CB2 inpaint",
       "model": "SAM3 + Fill Pro",
-      "label": "PIPE C: Snowmobile POV (SAM\u2192Fill)",
+      "label": "PIPE C: Snowmobile POV (SAM→Fill)",
       "source": "cb-review.html",
       "id": "pipeC-snowmo",
       "sport": "snowmobile"
@@ -3647,7 +3796,7 @@
       "id_from_review": "pipeC-mtb",
       "prompt": "Clean MTB action scene + SAM 3 arm mask + Fill Pro CB2 inpaint",
       "model": "SAM3 + Fill Pro",
-      "label": "PIPE C: MTB action (SAM\u2192Fill)",
+      "label": "PIPE C: MTB action (SAM→Fill)",
       "source": "cb-review.html",
       "id": "pipeC-mtb",
       "sport": "mtb"
@@ -5311,7 +5460,7 @@
     "https://files.catbox.moe/n1zlgm.png": {
       "url": "https://files.catbox.moe/n1zlgm.png",
       "id_from_review": "pipe-D-direct-v1-8704",
-      "prompt": "Direct inpaint v1 \u2014 device got rotated to vertical, 6 buttons instead of 5",
+      "prompt": "Direct inpaint v1 — device got rotated to vertical, 6 buttons instead of 5",
       "model": "GPT Image 1.5",
       "label": "Pipeline D: Direct Inpaint v1 (wrong orientation)",
       "source": "cb-review.html",
@@ -5321,7 +5470,7 @@
     "https://files.catbox.moe/zsxh2g.png": {
       "url": "https://files.catbox.moe/zsxh2g.png",
       "id_from_review": "pipe-A-upscale-8705",
-      "prompt": "4x upscale only of CB2 crop \u2014 no inpainting, just enhancement",
+      "prompt": "4x upscale only of CB2 crop — no inpainting, just enhancement",
       "model": "AuraSR v2",
       "label": "Pipeline A: Upscale Only (no inpaint)",
       "source": "cb-review.html",
@@ -5461,7 +5610,7 @@
     "https://files.catbox.moe/yrmvtk.png": {
       "url": "https://files.catbox.moe/yrmvtk.png",
       "id_from_review": "mask-inpaint-clean-10001",
-      "prompt": "Clean motorcycle scene (no CB2) \u2014 Step 1 of masked inpainting pipeline.",
+      "prompt": "Clean motorcycle scene (no CB2) — Step 1 of masked inpainting pipeline.",
       "model": "GPT Image 1.5",
       "label": "MASK INPAINT: Clean Base Scene",
       "source": "cb-review.html",
@@ -5471,7 +5620,7 @@
     "https://files.catbox.moe/pxcfo9.png": {
       "url": "https://files.catbox.moe/pxcfo9.png",
       "id_from_review": "mask-inpaint-result-10002",
-      "prompt": "Masked inpainting \u2014 CB2 placed into lower forearm mask region only, using Ref C + input_fidelity:high. Forearm mask constrained edit to lower arm only.",
+      "prompt": "Masked inpainting — CB2 placed into lower forearm mask region only, using Ref C + input_fidelity:high. Forearm mask constrained edit to lower arm only.",
       "model": "GPT Image 1.5 (masked inpaint)",
       "label": "MASK INPAINT: Final Result",
       "source": "cb-review.html",
@@ -5845,7 +5994,7 @@
     "https://files.catbox.moe/v94vvi.png": {
       "url": "https://files.catbox.moe/v94vvi.png",
       "id_from_review": "mask-desert-clean-10701",
-      "prompt": "Clean desert highway scene (no CB2) \u2014 base for masked inpainting.",
+      "prompt": "Clean desert highway scene (no CB2) — base for masked inpainting.",
       "model": "GPT Image 1.5",
       "label": "MASK: Desert Clean Base",
       "source": "cb-review.html",
@@ -5855,7 +6004,7 @@
     "https://files.catbox.moe/lslkc1.png": {
       "url": "https://files.catbox.moe/lslkc1.png",
       "id_from_review": "mask-desert-result-10702",
-      "prompt": "Masked inpainting \u2014 CB2 placed into forearm mask on desert scene, Ref C + input_fidelity:high.",
+      "prompt": "Masked inpainting — CB2 placed into forearm mask on desert scene, Ref C + input_fidelity:high.",
       "model": "GPT Image 1.5 (masked inpaint)",
       "label": "MASK: Desert Result",
       "source": "cb-review.html",
@@ -5865,7 +6014,7 @@
     "https://files.catbox.moe/thmktm.png": {
       "url": "https://files.catbox.moe/thmktm.png",
       "id_from_review": "mask-alpine-clean-10703",
-      "prompt": "Clean alpine road scene (no CB2) \u2014 base for masked inpainting.",
+      "prompt": "Clean alpine road scene (no CB2) — base for masked inpainting.",
       "model": "GPT Image 1.5",
       "label": "MASK: Alpine Clean Base",
       "source": "cb-review.html",
@@ -5875,7 +6024,7 @@
     "https://files.catbox.moe/a6ufo9.png": {
       "url": "https://files.catbox.moe/a6ufo9.png",
       "id_from_review": "mask-alpine-result-10704",
-      "prompt": "Masked inpainting \u2014 CB2 placed into forearm mask on alpine scene, Ref C + input_fidelity:high.",
+      "prompt": "Masked inpainting — CB2 placed into forearm mask on alpine scene, Ref C + input_fidelity:high.",
       "model": "GPT Image 1.5 (masked inpaint)",
       "label": "MASK: Alpine Result",
       "source": "cb-review.html",
@@ -6015,7 +6164,7 @@
     "https://files.catbox.moe/uue6kn.jpg": {
       "url": "https://files.catbox.moe/uue6kn.jpg",
       "id_from_review": "v2-ski-30001",
-      "prompt": "Skier carving powder, dual-ref w=1600 + product front, real dimensions 108\u00d739mm, LED window closest to elbow, explicit symbols PLUS/FF/PLAY-PAUSE/REW/MINUS.",
+      "prompt": "Skier carving powder, dual-ref w=1600 + product front, real dimensions 108×39mm, LED window closest to elbow, explicit symbols PLUS/FF/PLAY-PAUSE/REW/MINUS.",
       "model": "Nano Banana Pro (Gemini 3 Pro)",
       "label": "V2: Skiing",
       "source": "cb-review.html",
@@ -6065,7 +6214,7 @@
     "https://files.catbox.moe/16e8f6.jpg": {
       "url": "https://files.catbox.moe/16e8f6.jpg",
       "id_from_review": "v3-ski-40001",
-      "prompt": "Skier powder carve. V3: CORRECTED orientation \u2014 LED+logo at WRIST, MINUS at wrist, PLUS at elbow. Real dims 108\u00d739mm. Dual-ref w=1600 + product front.",
+      "prompt": "Skier powder carve. V3: CORRECTED orientation — LED+logo at WRIST, MINUS at wrist, PLUS at elbow. Real dims 108×39mm. Dual-ref w=1600 + product front.",
       "model": "Nano Banana Pro (Gemini 3 Pro)",
       "label": "V3: Skiing",
       "source": "cb-review.html",
@@ -6125,7 +6274,7 @@
     "https://files.catbox.moe/ahp2xb.jpg": {
       "url": "https://files.catbox.moe/ahp2xb.jpg",
       "id_from_review": "v4-ski-50001",
-      "prompt": "Skier powder carve. V4: PLUS at wrist, MINUS at elbow, LED at wrist. 108\u00d739mm. Dual-ref w=1600 + product front.",
+      "prompt": "Skier powder carve. V4: PLUS at wrist, MINUS at elbow, LED at wrist. 108×39mm. Dual-ref w=1600 + product front.",
       "model": "Nano Banana Pro (Gemini 3 Pro)",
       "label": "V4: Skiing",
       "source": "cb-review.html",
@@ -7394,7 +7543,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e5/5FiSNwhQExvJ4dU0bNoO3_7wjlzGxI.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e5/5FiSNwhQExvJ4dU0bNoO3_7wjlzGxI.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": {
         "id": "h3",
@@ -7413,7 +7562,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e5/cNrYU_JGUwbLR_jMq-LvA_cMAotBoD.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e5/cNrYU_JGUwbLR_jMq-LvA_cMAotBoD.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h3",
@@ -7432,7 +7581,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e5/O76RlcBGkgACopi-PmKqn_xk3WiF4v.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e5/O76RlcBGkgACopi-PmKqn_xk3WiF4v.jpg",
-      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
+      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
       "seed": 9302,
       "ref": {
         "id": "h3",
@@ -7451,7 +7600,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e5/yGrY440QfANH7gmdEbtjs_89eCfYaZ.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e5/yGrY440QfANH7gmdEbtjs_89eCfYaZ.jpg",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "seed": 9201,
       "ref": {
         "id": "h3",
@@ -7470,7 +7619,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e5/KA--43aes4b4Z-8LctBzE_gG1geBD8.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e5/KA--43aes4b4Z-8LctBzE_gG1geBD8.jpg",
-      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
+      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
       "seed": 9301,
       "ref": {
         "id": "h3",
@@ -7489,7 +7638,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e5/_6-ng0U4RxifF4DUBII_w_7Ddwllhg.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e5/_6-ng0U4RxifF4DUBII_w_7Ddwllhg.jpg",
-      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "seed": 9202,
       "ref": {
         "id": "h3",
@@ -7508,7 +7657,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e5/fHiqQYbCLi4xbQqm1UbCz_XQ2nSVj2.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e5/fHiqQYbCLi4xbQqm1UbCz_XQ2nSVj2.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h3",
@@ -7527,7 +7676,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e8/c2Dt32hDk3ixTOVwwJV-q_2xGjIaYV.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e8/c2Dt32hDk3ixTOVwwJV-q_2xGjIaYV.jpg",
-      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "seed": 9202,
       "ref": {
         "id": "h5",
@@ -7546,7 +7695,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e7/MDllnhK46wnYzvSwKE5P7_XKMxFh0v.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e7/MDllnhK46wnYzvSwKE5P7_XKMxFh0v.jpg",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "seed": 9201,
       "ref": {
         "id": "h5",
@@ -7565,7 +7714,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e7/TUEOq8WM3lFm4DlvnmMZH_YAfUTHcq.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e7/TUEOq8WM3lFm4DlvnmMZH_YAfUTHcq.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": {
         "id": "h5",
@@ -7584,7 +7733,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e7/tqrooOj9UBfxktD7R5Ufv_AoHuXPBj.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e7/tqrooOj9UBfxktD7R5Ufv_AoHuXPBj.jpg",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "seed": 9102,
       "ref": {
         "id": "h5",
@@ -7603,7 +7752,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e8/B1Y3KQHJD0FJL9gflg2bl_cc5DhJIr.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e8/B1Y3KQHJD0FJL9gflg2bl_cc5DhJIr.jpg",
-      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
+      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
       "seed": 9301,
       "ref": {
         "id": "h5",
@@ -7622,7 +7771,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e9/3aZPSMlaxp6nauZY4ocgF_QhugsaIv.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e9/3aZPSMlaxp6nauZY4ocgF_QhugsaIv.jpg",
-      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
+      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
       "seed": 9302,
       "ref": {
         "id": "h5",
@@ -7641,7 +7790,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ea/s9V40Y9m6O2FPdoJJseeP_yzRmXFm6.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ea/s9V40Y9m6O2FPdoJJseeP_yzRmXFm6.jpg",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "seed": 9201,
       "ref": {
         "id": "p4",
@@ -7660,7 +7809,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ea/em2m3MQxcbj_FRbBj9xIf_IGmDdYoe.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ea/em2m3MQxcbj_FRbBj9xIf_IGmDdYoe.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": {
         "id": "p4",
@@ -7679,7 +7828,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ea/WttMqvG2HnO2FpqdAYrfk_vumDm7qI.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ea/WttMqvG2HnO2FpqdAYrfk_vumDm7qI.jpg",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "seed": 9102,
       "ref": {
         "id": "p4",
@@ -7698,7 +7847,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576eb/y780v4X7ZfbpzDb9IZnLF_LNH3HCX7.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576eb/y780v4X7ZfbpzDb9IZnLF_LNH3HCX7.jpg",
-      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
+      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
       "seed": 9301,
       "ref": {
         "id": "p4",
@@ -7717,7 +7866,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "p4",
@@ -7736,7 +7885,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ec/yyTAmZFItSMIsqvj09DlW_MMnSoRu0.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ec/yyTAmZFItSMIsqvj09DlW_MMnSoRu0.jpg",
-      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
+      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
       "seed": 9302,
       "ref": {
         "id": "p4",
@@ -7755,7 +7904,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ec/mSZHUiHONdE6c6e0ncT7u_Nee5vJXs.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ec/mSZHUiHONdE6c6e0ncT7u_Nee5vJXs.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "p4",
@@ -7774,7 +7923,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ed/dDPA24L3CHESIqhgNUrYd_IfaOZW2N.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ed/dDPA24L3CHESIqhgNUrYd_IfaOZW2N.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": {
         "id": "p5",
@@ -7793,7 +7942,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ee/I4sPAsexnK3IUlo_HQY_l_w67PcLPr.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ee/I4sPAsexnK3IUlo_HQY_l_w67PcLPr.jpg",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "seed": 9102,
       "ref": {
         "id": "p5",
@@ -7812,7 +7961,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ee/2RQ7RVI7hvP1Ar0olvuyr_663gW5DH.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ee/2RQ7RVI7hvP1Ar0olvuyr_663gW5DH.jpg",
-      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "seed": 9202,
       "ref": {
         "id": "p5",
@@ -7831,7 +7980,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ee/zDxeYmmwVKdB8woiueURL_qPNmEnFZ.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ee/zDxeYmmwVKdB8woiueURL_qPNmEnFZ.jpg",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "seed": 9201,
       "ref": {
         "id": "p5",
@@ -7850,7 +7999,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ea/cedHYRGZpr5V9zpgcQLF1_VnV1GNoy.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ea/cedHYRGZpr5V9zpgcQLF1_VnV1GNoy.jpg",
-      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "seed": 9202,
       "ref": {
         "id": "p4",
@@ -7869,7 +8018,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e9/DXwOivNtNwezUZHuUd2YB_N6axDL99.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e9/DXwOivNtNwezUZHuUd2YB_N6axDL99.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h5",
@@ -7888,7 +8037,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ef/Sa_2siuZnPEbej6em8j2D_aHiu7N9q.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ef/Sa_2siuZnPEbej6em8j2D_aHiu7N9q.jpg",
-      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
+      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
       "seed": 9301,
       "ref": {
         "id": "p5",
@@ -7907,7 +8056,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576f0/-ZPfGR4YjFukISYiMQuWQ_4Lr9wbLA.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576f0/-ZPfGR4YjFukISYiMQuWQ_4Lr9wbLA.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "p5",
@@ -7926,7 +8075,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576f0/RTHZUiIm74DqIYjh76Q3X_2UYw3ejH.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576f0/RTHZUiIm74DqIYjh76Q3X_2UYw3ejH.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "p5",
@@ -7945,7 +8094,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576e5/Kx_OhUQHzVY7bLArNarDS_YzMIOyuk.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576e5/Kx_OhUQHzVY7bLArNarDS_YzMIOyuk.jpg",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "seed": 9102,
       "ref": {
         "id": "h3",
@@ -7964,7 +8113,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576f0/e8o8iZPtrH7WmKGtk-_JI_pNOwVYP9.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576f0/e8o8iZPtrH7WmKGtk-_JI_pNOwVYP9.jpg",
-      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
+      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
       "seed": 9302,
       "ref": {
         "id": "p5",
@@ -7983,7 +8132,7 @@
     },
     "https://v3b.fal.media/files/b/0a9576ea/WGj1jQxGEe39bEG0eXkAg_5DeK01h6.jpg": {
       "url": "https://v3b.fal.media/files/b/0a9576ea/WGj1jQxGEe39bEG0eXkAg_5DeK01h6.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h5",
@@ -8002,7 +8151,7 @@
     },
     "https://v3b.fal.media/files/b/0a957771/HydRq01KLiMJAMGXy5kQg_Il3tuPB8.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957771/HydRq01KLiMJAMGXy5kQg_Il3tuPB8.jpg",
-      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
+      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
       "seed": 9302,
       "ref": {
         "id": "h3+0529",
@@ -8022,7 +8171,7 @@
     },
     "https://v3b.fal.media/files/b/0a957771/siROpNGpyCnFB6Jx4TuZl_4jOHasG5.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957771/siROpNGpyCnFB6Jx4TuZl_4jOHasG5.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h3+0529",
@@ -8042,7 +8191,7 @@
     },
     "https://v3b.fal.media/files/b/0a957771/JrauH3lzdrC4QDejtmlm2_mvALLX8v.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957771/JrauH3lzdrC4QDejtmlm2_mvALLX8v.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h3+0529",
@@ -8062,7 +8211,7 @@
     },
     "https://v3b.fal.media/files/b/0a957771/eBkFoiELA1AdCzgprpwsQ_8ID7PmCV.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957771/eBkFoiELA1AdCzgprpwsQ_8ID7PmCV.jpg",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "seed": 9201,
       "ref": {
         "id": "h3+0529",
@@ -8082,7 +8231,7 @@
     },
     "https://v3b.fal.media/files/b/0a957771/6tIHlS5KOC3M9MHlE2KG7_9eYF0oWM.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957771/6tIHlS5KOC3M9MHlE2KG7_9eYF0oWM.jpg",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "seed": 9102,
       "ref": {
         "id": "h3+0529",
@@ -8102,7 +8251,7 @@
     },
     "https://v3b.fal.media/files/b/0a957771/D_QuR3COpIk0Sz8T8AWPH_ANbTHxn4.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957771/D_QuR3COpIk0Sz8T8AWPH_ANbTHxn4.jpg",
-      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
+      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
       "seed": 9301,
       "ref": {
         "id": "h3+0529",
@@ -8122,7 +8271,7 @@
     },
     "https://v3b.fal.media/files/b/0a957771/K74qKbisIMS9jaWropFfW_XC6QL9GF.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957771/K74qKbisIMS9jaWropFfW_XC6QL9GF.jpg",
-      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "seed": 9202,
       "ref": {
         "id": "h3+0529",
@@ -8142,7 +8291,7 @@
     },
     "https://v3b.fal.media/files/b/0a957771/IMTQCcm56_Mdz76-kuMI__JWlMxm2j.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957771/IMTQCcm56_Mdz76-kuMI__JWlMxm2j.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": {
         "id": "h3+0529",
@@ -8162,7 +8311,7 @@
     },
     "https://v3b.fal.media/files/b/0a957773/G1QAz23UwvkRPElxzTzLu_BLiySnFD.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957773/G1QAz23UwvkRPElxzTzLu_BLiySnFD.jpg",
-      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "seed": 9202,
       "ref": {
         "id": "p4+0513",
@@ -8182,7 +8331,7 @@
     },
     "https://v3b.fal.media/files/b/0a957773/TQQMrGslYGQyq_PeQkNSU_TrZxpkNJ.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957773/TQQMrGslYGQyq_PeQkNSU_TrZxpkNJ.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": {
         "id": "p4+0513",
@@ -8202,7 +8351,7 @@
     },
     "https://v3b.fal.media/files/b/0a957774/xvYm71FebuQM8N7oGqCgu_453I7qvW.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957774/xvYm71FebuQM8N7oGqCgu_453I7qvW.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "p4+0513",
@@ -8222,7 +8371,7 @@
     },
     "https://v3b.fal.media/files/b/0a957774/MCyw4XnXLvdYrQPPptl-u_RkhKVNa9.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957774/MCyw4XnXLvdYrQPPptl-u_RkhKVNa9.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "p4+0513",
@@ -8242,7 +8391,7 @@
     },
     "https://v3b.fal.media/files/b/0a957773/THvH4BQf69feNtiZPStih_HKRk7tB2.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957773/THvH4BQf69feNtiZPStih_HKRk7tB2.jpg",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "seed": 9102,
       "ref": {
         "id": "p4+0513",
@@ -8262,7 +8411,7 @@
     },
     "https://v3b.fal.media/files/b/0a957774/xdA29wgeGu19MUy-MKQAN_VlsicveX.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957774/xdA29wgeGu19MUy-MKQAN_VlsicveX.jpg",
-      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
+      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
       "seed": 9301,
       "ref": {
         "id": "p4+0513",
@@ -8282,7 +8431,7 @@
     },
     "https://v3b.fal.media/files/b/0a957773/NwpAjHjhbVOf-MVKuvnHN_1Rm2NkOF.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957773/NwpAjHjhbVOf-MVKuvnHN_1Rm2NkOF.jpg",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "seed": 9201,
       "ref": {
         "id": "p4+0513",
@@ -8302,7 +8451,7 @@
     },
     "https://v3b.fal.media/files/b/0a957774/YPWnlPmLJJGjjqhHczM3G_bOLn1l3k.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957774/YPWnlPmLJJGjjqhHczM3G_bOLn1l3k.jpg",
-      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
+      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
       "seed": 9302,
       "ref": {
         "id": "p4+0513",
@@ -8322,7 +8471,7 @@
     },
     "https://v3b.fal.media/files/b/0a957776/CU_U8pyNl_nmBgzK9XrrX_3Sw4zVfM.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957776/CU_U8pyNl_nmBgzK9XrrX_3Sw4zVfM.jpg",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "seed": 9201,
       "ref": {
         "id": "tron_first_test",
@@ -8342,7 +8491,7 @@
     },
     "https://v3b.fal.media/files/b/0a957777/X7C27BywXyzcxfxQPjpxi_oEqLXs9w.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957777/X7C27BywXyzcxfxQPjpxi_oEqLXs9w.jpg",
-      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
+      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
       "seed": 9301,
       "ref": {
         "id": "tron_first_test",
@@ -8362,7 +8511,7 @@
     },
     "https://v3b.fal.media/files/b/0a957777/dyOlCeAuPIgCzNaiEKEsG_abUXso7Z.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957777/dyOlCeAuPIgCzNaiEKEsG_abUXso7Z.jpg",
-      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "seed": 9202,
       "ref": {
         "id": "tron_first_test",
@@ -8382,7 +8531,7 @@
     },
     "https://v3b.fal.media/files/b/0a957778/D5uKDewduPkCMBo-AB5-j_8M0zFGrp.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957778/D5uKDewduPkCMBo-AB5-j_8M0zFGrp.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "tron_first_test",
@@ -8402,7 +8551,7 @@
     },
     "https://v3b.fal.media/files/b/0a957776/3R1x7zi2zxA1burhqjdA__anuKvKj6.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957776/3R1x7zi2zxA1burhqjdA__anuKvKj6.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": {
         "id": "tron_first_test",
@@ -8422,7 +8571,7 @@
     },
     "https://v3b.fal.media/files/b/0a957776/pSVJ8HUNoVgOztcr4Trco_bPD6wz0g.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957776/pSVJ8HUNoVgOztcr4Trco_bPD6wz0g.jpg",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "seed": 9102,
       "ref": {
         "id": "tron_first_test",
@@ -8442,7 +8591,7 @@
     },
     "https://v3b.fal.media/files/b/0a957777/-9z7HP3_cKSzEsIIrbV3X_YFdsHmvl.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957777/-9z7HP3_cKSzEsIIrbV3X_YFdsHmvl.jpg",
-      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
+      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
       "seed": 9302,
       "ref": {
         "id": "tron_first_test",
@@ -8462,7 +8611,7 @@
     },
     "https://v3b.fal.media/files/b/0a957778/rs3Dxn7onmlT8gRNwzzVU_tA90Iqtm.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957778/rs3Dxn7onmlT8gRNwzzVU_tA90Iqtm.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "tron_first_test",
@@ -8482,7 +8631,7 @@
     },
     "https://v3b.fal.media/files/b/0a957770/1djetfUydRIiEFqwYDza9_4F86SfEK.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957770/1djetfUydRIiEFqwYDza9_4F86SfEK.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h3",
@@ -8501,7 +8650,7 @@
     },
     "https://v3b.fal.media/files/b/0a957770/EQcNPuAefQhTM8eUF-Ure_9v2ZuvYU.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957770/EQcNPuAefQhTM8eUF-Ure_9v2ZuvYU.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "p4",
@@ -8520,7 +8669,7 @@
     },
     "https://v3b.fal.media/files/b/0a957770/h6c4WaKnne54oefge_39Q_XDkGu7IW.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957770/h6c4WaKnne54oefge_39Q_XDkGu7IW.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h3",
@@ -8539,7 +8688,7 @@
     },
     "https://v3b.fal.media/files/b/0a957770/aJKPQBR3wSlJpr_O9V7EG_Jiwzmpfq.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957770/aJKPQBR3wSlJpr_O9V7EG_Jiwzmpfq.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h5",
@@ -8558,7 +8707,7 @@
     },
     "https://v3b.fal.media/files/b/0a957770/sATF6gmx0SjHUqZLi8AkM_S10aXiK9.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957770/sATF6gmx0SjHUqZLi8AkM_S10aXiK9.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h5",
@@ -8577,7 +8726,7 @@
     },
     "https://v3b.fal.media/files/b/0a957770/OqVDBPOLW1j5tqchLxhr__siEaxg2j.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957770/OqVDBPOLW1j5tqchLxhr__siEaxg2j.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "p4",
@@ -8596,7 +8745,7 @@
     },
     "https://v3b.fal.media/files/b/0a95785f/_h5NVJsPUsOt4dH3jdVar_MpKeG8rQ.jpg": {
       "url": "https://v3b.fal.media/files/b/0a95785f/_h5NVJsPUsOt4dH3jdVar_MpKeG8rQ.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h3-mir",
@@ -8614,7 +8763,7 @@
     },
     "https://v3b.fal.media/files/b/0a95785f/Irp48WT2yNKxw80MTSWet_zeuph3jz.jpg": {
       "url": "https://v3b.fal.media/files/b/0a95785f/Irp48WT2yNKxw80MTSWet_zeuph3jz.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "p4-mir",
@@ -8632,7 +8781,7 @@
     },
     "https://v3b.fal.media/files/b/0a95785f/uUI9MAxpnZD_PTMgWEYHM_p6M4SV0r.jpg": {
       "url": "https://v3b.fal.media/files/b/0a95785f/uUI9MAxpnZD_PTMgWEYHM_p6M4SV0r.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h3-mir",
@@ -8650,7 +8799,7 @@
     },
     "https://v3b.fal.media/files/b/0a95785f/eG4wp3lKiPKVyUHvfXt_A_Xr9QqqgA.jpg": {
       "url": "https://v3b.fal.media/files/b/0a95785f/eG4wp3lKiPKVyUHvfXt_A_Xr9QqqgA.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "p4-mir",
@@ -8668,7 +8817,7 @@
     },
     "https://v3b.fal.media/files/b/0a95785f/OM_QifaX9O8aEPC6kA2hT_uPblDAQb.jpg": {
       "url": "https://v3b.fal.media/files/b/0a95785f/OM_QifaX9O8aEPC6kA2hT_uPblDAQb.jpg",
-      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in regular stance, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h5-mir",
@@ -8686,7 +8835,7 @@
     },
     "https://v3b.fal.media/files/b/0a95785f/6e_VDeZpUpk2PIsHbjL0Y_K3RP83KX.jpg": {
       "url": "https://v3b.fal.media/files/b/0a95785f/6e_VDeZpUpk2PIsHbjL0Y_K3RP83KX.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h5-mir",
@@ -8704,7 +8853,7 @@
     },
     "https://v3b.fal.media/files/b/0a957955/FPSMllVXtlo4_UhdPg7Sr_BNOhlJEt.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957955/FPSMllVXtlo4_UhdPg7Sr_BNOhlJEt.jpg",
-      "prompt": "Snowboarder carving down a groomer in GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h3",
@@ -8722,7 +8871,7 @@
     },
     "https://v3b.fal.media/files/b/0a957955/FgCuR_a40BeSR1ZtAz2Bc_lCDpIg7h.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957955/FgCuR_a40BeSR1ZtAz2Bc_lCDpIg7h.jpg",
-      "prompt": "Snowboarder carving down a groomer in GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "p4",
@@ -8740,7 +8889,7 @@
     },
     "https://v3b.fal.media/files/b/0a957955/93XmT3FJD1TdR7vcWB7OD_3Vl4pW5E.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957955/93XmT3FJD1TdR7vcWB7OD_3Vl4pW5E.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h5",
@@ -8758,7 +8907,7 @@
     },
     "https://v3b.fal.media/files/b/0a957955/YXVNIg8gnTQBGcfBaBUyJ_px13Bt8g.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957955/YXVNIg8gnTQBGcfBaBUyJ_px13Bt8g.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "p4",
@@ -8776,7 +8925,7 @@
     },
     "https://v3b.fal.media/files/b/0a957955/LqBWIUUbpEkzpF5378Pv0_j8j6l7ru.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957955/LqBWIUUbpEkzpF5378Pv0_j8j6l7ru.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": {
         "id": "h3",
@@ -8794,7 +8943,7 @@
     },
     "https://v3b.fal.media/files/b/0a957955/jrsqJdbfJzGdRY2Do89_C_c3UipzlL.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957955/jrsqJdbfJzGdRY2Do89_C_c3UipzlL.jpg",
-      "prompt": "Snowboarder carving down a groomer in GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
+      "prompt": "Snowboarder carving down a groomer in GOOFY stance with right foot forward, wearing snowboard helmet, goggles, insulated jacket, and snowboard gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, crisp morning light, film grain",
       "seed": 9401,
       "ref": {
         "id": "h5",
@@ -8812,7 +8961,7 @@
     },
     "https://v3b.fal.media/files/b/0a957ac2/FrkRUa5dibM_dawyyC-Dd_V9hmlfdM.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957ac2/FrkRUa5dibM_dawyyC-Dd_V9hmlfdM.jpg",
-      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
+      "prompt": "Skier carving powder on an open alpine slope, wearing ski helmet, goggles, insulated ski jacket, and ski gloves gripping a pole, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, cold morning light, film grain",
       "seed": 9301,
       "ref": "p4",
       "arm": "RIGHT",
@@ -8825,7 +8974,7 @@
     },
     "https://v3b.fal.media/files/b/0a957ac2/YeZo4PdDG1N_sybOkmcvR_hK5ZcXP4.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957ac2/YeZo4PdDG1N_sybOkmcvR_hK5ZcXP4.jpg",
-      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, wearing snowboard helmet, goggles, insulated shell, and snowboard gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, soft diffused snow light, documentary photography",
       "seed": 9402,
       "ref": "p4",
       "arm": "RIGHT",
@@ -8838,7 +8987,7 @@
     },
     "https://v3b.fal.media/files/b/0a957ac2/ftcw9h1a_UGileNaxtWZ7_rtOeNtWI.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957ac2/ftcw9h1a_UGileNaxtWZ7_rtOeNtWI.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": "p4",
       "arm": "LEFT",
@@ -8851,7 +9000,7 @@
     },
     "https://v3b.fal.media/files/b/0a957ac2/UAJnUDA4pmUIec9I6vh9z_ko3MNpqI.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957ac2/UAJnUDA4pmUIec9I6vh9z_ko3MNpqI.jpg",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "seed": 9201,
       "ref": "p4",
       "arm": "LEFT",
@@ -8864,7 +9013,7 @@
     },
     "https://v3b.fal.media/files/b/0a957ac2/WNKweO5SWSIMsmTud4gpk_XH03Dpoc.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957ac2/WNKweO5SWSIMsmTud4gpk_XH03Dpoc.jpg",
-      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "seed": 9101,
       "ref": "h3",
       "arm": "LEFT",
@@ -8877,7 +9026,7 @@
     },
     "https://v3b.fal.media/files/b/0a957ac2/nH9OGjT_2daOnaqOjWOks_gkktwQfK.jpg": {
       "url": "https://v3b.fal.media/files/b/0a957ac2/nH9OGjT_2daOnaqOjWOks_gkktwQfK.jpg",
-      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
+      "prompt": "Advanced skier on a steep groomed run, wearing ski helmet, goggles, shell jacket, and ski gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (−) button closest to WRIST, PLUS (+) closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (−), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, mid-turn, waist-up, Shot on Nikon Z9 70mm f/2.8, overcast daylight, documentary photography",
       "seed": 9302,
       "ref": "h3",
       "arm": "RIGHT",
