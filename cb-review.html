@@ -2179,14 +2179,34 @@ function renderGallery(){
   // Model filter — multi-select; empty set means "show all"
   if(galModelSet.size>0)filtered=filtered.filter(i=>galModelSet.has(i.modelCat));
 
-  // Pre-compute counts for each filter button (shown as "Moto 43", etc.)
+  // Faceted (crossfilter) counts — each category's count reflects what's
+  // left AFTER all OTHER categories' filters are applied, so clicking
+  // "Moto" narrows the "Likes N" count to "likes that are also moto".
+  // Industry-standard pattern (Amazon-style filter menus).
+  const passVerdict=(i)=>{
+    if(i.verdictBucket==='super')return galShowSuper;
+    if(i.verdictBucket==='reject')return galShowRejects;
+    return galShowLikes;
+  };
+  const passSport=(i)=>galSportSet.size===0||galSportSet.has(i.sport);
+  const passModel=(i)=>galModelSet.size===0||galModelSet.has(i.modelCat);
+
   const verdictCounts={like:0,super:0,reject:0};
   const sportCounts={};
   const modelCounts={};
   scored.forEach(i=>{
-    verdictCounts[i.verdictBucket]=(verdictCounts[i.verdictBucket]||0)+1;
-    sportCounts[i.sport]=(sportCounts[i.sport]||0)+1;
-    modelCounts[i.modelCat]=(modelCounts[i.modelCat]||0)+1;
+    // Verdict counts: apply sport + model filters only (not verdict itself)
+    if(passSport(i)&&passModel(i)){
+      verdictCounts[i.verdictBucket]=(verdictCounts[i.verdictBucket]||0)+1;
+    }
+    // Sport counts: apply verdict + model filters only (not sport itself)
+    if(passVerdict(i)&&passModel(i)){
+      sportCounts[i.sport]=(sportCounts[i.sport]||0)+1;
+    }
+    // Model counts: apply verdict + sport filters only (not model itself)
+    if(passVerdict(i)&&passSport(i)){
+      modelCounts[i.modelCat]=(modelCounts[i.modelCat]||0)+1;
+    }
   });
 
   // Apply .on class + count label to filter buttons
@@ -2224,7 +2244,11 @@ function renderGallery(){
           ?'<div style="position:absolute;top:4px;right:4px;font-size:.65rem;padding:.1rem .3rem;border-radius:4px;background:rgba(239,68,68,.85);color:#fff;font-weight:700" title="Reject">&#10007;</div>'
           :'';
     const modelTag='<div style="position:absolute;bottom:18px;left:4px;font-size:.45rem;padding:.1rem .25rem;border-radius:3px;background:rgba(0,0,0,.7);color:#06b6d4;font-weight:600">'+img.model.split('(')[0].trim().replace('FLUX 2 Flex g7.0','FLUX Flex').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT 1.5')+'</div>';
-    return '<div class="gal-card'+(img.isSuper?' gal-super':'')+'" onclick="galOpen(\''+img.id+'\')"><img src="'+img.url+'" loading="lazy" alt="">'+verdictBadge+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
+    // Use permanent archive URL when available, fall back to original on error
+    const primarySrc=archivedUrl(img.url,img.id);
+    const fallbackSrc=img.url;
+    const imgTag='<img src="'+primarySrc+'" loading="lazy" alt=""'+(primarySrc!==fallbackSrc?' onerror="this.onerror=null;this.src=\''+fallbackSrc+'\'"':'')+'>';
+    return '<div class="gal-card'+(img.isSuper?' gal-super':'')+'" onclick="galOpen(\''+img.id+'\')">'+imgTag+verdictBadge+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
   }).join('');
 
   // Build summary line — verdict counts
@@ -2246,15 +2270,18 @@ function galOpen(id){
   const ov=document.createElement('div');
   ov.className='gal-overlay';
   ov.onclick=e=>{if(e.target===ov)ov.remove();};
+  const ovPrimary=archivedUrl(img.url,img.id);
+  const ovFallback=img.url;
+  const ovImgTag='<img src="'+ovPrimary+'" alt=""'+(ovPrimary!==ovFallback?' onerror="this.onerror=null;this.src=\''+ovFallback+'\'"':'')+'>';
   ov.innerHTML='<button class="gal-close" onclick="this.parentElement.remove()">&times;</button>'
-    +'<img src="'+img.url+'" alt="">'
+    +ovImgTag
     +'<div class="gal-info">'
     +'<div style="font-size:.9rem;font-weight:700;margin-bottom:.3rem">'+img.label+'</div>'
     +'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+' — Score: <strong class="gal-score-edit" onclick="galEditScore(\''+img.id+'\',this)" style="color:'+(s>=90?'#22c55e':s>=70?'#f59e0b':s>=50?'#3b82f6':'#ef4444')+'">'+Math.round(s)+'/100</strong> <span style="font-size:.55rem;color:#555">(click to edit)</span></div>'
     +'<div style="font-size:.7rem;color:#aaa;max-height:200px;overflow-y:auto;text-align:left;background:#111;padding:.5rem;border-radius:6px">'+comment+'</div>'
     +'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
     +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
-    +'<a class="gal-dl" href="'+img.url+'" download target="_blank">Download Full Resolution</a>'
+    +'<a class="gal-dl" href="'+archivedUrl(img.url,img.id)+'" download target="_blank">Download Full Resolution</a>'
     +'<button class="gal-vidlab" onclick="galSendToVideoLab(\''+img.id+'\')">Send to Video Lab</button>'
     +'<button class="gal-mm" onclick="galToggleMM(\''+img.id+'\')">Make More Like This</button>'
     +'</div>'
@@ -3297,15 +3324,89 @@ const CR={
   esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');},
 };
 
+// === cb-rate.html state migration (one-time per browser) ====================
+// cb-rate.html stored verdicts under localStorage.cb2_rate_v1 with schema:
+//   { yes: {id:true}, no: {id:true}, superlike: {id:true}, ... }
+// When cb-rate.html was retired on 2026-04-09, all those verdicts became stuck
+// in whichever browser made them. This harvester runs on every cb-review.html
+// load and injects any un-migrated verdicts into the D() comments store, then
+// fires a one-shot syncFeedback() so the whole team sees them on GitHub Pages.
+// Safe to run repeatedly: checks cb2_migrated_from_rate_v1 flag and skips rows
+// whose identical comment text is already present.
+function migrateRateState(){
+  const MIGRATED_KEY='cb2_migrated_from_rate_v1';
+  try{
+    const already=JSON.parse(localStorage.getItem(MIGRATED_KEY)||'null');
+    if(already&&already.migratedAt)return 0;
+  }catch(e){}
+  let rs;
+  try{rs=JSON.parse(localStorage.getItem('cb2_rate_v1')||'null');}catch(e){return 0;}
+  if(!rs)return 0;
+  const d=D();
+  const now=new Date().toISOString();
+  let n=0;
+  const add=(id,text)=>{
+    if(!d[id])d[id]={comments:[]};
+    if(d[id].comments.some(c=>c.text===text))return;
+    d[id].comments.push({num:(d[id].comments.length||0)+1,text,time:now});
+    n++;
+  };
+  const superIds=Object.keys(rs.superlike||{}).filter(k=>rs.superlike[k]);
+  const yesIds=Object.keys(rs.yes||{}).filter(k=>rs.yes[k]);
+  const noIds=Object.keys(rs.no||{}).filter(k=>rs.no[k]);
+  // Super → explicit super marker
+  superIds.forEach(id=>add(id,'[super] migrated from hot-or-not'));
+  // Yes (not super) → Final score: 85
+  const superSet=new Set(superIds);
+  yesIds.filter(id=>!superSet.has(id)).forEach(id=>add(id,'Final score: 85 (liked in hot-or-not)'));
+  // No → Final score: 20
+  noIds.forEach(id=>add(id,'Final score: 20 (rejected in hot-or-not)'));
+  if(n>0){
+    try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+    try{localStorage.setItem(MIGRATED_KEY,JSON.stringify({migratedAt:now,count:n,super:superIds.length,yes:yesIds.length,no:noIds.length}));}catch(e){}
+    console.log('[migrate] harvested',n,'verdicts from cb2_rate_v1:',{super:superIds.length,yes:yesIds.length,no:noIds.length});
+    // Sync to GitHub Pages so other team members see these verdicts
+    try{if(typeof syncFeedback==='function')setTimeout(syncFeedback,2000);}catch(e){}
+  }
+  return n;
+}
+
+// === Permanent archive URL rewriting ========================================
+// 693 images were downloaded to jbarad424.github.io/ideas/winners/{id}.jpg on
+// 2026-04-09. Manifest cb-archived.json lists which IDs are archived. Client
+// rewrites <img src> from fal.media / catbox.moe to the permanent URL when
+// the ID is in the archived set. Falls back to the original URL on error.
+let ARCHIVED_IDS=new Set();
+let ARCHIVED_ITEMS={};
+function archivedUrl(originalUrl,id){
+  if(!id||!ARCHIVED_IDS.has(id))return originalUrl;
+  return 'https://jbarad424.github.io/ideas/winners/'+id+'.jpg';
+}
+async function loadArchiveManifest(){
+  try{
+    const r=await fetch('https://jbarad424.github.io/ideas/cb-archived.json?t='+Date.now(),{cache:'no-store'});
+    if(!r.ok)return;
+    const data=await r.json();
+    ARCHIVED_IDS=new Set(data.ids||[]);
+    ARCHIVED_ITEMS=data.items||{};
+    console.log('[archive] loaded',ARCHIVED_IDS.size,'archived IDs from cb-archived.json');
+    if(typeof renderGallery==='function')renderGallery();
+  }catch(e){/* no manifest yet — fall through, images still use original URLs */}
+}
+
 // Init: load any Make More Like This variations from localStorage
 mmLoadVariations();
 // Seed from local first (instant), then load shared feedback (async merge)
 seedFromLocal();
 counts();
+// Migrate any cb-rate.html verdicts from localStorage (once per browser)
+migrateRateState();
 // 3-tab layout: GALLERY is the default landing tab.
 setTab('gallery');
 // Load shared feedback from GitHub (merges remote reviews into local)
 loadSharedFeedback();
+// Load permanent archive manifest (cb-archived.json) → rewrite image URLs
+loadArchiveManifest();
 
 </script>
 </body></html>
