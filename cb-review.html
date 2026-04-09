@@ -2504,6 +2504,24 @@ function mmLoadVariations(){
 // "+ New Scene" form composes a fresh prompt with optional Sonnet refinement.
 // All state is local-first in localStorage (cb2_create_learning). v2 adds a CF
 // Worker proxy + remote sync.
+// cleanPrompt — strip phrases that CLAUDE.md explicitly forbids in production
+// prompts. Currently: wireless earbuds / AirPods ("they float on the face or
+// look comically Photoshopped; if wearing a helmet, earbuds are invisible
+// anyway"). Applied to every recipe's prompt at load time and as a safety net
+// at fire time. Preserves trailing comma cleanup so the scrubbed prompt still
+// reads naturally.
+function cleanPrompt(p){
+  if(!p||typeof p!=='string')return p||'';
+  // Remove ", wireless earbuds" / ", airpods" / ", earbuds ..." comma-delimited fragments.
+  // Match an optional comma + whitespace + the keyword + anything up to next comma or end.
+  let out=p.replace(/,\s*(?:wireless\s+)?(?:earbuds?|airpods?)[^,]*/gi,'');
+  // Also handle start-of-string case (rare, but defensive)
+  out=out.replace(/^\s*(?:wireless\s+)?(?:earbuds?|airpods?)[^,]*,\s*/gi,'');
+  // Collapse any double commas or stray whitespace the removal left behind
+  out=out.replace(/,\s*,/g,',').replace(/\s+/g,' ').trim();
+  return out;
+}
+
 const CR={
   keepersUrl:'https://jbarad424.github.io/ideas/cb-keepers.json',
   keepersLocal:'cb-keepers.json',
@@ -2688,13 +2706,21 @@ const CR={
     mmNotify('Could not load cb-keepers.json \u2014 Rail will be empty',true);
   },
 
-  // Group cb-keepers items into recipes. Prefer (scene_id, seed) \u2014 stable, no
-  // normalization drift \u2014 but fall back to the item's own id so older one-offs
-  // without scene_id still become singleton recipes (otherwise ~17 supers drop).
-  // Grouping key = sport+seed (scene_id is inconsistent across older/newer
-  // items and was splitting the same recipe into multiple cards). Snow gets
-  // a goofy/regular split since stance produces a meaningfully different
-  // output per CLAUDE.md arm-lock rules. Items with no seed become singletons.
+  // Group cb-keepers items into recipes. Grouping key = sport+seed. Snow gets
+  // a goofy/regular split since stance produces a meaningfully different output
+  // per CLAUDE.md arm-lock rules. Items with no seed become singletons.
+  //
+  // Primary-example rule (2026-04-09): after sorting each group's examples
+  // (super first, then longest-prompt within each tier), the FIRST example
+  // becomes the "primary". Its url drives the thumbnail AND its prompt drives
+  // what "Make 6 more like this" fires. This eliminates the old bug where
+  // the thumbnail came from one item but the prompt came from a different
+  // item (9/10 clusters had this mismatch — Justin caught subtle drift when
+  // the fired prompts didn't match the thumbnails).
+  //
+  // Prompt scrubbing: cleanPrompt() strips earbud/airpod fragments from every
+  // recipe prompt at load time (CLAUDE.md: "drop wireless earbuds from all
+  // prompts — they float on the face or look comically Photoshopped").
   buildRecipes(){
     const groups={};
     const items=this.keepers.items||{};
@@ -2712,10 +2738,6 @@ const CR={
           scene_id:it.scene_id||null,
           seed:it.seed,
           sport,
-          prompt:it.prompt||'',
-          model:it.model||'Nano Banana Pro',
-          arm:it.arm||'LEFT',
-          ref:it.ref||null,
           examples:[],
           super_count:0,
           yes_count:0,
@@ -2723,19 +2745,36 @@ const CR={
         };
       }
       const g=groups[id];
-      g.examples.push({url:it.url,label:it.label,id:it.id});
+      // Store each item's full prompt+model+ref+arm on the example entry so we
+      // can pick the primary's values later without a separate selection pass.
+      g.examples.push({
+        url:it.url,
+        label:it.label,
+        id:it.id,
+        prompt:cleanPrompt(it.prompt||''),
+        model:it.model||'Nano Banana Pro',
+        ref:it.ref||null,
+        arm:it.arm||'LEFT',
+      });
       if(it.label==='super')g.super_count++;else g.yes_count++;
-      // Prefer the highest-quality prompt snapshot: super beats yes, longer beats shorter.
-      if(it.label==='super'||(g.prompt.length<(it.prompt||'').length)){
-        g.prompt=it.prompt||g.prompt;
-        g.model=it.model||g.model;
-        g.ref=it.ref||g.ref;
-        g.arm=it.arm||g.arm;
-      }
     }
-    // Sort examples: super first
+    // Sort examples: super first, then longest-prompt within each tier
     for(const id in groups){
-      groups[id].examples.sort((a,b)=>(b.label==='super'?1:0)-(a.label==='super'?1:0));
+      const g=groups[id];
+      g.examples.sort((a,b)=>{
+        const supA=a.label==='super'?1:0;
+        const supB=b.label==='super'?1:0;
+        if(supA!==supB)return supB-supA;
+        return (b.prompt||'').length-(a.prompt||'').length;
+      });
+      // Primary = examples[0]. Hoist its values onto the group so the thumbnail
+      // (which uses examples[0].url) and the "Make more" prompt (which reads
+      // g.prompt) refer to the SAME original item.
+      const primary=g.examples[0];
+      g.prompt=primary.prompt;
+      g.model=primary.model;
+      g.ref=primary.ref;
+      g.arm=primary.arm;
     }
     this.recipes=Object.values(groups);
     this.scoreRecipes();
@@ -2896,7 +2935,9 @@ const CR={
     this.currentBatch={
       batch_id:new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)+'_'+Math.random().toString(36).slice(2,8),
       recipe_id:recipeId,
-      recipe_prompt:r.prompt,
+      // Safety-net strip of earbud/airpod phrases (buildRecipes already does this,
+      // but scrub again in case a downstream edit reintroduces them).
+      recipe_prompt:cleanPrompt(r.prompt),
       seed:r.seed,
       model:r.model,
       endpoint,
