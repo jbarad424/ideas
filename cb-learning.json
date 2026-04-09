@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "version": 1,
+    "alpha": 0.3,
+    "created": "2026-04-09T15:36:06.055443Z",
+    "notes": "CREATE tab learning loop state. Written by cb-review.html CREATE tab via Make.com scenario 4654266 (filename-keyed). EMA formula: new = 0.3 * batch_rate + 0.7 * prior."
+  },
+  "batches": [],
+  "recipes": {},
+  "refs": {},
+  "models_by_sport": {}
+}
