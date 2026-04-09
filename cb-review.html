@@ -139,6 +139,74 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .gen-count span{font-size:1.1rem;font-weight:700;color:#fff;min-width:24px;text-align:center}
 .preview-box{background:#0d1117;border:1px solid #1a3a2a;border-radius:8px;padding:.6rem .8rem;margin-top:.5rem;font-size:.7rem;color:#8b949e;line-height:1.5;max-height:120px;overflow-y:auto;word-break:break-word}
 .preview-box strong{color:#22c55e;display:block;margin-bottom:.2rem;font-size:.65rem}
+/* CREATE tab — Hit Parade + keeper grid */
+#createArea{width:100%;max-width:600px;margin:0 auto;padding:.5rem;display:none}
+.cr-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;gap:.5rem;flex-wrap:wrap}
+.cr-header-btns{display:flex;gap:.4rem}
+.cr-hdr-btn{background:#1a1030;border:1px solid #a855f7;color:#a855f7;padding:.45rem .7rem;border-radius:8px;font-size:.7rem;font-weight:700;cursor:pointer}
+.cr-hdr-btn:hover{background:#2d1a4e}
+.cr-hdr-btn.active{background:#a855f7;color:#fff}
+.cr-cost{font-size:.65rem;color:#888}
+.cr-cost strong{color:#22c55e}
+.cr-rail-label{font-size:.65rem;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:.8rem 0 .4rem}
+.cr-parade{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+.cr-card{background:#0f0f1a;border:1px solid #222;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;transition:border-color .15s}
+.cr-card:hover{border-color:#a855f7}
+.cr-card.fade{opacity:.45}
+.cr-card img{width:100%;height:150px;object-fit:cover;display:block}
+.cr-card-body{padding:.45rem .55rem}
+.cr-card-title{font-size:.68rem;font-weight:600;color:#ccc;line-height:1.3;margin-bottom:.25rem;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.cr-card-meta{display:flex;align-items:center;gap:.3rem;font-size:.55rem;color:#666;margin-bottom:.4rem;flex-wrap:wrap}
+.cr-sport{color:#84cc16}
+.cr-super-badge{position:absolute;top:6px;left:32px;background:#eab308;color:#000;font-size:.55rem;font-weight:800;padding:.12rem .35rem;border-radius:3px;z-index:2}
+.cr-rate-badge{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.75);color:#22c55e;font-size:.55rem;font-weight:700;padding:.12rem .35rem;border-radius:3px;z-index:2}
+.cr-hide-btn{position:absolute;top:6px;left:6px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:.72rem;font-weight:700;cursor:pointer;padding:0;line-height:1;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s,background .15s;z-index:3}
+.cr-card:hover .cr-hide-btn,.cr-unhide-btn{opacity:1}
+.cr-hide-btn:hover{background:#ef4444}
+.cr-unhide-btn{background:rgba(168,85,247,.8)}
+.cr-card.cr-card-hidden{opacity:.4;border-color:#7f1d1d}
+.cr-card.cr-card-hidden:hover{opacity:.7}
+.cr-make-btn{width:100%;background:linear-gradient(135deg,#a855f7,#6d28d9);border:none;color:#fff;padding:.45rem;border-radius:6px;font-size:.65rem;font-weight:700;cursor:pointer}
+.cr-make-btn:hover{opacity:.85}
+/* Batch + keeper grid */
+.cr-batch-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;gap:.5rem}
+.cr-back{background:none;border:1px solid #333;color:#888;padding:.4rem .7rem;border-radius:6px;font-size:.65rem;cursor:pointer}
+.cr-back:hover{border-color:#a855f7;color:#a855f7}
+.cr-batch-title{font-size:.75rem;color:#ccc;font-weight:600;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;margin-top:.4rem}
+.cr-tile{position:relative;aspect-ratio:2/3;background:#0a0a0a;border-radius:8px;overflow:hidden;border:2px solid #222}
+.cr-tile.kept{border-color:#eab308;box-shadow:0 0 0 2px rgba(234,179,8,.3)}
+.cr-tile img{width:100%;height:100%;object-fit:cover;cursor:pointer;display:block}
+.cr-skel{background:linear-gradient(90deg,#0a0a0a 0%,#1a1a1a 50%,#0a0a0a 100%);background-size:200% 100%;animation:crShimmer 1.5s linear infinite;display:flex;align-items:center;justify-content:center;color:#444;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+@keyframes crShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.cr-fail{background:#1a0a0a;border-color:#7f1d1d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;color:#ef4444;font-size:.65rem;padding:.5rem;text-align:center}
+.cr-fail button{background:transparent;border:1px solid #ef4444;color:#ef4444;padding:.25rem .5rem;border-radius:4px;font-size:.55rem;cursor:pointer}
+.cr-heart{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.65);border:none;color:#fff;font-size:1.2rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
+.cr-tile.kept .cr-heart{color:#eab308}
+.cr-save-bar{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-top:.6rem;padding:.5rem .7rem;background:#0f0f1a;border:1px solid #222;border-radius:10px;position:sticky;bottom:.5rem}
+.cr-save-bar .cr-count{font-size:.75rem;color:#ccc;font-weight:600}
+.cr-save-bar .gen-btn{flex:1;max-width:200px;margin-top:0;padding:.55rem}
+/* Simple lightbox */
+.cr-lb{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem;cursor:zoom-out}
+.cr-lb.on{display:flex}
+.cr-lb img{max-width:100%;max-height:100%;object-fit:contain}
+/* New Scene form */
+.cr-form{background:#0f0f1a;border:1px solid #222;border-radius:10px;padding:.8rem;margin-top:.4rem}
+.cr-form-row{margin-bottom:.7rem}
+.cr-form-label{font-size:.6rem;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem}
+.cr-select{width:100%;background:#111;border:1px solid #222;color:#fff;padding:.45rem .55rem;border-radius:6px;font-size:.75rem;font-family:inherit}
+.cr-select:focus{outline:none;border-color:#a855f7}
+.cr-select:disabled{opacity:.4}
+.cr-tron-hint{font-size:.6rem;color:#f59e0b;margin-top:.2rem;font-style:italic}
+.cr-refine-btn{background:transparent;border:1px solid #a855f7;color:#a855f7;padding:.4rem .7rem;border-radius:6px;font-size:.65rem;font-weight:700;cursor:pointer;margin-top:.3rem}
+.cr-refine-btn:hover{background:#1a1030}
+.cr-refine-btn:disabled{opacity:.5;cursor:default}
+.cr-refine-status{font-size:.6rem;color:#888;margin-top:.25rem}
+.cr-refined{background:#0d1117;border:1px solid #1a3a2a;border-radius:6px;padding:.5rem .6rem;margin-top:.4rem;font-size:.7rem;color:#9ec5fe;line-height:1.45}
+.cr-refined-label{font-size:.55rem;color:#22c55e;font-weight:700;margin-bottom:.2rem}
+.cr-refined-actions{display:flex;gap:.3rem;margin-top:.4rem}
+.cr-refined-actions button{background:#111;border:1px solid #333;color:#888;padding:.3rem .5rem;border-radius:4px;font-size:.55rem;font-weight:700;cursor:pointer}
+.cr-refined-actions button.on{border-color:#22c55e;color:#22c55e}
 </style>
 </head><body>
 
@@ -148,17 +216,14 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 </div>
 
 <div class="tabs">
-  <div class="tab" onclick="setTab('new')">TO REVIEW (<span id="cntNew">0</span>)</div>
-  <div class="tab" onclick="setTab('done')">REVIEWED (<span id="cntDone">0</span>)</div>
-  <div class="tab" onclick="setTab('progress')">PROGRESS</div>
-  <div class="tab" onclick="setTab('gallery')">GALLERY</div>
+  <div class="tab active" onclick="setTab('gallery')">GALLERY</div>
+  <div class="tab" onclick="setTab('create')">CREATE</div>
   <div class="tab" onclick="setTab('videos')">VIDEOS (<span id="cntVid">0</span>)</div>
-  <div class="tab" onclick="setTab('aiscore')">AI SCORING</div>
 </div>
 
 <div class="counter" id="counter">-</div>
 
-<div class="grid-toggle" id="gridToggle">
+<div class="grid-toggle" id="gridToggle" style="display:none">
   <button id="btnList" class="active" onclick="setView('list')">List</button>
   <button id="btnGrid" onclick="setView('grid')">Grid</button>
 </div>
@@ -167,7 +232,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="grid-return" id="gridReturn" style="display:none"><button onclick="backToGrid()">← Back to Grid</button></div>
 
-<div id="reviewArea">
+<div id="reviewArea" style="display:none">
   <div class="img-wrap" id="mediaWrap"><img id="mainImg" src="" alt=""><div class="meta" id="meta"></div></div>
   <div class="context-box" id="ctxBox" style="display:none"><div class="context-inner" id="ctxInner"></div></div>
   <div class="comment-trail" id="trail"></div>
@@ -188,7 +253,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <div id="emptyState" class="empty-state" style="display:none"></div>
 
 <!-- PROGRESS TAB -->
-<div class="progress-wrap" id="progressArea">
+<div class="progress-wrap" id="progressArea" style="display:none">
   <div class="section-label">How We Make the Photos</div>
 
   <div class="exp-card winner">
@@ -269,10 +334,8 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div style="margin-bottom:.6rem">
     <!-- Filter bar — tap any button to filter, tap again to clear -->
     <div style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.5rem;background:#111;border-radius:10px;border:1px solid #222">
-      <!-- Status -->
-      <button class="gal-filter on" onclick="galSetStatus('all')" data-st="all" style="padding:.3rem .6rem;font-size:.65rem">All</button>
-      <button class="gal-filter" onclick="galSetStatus('accepted')" data-st="accepted" style="padding:.3rem .6rem;font-size:.65rem;color:#22c55e;border-color:#22c55e">Accepted</button>
-      <button class="gal-filter" onclick="galSetStatus('rejected')" data-st="rejected" style="padding:.3rem .6rem;font-size:.65rem;color:#ef4444;border-color:#ef4444">Rejected</button>
+      <!-- Rejects hidden by default; toggle to reveal -->
+      <button class="gal-filter" id="galRejToggle" onclick="galToggleRejects()" style="padding:.3rem .6rem;font-size:.65rem;color:#ef4444;border-color:#ef4444">Show rejects</button>
       <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
       <!-- Score -->
       <button class="gal-filter gal-score-f" onclick="galSetScore('90+')" data-sf="90+" style="padding:.3rem .6rem;font-size:.65rem">90+</button>
@@ -381,6 +444,10 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <button id="aiScoreNext" onclick="aiScoreGo(1)">Next &rarr;</button>
   </div>
 </div>
+
+<!-- CREATE TAB -->
+<div id="createArea" style="display:none"></div>
+<div class="cr-lb" id="crLB" onclick="CR.closeLB()"><img id="crLBImg" alt=""></div>
 
 <div class="btn-row">
   <button class="export-btn" onclick="syncFeedback()">Sync All to Claude</button>
@@ -1114,7 +1181,7 @@ const SEED_COMMENTS={
 
 const LS='cb2_review_v5';
 const FEEDBACK_URL='https://jbarad424.github.io/ideas/cb-feedback.json';
-let tab='new',filt=[],ci=0;
+let tab='gallery',filt=[],ci=0;
 let feedbackLoaded=false;
 let viewMode='list'; // 'list' or 'grid'
 let navHistory=[]; // stack of image IDs for back button
@@ -1186,6 +1253,8 @@ function backToGrid(){
 }
 
 function renderView(){
+  // Review tabs are retired; only call this when a caller still expects them.
+  if(tab!=='new'&&tab!=='done')return;
   if(tab==='done'&&viewMode==='grid'){
     cameFromGrid=false;
     document.getElementById('gridReturn').style.display='none';
@@ -1238,7 +1307,9 @@ async function loadSharedFeedback(){
     }
     S(local);
     feedbackLoaded=true;
-    counts();upFilt();renderView();
+    counts();
+    if(tab==='gallery')renderGallery();
+    else if(tab==='new'||tab==='done'){upFilt();renderView();}
     // Also refresh video tab in case video comments were loaded from another device
     if(tab==='videos'){vidUpFilt();vidRender();}
     console.log('Loaded '+merged+' image reviews from shared feedback');
@@ -1286,32 +1357,33 @@ function submitComment(){
 }
 
 function counts(){
-  document.getElementById('cntNew').textContent=ALL_IMAGES.filter(i=>!isR(i)).length;
-  document.getElementById('cntDone').textContent=ALL_IMAGES.filter(i=>isR(i)).length;
-  document.getElementById('cntVid').textContent=ALL_VIDEOS.length;
+  // Legacy badges (cntNew/cntDone) removed with the review tabs; keep defensive.
+  const n=document.getElementById('cntNew');if(n)n.textContent=ALL_IMAGES.filter(i=>!isR(i)).length;
+  const d=document.getElementById('cntDone');if(d)d.textContent=ALL_IMAGES.filter(i=>isR(i)).length;
+  const v=document.getElementById('cntVid');if(v)v.textContent=ALL_VIDEOS.length;
 }
 
 function setTab(t){
   tab=t;ci=0;navHistory=[];
+  // 3-tab layout: GALLERY | CREATE | VIDEOS
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['new','done','progress','gallery','videos','aiscore'][i]===t)?' active':'');
+    el.className='tab'+((['gallery','create','videos'][i]===t)?' active':'');
   });
-  document.getElementById('gridToggle').style.display=(t==='done')?'block':'none';
-  document.getElementById('gridArea').style.display='none';
-  document.getElementById('reviewArea').style.display=(t==='new'||t==='done')?'block':'none';
-  document.getElementById('progressArea').style.display=(t==='progress')?'block':'none';
-  document.getElementById('galleryArea').style.display=(t==='gallery')?'block':'none';
-  document.getElementById('videosArea').style.display=(t==='videos')?'block':'none';
-  document.getElementById('aiscoreArea').style.display=(t==='aiscore')?'block':'none';
-  document.getElementById('emptyState').style.display='none';
-  if(t==='gallery'){renderGallery();}
-  else if(t==='videos'){vidLabCheck();vidSetTab('new');}
-  else if(t==='aiscore'){aiScoreRender();}
-  else if(t==='new'||t==='done'){upFilt();renderView();}
-  else if(t==='progress'){document.getElementById('counter').textContent='Experiment Tracker';}
+  const hide=id=>{const e=document.getElementById(id);if(e)e.style.display='none';};
+  const show=id=>{const e=document.getElementById(id);if(e)e.style.display='block';};
+  hide('gridToggle');hide('gridArea');hide('reviewArea');hide('progressArea');
+  hide('galleryArea');hide('videosArea');hide('aiscoreArea');hide('createArea');
+  hide('emptyState');
+  if(t==='gallery'){show('galleryArea');renderGallery();}
+  else if(t==='create'){show('createArea');CR.open();}
+  else if(t==='videos'){show('videosArea');vidLabCheck();vidSetTab('new');}
 }
 
-function upFilt(){filt=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i))}
+function upFilt(){
+  // Only relevant for retired review tabs — no-op in gallery/create/videos.
+  if(tab!=='new'&&tab!=='done')return;
+  filt=tab==='new'?ALL_IMAGES.filter(i=>!isR(i)):ALL_IMAGES.filter(i=>isR(i));
+}
 
 function render(){
   // Show/hide grid return bar
@@ -1366,7 +1438,7 @@ function go(dir){
         const reviewed=ALL_IMAGES.filter(i=>isR(i));
         idx=reviewed.findIndex(i=>i.id===prevId);
         if(idx!==-1){filt=reviewed;ci=idx;tab='done';
-          document.querySelectorAll('.tab').forEach((el,j)=>{el.className='tab'+((['new','done','progress','gallery','videos','aiscore'][j]===tab)?' active':'');});
+          document.querySelectorAll('.tab').forEach((el,j)=>{el.className='tab'+((['new','done','progress','gallery','videos','create','aiscore'][j]===tab)?' active':'');});
           document.getElementById('gridToggle').style.display='block';
           counts();
         }else{upFilt();ci=Math.max(0,ci-1);}
@@ -1440,7 +1512,7 @@ document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;
 
 // === GALLERY TAB ===
 let galFilterMode='all';
-let galStatusMode='all';
+let galShowRejects=false; // rejects hidden by default
 let galScoreMode='all';
 let galSportMode='all';
 let galModelMode='all';
@@ -1478,16 +1550,14 @@ function galIsAccepted(img){
   return null;
 }
 
-function galSetStatus(mode){
-  galStatusMode=galStatusMode===mode?'all':mode;
-  document.querySelectorAll('[data-st]').forEach(b=>{
-    const on=b.dataset.st===galStatusMode;
-    b.className='gal-filter'+(on?' on':'');
-    if(!on&&b.dataset.st==='accepted'){b.style.color='#22c55e';b.style.borderColor='#22c55e';}
-    else if(!on&&b.dataset.st==='rejected'){b.style.color='#ef4444';b.style.borderColor='#ef4444';}
-    else if(on&&b.dataset.st!=='all'){b.style.color='#fff';b.style.borderColor='#a855f7';}
-    else{b.style.color='';b.style.borderColor='';}
-  });
+function galToggleRejects(){
+  galShowRejects=!galShowRejects;
+  const b=document.getElementById('galRejToggle');
+  if(b){
+    b.className='gal-filter'+(galShowRejects?' on':'');
+    if(galShowRejects){b.style.color='#fff';b.style.borderColor='#a855f7';b.textContent='Hide rejects';}
+    else{b.style.color='#ef4444';b.style.borderColor='#ef4444';b.textContent='Show rejects';}
+  }
   renderGallery();
 }
 function galSetScore(mode){
@@ -2001,9 +2071,8 @@ function renderGallery(){
   scored.sort((a,b)=>b.score-a.score);
 
   let filtered=scored;
-  // Status filter
-  if(galStatusMode==='accepted')filtered=filtered.filter(i=>i.accepted===true);
-  else if(galStatusMode==='rejected')filtered=filtered.filter(i=>i.accepted===false);
+  // Rejects hidden by default — toggle to reveal
+  if(!galShowRejects)filtered=filtered.filter(i=>i.accepted!==false);
   // Score filter
   if(galScoreMode==='90+')filtered=filtered.filter(i=>i.score>=90);
   else if(galScoreMode==='70-89')filtered=filtered.filter(i=>i.score>=70&&i.score<90);
@@ -2263,17 +2332,762 @@ function mmLoadVariations(){
   saved.forEach(e=>{if(!ALL_IMAGES.find(i=>i.id===e.id))ALL_IMAGES.push(e);});
 }
 
+// ============================================================================
+// === CREATE TAB — Hit Parade + keeper grid + learning loop ===
+// ============================================================================
+// Scope: loads cb-keepers.json, groups by scene_id+seed into recipes, lets Justin
+// click "Make 6 more" → generates via existing mmSubmit/mmPoll → multi-select
+// keeper grid → save bumps localStorage learning counters → Hit Parade re-sorts.
+// "+ New Scene" form composes a fresh prompt with optional Sonnet refinement.
+// All state is local-first in localStorage (cb2_create_learning). v2 adds a CF
+// Worker proxy + remote sync.
+const CR={
+  keepersUrl:'https://jbarad424.github.io/ideas/cb-keepers.json',
+  keepersLocal:'cb-keepers.json',
+  FK_FALLBACK:'abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099',
+  keepers:null,
+  recipes:[],
+  learning:null,
+  hiddenRecipes:{},        // id -> true, persisted in localStorage
+  showHiddenFlag:false,    // session-only: reveal hidden cards
+  singletonsExpanded:false,// session-only: show all one-offs past the 20 cap
+  view:'parade',           // 'parade' | 'batch' | 'newscene'
+  currentBatch:null,
+  newScene:null,
+  lightboxInit:false,
+  // REFS (from CLAUDE.md, 2026-04-08 lock). Rotated images hosted on GH Pages.
+  REFS:{
+    h3:{id:'h3',colorway:'Hunter',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/h3.jpg'},
+    h5:{id:'h5',colorway:'Hunter',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/h5.jpg'},
+    h6:{id:'h6',colorway:'Hunter',type:'product',url:'https://jbarad424.github.io/ideas/rotated-refs/h6.jpg'},
+    p4:{id:'p4',colorway:'Patriot',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/p4.jpg'},
+    p6:{id:'p6',colorway:'Patriot',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/p6.jpg'},
+    refc:{id:'refc',colorway:'Hunter',type:'dual',url:'https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800'},
+    // Tron refs drop in as t1,t2,... once Justin shoots them.
+  },
+  KILLED_REFS:['p1','h1','h4','p5'],
+  // Mandatory gear per sport (CLAUDE.md)
+  GEAR:{
+    moto:'full-face helmet, leather riding jacket with armor, thick leather riding gloves',
+    ski:'ski helmet, goggles, ski gloves, ski jacket',
+    snow:'snowboard helmet, gloves, snowboard jacket',
+    mtb:'full-face DH helmet, gloves, long-sleeve jersey with armor',
+    snowmobile:'full-face helmet, snowmobile gloves, snowmobile suit',
+  },
+  DEFAULT_MODEL:{
+    moto:'fal-ai/gpt-image-1.5/edit',
+    ski:'fal-ai/nano-banana-2/edit',
+    snow:'fal-ai/nano-banana-pro/edit',
+    mtb:'fal-ai/nano-banana-pro/edit',
+    snowmobile:'fal-ai/nano-banana-pro/edit',
+  },
+  MODEL_LABELS:{
+    'fal-ai/gpt-image-1.5/edit':'GPT Image 1.5',
+    'fal-ai/nano-banana-pro/edit':'Nano Banana Pro',
+    'fal-ai/nano-banana-2/edit':'Nano Banana 2',
+    'fal-ai/flux-2-flex/edit':'FLUX 2 Flex',
+  },
+  MODEL_COST:{
+    'fal-ai/gpt-image-1.5/edit':0.15,
+    'fal-ai/nano-banana-pro/edit':0.15,
+    'fal-ai/nano-banana-2/edit':0.08,
+    'fal-ai/flux-2-flex/edit':0.05,
+  },
+  CB2_BLOCK:{
+    LEFT:'the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular',
+    RIGHT:'the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular',
+  },
+
+  // ---- entry point ----
+  async open(){
+    document.getElementById('counter').textContent='CREATE \u2014 generate with proven recipes';
+    // Load learning + keepers lazily on first open
+    if(!this.learning)this.loadLearning();
+    this.loadHidden();
+    if(!this.keepers){
+      await this.loadKeepers();
+      this.buildRecipes();
+    }
+    this.view='parade';
+    this.render();
+  },
+
+  // ---- persistence ----
+  loadLearning(){
+    try{
+      this.learning=JSON.parse(localStorage.getItem('cb2_create_learning')||'null');
+    }catch(e){this.learning=null;}
+    if(!this.learning){
+      this.learning={version:1,alpha:0.3,batches:[],recipes:{},refs:{},models_by_sport:{}};
+    }
+  },
+  saveLearning(){
+    localStorage.setItem('cb2_create_learning',JSON.stringify(this.learning));
+  },
+  loadHidden(){
+    try{this.hiddenRecipes=JSON.parse(localStorage.getItem('cb2_create_hidden')||'{}')||{};}
+    catch(e){this.hiddenRecipes={};}
+  },
+  saveHidden(){
+    localStorage.setItem('cb2_create_hidden',JSON.stringify(this.hiddenRecipes));
+  },
+  hideRecipe(id){
+    this.hiddenRecipes[id]=true;
+    this.saveHidden();
+    this.render();
+  },
+  unhideRecipe(id){
+    delete this.hiddenRecipes[id];
+    this.saveHidden();
+    this.render();
+  },
+
+  async loadKeepers(){
+    // Try local file first (works when opening via file://), fall back to GH Pages.
+    try{
+      const r=await fetch(this.keepersLocal);
+      if(r.ok){this.keepers=await r.json();return;}
+    }catch(e){}
+    try{
+      const r=await fetch(this.keepersUrl+'?t='+Date.now());
+      if(r.ok){this.keepers=await r.json();return;}
+    }catch(e){}
+    this.keepers={items:{}};
+    mmNotify('Could not load cb-keepers.json \u2014 Rail will be empty',true);
+  },
+
+  // Group cb-keepers items into recipes. Prefer (scene_id, seed) \u2014 stable, no
+  // normalization drift \u2014 but fall back to the item's own id so older one-offs
+  // without scene_id still become singleton recipes (otherwise ~17 supers drop).
+  // Grouping key = sport+seed (scene_id is inconsistent across older/newer
+  // items and was splitting the same recipe into multiple cards). Snow gets
+  // a goofy/regular split since stance produces a meaningfully different
+  // output per CLAUDE.md arm-lock rules. Items with no seed become singletons.
+  buildRecipes(){
+    const groups={};
+    const items=this.keepers.items||{};
+    for(const url in items){
+      const it=items[url];
+      const sport=it.sport||'other';
+      const hasSeed=(it.seed!==undefined&&it.seed!==null);
+      const goofy=sport==='snow'&&it.scene_id&&/goofy/i.test(it.scene_id)?'_goofy':'';
+      const id=hasSeed
+        ?(sport+'_'+it.seed+goofy)
+        :('one_'+(it.id||url.slice(-16)));
+      if(!groups[id]){
+        groups[id]={
+          id,
+          scene_id:it.scene_id||null,
+          seed:it.seed,
+          sport,
+          prompt:it.prompt||'',
+          model:it.model||'Nano Banana Pro',
+          arm:it.arm||'LEFT',
+          ref:it.ref||null,
+          examples:[],
+          super_count:0,
+          yes_count:0,
+          is_singleton:!hasSeed,
+        };
+      }
+      const g=groups[id];
+      g.examples.push({url:it.url,label:it.label,id:it.id});
+      if(it.label==='super')g.super_count++;else g.yes_count++;
+      // Prefer the highest-quality prompt snapshot: super beats yes, longer beats shorter.
+      if(it.label==='super'||(g.prompt.length<(it.prompt||'').length)){
+        g.prompt=it.prompt||g.prompt;
+        g.model=it.model||g.model;
+        g.ref=it.ref||g.ref;
+        g.arm=it.arm||g.arm;
+      }
+    }
+    // Sort examples: super first
+    for(const id in groups){
+      groups[id].examples.sort((a,b)=>(b.label==='super'?1:0)-(a.label==='super'?1:0));
+    }
+    this.recipes=Object.values(groups);
+    this.scoreRecipes();
+  },
+
+  // Learning-weighted score. Cold start: super*2 + yes.
+  scoreRecipes(){
+    for(const r of this.recipes){
+      const rec=this.learning.recipes[r.id];
+      if(rec&&rec.batches_run>0){
+        r.keeper_rate=rec.keeper_rate;
+        r.batches_run=rec.batches_run;
+        r.score=rec.keeper_rate*2+r.super_count*0.5+r.yes_count*0.1;
+        // Fade: <0.2 over 3+ batches
+        r.fade=rec.batches_run>=3&&rec.keeper_rate<0.2;
+      }else{
+        r.keeper_rate=null;
+        r.batches_run=0;
+        r.score=r.super_count*2+r.yes_count;
+        r.fade=false;
+      }
+    }
+    this.recipes.sort((a,b)=>{
+      if(a.fade!==b.fade)return a.fade?1:-1;
+      return b.score-a.score;
+    });
+  },
+
+  // ---- rendering ----
+  render(){
+    const el=document.getElementById('createArea');
+    if(!el)return;
+    if(this.view==='parade')el.innerHTML=this.renderParade();
+    else if(this.view==='batch')el.innerHTML=this.renderBatch();
+    else if(this.view==='newscene')el.innerHTML=this.renderNewScene();
+  },
+
+  renderParade(){
+    const dryrun=this.isDryRun()?' <strong style="color:#f59e0b">DRY-RUN</strong>':'';
+    // A "cluster" for display purposes = 2+ examples. n=1 clusters fall into one-offs.
+    const allClustered=this.recipes.filter(r=>!r.is_singleton&&r.examples.length>=2);
+    const allSingletons=this.recipes.filter(r=>r.is_singleton||r.examples.length<2);
+    // Hide filter
+    const hidden=this.hiddenRecipes||{};
+    const hiddenCount=Object.keys(hidden).filter(id=>this.recipes.find(x=>x.id===id)).length;
+    const showingHidden=!!this.showHiddenFlag;
+    const clustered=showingHidden?allClustered:allClustered.filter(r=>!hidden[r.id]);
+    const singletons=showingHidden?allSingletons:allSingletons.filter(r=>!hidden[r.id]);
+    const clusteredCards=clustered.map(r=>this.renderRecipeCard(r)).join('');
+    // Cap singletons at top 20; "Show all N" expands to full list.
+    const expanded=!!this.singletonsExpanded;
+    const capSing=expanded?singletons:singletons.slice(0,20);
+    const singletonCards=capSing.map(r=>this.renderRecipeCard(r)).join('');
+    const expandBtn=(!expanded&&singletons.length>20)
+      ?'<button class="cr-hdr-btn" style="margin:.6rem auto;display:block" onclick="CR.singletonsExpanded=true;CR.render()">Show all '+singletons.length+' one-offs</button>'
+      :'';
+    const empty=this.recipes.length===0?'<div style="color:#666;text-align:center;padding:2rem .5rem;font-size:.75rem">No recipes loaded yet. Check cb-keepers.json.</div>':'';
+    const hiddenToggle=hiddenCount>0
+      ?'<button class="cr-hdr-btn" onclick="CR.showHiddenFlag=!CR.showHiddenFlag;CR.render()">'+(showingHidden?'Hide hidden':'Show hidden ('+hiddenCount+')')+'</button>'
+      :'';
+    const header='<div class="cr-header">'+
+      '<div class="cr-header-btns">'+
+        '<button class="cr-hdr-btn" onclick="CR.showNewScene()">+ New Scene</button>'+
+        '<button class="cr-hdr-btn" onclick="CR.toggleDryRun()" id="crDryBtn">'+(this.isDryRun()?'\uD83E\uDDEA Dry-run ON':'\uD83E\uDDEA Dry-run OFF')+'</button>'+
+        hiddenToggle+
+      '</div>'+
+      '<div class="cr-cost">Pool: <strong>'+clustered.length+'</strong> clusters + <strong>'+singletons.length+'</strong> one-offs'+dryrun+'</div>'+
+    '</div>';
+    if(empty)return header+empty;
+    return header+
+      '<div class="cr-rail-label">Hit Parade \u2014 proven recipes</div>'+
+      '<div class="cr-parade">'+clusteredCards+'</div>'+
+      '<div class="cr-rail-label">Creative one-offs \u2014 super picks from history</div>'+
+      '<div class="cr-parade">'+singletonCards+'</div>'+
+      expandBtn;
+  },
+
+  renderRecipeCard(r){
+    const thumb=r.examples[0]?.url||'';
+    const sportIcon={moto:'\uD83C\uDFCD',mtb:'\uD83D\uDEB5',ski:'\u26F7',snow:'\uD83C\uDFC2',snowmobile:'\uD83D\uDEF7',sled:'\uD83D\uDEF7'}[r.sport]||'\uD83D\uDCF7';
+    const modelShort=(r.model||'').replace('Nano Banana','NB').replace('GPT Image 1.5','GPT').replace('FLUX 2 Flex','Flex');
+    const superBadge=r.super_count>0?'<div class="cr-super-badge">\u2605 '+r.super_count+'</div>':'';
+    const rateBadge=r.keeper_rate!=null?'<div class="cr-rate-badge">'+Math.round(r.keeper_rate*100)+'% keep</div>':'';
+    const title=(r.prompt||'').split(',').slice(0,2).join(',').slice(0,90);
+    const isHidden=!!(this.hiddenRecipes&&this.hiddenRecipes[r.id]);
+    const hideBtn=isHidden
+      ?'<button class="cr-hide-btn cr-unhide-btn" onclick="event.stopPropagation();CR.unhideRecipe(\''+r.id+'\')" title="Un-hide this recipe">\u21BA</button>'
+      :'<button class="cr-hide-btn" onclick="event.stopPropagation();CR.hideRecipe(\''+r.id+'\')" title="Don\'t suggest this one anymore">\u2715</button>';
+    return '<div class="cr-card'+(r.fade?' fade':'')+(isHidden?' cr-card-hidden':'')+'" onclick="CR.openRecipe(\''+r.id+'\')">'+
+      '<img src="'+thumb+'" alt="" loading="lazy">'+
+      hideBtn+superBadge+rateBadge+
+      '<div class="cr-card-body">'+
+        '<div class="cr-card-title">'+this.esc(title)+'</div>'+
+        '<div class="cr-card-meta"><span class="cr-sport">'+sportIcon+' '+r.sport+'</span><span>\u2022</span><span>'+this.esc(modelShort)+'</span><span>\u2022</span><span>seed '+(r.seed!=null?r.seed:'\u2014')+'</span></div>'+
+        '<button class="cr-make-btn" onclick="event.stopPropagation();CR.startBatch(\''+r.id+'\',6)">Make 6 more like this</button>'+
+      '</div>'+
+    '</div>';
+  },
+
+  // Click card body \u2014 lightbox all examples
+  openRecipe(id){
+    const r=this.recipes.find(x=>x.id===id);
+    if(!r||!r.examples[0])return;
+    this.openLB(r.examples[0].url);
+  },
+
+  // ---- batch generation ----
+  async startBatch(recipeId,n){
+    const r=this.recipes.find(x=>x.id===recipeId);
+    if(!r)return;
+    const endpoint=this.modelEndpoint(r.model);
+    const cost=(this.MODEL_COST[endpoint]||0.12)*n;
+    if(!confirm('Generate '+n+' images via '+(this.MODEL_LABELS[endpoint]||r.model)+'?\n\nEstimated cost: $'+cost.toFixed(2)+(this.isDryRun()?'\n\nDRY-RUN mode is ON \u2014 no real API calls, mock images only.':''))){return;}
+    this.currentBatch={
+      batch_id:new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)+'_'+Math.random().toString(36).slice(2,8),
+      recipe_id:recipeId,
+      recipe_prompt:r.prompt,
+      seed:r.seed,
+      model:r.model,
+      endpoint,
+      ref:r.ref,
+      sport:r.sport,
+      is_novel:false,
+      cost_usd:cost,
+      started_at:new Date().toISOString(),
+      tiles:Array.from({length:n},(_,i)=>({i,status:'queued',url:null,kept:false,error:null})),
+    };
+    this.view='batch';
+    this.render();
+    this.fireBatch();
+  },
+
+  renderBatch(){
+    const b=this.currentBatch;
+    if(!b)return '<div style="padding:1rem;color:#888">No active batch.</div>';
+    const title=this.MODEL_LABELS[b.endpoint]||b.model;
+    return '<div class="cr-batch-head">'+
+      '<button class="cr-back" onclick="CR.backToParade()">\u2190 Parade</button>'+
+      '<div class="cr-batch-title">'+this.esc(title)+' \u00b7 '+b.tiles.length+' tiles \u00b7 ~$'+b.cost_usd.toFixed(2)+'</div>'+
+      '<div style="width:72px"></div>'+
+    '</div>'+
+    '<div class="preview-box"><strong>Prompt</strong>'+this.esc((b.recipe_prompt||'').slice(0,260))+(b.recipe_prompt.length>260?'\u2026':'')+'</div>'+
+    '<div id="crGrid">'+this.renderGridInner()+'</div>'+
+    '<div id="crSaveBar">'+this.renderSaveBar()+'</div>';
+  },
+
+  renderGridInner(){
+    const b=this.currentBatch;
+    return '<div class="cr-grid">'+b.tiles.map((t,i)=>this.renderTile(t,i)).join('')+'</div>';
+  },
+
+  renderTile(t,i){
+    if(t.status==='queued')return '<div class="cr-tile cr-skel">Queued\u2026</div>';
+    if(t.status==='generating')return '<div class="cr-tile cr-skel">Generating\u2026</div>';
+    if(t.status==='failed')return '<div class="cr-tile cr-fail"><div>Failed</div><div style="font-size:.5rem;color:#888">'+this.esc(t.error||'')+'</div><button onclick="CR.retryTile('+i+')">Retry</button></div>';
+    // done
+    return '<div class="cr-tile'+(t.kept?' kept':'')+'">'+
+      '<img src="'+t.url+'" alt="" onclick="CR.openLB(\''+t.url+'\')">'+
+      '<button class="cr-heart" onclick="CR.toggleKeeper('+i+')">'+(t.kept?'\u2665':'\u2661')+'</button>'+
+    '</div>';
+  },
+
+  renderSaveBar(){
+    const b=this.currentBatch;
+    const kept=b.tiles.filter(t=>t.kept).length;
+    const done=b.tiles.filter(t=>t.status==='done').length;
+    const failed=b.tiles.filter(t=>t.status==='failed').length;
+    const terminal=done+failed;
+    const allTerm=terminal===b.tiles.length;
+    return '<div class="cr-save-bar">'+
+      '<span class="cr-count">'+kept+' of '+done+' keepers'+(failed?' \u00b7 '+failed+' failed':'')+'</span>'+
+      '<button class="gen-btn" '+(allTerm?'':'disabled')+' onclick="CR.saveBatch()">Save batch</button>'+
+    '</div>';
+  },
+
+  refreshGrid(){
+    const g=document.getElementById('crGrid');if(g)g.innerHTML=this.renderGridInner();
+    const s=document.getElementById('crSaveBar');if(s)s.innerHTML=this.renderSaveBar();
+  },
+
+  toggleKeeper(i){
+    const t=this.currentBatch.tiles[i];
+    if(t.status!=='done')return;
+    t.kept=!t.kept;
+    this.refreshGrid();
+  },
+
+  async retryTile(i){
+    const t=this.currentBatch.tiles[i];
+    t.status='queued';t.error=null;t.url=null;
+    this.refreshGrid();
+    this.fireOne(i);
+  },
+
+  backToParade(){
+    if(this.currentBatch&&this.currentBatch.tiles.some(t=>t.status==='done'||t.status==='failed')){
+      if(!confirm('Leave without saving? Unsaved keepers will be lost.'))return;
+    }
+    this.currentBatch=null;
+    this.view='parade';
+    this.render();
+  },
+
+  async fireBatch(){
+    const b=this.currentBatch;
+    // Fire in parallel so slow models don't sequentially block
+    for(let i=0;i<b.tiles.length;i++){
+      this.fireOne(i);
+    }
+  },
+
+  async fireOne(i){
+    const b=this.currentBatch;
+    const t=b.tiles[i];
+    t.status='generating';
+    this.refreshGrid();
+    try{
+      let url;
+      if(this.isDryRun()){
+        await new Promise(r=>setTimeout(r,800+Math.random()*2500));
+        // Deterministic mock: reuse the recipe's own example thumbnails if available, else picsum
+        const r=this.recipes.find(x=>x.id===b.recipe_id);
+        if(r&&r.examples.length){
+          url=r.examples[(i+Math.floor(Math.random()*r.examples.length))%r.examples.length].url;
+        }else{
+          url='https://picsum.photos/seed/cr'+b.batch_id+i+'/512/768';
+        }
+      }else{
+        const payload=this.buildPayload(b,i);
+        const key=this.getFalKey();
+        const rid=await mmSubmit(b.endpoint,payload,key);
+        const imgs=await mmPoll(b.endpoint,rid,key,null);
+        if(!imgs||!imgs.length)throw new Error('no images returned');
+        url=imgs[0].url;
+      }
+      t.url=url;
+      t.status='done';
+    }catch(e){
+      t.status='failed';
+      t.error=(e&&e.message||'err').slice(0,80);
+    }
+    this.refreshGrid();
+  },
+
+  // Build a fal.ai payload. Seed jittered per tile so the 6 aren't identical.
+  buildPayload(b,i){
+    const refUrl=(b.ref&&b.ref.url)||this.REFS.refc.url;
+    const seed=(b.seed||0)+i*1000+1;
+    const body={image_urls:[refUrl],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
+    if(b.endpoint.includes('gpt-image')){
+      return {image_urls:[refUrl],prompt:b.recipe_prompt,size:'1024x1536',quality:'high',input_fidelity:'high'};
+    }
+    if(b.endpoint.includes('flux-2-flex')){
+      body.guidance_scale=7.0;body.num_inference_steps=28;
+    }
+    return body;
+  },
+
+  modelEndpoint(modelLabel){
+    const m=(modelLabel||'').toLowerCase();
+    if(m.includes('gpt image'))return 'fal-ai/gpt-image-1.5/edit';
+    if(m.includes('nano banana pro'))return 'fal-ai/nano-banana-pro/edit';
+    if(m.includes('nano banana 2'))return 'fal-ai/nano-banana-2/edit';
+    if(m.includes('flex'))return 'fal-ai/flux-2-flex/edit';
+    return 'fal-ai/nano-banana-pro/edit';
+  },
+
+  getFalKey(){return localStorage.getItem('cb2_fal_key')||this.FK_FALLBACK;},
+
+  isDryRun(){return localStorage.getItem('cb2_create_dryrun')==='true';},
+  toggleDryRun(){
+    const on=!this.isDryRun();
+    localStorage.setItem('cb2_create_dryrun',on?'true':'false');
+    const b=document.getElementById('crDryBtn');if(b)b.textContent=on?'Dry-run ON':'Dry-run OFF';
+    mmNotify('Dry-run '+(on?'ON \u2014 no real API calls':'OFF \u2014 real generations'));
+  },
+
+  // ---- save batch + update counters ----
+  saveBatch(){
+    const b=this.currentBatch;
+    if(!b)return;
+    const kept=b.tiles.filter(t=>t.kept&&t.url).map(t=>t.url);
+    const rejected=b.tiles.filter(t=>!t.kept&&t.status==='done').map(t=>t.url);
+    const failed=b.tiles.filter(t=>t.status==='failed').map(t=>({i:t.i,error:t.error}));
+    const generated=b.tiles.filter(t=>t.status==='done').length;
+    const keeper_rate=generated?kept.length/generated:0;
+    const rec={
+      batch_id:b.batch_id,
+      recipe_id:b.recipe_id,
+      recipe_prompt:b.recipe_prompt,
+      ref_id:b.ref?.id||null,
+      model:b.endpoint,
+      sport:b.sport,
+      generated,
+      kept_urls:kept,
+      rejected_urls:rejected,
+      failed,
+      keeper_rate,
+      cost_usd:b.cost_usd,
+      is_novel:b.is_novel||false,
+      at:new Date().toISOString(),
+    };
+    this.learning.batches.push(rec);
+    this.updateCounters(rec);
+    this.saveLearning();
+    // Snapshot kept URLs into ALL_IMAGES so they appear in TO REVIEW
+    kept.forEach((url,idx)=>{
+      const vid='cr-'+b.batch_id+'-'+idx;
+      if(!ALL_IMAGES.find(i=>i.id===vid)){
+        const entry={id:vid,url,model:this.MODEL_LABELS[b.endpoint]||b.model,prompt:b.recipe_prompt,label:'CREATE keeper: '+(b.recipe_id||'scene'),context:'CREATE batch '+b.batch_id+' \u00b7 recipe '+b.recipe_id+' \u00b7 keeper_rate '+Math.round(keeper_rate*100)+'%'};
+        ALL_IMAGES.push(entry);
+      }
+    });
+    try{mmSaveVariations(kept.map((url,idx)=>({id:'cr-'+b.batch_id+'-'+idx,url,model:this.MODEL_LABELS[b.endpoint]||b.model,prompt:b.recipe_prompt,label:'CREATE keeper: '+b.recipe_id,context:'CREATE batch '+b.batch_id})));}catch(e){}
+    counts();
+    showToast('Saved \u00b7 '+kept.length+' keepers \u00b7 '+Math.round(keeper_rate*100)+'% rate');
+    this.currentBatch=null;
+    this.scoreRecipes();
+    this.view='parade';
+    this.render();
+  },
+
+  // EMA α=0.3. Three counters: recipe, ref, model_by_sport.
+  updateCounters(rec){
+    const a=0.3,L=this.learning;
+    const bump=(obj,key,rate,gen,kept)=>{
+      const prior=obj[key];
+      if(!prior){
+        obj[key]={keeper_rate:rate,batches_run:1,total_generated:gen,total_kept:kept,last_batch_at:rec.at};
+      }else{
+        prior.keeper_rate=a*rate+(1-a)*prior.keeper_rate;
+        prior.batches_run++;
+        prior.total_generated+=gen;
+        prior.total_kept+=kept;
+        prior.last_batch_at=rec.at;
+      }
+    };
+    bump(L.recipes,rec.recipe_id,rec.keeper_rate,rec.generated,rec.kept_urls.length);
+    if(rec.ref_id){
+      if(!L.refs[rec.ref_id])L.refs[rec.ref_id]={overall:null,by_recipe:{}};
+      const overallPrior=L.refs[rec.ref_id].overall;
+      if(!overallPrior){
+        L.refs[rec.ref_id].overall={keeper_rate:rec.keeper_rate,batches_run:1};
+      }else{
+        overallPrior.keeper_rate=a*rec.keeper_rate+(1-a)*overallPrior.keeper_rate;
+        overallPrior.batches_run++;
+      }
+      bump(L.refs[rec.ref_id].by_recipe,rec.recipe_id,rec.keeper_rate,rec.generated,rec.kept_urls.length);
+    }
+    if(rec.sport){
+      if(!L.models_by_sport[rec.sport])L.models_by_sport[rec.sport]={};
+      bump(L.models_by_sport[rec.sport],rec.model,rec.keeper_rate,rec.generated,rec.kept_urls.length);
+    }
+  },
+
+  // ---- + New Scene ----
+  showNewScene(){
+    this.newScene={
+      sport:'moto',
+      colorway:'Hunter',
+      vibe:'editorial',
+      arm:'LEFT',
+      batchSize:6,
+      scene:'',
+      refined:'',
+      refinedAccepted:false,
+      finalPrompt:'',
+    };
+    this.view='newscene';
+    this.render();
+  },
+
+  renderNewScene(){
+    const s=this.newScene;
+    const colorwayRefs=this.refsForColorway(s.colorway);
+    const gearStr=this.GEAR[s.sport]||'';
+    const defaultEndpoint=this.DEFAULT_MODEL[s.sport]||'fal-ai/nano-banana-pro/edit';
+    const cost=(this.MODEL_COST[defaultEndpoint]||0.12)*s.batchSize;
+    const refOptions=colorwayRefs.length
+      ?colorwayRefs.map(r=>'<option value="'+r.id+'">'+r.id+' \u00b7 '+r.type+'</option>').join('')
+      :'<option value="">(no refs for this colorway)</option>';
+    return '<div class="cr-batch-head">'+
+      '<button class="cr-back" onclick="CR.backToParade()">\u2190 Parade</button>'+
+      '<div class="cr-batch-title">+ New Scene</div>'+
+      '<div style="width:72px"></div>'+
+    '</div>'+
+    '<div class="cr-form">'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Sport</div>'+
+        '<select class="cr-select" onchange="CR.updateForm(\'sport\',this.value)">'+
+          ['moto','ski','snow','mtb','sled'].map(sp=>'<option value="'+sp+'"'+(s.sport===sp?' selected':'')+'>'+sp+'</option>').join('')+
+        '</select>'+
+      '</div>'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Colorway</div>'+
+        '<select class="cr-select" onchange="CR.updateForm(\'colorway\',this.value)">'+
+          '<option value="Hunter"'+(s.colorway==='Hunter'?' selected':'')+'>Hunter</option>'+
+          '<option value="Patriot"'+(s.colorway==='Patriot'?' selected':'')+'>Patriot</option>'+
+          '<option value="Tron"'+(s.colorway==='Tron'?' selected':'')+'>Tron</option>'+
+        '</select>'+
+        (s.colorway==='Tron'&&!colorwayRefs.length?'<div class="cr-tron-hint">\uD83E\uDD41 Waiting for Tron reference photos \u2014 drop shots into rotated-refs/ as t1.jpg, t2.jpg, ...</div>':'')+
+      '</div>'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Reference</div>'+
+        '<select class="cr-select" '+(colorwayRefs.length?'':'disabled')+'>'+refOptions+'</select>'+
+      '</div>'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Vibe</div>'+
+        '<select class="cr-select" onchange="CR.updateForm(\'vibe\',this.value)">'+
+          ['editorial','documentary','golden hour','harsh midday','moody night'].map(v=>'<option'+(s.vibe===v?' selected':'')+'>'+v+'</option>').join('')+
+        '</select>'+
+      '</div>'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Scene description</div>'+
+        '<textarea class="create-prompt" id="crSceneInput" placeholder="Redwood forest, late afternoon, misty, descending steep switchbacks\u2026" oninput="CR.updateForm(\'scene\',this.value)">'+this.esc(s.scene)+'</textarea>'+
+        '<button class="cr-refine-btn" id="crRefineBtn" onclick="CR.refineWithSonnet()">\u2728 Refine with Sonnet</button>'+
+        '<div class="cr-refine-status" id="crRefineStatus"></div>'+
+        (s.refined?'<div class="cr-refined"><div class="cr-refined-label">Refined by Sonnet</div>'+this.esc(s.refined)+'<div class="cr-refined-actions"><button class="'+(s.refinedAccepted?'on':'')+'" onclick="CR.acceptRefined()">Use refined</button><button onclick="CR.rejectRefined()">Use original</button></div></div>':'')+
+      '</div>'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Mandatory gear (auto)</div>'+
+        '<div class="preview-box">'+this.esc(gearStr)+'</div>'+
+      '</div>'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Final prompt</div>'+
+        '<textarea class="create-prompt" id="crFinalPrompt" style="min-height:110px" placeholder="(click Assemble to build)">'+this.esc(s.finalPrompt)+'</textarea>'+
+        '<button class="cr-refine-btn" onclick="CR.assemblePrompt()">Assemble prompt</button>'+
+      '</div>'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Batch size</div>'+
+        '<select class="cr-select" onchange="CR.updateForm(\'batchSize\',parseInt(this.value))">'+
+          '<option value="4"'+(s.batchSize===4?' selected':'')+'>4 (\u223c$'+((this.MODEL_COST[defaultEndpoint]||0.12)*4).toFixed(2)+')</option>'+
+          '<option value="6"'+(s.batchSize===6?' selected':'')+'>6 (\u223c$'+((this.MODEL_COST[defaultEndpoint]||0.12)*6).toFixed(2)+')</option>'+
+        '</select>'+
+      '</div>'+
+      '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Model</div>'+
+        '<select class="cr-select" id="crModelSelect">'+
+          Object.keys(this.MODEL_LABELS).map(ep=>'<option value="'+ep+'"'+(ep===defaultEndpoint?' selected':'')+'>'+this.MODEL_LABELS[ep]+' \u00b7 ~$'+this.MODEL_COST[ep].toFixed(2)+'</option>').join('')+
+        '</select>'+
+      '</div>'+
+      '<button class="gen-btn" onclick="CR.fireNewScene()">Generate '+s.batchSize+' images</button>'+
+      '<div style="font-size:.6rem;color:#666;margin-top:.3rem;text-align:center">Novel recipes land in the Experimental stripe until 2 batches clear 40% keep rate.</div>'+
+    '</div>';
+  },
+
+  updateForm(key,val){
+    this.newScene[key]=val;
+    if(key==='sport'||key==='colorway'){this.render();}
+  },
+
+  refsForColorway(cw){
+    return Object.values(this.REFS).filter(r=>r.colorway===cw&&!this.KILLED_REFS.includes(r.id));
+  },
+
+  async refineWithSonnet(){
+    const s=this.newScene;
+    const raw=(document.getElementById('crSceneInput')?.value||'').trim();
+    if(!raw){showToast('Type a scene first');return;}
+    s.scene=raw;
+    const key=vidLabGetAnthKey();
+    if(!key){showToast('No Anthropic key provided');return;}
+    const btn=document.getElementById('crRefineBtn');
+    const status=document.getElementById('crRefineStatus');
+    btn.disabled=true;btn.style.opacity='.5';
+    status.textContent='Refining\u2026';
+    const sys="You are a photography director for an action-sports marketing brand. Rewrite the user's scene description into industry-standard photographic language that would produce exceptional marketing photos \u2014 but preserve 100% of the user's creative intent. Use specific camera/lens terminology (e.g. 'shot on Sony A7R IV 85mm f/2.0'), concrete lighting vocabulary (e.g. 'raking sidelight', 'golden-hour backlight'), evocative setting detail, and atmospheric descriptors. Do NOT add a product description, subject description, wardrobe, or framing \u2014 those are added separately. Output only the rewritten scene paragraph, no preamble.";
+    try{
+      const r=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+        body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:sys,messages:[{role:'user',content:'Scene:\n'+raw}]}),
+      });
+      const d=await r.json();
+      if(d.error){
+        if(d.error.type==='authentication_error')localStorage.removeItem('cb2_anth_key');
+        status.textContent='Error: '+(d.error.message||'unknown');
+        btn.disabled=false;btn.style.opacity='1';
+        return;
+      }
+      const refined=d.content?.[0]?.text?.trim();
+      if(!refined){status.textContent='No output';btn.disabled=false;btn.style.opacity='1';return;}
+      s.refined=refined;
+      s.refinedAccepted=true;
+      status.textContent='Done ('+(d.usage?.output_tokens||'?')+' tokens)';
+      btn.disabled=false;btn.style.opacity='1';
+      this.render();
+    }catch(e){
+      status.textContent='Network error: '+e.message;
+      btn.disabled=false;btn.style.opacity='1';
+    }
+  },
+
+  acceptRefined(){this.newScene.refinedAccepted=true;this.render();},
+  rejectRefined(){this.newScene.refinedAccepted=false;this.render();},
+
+  assemblePrompt(){
+    const s=this.newScene;
+    // Pull scene from live textarea in case user edited without blur
+    const liveScene=document.getElementById('crSceneInput')?.value||s.scene;
+    s.scene=liveScene;
+    const sceneText=(s.refinedAccepted&&s.refined)?s.refined:liveScene;
+    if(!sceneText.trim()){showToast('Type or refine a scene first');return;}
+    const subject={moto:'motorcycle rider',ski:'skier',snow:'snowboarder',mtb:'mountain biker',sled:'snowmobile rider'}[s.sport]||'athlete';
+    const gear=this.GEAR[s.sport]||'';
+    const cb2=this.CB2_BLOCK[s.arm]||this.CB2_BLOCK.LEFT;
+    const vibeCam={
+      editorial:'Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain, editorial photography',
+      documentary:'Shot on Nikon Z9 70mm f/2.8, documentary photography, slight lens vignetting',
+      'golden hour':'Shot on Sony A7R IV 85mm f/1.4, golden-hour backlight, warm rim light, film grain',
+      'harsh midday':'Shot on Nikon Z9 50mm f/4.0, harsh overhead sun, sharp shadows, documentary photography',
+      'moody night':'Shot on Sony A7S III 35mm f/1.4, moody night exposure, ambient streetlight, film grain',
+    }[s.vibe]||'Shot on Sony A7R IV 85mm f/2.0, film grain';
+    const full=sceneText.trim()+'. '+subject+' wearing '+gear+', '+cb2+', waist-up, '+vibeCam+'.';
+    s.finalPrompt=full;
+    const ta=document.getElementById('crFinalPrompt');if(ta)ta.value=full;
+    showToast('Assembled \u2014 edit inline if needed');
+  },
+
+  fireNewScene(){
+    const s=this.newScene;
+    const finalPrompt=(document.getElementById('crFinalPrompt')?.value||s.finalPrompt||'').trim();
+    if(!finalPrompt){showToast('Click Assemble first');return;}
+    const endpoint=document.getElementById('crModelSelect')?.value||this.DEFAULT_MODEL[s.sport];
+    const refs=this.refsForColorway(s.colorway);
+    if(!refs.length&&!this.isDryRun()){showToast('No refs for '+s.colorway+' \u2014 turn on dry-run or switch colorway');return;}
+    const ref=refs[0]||null;
+    const sceneKey=s.sport+'_novel_'+Date.now().toString(36);
+    // Create an ad-hoc recipe for this novel scene so the learning loop can track it
+    const recipe={
+      id:sceneKey,
+      scene_id:sceneKey,
+      seed:Math.floor(Math.random()*100000),
+      sport:s.sport,
+      prompt:finalPrompt,
+      model:this.MODEL_LABELS[endpoint]||endpoint,
+      arm:s.arm,
+      ref,
+      examples:[],
+      super_count:0,
+      yes_count:0,
+      score:0,
+      keeper_rate:null,
+      batches_run:0,
+    };
+    this.recipes.unshift(recipe);
+    this.currentBatch={
+      batch_id:new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)+'_'+Math.random().toString(36).slice(2,8),
+      recipe_id:sceneKey,
+      recipe_prompt:finalPrompt,
+      seed:recipe.seed,
+      model:recipe.model,
+      endpoint,
+      ref,
+      sport:s.sport,
+      is_novel:true,
+      cost_usd:(this.MODEL_COST[endpoint]||0.12)*s.batchSize,
+      started_at:new Date().toISOString(),
+      tiles:Array.from({length:s.batchSize},(_,i)=>({i,status:'queued',url:null,kept:false,error:null})),
+    };
+    this.view='batch';
+    this.render();
+    this.fireBatch();
+  },
+
+  // ---- lightbox ----
+  openLB(url){
+    document.getElementById('crLBImg').src=url;
+    document.getElementById('crLB').classList.add('on');
+  },
+  closeLB(){
+    document.getElementById('crLB').classList.remove('on');
+  },
+
+  esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');},
+};
+
 // Init: load any Make More Like This variations from localStorage
 mmLoadVariations();
 // Seed from local first (instant), then load shared feedback (async merge)
 seedFromLocal();
 counts();
-if(!ALL_IMAGES.filter(i=>!isR(i)).length&&ALL_IMAGES.some(i=>isR(i)))tab='done';
-upFilt();
-document.querySelectorAll('.tab').forEach((el,i)=>{el.className='tab'+((['new','done','progress','gallery','videos','aiscore'][i]===tab)?' active':'');});
-// Ensure grid toggle visibility matches initial tab
-document.getElementById('gridToggle').style.display=(tab==='done')?'block':'none';
-renderView();
+// 3-tab layout: GALLERY is the default landing tab.
+setTab('gallery');
 // Load shared feedback from GitHub (merges remote reviews into local)
 loadSharedFeedback();
 
