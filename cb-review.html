@@ -333,29 +333,29 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <!-- GALLERY/ARCHIVE TAB -->
 <div id="galleryArea" style="display:none;width:100%;max-width:900px;margin:0 auto;padding:0 .5rem">
   <div style="margin-bottom:.6rem">
-    <!-- Filter bar — tap any button to filter, tap again to clear -->
-    <div style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.5rem;background:#111;border-radius:10px;border:1px solid #222">
-      <!-- Rejects hidden by default; toggle to reveal -->
-      <button class="gal-filter" id="galRejToggle" onclick="galToggleRejects()" style="padding:.3rem .6rem;font-size:.65rem;color:#ef4444;border-color:#ef4444">Show rejects</button>
+    <!-- Filter bar — everything is a toggle. Purple = on, gray = off. Multi-select on Sport + Model. -->
+    <div id="galFilterBar" style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.5rem;background:#111;border-radius:10px;border:1px solid #222">
+      <!-- Verdict filters (independent toggles) -->
+      <button class="gal-filter gal-vf" id="galLikesToggle" onclick="galToggleLikes()" style="padding:.3rem .6rem;font-size:.65rem">Likes</button>
+      <button class="gal-filter gal-vf" id="galSuperToggle" onclick="galToggleSuperFilter()" style="padding:.3rem .6rem;font-size:.65rem">⭐ Super</button>
+      <button class="gal-filter gal-vf" id="galRejToggle" onclick="galToggleRejects()" style="padding:.3rem .6rem;font-size:.65rem">Rejects</button>
       <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
-      <!-- Score -->
-      <button class="gal-filter gal-score-f" onclick="galSetScore('90+')" data-sf="90+" style="padding:.3rem .6rem;font-size:.65rem">90+</button>
-      <button class="gal-filter gal-score-f" onclick="galSetScore('70-89')" data-sf="70-89" style="padding:.3rem .6rem;font-size:.65rem">70-89</button>
-      <button class="gal-filter gal-score-f" onclick="galSetScore('under70')" data-sf="under70" style="padding:.3rem .6rem;font-size:.65rem">&lt;70</button>
+      <!-- Sport (multi-select) -->
+      <button class="gal-filter gal-sport-f" onclick="galToggleSport('motorcycle')" data-sp="motorcycle" style="padding:.3rem .6rem;font-size:.65rem">Moto</button>
+      <button class="gal-filter gal-sport-f" onclick="galToggleSport('skiing')" data-sp="skiing" style="padding:.3rem .6rem;font-size:.65rem">Ski</button>
+      <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowboard')" data-sp="snowboard" style="padding:.3rem .6rem;font-size:.65rem">Snow</button>
+      <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowmobile')" data-sp="snowmobile" style="padding:.3rem .6rem;font-size:.65rem">Sled</button>
+      <button class="gal-filter gal-sport-f" onclick="galToggleSport('mtb')" data-sp="mtb" style="padding:.3rem .6rem;font-size:.65rem">MTB</button>
       <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
-      <!-- Sport -->
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('motorcycle')" data-sp="motorcycle" style="padding:.3rem .6rem;font-size:.65rem">Moto</button>
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('skiing')" data-sp="skiing" style="padding:.3rem .6rem;font-size:.65rem">Ski</button>
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('snowboard')" data-sp="snowboard" style="padding:.3rem .6rem;font-size:.65rem">Snow</button>
-      <button class="gal-filter gal-sport-f" onclick="galSetSport('mtb')" data-sp="mtb" style="padding:.3rem .6rem;font-size:.65rem">MTB</button>
+      <!-- Model (multi-select) -->
+      <button class="gal-filter gal-model-f" onclick="galToggleModel('gpt')" data-md="gpt" style="padding:.3rem .6rem;font-size:.65rem">GPT</button>
+      <button class="gal-filter gal-model-f" onclick="galToggleModel('flex')" data-md="flex" style="padding:.3rem .6rem;font-size:.65rem">FLUX</button>
+      <button class="gal-filter gal-model-f" onclick="galToggleModel('nbpro')" data-md="nbpro" style="padding:.3rem .6rem;font-size:.65rem">NB Pro</button>
+      <button class="gal-filter gal-model-f" onclick="galToggleModel('nb2')" data-md="nb2" style="padding:.3rem .6rem;font-size:.65rem">NB2</button>
       <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
-      <!-- Model -->
-      <button class="gal-filter gal-model-f" onclick="galSetModel('gpt')" data-md="gpt" style="padding:.3rem .6rem;font-size:.65rem">GPT</button>
-      <button class="gal-filter gal-model-f" onclick="galSetModel('flex')" data-md="flex" style="padding:.3rem .6rem;font-size:.65rem">FLUX</button>
-      <button class="gal-filter gal-model-f" onclick="galSetModel('nbpro')" data-md="nbpro" style="padding:.3rem .6rem;font-size:.65rem">NB Pro</button>
-      <button class="gal-filter gal-model-f" onclick="galSetModel('nb2')" data-md="nb2" style="padding:.3rem .6rem;font-size:.65rem">NB2</button>
+      <button class="gal-filter" onclick="galClearFilters()" style="padding:.3rem .6rem;font-size:.65rem">Reset</button>
     </div>
-    <div style="text-align:center;margin-top:.3rem;font-size:.55rem;color:#555">Tap a filter to toggle it on/off. Active filters are highlighted purple.</div>
+    <div style="text-align:center;margin-top:.3rem;font-size:.55rem;color:#555">Tap any button to toggle on/off — purple = active. Sport + Model filters stack (tap multiple).</div>
   </div>
   <div id="galGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem"></div>
 </div>
@@ -1573,10 +1573,13 @@ document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;
 
 // === GALLERY TAB ===
 let galFilterMode='all';
-let galShowRejects=false; // rejects hidden by default
-let galScoreMode='all';
-let galSportMode='all';
-let galModelMode='all';
+// Verdict filters — independent toggles, default: show likes + super, hide rejects
+let galShowLikes=true;
+let galShowSuper=true;
+let galShowRejects=false;
+// Multi-select sport + model filters — Sets. Empty = show all.
+let galSportSet=new Set();
+let galModelSet=new Set();
 
 function galDetectSport(img){
   const t=(img.id+' '+img.label+' '+img.prompt+' '+(img.context||'')).toLowerCase();
@@ -1591,10 +1594,14 @@ function galDetectSport(img){
 
 function galDetectModel(img){
   const m=(img.model||'').toLowerCase();
-  if(m.includes('gpt image'))return 'gpt';
+  // Order matters: check the more specific model names first before the family catch-alls
+  if(m.includes('gpt image')||m.includes('gpt-image'))return 'gpt';
   if(m.includes('nano banana pro')||m.includes('gemini 3 pro'))return 'nbpro';
   if(m.includes('nano banana 2')||m.includes('gemini 3.1'))return 'nb2';
-  if(m.includes('flex'))return 'flex';
+  // FLUX family — includes flex, flux2-pro, flux-2-dev, flux-lora, kontext (Kontext is FLUX-based),
+  // and two-pass which was always a FLUX-based edit pipeline. Also catches "sam rotation" post-process
+  // which ran on top of flux-generated images.
+  if(m.includes('flex')||m.includes('flux')||m.includes('kontext')||m.includes('two-pass')||m.includes('sam rotation'))return 'flex';
   return 'other-model';
 }
 
@@ -1650,38 +1657,27 @@ function galToggleSuper(id){
   showToast(isSuperNow?'Super-like removed':'\u2B50 Super-liked');
 }
 
-function galToggleRejects(){
-  galShowRejects=!galShowRejects;
-  const b=document.getElementById('galRejToggle');
-  if(b){
-    b.className='gal-filter'+(galShowRejects?' on':'');
-    if(galShowRejects){b.style.color='#fff';b.style.borderColor='#a855f7';b.textContent='Hide rejects';}
-    else{b.style.color='#ef4444';b.style.borderColor='#ef4444';b.textContent='Show rejects';}
-  }
+// === Gallery filter toggles — all behave the same way ========================
+// Click to add to the active set (button turns purple), click again to remove.
+// Sets are cleared by un-clicking individually or calling galClearFilters().
+// Each toggle just flips a state bit and re-renders; button styling comes from
+// the .gal-filter.on class, no inline color overrides.
+function galToggleLikes(){galShowLikes=!galShowLikes;renderGallery();}
+function galToggleSuperFilter(){galShowSuper=!galShowSuper;renderGallery();}
+function galToggleRejects(){galShowRejects=!galShowRejects;renderGallery();}
+function galToggleSport(sport){
+  if(galSportSet.has(sport))galSportSet.delete(sport);
+  else galSportSet.add(sport);
   renderGallery();
 }
-function galSetScore(mode){
-  galScoreMode=galScoreMode===mode?'all':mode;
-  document.querySelectorAll('.gal-score-f').forEach(b=>{
-    const on=b.dataset.sf===galScoreMode;
-    b.className='gal-filter gal-score-f'+(on?' on':'');
-  });
+function galToggleModel(model){
+  if(galModelSet.has(model))galModelSet.delete(model);
+  else galModelSet.add(model);
   renderGallery();
 }
-function galSetSport(mode){
-  galSportMode=galSportMode===mode?'all':mode;
-  document.querySelectorAll('.gal-sport-f').forEach(b=>{
-    const on=b.dataset.sp===galSportMode;
-    b.className='gal-filter gal-sport-f'+(on?' on':'');
-  });
-  renderGallery();
-}
-function galSetModel(mode){
-  galModelMode=galModelMode===mode?'all':mode;
-  document.querySelectorAll('.gal-model-f').forEach(b=>{
-    const on=b.dataset.md===galModelMode;
-    b.className='gal-filter gal-model-f'+(on?' on':'');
-  });
+function galClearFilters(){
+  galShowLikes=true;galShowSuper=true;galShowRejects=false;
+  galSportSet.clear();galModelSet.clear();
   renderGallery();
 }
 
@@ -2161,33 +2157,85 @@ function renderGallery(){
   }));
   scored.sort((a,b)=>b.score-a.score);
 
-  let filtered=scored;
-  // Rejects hidden by default — toggle to reveal
-  if(!galShowRejects)filtered=filtered.filter(i=>i.accepted!==false);
-  // Score filter
-  if(galScoreMode==='90+')filtered=filtered.filter(i=>i.score>=90);
-  else if(galScoreMode==='70-89')filtered=filtered.filter(i=>i.score>=70&&i.score<90);
-  else if(galScoreMode==='under70')filtered=filtered.filter(i=>i.score<70);
-  // Sport filter
-  if(galSportMode!=='all')filtered=filtered.filter(i=>i.sport===galSportMode);
-  // Model filter
-  if(galModelMode!=='all')filtered=filtered.filter(i=>i.modelCat===galModelMode);
+  // Bucket each image into exactly one verdict category
+  //   super   → galIsSuper === true
+  //   reject  → not super AND accepted === false
+  //   like    → everything else (accepted === true, or ambiguous null)
+  scored.forEach(i=>{
+    if(i.isSuper)i.verdictBucket='super';
+    else if(i.accepted===false)i.verdictBucket='reject';
+    else i.verdictBucket='like';
+  });
 
-  const sportIcon={motorcycle:'&#127949;',skiing:'&#9975;',snowboard:'&#127938;',mtb:'&#128692;',other:'&#127918;'};
+  let filtered=scored;
+  // Verdict filters: show images whose bucket is in the active set
+  filtered=filtered.filter(i=>{
+    if(i.verdictBucket==='super')return galShowSuper;
+    if(i.verdictBucket==='reject')return galShowRejects;
+    return galShowLikes;
+  });
+  // Sport filter — multi-select; empty set means "show all"
+  if(galSportSet.size>0)filtered=filtered.filter(i=>galSportSet.has(i.sport));
+  // Model filter — multi-select; empty set means "show all"
+  if(galModelSet.size>0)filtered=filtered.filter(i=>galModelSet.has(i.modelCat));
+
+  // Pre-compute counts for each filter button (shown as "Moto 43", etc.)
+  const verdictCounts={like:0,super:0,reject:0};
+  const sportCounts={};
+  const modelCounts={};
+  scored.forEach(i=>{
+    verdictCounts[i.verdictBucket]=(verdictCounts[i.verdictBucket]||0)+1;
+    sportCounts[i.sport]=(sportCounts[i.sport]||0)+1;
+    modelCounts[i.modelCat]=(modelCounts[i.modelCat]||0)+1;
+  });
+
+  // Apply .on class + count label to filter buttons
+  const setBtn=(el,label,count,on)=>{
+    if(!el)return;
+    el.className='gal-filter'+(el.classList.contains('gal-vf')?' gal-vf':'')+(on?' on':'');
+    // Preserve the gal-sport-f / gal-model-f markers if present
+    if(el.dataset.sp)el.className+=' gal-sport-f';
+    else if(el.dataset.md)el.className+=' gal-model-f';
+    el.innerHTML=label+' <span style="opacity:.7;font-weight:400">'+count+'</span>';
+  };
+  setBtn(document.getElementById('galLikesToggle'),'Likes',verdictCounts.like||0,galShowLikes);
+  setBtn(document.getElementById('galSuperToggle'),'⭐ Super',verdictCounts.super||0,galShowSuper);
+  setBtn(document.getElementById('galRejToggle'),'Rejects',verdictCounts.reject||0,galShowRejects);
+  const sportLabels={motorcycle:'Moto',skiing:'Ski',snowboard:'Snow',snowmobile:'Sled',mtb:'MTB'};
+  document.querySelectorAll('.gal-sport-f').forEach(b=>{
+    const sp=b.dataset.sp;
+    setBtn(b,sportLabels[sp]||sp,sportCounts[sp]||0,galSportSet.has(sp));
+  });
+  const modelLabels={gpt:'GPT',flex:'FLUX',nbpro:'NB Pro',nb2:'NB2'};
+  document.querySelectorAll('.gal-model-f').forEach(b=>{
+    const md=b.dataset.md;
+    setBtn(b,modelLabels[md]||md,modelCounts[md]||0,galModelSet.has(md));
+  });
+
+  const sportIcon={motorcycle:'&#127949;',skiing:'&#9975;',snowboard:'&#127938;',snowmobile:'&#128757;',mtb:'&#128692;',other:'&#127918;'};
   g.innerHTML=filtered.map(img=>{
-    const cls=galScoreCls(img.score);
     const short=img.label.replace(/^(REF TEST |REF C: |BATCH: |FLIP FIX: |PIPE [A-Z]: |LoRA V5: |FLUX 2 LoRA: |FLEX g7: |NB PRO: |NB2: |FLUX-GPT: |MASK INPAINT: |MICRO: |COMBO: |DUALREF: )/,'');
-    const superBadge=img.isSuper?'<div style="position:absolute;top:24px;right:4px;font-size:.75rem;padding:.05rem .2rem;border-radius:4px;background:rgba(234,179,8,.95);color:#000;font-weight:700;box-shadow:0 0 6px rgba(234,179,8,.6)" title="Super-liked">&#11088;</div>':'';
-    const statusBadge=img.accepted===true?'<div style="position:absolute;top:4px;left:4px;font-size:.55rem;padding:.1rem .3rem;border-radius:3px;background:rgba(34,197,94,.85);color:#000;font-weight:700">&#10003;</div>'
-      :img.accepted===false?'<div style="position:absolute;top:4px;left:4px;font-size:.55rem;padding:.1rem .3rem;border-radius:3px;background:rgba(239,68,68,.85);color:#fff;font-weight:700">&#10007;</div>':'';
+    // Verdict badge in top-right (score badge removed per 2026-04-09 UX feedback)
+    const verdictBadge=img.isSuper
+      ?'<div style="position:absolute;top:4px;right:4px;font-size:.85rem;padding:.05rem .25rem;border-radius:4px;background:rgba(234,179,8,.95);color:#000;font-weight:700;box-shadow:0 0 8px rgba(234,179,8,.6)" title="Super-liked">&#11088;</div>'
+      :img.accepted===true
+        ?'<div style="position:absolute;top:4px;right:4px;font-size:.6rem;padding:.15rem .35rem;border-radius:4px;background:rgba(34,197,94,.85);color:#000;font-weight:700" title="Like">&#9829;</div>'
+        :img.accepted===false
+          ?'<div style="position:absolute;top:4px;right:4px;font-size:.65rem;padding:.1rem .3rem;border-radius:4px;background:rgba(239,68,68,.85);color:#fff;font-weight:700" title="Reject">&#10007;</div>'
+          :'';
     const modelTag='<div style="position:absolute;bottom:18px;left:4px;font-size:.45rem;padding:.1rem .25rem;border-radius:3px;background:rgba(0,0,0,.7);color:#06b6d4;font-weight:600">'+img.model.split('(')[0].trim().replace('FLUX 2 Flex g7.0','FLUX Flex').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT 1.5')+'</div>';
-    return '<div class="gal-card'+(img.isSuper?' gal-super':'')+'" onclick="galOpen(\''+img.id+'\')"><img src="'+img.url+'" loading="lazy" alt="">'+statusBadge+superBadge+'<div class="gal-score '+cls+'">'+Math.round(img.score)+'</div>'+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
+    return '<div class="gal-card'+(img.isSuper?' gal-super':'')+'" onclick="galOpen(\''+img.id+'\')"><img src="'+img.url+'" loading="lazy" alt="">'+verdictBadge+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
   }).join('');
 
-  // Build summary line
-  const acceptedCount=scored.filter(i=>i.accepted===true).length;
-  const rejectedCount=scored.filter(i=>i.accepted===false).length;
-  document.getElementById('counter').innerHTML=filtered.length+' shown — '+acceptedCount+' <span style="color:#22c55e">accepted</span>, '+rejectedCount+' <span style="color:#ef4444">rejected</span> of '+scored.length+' reviewed';
+  // Build summary line — verdict counts
+  const superCount=scored.filter(i=>i.verdictBucket==='super').length;
+  const likeCount=scored.filter(i=>i.verdictBucket==='like').length;
+  const rejectCount=scored.filter(i=>i.verdictBucket==='reject').length;
+  document.getElementById('counter').innerHTML=filtered.length+' shown — '
+    +'<span style="color:#eab308">⭐ '+superCount+'</span> · '
+    +'<span style="color:#22c55e">♥ '+likeCount+'</span> · '
+    +'<span style="color:#ef4444">✗ '+rejectCount+'</span>'
+    +' of '+scored.length+' reviewed';
 }
 
 function galOpen(id){
