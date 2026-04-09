@@ -172,8 +172,19 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .cr-unhide-btn{background:rgba(168,85,247,.8)}
 .cr-card.cr-card-hidden{opacity:.4;border-color:#7f1d1d}
 .cr-card.cr-card-hidden:hover{opacity:.7}
-.cr-make-btn{width:100%;background:linear-gradient(135deg,#a855f7,#6d28d9);border:none;color:#fff;padding:.45rem;border-radius:6px;font-size:.65rem;font-weight:700;cursor:pointer}
+.cr-card-btns{display:flex;gap:.3rem}
+.cr-make-btn{flex:1;background:linear-gradient(135deg,#a855f7,#6d28d9);border:none;color:#fff;padding:.45rem;border-radius:6px;font-size:.65rem;font-weight:700;cursor:pointer}
 .cr-make-btn:hover{opacity:.85}
+.cr-twist-btn{background:transparent;border:1.5px solid #a855f7;color:#a855f7;padding:.4rem .55rem;border-radius:6px;font-size:.65rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.cr-twist-btn:hover{background:#1a1030}
+.cr-twist-banner{display:flex;gap:.6rem;align-items:flex-start;background:#1a1030;border:2px solid #a855f7;border-radius:10px;padding:.6rem;margin-bottom:.6rem}
+.cr-twist-banner img{width:60px;height:80px;object-fit:cover;border-radius:6px;flex-shrink:0}
+.cr-twist-banner-body{flex:1;min-width:0}
+.cr-twist-banner-label{font-size:.7rem;color:#a855f7;font-weight:700;margin-bottom:.2rem}
+.cr-twist-banner-hint{font-size:.6rem;color:#aaa;line-height:1.35}
+.cr-twist-orig{margin-top:.35rem;font-size:.55rem;color:#888}
+.cr-twist-orig summary{cursor:pointer;color:#a855f7}
+.cr-twist-orig-body{margin-top:.3rem;padding:.35rem .5rem;background:#0a0a15;border-radius:4px;color:#ccc;font-family:ui-monospace,Menlo,monospace;line-height:1.4;max-height:180px;overflow-y:auto}
 /* Batch + keeper grid */
 .cr-batch-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;gap:.5rem}
 .cr-back{background:none;border:1px solid #333;color:#888;padding:.4rem .7rem;border-radius:6px;font-size:.65rem;cursor:pointer}
@@ -2913,7 +2924,10 @@ const CR={
       '<div class="cr-card-body">'+
         '<div class="cr-card-title">'+this.esc(title)+'</div>'+
         '<div class="cr-card-meta"><span class="cr-sport">'+sportIcon+' '+r.sport+'</span><span>\u2022</span><span>'+this.esc(modelShort)+'</span><span>\u2022</span><span>seed '+(r.seed!=null?r.seed:'\u2014')+'</span></div>'+
-        '<button class="cr-make-btn" onclick="event.stopPropagation();CR.startBatch(\''+r.id+'\',6)">Make 6 more like this</button>'+
+        '<div class="cr-card-btns">'+
+          '<button class="cr-make-btn" onclick="event.stopPropagation();CR.startBatch(\''+r.id+'\',6)">Make 6 more like this</button>'+
+          '<button class="cr-twist-btn" onclick="event.stopPropagation();CR.twistRecipe(\''+r.id+'\')" title="Keep the sport/model/ref/arm, write a new scene">\uD83C\uDFA8 Twist</button>'+
+        '</div>'+
       '</div>'+
     '</div>';
   },
@@ -3212,25 +3226,81 @@ const CR={
       refined:'',
       refinedAccepted:false,
       finalPrompt:'',
+      twistingFrom:null,     // null = blank New Scene (Flavor B)
+      twistingFromPrompt:'', // full original prompt, shown in the banner for reference
     };
     this.view='newscene';
     this.render();
+  },
+
+  // Flavor A: "Twist this recipe" — opens the New Scene form pre-populated
+  // from an existing recipe, so you keep the sport/model/ref/arm (and the
+  // exact CB2 block wording that produced the thumbnail) but write a fresh
+  // scene. Everything else works identically to Flavor B.
+  twistRecipe(recipeId){
+    const r=this.recipes.find(x=>x.id===recipeId);
+    if(!r){showToast('Recipe not found');return;}
+    const colorway=(r.ref&&r.ref.colorway)||'Hunter';
+    const endpoint=this.modelEndpoint(r.model);
+    // Map sport keys to the form's sport values (the form accepts 'sled' not 'snowmobile')
+    const sportMap={motorcycle:'moto',moto:'moto',skiing:'ski',ski:'ski',snowboard:'snow',snow:'snow',snowmobile:'sled',sled:'sled',mtb:'mtb'};
+    const formSport=sportMap[r.sport]||r.sport||'moto';
+    this.newScene={
+      sport:formSport,
+      colorway,
+      vibe:'editorial',
+      arm:r.arm||'LEFT',
+      batchSize:6,
+      scene:'',
+      refined:'',
+      refinedAccepted:false,
+      finalPrompt:'',
+      twistingFrom:r.id,
+      twistingFromPrompt:r.prompt||'',
+      twistingFromThumb:r.examples?.[0]?.url||'',
+      twistingFromPreferredEndpoint:endpoint,
+    };
+    this.view='newscene';
+    this.render();
+    // After the DOM renders, force the model dropdown to the pre-selected endpoint
+    // (renderNewScene uses DEFAULT_MODEL[sport] for the selected attribute, which may
+    // differ from the recipe's actual model).
+    setTimeout(()=>{
+      const sel=document.getElementById('crModelSelect');
+      if(sel&&this.newScene.twistingFromPreferredEndpoint)sel.value=this.newScene.twistingFromPreferredEndpoint;
+    },50);
   },
 
   renderNewScene(){
     const s=this.newScene;
     const colorwayRefs=this.refsForColorway(s.colorway);
     const gearStr=this.GEAR[s.sport]||'';
-    const defaultEndpoint=this.DEFAULT_MODEL[s.sport]||'fal-ai/nano-banana-pro/edit';
+    const defaultEndpoint=s.twistingFromPreferredEndpoint||this.DEFAULT_MODEL[s.sport]||'fal-ai/nano-banana-pro/edit';
     const cost=(this.MODEL_COST[defaultEndpoint]||0.12)*s.batchSize;
     const refOptions=colorwayRefs.length
       ?colorwayRefs.map(r=>'<option value="'+r.id+'">'+r.id+' \u00b7 '+r.type+'</option>').join('')
       :'<option value="">(no refs for this colorway)</option>';
+    const titleText=s.twistingFrom?'\uD83C\uDFA8 Twist this recipe':'+ New Scene';
+    // Banner shown when twisting an existing recipe: thumb + original prompt preview +
+    // hint that the sport/model/ref/arm are inherited. User only needs to write a new scene.
+    const twistBanner=s.twistingFrom
+      ?'<div class="cr-twist-banner">'+
+         (s.twistingFromThumb
+           ?'<img src="'+(typeof archivedUrl==="function"?archivedUrl(s.twistingFromThumb,(s.twistingFrom)):s.twistingFromThumb)+'" alt="" loading="lazy">'
+           :'')+
+         '<div class="cr-twist-banner-body">'+
+           '<div class="cr-twist-banner-label">Twisting: <strong>'+this.esc(s.twistingFrom)+'</strong></div>'+
+           '<div class="cr-twist-banner-hint">Sport, model, ref, and arm are inherited from this recipe. Just write a new scene below and click Assemble.</div>'+
+           '<details class="cr-twist-orig"><summary>View original prompt</summary><div class="cr-twist-orig-body">'+this.esc((s.twistingFromPrompt||'').slice(0,400))+(s.twistingFromPrompt&&s.twistingFromPrompt.length>400?'\u2026':'')+'</div></details>'+
+         '</div>'+
+       '</div>'
+      :'';
     return '<div class="cr-batch-head">'+
       '<button class="cr-back" onclick="CR.backToParade()">\u2190 Parade</button>'+
-      '<div class="cr-batch-title">+ New Scene</div>'+
+      '<div class="cr-batch-title">'+titleText+'</div>'+
       '<div style="width:72px"></div>'+
     '</div>'+
+    twistBanner+
     '<div class="cr-form">'+
       '<div class="cr-form-row">'+
         '<div class="cr-form-label">Sport</div>'+
