@@ -130,6 +130,7 @@ body{display:flex;flex-direction:column;touch-action:none}
     <option value="other">Other</option>
   </select>
   <div class="prog"><span class="y" id="pY">0</span>/<span id="pTotal">0</span><span class="n" id="pN">0</span><span class="s" id="pS">⭐0</span></div>
+  <button id="btnNBPro" title="Rate the 25 NB Pro action-batch photos (re-queues even if already swiped)" style="color:#fbbf24;border-color:#a16207">🔥 NB Pro 25</button>
   <button id="btnUndoTop" title="Undo (U)">↺</button>
   <button id="btnSummary">📊</button>
   <button id="btnReset" class="danger" title="Reset (clears all ratings)">🗑</button>
@@ -247,7 +248,23 @@ function shuffle(arr){
   return a;
 }
 
+// The 25 Nano Banana Pro action-batch photos (Apr 7) — used by the "🔥 NB Pro 25" button override
+const NBPRO_IDS = [
+  'act-ski-7001','act-ski-7002','act-ski-7003','act-ski-7004','act-ski-7005',
+  'act-sled-7001','act-sled-7002','act-sled-7003','act-sled-7004','act-sled-7005',
+  'act-moto-7001','act-moto-7002','act-moto-7003','act-moto-7004','act-moto-7005',
+  'act-mtb-7001','act-mtb-7002','act-mtb-7003','act-mtb-7004','act-mtb-7005',
+  'glove-moto-8001','glove-moto-8002','glove-moto-8003','glove-moto-8004','glove-moto-8005'
+];
+// Session-only flag: when true, getPool() returns the 25 NB Pro items instead of the normal queue
+let nbproMode = false;
+
 function getPool(){
+  if (nbproMode){
+    const lookup = {};
+    CORPUS.forEach(i => lookup[i.id] = i);
+    return NBPRO_IDS.map(id => lookup[id]).filter(Boolean);
+  }
   const sport = document.getElementById('sport').value;
   let items = sport === 'all' ? CORPUS : CORPUS.filter(c => c.sport === sport);
   // Ensure a stable shuffled order per sport (per-session, not per-action)
@@ -519,11 +536,30 @@ document.getElementById('btnNo').onclick = () => actionButton('no');
 document.getElementById('btnSuper').onclick = () => actionButton('super');
 document.getElementById('btnUndoTop').onclick = undo;
 document.getElementById('sport').onchange = () => {
+  // Changing sport cancels the NB Pro override
+  nbproMode = false;
   renderStack();
   updateProgress();
 };
 document.getElementById('btnReset').onclick = confirmReset;
 document.getElementById('btnSummary').onclick = showSummary;
+document.getElementById('btnNBPro').onclick = rateNBPro;
+
+function rateNBPro(){
+  // Clear any prior ratings on these 25 so they surface as unrated
+  NBPRO_IDS.forEach(id => {
+    delete state.yes[id];
+    delete state.no[id];
+    delete state.superlike[id];
+  });
+  saveState();
+  // Flip the session-only override flag so getPool() returns just these 25
+  nbproMode = true;
+  hideSummary();
+  renderStack();
+  updateProgress();
+  toast('Queue set to 25 NB Pro');
+}
 
 function confirmReset(){
   if (!confirm('Clear ALL ratings? This cannot be undone.')) return;
