@@ -1,0 +1,32 @@
+name = "cb2-proxy"
+main = "worker.js"
+compatibility_date = "2026-04-09"
+
+# Secrets (set via wrangler secret put, NOT committed):
+#   FAL_KEY         — fal.ai API key
+#   ANTHROPIC_KEY   — Anthropic API key
+#   SHARED_PASSWORD — team gate password
+#
+# To set:
+#   cd scripts/cf-worker
+#   wrangler secret put FAL_KEY
+#   wrangler secret put ANTHROPIC_KEY
+#   wrangler secret put SHARED_PASSWORD
+#
+# To deploy:
+#   wrangler deploy
+#
+# To test locally:
+#   wrangler dev
+#   curl http://localhost:8787 # should return {ok:true,...}
+
+# Uncomment to restrict to specific routes once you have a custom domain.
+# Free tier uses cb2-proxy.<your-subdomain>.workers.dev automatically.
+# [[routes]]
+# pattern = "cb2-proxy.example.com/*"
+# zone_name = "example.com"
+
+# Optional: observability (Workers Analytics Engine — free tier)
+[observability]
+enabled = true
+head_sampling_rate = 1.0

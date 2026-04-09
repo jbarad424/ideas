@@ -7,6 +7,34 @@
 
 ---
 
+## 📍 END-OF-DAY STATE (2026-04-09 evening)
+
+**What shipped today (fully deployed):**
+- ✅ **Tron colorway unlocked** — 80 NB Pro gens ($12), 77/80 rated, 7 refs locked into production (t18 champion, t01/t03/t11 Tier 1, t05/t09/t17 Tier 2). t10/t16 killed.
+- ✅ **tron-ab-review.html** live on GitHub Pages with permanent image URLs + keyboard shortcuts
+- ✅ **80 gens + 20 original refs archived** on `jbarad424/ideas` at permanent URLs (`tron-ab-gens/` and `ref-library/tron-raw/`)
+- ✅ **🔥 NB Pro 25 button retired** from cb-rate.html (batch complete)
+- ✅ **`cb-learning.json` scaffold shipped** (Part 0.3 done)
+- ✅ **CLAUDE.md updated** with Tron ref table entries, killed list, session priorities rewrite (commit `5755a55`)
+- ✅ **`tron-triage.html` retired** and auto-redirects to the review page
+
+**What's code-complete but not deployed (waiting on Justin's external actions):**
+- ⏸ **CF Worker code** at `scripts/cf-worker/worker.js` — ready to `wrangler deploy`. Blocks on Justin: CF account + Wrangler install + shared password + rotated fal.ai key + Anthropic key. See `JUSTIN-TODO-CF-WORKER.md`.
+- ⏸ **CREATE tab Part 1 data layer** at `scripts/create-tab/data.js` — tested against real `cb-keepers.json`, produces 93 recipes from 217 keepers, 32 multi-example Hit Parade candidates, top recipe is moto desert canyon with 22 examples + 8 super-likes. Can ship standalone; integrates into cb-review.html once Worker is deployed.
+
+**What's explicitly deferred (not blocking v1):**
+- ⏳ Part 2.3 "Write your own" Flavor C → v2
+- ⏳ Part 2.4 "Twist this recipe" Flavor A → v2
+- ⏳ Part 4.4 Auto-defaulting model/ref → v2 (after ≥ 20 batches of real data)
+- ⏳ Part 4.6 Novel scene auto-promotion → v2
+- ⏳ Rail 2 "Creative One-offs" → v2 (only if Rail 1 isn't enough)
+
+**Critical path to ship CREATE tab v1:** CF Worker deployed → `cb-review.html` edits (strip keys, add proxyCall, add password modal, fix SYNC_URL, add CREATE tab UI) → integrate Part 1 data layer → build Part 2.1 recipe cards + Part 2.2 "+New Scene" + Part 3 keeper grid + Parts 4.1-4.3 learning loop. **Every step after "CF Worker deployed" is my work; Worker deployment is the blocker on Justin.**
+
+---
+
+---
+
 ## Guiding Principle — the 80/20 rule (North Star)
 
 > Every exchange spawns six or seven ways to keep going. Guide me toward the 80/20 route. Seeds are random — don't chase randomness. If UX is getting complicated, pull me back to "let's finish this."
