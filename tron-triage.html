@@ -1,0 +1,90 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tron Ref Shoot — Jordan 2026-04-09</title>
+<style>
+body{font:14px -apple-system,system-ui,sans-serif;background:#111;color:#eee;margin:0;padding:16px;}
+h1{font-size:18px;margin:0 0 4px;}
+.sub{color:#888;margin-bottom:14px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
+.card{background:#1e1e1e;border:3px solid #333;border-radius:8px;overflow:hidden;cursor:pointer;transition:all .15s;}
+.card.keep{border-color:#4ade80;}
+.card.skip{border-color:#ef4444;opacity:.35;}
+.card img{width:100%;display:block;background:#000;min-height:120px;}
+.label{padding:7px 10px;font-size:12px;display:flex;justify-content:space-between;}
+.tag{color:#888;}
+.keep .tag{color:#4ade80;font-weight:bold;}
+.skip .tag{color:#ef4444;font-weight:bold;}
+.bar{position:sticky;top:0;background:#111;padding:12px 0;margin-bottom:0;z-index:10;border-bottom:1px solid #333;}
+button{background:#333;color:#eee;border:1px solid #555;padding:7px 14px;border-radius:4px;cursor:pointer;margin-right:6px;font:inherit;}
+button:hover{background:#444;}
+#summary{color:#4ade80;font-weight:bold;margin-left:10px;}
+#out{background:#000;padding:10px;border-radius:4px;color:#4ade80;font-family:ui-monospace,Menlo,monospace;font-size:12px;white-space:pre-wrap;word-break:break-word;margin-top:8px;display:none;}
+</style></head><body>
+<h1>Tron Ref Shoot — triage (Jordan, 2026-04-09)</h1>
+<div class="sub">20 photos from Drive folder <code>1DfR8YHW9L2BLb_w-JZhKEdj_Vfo1D4es</code>. Click a card once = Keep (green), twice = Skip (red), thrice = Unmarked. Hit "Show picks" when done, copy the list back to Claude.</div>
+<div class="bar">
+  <button onclick="showPicks()">Show picks</button>
+  <button onclick="document.querySelectorAll('.card').forEach(c=>{c.className='card';c.querySelector('.tag').textContent='—';});updateSummary()">Clear all</button>
+  <span id="summary">0 keep · 0 skip · 20 unmarked</span>
+  <pre id="out"></pre>
+</div>
+<div class="grid">
+  <div class="card" data-n="IMG_7184" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1iC67fOEGyuv6jJn-0uXFHnVmevXRtjGk=w600" loading="lazy" alt="IMG_7184"><div class="label"><span>#01 IMG_7184</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7185" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1jxVP6yb1RGSdQj551w9tc_GsZCF5fdy0=w600" loading="lazy" alt="IMG_7185"><div class="label"><span>#02 IMG_7185</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7186" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1EGepZNq9qZ8QipBmR3XQCIWsh7kFbR3a=w600" loading="lazy" alt="IMG_7186"><div class="label"><span>#03 IMG_7186</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7187" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/15-9JyB3VQvnItMar27tvKvNrjJ1ysW-d=w600" loading="lazy" alt="IMG_7187"><div class="label"><span>#04 IMG_7187</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7188" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/14wFf-JNdzJ44DnaEcHZtT-5MiFvD6tWE=w600" loading="lazy" alt="IMG_7188"><div class="label"><span>#05 IMG_7188</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7189" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1HpSg9A5Cr89zQclZ_UqlJsThBYwePXlb=w600" loading="lazy" alt="IMG_7189"><div class="label"><span>#06 IMG_7189</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7190" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1J7XBg4bVToxeNLlESKTVQaPkf1KMqzuv=w600" loading="lazy" alt="IMG_7190"><div class="label"><span>#07 IMG_7190</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7191" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1F29NpOOcZceKfmTCsc3kXvXjrMwtvZ_w=w600" loading="lazy" alt="IMG_7191"><div class="label"><span>#08 IMG_7191</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7192" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/15juvsZ5uULR6ChLP5zAVhiN_mMxhrQWZ=w600" loading="lazy" alt="IMG_7192"><div class="label"><span>#09 IMG_7192</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7193" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1anfPl4uJ3dHpAkGfHWgkAE6pjkUBY83w=w600" loading="lazy" alt="IMG_7193"><div class="label"><span>#10 IMG_7193</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7194" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1FlOTSnp1w0hcwve3masxCN7ayW6epCQ0=w600" loading="lazy" alt="IMG_7194"><div class="label"><span>#11 IMG_7194</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7195" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1f4aZySxxytuXAN5lXIlgFT9p_bg645RJ=w600" loading="lazy" alt="IMG_7195"><div class="label"><span>#12 IMG_7195</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7196" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1LfFB3ec_BVYfmVKELIY1N-NE8nWJDLlb=w600" loading="lazy" alt="IMG_7196"><div class="label"><span>#13 IMG_7196</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7197" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1DnHwYQBBfL9zCbZsjILudozCYPJ6oz1_=w600" loading="lazy" alt="IMG_7197"><div class="label"><span>#14 IMG_7197</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7198" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/141kPI_mPO7Ry7eJ1G5Uay-rEdjMKrBqu=w600" loading="lazy" alt="IMG_7198"><div class="label"><span>#15 IMG_7198</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7199" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1hyuDNmldEa6PjjvL2n6PkIYgVGmusNdD=w600" loading="lazy" alt="IMG_7199"><div class="label"><span>#16 IMG_7199</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7200" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1VTOu2axfFhFSCY69ha9D3wRjHp-u9sJI=w600" loading="lazy" alt="IMG_7200"><div class="label"><span>#17 IMG_7200</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7201" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/15qQAInr--xwNn5ZG06HNMPZH4gzf3nSm=w600" loading="lazy" alt="IMG_7201"><div class="label"><span>#18 IMG_7201</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7202" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1dHAc8wIETg0TSmCLrpt5EiEZ6sFo67iW=w600" loading="lazy" alt="IMG_7202"><div class="label"><span>#19 IMG_7202</span><span class="tag">—</span></div></div>
+  <div class="card" data-n="IMG_7203" onclick="tog(this)"><img src="https://lh3.googleusercontent.com/d/1uCUnWwq4RpO6uDpb5EwkMrpxa6jE9ljW=w600" loading="lazy" alt="IMG_7203"><div class="label"><span>#20 IMG_7203</span><span class="tag">—</span></div></div>
+</div>
+<script>
+function tog(el){
+  const cls=el.className;
+  if(cls==='card'){el.className='card keep';el.querySelector('.tag').textContent='✓ keep';}
+  else if(cls==='card keep'){el.className='card skip';el.querySelector('.tag').textContent='✗ skip';}
+  else{el.className='card';el.querySelector('.tag').textContent='—';}
+  updateSummary();
+  save();
+}
+function updateSummary(){
+  const k=document.querySelectorAll('.card.keep').length;
+  const s=document.querySelectorAll('.card.skip').length;
+  const u=20-k-s;
+  document.getElementById('summary').textContent=`${k} keep · ${s} skip · ${u} unmarked`;
+}
+function showPicks(){
+  const k=[...document.querySelectorAll('.card.keep')].map(c=>c.dataset.n);
+  const s=[...document.querySelectorAll('.card.skip')].map(c=>c.dataset.n);
+  const out=document.getElementById('out');
+  out.style.display='block';
+  out.textContent=`KEEP (${k.length}): ${k.join(', ')||'(none)'}\n\nSKIP (${s.length}): ${s.join(', ')||'(none)'}`;
+}
+function save(){
+  const st={};
+  document.querySelectorAll('.card').forEach(c=>{
+    if(c.className!=='card') st[c.dataset.n]=c.className.replace('card ','');
+  });
+  localStorage.setItem('tron_triage',JSON.stringify(st));
+}
+try{
+  const st=JSON.parse(localStorage.getItem('tron_triage')||'{}');
+  Object.entries(st).forEach(([n,cls])=>{
+    const el=document.querySelector(`.card[data-n="${n}"]`);
+    if(el){el.className='card '+cls;el.querySelector('.tag').textContent=cls==='keep'?'✓ keep':'✗ skip';}
+  });
+  updateSummary();
+}catch(e){}
+</script>
+</body></html>
