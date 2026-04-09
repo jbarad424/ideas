@@ -130,7 +130,6 @@ body{display:flex;flex-direction:column;touch-action:none}
     <option value="other">Other</option>
   </select>
   <div class="prog"><span class="y" id="pY">0</span>/<span id="pTotal">0</span><span class="n" id="pN">0</span><span class="s" id="pS">⭐0</span></div>
-  <button id="btnNBPro" title="Rate the 25 NB Pro action-batch photos (re-queues even if already swiped)" style="color:#fbbf24;border-color:#a16207">🔥 NB Pro 25</button>
   <button id="btnUndoTop" title="Undo (U)">↺</button>
   <button id="btnSummary">📊</button>
   <button id="btnReset" class="danger" title="Reset (clears all ratings)">🗑</button>
@@ -248,7 +247,9 @@ function shuffle(arr){
   return a;
 }
 
-// The 25 Nano Banana Pro action-batch photos (Apr 7) — used by the "🔥 NB Pro 25" button override
+// ARCHIVED 2026-04-09 — Justin finished rating these 25. Button removed from UI.
+// Array + rateNBPro() preserved as dead code so this batch can be re-queued if needed.
+// Original commit: 5b726f3 (cb-rate: add "🔥 NB Pro 25" button).
 const NBPRO_IDS = [
   'act-ski-7001','act-ski-7002','act-ski-7003','act-ski-7004','act-ski-7005',
   'act-sled-7001','act-sled-7002','act-sled-7003','act-sled-7004','act-sled-7005',
@@ -543,7 +544,7 @@ document.getElementById('sport').onchange = () => {
 };
 document.getElementById('btnReset').onclick = confirmReset;
 document.getElementById('btnSummary').onclick = showSummary;
-document.getElementById('btnNBPro').onclick = rateNBPro;
+// btnNBPro retired 2026-04-09 — button removed from UI; rateNBPro() kept as dead code for possible revival.
 
 function rateNBPro(){
   // Clear any prior ratings on these 25 so they surface as unrated
