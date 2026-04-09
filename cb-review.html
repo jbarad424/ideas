@@ -1710,11 +1710,51 @@ function vidLabCheck(){
     }
   }catch(e){}
 }
+// Video Lab poller — polls the Worker's fal-get target (not fal.media directly)
+// every 15s. Survives page reloads via localStorage.cb2_videolab_job.
+// Re-enabled 2026-04-09 after Worker gained fal-submit + fal-get targets.
 function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
-  // Video Lab temporarily disabled 2026-04-09 — see vidLabGenerate() stub.
-  // If you get here via localStorage restoration from a pre-disable job, clear state
-  // so it doesn't keep trying to resume on every reload.
-  localStorage.removeItem('cb2_videolab_job');
+  // Resolve requestId from localStorage if not passed (backward compat for resume-on-reload)
+  if(!requestId){const j=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');if(j)requestId=j.requestId;}
+  let polls=0;
+  const st=document.getElementById('vidLabStatus');
+  const poller=setInterval(async()=>{
+    polls++;
+    try{
+      const s=await proxyCall('fal-get',{url:statusUrl});
+      const prog=document.getElementById('vidLabProgress');
+      if(!prog){clearInterval(poller);return;}
+      prog.textContent='Status: '+(s.status||'checking')+' — poll #'+polls;
+      if(s.status==='COMPLETED'){
+        clearInterval(poller);
+        localStorage.removeItem('cb2_videolab_job');
+        prog.innerHTML='<span style="color:#22c55e;font-weight:700">COMPLETED!</span> Fetching video\u2026';
+        const res=await proxyCall('fal-get',{url:resultUrl});
+        const vidUrl=res?.video?.url||res?.output?.video?.url;
+        if(vidUrl){
+          prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done!</span> Video ready below.';
+          const preview=document.createElement('div');
+          preview.style.cssText='margin-top:.5rem';
+          preview.innerHTML='<video controls playsinline autoplay loop style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
+            +'<div style="font-size:.55rem;color:#888;margin-top:.2rem;word-break:break-all">'+vidUrl+'</div>';
+          if(st)st.appendChild(preview);
+          showToast('Video ready! '+platformName+' completed');
+        }else{
+          prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found.</span>';
+        }
+        if(requestId)vidJobUpdate(requestId,{status:'COMPLETED',videoUrl:vidUrl||''});
+      }else if(s.status==='FAILED'||s.status==='ERROR'){
+        clearInterval(poller);
+        localStorage.removeItem('cb2_videolab_job');
+        prog.innerHTML='<span style="color:#ef4444;font-weight:700">FAILED</span> \u2014 '+(s.error||'unknown error');
+        if(requestId)vidJobUpdate(requestId,{status:'FAILED'});
+      }
+    }catch(e){
+      // Network errors or 401 — don't spam, but surface to progress element
+      const prog=document.getElementById('vidLabProgress');
+      if(prog)prog.textContent='Poll error (will retry): '+(e.message||'').slice(0,80);
+    }
+  },15000);
 }
 function vidLabDismiss(){
   localStorage.removeItem('cb2_videolab_source');
@@ -1762,22 +1802,80 @@ function vidJobRender(){
       +'</div>';
   }).join('');
 }
-function vidJobRefreshAll(){
-  // Video Lab temporarily disabled 2026-04-09 — see vidLabGenerate() stub.
-  showToast('Video Lab temporarily disabled \u2014 pending Worker long-poll support');
+// Refresh pending Video Lab jobs by polling the Worker's fal-get target.
+// Re-enabled 2026-04-09.
+async function vidJobRefreshAll(){
+  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const pending=jobs.filter(j=>j.status!=='COMPLETED'&&j.status!=='FAILED');
+  if(!pending.length){showToast('All jobs already finished');return;}
+  showToast('Checking '+pending.length+' pending job(s)\u2026');
+  for(const j of pending){
+    try{
+      const s=await proxyCall('fal-get',{url:j.statusUrl});
+      if(s.status==='COMPLETED'){
+        const res=await proxyCall('fal-get',{url:j.resultUrl});
+        const vidUrl=res?.video?.url||res?.output?.video?.url;
+        vidJobUpdate(j.requestId,{status:'COMPLETED',videoUrl:vidUrl||''});
+        if(vidUrl)showToast(j.platform+' done! Tap Watch to view.');
+      }else{
+        vidJobUpdate(j.requestId,{status:s.status||'UNKNOWN'});
+      }
+    }catch(e){/* skip failures, user can retry */}
+  }
 }
-function vidLabGenerate(platform){
-  // Video Lab temporarily disabled 2026-04-09 ------------------------------------
-  // Videos (Kling/Sora/Veo) take 60-300+ seconds, which exceeds the CF Worker's
-  // 135s internal polling window. Re-enabling needs either:
-  //   (a) paid Workers plan + extended polling budget, OR
-  //   (b) new Worker targets fal-submit + fal-status for client-side polling.
-  // Tracked in PLAN-CREATE-TAB-V2.md "Deferred" section.
-  // Legacy code previously here (submit+poll with hardcoded FAL key) was removed
-  // in commit that introduced proxyCall/mmGen. Git history has the full original.
-  const statusEl=document.getElementById('vidLabStatus');
-  if(statusEl)statusEl.innerHTML='<div style="background:#2a1a10;border:2px solid #f59e0b;border-radius:8px;padding:.6rem;color:#f59e0b;font-size:.7rem"><strong>Video Lab temporarily disabled</strong><br><span style="color:#ccc">Pending long-running job support in the CF Worker. Images via CREATE tab still work. Animate winners via Claude Code directly for now.</span></div>';
-  document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+// Video Lab — re-enabled 2026-04-09 using Worker fal-submit + fal-get targets.
+// Client-side polling via vidLabResumePoll() every 15s (same UX as the original
+// direct-to-fal.media flow, just with the Worker injecting the FAL_KEY in the middle).
+async function vidLabGenerate(platform){
+  const src=JSON.parse(localStorage.getItem('cb2_videolab_source')||'null');
+  if(!src){showToast('No source image');return;}
+  const dir=(document.getElementById('vidLabDirection')?.value||'').trim();
+  const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
+  const prompt=dir?dir+'. '+basePrompt:basePrompt;
+  const info={
+    kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',cost:'~$1.50',
+      body:{image_url:src.url,prompt:prompt,duration:'10',aspect_ratio:'9:16'}},
+    'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',cost:'~$0.40',
+      body:{image_url:src.url,prompt:prompt,duration:'8s',aspect_ratio:'9:16'}},
+    sora:{name:'Sora 2 Pro',endpoint:'fal-ai/sora-2/image-to-video/pro',cost:'~$5.00',
+      body:{image_url:src.url,prompt:prompt,duration:16,aspect_ratio:'9:16'}},
+    runway:{name:'Runway Gen-4T',endpoint:null,cost:'~$0.50',body:null}
+  };
+  const p=info[platform]||info.kling;
+  if(!p.endpoint){
+    document.getElementById('vidLabStatus').innerHTML='<div style="color:#f59e0b;font-size:.65rem;margin-top:.3rem">Runway requires direct API \u2014 tell Claude Code: <strong>"animate '+src.label+' with Runway Gen-4 Turbo"</strong></div>';
+    return;
+  }
+  document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=true;b.style.opacity='.4';});
+  const st=document.getElementById('vidLabStatus');
+  if(st)st.innerHTML='<div style="background:#1a1030;border:2px solid #a855f7;border-radius:8px;padding:.6rem;text-align:center">'
+    +'<div style="font-size:.8rem;color:#a855f7;font-weight:700">Submitting to '+p.name+'\u2026</div>'
+    +'<div style="font-size:.6rem;color:#888;margin-top:.2rem">'+p.cost+' per video</div></div>';
+
+  try{
+    // Submit via Worker fal-submit (returns immediately with request_id + URLs)
+    const d=await proxyCall('fal-submit',{endpoint:p.endpoint,input:p.body});
+    if(!d.request_id){
+      if(st)st.innerHTML='<div style="color:#ef4444">Error: '+JSON.stringify(d).slice(0,200)+'</div>';
+      document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+      return;
+    }
+    const rid=d.request_id;
+    const statusUrl=d.status_url||('https://queue.fal.run/'+p.endpoint.replace(/\/[^/]+$/,'')+'/requests/'+rid+'/status');
+    const resultUrl=d.response_url||('https://queue.fal.run/'+p.endpoint.replace(/\/[^/]+$/,'')+'/requests/'+rid);
+    // Save job state so it survives page reloads
+    localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,submitted:new Date().toISOString()}));
+    // Log to Job History so it's never lost
+    vidJobLog({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,label:src.label,model:src.model,sourceUrl:src.url,prompt:prompt,status:'IN_QUEUE',submitted:new Date().toISOString()});
+    if(st)st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
+      +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.2rem">Job Submitted!</div>'
+      +'<div id="vidLabProgress" style="font-size:.65rem;color:#ccc">Status: IN_QUEUE \u2014 checking every 15s\u2026</div>'
+      +'<div style="font-size:.5rem;color:#666;margin-top:.3rem">Request: '+rid.slice(0,18)+'\u2026</div></div>';
+    vidLabResumePoll(statusUrl,resultUrl,p.name,rid);
+  }catch(e){
+    if(st)st.innerHTML='<div style="color:#ef4444">Error: '+(e.message||'unknown').slice(0,200)+'</div>';
+    document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+  }
 }
 
 // === Claude prompt refiner — rewrites rough cues into Kling-optimized prompts ===
