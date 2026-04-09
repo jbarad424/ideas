@@ -225,9 +225,11 @@ function render(){
       const score = r.score;
       const flagObj = r.flags || {};
 
+      // Permanent GitHub Pages archive URL (primary), fal.media fallback (in case of CDN propagation gap)
+      const permUrl = result && result.url ? `https://jbarad424.github.io/ideas/tron-ab-gens/${label}.jpg` : null;
       let thumbHtml;
       if(result && result.url){
-        thumbHtml = `<div class="thumb-wrap" onclick="openLb('${result.url}')"><img src="${result.url.replace('.jpg','.jpg?w=600')}" loading="lazy" onerror="this.src='${result.url}'"></div>`;
+        thumbHtml = `<div class="thumb-wrap" onclick="openLb('${permUrl}')"><img src="${permUrl}" loading="lazy" onerror="this.onerror=null;this.src='${result.url}'"></div>`;
       } else if(result && result.error){
         thumbHtml = `<div class="thumb-wrap error">⚠ ${(result.error || '').substring(0,50)}</div>`;
       } else {
