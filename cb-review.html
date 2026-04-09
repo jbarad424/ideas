@@ -72,6 +72,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .gal-filter:hover{border-color:#a855f7;color:#fff}
 .gal-filter.on{border-color:#a855f7;color:#a855f7;background:#1a1030}
 .gal-card{background:#111;border:1px solid #222;border-radius:8px;overflow:hidden;cursor:pointer;position:relative}
+.gal-card.gal-super{border:2px solid #eab308;box-shadow:0 0 12px rgba(234,179,8,.4)}
 .gal-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
 .gal-card .gal-score{position:absolute;top:4px;right:4px;font-size:.6rem;padding:.15rem .35rem;border-radius:4px;font-weight:700;backdrop-filter:blur(4px)}
 .gal-card .gal-score.s90{background:rgba(34,197,94,.85);color:#000}
@@ -1600,6 +1601,8 @@ function galDetectModel(img){
 function galIsAccepted(img){
   const cs=getC(img.id);if(!cs.length)return null;
   const txt=cs.map(c=>c.text).join(' ').toLowerCase();
+  // Explicit super-like marker always accepts (overrides everything below)
+  if(/\bsuper-like\b|\[super\]/.test(txt))return true;
   if(/does not pass|doesn't pass|not pass|rejected|does not work|doesn't work|total fail/.test(txt))return false;
   const s=galScore(img.id);
   if(s>=75)return true;
@@ -1608,6 +1611,43 @@ function galIsAccepted(img){
   if(/\bgreat\b|\blove\b|\bamazing\b|\bperfect\b|\bnailed\b|\bfire\b|\bfantastic\b|\bunbelievable\b|\bcool\b|\bawesome\b|\bpromising\b/.test(txt))return true;
   if(/\bfail\b|\bbad\b|\bwrong\b|\bmissing\b|\bgarbled\b|\bstrange\b|\bweird\b|\bnightmare\b/.test(txt))return false;
   return null;
+}
+
+// galIsSuper — checks for an explicit super-like marker comment.
+// Set via galToggleSuper() from the Gallery overlay; persists via syncFeedback().
+function galIsSuper(img){
+  const cs=getC(img.id);if(!cs.length)return false;
+  const txt=cs.map(c=>c.text).join(' ');
+  return /\[super\]|super-like/i.test(txt);
+}
+
+// galToggleSuper — toggles super-like status on an image. Called from the
+// Gallery overlay button. Persists via localStorage + fires syncFeedback()
+// so all team members see it.
+function galToggleSuper(id){
+  const d=D();
+  if(!d[id])d[id]={comments:[]};
+  const isSuperNow=galIsSuper({id});
+  if(isSuperNow){
+    // Remove all super-like comments
+    d[id].comments=d[id].comments.filter(c=>!/\[super\]|super-like/i.test(c.text||''));
+  }else{
+    d[id].comments.push({num:(d[id].comments.length||0)+1,text:'[super] marked super-like in Gallery',time:new Date().toISOString()});
+  }
+  try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+  // Update the button UI in the open overlay
+  const btn=document.getElementById('galSuperBtn-'+id);
+  if(btn){
+    const nowSuper=!isSuperNow;
+    btn.textContent=nowSuper?'\u2B50 Super-liked':'\u2606 Super-like';
+    btn.style.background=nowSuper?'#eab308':'transparent';
+    btn.style.color=nowSuper?'#000':'#eab308';
+  }
+  // Update the gallery card badge
+  renderGallery();
+  // Sync to GitHub Pages so 2-3 users see the same verdicts
+  try{if(typeof syncFeedback==='function')setTimeout(syncFeedback,300);}catch(e){}
+  showToast(isSuperNow?'Super-like removed':'\u2B50 Super-liked');
 }
 
 function galToggleRejects(){
@@ -2116,7 +2156,8 @@ function renderGallery(){
     bucket:galBucket(galScore(i.id)),
     sport:galDetectSport(i),
     modelCat:galDetectModel(i),
-    accepted:galIsAccepted(i)
+    accepted:galIsAccepted(i),
+    isSuper:galIsSuper(i),
   }));
   scored.sort((a,b)=>b.score-a.score);
 
@@ -2136,10 +2177,11 @@ function renderGallery(){
   g.innerHTML=filtered.map(img=>{
     const cls=galScoreCls(img.score);
     const short=img.label.replace(/^(REF TEST |REF C: |BATCH: |FLIP FIX: |PIPE [A-Z]: |LoRA V5: |FLUX 2 LoRA: |FLEX g7: |NB PRO: |NB2: |FLUX-GPT: |MASK INPAINT: |MICRO: |COMBO: |DUALREF: )/,'');
+    const superBadge=img.isSuper?'<div style="position:absolute;top:24px;right:4px;font-size:.75rem;padding:.05rem .2rem;border-radius:4px;background:rgba(234,179,8,.95);color:#000;font-weight:700;box-shadow:0 0 6px rgba(234,179,8,.6)" title="Super-liked">&#11088;</div>':'';
     const statusBadge=img.accepted===true?'<div style="position:absolute;top:4px;left:4px;font-size:.55rem;padding:.1rem .3rem;border-radius:3px;background:rgba(34,197,94,.85);color:#000;font-weight:700">&#10003;</div>'
       :img.accepted===false?'<div style="position:absolute;top:4px;left:4px;font-size:.55rem;padding:.1rem .3rem;border-radius:3px;background:rgba(239,68,68,.85);color:#fff;font-weight:700">&#10007;</div>':'';
     const modelTag='<div style="position:absolute;bottom:18px;left:4px;font-size:.45rem;padding:.1rem .25rem;border-radius:3px;background:rgba(0,0,0,.7);color:#06b6d4;font-weight:600">'+img.model.split('(')[0].trim().replace('FLUX 2 Flex g7.0','FLUX Flex').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT 1.5')+'</div>';
-    return '<div class="gal-card" onclick="galOpen(\''+img.id+'\')"><img src="'+img.url+'" loading="lazy" alt="">'+statusBadge+'<div class="gal-score '+cls+'">'+Math.round(img.score)+'</div>'+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
+    return '<div class="gal-card'+(img.isSuper?' gal-super':'')+'" onclick="galOpen(\''+img.id+'\')"><img src="'+img.url+'" loading="lazy" alt="">'+statusBadge+superBadge+'<div class="gal-score '+cls+'">'+Math.round(img.score)+'</div>'+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
   }).join('');
 
   // Build summary line
@@ -2163,6 +2205,7 @@ function galOpen(id){
     +'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+' — Score: <strong class="gal-score-edit" onclick="galEditScore(\''+img.id+'\',this)" style="color:'+(s>=90?'#22c55e':s>=70?'#f59e0b':s>=50?'#3b82f6':'#ef4444')+'">'+Math.round(s)+'/100</strong> <span style="font-size:.55rem;color:#555">(click to edit)</span></div>'
     +'<div style="font-size:.7rem;color:#aaa;max-height:200px;overflow-y:auto;text-align:left;background:#111;padding:.5rem;border-radius:6px">'+comment+'</div>'
     +'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
+    +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
     +'<a class="gal-dl" href="'+img.url+'" download target="_blank">Download Full Resolution</a>'
     +'<button class="gal-vidlab" onclick="galSendToVideoLab(\''+img.id+'\')">Send to Video Lab</button>'
     +'<button class="gal-mm" onclick="galToggleMM(\''+img.id+'\')">Make More Like This</button>'
@@ -2440,29 +2483,97 @@ const CR={
 
   // ---- entry point ----
   async open(){
-    document.getElementById('counter').textContent='CREATE \u2014 generate with proven recipes';
-    // Load learning + keepers lazily on first open
-    if(!this.learning)this.loadLearning();
+    document.getElementById('counter').textContent='CREATE \u2014 loading\u2026';
+    // Load learning (shared state from GitHub Pages, fallback to localStorage)
+    if(!this.learning)await this.loadLearning();
     this.loadHidden();
     if(!this.keepers){
       await this.loadKeepers();
       this.buildRecipes();
     }
+    document.getElementById('counter').textContent='CREATE \u2014 generate with proven recipes';
     this.view='parade';
     this.render();
   },
 
   // ---- persistence ----
-  loadLearning(){
+  // loadLearning — fetch-before-use from GitHub Pages (shared across all users),
+  // fall back to localStorage if the remote fetch fails (offline / CDN hiccup).
+  // After first fetch, the remote copy is merged with local cache by batch_id
+  // so unsynced local work isn't lost. Called on CREATE tab open.
+  async loadLearning(){
+    let remote=null;
     try{
-      this.learning=JSON.parse(localStorage.getItem('cb2_create_learning')||'null');
-    }catch(e){this.learning=null;}
-    if(!this.learning){
-      this.learning={version:1,alpha:0.3,batches:[],recipes:{},refs:{},models_by_sport:{}};
+      const r=await fetch('https://jbarad424.github.io/ideas/cb-learning.json?t='+Date.now(),{cache:'no-store'});
+      if(r.ok)remote=await r.json();
+    }catch(e){/* network error, fall through to local */}
+    let local=null;
+    try{local=JSON.parse(localStorage.getItem('cb2_create_learning')||'null');}catch(e){}
+    if(remote&&remote.meta){
+      if(local&&local.batches&&local.batches.length){
+        // Merge: keep any local batches the remote doesn't have yet (by batch_id)
+        const remoteIds=new Set((remote.batches||[]).map(b=>b.batch_id));
+        const unsynced=local.batches.filter(b=>!remoteIds.has(b.batch_id));
+        if(unsynced.length){
+          remote.batches=[...(remote.batches||[]),...unsynced];
+          // Re-apply unsynced counter bumps so local view is consistent until next push
+          // (the next saveLearning() call will push the merged state to remote)
+          for(const rec of unsynced){this.applyCounterBump(remote,rec);}
+        }
+      }
+      this.learning=remote;
+    }else if(local){
+      this.learning=local;
+    }else{
+      this.learning={meta:{version:1,alpha:0.3,created:new Date().toISOString()},batches:[],recipes:{},refs:{},models_by_sport:{}};
+    }
+    // Always cache latest state locally
+    localStorage.setItem('cb2_create_learning',JSON.stringify(this.learning));
+  },
+
+  // applyCounterBump — replays a single batch's EMA update on a learning object.
+  // Used during merge to preserve local unsynced state.
+  applyCounterBump(L,rec){
+    const a=(L.meta&&L.meta.alpha)||0.3;
+    const bump=(obj,key,rate,gen,kept)=>{
+      const prior=obj[key];
+      if(!prior)obj[key]={keeper_rate:rate,batches_run:1,total_generated:gen,total_kept:kept,last_batch_at:rec.at};
+      else{prior.keeper_rate=a*rate+(1-a)*prior.keeper_rate;prior.batches_run++;prior.total_generated+=gen;prior.total_kept+=kept;prior.last_batch_at=rec.at;}
+    };
+    if(!L.recipes)L.recipes={};
+    bump(L.recipes,rec.recipe_id,rec.keeper_rate,rec.generated,rec.kept_urls?.length||0);
+    if(rec.ref_id){
+      if(!L.refs)L.refs={};
+      if(!L.refs[rec.ref_id])L.refs[rec.ref_id]={overall:null,by_recipe:{}};
+      const op=L.refs[rec.ref_id].overall;
+      if(!op)L.refs[rec.ref_id].overall={keeper_rate:rec.keeper_rate,batches_run:1};
+      else{op.keeper_rate=a*rec.keeper_rate+(1-a)*op.keeper_rate;op.batches_run++;}
+      bump(L.refs[rec.ref_id].by_recipe,rec.recipe_id,rec.keeper_rate,rec.generated,rec.kept_urls?.length||0);
+    }
+    if(rec.sport){
+      if(!L.models_by_sport)L.models_by_sport={};
+      if(!L.models_by_sport[rec.sport])L.models_by_sport[rec.sport]={};
+      bump(L.models_by_sport[rec.sport],rec.model,rec.keeper_rate,rec.generated,rec.kept_urls?.length||0);
     }
   },
+
+  // saveLearning — persists locally AND syncs to GitHub Pages via Make.com webhook.
+  // Fire-and-forget on the remote push; local state is the SoT for the current session.
+  // Next loadLearning() call on another browser will pick up this push.
   saveLearning(){
     localStorage.setItem('cb2_create_learning',JSON.stringify(this.learning));
+    // Sync to remote (shared state for 2-3 users)
+    try{
+      fetch(SYNC_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          jsonContent:JSON.stringify(this.learning,null,2),
+          filename:'cb-learning.json',
+          commitMessage:'CREATE tab saveBatch '+new Date().toISOString().slice(0,19),
+        }),
+      }).then(()=>{/* success, nothing to do */}).catch(()=>{/* network error, local is SoT */});
+    }catch(e){/* no-op */}
   },
   loadHidden(){
     try{this.hiddenRecipes=JSON.parse(localStorage.getItem('cb2_create_hidden')||'{}')||{};}
@@ -2847,15 +2958,41 @@ const CR={
     this.learning.batches.push(rec);
     this.updateCounters(rec);
     this.saveLearning();
-    // Snapshot kept URLs into ALL_IMAGES so they appear in TO REVIEW
-    kept.forEach((url,idx)=>{
+    // Snapshot BOTH kept and rejected URLs into ALL_IMAGES so they appear
+    // in Gallery. Inject verdict comments so galIsAccepted() / galScore() know
+    // which is which, and galScore can infer a reasonable score from the verdict.
+    // (The local comment store is D(); syncFeedback() pushes it to cb-feedback.json
+    // via Make.com — this makes the verdict visible to all team members.)
+    const d=D();
+    const snapshotEntry=(url,idx,verdict)=>{
       const vid='cr-'+b.batch_id+'-'+idx;
-      if(!ALL_IMAGES.find(i=>i.id===vid)){
-        const entry={id:vid,url,model:this.MODEL_LABELS[b.endpoint]||b.model,prompt:b.recipe_prompt,label:'CREATE keeper: '+(b.recipe_id||'scene'),context:'CREATE batch '+b.batch_id+' \u00b7 recipe '+b.recipe_id+' \u00b7 keeper_rate '+Math.round(keeper_rate*100)+'%'};
-        ALL_IMAGES.push(entry);
-      }
-    });
-    try{mmSaveVariations(kept.map((url,idx)=>({id:'cr-'+b.batch_id+'-'+idx,url,model:this.MODEL_LABELS[b.endpoint]||b.model,prompt:b.recipe_prompt,label:'CREATE keeper: '+b.recipe_id,context:'CREATE batch '+b.batch_id})));}catch(e){}
+      if(ALL_IMAGES.find(i=>i.id===vid))return;
+      const modelLabel=this.MODEL_LABELS[b.endpoint]||b.model;
+      const entry={
+        id:vid,
+        url,
+        model:modelLabel,
+        prompt:b.recipe_prompt,
+        label:(verdict==='kept'?'CREATE keeper: ':'CREATE reject: ')+(b.recipe_id||'scene'),
+        context:'CREATE batch '+b.batch_id+' \u00b7 recipe '+b.recipe_id+' \u00b7 keeper_rate '+Math.round(keeper_rate*100)+'%',
+      };
+      ALL_IMAGES.push(entry);
+      // Inject a synthetic verdict comment so Gallery filters work.
+      // Score 85 = kept (accepted), Score 20 = rejected (filtered by Show rejects).
+      if(!d[vid])d[vid]={comments:[]};
+      d[vid].comments.push({
+        num:1,
+        text:verdict==='kept'?'Final score: 85 (CREATE keeper)':'Final score: 20 (CREATE reject)',
+        time:new Date().toISOString(),
+      });
+    };
+    kept.forEach((url,idx)=>snapshotEntry(url,idx,'kept'));
+    rejected.forEach((url,idx)=>snapshotEntry(url,kept.length+idx,'rejected'));
+    // Persist the verdict comments to the same localStorage key D() reads from
+    try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+    try{mmSaveVariations([...kept.map((url,idx)=>({id:'cr-'+b.batch_id+'-'+idx,url,model:this.MODEL_LABELS[b.endpoint]||b.model,prompt:b.recipe_prompt,label:'CREATE keeper: '+b.recipe_id,context:'CREATE batch '+b.batch_id})),...rejected.map((url,idx)=>({id:'cr-'+b.batch_id+'-'+(kept.length+idx),url,model:this.MODEL_LABELS[b.endpoint]||b.model,prompt:b.recipe_prompt,label:'CREATE reject: '+b.recipe_id,context:'CREATE batch '+b.batch_id}))]);}catch(e){}
+    // Fire-and-forget sync of the feedback verdicts so other users see them
+    try{if(typeof syncFeedback==='function')setTimeout(syncFeedback,500);}catch(e){}
     counts();
     showToast('Saved \u00b7 '+kept.length+' keepers \u00b7 '+Math.round(keeper_rate*100)+'% rate');
     this.currentBatch=null;
