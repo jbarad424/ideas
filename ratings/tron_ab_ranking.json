@@ -1,0 +1,362 @@
+[
+  {
+    "id": "t18",
+    "name": "IMG_7201",
+    "fives": 4,
+    "fours": 0,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 0,
+    "avg": 5.0,
+    "rank_key": [
+      4,
+      0,
+      5.0,
+      0
+    ]
+  },
+  {
+    "id": "t01",
+    "name": "IMG_7184",
+    "fives": 4,
+    "fours": 0,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 3,
+    "avg": 5.0,
+    "rank_key": [
+      4,
+      0,
+      5.0,
+      -3
+    ]
+  },
+  {
+    "id": "t03",
+    "name": "IMG_7186",
+    "fives": 4,
+    "fours": 0,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 3,
+    "avg": 5.0,
+    "rank_key": [
+      4,
+      0,
+      5.0,
+      -3
+    ]
+  },
+  {
+    "id": "t11",
+    "name": "IMG_7194",
+    "fives": 4,
+    "fours": 0,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 3,
+    "avg": 5.0,
+    "rank_key": [
+      4,
+      0,
+      5.0,
+      -3
+    ]
+  },
+  {
+    "id": "t05",
+    "name": "IMG_7188",
+    "fives": 3,
+    "fours": 1,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 4,
+    "avg": 4.75,
+    "rank_key": [
+      3,
+      0,
+      4.75,
+      -4
+    ]
+  },
+  {
+    "id": "t09",
+    "name": "IMG_7192",
+    "fives": 3,
+    "fours": 1,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 4,
+    "avg": 4.75,
+    "rank_key": [
+      3,
+      0,
+      4.75,
+      -4
+    ]
+  },
+  {
+    "id": "t17",
+    "name": "IMG_7200",
+    "fives": 3,
+    "fours": 0,
+    "threes": 1,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 1,
+    "avg": 4.5,
+    "rank_key": [
+      3,
+      0,
+      4.5,
+      -1
+    ]
+  },
+  {
+    "id": "t08",
+    "name": "IMG_7191",
+    "fives": 3,
+    "fours": 0,
+    "threes": 0,
+    "twos": 1,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 0,
+    "avg": 4.25,
+    "rank_key": [
+      3,
+      -3,
+      4.25,
+      0
+    ]
+  },
+  {
+    "id": "t15",
+    "name": "IMG_7198",
+    "fives": 2,
+    "fours": 1,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 1,
+    "rot180": 1,
+    "avg": 4.67,
+    "rank_key": [
+      2,
+      0,
+      4.666666666666667,
+      -1
+    ]
+  },
+  {
+    "id": "t20",
+    "name": "IMG_7203",
+    "fives": 2,
+    "fours": 1,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 1,
+    "avg": 4.67,
+    "rank_key": [
+      2,
+      0,
+      4.666666666666667,
+      -1
+    ]
+  },
+  {
+    "id": "t14",
+    "name": "IMG_7197",
+    "fives": 2,
+    "fours": 2,
+    "threes": 0,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 0,
+    "avg": 4.5,
+    "rank_key": [
+      2,
+      0,
+      4.5,
+      0
+    ]
+  },
+  {
+    "id": "t13",
+    "name": "IMG_7196",
+    "fives": 2,
+    "fours": 1,
+    "threes": 1,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 1,
+    "avg": 4.25,
+    "rank_key": [
+      2,
+      0,
+      4.25,
+      -1
+    ]
+  },
+  {
+    "id": "t02",
+    "name": "IMG_7185",
+    "fives": 2,
+    "fours": 1,
+    "threes": 1,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 2,
+    "avg": 4.25,
+    "rank_key": [
+      2,
+      0,
+      4.25,
+      -2
+    ]
+  },
+  {
+    "id": "t04",
+    "name": "IMG_7187",
+    "fives": 2,
+    "fours": 1,
+    "threes": 1,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 2,
+    "avg": 4.25,
+    "rank_key": [
+      2,
+      0,
+      4.25,
+      -2
+    ]
+  },
+  {
+    "id": "t16",
+    "name": "IMG_7199",
+    "fives": 2,
+    "fours": 0,
+    "threes": 0,
+    "twos": 0,
+    "ones": 1,
+    "unrated": 1,
+    "rot180": 3,
+    "avg": 3.67,
+    "rank_key": [
+      2,
+      -10,
+      3.6666666666666665,
+      -3
+    ]
+  },
+  {
+    "id": "t10",
+    "name": "IMG_7193",
+    "fives": 2,
+    "fours": 0,
+    "threes": 1,
+    "twos": 0,
+    "ones": 1,
+    "unrated": 0,
+    "rot180": 2,
+    "avg": 3.5,
+    "rank_key": [
+      2,
+      -10,
+      3.5,
+      -2
+    ]
+  },
+  {
+    "id": "t12",
+    "name": "IMG_7195",
+    "fives": 1,
+    "fours": 2,
+    "threes": 1,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 1,
+    "avg": 4.0,
+    "rank_key": [
+      1,
+      0,
+      4.0,
+      -1
+    ]
+  },
+  {
+    "id": "t19",
+    "name": "IMG_7202",
+    "fives": 1,
+    "fours": 2,
+    "threes": 1,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 1,
+    "avg": 4.0,
+    "rank_key": [
+      1,
+      0,
+      4.0,
+      -1
+    ]
+  },
+  {
+    "id": "t06",
+    "name": "IMG_7189",
+    "fives": 1,
+    "fours": 1,
+    "threes": 2,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 2,
+    "avg": 3.75,
+    "rank_key": [
+      1,
+      0,
+      3.75,
+      -2
+    ]
+  },
+  {
+    "id": "t07",
+    "name": "IMG_7190",
+    "fives": 0,
+    "fours": 2,
+    "threes": 1,
+    "twos": 0,
+    "ones": 0,
+    "unrated": 0,
+    "rot180": 2,
+    "avg": 3.67,
+    "rank_key": [
+      0,
+      0,
+      3.6666666666666665,
+      -2
+    ]
+  }
+]
