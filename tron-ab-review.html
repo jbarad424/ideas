@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tron Ref A/B — Review</title>
+<style>
+  :root{--bg:#0c0c10;--panel:#16161c;--panel2:#1e1e26;--border:#2a2a33;--text:#e5e5ec;--dim:#8b8b95;--gold:#fbbf24;--green:#4ade80;--red:#ef4444;--blue:#60a5fa;}
+  *{box-sizing:border-box}
+  html,body{background:var(--bg);color:var(--text);font:14px -apple-system,system-ui,sans-serif;margin:0;}
+  a{color:var(--blue);}
+  header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:14px 20px;}
+  h1{font-size:17px;margin:0 0 4px;}
+  .sub{color:var(--dim);font-size:12px;margin-bottom:10px;}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  button{background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:7px 14px;border-radius:5px;cursor:pointer;font:inherit;}
+  button:hover{background:#252532;}
+  button.prim{background:#1d4ed8;border-color:#2563eb;}
+  .summary{color:var(--green);font-weight:bold;margin-left:10px;}
+  #status{color:var(--dim);font-size:12px;margin-left:10px;}
+
+  main{padding:20px;max-width:1600px;margin:0 auto;}
+  .loading{text-align:center;padding:80px 20px;color:var(--dim);}
+  .spinner{display:inline-block;width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:sp 1s linear infinite;vertical-align:middle;margin-right:10px;}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  .row{display:grid;grid-template-columns:180px 1fr 1fr 1fr 1fr;gap:12px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:12px;}
+  .row.winner{border-color:var(--green);}
+  .row.killed{opacity:.45;border-color:var(--red);}
+  .ref-col{display:flex;flex-direction:column;gap:6px;}
+  .ref-col img{width:100%;aspect-ratio:3/4;object-fit:cover;background:#000;border-radius:6px;}
+  .ref-label{font-weight:bold;font-size:15px;}
+  .ref-label small{color:var(--dim);font-weight:normal;font-size:11px;display:block;}
+  .rank{font-size:11px;color:var(--dim);}
+  .avg{font-size:18px;font-weight:bold;color:var(--gold);}
+  .flag-count{font-size:11px;color:var(--red);}
+
+  .cell{background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:8px;display:flex;flex-direction:column;gap:6px;}
+  .cell .caption{font-size:11px;color:var(--dim);display:flex;justify-content:space-between;}
+  .thumb-wrap{position:relative;background:#000;aspect-ratio:3/4;border-radius:4px;overflow:hidden;cursor:zoom-in;}
+  .thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+  .thumb-wrap.placeholder{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:11px;}
+  .thumb-wrap.error{display:flex;align-items:center;justify-content:center;color:var(--red);font-size:11px;text-align:center;padding:10px;}
+  .score{display:flex;gap:4px;justify-content:center;padding:4px 0;}
+  .dot{width:22px;height:22px;border-radius:50%;border:1.5px solid #444;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:#666;transition:all .1s;}
+  .dot:hover{border-color:#888;}
+  .dot.on{background:var(--gold);border-color:#b45309;color:#000;font-weight:bold;}
+  .flags{display:flex;gap:4px;justify-content:center;}
+  .flag{font-size:10px;padding:3px 8px;border-radius:3px;border:1px solid #444;cursor:pointer;color:#888;background:transparent;}
+  .flag:hover{border-color:#888;color:#aaa;}
+  .flag.on{background:var(--red);border-color:#991b1b;color:#fff;}
+  .dl{font-size:10px;color:var(--dim);text-decoration:none;text-align:center;padding:3px 0;}
+  .dl:hover{color:var(--blue);}
+
+  /* lightbox */
+  #lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:100;cursor:pointer;}
+  #lb.on{display:flex;align-items:center;justify-content:center;}
+  #lb img{max-width:95vw;max-height:95vh;object-fit:contain;}
+  #lb .close{position:absolute;top:16px;right:20px;font-size:28px;color:#fff;cursor:pointer;}
+
+  /* summary panel */
+  #winners{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px;display:none;}
+  #winners.on{display:block;}
+  #winners h2{margin:0 0 10px;font-size:15px;}
+  .rank-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:13px;}
+  .rank-row:last-child{border:0;}
+  .rank-row.w{color:var(--green);}
+  .rank-row.k{color:var(--red);}
+</style>
+</head>
+<body>
+<header>
+  <h1>🪩 Tron Reference A/B — Jordan 2026-04-09</h1>
+  <div class="sub">20 Tron refs × 2 sports × 2 scenes = 80 NB Pro gens. Score each image 1–5 on symbol clarity (5 = perfect, 1 = barely visible). Flag perpendicular / wrongArm / rotated as needed.</div>
+  <div class="bar">
+    <button class="prim" onclick="showWinners()">📊 Show rankings</button>
+    <button onclick="copyJSON()">📋 Copy ratings JSON</button>
+    <button onclick="if(confirm('Clear all ratings?')){localStorage.removeItem('cb2_tron_ab');location.reload()}">🗑 Clear</button>
+    <span class="summary" id="summary">0 / 80 rated</span>
+    <span id="status">loading results…</span>
+  </div>
+</header>
+
+<main>
+  <div id="winners"></div>
+  <div id="grid" class="loading"><span class="spinner"></span>Loading A/B results…</div>
+</main>
+
+<div id="lb" onclick="closeLb()"><div class="close">×</div><img id="lbImg"></div>
+
+<script>
+const STORE_KEY = 'cb2_tron_ab';
+const state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); // {label: {score, flags:{perp,wrongArm,rot180,garbled}}}
+
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); updateSummary(); }
+
+function setScore(label, n){
+  if(!state[label]) state[label] = {flags:{}};
+  state[label].score = (state[label].score === n) ? null : n;
+  save();
+  render();
+}
+function toggleFlag(label, flag){
+  if(!state[label]) state[label] = {flags:{}};
+  if(!state[label].flags) state[label].flags = {};
+  state[label].flags[flag] = !state[label].flags[flag];
+  save();
+  render();
+}
+function updateSummary(){
+  const rated = Object.values(state).filter(s => s.score != null).length;
+  document.getElementById('summary').textContent = `${rated} / 80 rated`;
+}
+function openLb(url){
+  document.getElementById('lbImg').src = url;
+  document.getElementById('lb').classList.add('on');
+}
+function closeLb(){ document.getElementById('lb').classList.remove('on'); }
+
+function copyJSON(){
+  const out = {
+    exported: new Date().toISOString(),
+    ratings: state,
+    summary: computeRanking(),
+  };
+  const txt = JSON.stringify(out, null, 2);
+  navigator.clipboard.writeText(txt).then(() => alert('Copied ' + Object.keys(state).length + ' ratings to clipboard')).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); ta.remove();
+    alert('Copied (fallback)');
+  });
+}
+
+let RESULTS = null;
+let REFS = null;
+
+async function loadResults(){
+  try {
+    const r = await fetch('tron_ab_results.json?t=' + Date.now());
+    if(!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    RESULTS = data.results;
+    REFS = data.meta.refs;
+    document.getElementById('status').textContent = `loaded ${RESULTS.length}/80 gens`;
+    render();
+  } catch(e) {
+    document.getElementById('status').textContent = 'results not ready yet — retrying in 20s';
+    setTimeout(loadResults, 20000);
+  }
+}
+
+function computeRanking(){
+  if(!REFS) return [];
+  const byRef = {};
+  REFS.forEach(ref => {
+    byRef[ref.id] = {id: ref.id, name: ref.name, scores: [], flags: 0, rated: 0};
+  });
+  Object.entries(state).forEach(([label, s]) => {
+    const refId = label.split('_')[0];
+    if(!byRef[refId]) return;
+    if(s.score != null){ byRef[refId].scores.push(s.score); byRef[refId].rated++; }
+    if(s.flags){
+      Object.values(s.flags).forEach(v => { if(v) byRef[refId].flags++; });
+    }
+  });
+  const rows = Object.values(byRef).map(r => ({
+    ...r,
+    avg: r.scores.length ? (r.scores.reduce((a,b)=>a+b,0) / r.scores.length) : null,
+    max: r.scores.length ? Math.max(...r.scores) : null,
+  }));
+  rows.sort((a, b) => {
+    if(a.avg == null && b.avg == null) return 0;
+    if(a.avg == null) return 1;
+    if(b.avg == null) return -1;
+    return b.avg - a.avg || a.flags - b.flags;
+  });
+  return rows;
+}
+
+function showWinners(){
+  const rows = computeRanking();
+  const el = document.getElementById('winners');
+  el.classList.add('on');
+  el.innerHTML = '<h2>Rankings (higher avg + fewer flags = winner)</h2>' + rows.map((r, i) => {
+    const cls = r.avg == null ? '' : (r.avg >= 4 && r.flags <= 1) ? 'w' : (r.avg < 3 || r.flags >= 3) ? 'k' : '';
+    const avgStr = r.avg != null ? r.avg.toFixed(2) : '—';
+    return `<div class="rank-row ${cls}"><span>#${i+1} <strong>${r.id}</strong> <small>${r.name}</small></span><span>avg ${avgStr} (${r.rated}/4 rated) · 🚩 ${r.flags}</span></div>`;
+  }).join('');
+}
+
+function render(){
+  if(!REFS) return;
+  const grid = document.getElementById('grid');
+  grid.classList.remove('loading');
+
+  const byRefSport = {};
+  (RESULTS || []).forEach(r => {
+    byRefSport[`${r.ref_id}_${r.sport}_s${r.scene_idx}`] = r;
+  });
+
+  const ranking = computeRanking();
+  const rankMap = {};
+  ranking.forEach((r, i) => rankMap[r.id] = i + 1);
+
+  const rows = REFS.map(ref => {
+    const driveThumb = `https://lh3.googleusercontent.com/d/${ref.file_id}=w400`;
+    const rank = rankMap[ref.id];
+    const refRating = ranking.find(r => r.id === ref.id);
+    const avg = refRating && refRating.avg != null ? refRating.avg.toFixed(2) : '—';
+    const flags = refRating ? refRating.flags : 0;
+    const winnerClass = refRating && refRating.avg != null ?
+      ((refRating.avg >= 4 && refRating.flags <= 1) ? 'winner' : (refRating.avg < 3 || refRating.flags >= 3) ? 'killed' : '') : '';
+
+    const cells = ['moto_s0','moto_s1','mtb_s0','mtb_s1'].map(sceneKey => {
+      const [sport, sceneTag] = sceneKey.split('_');
+      const sceneIdx = parseInt(sceneTag.replace('s',''));
+      const label = `${ref.id}_${sport}_s${sceneIdx}`;
+      const result = byRefSport[label];
+      const r = state[label] || {flags:{}};
+      const score = r.score;
+      const flagObj = r.flags || {};
+
+      let thumbHtml;
+      if(result && result.url){
+        thumbHtml = `<div class="thumb-wrap" onclick="openLb('${result.url}')"><img src="${result.url.replace('.jpg','.jpg?w=600')}" loading="lazy" onerror="this.src='${result.url}'"></div>`;
+      } else if(result && result.error){
+        thumbHtml = `<div class="thumb-wrap error">⚠ ${(result.error || '').substring(0,50)}</div>`;
+      } else {
+        thumbHtml = `<div class="thumb-wrap placeholder">⏳ pending</div>`;
+      }
+
+      const dots = [1,2,3,4,5].map(n => `<div class="dot ${score===n?'on':''}" onclick="setScore('${label}',${n})">${n}</div>`).join('');
+      const flagBtns = [
+        ['perp','⊥'],['wrongArm','↔'],['rot180','↻'],['garbled','⚠']
+      ].map(([k, label2]) => `<button class="flag ${flagObj[k]?'on':''}" onclick="toggleFlag('${label}','${k}')" title="${k}">${label2}</button>`).join('');
+      const dlLink = result && result.url ? `<a class="dl" href="${result.url}" target="_blank" rel="noopener">⬇ full-res</a>` : `<span class="dl">—</span>`;
+
+      return `<div class="cell">
+        <div class="caption"><span>${sport} s${sceneIdx}</span><span>seed ${result && result.seed || '—'}</span></div>
+        ${thumbHtml}
+        <div class="score">${dots}</div>
+        <div class="flags">${flagBtns}</div>
+        ${dlLink}
+      </div>`;
+    }).join('');
+
+    return `<div class="row ${winnerClass}">
+      <div class="ref-col">
+        <div class="ref-label">${ref.id} ${rank ? `<span class="rank">#${rank}</span>` : ''}<small>${ref.name}</small></div>
+        <img src="${driveThumb}" loading="lazy" alt="${ref.id}" onclick="openLb('https://lh3.googleusercontent.com/d/${ref.file_id}=w1600')" style="cursor:zoom-in">
+        <div class="avg">${avg}</div>
+        ${flags ? `<div class="flag-count">${flags} 🚩</div>` : ''}
+      </div>
+      ${cells}
+    </div>`;
+  });
+
+  grid.innerHTML = rows.join('');
+  updateSummary();
+}
+
+// Keyboard: 1-5 on hover cell, Esc to close lightbox
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') closeLb();
+});
+
+loadResults();
+// Auto-reload results every 20s until complete
+const reloadInterval = setInterval(() => {
+  if(RESULTS && RESULTS.length >= 80) { clearInterval(reloadInterval); return; }
+  loadResults();
+}, 20000);
+</script>
+</body>
+</html>
