@@ -458,6 +458,66 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <script>
 const SYNC_URL='https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh';
+
+// === CF Worker API Proxy (PLAN Part 0.1, 2026-04-09) ============================
+// All fal.ai and Anthropic calls route through this Worker so API keys stay server-
+// side. First use prompts the team password; it's stored in localStorage.cb2_team_pw
+// and never committed to the repo. 401 clears the stale password and re-prompts.
+// Worker source: scripts/cf-worker/worker.js (in repo).
+const WORKER_URL='https://cb2-proxy.chubbybuttons.workers.dev';
+
+function getTeamPassword(){
+  let pw=localStorage.getItem('cb2_team_pw');
+  if(!pw){
+    pw=prompt('Paste the CB2 team password to enable image generation + Sonnet refine.\n\n(Stored in this browser only. Ask Justin if you don\u2019t have it.)');
+    if(pw){pw=pw.trim();localStorage.setItem('cb2_team_pw',pw);}
+  }
+  return pw;
+}
+function clearTeamPassword(){localStorage.removeItem('cb2_team_pw');}
+
+async function proxyCall(target,body){
+  const pw=getTeamPassword();
+  if(!pw)throw new Error('No team password provided');
+  let resp;
+  try{
+    resp=await fetch(WORKER_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-Team-Password':pw,'X-Proxy-Target':target},
+      body:JSON.stringify(body||{}),
+    });
+  }catch(netErr){
+    throw new Error('Worker unreachable: '+(netErr.message||'network error'));
+  }
+  if(resp.status===401){
+    clearTeamPassword();
+    throw new Error('Team password rejected — reload the page and try again');
+  }
+  let data;
+  try{data=await resp.json();}
+  catch(e){throw new Error('Proxy returned non-JSON: '+resp.status);}
+  if(!resp.ok){
+    const msg=(data&&(data.error||data.detail))||('HTTP '+resp.status);
+    const up=data&&data.upstreamStatus?' (upstream '+data.upstreamStatus+')':'';
+    const body=data&&data.bodyPreview?' — '+String(data.bodyPreview).slice(0,160):'';
+    throw new Error('Proxy error: '+msg+up+body);
+  }
+  return data;
+}
+
+// Fal.ai queue gen through Worker. Worker submits + polls up to 135s.
+// Returns the full fal result object. Use data.images for NB Pro/NB2/FLUX/GPT.
+async function proxyFal(endpoint,input){
+  return proxyCall('fal',{endpoint,input});
+}
+
+// Anthropic messages through Worker. Body matches Anthropic API
+// {model, max_tokens, system, messages}.
+async function proxyAnthropic(body){
+  return proxyCall('anthropic',body);
+}
+// ================================================================================
+
 // === VIDEO ENTRIES (shown when mediaType toggle is 'video') ===
 const ALL_VIDEOS=[
   // === ROUND 3: Kling 3.0 Pro (reportedly best quality, fal.ai) ===
@@ -1651,45 +1711,10 @@ function vidLabCheck(){
   }catch(e){}
 }
 function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
-  const FAL='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
-  // Resolve requestId from localStorage if not passed (backward compat for resume-on-reload)
-  if(!requestId){const j=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');if(j)requestId=j.requestId;}
-  let polls=0;
-  const st=document.getElementById('vidLabStatus');
-  const poller=setInterval(()=>{
-    polls++;
-    fetch(statusUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(s=>{
-      const prog=document.getElementById('vidLabProgress');
-      if(!prog){clearInterval(poller);return;}
-      prog.textContent='Status: '+(s.status||'checking')+' — poll #'+polls;
-      if(s.status==='COMPLETED'){
-        clearInterval(poller);
-        localStorage.removeItem('cb2_videolab_job');
-        prog.innerHTML='<span style="color:#22c55e;font-weight:700">COMPLETED!</span> Fetching video...';
-        fetch(resultUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(res=>{
-          const vidUrl=res?.video?.url||res?.output?.video?.url;
-          if(vidUrl){
-            prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done!</span> Video ready below.';
-            const preview=document.createElement('div');
-            preview.style.cssText='margin-top:.5rem';
-            preview.innerHTML='<video controls playsinline autoplay loop style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
-              +'<div style="font-size:.55rem;color:#888;margin-top:.2rem;word-break:break-all">'+vidUrl+'</div>';
-            st.appendChild(preview);
-            showToast('Video ready! '+platformName+' completed');
-          }else{
-            prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found.</span>';
-          }
-          // Update Job History with final status
-          if(requestId)vidJobUpdate(requestId,{status:'COMPLETED',videoUrl:vidUrl||''});
-        });
-      }else if(s.status==='FAILED'){
-        clearInterval(poller);
-        localStorage.removeItem('cb2_videolab_job');
-        prog.innerHTML='<span style="color:#ef4444;font-weight:700">FAILED</span> — '+(s.error||'unknown error');
-        if(requestId)vidJobUpdate(requestId,{status:'FAILED'});
-      }
-    }).catch(()=>{});
-  },15000);
+  // Video Lab temporarily disabled 2026-04-09 — see vidLabGenerate() stub.
+  // If you get here via localStorage restoration from a pre-disable job, clear state
+  // so it doesn't keep trying to resume on every reload.
+  localStorage.removeItem('cb2_videolab_job');
 }
 function vidLabDismiss(){
   localStorage.removeItem('cb2_videolab_source');
@@ -1738,87 +1763,32 @@ function vidJobRender(){
   }).join('');
 }
 function vidJobRefreshAll(){
-  const FAL='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
-  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
-  const pending=jobs.filter(j=>j.status!=='COMPLETED'&&j.status!=='FAILED');
-  if(!pending.length){showToast('All jobs already finished');return;}
-  showToast('Checking '+pending.length+' pending job(s)...');
-  pending.forEach(j=>{
-    fetch(j.statusUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(s=>{
-      if(s.status==='COMPLETED'){
-        fetch(j.resultUrl,{method:'GET',headers:{'Authorization':'Key '+FAL}}).then(r=>r.json()).then(res=>{
-          const vidUrl=res?.video?.url||res?.output?.video?.url;
-          vidJobUpdate(j.requestId,{status:'COMPLETED',videoUrl:vidUrl||''});
-          if(vidUrl)showToast(j.platform+' done! Tap Watch to view.');
-        });
-      }else{
-        vidJobUpdate(j.requestId,{status:s.status||'UNKNOWN'});
-      }
-    }).catch(()=>{});
-  });
+  // Video Lab temporarily disabled 2026-04-09 — see vidLabGenerate() stub.
+  showToast('Video Lab temporarily disabled \u2014 pending Worker long-poll support');
 }
 function vidLabGenerate(platform){
-  const src=JSON.parse(localStorage.getItem('cb2_videolab_source')||'null');
-  if(!src){showToast('No source image');return;}
-  const FAL='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
-  const dir=(document.getElementById('vidLabDirection')?.value||'').trim();
-  const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
-  const prompt=dir?dir+'. '+basePrompt:basePrompt;
-  const info={
-    kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',cost:'~$1.50',
-      body:{image_url:src.url,prompt:prompt,duration:'10',aspect_ratio:'9:16'}},
-    'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',cost:'~$0.40',
-      body:{image_url:src.url,prompt:prompt,duration:'8s',aspect_ratio:'9:16'}},
-    sora:{name:'Sora 2 Pro',endpoint:'fal-ai/sora-2/image-to-video/pro',cost:'~$5.00',
-      body:{image_url:src.url,prompt:prompt,duration:16,aspect_ratio:'9:16'}},
-    runway:{name:'Runway Gen-4T',endpoint:null,cost:'~$0.50',body:null}
-  };
-  const p=info[platform]||info.kling;
-  if(!p.endpoint){
-    document.getElementById('vidLabStatus').innerHTML='<div style="color:#f59e0b;font-size:.65rem;margin-top:.3rem">Runway requires direct API — tell Claude Code: <strong>"animate '+src.label+' with Runway Gen-4 Turbo"</strong></div>';
-    return;
-  }
-  // Disable buttons, show submitting state
-  document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=true;b.style.opacity='.4';});
-  const st=document.getElementById('vidLabStatus');
-  st.innerHTML='<div style="background:#1a1030;border:2px solid #a855f7;border-radius:8px;padding:.6rem;text-align:center">'
-    +'<div style="font-size:.8rem;color:#a855f7;font-weight:700">Submitting to '+p.name+'...</div>'
-    +'<div style="font-size:.6rem;color:#888;margin-top:.2rem">'+p.cost+' per video</div></div>';
-
-  fetch('https://queue.fal.run/'+p.endpoint,{method:'POST',headers:{'Authorization':'Key '+FAL,'Content-Type':'application/json'},body:JSON.stringify(p.body)})
-  .then(r=>r.json()).then(d=>{
-    if(!d.request_id){st.innerHTML='<div style="color:#ef4444">Error: '+JSON.stringify(d).slice(0,200)+'</div>';return;}
-    const rid=d.request_id;
-    // Use the URLs returned by fal.ai (they use a shorter base path than the submit endpoint)
-    const statusUrl=d.status_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid+'/status');
-    const resultUrl=d.response_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid);
-    // Save job state so it survives page reloads
-    localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,submitted:new Date().toISOString()}));
-    // Log to Job History so it's never lost
-    vidJobLog({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,label:src.label,model:src.model,sourceUrl:src.url,prompt:prompt,status:'IN_QUEUE',submitted:new Date().toISOString()});
-    st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
-      +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.2rem">Job Submitted!</div>'
-      +'<div id="vidLabProgress" style="font-size:.65rem;color:#ccc">Status: IN_QUEUE — checking every 15s...</div>'
-      +'<div style="font-size:.5rem;color:#666;margin-top:.3rem">Request: '+rid.slice(0,18)+'...</div></div>';
-    // Start polling — reuses the same resume function
-    vidLabResumePoll(statusUrl,resultUrl,p.name,rid);
-  }).catch(e=>{
-    st.innerHTML='<div style="color:#ef4444">Network error: '+e.message+'</div>';
-    document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
-  });
+  // Video Lab temporarily disabled 2026-04-09 ------------------------------------
+  // Videos (Kling/Sora/Veo) take 60-300+ seconds, which exceeds the CF Worker's
+  // 135s internal polling window. Re-enabling needs either:
+  //   (a) paid Workers plan + extended polling budget, OR
+  //   (b) new Worker targets fal-submit + fal-status for client-side polling.
+  // Tracked in PLAN-CREATE-TAB-V2.md "Deferred" section.
+  // Legacy code previously here (submit+poll with hardcoded FAL key) was removed
+  // in commit that introduced proxyCall/mmGen. Git history has the full original.
+  const statusEl=document.getElementById('vidLabStatus');
+  if(statusEl)statusEl.innerHTML='<div style="background:#2a1a10;border:2px solid #f59e0b;border-radius:8px;padding:.6rem;color:#f59e0b;font-size:.7rem"><strong>Video Lab temporarily disabled</strong><br><span style="color:#ccc">Pending long-running job support in the CF Worker. Images via CREATE tab still work. Animate winners via Claude Code directly for now.</span></div>';
+  document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
 }
 
 // === Claude prompt refiner — rewrites rough cues into Kling-optimized prompts ===
 // Key is stored in browser localStorage so it never hits the public repo.
 // First use: a prompt() asks for the key, then persists it on this device.
+// vidLabGetAnthKey removed 2026-04-09 — Anthropic calls now go through CF Worker
+// via proxyAnthropic(). Stored Anthropic keys in old localStorage are stale and
+// can be cleared on next login. Stub kept for any external callers.
 function vidLabGetAnthKey(){
-  let k=localStorage.getItem('cb2_anth_key');
-  if(!k){
-    k=prompt('Paste your Anthropic API key (sk-ant-api…). Stored locally in this browser only.');
-    if(k&&k.trim().startsWith('sk-ant-')){localStorage.setItem('cb2_anth_key',k.trim());return k.trim();}
-    return null;
-  }
-  return k;
+  localStorage.removeItem('cb2_anth_key');
+  return null;
 }
 function vidLabRefineSystemPrompt(platform){
   // Platform-specific length caps — Kling truncates hardest, Sora/Veo handle more.
@@ -1851,44 +1821,27 @@ LENGTH RULE (model-specific): ${lenRule}
 OUTPUT FORMAT: Return ONLY the refined prompt text — no preamble, no explanation, no "here is the refined prompt:" header. Just the prompt itself.`;
 }
 
-function vidLabRefine(){
+async function vidLabRefine(){
   const raw=(document.getElementById('vidLabDirection')?.value||'').trim();
   if(!raw){showToast('Type some cues first');return;}
-  const key=vidLabGetAnthKey();
-  if(!key){showToast('No API key provided');return;}
   // Read the platform the user has selected (if any) — stored in a data attribute
   // on the refine button when a platform button is clicked, or null for universal rules.
   const platform=localStorage.getItem('cb2_videolab_refine_target')||null;
   const btn=document.getElementById('vidLabRefineBtn');
   const status=document.getElementById('vidLabRefineStatus');
   btn.disabled=true;btn.style.opacity='.5';
-  status.textContent='Refining for '+(platform||'universal')+'…';
-  fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key':key,
-      'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true'
-    },
-    body:JSON.stringify({
-      model:'claude-sonnet-4-6',
+  status.textContent='Refining for '+(platform||'universal')+'\u2026';
+  try{
+    // 2026-04-09: routed through CF Worker (proxyAnthropic) — no client-side Anthropic key.
+    const d=await proxyAnthropic({
+      model:'claude-sonnet-4-5',
       max_tokens:500,
       system:vidLabRefineSystemPrompt(platform),
       messages:[{role:'user',content:'Rough cue:\n'+raw}]
-    })
-  })
-  .then(r=>r.json())
-  .then(d=>{
+    });
     btn.disabled=false;btn.style.opacity='1';
     if(d.error){
-      // If auth failed, clear the stored key so next click re-prompts
-      if(d.error.type==='authentication_error'||(d.error.message||'').toLowerCase().includes('auth')){
-        localStorage.removeItem('cb2_anth_key');
-        status.textContent='Auth failed — key cleared, click again to paste a new one';
-      }else{
-        status.textContent='Error: '+(d.error.message||'unknown');
-      }
+      status.textContent='Error: '+(d.error.message||'unknown');
       return;
     }
     const refined=d.content?.[0]?.text?.trim();
@@ -1896,11 +1849,10 @@ function vidLabRefine(){
     status.textContent='Done ('+(d.usage?.output_tokens||'?')+' tokens)';
     document.getElementById('vidLabRefinedBox').style.display='block';
     document.getElementById('vidLabRefinedText').textContent=refined;
-  })
-  .catch(e=>{
+  }catch(e){
     btn.disabled=false;btn.style.opacity='1';
-    status.textContent='Network error: '+e.message;
-  });
+    status.textContent='Error: '+e.message;
+  }
 }
 function vidLabApplyRefined(){
   const refined=document.getElementById('vidLabRefinedText').textContent;
@@ -2204,7 +2156,7 @@ async function galGenerate(id,fidelity){
   const resultsEl=document.getElementById('mmResults-'+id);
   if(resultsEl)resultsEl.innerHTML='';
 
-  const FK='abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099';
+  // Fal key removed 2026-04-09 — all calls go through CF Worker proxyCall().
   const REF='https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800';
   const mdl=mmDetectModel(img.model);
 
@@ -2228,9 +2180,8 @@ async function galGenerate(id,fidelity){
     const allImgs=[];
     const seeds=[];
     if(mdl.type==='gpt'){
-      const rid=await mmSubmit(mdl.endpoint,{image_urls:[img.url,REF],prompt:fullPrompt,size:'1024x1536',quality:'high',input_fidelity:fidelity,num_images:2},FK);
       setStatus('Generating 2 variations via '+mdl.name+'... (60-90s)');
-      const imgs=await mmPoll(mdl.endpoint,rid,FK,null);
+      const imgs=await mmGen(mdl.endpoint,{image_urls:[img.url,REF],prompt:fullPrompt,size:'1024x1536',quality:'high',input_fidelity:fidelity,num_images:2});
       allImgs.push(...imgs);
       seeds.push('n/a','n/a');
     }else{
@@ -2242,9 +2193,8 @@ async function galGenerate(id,fidelity){
         if(mdl.type==='flex'){p.guidance_scale=gs;p.num_inference_steps=28;}
         return p;
       };
-      const [rid1,rid2]=await Promise.all([mmSubmit(mdl.endpoint,mkPayload(s1),FK),mmSubmit(mdl.endpoint,mkPayload(s2),FK)]);
       setStatus('Generating 2 variations via '+mdl.name+'... (30-60s)');
-      const [imgs1,imgs2]=await Promise.all([mmPoll(mdl.endpoint,rid1,FK,null),mmPoll(mdl.endpoint,rid2,FK,null)]);
+      const [imgs1,imgs2]=await Promise.all([mmGen(mdl.endpoint,mkPayload(s1)),mmGen(mdl.endpoint,mkPayload(s2))]);
       allImgs.push(...imgs1,...imgs2);
     }
     if(!allImgs.length){setStatus('No images returned.');return;}
@@ -2279,34 +2229,26 @@ async function galGenerate(id,fidelity){
   }
 }
 
-async function mmSubmit(endpoint,payload,key){
-  const resp=await fetch('https://queue.fal.run/'+endpoint,{
-    method:'POST',headers:{'Authorization':'Key '+key,'Content-Type':'application/json'},body:JSON.stringify(payload)
-  });
-  if(!resp.ok)throw new Error('Submit failed: '+resp.status);
-  const data=await resp.json();
-  return data.request_id;
+// === mmGen — Worker-backed generation (replaces mmSubmit + mmPoll) =============
+// Single call: submit + poll-to-completion happens inside the CF Worker
+// (scripts/cf-worker/worker.js). Returns the fal.ai images[] array directly.
+// 135s internal timeout covers ~95% of image gens; slow outliers will throw.
+// Video endpoints should NOT use this — they need client-side polling.
+async function mmGen(endpoint,payload,statusEl){
+  if(statusEl)statusEl.innerHTML='Submitting via proxy\u2026';
+  const data=await proxyFal(endpoint,payload);
+  if(statusEl)statusEl.innerHTML='Done';
+  return data.images||[];
 }
 
+// mmSubmit + mmPoll kept as thin shims so any stale callers don't crash.
+// They route through mmGen but ignore the decoupled request_id contract.
+// New code should call mmGen() directly.
+async function mmSubmit(endpoint,payload,key){
+  throw new Error('mmSubmit is deprecated \u2014 use mmGen(endpoint,payload) which proxies through the CF Worker');
+}
 async function mmPoll(endpoint,rid,key,statusEl){
-  // Strip /edit from endpoint for status URL
-  const base=endpoint.replace(/\/edit$/,'');
-  let elapsed=0;
-  while(elapsed<300){
-    await new Promise(r=>setTimeout(r,5000));
-    elapsed+=5;
-    const sr=await fetch('https://queue.fal.run/'+base+'/requests/'+rid+'/status',{headers:{'Authorization':'Key '+key}});
-    const sd=await sr.json();
-    if(sd.status==='COMPLETED'){
-      const rr=await fetch('https://queue.fal.run/'+base+'/requests/'+rid,{headers:{'Authorization':'Key '+key}});
-      const rd=await rr.json();
-      return rd.images||[];
-    }else if(sd.status==='FAILED'){
-      throw new Error('Generation failed');
-    }
-    if(statusEl)statusEl.innerHTML='Generating... '+elapsed+'s ('+sd.status+')';
-  }
-  throw new Error('Timed out after 5 minutes');
+  throw new Error('mmPoll is deprecated \u2014 use mmGen(endpoint,payload) which proxies through the CF Worker');
 }
 
 async function mmUploadCatbox(falUrl){
@@ -2344,7 +2286,7 @@ function mmLoadVariations(){
 const CR={
   keepersUrl:'https://jbarad424.github.io/ideas/cb-keepers.json',
   keepersLocal:'cb-keepers.json',
-  FK_FALLBACK:'abd109db-5b32-4be9-8e80-55d543ef21b5:25db06d5650ad2d12f2f1d32dcca5099',
+  // FK_FALLBACK removed 2026-04-09 — all generation routes through mmGen() → CF Worker.
   keepers:null,
   recipes:[],
   learning:null,
@@ -2733,9 +2675,7 @@ const CR={
         }
       }else{
         const payload=this.buildPayload(b,i);
-        const key=this.getFalKey();
-        const rid=await mmSubmit(b.endpoint,payload,key);
-        const imgs=await mmPoll(b.endpoint,rid,key,null);
+        const imgs=await mmGen(b.endpoint,payload);
         if(!imgs||!imgs.length)throw new Error('no images returned');
         url=imgs[0].url;
       }
@@ -2771,7 +2711,7 @@ const CR={
     return 'fal-ai/nano-banana-pro/edit';
   },
 
-  getFalKey(){return localStorage.getItem('cb2_fal_key')||this.FK_FALLBACK;},
+  // getFalKey removed 2026-04-09 — CREATE tab uses mmGen() → CF Worker proxyCall().
 
   isDryRun(){return localStorage.getItem('cb2_create_dryrun')==='true';},
   toggleDryRun(){
@@ -2964,22 +2904,15 @@ const CR={
     const raw=(document.getElementById('crSceneInput')?.value||'').trim();
     if(!raw){showToast('Type a scene first');return;}
     s.scene=raw;
-    const key=vidLabGetAnthKey();
-    if(!key){showToast('No Anthropic key provided');return;}
     const btn=document.getElementById('crRefineBtn');
     const status=document.getElementById('crRefineStatus');
     btn.disabled=true;btn.style.opacity='.5';
     status.textContent='Refining\u2026';
     const sys="You are a photography director for an action-sports marketing brand. Rewrite the user's scene description into industry-standard photographic language that would produce exceptional marketing photos \u2014 but preserve 100% of the user's creative intent. Use specific camera/lens terminology (e.g. 'shot on Sony A7R IV 85mm f/2.0'), concrete lighting vocabulary (e.g. 'raking sidelight', 'golden-hour backlight'), evocative setting detail, and atmospheric descriptors. Do NOT add a product description, subject description, wardrobe, or framing \u2014 those are added separately. Output only the rewritten scene paragraph, no preamble.";
     try{
-      const r=await fetch('https://api.anthropic.com/v1/messages',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-        body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:sys,messages:[{role:'user',content:'Scene:\n'+raw}]}),
-      });
-      const d=await r.json();
+      // 2026-04-09: routed through CF Worker (proxyAnthropic) — no client-side Anthropic key.
+      const d=await proxyAnthropic({model:'claude-sonnet-4-5',max_tokens:500,system:sys,messages:[{role:'user',content:'Scene:\n'+raw}]});
       if(d.error){
-        if(d.error.type==='authentication_error')localStorage.removeItem('cb2_anth_key');
         status.textContent='Error: '+(d.error.message||'unknown');
         btn.disabled=false;btn.style.opacity='1';
         return;
@@ -2992,7 +2925,7 @@ const CR={
       btn.disabled=false;btn.style.opacity='1';
       this.render();
     }catch(e){
-      status.textContent='Network error: '+e.message;
+      status.textContent='Error: '+e.message;
       btn.disabled=false;btn.style.opacity='1';
     }
   },
