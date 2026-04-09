@@ -45,7 +45,7 @@ KILLED_REFS = ["p1", "h1", "h4", "p5", "t10", "t16"]
 > Tron is unvalidated — no on-jacket ref exists. First Tron signal came from `dual_ref_test.py`…
 
 **Replace with:**
-> **Tron is production-ready (2026-04-09).** Jordan shot 20 Tron refs on 2026-04-09 and the A/B test (`tron_ab_test.py`, `tron_ab_results.json`, ratings in `ratings/tron_ab_ratings_2026-04-09.json`) identified t18 as the sole pure-gold reference (4×5, 0 flags) plus t01/t03/t11 as Tier-1 backups (pure 4×5 with cosmetic rot180). Unlike the Hunter/Patriot shoot, Jordan captured multi-orientation variants physically, so no `sips -r 180` post-processing was needed. Per Justin + Jordan: rot180 flags are cosmetic, not blockers — production can ship refs with or without.
+> **Tron is production-ready (2026-04-09).** Justin shot 20 Tron refs himself on 2026-04-09 (Hunter/Patriot were Jordan's shoot on 2026-04-03; Tron is Justin's). The A/B test (`tron_ab_test.py`, `tron_ab_results.json`, ratings in `ratings/tron_ab_ratings_2026-04-09.json`) identified t18 as the sole pure-gold reference (4×5, 0 flags) plus t01/t03/t11 as Tier-1 backups (pure 4×5 with cosmetic rot180). Unlike the Hunter/Patriot shoot, Justin captured multi-orientation variants physically, so no `sips -r 180` post-processing was needed. Per Justin + Jordan: rot180 flags are cosmetic, not blockers — production can ship refs with or without.
 
 ## Section 4: Per-Scene Arm Decision Table — add Tron column
 
@@ -104,4 +104,4 @@ No table change needed. Tron uses the same per-scene arm locks as Hunter/Patriot
 
 5. **Testing protocol:** After reshoot, run `tron_ab_test.py` pattern on the new refs (20 refs × 2 sports × 2 scenes @ NB Pro = $12, or just the new refs if <6 new shots to save money). Rate in `cb-ab-review.html` (generalized review page). Lock winners same way.
 
-**Honest caveat:** With 20 refs we have a small sample, and the winners might be confounded by lighting quality, camera angle, or ref subject (jacket fabric vs wood table) in ways we can't fully separate. The t18 pattern is a *hypothesis* to test, not proof. But Justin's offer is cheap to test (Jordan shoots 6 photos, I fire $3 of gens, Justin rates, done).
+**Honest caveat:** With 20 refs we have a small sample, and the winners might be confounded by lighting quality, camera angle, or ref subject (jacket fabric vs wood table) in ways we can't fully separate. The t18 pattern is a *hypothesis* to test, not proof. But it's cheap to test when products arrive — Justin shoots 6 photos (3 Hunter + 3 Patriot t18-clones), I fire $3 of gens, Justin rates, done.

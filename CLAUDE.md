@@ -128,6 +128,66 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 - **Device dimensions:** 108mm × 39mm (≈ 4.25" × 1.5"). NOT 3 inches.
 - **WARNING:** A previous session incorrectly reversed this to "MINUS closest to wrist on LEFT arm" — that is WRONG. Justin confirmed in V3 feedback: "minus symbol is by the wrist, which should not be" (on left arm).
 
+### Reference Photo Rotation Rule (CONFIRMED April 8 — 26–2 A/B verdict with pure isolation)
+**Reference photo orientation is the primary failure mode for upside-down CB2 renders.** In the first ref A/B test (12 candidate refs × 48 gens, Nano Banana Pro, single-ref), Justin flagged 73% of outputs as rotated-180°. Rotating each reference 180° (`sips -r 180`) and re-running with identical prompts and seeds produced a 26–2 win rate for the rotated side (31/48 pairs rated, `exportedAt: 2026-04-08T18:47Z`). Scoring semantics: rot=5 means rotation nailed it; rot=1 means still broken; orig=5 means it didn't need rotation; both=5 means the model swapped arms (still correct, just mirrored).
+
+**Production reference library (locked 2026-04-08):**
+
+| ID | File | Colorway | Type | Rotated URL (permanent) |
+|----|------|----------|------|--------------------------|
+| h3 | IMG_0534_Hunter_Jacket_A | Hunter | jacket | `https://jbarad424.github.io/ideas/rotated-refs/h3.jpg` |
+| h5 | IMG_0542_Hunter_Jacket_C | Hunter | jacket | `https://jbarad424.github.io/ideas/rotated-refs/h5.jpg` |
+| h6 | IMG_0566_Hunter_Product_C | Hunter | product | `https://jbarad424.github.io/ideas/rotated-refs/h6.jpg` |
+| p4 | IMG_0550_Patriot_Jacket_B | Patriot | jacket | `https://jbarad424.github.io/ideas/rotated-refs/p4.jpg` |
+| p5 | IMG_0556_Patriot_Jacket_C | Patriot | jacket | `https://jbarad424.github.io/ideas/rotated-refs/p5.jpg` |
+| p6 | IMG_0560_Patriot_Jacket_D | Patriot | jacket | `https://jbarad424.github.io/ideas/rotated-refs/p6.jpg` |
+| **Tron — added 2026-04-09 (Justin shot these himself, A/B results in `ratings/tron_ab_ratings_2026-04-09.json`)** | | | | |
+| t18 | IMG_7201_Tron_Product_A | Tron | product | `https://jbarad424.github.io/ideas/ref-library/tron-raw/t18.jpeg` |
+| t01 | IMG_7184_Tron_Glove | Tron | jacket | `https://jbarad424.github.io/ideas/ref-library/tron-raw/t01.jpeg` |
+| t03 | IMG_7186_Tron_Sleeve_A | Tron | jacket | `https://jbarad424.github.io/ideas/ref-library/tron-raw/t03.jpeg` |
+| t11 | IMG_7194_Tron_Sleeve_B | Tron | jacket | `https://jbarad424.github.io/ideas/ref-library/tron-raw/t11.jpeg` |
+| t05 | IMG_7188_Tron_Sleeve_C (Tier 2) | Tron | jacket | `https://jbarad424.github.io/ideas/ref-library/tron-raw/t05.jpeg` |
+| t09 | IMG_7192_Tron_Sleeve_D (Tier 2) | Tron | jacket | `https://jbarad424.github.io/ideas/ref-library/tron-raw/t09.jpeg` |
+| t17 | IMG_7200_Tron_Product_B (Tier 2) | Tron | product | `https://jbarad424.github.io/ideas/ref-library/tron-raw/t17.jpeg` |
+
+**Tron A/B results (2026-04-09):** Justin shot 20 Tron refs (IMG_7184–7203), and `tron_ab_test.py` fired 20 refs × 2 sports × 2 scenes = 80 NB Pro gens (same prompts + seeds as the 2026-04-08 Hunter/Patriot rotation A/B for direct comparison). 77/80 rated. **Unlike the Hunter/Patriot shoot, Justin captured multi-orientation variants physically, so no `sips -r 180` post-processing was needed.** Full pattern analysis + Hunter/Patriot reshoot recommendations in `ratings/CLAUDE-md-proposed-update.md`. TL;DR: **t18 is the only pure-pure gold (4×5, 0 flags)** — standalone product on wood table, vertical canonical orientation (PLUS at top). t01/t03/t11 are Tier-1 with cosmetic rot180 flags only. t10 and t16 are kill-listed.
+
+**Killed references (never use — rotation + arm lock didn't fix them):**
+- h1 (IMG_0525), h4 (IMG_0541), p1 (IMG_0513) — 3 rot=1 fails each in the rotation A/B
+- **p5 (IMG_0556)** — killed 2026-04-08 after production batch V1. Only 1 clean success out of 8 gens (mtb_s1=5). 3 perpendicular flags + 3 wrongArm flags. Worst performer in the batch.
+- **t10 (IMG_7193)** — killed 2026-04-09 after Tron A/B. Produced a score-1 on mtb_s1 (weird two-rider composition) + score-3 on mtb_s0. Avg 3.5, worst Tron performer.
+- **t16 (IMG_7199)** — killed 2026-04-09 after Tron A/B. Upside-down vertical standalone (MINUS at top, opposite of t18 canonical orientation). Score-1 on mtb_s1 + one unrated. Avg 3.67.
+
+**Mixed (use only in specific scenes that worked):** h2, p2, p3.
+
+**Ref C (J&Mike Dual) is still a valid baseline** — it had 0 flags in the original A/B and was excluded from the rotation test because rotating it would break something already working. Continue using it when you want the "two-people shot works" dynamic.
+
+### Per-Scene Arm Decision Table (proposed 2026-04-08, locks in naturally visible arm per camera setup)
+**The arm swap problem:** When both orig+rotated scored 5, the model placed the device on opposite arms. Rotating a reference flips the device top-to-bottom, and the model re-assigns it to whichever arm makes the new orientation "natural" — so without an explicit arm lock, the model has an escape hatch. Every prompt must lock LEFT or RIGHT explicitly per scene.
+
+| Scene | Seed | Target arm | How to get it |
+|-------|------|------------|---------------|
+| moto_s0 coastal golden hour | 9101 | LEFT | default framing |
+| moto_s1 desert canyon | 9102 | LEFT | default framing |
+| mtb_s0 forest descend | 9201 | LEFT | default framing |
+| mtb_s1 alpine ridge | 9202 | LEFT | default framing |
+| ski carve | — | RIGHT | default framing |
+| **snowboard LEFT** | 9401/9402 | LEFT | h3 ref + **regular stance** |
+| **snowboard RIGHT** | 9401/9402 | RIGHT | h3 ref + **goofy stance** (right foot forward) |
+| snowmobile | — | LEFT | default framing |
+
+**CRITICAL — prompt arm-lock does NOT work (confirmed 2026-04-08).** The `LEFT lower forearm` / `RIGHT lower forearm` text in the CB2 block is cosmetic. The reference image geometry, the rider's body orientation, and the scene pose prior dominate. Three tests proved this:
+1. Prompt LEFT vs RIGHT on same refs → 5/6 stayed LEFT regardless
+2. Mirrored refs (device on opposite arm in ref) → 6/6 still rendered LEFT
+3. Goofy stance on h3 → FLIPPED both scenes from L to R (h5 and p4 stance-immune)
+
+**The real levers are:**
+- **Reference choice** — most refs are "arm-committed" by virtue of the pose/angle in the source photo. h3 responds to stance swaps; h5 and p4 don't.
+- **Body orientation in scene** — for snowboard, regular stance = LEFT output, goofy stance = RIGHT output (on h3 only so far).
+- **Fallback: GPT masked inpainting** — generate clean scene → mask specific forearm → inpaint CB2. Only works on GPT Image 1.5 base images. Known-good from V1 (scored 99 on moto).
+
+**Rule:** Keep the LEFT/RIGHT text in the prompt for documentation, but don't trust it. If you need a specific arm on snow, use h3 + the matching stance. For other sports, stick with defaults until re-tested. Retire h5 and p5 from snow permanently.
+
 ### Step 2 (optional): Two-Pass Gear Addition
 - Run a winning image through FLUX edit again to add helmet or earbuds
 - Works for: helmets, earbuds, small accessories (CB2 survives)
@@ -335,27 +395,36 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 - "Wireless earbuds" / "AirPods" removed from all prompts permanently (float on face, look Photoshopped)
 - MANDATORY per-sport gear list added to CLAUDE.md
 
-### Next Session Priorities
-1. **Justin reviews 25 new images** — 20 action batch + 5 gloves moto in TO REVIEW tab
-2. **Scale production across all 4 validated models** — GPT Image 1.5, Nano Banana Pro, Nano Banana 2, FLUX 2 Flex all work. Generate batches across all sports.
-3. **Use GPT masked inpainting on best GPT-generated scenes** — apply the 99-scoring pipeline to new GPT scenes to fix above-elbow placement
-4. **Jordan shoots 7 reference photos** — 3 Hunter + 3 Patriot + 1 Tron winter. See jordan-shot-list.html
-5. **Build CREATE tab** — sport/colorway/vibe dropdowns → auto-generate → review page
-6. **Scale video production** — animate approved stills with Kling 3.0 Pro (now submittable from Video Lab) and Gen-4 Turbo
-7. **Fix feedback sync** — SYNC_URL points to wrong webhook (plan exists in luminous-bubbling-candy.md)
-8. **Test Nano Banana Pro with multiple reference images** — supports up to 14 refs, only tested with single Ref C so far. Could improve CB2 fidelity with additional product photos.
-9. **Cancel Recraft subscription** ($25/mo, never used)
+### Next Session Priorities (updated 2026-04-09 EOD)
+1. **Cloudflare Worker deployment** (PLAN Part 0.1) — CRITICAL path blocker for CREATE tab. Waiting on Justin to create a CF account + provide a shared team password + rotate the leaked fal.ai key. Worker code ready to deploy. See `scripts/cf-worker/` (written but not deployed).
+2. **SYNC_URL webhook fix** (PLAN Part 0.2) — waiting on Justin to update Make.com scenario 4654266 to accept a dynamic `filename` field.
+3. **Build CREATE tab** (PLAN Parts 1-4) — data layer + recipe cards + keeper grid + learning loop. Partially scaffolded in `scripts/create-tab/` (data layer can ship before the Worker; UI wiring waits for Worker).
+4. **Hunter/Patriot reshoot** — Justin will do this next week when products arrive. Single highest-EV shot: t18-clone (vertical standalone on wood table, PLUS at top, warm light). Replaces h3/p4 if results beat existing.
+5. **Scale production across all 4 validated models + 3 validated colorways** — GPT Image 1.5, Nano Banana Pro, Nano Banana 2, FLUX 2 Flex × Hunter, Patriot, Tron. Tron unlocked as of 2026-04-09.
+6. **Use GPT masked inpainting on best GPT-generated scenes** — apply the 99-scoring pipeline to new GPT scenes to fix above-elbow placement.
+7. **Permanent archival pipeline** — script to download every super/yes URL from `_rate_corpus.json` → `winners/` on GitHub Pages + rewrite URLs. Source data identified (`_rate_corpus.json` has 694 items with URL field). Script design pending.
+8. **Scale video production** — animate approved stills with Kling 3.0 Pro and Gen-4 Turbo.
+9. **Cancel Recraft subscription** ($25/mo, never used).
 
 ### Key Resources
 | Resource | Location |
 |----------|----------|
 | Review page | https://jbarad424.github.io/ideas/cb-review.html |
+| Tron ref A/B review | https://jbarad424.github.io/ideas/tron-ab-review.html |
 | Jordan's shot list | https://jbarad424.github.io/ideas/jordan-shot-list.html |
 | Feedback JSON | https://jbarad424.github.io/ideas/cb-feedback.json |
 | Notion status | https://www.notion.so/33af45bfc038813f8b09f0d6efdffc49 |
 | Google Drive | CB2 AI Generated Photos (4 quality-tier subfolders) |
-| Memory files | ~/.claude/projects/-Users-justinbarad-Documents-Claude-Code-ideas/memory/ |
+| Memory files | ~/.claude/projects/-Users-justinbarad-code-cb2-ideas/memory/ |
 | Make.com sync webhook | https://hook.us1.make.com/p3bt4ga6npqjs3608t9aou45qq1m5amh |
+| Plan v2 (CREATE tab) | `PLAN-CREATE-TAB-V2.md` in repo root |
+
+### Colorway Status (updated 2026-04-09)
+| Colorway | Status | Production refs | Notes |
+|----------|--------|-----------------|-------|
+| **Hunter** | Production-ready | h3, h5, h6 | Reshoot t18-clone pending (product shipment to Justin next week) |
+| **Patriot** | Production-ready | p4, p6 (p5 killed) | Reshoot t18-clone pending (product shipment to Justin next week) |
+| **Tron** | **Production-ready as of 2026-04-09** | t18 (pure gold), t01, t03, t11 (Tier 1), t05, t09, t17 (Tier 2) | Justin shot 20 refs 2026-04-09, A/B locked winners. t18 is the only pure-pure. t10, t16 kill-listed. |
 
 ### Sports Priority
 | Sport | Status | Notes |
