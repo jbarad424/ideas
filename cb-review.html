@@ -150,11 +150,16 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .cr-cost{font-size:.65rem;color:#888}
 .cr-cost strong{color:#22c55e}
 .cr-rail-label{font-size:.65rem;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:.8rem 0 .4rem}
-.cr-parade{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+.cr-parade{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
 .cr-card{background:#0f0f1a;border:1px solid #222;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;transition:border-color .15s}
 .cr-card:hover{border-color:#a855f7}
 .cr-card.fade{opacity:.45}
-.cr-card img{width:100%;height:150px;object-fit:cover;display:block}
+.cr-card img{width:100%;aspect-ratio:3/4;height:auto;object-fit:cover;display:block;background:#000}
+/* Sport filter bar — matches Gallery .gal-filter pattern */
+.cr-sport-bar{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.45rem;background:#111;border:1px solid #222;border-radius:10px;margin-bottom:.6rem}
+.cr-sport-bar button{padding:.3rem .6rem;border-radius:8px;border:2px solid #333;background:#111;color:#888;font-size:.65rem;font-weight:600;cursor:pointer;transition:all .15s}
+.cr-sport-bar button:hover{border-color:#a855f7;color:#fff}
+.cr-sport-bar button.on{border-color:#a855f7;color:#a855f7;background:#1a1030}
 .cr-card-body{padding:.45rem .55rem}
 .cr-card-title{font-size:.68rem;font-weight:600;color:#ccc;line-height:1.3;margin-bottom:.25rem;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .cr-card-meta{display:flex;align-items:center;gap:.3rem;font-size:.55rem;color:#666;margin-bottom:.4rem;flex-wrap:wrap}
@@ -2504,6 +2509,7 @@ const CR={
   keepersLocal:'cb-keepers.json',
   // FK_FALLBACK removed 2026-04-09 — all generation routes through mmGen() → CF Worker.
   keepers:null,
+  sportFilter:new Set(),  // 2026-04-09: multi-select sport filter for Hit Parade + one-offs. Empty = show all.
   recipes:[],
   learning:null,
   hiddenRecipes:{},        // id -> true, persisted in localStorage
@@ -2776,8 +2782,14 @@ const CR={
     const hidden=this.hiddenRecipes||{};
     const hiddenCount=Object.keys(hidden).filter(id=>this.recipes.find(x=>x.id===id)).length;
     const showingHidden=!!this.showHiddenFlag;
-    const clustered=showingHidden?allClustered:allClustered.filter(r=>!hidden[r.id]);
-    const singletons=showingHidden?allSingletons:allSingletons.filter(r=>!hidden[r.id]);
+    let clustered=showingHidden?allClustered:allClustered.filter(r=>!hidden[r.id]);
+    let singletons=showingHidden?allSingletons:allSingletons.filter(r=>!hidden[r.id]);
+    // Sport filter (multi-select). Empty set = show all.
+    if(this.sportFilter.size>0){
+      const matches=(r)=>this.sportFilter.has(r.sport);
+      clustered=clustered.filter(matches);
+      singletons=singletons.filter(matches);
+    }
     const clusteredCards=clustered.map(r=>this.renderRecipeCard(r)).join('');
     // Cap singletons at top 20; "Show all N" expands to full list.
     const expanded=!!this.singletonsExpanded;
@@ -2790,6 +2802,32 @@ const CR={
     const hiddenToggle=hiddenCount>0
       ?'<button class="cr-hdr-btn" onclick="CR.showHiddenFlag=!CR.showHiddenFlag;CR.render()">'+(showingHidden?'Hide hidden':'Show hidden ('+hiddenCount+')')+'</button>'
       :'';
+
+    // Sport filter bar — multi-select, matches Gallery pattern.
+    // Count per sport computed from the full (pre-sport-filter) set.
+    const sportCounts={};
+    [...allClustered,...allSingletons].forEach(r=>{
+      if(!hidden[r.id]||showingHidden)sportCounts[r.sport]=(sportCounts[r.sport]||0)+1;
+    });
+    const sportBtn=(key,label,icon)=>{
+      const n=sportCounts[key]||0;
+      if(n===0)return '';
+      const on=this.sportFilter.has(key);
+      return '<button class="'+(on?'on':'')+'" onclick="CR.toggleSportFilter(\''+key+'\')">'+icon+' '+label+' <span style="opacity:.6;font-weight:400">'+n+'</span></button>';
+    };
+    const resetBtn=this.sportFilter.size>0
+      ?'<button onclick="CR.sportFilter.clear();CR.render()" style="margin-left:.2rem">Reset</button>'
+      :'';
+    const sportBar='<div class="cr-sport-bar">'+
+      sportBtn('moto','Moto','\uD83C\uDFCD')+
+      sportBtn('ski','Ski','\u26F7')+
+      sportBtn('snow','Snow','\uD83C\uDFC2')+
+      sportBtn('snowmobile','Sled','\uD83D\uDEF7')+
+      sportBtn('mtb','MTB','\uD83D\uDEB5')+
+      sportBtn('other','Other','\uD83D\uDCF7')+
+      resetBtn+
+    '</div>';
+
     const header='<div class="cr-header">'+
       '<div class="cr-header-btns">'+
         '<button class="cr-hdr-btn" onclick="CR.showNewScene()">+ New Scene</button>'+
@@ -2800,6 +2838,7 @@ const CR={
     '</div>';
     if(empty)return header+empty;
     return header+
+      sportBar+
       '<div class="cr-rail-label">Hit Parade \u2014 proven recipes</div>'+
       '<div class="cr-parade">'+clusteredCards+'</div>'+
       '<div class="cr-rail-label">Creative one-offs \u2014 super picks from history</div>'+
@@ -2807,8 +2846,19 @@ const CR={
       expandBtn;
   },
 
+  toggleSportFilter(sport){
+    if(this.sportFilter.has(sport))this.sportFilter.delete(sport);
+    else this.sportFilter.add(sport);
+    this.render();
+  },
+
   renderRecipeCard(r){
-    const thumb=r.examples[0]?.url||'';
+    const ex=r.examples[0]||{};
+    const thumbOrig=ex.url||'';
+    // Use permanent archive URL when available, fall back to original on error
+    const thumbPrimary=(typeof archivedUrl==='function')?archivedUrl(thumbOrig,ex.id):thumbOrig;
+    const thumbFallback=thumbOrig;
+    const imgTag='<img src="'+thumbPrimary+'" alt="" loading="lazy"'+(thumbPrimary!==thumbFallback?' onerror="this.onerror=null;this.src=\''+thumbFallback+'\'"':'')+'>';
     const sportIcon={moto:'\uD83C\uDFCD',mtb:'\uD83D\uDEB5',ski:'\u26F7',snow:'\uD83C\uDFC2',snowmobile:'\uD83D\uDEF7',sled:'\uD83D\uDEF7'}[r.sport]||'\uD83D\uDCF7';
     const modelShort=(r.model||'').replace('Nano Banana','NB').replace('GPT Image 1.5','GPT').replace('FLUX 2 Flex','Flex');
     const superBadge=r.super_count>0?'<div class="cr-super-badge">\u2605 '+r.super_count+'</div>':'';
@@ -2819,7 +2869,7 @@ const CR={
       ?'<button class="cr-hide-btn cr-unhide-btn" onclick="event.stopPropagation();CR.unhideRecipe(\''+r.id+'\')" title="Un-hide this recipe">\u21BA</button>'
       :'<button class="cr-hide-btn" onclick="event.stopPropagation();CR.hideRecipe(\''+r.id+'\')" title="Don\'t suggest this one anymore">\u2715</button>';
     return '<div class="cr-card'+(r.fade?' fade':'')+(isHidden?' cr-card-hidden':'')+'" onclick="CR.openRecipe(\''+r.id+'\')">'+
-      '<img src="'+thumb+'" alt="" loading="lazy">'+
+      imgTag+
       hideBtn+superBadge+rateBadge+
       '<div class="cr-card-body">'+
         '<div class="cr-card-title">'+this.esc(title)+'</div>'+
