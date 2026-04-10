@@ -3023,10 +3023,12 @@ async function galGenerate(id,fidelity){
     });
     mmSaveVariations(added);
     counts();
-    setStatus(added.length+' variation'+(added.length>1?'s':'')+' added to TO REVIEW!');
-    // Update overlay results if still open
+    setStatus(added.length+' variation'+(added.length>1?'s':'')+' added! Close this overlay to see them at the top of Gallery.');
+    // Update overlay results if still open — show clickable thumbnails
     const r=document.getElementById('mmResults-'+id);
-    if(r)r.innerHTML=permUrls.map(url=>'<img src="'+url+'" alt="variation" style="border:2px solid #22c55e">').join('');
+    if(r)r.innerHTML=permUrls.map(url=>'<img src="'+url+'" alt="variation" style="border:2px solid #22c55e;cursor:pointer" onclick="galOpen(\''+added[0]?.id+'\')">').join('');
+    // Re-render gallery in the background so the new variations appear at top when overlay closes
+    galResetPage();renderGalleryDebounced();
   }catch(e){
     if(e.message.includes('Failed to fetch')||e.message.includes('NetworkError')){
       setStatus('CORS blocked. Use Claude Code to generate variations.');
