@@ -4396,16 +4396,23 @@ function discoverSendToCreate(idx){
   const prompt=(window._discoverPrompts||[])[idx]||'';
   const sport=window._discoverSport||'moto';
   const gender=window._discoverGender||'any';
-  // Pre-populate the CREATE New Scene form with this discovered scene
-  CR.showNewScene();
-  CR.newScene.sport=sport;
-  CR.newScene.gender=gender;
-  CR.newScene.scene=prompt.split('. '+({moto:'motorcycle',ski:'skier',snow:'snowboarder',mtb:'mountain',sled:'snowmobile'}[sport]||''))[0]||prompt;
-  CR.newScene.gear=CR.GEAR[sport]||'';
+  // Extract just the scene description (before the subject/camera clauses)
+  const subjectWords={moto:'motorcycle rider',ski:'skier',snow:'snowboarder',mtb:'mountain biker',sled:'snowmobile rider'};
+  const subj=subjectWords[sport]||'athlete';
+  const sceneOnly=prompt.split('. '+subj)[0]||prompt.split(', waist-up')[0]||prompt;
+  // Switch to CREATE tab first (CR.open() loads keepers + sets view=parade),
+  // then override to newScene after a tick so the form renders with our data.
   setTab('create');
-  CR.view='newscene';
-  CR.render();
-  showToast('Scene loaded in CREATE \u2014 pick colorway + model and generate!');
+  setTimeout(()=>{
+    CR.showNewScene();
+    CR.newScene.sport=sport;
+    CR.newScene.gender=gender;
+    CR.newScene.scene=sceneOnly;
+    CR.newScene.gear=CR.GEAR[sport]||'';
+    CR.view='newscene';
+    CR.render();
+    showToast('Scene loaded \u2014 pick colorway + model and hit Refine or Assemble!');
+  },600);
 }
 
 // Inspiration Upload — analyze a photo with Claude Vision
@@ -4441,12 +4448,14 @@ function discoverUseAnalysis(){
   // Extract the last paragraph (usually the ready-to-use prompt)
   const paragraphs=text.split(/\n\n+/).filter(p=>p.trim());
   const scenePrompt=paragraphs[paragraphs.length-1]||text.slice(0,200);
-  CR.showNewScene();
-  CR.newScene.scene=scenePrompt;
   setTab('create');
-  CR.view='newscene';
-  CR.render();
-  showToast('Inspiration loaded in CREATE!');
+  setTimeout(()=>{
+    CR.showNewScene();
+    CR.newScene.scene=scenePrompt;
+    CR.view='newscene';
+    CR.render();
+    showToast('Inspiration loaded \u2014 pick sport + colorway and generate!');
+  },600);
 }
 
 // Init: load any Make More Like This variations from localStorage
