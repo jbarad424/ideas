@@ -554,13 +554,22 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
       <div style="flex:1;min-width:100px">
         <div style="font-size:.55rem;color:#888;font-weight:600;margin-bottom:.2rem">Count</div>
         <select id="discCount" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#0a0a0a;color:#fff;font-size:.65rem">
-          <option value="4">4 sketches (~$0.20)</option>
-          <option value="6" selected>6 sketches (~$0.30)</option>
+          <option value="4">4</option>
+          <option value="6" selected>6</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:120px">
+        <div style="font-size:.55rem;color:#888;font-weight:600;margin-bottom:.2rem">Quality</div>
+        <select id="discModel" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#0a0a0a;color:#fff;font-size:.65rem">
+          <option value="flux" selected>FLUX Fast (~$0.05)</option>
+          <option value="nbpro">NB Pro (~$0.15)</option>
+          <option value="nb2">NB2 (~$0.08)</option>
+          <option value="gpt">GPT 1.5 (~$0.15)</option>
         </select>
       </div>
     </div>
     <textarea id="discPrompt" placeholder="Optional: describe a mood, setting, or concept... (leave blank for AI-generated variety)" style="width:100%;min-height:50px;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#fff;font-size:.7rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box;margin-bottom:.3rem"></textarea>
-    <button onclick="discoverGenerate()" id="discGenBtn" style="width:100%;padding:.5rem;border-radius:6px;border:none;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:.75rem;cursor:pointer;font-weight:700">Generate Sketches (~$0.05 each via FLUX)</button>
+    <button onclick="discoverGenerate()" id="discGenBtn" style="width:100%;padding:.5rem;border-radius:6px;border:none;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:.75rem;cursor:pointer;font-weight:700">Generate Sketches</button>
     <div id="discStatus" style="font-size:.6rem;color:#888;margin-top:.3rem;text-align:center"></div>
     <div id="discGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-top:.5rem"></div>
   </div>
@@ -568,9 +577,12 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <!-- Mode 2: Learn from an uploaded photo -->
   <div style="background:#111;border:1px solid #222;border-radius:10px;padding:.8rem">
     <div style="font-size:.8rem;font-weight:700;color:#a855f7;margin-bottom:.5rem">Inspiration Upload — learn from a photo</div>
-    <div style="font-size:.65rem;color:#888;margin-bottom:.4rem;line-height:1.4">Paste a URL to an inspiring action sports photo. Claude will analyze it and suggest how to recreate the vibe with CB2. Then take the suggestion to CREATE.</div>
-    <div style="display:flex;gap:.3rem;align-items:center">
-      <input id="discInspoUrl" type="text" placeholder="Paste an image URL..." style="flex:1;padding:.4rem;border-radius:6px;border:1px solid #333;background:#0a0a0a;color:#fff;font-size:.7rem;box-sizing:border-box">
+    <div style="font-size:.65rem;color:#888;margin-bottom:.4rem;line-height:1.4">Upload a photo or paste a URL. Claude will analyze what makes it compelling and suggest how to recreate the vibe with CB2.</div>
+    <div style="display:flex;gap:.3rem;align-items:center;flex-wrap:wrap">
+      <input id="discInspoUrl" type="text" placeholder="Paste an image URL..." style="flex:1;min-width:180px;padding:.4rem;border-radius:6px;border:1px solid #333;background:#0a0a0a;color:#fff;font-size:.7rem;box-sizing:border-box">
+      <label style="padding:.4rem .6rem;border-radius:6px;border:1px solid #555;background:#222;color:#ccc;font-size:.65rem;cursor:pointer;white-space:nowrap">
+        Upload <input id="discInspoFile" type="file" accept="image/*" onchange="discoverFileUpload(this)" style="display:none">
+      </label>
       <button onclick="discoverAnalyze()" id="discAnalyzeBtn" style="padding:.4rem .7rem;border-radius:6px;border:none;background:#a855f7;color:#fff;font-size:.7rem;cursor:pointer;font-weight:700;white-space:nowrap">Analyze</button>
     </div>
     <div id="discInspoPreview" style="margin-top:.4rem"></div>
@@ -4462,14 +4474,30 @@ async function discoverGenerate(){
     }
   }
 
-  // Generate via FLUX 2 Flex (cheapest: ~$0.05/image, no ref needed)
-  const endpoint='fal-ai/flux-2-flex';
+  // Model selection — user can choose quality vs cost
+  const modelKey=document.getElementById('discModel')?.value||'flux';
+  const modelEndpoints={
+    flux:'fal-ai/flux-2-flex',
+    nbpro:'fal-ai/nano-banana-pro/edit',
+    nb2:'fal-ai/nano-banana-2/edit',
+    gpt:'fal-ai/gpt-image-1.5/edit',
+  };
+  const endpoint=modelEndpoints[modelKey]||modelEndpoints.flux;
+  const isGPT=modelKey==='gpt';
+  const costEst={flux:'~$0.05',nbpro:'~$0.15',nb2:'~$0.08',gpt:'~$0.15'}[modelKey]||'~$0.05';
+  status.textContent='Generating '+count+' sketches via '+(modelKey==='flux'?'FLUX':modelKey==='nbpro'?'NB Pro':modelKey==='nb2'?'NB2':'GPT')+' ('+costEst+' each)...';
   try{
     const results=await Promise.all(prompts.map(async(p,i)=>{
       try{
         const seed=Math.floor(Math.random()*100000);
-        const data=await proxyFal(endpoint,{prompt:p,seed,num_images:1,output_format:'jpeg',image_size:{width:768,height:1024}});
-        return data?.images?.[0]||null;
+        let payload;
+        if(isGPT){
+          payload={prompt:p,size:'1024x1536',quality:'high'};
+        }else{
+          payload={prompt:p,seed,num_images:1,output_format:'jpeg',image_size:{width:768,height:1024}};
+        }
+        const data=await proxyFal(endpoint,payload);
+        return data?.images?.[0]||data?.data?.[0]||null;
       }catch(e){
         return {error:e.message};
       }
@@ -4522,6 +4550,33 @@ function discoverSendToCreate(idx){
 }
 
 // Inspiration Upload — analyze a photo with Claude Vision
+// discoverFileUpload — handles file input from camera roll / photo album.
+// Uploads the file to catbox.moe for a permanent URL, then puts the URL in
+// the input field so discoverAnalyze() can use it.
+async function discoverFileUpload(input){
+  if(!input.files||!input.files[0])return;
+  const file=input.files[0];
+  const preview=document.getElementById('discInspoPreview');
+  if(preview)preview.innerHTML='<div style="font-size:.6rem;color:#888">Uploading '+file.name+'...</div>';
+  try{
+    const fd=new FormData();
+    fd.append('reqtype','fileupload');
+    fd.append('fileToUpload',file,file.name);
+    const resp=await fetch('https://catbox.moe/user/api.php',{method:'POST',body:fd});
+    const url=await resp.text();
+    if(url.startsWith('https://')){
+      document.getElementById('discInspoUrl').value=url.trim();
+      if(preview)preview.innerHTML='<img src="'+url.trim()+'" alt="" style="max-width:200px;border-radius:8px;margin-top:.3rem">';
+      showToast('Uploaded! Click Analyze to continue.');
+    }else{
+      if(preview)preview.innerHTML='<div style="color:#ef4444;font-size:.6rem">Upload failed: '+url.slice(0,100)+'</div>';
+    }
+  }catch(e){
+    if(preview)preview.innerHTML='<div style="color:#ef4444;font-size:.6rem">Upload error: '+e.message+'</div>';
+  }
+  input.value=''; // reset so same file can be re-selected
+}
+
 async function discoverAnalyze(){
   const url=(document.getElementById('discInspoUrl').value||'').trim();
   if(!url){showToast('Paste an image URL first');return;}
