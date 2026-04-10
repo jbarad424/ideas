@@ -1849,23 +1849,24 @@ function galArchiveVideo(id){
 // Sets are cleared by un-clicking individually or calling galClearFilters().
 // Each toggle just flips a state bit and re-renders; button styling comes from
 // the .gal-filter.on class, no inline color overrides.
-function galToggleLikes(){galShowLikes=!galShowLikes;renderGallery();}
-function galToggleSuperFilter(){galShowSuper=!galShowSuper;renderGallery();}
-function galToggleRejects(){galShowRejects=!galShowRejects;renderGallery();}
+function galResetPage(){window._galPage=0;}
+function galToggleLikes(){galShowLikes=!galShowLikes;galResetPage();renderGallery();}
+function galToggleSuperFilter(){galShowSuper=!galShowSuper;galResetPage();renderGallery();}
+function galToggleRejects(){galShowRejects=!galShowRejects;galResetPage();renderGallery();}
 function galToggleSport(sport){
   if(galSportSet.has(sport))galSportSet.delete(sport);
   else galSportSet.add(sport);
-  renderGallery();
+  galResetPage();renderGallery();
 }
 function galToggleModel(model){
   if(galModelSet.has(model))galModelSet.delete(model);
   else galModelSet.add(model);
-  renderGallery();
+  galResetPage();renderGallery();
 }
 function galClearFilters(){
   galShowLikes=true;galShowSuper=true;galShowRejects=false;
   galSportSet.clear();galModelSet.clear();
-  renderGallery();
+  galResetPage();renderGallery();
 }
 
 // galSetMediaType — flip the gallery between photos and videos. Pauses every
@@ -1874,6 +1875,7 @@ function galClearFilters(){
 // distributions and we don't want a stale "GPT 0" carrying over from photos.
 function galSetMediaType(t){
   if(t===galMediaType)return;
+  galResetPage();
   closeGalleryOverlay();
   galMediaType=t;
   // Update toggle button styling
@@ -2678,8 +2680,15 @@ function renderGallery(){
     setBtn(b,modelLabels[md]||md,modelCounts[md]||0,galModelSet.has(md));
   });
 
+  // Performance: cap initial render to 60 items on mobile to keep the DOM lean.
+  // "Show more" button loads the rest. On desktop (>768px) show 120.
+  const PAGE_SIZE=window.innerWidth>768?120:60;
+  const galPage=window._galPage||0;
+  const visibleCount=Math.min(filtered.length,(galPage+1)*PAGE_SIZE);
+  const visible=filtered.slice(0,visibleCount);
+
   const sportIcon={motorcycle:'&#127949;',skiing:'&#9975;',snowboard:'&#127938;',snowmobile:'&#128757;',mtb:'&#128692;',other:'&#127918;'};
-  g.innerHTML=filtered.map(img=>{
+  g.innerHTML=visible.map(img=>{
     const short=img.label.replace(/^(REF TEST |REF C: |BATCH: |FLIP FIX: |PIPE [A-Z]: |LoRA V5: |FLUX 2 LoRA: |FLEX g7: |NB PRO: |NB2: |FLUX-GPT: |MASK INPAINT: |MICRO: |COMBO: |DUALREF: |VIDEO[^:]*:\s*)/,'');
     // Verdict badge in top-right (score badge removed per 2026-04-09 UX feedback)
     const verdictBadge=img.isSuper
@@ -2714,6 +2723,11 @@ function renderGallery(){
     }
     return '<div class="gal-card'+(img.isSuper?' gal-super':'')+'" onclick="galOpen(\''+img.id+'\')">'+mediaTag+verdictBadge+vidBadge+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
   }).join('');
+
+  // "Show more" button if there are hidden items
+  if(visibleCount<filtered.length){
+    g.innerHTML+='<div style="grid-column:1/-1;text-align:center;padding:.5rem"><button onclick="window._galPage=(window._galPage||0)+1;renderGallery()" style="padding:.4rem 1.2rem;border-radius:6px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.7rem;cursor:pointer;font-weight:600">Show more ('+visibleCount+' of '+filtered.length+')</button></div>';
+  }
 
   // Build summary line — verdict counts
   const superCount=scored.filter(i=>i.verdictBucket==='super').length;
