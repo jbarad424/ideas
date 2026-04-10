@@ -1992,7 +1992,7 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
     }catch(e){
       // Network errors or 401 — don't spam, but surface to progress element
       const prog=document.getElementById('vidLabProgress');
-      if(prog)prog.textContent='Poll error (will retry): '+(e.message||'').slice(0,80);
+      if(prog)prog.textContent='Poll error (will retry): '+(e?.message||JSON.stringify(e)||'unknown').slice(0,120);
     }
   },15000);
 }
