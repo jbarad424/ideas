@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:40:11.606Z",
+  "syncedAt": "2026-04-10T19:40:49.004Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17014,6 +17014,11 @@
           "text": "The remote is cut off the lighting is cool, but you can't see the whole remote decent, but not nearly as cool as the cling",
           "time": "2026-04-08T02:17:38.327Z",
           "num": 1
+        },
+        {
+          "num": 2,
+          "text": "rejected — archived from Gallery",
+          "time": "2026-04-10T19:40:48.175Z"
         }
       ]
     },
