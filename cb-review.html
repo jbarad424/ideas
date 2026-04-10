@@ -1818,6 +1818,20 @@ function galToggleSuper(id){
   showToast(isSuperNow?'Super-like removed':'\u2B50 Super-liked');
 }
 
+// galArchiveVideo — marks a video as archived by adding a rejection comment.
+// Archived videos are hidden in the Gallery unless "Rejects" filter is on.
+function galArchiveVideo(id){
+  const d=D();
+  if(!d[id])d[id]={comments:[]};
+  d[id].comments.push({num:(d[id].comments.length||0)+1,text:'rejected — archived from Gallery',time:new Date().toISOString()});
+  try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+  // Close the overlay
+  const ov=document.querySelector('.gal-overlay');if(ov){pauseAllVideos();ov.remove();}
+  renderGallery();
+  try{if(typeof syncFeedback==='function')setTimeout(syncFeedback,300);}catch(e){}
+  showToast('Video archived');
+}
+
 // === Gallery filter toggles — all behave the same way ========================
 // Click to add to the active set (button turns purple), click again to remove.
 // Sets are cleared by un-clicking individually or calling galClearFilters().
@@ -2754,8 +2768,11 @@ function galOpen(id){
   // Photos: full action set (super-like, download, send to video lab, make more).
   const actionRow=isVideo
     ?'<div style="display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-top:.5rem">'
-      +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.55rem 1.2rem;border-radius:8px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.8rem;cursor:pointer;font-weight:700;min-width:180px">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
-      +'<a href="'+dlHref+'" download target="_blank" style="font-size:.65rem;color:#888;text-decoration:underline">\u2B07 Download video file</a>'
+      +'<div style="display:flex;gap:.4rem">'
+      +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:8px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.75rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Keep')+'</button>';})()
+      +'<button onclick="galArchiveVideo(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:8px;border:1px solid #444;background:transparent;color:#888;font-size:.75rem;cursor:pointer">Archive</button>'
+      +'</div>'
+      +'<a href="'+dlHref+'" download target="_blank" style="font-size:.6rem;color:#666;text-decoration:underline">\u2B07 Download</a>'
       +'</div>'
     :'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
       +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()

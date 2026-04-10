@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CB2 Reference Photo Library</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;padding:16px}
+h1{font-size:1.2em;color:#a855f7;margin-bottom:4px}
+.sub{color:#888;font-size:.8em;margin-bottom:16px}
+.section{margin-bottom:24px}
+.section-title{font-size:.9em;font-weight:700;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #222}
+.section-title .cw{padding:2px 8px;border-radius:4px;font-size:.75em;margin-left:6px}
+.hunter{background:#365314;color:#fde047}
+.patriot{background:#1e3a5f;color:#93c5fd}
+.tron{background:#155e75;color:#06b6d4}
+.killed{background:#7f1d1d;color:#fca5a5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.card{background:#111;border:1px solid #222;border-radius:8px;overflow:hidden;position:relative}
+.card.killed-card{opacity:.4;border-color:#7f1d1d}
+.card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;cursor:pointer}
+.card .info{padding:6px 8px;font-size:.65em;color:#888;line-height:1.4}
+.card .id{font-weight:700;color:#ccc;font-size:.75em}
+.card .badge{position:absolute;top:4px;right:4px;font-size:.55em;padding:2px 6px;border-radius:3px;font-weight:700}
+.card .badge.product{background:rgba(234,179,8,.9);color:#000}
+.card .badge.jacket{background:rgba(168,85,247,.8);color:#fff}
+.card .badge.dual{background:rgba(6,182,212,.8);color:#000}
+.card .kill-badge{position:absolute;top:4px;left:4px;font-size:.6em;padding:2px 6px;border-radius:3px;background:rgba(239,68,68,.9);color:#fff;font-weight:700}
+.lb{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.92);z-index:100;display:none;align-items:center;justify-content:center;cursor:pointer}
+.lb.on{display:flex}
+.lb img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px}
+.stats{font-size:.7em;color:#666;margin-bottom:12px}
+</style>
+</head><body>
+<h1>CB2 Reference Photo Library</h1>
+<div class="sub">All reference images used by the pipeline. Click any image to view full size. Killed refs are dimmed.</div>
+<div class="stats" id="stats"></div>
+<div id="content"></div>
+<div class="lb" id="lb" onclick="this.classList.remove('on')"><img id="lbImg" alt=""></div>
+
+<script>
+// All refs from CLAUDE.md production library (2026-04-10 lock)
+const REFS=[
+  // Hunter
+  {id:'h3',colorway:'Hunter',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/h3.jpg',notes:'Production-ready. Rotated 180. Responds to stance swaps for snowboard arm control.'},
+  {id:'h5',colorway:'Hunter',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/h5.jpg',notes:'Production-ready. Rotated 180. Stance-immune (always LEFT arm).'},
+  {id:'h6',colorway:'Hunter',type:'product',url:'https://jbarad424.github.io/ideas/rotated-refs/h6.jpg',notes:'Hunter product close-up. Used as image 2 in dual-ref for symbol clarity.'},
+  {id:'refc',colorway:'Hunter',type:'dual',url:'https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800',notes:'J&Mike Dual (Ref C). Original production ref. 0 flags in rotation A/B. Fallback product ref for Patriot.'},
+  // Patriot
+  {id:'p4',colorway:'Patriot',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/p4.jpg',notes:'Production-ready. Rotated 180. Stance-immune.'},
+  {id:'p6',colorway:'Patriot',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/p6.jpg',notes:'Production-ready. Rotated 180.'},
+  // Tron (Justin shot 2026-04-09)
+  {id:'t18',colorway:'Tron',type:'product',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t18.jpeg',notes:'PURE GOLD. 4x score 5, 0 flags. Standalone product on wood table, vertical canonical (PLUS at top).'},
+  {id:'t01',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t01.jpeg',notes:'Tier 1. Glove shot. Cosmetic rot180 flags only.'},
+  {id:'t03',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t03.jpeg',notes:'Tier 1. Sleeve A. Cosmetic rot180 flags only.'},
+  {id:'t11',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t11.jpeg',notes:'Tier 1. Sleeve B.'},
+  {id:'t05',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t05.jpeg',notes:'Tier 2. Sleeve C.'},
+  {id:'t09',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t09.jpeg',notes:'Tier 2. Sleeve D.'},
+  {id:'t17',colorway:'Tron',type:'product',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t17.jpeg',notes:'Tier 2. Product B.'},
+];
+
+const KILLED=[
+  {id:'h1',colorway:'Hunter',reason:'3 rot=1 fails in rotation A/B'},
+  {id:'h4',colorway:'Hunter',reason:'3 rot=1 fails in rotation A/B'},
+  {id:'p1',colorway:'Patriot',reason:'3 rot=1 fails in rotation A/B'},
+  {id:'p5',colorway:'Patriot',reason:'Only 1 clean success out of 8 gens in production batch V1. 3 perpendicular + 3 wrongArm flags.'},
+  {id:'t10',colorway:'Tron',reason:'Score-1 on mtb_s1 (weird two-rider composition). Avg 3.5, worst Tron performer.'},
+  {id:'t16',colorway:'Tron',reason:'Upside-down vertical standalone (MINUS at top). Score-1 on mtb_s1. Avg 3.67.'},
+];
+
+function openLB(url){document.getElementById('lbImg').src=url;document.getElementById('lb').classList.add('on');}
+
+function render(){
+  const active=REFS.filter(r=>!KILLED.find(k=>k.id===r.id));
+  const killedRefs=KILLED;
+  document.getElementById('stats').textContent=active.length+' active refs across 3 colorways. '+killedRefs.length+' killed.';
+
+  const colorways=['Hunter','Patriot','Tron'];
+  let html='';
+  for(const cw of colorways){
+    const cwClass=cw.toLowerCase();
+    const cwRefs=active.filter(r=>r.colorway===cw);
+    html+='<div class="section">';
+    html+='<div class="section-title">'+cw+' <span class="cw '+cwClass+'">'+cwRefs.length+' refs</span></div>';
+    html+='<div class="grid">';
+    for(const r of cwRefs){
+      html+='<div class="card" onclick="openLB(\''+r.url+'\')">';
+      html+='<img src="'+r.url+'" alt="'+r.id+'" loading="lazy">';
+      html+='<div class="badge '+r.type+'">'+r.type+'</div>';
+      html+='<div class="info"><div class="id">'+r.id+'</div>'+r.notes+'</div>';
+      html+='</div>';
+    }
+    html+='</div></div>';
+  }
+
+  // Killed refs section
+  html+='<div class="section">';
+  html+='<div class="section-title">Killed Refs <span class="cw killed">'+killedRefs.length+' retired</span></div>';
+  html+='<div class="grid">';
+  for(const k of killedRefs){
+    html+='<div class="card killed-card">';
+    html+='<div style="aspect-ratio:3/4;background:#1a0a0a;display:flex;align-items:center;justify-content:center;font-size:.7em;color:#ef4444;padding:8px;text-align:center">'+k.id+'</div>';
+    html+='<div class="kill-badge">KILLED</div>';
+    html+='<div class="info"><div class="id">'+k.id+' ('+k.colorway+')</div>'+k.reason+'</div>';
+    html+='</div>';
+  }
+  html+='</div></div>';
+
+  document.getElementById('content').innerHTML=html;
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('on');});
+render();
+</script>
+</body></html>
