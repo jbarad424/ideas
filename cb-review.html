@@ -2116,7 +2116,10 @@ function vidJobRender(){
     const age=Math.round((Date.now()-new Date(j.submitted).getTime())/60000);
     const ageStr=age<60?age+'m ago':Math.round(age/60)+'h ago';
     const statusColor=j.status==='COMPLETED'?'#22c55e':j.status==='FAILED'?'#ef4444':'#f59e0b';
-    const videoLink=j.videoUrl?'<a href="'+j.videoUrl+'" target="_blank" style="color:#06b6d4;margin-left:.3rem">Watch</a>':'';
+    const videoLink=j.videoUrl
+      ?'<a href="'+j.videoUrl+'" target="_blank" style="color:#06b6d4;margin-left:.3rem">Watch</a>'
+       +'<a href="'+j.videoUrl+'" download style="color:#888;margin-left:.3rem;font-size:.5rem">\u2B07</a>'
+      :'';
     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;border-bottom:1px solid #1a1a1a">'
       +'<div><span style="color:#ccc">'+j.platform+'</span> <span style="color:#666">— '+(j.label||'unknown')+'</span></div>'
       +'<div><span style="color:'+statusColor+';font-weight:600">'+(j.status||'PENDING')+'</span> <span style="color:#555">'+ageStr+'</span>'+videoLink+'</div>'
