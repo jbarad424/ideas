@@ -98,6 +98,28 @@
       "cost_usd": 0.8999999999999999,
       "is_novel": true,
       "at": "2026-04-10T18:32:21.239Z"
+    },
+    {
+      "batch_id": "20260410194641_84hnov",
+      "recipe_id": "moto_9102",
+      "recipe_prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "ref_id": "p4+0513",
+      "model": "fal-ai/nano-banana-pro/edit",
+      "sport": "moto",
+      "generated": 4,
+      "kept_urls": [
+        "https://v3b.fal.media/files/b/0a95bb90/VPMKgGvTn7Ygma1-90PQf_w2EnsvdT.jpg",
+        "https://v3b.fal.media/files/b/0a95bb90/VJ4mkzCuPH_XF5n3vWFb6_xCLqXFqf.jpg",
+        "https://v3b.fal.media/files/b/0a95bb90/c38YAZALxOD-S_OhYknz8_jBKu81SO.jpg"
+      ],
+      "rejected_urls": [
+        "https://v3b.fal.media/files/b/0a95bb90/OYnEuJxiRJwP0F0hfMIxA_LlToKlu3.jpg"
+      ],
+      "failed": [],
+      "keeper_rate": 0.75,
+      "cost_usd": 0.6,
+      "is_novel": false,
+      "at": "2026-04-10T19:49:07.961Z"
     }
   ],
   "recipes": {
@@ -121,6 +143,13 @@
       "total_generated": 6,
       "total_kept": 2,
       "last_batch_at": "2026-04-10T18:32:21.239Z"
+    },
+    "moto_9102": {
+      "keeper_rate": 0.75,
+      "batches_run": 1,
+      "total_generated": 4,
+      "total_kept": 3,
+      "last_batch_at": "2026-04-10T19:49:07.961Z"
     }
   },
   "refs": {
@@ -175,6 +204,21 @@
           "last_batch_at": "2026-04-10T18:32:21.239Z"
         }
       }
+    },
+    "p4+0513": {
+      "overall": {
+        "keeper_rate": 0.75,
+        "batches_run": 1
+      },
+      "by_recipe": {
+        "moto_9102": {
+          "keeper_rate": 0.75,
+          "batches_run": 1,
+          "total_generated": 4,
+          "total_kept": 3,
+          "last_batch_at": "2026-04-10T19:49:07.961Z"
+        }
+      }
     }
   },
   "models_by_sport": {
@@ -194,6 +238,13 @@
         "total_generated": 4,
         "total_kept": 0,
         "last_batch_at": "2026-04-10T12:54:23.093Z"
+      },
+      "fal-ai/nano-banana-pro/edit": {
+        "keeper_rate": 0.75,
+        "batches_run": 1,
+        "total_generated": 4,
+        "total_kept": 3,
+        "last_batch_at": "2026-04-10T19:49:07.961Z"
       }
     }
   }
