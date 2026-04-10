@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.1</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.2</span></div>
 </div>
 
 <div class="tabs">
@@ -3793,7 +3793,25 @@ const CR={
   // Dual-ref WAS working. The stock photo bug was caused by image_size + w=2400,
   // NOT by dual-ref. Single-ref revert was a misdiagnosis.
   buildPayload(b,i){
-    const refUrl=(b.ref&&b.ref.url)||this.REFS.refc.url;
+    // If the recipe's ref has a URL, use it. If not (older keepers from
+    // cb-keepers.json have no ref field), auto-pick from the colorway's
+    // pool. This fixes the bug where Patriot recipes fell back to Ref C
+    // (which shows Tron) because the keeper data had no ref.
+    let refUrl;
+    if(b.ref&&b.ref.url){
+      refUrl=b.ref.url;
+    }else{
+      // Detect colorway from the batch's sport/prompt context
+      const ctx=(b.recipe_prompt||'').toLowerCase();
+      let cw='Hunter'; // default
+      if(b.ref&&b.ref.colorway)cw=b.ref.colorway;
+      else if(/patriot/.test(ctx))cw='Patriot';
+      else if(/tron/.test(ctx))cw='Tron';
+      // Pick from the colorway pool
+      const pool=this.refsForColorway(cw);
+      refUrl=pool.length?pool[Math.floor(Math.random()*pool.length)].url:this.REFS.refc.url;
+      console.log('[buildPayload] no ref URL on recipe, auto-picked',cw,'ref from pool of',pool.length);
+    }
     const productShots={
       Hunter:this.REFS.h6?.url,
       Tron:this.REFS.t18?.url,
