@@ -73,7 +73,8 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .gal-filter.on{border-color:#a855f7;color:#a855f7;background:#1a1030}
 .gal-card{background:#111;border:1px solid #222;border-radius:8px;overflow:hidden;cursor:pointer;position:relative}
 .gal-card.gal-super{border:2px solid #eab308;box-shadow:0 0 12px rgba(234,179,8,.4)}
-.gal-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.gal-card img,.gal-card video{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#000}
+.gal-card .gal-vid-badge{position:absolute;top:4px;left:4px;font-size:.7rem;padding:.1rem .3rem;border-radius:4px;background:rgba(0,0,0,.7);color:#a855f7;font-weight:700;pointer-events:none}
 .gal-card .gal-score{position:absolute;top:4px;right:4px;font-size:.6rem;padding:.15rem .35rem;border-radius:4px;font-weight:700;backdrop-filter:blur(4px)}
 .gal-card .gal-score.s90{background:rgba(34,197,94,.85);color:#000}
 .gal-card .gal-score.s70{background:rgba(245,158,11,.85);color:#000}
@@ -81,7 +82,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .gal-card .gal-score.s0{background:rgba(239,68,68,.85);color:#fff}
 .gal-card .gal-label{font-size:.5rem;padding:.2rem .3rem;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:100;display:flex;flex-direction:column;align-items:center;padding:1rem;overflow-y:auto}
-.gal-overlay img{max-width:90vw;max-height:60vh;object-fit:contain;border-radius:8px}
+.gal-overlay img,.gal-overlay video{max-width:90vw;max-height:60vh;object-fit:contain;border-radius:8px;background:#000}
 .gal-overlay .gal-info{max-width:500px;margin-top:.8rem;text-align:center}
 .gal-overlay .gal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer}
 .gal-overlay .gal-dl{display:inline-block;margin-top:.5rem;padding:.3rem .8rem;border-radius:6px;border:1px solid #22c55e;color:#22c55e;font-size:.7rem;text-decoration:none}
@@ -235,7 +236,6 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <div class="tabs">
   <div class="tab active" onclick="setTab('gallery')">GALLERY</div>
   <div class="tab" onclick="setTab('create')">CREATE</div>
-  <div class="tab" onclick="setTab('videos')">VIDEOS (<span id="cntVid">0</span>)</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -349,6 +349,11 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <!-- GALLERY/ARCHIVE TAB -->
 <div id="galleryArea" style="display:none;width:100%;max-width:900px;margin:0 auto;padding:0 .5rem">
   <div style="margin-bottom:.6rem">
+    <!-- Photos | Videos media-type toggle (mutually exclusive — pick one) -->
+    <div style="display:flex;gap:0;justify-content:center;margin-bottom:.4rem">
+      <button id="galMediaPhoto" onclick="galSetMediaType('photo')" style="padding:.45rem 1.2rem;font-size:.75rem;font-weight:700;border:2px solid #a855f7;background:#1a1030;color:#a855f7;border-radius:8px 0 0 8px;cursor:pointer">📷 Photos <span id="galPhotoCount" style="opacity:.65;font-weight:400"></span></button>
+      <button id="galMediaVideo" onclick="galSetMediaType('video')" style="padding:.45rem 1.2rem;font-size:.75rem;font-weight:700;border:2px solid #333;background:#111;color:#888;border-left:none;border-radius:0 8px 8px 0;cursor:pointer">🎬 Videos <span id="galVideoCount" style="opacity:.65;font-weight:400"></span></button>
+    </div>
     <!-- Filter bar — everything is a toggle. Purple = on, gray = off. Multi-select on Sport + Model. -->
     <div id="galFilterBar" style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.5rem;background:#111;border-radius:10px;border:1px solid #222">
       <!-- Verdict filters (independent toggles) -->
@@ -1443,8 +1448,12 @@ function counts(){
 function setTab(t){
   tab=t;ci=0;navHistory=[];
   // 3-tab layout: GALLERY | CREATE | VIDEOS
+  // 2026-04-09: VIDEOS tab retired and merged into Gallery as a sub-toggle.
+  // Pause all <video> elements + tear down any open overlays whenever the tab
+  // changes — fixes the audio-keeps-playing-after-tab-switch bug.
+  if(typeof closeGalleryOverlay==='function')closeGalleryOverlay();
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['gallery','create','videos'][i]===t)?' active':'');
+    el.className='tab'+((['gallery','create'][i]===t)?' active':'');
   });
   const hide=id=>{const e=document.getElementById(id);if(e)e.style.display='none';};
   const show=id=>{const e=document.getElementById(id);if(e)e.style.display='block';};
@@ -1453,7 +1462,13 @@ function setTab(t){
   hide('emptyState');
   if(t==='gallery'){show('galleryArea');renderGallery();}
   else if(t==='create'){show('createArea');CR.open();}
-  else if(t==='videos'){show('videosArea');vidLabCheck();vidSetTab('new');}
+  else if(t==='videos'){
+    // Videos tab is no longer exposed in the tab bar (merged into Gallery as a
+    // sub-toggle), but galSendToVideoLab() still routes here so the Video Lab
+    // workflow keeps working. The user clicks the Gallery tab to return.
+    show('videosArea');
+    if(typeof vidLabCheck==='function')vidLabCheck();
+  }
 }
 
 function upFilt(){
@@ -1590,6 +1605,9 @@ document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')return;
 // === GALLERY TAB ===
 let galFilterMode='all';
 // Verdict filters — independent toggles, default: show likes + super, hide rejects
+// Gallery media type — 'photo' (default) or 'video'. Mutually exclusive.
+// 2026-04-09: VIDEOS tab was retired and merged into the Gallery as a sub-toggle.
+let galMediaType='photo';
 let galShowLikes=true;
 let galShowSuper=true;
 let galShowRejects=false;
@@ -1695,6 +1713,46 @@ function galClearFilters(){
   galShowLikes=true;galShowSuper=true;galShowRejects=false;
   galSportSet.clear();galModelSet.clear();
   renderGallery();
+}
+
+// galSetMediaType — flip the gallery between photos and videos. Pauses every
+// playing <video> first so audio doesn't bleed across the toggle. Resets the
+// per-mediaType filter state since photos vs videos can have different sport
+// distributions and we don't want a stale "GPT 0" carrying over from photos.
+function galSetMediaType(t){
+  if(t===galMediaType)return;
+  closeGalleryOverlay();
+  galMediaType=t;
+  // Update toggle button styling
+  const photoBtn=document.getElementById('galMediaPhoto');
+  const videoBtn=document.getElementById('galMediaVideo');
+  if(photoBtn&&videoBtn){
+    if(t==='photo'){
+      photoBtn.style.background='#1a1030';photoBtn.style.color='#a855f7';photoBtn.style.borderColor='#a855f7';
+      videoBtn.style.background='#111';videoBtn.style.color='#888';videoBtn.style.borderColor='#333';
+    }else{
+      videoBtn.style.background='#1a1030';videoBtn.style.color='#a855f7';videoBtn.style.borderColor='#a855f7';
+      photoBtn.style.background='#111';photoBtn.style.color='#888';photoBtn.style.borderColor='#333';
+    }
+  }
+  renderGallery();
+}
+
+// pauseAllVideos — guards against the "audio keeps playing after I switch tabs"
+// bug. Walks every <video> on the page, pauses + resets it. Does NOT remove
+// overlays — that is the caller's responsibility (setTab and galSetMediaType
+// also call closeGalleryOverlay; the overlay's own close button removes itself).
+function pauseAllVideos(){
+  document.querySelectorAll('video').forEach(v=>{
+    try{v.pause();v.muted=true;}catch(e){}
+  });
+}
+// closeGalleryOverlay — pauses any video then removes the overlay. Used by
+// setTab + galSetMediaType so a half-open overlay can't keep playing audio
+// across tab switches or photo/video toggles.
+function closeGalleryOverlay(){
+  pauseAllVideos();
+  document.querySelectorAll('.gal-overlay').forEach(o=>o.remove());
 }
 
 // === SELF-CONTAINED VIDEO TAB ===
@@ -2162,7 +2220,21 @@ function galFilter(mode){
 
 function renderGallery(){
   const g=document.getElementById('galGrid');
-  const scored=ALL_IMAGES.filter(i=>isR(i)).map(i=>({
+
+  // Source switching: photos use ALL_IMAGES filtered by isR (must have a comment).
+  // Videos use ALL_VIDEOS + any live Video Lab jobs from localStorage. Videos
+  // default to "like" verdict even with no comments because they're expensive
+  // and Justin wants to keep them all unless explicitly rejected.
+  const isVideoMode=galMediaType==='video';
+  let sourceItems;
+  if(isVideoMode){
+    const liveVideos=(typeof vidLiveVideos==='function')?vidLiveVideos():[];
+    sourceItems=[...liveVideos,...ALL_VIDEOS];
+  }else{
+    sourceItems=ALL_IMAGES.filter(i=>isR(i));
+  }
+
+  const scored=sourceItems.map(i=>({
     ...i,
     score:galScore(i.id),
     bucket:galBucket(galScore(i.id)),
@@ -2170,18 +2242,28 @@ function renderGallery(){
     modelCat:galDetectModel(i),
     accepted:galIsAccepted(i),
     isSuper:galIsSuper(i),
+    isVideo:isVideoMode,
   }));
   scored.sort((a,b)=>b.score-a.score);
 
-  // Bucket each image into exactly one verdict category
+  // Bucket each item into exactly one verdict category.
   //   super   → galIsSuper === true
   //   reject  → not super AND accepted === false
   //   like    → everything else (accepted === true, or ambiguous null)
+  // Videos default to "like" if no verdict comments — keep all by default.
   scored.forEach(i=>{
     if(i.isSuper)i.verdictBucket='super';
     else if(i.accepted===false)i.verdictBucket='reject';
     else i.verdictBucket='like';
   });
+
+  // Update Photos / Videos count badges (Option A: separate per-mediaType counts)
+  // We compute the OTHER mediaType's count too for the toggle badge.
+  const photoCount=ALL_IMAGES.filter(i=>isR(i)).length;
+  const liveCount=(typeof vidLiveVideos==='function')?vidLiveVideos().length:0;
+  const videoCount=ALL_VIDEOS.length+liveCount;
+  const pcEl=document.getElementById('galPhotoCount');if(pcEl)pcEl.textContent=photoCount;
+  const vcEl=document.getElementById('galVideoCount');if(vcEl)vcEl.textContent=videoCount;
 
   let filtered=scored;
   // Verdict filters: show images whose bucket is in the active set
@@ -2250,7 +2332,7 @@ function renderGallery(){
 
   const sportIcon={motorcycle:'&#127949;',skiing:'&#9975;',snowboard:'&#127938;',snowmobile:'&#128757;',mtb:'&#128692;',other:'&#127918;'};
   g.innerHTML=filtered.map(img=>{
-    const short=img.label.replace(/^(REF TEST |REF C: |BATCH: |FLIP FIX: |PIPE [A-Z]: |LoRA V5: |FLUX 2 LoRA: |FLEX g7: |NB PRO: |NB2: |FLUX-GPT: |MASK INPAINT: |MICRO: |COMBO: |DUALREF: )/,'');
+    const short=img.label.replace(/^(REF TEST |REF C: |BATCH: |FLIP FIX: |PIPE [A-Z]: |LoRA V5: |FLUX 2 LoRA: |FLEX g7: |NB PRO: |NB2: |FLUX-GPT: |MASK INPAINT: |MICRO: |COMBO: |DUALREF: |VIDEO[^:]*:\s*)/,'');
     // Verdict badge in top-right (score badge removed per 2026-04-09 UX feedback)
     const verdictBadge=img.isSuper
       ?'<div style="position:absolute;top:4px;right:4px;font-size:.85rem;padding:.05rem .25rem;border-radius:4px;background:rgba(234,179,8,.95);color:#000;font-weight:700;box-shadow:0 0 8px rgba(234,179,8,.6)" title="Super-liked">&#11088;</div>'
@@ -2260,11 +2342,23 @@ function renderGallery(){
           ?'<div style="position:absolute;top:4px;right:4px;font-size:.65rem;padding:.1rem .3rem;border-radius:4px;background:rgba(239,68,68,.85);color:#fff;font-weight:700" title="Reject">&#10007;</div>'
           :'';
     const modelTag='<div style="position:absolute;bottom:18px;left:4px;font-size:.45rem;padding:.1rem .25rem;border-radius:3px;background:rgba(0,0,0,.7);color:#06b6d4;font-weight:600">'+img.model.split('(')[0].trim().replace('FLUX 2 Flex g7.0','FLUX Flex').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT 1.5')+'</div>';
-    // Use permanent archive URL when available, fall back to original on error
-    const primarySrc=archivedUrl(img.url,img.id);
-    const fallbackSrc=img.url;
-    const imgTag='<img src="'+primarySrc+'" loading="lazy" alt=""'+(primarySrc!==fallbackSrc?' onerror="this.onerror=null;this.src=\''+fallbackSrc+'\'"':'')+'>';
-    return '<div class="gal-card'+(img.isSuper?' gal-super':'')+'" onclick="galOpen(\''+img.id+'\')">'+imgTag+verdictBadge+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
+    // Photos use archivedUrl(); videos use archivedVideoUrl(). For videos in
+    // the grid, render a <video> tag with metadata-only preload (no autoplay,
+    // no audio) so the page stays responsive — full playback happens in the
+    // overlay. The vid-badge marks the card as a video at a glance.
+    let mediaTag,vidBadge='';
+    if(img.isVideo){
+      const primarySrc=archivedVideoUrl(img.url,img.id);
+      const fallbackSrc=img.url;
+      const onErr=(primarySrc!==fallbackSrc?' onerror="this.onerror=null;this.src=\''+fallbackSrc+'\'"':'');
+      mediaTag='<video src="'+primarySrc+'" preload="metadata" muted playsinline'+onErr+'></video>';
+      vidBadge='<div class="gal-vid-badge">&#9654; VIDEO</div>';
+    }else{
+      const primarySrc=archivedUrl(img.url,img.id);
+      const fallbackSrc=img.url;
+      mediaTag='<img src="'+primarySrc+'" loading="lazy" alt=""'+(primarySrc!==fallbackSrc?' onerror="this.onerror=null;this.src=\''+fallbackSrc+'\'"':'')+'>';
+    }
+    return '<div class="gal-card'+(img.isSuper?' gal-super':'')+'" onclick="galOpen(\''+img.id+'\')">'+mediaTag+verdictBadge+vidBadge+modelTag+'<div class="gal-label">'+(sportIcon[img.sport]||'')+' '+short+'</div></div>';
   }).join('');
 
   // Build summary line — verdict counts
@@ -2278,39 +2372,81 @@ function renderGallery(){
     +' of '+scored.length+' reviewed';
 }
 
+// galFindItem — finds a card by id across all 3 sources (images, live videos,
+// curated videos). Returns {item, isVideo} or null. Used by galOpen so the
+// overlay handles photos and videos uniformly.
+function galFindItem(id){
+  const img=ALL_IMAGES.find(i=>i.id===id);
+  if(img)return {item:img,isVideo:false};
+  const liveVideos=(typeof vidLiveVideos==='function')?vidLiveVideos():[];
+  const vid=[...liveVideos,...ALL_VIDEOS].find(v=>v.id===id);
+  if(vid)return {item:vid,isVideo:true};
+  return null;
+}
+
 function galOpen(id){
-  const img=ALL_IMAGES.find(i=>i.id===id);if(!img)return;
+  const found=galFindItem(id);if(!found)return;
+  const img=found.item;
+  const isVideo=found.isVideo;
   const s=galScore(id);
   const cs=getC(id);
   const comment=cs.length?cs[cs.length-1].text:'No comment';
   const ov=document.createElement('div');
   ov.className='gal-overlay';
-  ov.onclick=e=>{if(e.target===ov)ov.remove();};
-  const ovPrimary=archivedUrl(img.url,img.id);
-  const ovFallback=img.url;
-  const ovImgTag='<img src="'+ovPrimary+'" alt=""'+(ovPrimary!==ovFallback?' onerror="this.onerror=null;this.src=\''+ovFallback+'\'"':'')+'>';
-  ov.innerHTML='<button class="gal-close" onclick="this.parentElement.remove()">&times;</button>'
-    +ovImgTag
+  ov.onclick=e=>{if(e.target===ov){pauseAllVideos();ov.remove();}};
+  // Esc key also closes — common UX expectation for full-screen overlays
+  const escHandler=e=>{if(e.key==='Escape'){pauseAllVideos();ov.remove();document.removeEventListener('keydown',escHandler);}};
+  document.addEventListener('keydown',escHandler);
+  // Photos: <img> with archived photo URL. Videos: <video controls> with
+  // archived MP4 URL — autoplay so it starts immediately, but muted so the
+  // user has to unmute deliberately. Closing the overlay (or switching tabs)
+  // pauses all videos via pauseAllVideos().
+  let mediaTag,dlHref;
+  if(isVideo){
+    const ovPrimary=archivedVideoUrl(img.url,img.id);
+    const ovFallback=img.url;
+    const onErr=(ovPrimary!==ovFallback?' onerror="this.onerror=null;this.src=\''+ovFallback+'\'"':'');
+    mediaTag='<video src="'+ovPrimary+'" controls autoplay muted playsinline loop'+onErr+'></video>';
+    dlHref=ovPrimary;
+  }else{
+    const ovPrimary=archivedUrl(img.url,img.id);
+    const ovFallback=img.url;
+    mediaTag='<img src="'+ovPrimary+'" alt=""'+(ovPrimary!==ovFallback?' onerror="this.onerror=null;this.src=\''+ovFallback+'\'"':'')+'>';
+    dlHref=ovPrimary;
+  }
+  // Score line: only shown for photos (videos don't have scores)
+  const scoreLine=isVideo
+    ?'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+'</div>'
+    :'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+' — Score: <strong class="gal-score-edit" onclick="galEditScore(\''+img.id+'\',this)" style="color:'+(s>=90?'#22c55e':s>=70?'#f59e0b':s>=50?'#3b82f6':'#ef4444')+'">'+Math.round(s)+'/100</strong> <span style="font-size:.55rem;color:#555">(click to edit)</span></div>';
+  // Action row — videos get super-like + download only. Photos get the full set.
+  const actionRow=isVideo
+    ?'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
+      +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
+      +'<a class="gal-dl" href="'+dlHref+'" download target="_blank">Download Video</a>'
+      +'</div>'
+    :'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
+      +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
+      +'<a class="gal-dl" href="'+dlHref+'" download target="_blank">Download Full Resolution</a>'
+      +'<button class="gal-vidlab" onclick="galSendToVideoLab(\''+img.id+'\')">Send to Video Lab</button>'
+      +'<button class="gal-mm" onclick="galToggleMM(\''+img.id+'\')">Make More Like This</button>'
+      +'</div>'
+      +'<div id="mmPanel-'+img.id+'" class="mm-panel" style="display:none">'
+      +'<div style="font-size:.6rem;color:#a855f7;margin-bottom:.3rem">Using: '+mmDetectModel(img.model).name+'</div>'
+      +'<input id="mmText-'+img.id+'" type="text" placeholder="Optional: more snow, change to sunset, zoom closer...">'
+      +'<div class="mm-btns">'
+      +'<button class="mm-btn-close" onclick="galGenerate(\''+img.id+'\',\'high\')">Close Variation</button>'
+      +'<button class="mm-btn-creative" onclick="galGenerate(\''+img.id+'\',\'low\')">Creative Variation</button>'
+      +'</div>'
+      +'<div id="mmStatus-'+img.id+'" class="mm-status"></div>'
+      +'<div id="mmResults-'+img.id+'" class="mm-results"></div>'
+      +'</div>';
+  ov.innerHTML='<button class="gal-close" onclick="pauseAllVideos();this.parentElement.remove()">&times;</button>'
+    +mediaTag
     +'<div class="gal-info">'
     +'<div style="font-size:.9rem;font-weight:700;margin-bottom:.3rem">'+img.label+'</div>'
-    +'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+' — Score: <strong class="gal-score-edit" onclick="galEditScore(\''+img.id+'\',this)" style="color:'+(s>=90?'#22c55e':s>=70?'#f59e0b':s>=50?'#3b82f6':'#ef4444')+'">'+Math.round(s)+'/100</strong> <span style="font-size:.55rem;color:#555">(click to edit)</span></div>'
+    +scoreLine
     +'<div style="font-size:.7rem;color:#aaa;max-height:200px;overflow-y:auto;text-align:left;background:#111;padding:.5rem;border-radius:6px">'+comment+'</div>'
-    +'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
-    +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
-    +'<a class="gal-dl" href="'+archivedUrl(img.url,img.id)+'" download target="_blank">Download Full Resolution</a>'
-    +'<button class="gal-vidlab" onclick="galSendToVideoLab(\''+img.id+'\')">Send to Video Lab</button>'
-    +'<button class="gal-mm" onclick="galToggleMM(\''+img.id+'\')">Make More Like This</button>'
-    +'</div>'
-    +'<div id="mmPanel-'+img.id+'" class="mm-panel" style="display:none">'
-    +'<div style="font-size:.6rem;color:#a855f7;margin-bottom:.3rem">Using: '+mmDetectModel(img.model).name+'</div>'
-    +'<input id="mmText-'+img.id+'" type="text" placeholder="Optional: more snow, change to sunset, zoom closer...">'
-    +'<div class="mm-btns">'
-    +'<button class="mm-btn-close" onclick="galGenerate(\''+img.id+'\',\'high\')">Close Variation</button>'
-    +'<button class="mm-btn-creative" onclick="galGenerate(\''+img.id+'\',\'low\')">Creative Variation</button>'
-    +'</div>'
-    +'<div id="mmStatus-'+img.id+'" class="mm-status"></div>'
-    +'<div id="mmResults-'+img.id+'" class="mm-results"></div>'
-    +'</div>'
+    +actionRow
     +'</div>';
   document.body.appendChild(ov);
 }
@@ -3533,15 +3669,22 @@ function migrateRateState(){
 }
 
 // === Permanent archive URL rewriting ========================================
-// 693 images were downloaded to jbarad424.github.io/ideas/winners/{id}.jpg on
-// 2026-04-09. Manifest cb-archived.json lists which IDs are archived. Client
-// rewrites <img src> from fal.media / catbox.moe to the permanent URL when
-// the ID is in the archived set. Falls back to the original URL on error.
+// 693 photos + 17 videos were downloaded to jbarad424.github.io/ideas/winners/
+// on 2026-04-09. Manifest cb-archived.json lists which IDs are archived.
+// Client rewrites <img src> / <video src> from fal.media / catbox.moe to the
+// permanent URL when the ID is in the archived set. Falls back to the
+// original URL on error via onerror handlers.
 let ARCHIVED_IDS=new Set();
 let ARCHIVED_ITEMS={};
+let ARCHIVED_VIDEO_IDS=new Set();
+let ARCHIVED_VIDEOS={};
 function archivedUrl(originalUrl,id){
   if(!id||!ARCHIVED_IDS.has(id))return originalUrl;
   return 'https://jbarad424.github.io/ideas/winners/'+id+'.jpg';
+}
+function archivedVideoUrl(originalUrl,id){
+  if(!id||!ARCHIVED_VIDEO_IDS.has(id))return originalUrl;
+  return 'https://jbarad424.github.io/ideas/winners/videos/'+id+'.mp4';
 }
 async function loadArchiveManifest(){
   try{
@@ -3550,7 +3693,9 @@ async function loadArchiveManifest(){
     const data=await r.json();
     ARCHIVED_IDS=new Set(data.ids||[]);
     ARCHIVED_ITEMS=data.items||{};
-    console.log('[archive] loaded',ARCHIVED_IDS.size,'archived IDs from cb-archived.json');
+    ARCHIVED_VIDEO_IDS=new Set(data.video_ids||[]);
+    ARCHIVED_VIDEOS=data.videos||{};
+    console.log('[archive] loaded',ARCHIVED_IDS.size,'photos +',ARCHIVED_VIDEO_IDS.size,'videos from cb-archived.json');
     if(typeof renderGallery==='function')renderGallery();
   }catch(e){/* no manifest yet — fall through, images still use original URLs */}
 }

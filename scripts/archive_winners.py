@@ -41,11 +41,14 @@ import urllib.request
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 STAGING = "/tmp/ideas-archive-staging"
 WINNERS_DIR = os.path.join(STAGING, "winners")
+VIDEOS_DIR = os.path.join(WINNERS_DIR, "videos")
 MANIFEST_PATH = os.path.join(STAGING, "cb-archived.json")
 CORPUS_PATH = os.path.join(REPO_ROOT, "_rate_corpus.json")
+CB_REVIEW_PATH = os.path.join(REPO_ROOT, "cb-review.html")
 KEEPERS_URL = "https://jbarad424.github.io/ideas/cb-keepers.json"
 
 GITHUB_PAGES_BASE = "https://jbarad424.github.io/ideas/winners/"
+GITHUB_PAGES_VIDEOS_BASE = "https://jbarad424.github.io/ideas/winners/videos/"
 
 UA = "cb2-archive-bot/1.0 (justin.barad@gmail.com)"
 
@@ -65,6 +68,45 @@ def load_corpus():
     """Load the local 694-item reviewed corpus."""
     with open(CORPUS_PATH) as f:
         return json.load(f)
+
+
+def load_videos_from_html():
+    """
+    Extract the ALL_VIDEOS array from cb-review.html. The array is a JS object
+    literal so we can't json.loads it directly — instead we walk each {...}
+    block and pull out id/url/model/label fields with regex. Brittle if anyone
+    rewrites the format, but bounded by the bracket-balance check below.
+    """
+    if not os.path.exists(CB_REVIEW_PATH):
+        log("WARN: cb-review.html not found, skipping videos")
+        return []
+    with open(CB_REVIEW_PATH) as f:
+        html = f.read()
+    import re
+    m = re.search(r'const ALL_VIDEOS\s*=\s*\[(.*?)\n\];', html, re.DOTALL)
+    if not m:
+        log("WARN: ALL_VIDEOS array not found in cb-review.html")
+        return []
+    block = m.group(1)
+    videos = []
+    # Match each {id:'...', url:'...', model:'...', ...} object
+    for entry in re.finditer(r"\{[^{}]*?\}", block):
+        text = entry.group(0)
+        id_m = re.search(r"id:\s*'([^']+)'", text)
+        url_m = re.search(r"url:\s*'([^']+)'", text)
+        if not (id_m and url_m):
+            continue
+        model_m = re.search(r"model:\s*'([^']*)'", text)
+        label_m = re.search(r"label:\s*'([^']*)'", text)
+        videos.append({
+            "id": id_m.group(1),
+            "url": url_m.group(1),
+            "source": "all_videos",
+            "model": model_m.group(1) if model_m else "",
+            "label": label_m.group(1) if label_m else "",
+        })
+    log(f"loaded {len(videos)} videos from cb-review.html ALL_VIDEOS")
+    return videos
 
 
 def build_download_list():
@@ -148,10 +190,51 @@ def download_one(item, winners_dir):
         return (item["id"], "error", str(e)[:120])
 
 
-def build_manifest(items, winners_dir):
+def video_filename(iid):
+    """Stable .mp4 filename for a video id."""
+    if all(c.isalnum() or c in "-_" for c in iid):
+        return iid + ".mp4"
+    return "h-" + hashlib.sha1(iid.encode()).hexdigest()[:12] + ".mp4"
+
+
+def download_video(item, videos_dir):
+    """
+    Download one video to videos_dir/{id}.mp4. Cached if already present.
+    Sanity check: ftyp box near the start of an mp4 (or webm magic).
+    """
+    fname = video_filename(item["id"])
+    out_path = os.path.join(videos_dir, fname)
+    if os.path.exists(out_path) and os.path.getsize(out_path) > 50000:
+        return (item["id"], "cached", os.path.getsize(out_path))
+    try:
+        req = urllib.request.Request(item["url"], headers={"User-Agent": UA})
+        with urllib.request.urlopen(req, timeout=120) as r:
+            data = r.read()
+            # MP4: 'ftyp' box at offset 4. WebM: starts with 1A 45 DF A3.
+            head = data[:32]
+            is_mp4 = b"ftyp" in head[:32]
+            is_webm = data.startswith(b"\x1a\x45\xdf\xa3")
+            if not (is_mp4 or is_webm):
+                return (item["id"], "bad_format", f"not mp4/webm, first 32: {head.hex()}")
+            with open(out_path, "wb") as f:
+                f.write(data)
+        return (item["id"], "ok", len(data))
+    except urllib.error.HTTPError as e:
+        return (item["id"], "http_error", f"{e.code} {e.reason}")
+    except Exception as e:
+        return (item["id"], "error", str(e)[:120])
+
+
+def build_manifest(items, winners_dir, videos=None, videos_dir=None):
     """
     Scan what's actually on disk and build cb-archived.json.
-    Format: {"meta": {...}, "ids": ["id1", "id2", ...], "items": {"id1": {"url": "...", ...}}}
+    Format: {
+      "meta": {...},
+      "ids":        ["photo_id1", ...],   # photos archived
+      "items":      {"id": {url, filename, ...}, ...},  # photos
+      "video_ids":  ["video_id1", ...],   # videos archived
+      "videos":     {"id": {url, filename, ...}, ...},  # videos
+    }
     """
     archived_ids = []
     items_map = {}
@@ -166,14 +249,32 @@ def build_manifest(items, winners_dir):
                 "original": item["url"],
                 "source": item["source"],
             }
+    archived_video_ids = []
+    videos_map = {}
+    for v in (videos or []):
+        fname = video_filename(v["id"])
+        fpath = os.path.join(videos_dir or "", fname)
+        if videos_dir and os.path.exists(fpath) and os.path.getsize(fpath) > 50000:
+            archived_video_ids.append(v["id"])
+            videos_map[v["id"]] = {
+                "filename": fname,
+                "url": GITHUB_PAGES_VIDEOS_BASE + fname,
+                "original": v["url"],
+                "source": v.get("source", "all_videos"),
+                "model": v.get("model", ""),
+                "label": v.get("label", ""),
+            }
     return {
         "meta": {
             "generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "count": len(archived_ids),
-            "note": "Archived from fal.media / catbox.moe to permanent GitHub Pages storage.",
+            "video_count": len(archived_video_ids),
+            "note": "Archived from fal.media / catbox.moe to permanent GitHub Pages storage. Photos under /winners/, videos under /winners/videos/.",
         },
         "ids": sorted(archived_ids),
         "items": items_map,
+        "video_ids": sorted(archived_video_ids),
+        "videos": videos_map,
     }
 
 
@@ -222,52 +323,104 @@ def main():
     parser.add_argument("--skip-push", action="store_true", help="stage files but don't git push")
     parser.add_argument("--limit", type=int, default=0, help="only process first N items (for testing)")
     parser.add_argument("--workers", type=int, default=16)
+    parser.add_argument("--skip-photos", action="store_true", help="skip the photo download step (manifest still scans /winners/ on disk)")
+    parser.add_argument("--skip-videos", action="store_true", help="skip the video download step (manifest still scans /winners/videos/ on disk)")
+    parser.add_argument("--force-shrink", action="store_true", help="bypass the safety guard that refuses to push a smaller manifest than what's live")
     args = parser.parse_args()
 
     os.makedirs(WINNERS_DIR, exist_ok=True)
+    os.makedirs(VIDEOS_DIR, exist_ok=True)
 
+    # Always build the full lists — they're cheap and the manifest needs them
+    # to enumerate everything that's already on disk. The --skip flags only
+    # control whether we re-download. If we ALSO zeroed out the lists here,
+    # build_manifest would emit an empty {ids:[],items:{}} block and silently
+    # wipe the live cb-archived.json on push (the --skip-photos regression
+    # that nuked 693 entries on 2026-04-09).
     items = build_download_list()
-    log(f"{len(items)} items to consider")
+    videos = load_videos_from_html()
+
     if args.limit:
         items = items[: args.limit]
-        log(f"--limit: processing {len(items)}")
+        videos = videos[: args.limit]
+        log(f"--limit: processing {len(items)} photos + {len(videos)} videos")
 
-    if not items:
-        log("nothing to do")
-        return
+    # === PHOTOS ===
+    if items and not args.skip_photos:
+        log(f"PHOTOS: downloading {len(items)} with {args.workers} workers…")
+        t0 = time.time()
+        results = {"ok": 0, "cached": 0, "bad_format": 0, "http_error": 0, "error": 0}
+        fail_details = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futures = [ex.submit(download_one, it, WINNERS_DIR) for it in items]
+            for i, f in enumerate(concurrent.futures.as_completed(futures), 1):
+                iid, status, detail = f.result()
+                results[status] = results.get(status, 0) + 1
+                if status not in ("ok", "cached"):
+                    fail_details.append((iid, status, detail))
+                if i % 50 == 0:
+                    log(f"  photos {i}/{len(items)} — ok={results['ok']} cached={results['cached']} fail={len(fail_details)}")
+        log(f"  photos done in {time.time()-t0:.1f}s: {json.dumps(results)}")
+        if fail_details:
+            log(f"  PHOTO FAILURES ({len(fail_details)}):")
+            for iid, status, detail in fail_details[:10]:
+                log(f"    {iid}: {status} — {detail}")
 
-    log(f"downloading with {args.workers} workers…")
-    t0 = time.time()
-    results = {"ok": 0, "cached": 0, "bad_format": 0, "http_error": 0, "error": 0}
-    fail_details = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as ex:
-        futures = [ex.submit(download_one, it, WINNERS_DIR) for it in items]
-        for i, f in enumerate(concurrent.futures.as_completed(futures), 1):
-            iid, status, detail = f.result()
-            results[status] = results.get(status, 0) + 1
-            if status not in ("ok", "cached"):
-                fail_details.append((iid, status, detail))
-            if i % 25 == 0:
-                log(f"progress {i}/{len(items)} — ok={results['ok']} cached={results['cached']} fail={len(fail_details)}")
-    dt = time.time() - t0
+    # === VIDEOS ===
+    if videos and not args.skip_videos:
+        log(f"VIDEOS: downloading {len(videos)} with {min(args.workers, 8)} workers…")
+        t0 = time.time()
+        v_results = {"ok": 0, "cached": 0, "bad_format": 0, "http_error": 0, "error": 0}
+        v_fail = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(args.workers, 8)) as ex:
+            futures = [ex.submit(download_video, v, VIDEOS_DIR) for v in videos]
+            for i, f in enumerate(concurrent.futures.as_completed(futures), 1):
+                vid, status, detail = f.result()
+                v_results[status] = v_results.get(status, 0) + 1
+                if status not in ("ok", "cached"):
+                    v_fail.append((vid, status, detail))
+                log(f"  video {i}/{len(videos)} — {vid}: {status}")
+        log(f"  videos done in {time.time()-t0:.1f}s: {json.dumps(v_results)}")
+        if v_fail:
+            log(f"  VIDEO FAILURES ({len(v_fail)}):")
+            for vid, status, detail in v_fail:
+                log(f"    {vid}: {status} — {detail}")
 
-    log(f"done in {dt:.1f}s: {json.dumps(results)}")
-    if fail_details:
-        log(f"FAILURES ({len(fail_details)}):")
-        for iid, status, detail in fail_details[:20]:
-            log(f"  {iid}: {status} — {detail}")
-        if len(fail_details) > 20:
-            log(f"  … and {len(fail_details) - 20} more")
+    # Size summary
+    if os.path.exists(WINNERS_DIR):
+        photo_files = [f for f in os.listdir(WINNERS_DIR) if not os.path.isdir(os.path.join(WINNERS_DIR, f))]
+        photo_bytes = sum(os.path.getsize(os.path.join(WINNERS_DIR, f)) for f in photo_files)
+        log(f"winners/: {photo_bytes / 1_000_000:.1f} MB across {len(photo_files)} files")
+    if os.path.exists(VIDEOS_DIR):
+        video_files = os.listdir(VIDEOS_DIR)
+        video_bytes = sum(os.path.getsize(os.path.join(VIDEOS_DIR, f)) for f in video_files)
+        log(f"winners/videos/: {video_bytes / 1_000_000:.1f} MB across {len(video_files)} files")
 
-    # Size check
-    total_bytes = sum(os.path.getsize(os.path.join(WINNERS_DIR, f))
-                      for f in os.listdir(WINNERS_DIR))
-    log(f"winners dir: {total_bytes / 1_000_000:.1f} MB across {len(os.listdir(WINNERS_DIR))} files")
-
-    manifest = build_manifest(items, WINNERS_DIR)
+    manifest = build_manifest(items, WINNERS_DIR, videos=videos, videos_dir=VIDEOS_DIR)
     with open(MANIFEST_PATH, "w") as f:
         json.dump(manifest, f, indent=2)
-    log(f"manifest: {len(manifest['ids'])} archived, written to {MANIFEST_PATH}")
+    log(f"manifest: {len(manifest['ids'])} photos + {len(manifest['video_ids'])} videos archived, written to {MANIFEST_PATH}")
+
+    # Safety guard — refuse to push if the new manifest has FEWER photos or
+    # videos than the live one. This prevents bug-class regressions like the
+    # 2026-04-09 --skip-photos wipe (which silently dropped 693 entries to 0).
+    try:
+        live_url = "https://jbarad424.github.io/ideas/cb-archived.json?t=" + str(int(time.time()))
+        with urllib.request.urlopen(urllib.request.Request(live_url, headers={"User-Agent": UA}), timeout=20) as r:
+            live = json.loads(r.read())
+        live_photos = len(live.get("ids", []))
+        live_videos = len(live.get("video_ids", []))
+        new_photos = len(manifest["ids"])
+        new_videos = len(manifest["video_ids"])
+        if new_photos < live_photos or new_videos < live_videos:
+            log(f"REFUSING TO PUSH: manifest would shrink (live: {live_photos}p+{live_videos}v → new: {new_photos}p+{new_videos}v)")
+            log("Re-run without skip flags or use --force-shrink to override.")
+            if not getattr(args, "force_shrink", False):
+                sys.exit(2)
+    except urllib.error.URLError as e:
+        log(f"warning: couldn't fetch live manifest for safety check ({e}), proceeding")
+    except Exception as e:
+        log(f"warning: live manifest check failed ({e}), proceeding")
 
     if args.skip_push:
         log("--skip-push set, stopping here")
