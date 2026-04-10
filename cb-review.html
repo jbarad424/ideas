@@ -4135,7 +4135,8 @@ const CR={
       "1. PRESERVE the user\u2019s scene/location. If they say \u2018Brooklyn\u2019 or \u2018urban environment\u2019, keep it urban \u2014 do NOT replace it with a nature scene. The sport and vibe should adapt TO the location, not override it.\n"+
       "2. Use specific camera/lens terminology, concrete lighting vocabulary, and atmospheric descriptors appropriate to both the vibe AND the user\u2019s setting.\n"+
       "3. Do NOT add wardrobe, helmet, gloves, or product description \u2014 those are added separately.\n"+
-      "4. Output only the rewritten scene paragraph, no preamble or explanation.\n\n"+
+      "4. KEEP IT CONCISE: aim for 2-3 sentences, ~60-80 words MAX. Longer scenes dilute product accuracy. The product description block that gets appended after your scene is ~100 words \u2014 if your scene is also 200 words, the model runs out of attention budget and the product looks wrong. Be vivid but tight.\n"+
+      "5. Output only the rewritten scene paragraph, no preamble or explanation.\n\n"+
       "Example: sport=SKI, vibe=golden hour, scene='James Bond escaping a heist' \u2192 Bond-style chase on a ski slope at golden hour (NOT an urban heist).\n"+
       "Example: sport=MOTO, vibe=golden hour, scene='Brooklyn urban environment' \u2192 motorcycle cruising across the BQE with the Manhattan skyline catching golden-hour light (urban setting PRESERVED).\n";
     try{
@@ -4190,7 +4191,27 @@ const CR={
     }[s.vibe]||'film grain';
     // Gear is optional now (editable). If empty, skip the "wearing X" clause.
     const subjectClause=gear?(subject+' wearing '+gear):subject;
-    const full=sceneText.trim()+'. '+subjectClause+', '+cb2+', waist-up, '+vibeCam+'.';
+    // PROMPT STRUCTURE FIX: If the scene text is very long (>150 words), the CB2
+    // block gets buried and models deprioritize it. Restructure so the CB2 block
+    // comes AFTER a shortened scene opener but BEFORE the detailed scene continuation.
+    // This keeps product accuracy high even with creative/elaborate scenes.
+    const sceneWords=sceneText.trim().split(/\s+/);
+    let scenePart1,scenePart2;
+    if(sceneWords.length>80){
+      // Split: first ~2 sentences as opener, rest as continuation after CB2
+      const firstBreak=sceneText.indexOf('. ',Math.min(sceneText.length-1,200));
+      if(firstBreak>50){
+        scenePart1=sceneText.slice(0,firstBreak+1).trim();
+        scenePart2=sceneText.slice(firstBreak+1).trim();
+      }else{
+        scenePart1=sceneWords.slice(0,40).join(' ');
+        scenePart2=sceneWords.slice(40).join(' ');
+      }
+    }else{
+      scenePart1=sceneText.trim();
+      scenePart2='';
+    }
+    const full=scenePart1+'. '+subjectClause+', '+cb2+', waist-up, '+vibeCam+'.'+(scenePart2?' '+scenePart2:'');
     s.finalPrompt=full;
     const ta=document.getElementById('crFinalPrompt');if(ta)ta.value=full;
     showToast('Assembled \u2014 edit inline if needed');
