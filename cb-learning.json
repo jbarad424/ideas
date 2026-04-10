@@ -144,6 +144,28 @@
       "cost_usd": 0.8999999999999999,
       "is_novel": true,
       "at": "2026-04-10T20:15:28.964Z"
+    },
+    {
+      "batch_id": "20260410202106_ealwnu",
+      "recipe_id": "mtb_novel_mntcpgg9",
+      "recipe_prompt": "Female mountain biker launches off a gnarled root jump in a fog-choked forest, overhead sun piercing through dead branches creating stark, skeletal shadows across the trail. Mid-air, decomposed zombies in tattered clothing lunge from both sides of the singletrack below, their outstretched arms frozen in the harsh midday contrast as she clears the undead gauntlet.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "ref_id": "h3",
+      "model": "fal-ai/nano-banana-pro/edit",
+      "sport": "mtb",
+      "generated": 4,
+      "kept_urls": [
+        "https://v3b.fal.media/files/b/0a95bc5e/e-Db4D31xhl_jIb9DZVu2_Eef2Mwsj.jpg"
+      ],
+      "rejected_urls": [
+        "https://v3b.fal.media/files/b/0a95bc5e/Mt7Ig1Aode535XrRqOUAx_vdwmLSaM.jpg",
+        "https://v3b.fal.media/files/b/0a95bc5e/FYs69S9CuYvsmZNNIBSeK_I7LqnJrU.jpg",
+        "https://v3b.fal.media/files/b/0a95bc5e/XzzuANZXUO71FxX8hIIYm_WpnhOIFM.jpg"
+      ],
+      "failed": [],
+      "keeper_rate": 0.25,
+      "cost_usd": 0.6,
+      "is_novel": true,
+      "at": "2026-04-10T20:22:44.923Z"
     }
   ],
   "recipes": {
@@ -181,6 +203,13 @@
       "total_generated": 6,
       "total_kept": 2,
       "last_batch_at": "2026-04-10T20:15:28.964Z"
+    },
+    "mtb_novel_mntcpgg9": {
+      "keeper_rate": 0.25,
+      "batches_run": 1,
+      "total_generated": 4,
+      "total_kept": 1,
+      "last_batch_at": "2026-04-10T20:22:44.923Z"
     }
   },
   "refs": {
@@ -265,16 +294,31 @@
           "last_batch_at": "2026-04-10T20:15:28.964Z"
         }
       }
+    },
+    "h3": {
+      "overall": {
+        "keeper_rate": 0.25,
+        "batches_run": 1
+      },
+      "by_recipe": {
+        "mtb_novel_mntcpgg9": {
+          "keeper_rate": 0.25,
+          "batches_run": 1,
+          "total_generated": 4,
+          "total_kept": 1,
+          "last_batch_at": "2026-04-10T20:22:44.923Z"
+        }
+      }
     }
   },
   "models_by_sport": {
     "mtb": {
       "fal-ai/nano-banana-pro/edit": {
-        "keeper_rate": 0.30066666666666664,
-        "batches_run": 4,
-        "total_generated": 24,
-        "total_kept": 8,
-        "last_batch_at": "2026-04-10T20:15:28.964Z"
+        "keeper_rate": 0.28546666666666665,
+        "batches_run": 5,
+        "total_generated": 28,
+        "total_kept": 9,
+        "last_batch_at": "2026-04-10T20:22:44.923Z"
       }
     },
     "moto": {
