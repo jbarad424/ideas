@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T18:32:21.808Z",
+  "syncedAt": "2026-04-10T19:37:33.384Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -13978,6 +13978,186 @@
       ]
     },
     {
+      "id": "mm-bg-coast3-1775589419542-0",
+      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "excellent, 90",
+          "time": "2026-04-07T19:20:37.937Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-1",
+      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:47.636Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-0",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:56.418Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-1",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "nice. 85",
+          "time": "2026-04-07T19:21:13.486Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-0",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
+          "time": "2026-04-07T19:21:34.619Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-1",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
+          "time": "2026-04-07T19:21:47.035Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-0",
+      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "This is cool yeah I really like this one great 95",
+          "time": "2026-04-07T19:22:10.501Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-1",
+      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
+          "time": "2026-04-07T19:22:36.702Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-0",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/80G-XJirJRRSKk5TZ9nOO_I12az3Az.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.095Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-1",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/wxePZ7YT6EOkQlfBXGAhP_Gh7XO82s.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.095Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-2",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/d-9UMfKrGodI_prVb9Sqq_QSuR4Nat.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.096Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-3",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/JWkzRFt8jnQglCwbHQYdB_lYIfzjlp.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.096Z"
+        }
+      ]
+    },
+    {
       "id": "rot_moto__0",
       "url": "https://v3b.fal.media/files/b/0a95760e/0Y8Ft5hAZNmoit0KBBIJy_Qh7Ds8o3.jpg",
       "model": "Nano Banana Pro",
@@ -16538,126 +16718,6 @@
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589419542-0",
-      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "excellent, 90",
-          "time": "2026-04-07T19:20:37.937Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589419542-1",
-      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:47.636Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589531515-0",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:56.418Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589531515-1",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "nice. 85",
-          "time": "2026-04-07T19:21:13.486Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589559647-0",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
-          "time": "2026-04-07T19:21:34.619Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589559647-1",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
-          "time": "2026-04-07T19:21:47.035Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589600635-0",
-      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "This is cool yeah I really like this one great 95",
-          "time": "2026-04-07T19:22:10.501Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589600635-1",
-      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
-          "time": "2026-04-07T19:22:36.702Z",
-          "num": 1
-        }
-      ]
-    },
-    {
       "id": "cr-20260409194302_prv955-0",
       "url": "https://v3b.fal.media/files/b/0a9599ba/HNf7hS22zwuWPjJvdtOIN_OUcJNCTM.jpg",
       "model": "Nano Banana Pro",
@@ -16744,66 +16804,6 @@
           "num": 1,
           "text": "Final score: 20 (CREATE reject)",
           "time": "2026-04-09T19:44:55.713Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-0",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/80G-XJirJRRSKk5TZ9nOO_I12az3Az.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de · recipe moto_novel_mnswlk6w · keeper_rate 0%",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.095Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-1",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/wxePZ7YT6EOkQlfBXGAhP_Gh7XO82s.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de · recipe moto_novel_mnswlk6w · keeper_rate 0%",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.095Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-2",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/d-9UMfKrGodI_prVb9Sqq_QSuR4Nat.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de · recipe moto_novel_mnswlk6w · keeper_rate 0%",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.096Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-3",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/JWkzRFt8jnQglCwbHQYdB_lYIfzjlp.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de · recipe moto_novel_mnswlk6w · keeper_rate 0%",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.096Z"
         }
       ]
     },
