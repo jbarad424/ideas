@@ -68,7 +68,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .grid-card:hover{border-color:#a855f7}
 .grid-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
 .grid-card .grid-label{font-size:.5rem;padding:.2rem .3rem;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gal-filter{padding:.4rem .7rem;border-radius:8px;border:2px solid #333;background:#111;color:#888;font-size:.65rem;font-weight:600;cursor:pointer}
+.gal-filter{padding:.25rem .5rem;border-radius:6px;border:1.5px solid #333;background:#111;color:#888;font-size:.6rem;font-weight:600;cursor:pointer}
 .gal-filter:hover{border-color:#a855f7;color:#fff}
 .gal-filter.on{border-color:#a855f7;color:#a855f7;background:#1a1030}
 .gal-card{background:#111;border:1px solid #222;border-radius:8px;overflow:hidden;cursor:pointer;position:relative}
@@ -362,31 +362,36 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
       <button id="galMediaPhoto" onclick="galSetMediaType('photo')" style="padding:.45rem 1.2rem;font-size:.75rem;font-weight:700;border:2px solid #a855f7;background:#1a1030;color:#a855f7;border-radius:8px 0 0 8px;cursor:pointer">📷 Photos <span id="galPhotoCount" style="opacity:.65;font-weight:400"></span></button>
       <button id="galMediaVideo" onclick="galSetMediaType('video')" style="padding:.45rem 1.2rem;font-size:.75rem;font-weight:700;border:2px solid #333;background:#111;color:#888;border-left:none;border-radius:0 8px 8px 0;cursor:pointer">🎬 Videos <span id="galVideoCount" style="opacity:.65;font-weight:400"></span></button>
     </div>
-    <!-- Filter bar — everything is a toggle. Purple = on, gray = off. Multi-select on Sport + Model. -->
-    <div id="galFilterBar" style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:.5rem;background:#111;border-radius:10px;border:1px solid #222">
-      <!-- Verdict filters (independent toggles) -->
-      <button class="gal-filter gal-vf" id="galLikesToggle" onclick="galToggleLikes()" style="padding:.3rem .6rem;font-size:.65rem">Likes</button>
-      <button class="gal-filter gal-vf" id="galSuperToggle" onclick="galToggleSuperFilter()" style="padding:.3rem .6rem;font-size:.65rem">⭐ Super</button>
-      <button class="gal-filter gal-vf" id="galRejToggle" onclick="galToggleRejects()" style="padding:.3rem .6rem;font-size:.65rem">Rejects</button>
-      <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
-      <!-- Sport (multi-select) -->
-      <button class="gal-filter gal-sport-f" onclick="galToggleSport('motorcycle')" data-sp="motorcycle" style="padding:.3rem .6rem;font-size:.65rem">Moto</button>
-      <button class="gal-filter gal-sport-f" onclick="galToggleSport('skiing')" data-sp="skiing" style="padding:.3rem .6rem;font-size:.65rem">Ski</button>
-      <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowboard')" data-sp="snowboard" style="padding:.3rem .6rem;font-size:.65rem">Snow</button>
-      <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowmobile')" data-sp="snowmobile" style="padding:.3rem .6rem;font-size:.65rem">Snowmobile</button>
-      <button class="gal-filter gal-sport-f" onclick="galToggleSport('mtb')" data-sp="mtb" style="padding:.3rem .6rem;font-size:.65rem">MTB</button>
-      <button class="gal-filter gal-sport-f" onclick="galToggleSport('other')" data-sp="other" style="padding:.3rem .6rem;font-size:.65rem" title="Items whose sport couldn't be auto-detected from the prompt">Other</button>
-      <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
-      <!-- Model (multi-select) -->
-      <button class="gal-filter gal-model-f" onclick="galToggleModel('gpt')" data-md="gpt" style="padding:.3rem .6rem;font-size:.65rem">GPT</button>
-      <button class="gal-filter gal-model-f" onclick="galToggleModel('flex')" data-md="flex" style="padding:.3rem .6rem;font-size:.65rem">FLUX</button>
-      <button class="gal-filter gal-model-f" onclick="galToggleModel('nbpro')" data-md="nbpro" style="padding:.3rem .6rem;font-size:.65rem">NB Pro</button>
-      <button class="gal-filter gal-model-f" onclick="galToggleModel('nb2')" data-md="nb2" style="padding:.3rem .6rem;font-size:.65rem">NB2</button>
-      <button class="gal-filter gal-model-f" onclick="galToggleModel('other-model')" data-md="other-model" style="padding:.3rem .6rem;font-size:.65rem" title="Items whose model couldn't be auto-detected (LoRA, Kontext, two-pass, video models, etc.)">Other</button>
-      <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
-      <button class="gal-filter" onclick="galClearFilters()" style="padding:.3rem .6rem;font-size:.65rem">Reset</button>
+    <!-- Filter bar — organized into labeled rows so mobile doesn't get cluttered -->
+    <div id="galFilterBar" style="background:#111;border-radius:10px;border:1px solid #222;padding:.5rem .6rem;display:flex;flex-direction:column;gap:.35rem">
+      <!-- Row 1: Verdict -->
+      <div style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
+        <span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Show</span>
+        <button class="gal-filter gal-vf" id="galLikesToggle" onclick="galToggleLikes()">Likes</button>
+        <button class="gal-filter gal-vf" id="galSuperToggle" onclick="galToggleSuperFilter()">Super</button>
+        <button class="gal-filter gal-vf" id="galRejToggle" onclick="galToggleRejects()">Rejects</button>
+        <button class="gal-filter" onclick="galClearFilters()" style="margin-left:auto;font-size:.55rem;padding:.2rem .4rem;opacity:.6">Reset</button>
+      </div>
+      <!-- Row 2: Sport -->
+      <div style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
+        <span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Sport</span>
+        <button class="gal-filter gal-sport-f" onclick="galToggleSport('motorcycle')" data-sp="motorcycle">Moto</button>
+        <button class="gal-filter gal-sport-f" onclick="galToggleSport('skiing')" data-sp="skiing">Ski</button>
+        <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowboard')" data-sp="snowboard">Snow</button>
+        <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowmobile')" data-sp="snowmobile">Sled</button>
+        <button class="gal-filter gal-sport-f" onclick="galToggleSport('mtb')" data-sp="mtb">MTB</button>
+        <button class="gal-filter gal-sport-f" onclick="galToggleSport('other')" data-sp="other">Other</button>
+      </div>
+      <!-- Row 3: Model -->
+      <div style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
+        <span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Model</span>
+        <button class="gal-filter gal-model-f" onclick="galToggleModel('gpt')" data-md="gpt">GPT</button>
+        <button class="gal-filter gal-model-f" onclick="galToggleModel('flex')" data-md="flex">FLUX</button>
+        <button class="gal-filter gal-model-f" onclick="galToggleModel('nbpro')" data-md="nbpro">NB Pro</button>
+        <button class="gal-filter gal-model-f" onclick="galToggleModel('nb2')" data-md="nb2">NB2</button>
+        <button class="gal-filter gal-model-f" onclick="galToggleModel('other-model')" data-md="other-model">Other</button>
+      </div>
     </div>
-    <div style="text-align:center;margin-top:.3rem;font-size:.55rem;color:#555">Tap any button to toggle on/off — purple = active. Sport + Model filters stack (tap multiple).</div>
   </div>
   <div id="galGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem"></div>
 </div>
@@ -428,14 +433,17 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
             <button onclick="vidLabRefine()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.6rem;cursor:pointer">Try Again</button>
           </div>
         </div>
-        <div style="font-size:.65rem;color:#06b6d4;font-weight:600;margin:.4rem 0 .3rem">Pick a platform to generate:</div>
-        <div style="display:flex;gap:.3rem;flex-wrap:wrap" id="vidLabPlatforms">
-          <button onclick="vidLabGenerate('seedance')" title="ByteDance Seedance 2.0 — current Elo leaderboard leader (1269) for video gen, beats Veo/Sora/Gen-4.5" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #06b6d4;background:transparent;color:#06b6d4;font-size:.65rem;cursor:pointer;font-weight:600">Seedance 2.0 &#11088;<br><span style="color:#888;font-weight:400;font-size:.5rem">5s · $1.51</span></button>
-          <button onclick="vidLabGenerate('seedance-fast')" title="Seedance 2.0 fast — same model, ~20% cheaper, ~30% faster" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #06b6d4;background:transparent;color:#06b6d4;font-size:.65rem;cursor:pointer;font-weight:600">Seedance Fast<br><span style="color:#888;font-weight:400;font-size:.5rem">5s · $1.21</span></button>
-          <button onclick="vidLabGenerate('kling')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #22c55e;background:transparent;color:#22c55e;font-size:.65rem;cursor:pointer;font-weight:600">Kling 3.0 Pro<br><span style="color:#888;font-weight:400;font-size:.5rem">10s · $1.50</span></button>
-          <button onclick="vidLabGenerate('veo-lite')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.65rem;cursor:pointer;font-weight:600">Veo 3.1 Lite<br><span style="color:#888;font-weight:400;font-size:.5rem">8s · $0.40</span></button>
-          <button onclick="vidLabGenerate('sora')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #ec4899;background:transparent;color:#ec4899;font-size:.65rem;cursor:pointer;font-weight:600">Sora 2 Pro<br><span style="color:#888;font-weight:400;font-size:.5rem">16s · $5.00</span></button>
-          <button onclick="vidLabGenerate('runway')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #a855f7;background:transparent;color:#a855f7;font-size:.65rem;cursor:pointer;font-weight:600">Runway Gen-4T<br><span style="color:#888;font-weight:400;font-size:.5rem">10s · $0.50</span></button>
+        <div style="font-size:.65rem;color:#06b6d4;font-weight:600;margin:.4rem 0 .3rem">Platform</div>
+        <div style="display:flex;gap:.3rem;align-items:center;flex-wrap:wrap" id="vidLabPlatforms">
+          <select id="vidLabPlatformSelect" style="flex:1;min-width:200px;padding:.4rem .5rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.7rem;cursor:pointer">
+            <option value="seedance">Seedance 2.0 — 5s · ~$1.51</option>
+            <option value="seedance-fast">Seedance Fast — 5s · ~$1.21</option>
+            <option value="kling" selected>Kling 3.0 Pro — 10s · ~$1.50</option>
+            <option value="veo-lite">Veo 3.1 Lite — 8s · ~$0.40</option>
+            <option value="sora">Sora 2 Pro — 16s · ~$5.00</option>
+            <option value="runway">Runway Gen-4T — 10s · ~$0.50</option>
+          </select>
+          <button onclick="vidLabGenerate(document.getElementById('vidLabPlatformSelect').value)" style="padding:.45rem .9rem;border-radius:6px;border:none;background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;font-size:.7rem;cursor:pointer;font-weight:700;white-space:nowrap">Create Video</button>
         </div>
         <div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.4rem"></div>
       </div>
