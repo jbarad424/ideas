@@ -244,6 +244,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="tab active" onclick="setTab('gallery')">GALLERY</div>
   <div class="tab" onclick="setTab('create')">CREATE</div>
   <div class="tab" onclick="setTab('videos')">VIDEO LAB</div>
+  <div class="tab" onclick="setTab('discover')">DISCOVER</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -520,6 +521,62 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <!-- CREATE TAB -->
 <div id="createArea" style="display:none"></div>
 <div class="cr-lb" id="crLB" onclick="CR.closeLB()"><img id="crLBImg" alt=""></div>
+
+<!-- DISCOVER TAB — explore new scenes before committing to full CB2 generations -->
+<div id="discoverArea" style="display:none;width:100%;max-width:900px;margin:0 auto;padding:0 .5rem">
+  <div style="text-align:center;margin-bottom:1rem">
+    <div style="font-size:1rem;font-weight:700;color:#f59e0b;margin-bottom:.3rem">Discover</div>
+    <div style="font-size:.7rem;color:#888;line-height:1.5">Explore new scenes cheaply before committing to full CB2 generations.<br>No product, no reference — just athletes in action. Find a vibe you love, then take it to CREATE.</div>
+  </div>
+
+  <!-- Mode 1: Quick Sketches -->
+  <div style="background:#111;border:1px solid #222;border-radius:10px;padding:.8rem;margin-bottom:.8rem">
+    <div style="font-size:.8rem;font-weight:700;color:#f59e0b;margin-bottom:.5rem">Quick Sketches — CB2-free scene exploration</div>
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem">
+      <div style="flex:1;min-width:120px">
+        <div style="font-size:.55rem;color:#888;font-weight:600;margin-bottom:.2rem">Sport</div>
+        <select id="discSport" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#0a0a0a;color:#fff;font-size:.65rem">
+          <option value="moto">Motorcycle</option>
+          <option value="ski">Skiing</option>
+          <option value="snow">Snowboard</option>
+          <option value="mtb">MTB</option>
+          <option value="sled">Snowmobile</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:120px">
+        <div style="font-size:.55rem;color:#888;font-weight:600;margin-bottom:.2rem">Subject</div>
+        <select id="discGender" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#0a0a0a;color:#fff;font-size:.65rem">
+          <option value="any">Any</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:100px">
+        <div style="font-size:.55rem;color:#888;font-weight:600;margin-bottom:.2rem">Count</div>
+        <select id="discCount" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#0a0a0a;color:#fff;font-size:.65rem">
+          <option value="4">4 sketches (~$0.20)</option>
+          <option value="6" selected>6 sketches (~$0.30)</option>
+        </select>
+      </div>
+    </div>
+    <textarea id="discPrompt" placeholder="Optional: describe a mood, setting, or concept... (leave blank for AI-generated variety)" style="width:100%;min-height:50px;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#fff;font-size:.7rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box;margin-bottom:.3rem"></textarea>
+    <button onclick="discoverGenerate()" id="discGenBtn" style="width:100%;padding:.5rem;border-radius:6px;border:none;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:.75rem;cursor:pointer;font-weight:700">Generate Sketches (~$0.05 each via FLUX)</button>
+    <div id="discStatus" style="font-size:.6rem;color:#888;margin-top:.3rem;text-align:center"></div>
+    <div id="discGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-top:.5rem"></div>
+  </div>
+
+  <!-- Mode 2: Learn from an uploaded photo -->
+  <div style="background:#111;border:1px solid #222;border-radius:10px;padding:.8rem">
+    <div style="font-size:.8rem;font-weight:700;color:#a855f7;margin-bottom:.5rem">Inspiration Upload — learn from a photo</div>
+    <div style="font-size:.65rem;color:#888;margin-bottom:.4rem;line-height:1.4">Paste a URL to an inspiring action sports photo. Claude will analyze it and suggest how to recreate the vibe with CB2. Then take the suggestion to CREATE.</div>
+    <div style="display:flex;gap:.3rem;align-items:center">
+      <input id="discInspoUrl" type="text" placeholder="Paste an image URL..." style="flex:1;padding:.4rem;border-radius:6px;border:1px solid #333;background:#0a0a0a;color:#fff;font-size:.7rem;box-sizing:border-box">
+      <button onclick="discoverAnalyze()" id="discAnalyzeBtn" style="padding:.4rem .7rem;border-radius:6px;border:none;background:#a855f7;color:#fff;font-size:.7rem;cursor:pointer;font-weight:700;white-space:nowrap">Analyze</button>
+    </div>
+    <div id="discInspoPreview" style="margin-top:.4rem"></div>
+    <div id="discInspoResult" style="margin-top:.4rem;font-size:.7rem;color:#ccc;line-height:1.5"></div>
+  </div>
+</div>
 
 <div class="btn-row">
   <button class="export-btn" onclick="syncFeedback()">Sync All to Claude</button>
@@ -1523,28 +1580,22 @@ function counts(){
 
 function setTab(t){
   tab=t;ci=0;navHistory=[];
-  // 3-tab layout: GALLERY | CREATE | VIDEOS
-  // 2026-04-09: VIDEOS tab retired and merged into Gallery as a sub-toggle.
-  // Pause all <video> elements + tear down any open overlays whenever the tab
-  // changes — fixes the audio-keeps-playing-after-tab-switch bug.
+  // Persist active tab so page reload stays where you were
+  try{localStorage.setItem('cb2_active_tab',t);}catch(e){}
+  // Pause all <video> elements + tear down any open overlays
   if(typeof closeGalleryOverlay==='function')closeGalleryOverlay();
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['gallery','create','videos'][i]===t)?' active':'');
+    el.className='tab'+((['gallery','create','videos','discover'][i]===t)?' active':'');
   });
   const hide=id=>{const e=document.getElementById(id);if(e)e.style.display='none';};
   const show=id=>{const e=document.getElementById(id);if(e)e.style.display='block';};
   hide('gridToggle');hide('gridArea');hide('reviewArea');hide('progressArea');
   hide('galleryArea');hide('videosArea');hide('aiscoreArea');hide('createArea');
-  hide('emptyState');
+  hide('discoverArea');hide('emptyState');
   if(t==='gallery'){show('galleryArea');renderGallery();}
   else if(t==='create'){show('createArea');CR.open();}
-  else if(t==='videos'){
-    // Videos tab is no longer exposed in the tab bar (merged into Gallery as a
-    // sub-toggle), but galSendToVideoLab() still routes here so the Video Lab
-    // workflow keeps working. The user clicks the Gallery tab to return.
-    show('videosArea');
-    if(typeof vidLabCheck==='function')vidLabCheck();
-  }
+  else if(t==='videos'){show('videosArea');if(typeof vidLabCheck==='function')vidLabCheck();}
+  else if(t==='discover'){show('discoverArea');if(typeof discoverInit==='function')discoverInit();}
 }
 
 function upFilt(){
@@ -4237,6 +4288,167 @@ async function loadCorpus(){
   }catch(e){console.log('[corpus] load failed:',e);}
 }
 
+// === DISCOVER TAB — cheap CB2-free scene exploration ========================
+// Generates quick FLUX sketches (no product, no ref photo) so Justin can
+// preview vibes/scenes before committing to full CB2 generations. Each sketch
+// costs ~$0.05 via FLUX 2 Flex. Also includes "Inspiration Upload" where you
+// paste an image URL and Claude Vision analyzes it to suggest a CB2 recreation.
+
+function discoverInit(){
+  document.getElementById('counter').textContent='DISCOVER \u2014 explore new scenes';
+}
+
+// Scene generation prompts — diverse, sport-appropriate, NO CB2 references
+const DISC_SCENES={
+  moto:[
+    'Motorcycle rider cruising Pacific Coast Highway at golden hour, dramatic ocean cliffs',
+    'Rider leaning into a turn on a wet city street at night, neon reflections on asphalt',
+    'Adventure bike paused at a desert overlook, red rock canyons in the distance',
+    'Female motorcycle rider on a mountain pass, fresh snow on peaks, crisp morning light',
+    'Rider accelerating through autumn forest road, leaves swirling in the wake',
+    'Urban motorcycle rider threading traffic on a bridge, downtown skyline behind',
+  ],
+  ski:[
+    'Skier carving through untouched powder in a steep alpine bowl, bluebird sky',
+    'Female skier launching off a cornice, spray of snow catching backlight',
+    'Skier descending through a forest glade, dappled sunlight through snow-laden trees',
+    'Skier paused at a summit ridge, panoramic mountain vista, clouds below',
+  ],
+  snow:[
+    'Snowboarder slashing a turn in deep powder, mountain backdrop',
+    'Female snowboarder midair in a terrain park, urban cityscape visible behind the resort',
+    'Snowboarder riding through a misty forest trail, ethereal morning light',
+  ],
+  mtb:[
+    'Mountain biker descending a steep alpine trail, wildflowers in the foreground',
+    'Female MTB rider launching over a rock drop, forest canopy above',
+    'Mountain biker riding a ridgeline at sunset, golden light, dramatic sky',
+    'Rider navigating a technical root section in a Pacific Northwest rainforest',
+  ],
+  sled:[
+    'Snowmobile rider crossing a frozen alpine lake, mountains reflected in ice',
+    'Snowmobile cutting fresh tracks through backcountry powder, trees heavy with snow',
+  ],
+};
+
+async function discoverGenerate(){
+  const sport=document.getElementById('discSport').value;
+  const gender=document.getElementById('discGender').value;
+  const count=parseInt(document.getElementById('discCount').value)||6;
+  const userPrompt=(document.getElementById('discPrompt').value||'').trim();
+  const btn=document.getElementById('discGenBtn');
+  const status=document.getElementById('discStatus');
+  const grid=document.getElementById('discGrid');
+  btn.disabled=true;btn.style.opacity='.5';
+  status.textContent='Generating '+count+' sketches...';
+  grid.innerHTML='';
+
+  const subjectMap={moto:'motorcycle rider',ski:'skier',snow:'snowboarder',mtb:'mountain biker',sled:'snowmobile rider'};
+  const genderPre={male:'male ',female:'female ','any':''}[gender]||'';
+  const subject=genderPre+subjectMap[sport];
+  const sportScenes=DISC_SCENES[sport]||DISC_SCENES.moto;
+
+  // Build prompts: user-provided or randomly sampled from the scene bank
+  const prompts=[];
+  for(let i=0;i<count;i++){
+    if(userPrompt){
+      // Use user's description but inject the subject + add photographic language
+      prompts.push(userPrompt+'. '+subject+', waist-up, shot on Sony A7R IV 85mm f/2.0, film grain, photorealistic');
+    }else{
+      // Random sample from the scene bank (with wrapping)
+      const scene=sportScenes[i%sportScenes.length];
+      prompts.push(scene+'. '+subject+', waist-up, shot on Sony A7R IV 85mm f/2.0, film grain, photorealistic');
+    }
+  }
+
+  // Generate via FLUX 2 Flex (cheapest: ~$0.05/image, no ref needed)
+  const endpoint='fal-ai/flux-2-flex';
+  try{
+    const results=await Promise.all(prompts.map(async(p,i)=>{
+      try{
+        const seed=Math.floor(Math.random()*100000);
+        const data=await proxyFal(endpoint,{prompt:p,seed,num_images:1,output_format:'jpeg',image_size:{width:768,height:1024}});
+        return data?.images?.[0]||null;
+      }catch(e){
+        return {error:e.message};
+      }
+    }));
+    grid.innerHTML=results.map((img,i)=>{
+      if(!img||img.error)return '<div style="aspect-ratio:3/4;background:#1a0a0a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:#ef4444">'+(img?.error||'Failed')+'</div>';
+      return '<div style="position:relative;border-radius:8px;overflow:hidden;cursor:pointer" onclick="discoverUseScene('+i+')">'
+        +'<img src="'+img.url+'" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block">'
+        +'<div style="position:absolute;bottom:0;left:0;right:0;padding:.3rem .4rem;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;font-size:.5rem;line-height:1.3">'+prompts[i].slice(0,100)+'\u2026</div>'
+        +'<div style="position:absolute;top:4px;right:4px;background:rgba(245,158,11,.9);color:#000;padding:.15rem .35rem;border-radius:4px;font-size:.5rem;font-weight:700;cursor:pointer" onclick="event.stopPropagation();discoverSendToCreate('+i+')">Use in CREATE \u2192</div>'
+        +'</div>';
+    }).join('');
+    // Store prompts for the "Use in CREATE" button
+    window._discoverPrompts=prompts;
+    window._discoverSport=sport;
+    window._discoverGender=gender;
+    status.textContent=results.filter(r=>r&&!r.error).length+' of '+count+' generated. Click any sketch to use it.';
+  }catch(e){
+    status.textContent='Error: '+e.message;
+  }
+  btn.disabled=false;btn.style.opacity='1';
+}
+
+function discoverSendToCreate(idx){
+  const prompt=(window._discoverPrompts||[])[idx]||'';
+  const sport=window._discoverSport||'moto';
+  const gender=window._discoverGender||'any';
+  // Pre-populate the CREATE New Scene form with this discovered scene
+  CR.showNewScene();
+  CR.newScene.sport=sport;
+  CR.newScene.gender=gender;
+  CR.newScene.scene=prompt.split('. '+({moto:'motorcycle',ski:'skier',snow:'snowboarder',mtb:'mountain',sled:'snowmobile'}[sport]||''))[0]||prompt;
+  CR.newScene.gear=CR.GEAR[sport]||'';
+  setTab('create');
+  CR.view='newscene';
+  CR.render();
+  showToast('Scene loaded in CREATE \u2014 pick colorway + model and generate!');
+}
+
+// Inspiration Upload — analyze a photo with Claude Vision
+async function discoverAnalyze(){
+  const url=(document.getElementById('discInspoUrl').value||'').trim();
+  if(!url){showToast('Paste an image URL first');return;}
+  const btn=document.getElementById('discAnalyzeBtn');
+  const preview=document.getElementById('discInspoPreview');
+  const result=document.getElementById('discInspoResult');
+  btn.disabled=true;btn.textContent='Analyzing\u2026';
+  preview.innerHTML='<img src="'+url+'" alt="" style="max-width:200px;border-radius:8px;margin-top:.3rem">';
+  result.innerHTML='';
+  try{
+    const d=await proxyAnthropic({
+      model:'claude-sonnet-4-5',max_tokens:500,
+      messages:[{role:'user',content:[
+        {type:'image',source:{type:'url',url}},
+        {type:'text',text:'Analyze this action sports marketing photo. In 2-3 short paragraphs, describe:\n1. What makes this photo compelling as marketing (composition, lighting, mood, energy)\n2. How to recreate this vibe with a CB2 wearable remote on the rider\'s forearm — suggest a specific scene description, sport, vibe (editorial/documentary/golden hour/moody night), and what gear the rider should wear.\n3. A ready-to-use prompt for generating a similar image (just the scene description, no product details).\n\nBe specific and actionable.'}
+      ]}]
+    });
+    const text=d?.content?.[0]?.text||'No analysis returned.';
+    result.innerHTML='<div style="background:#0a0a1a;border:1px solid #333;border-radius:8px;padding:.6rem;margin-top:.3rem;white-space:pre-wrap;line-height:1.5">'+text.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div>'
+      +'<button onclick="discoverUseAnalysis()" style="margin-top:.3rem;padding:.35rem .7rem;border-radius:6px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.65rem;cursor:pointer;font-weight:600">Use this in CREATE \u2192</button>';
+    window._discoverAnalysisText=text;
+  }catch(e){
+    result.innerHTML='<div style="color:#ef4444">Error: '+e.message+'</div>';
+  }
+  btn.disabled=false;btn.textContent='Analyze';
+}
+
+function discoverUseAnalysis(){
+  const text=window._discoverAnalysisText||'';
+  // Extract the last paragraph (usually the ready-to-use prompt)
+  const paragraphs=text.split(/\n\n+/).filter(p=>p.trim());
+  const scenePrompt=paragraphs[paragraphs.length-1]||text.slice(0,200);
+  CR.showNewScene();
+  CR.newScene.scene=scenePrompt;
+  setTab('create');
+  CR.view='newscene';
+  CR.render();
+  showToast('Inspiration loaded in CREATE!');
+}
+
 // Init: load any Make More Like This variations from localStorage
 mmLoadVariations();
 // Seed from local first (instant), then load shared feedback (async merge)
@@ -4244,8 +4456,8 @@ seedFromLocal();
 counts();
 // Migrate any cb-rate.html verdicts from localStorage (once per browser)
 migrateRateState();
-// 3-tab layout: GALLERY is the default landing tab.
-setTab('gallery');
+// Restore last active tab on reload (default: gallery)
+setTab(localStorage.getItem('cb2_active_tab')||'gallery');
 // Load shared feedback from GitHub (merges remote reviews into local)
 loadSharedFeedback();
 // Load permanent archive manifest (cb-archived.json) → rewrite image URLs
