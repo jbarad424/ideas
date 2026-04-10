@@ -1843,7 +1843,7 @@ function galToggleSuper(id){
   }else{
     d[id].comments.push({num:(d[id].comments.length||0)+1,text:'[super] marked super-like in Gallery',time:new Date().toISOString()});
   }
-  try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+  S(d);
   // Update the button UI in the open overlay
   const btn=document.getElementById('galSuperBtn-'+id);
   if(btn){
@@ -1865,7 +1865,7 @@ function galArchiveVideo(id){
   const d=D();
   if(!d[id])d[id]={comments:[]};
   d[id].comments.push({num:(d[id].comments.length||0)+1,text:'rejected — archived from Gallery',time:new Date().toISOString()});
-  try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+  S(d);
   // Close the overlay
   const ov=document.querySelector('.gal-overlay');if(ov){pauseAllVideos();ov.remove();}
   renderGallery();
@@ -2304,7 +2304,7 @@ async function vidLabGenerate(platform){
   const st=document.getElementById('vidLabStatus');
   if(st)st.innerHTML='<div style="background:#1a1030;border:2px solid #a855f7;border-radius:8px;padding:.6rem;text-align:center">'
     +'<div style="font-size:.8rem;color:#a855f7;font-weight:700">Submitting to '+p.name+'\u2026</div>'
-    +'<div style="font-size:.6rem;color:#888;margin-top:.2rem">'+p.cost+' per video</div></div>';
+    +'<div style="font-size:.6rem;color:#888;margin-top:.2rem">~$'+estCost.toFixed(2)+' estimated</div></div>';
 
   try{
     // Submit via Worker fal-submit (returns immediately with request_id + URLs)
@@ -2607,16 +2607,16 @@ function renderGallery(){
     }else{
       sourceItems=ALL_IMAGES.filter(i=>isR(i));
     }
-    scored=sourceItems.map(i=>({
+    scored=sourceItems.map(i=>{const sc=galScore(i.id);return{
       ...i,
-      score:galScore(i.id),
-      bucket:galBucket(galScore(i.id)),
+      score:sc,
+      bucket:galBucket(sc),
       sport:galDetectSport(i),
       modelCat:galDetectModel(i),
       accepted:galIsAccepted(i),
       isSuper:galIsSuper(i),
       isVideo:isVideoMode,
-    }));
+    }});
     _galCache=scored;
     _galCacheKey=cacheKey;
     console.log('[perf] gallery cache rebuilt:',scored.length,'items');
@@ -2908,7 +2908,7 @@ function galEditScore(id,el){
     const d=D();
     if(!d[id])d[id]={comments:[]};
     d[id].comments.push({num:(d[id].comments.length||0)+1,text:'Final score: '+v,time:new Date().toISOString()});
-    localStorage.setItem('cb2_fb',JSON.stringify(d));
+    S(d);
     inp.remove();
     el.textContent=v+'/100';
     el.style.color=v>=90?'#22c55e':v>=70?'#f59e0b':v>=50?'#3b82f6':'#ef4444';
@@ -3996,8 +3996,8 @@ const CR={
     };
     kept.forEach((url,idx)=>snapshotEntry(url,idx,'kept'));
     rejected.forEach((url,idx)=>snapshotEntry(url,kept.length+idx,'rejected'));
-    // Persist the verdict comments to the same localStorage key D() reads from
-    try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+    // Persist the verdict comments + bust D() cache
+    S(d);
     try{mmSaveVariations([...kept.map((url,idx)=>({id:'cr-'+b.batch_id+'-'+idx,url,model:this.MODEL_LABELS[b.endpoint]||b.model,prompt:b.recipe_prompt,label:'CREATE keeper: '+b.recipe_id,context:'CREATE batch '+b.batch_id})),...rejected.map((url,idx)=>({id:'cr-'+b.batch_id+'-'+(kept.length+idx),url,model:this.MODEL_LABELS[b.endpoint]||b.model,prompt:b.recipe_prompt,label:'CREATE reject: '+b.recipe_id,context:'CREATE batch '+b.batch_id}))]);}catch(e){}
     // Fire-and-forget sync of the feedback verdicts so other users see them
     try{if(typeof syncFeedback==='function')setTimeout(syncFeedback,500);}catch(e){}
@@ -4498,7 +4498,7 @@ function migrateRateState(){
   // No → Final score: 20
   noIds.forEach(id=>add(id,'Final score: 20 (rejected in hot-or-not)'));
   if(n>0){
-    try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+    S(d);
     try{localStorage.setItem(MIGRATED_KEY,JSON.stringify({migratedAt:now,count:n,super:superIds.length,yes:yesIds.length,no:noIds.length}));}catch(e){}
     console.log('[migrate] harvested',n,'verdicts from cb2_rate_v1:',{super:superIds.length,yes:yesIds.length,no:noIds.length});
     // Sync to GitHub Pages so other team members see these verdicts
@@ -4682,7 +4682,7 @@ async function discoverGenerate(){
     }));
     grid.innerHTML=results.map((img,i)=>{
       if(!img||img.error)return '<div style="aspect-ratio:3/4;background:#1a0a0a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:#ef4444">'+(img?.error||'Failed')+'</div>';
-      return '<div style="position:relative;border-radius:8px;overflow:hidden;cursor:pointer" onclick="discoverUseScene('+i+')">'
+      return '<div style="position:relative;border-radius:8px;overflow:hidden;cursor:pointer" onclick="discoverSendToCreate('+i+')">'
         +'<img src="'+img.url+'" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block">'
         +'<div style="position:absolute;bottom:0;left:0;right:0;padding:.3rem .4rem;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;font-size:.5rem;line-height:1.3">'+prompts[i].slice(0,100)+'\u2026</div>'
         +'<div style="position:absolute;top:4px;right:4px;background:rgba(245,158,11,.9);color:#000;padding:.15rem .35rem;border-radius:4px;font-size:.5rem;font-weight:700;cursor:pointer" onclick="event.stopPropagation();discoverSendToCreate('+i+')">Use in CREATE \u2192</div>'
@@ -5348,7 +5348,7 @@ const LAB={
     };
     kept.forEach((url,idx)=>snapshotEntry(url,idx,'kept'));
     rejected.forEach((url,idx)=>snapshotEntry(url,kept.length+idx,'rejected'));
-    try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+    S(d);
     // Invalidate gallery cache so new items show up
     _galCache=null;_galCacheKey='';
     counts();
