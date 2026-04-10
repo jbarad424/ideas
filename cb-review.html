@@ -2931,6 +2931,12 @@ function galBringToLab(id){
   const sport=galDetectSport(img);
   const score=galScore(img.id);
   const src={id:img.id,url:img.url,label:img.label,model:img.model,prompt:img.prompt||'',score,sport};
+  // Set LAB state directly (not just localStorage) so init() uses the new source
+  LAB.source=src;
+  LAB.mode=null;
+  LAB.stillsMode=null;
+  LAB.batch=null;
+  LAB.newScene=null;
   localStorage.setItem('cb2_lab_source',JSON.stringify(src));
   setTab('lab');
   showToast('Loaded in Lab \u2014 choose Make Stills or Make Video');
