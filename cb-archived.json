@@ -1,12 +1,4865 @@
 {
   "meta": {
-    "generated": "2026-04-10T01:39:57Z",
-    "count": 0,
+    "generated": "2026-04-10T01:23:01Z",
+    "count": 693,
     "video_count": 17,
     "note": "Archived from fal.media / catbox.moe to permanent GitHub Pages storage. Photos under /winners/, videos under /winners/videos/."
   },
-  "ids": [],
-  "items": {},
+  "ids": [
+    "E2-moto-r65s75",
+    "E2-r50-s80",
+    "E2-r55-s75",
+    "E2-r60-s70",
+    "E2-r60-s85",
+    "E2-r65-s75",
+    "E2-r70-s70",
+    "E2-r70-s80",
+    "E2-snowmo-r65s75",
+    "ab-new-moto",
+    "ab-new-mtb",
+    "ab-new-ski",
+    "ab-old-moto",
+    "ab-old-mtb",
+    "ab-old-ski",
+    "act-moto-7001",
+    "act-moto-7002",
+    "act-moto-7003",
+    "act-moto-7004",
+    "act-moto-7005",
+    "act-mtb-7001",
+    "act-mtb-7002",
+    "act-mtb-7003",
+    "act-mtb-7004",
+    "act-mtb-7005",
+    "act-ski-7001",
+    "act-ski-7002",
+    "act-ski-7003",
+    "act-ski-7004",
+    "act-ski-7005",
+    "act-sled-7001",
+    "act-sled-7002",
+    "act-sled-7003",
+    "act-sled-7004",
+    "act-sled-7005",
+    "action-fish-s950",
+    "action-fish-s951",
+    "action-hike-s940",
+    "action-moto-s900",
+    "action-moto-s901",
+    "action-moto-s902",
+    "action-moto-s903",
+    "action-moto-s904",
+    "action-mtb-s930",
+    "action-mtb-s931",
+    "action-mtb-s932",
+    "action-mtb-s933",
+    "action-run-s941",
+    "action-ski-s910",
+    "action-ski-s911",
+    "action-ski-s912",
+    "action-ski-s913",
+    "action-snow-s920",
+    "action-snow-s921",
+    "action-snow-s922",
+    "agg-cycle-climb-7006",
+    "agg-moto-lean-7004",
+    "bg-coast1",
+    "bg-coast10",
+    "bg-coast11",
+    "bg-coast14",
+    "bg-coast17",
+    "bg-coast19",
+    "bg-coast2",
+    "bg-coast20",
+    "bg-coast3",
+    "bg-coast4",
+    "bg-coast5",
+    "bg-coast6",
+    "bg-coast7",
+    "bg-coast8",
+    "bg-coast9",
+    "bg-mtb2",
+    "bg-mtb3",
+    "bg-mtb4",
+    "bg-mtb5",
+    "bg-over1",
+    "bg-over10",
+    "bg-over2",
+    "bg-over3",
+    "bg-over4",
+    "bg-over5",
+    "bg-over6",
+    "bg-over7",
+    "bg-over8",
+    "bg-over9",
+    "bg-snow1",
+    "bg-snow2",
+    "bg-snow3",
+    "bg-snowmo1",
+    "bg-snowmo2",
+    "bg-snowmo3",
+    "cb2-moto-1300",
+    "cb2-mtb-1302",
+    "cb2-ski-1301",
+    "clothswap-moto-jacket",
+    "clothswap-ski-gloves",
+    "clothswap-snow-earbuds",
+    "combo-anatomical",
+    "combo-editorial",
+    "combo-negative",
+    "combo-patriot-moto-9001",
+    "combo-patriot-moto-med-9002",
+    "combo-patriot-snow-9004",
+    "combo-seed1",
+    "combo-seed2",
+    "combo-seed3",
+    "combo-seed4",
+    "combo-seed5",
+    "combo-tron-ski-9003",
+    "combo-twopass-base",
+    "combo-twopass-refined",
+    "compare-flex-8301",
+    "compare-gpt-8301",
+    "compare-max-8301",
+    "compare-pro-8301",
+    "cw-control-s51",
+    "cw-hunter-s50",
+    "cw-hunter-s51",
+    "cw-patriot-s50",
+    "cw-patriot-s51",
+    "cw-tron-s50",
+    "cw-tron-s51",
+    "dual_moto_moto_s0_100",
+    "dual_moto_moto_s0_87",
+    "dual_moto_moto_s0_89",
+    "dual_moto_moto_s1_101",
+    "dual_moto_moto_s1_84",
+    "dual_moto_moto_s1_92",
+    "dual_mtb_mtb_s0_83",
+    "dual_mtb_mtb_s0_94",
+    "dual_mtb_mtb_s0_96",
+    "dual_mtb_mtb_s1_86",
+    "dual_mtb_mtb_s1_88",
+    "dual_mtb_mtb_s1_98",
+    "dual_ski_ski_s0_85",
+    "dual_ski_ski_s0_93",
+    "dual_ski_ski_s0_97",
+    "dual_ski_ski_s1_102",
+    "dual_ski_ski_s1_80",
+    "dual_ski_ski_s1_95",
+    "dual_snow_snow_s0_82",
+    "dual_snow_snow_s0_90",
+    "dual_snow_snow_s0_99",
+    "dual_snow_snow_s1_103",
+    "dual_snow_snow_s1_81",
+    "dual_snow_snow_s1_91",
+    "dualref-hunter-moto-8901",
+    "dualref-patriot-moto-8902",
+    "dualref-tron-ski-8903",
+    "flex-default",
+    "flex-highboth",
+    "flex-highguide",
+    "flex-moresteps",
+    "flex-twopass-goggles",
+    "flex-twopass-helmet",
+    "flex-twopass-jacket",
+    "flex-twopass-neckguard",
+    "flex7-hike-2040",
+    "flex7-hike-2041",
+    "flex7-moto-2000",
+    "flex7-moto-2001",
+    "flex7-moto-2002",
+    "flex7-moto-2003",
+    "flex7-moto-2004",
+    "flex7-mtb-2030",
+    "flex7-mtb-2031",
+    "flex7-mtb-2032",
+    "flex7-mtb-2033",
+    "flex7-ski-2010",
+    "flex7-ski-2011",
+    "flex7-ski-2012",
+    "flex7-ski-2013",
+    "flex7-ski-2014",
+    "flex7-snow-2020",
+    "flex7-snow-2021",
+    "flex7-snow-2022",
+    "flex7-snow-2023",
+    "flexmulti-moto-1600",
+    "flexmulti-moto-1601",
+    "flexmulti-moto-1602",
+    "flexmulti-ski-1603",
+    "flexmulti-ski-1604",
+    "flexmulti-ski-1605",
+    "flip-coastal1",
+    "flip-coastal2",
+    "flip-coastal3",
+    "flip-coastal4",
+    "flip-coastal5",
+    "flip_snow_snow_s0_104",
+    "flip_snow_snow_s0_105",
+    "flip_snow_snow_s0_108",
+    "flip_snow_snow_s1_106",
+    "flip_snow_snow_s1_107",
+    "flip_snow_snow_s1_109",
+    "flux-gpt-enhanced1337-10304",
+    "flux-gpt-enhanced42-10303",
+    "flux-gpt-flux1337-10302",
+    "flux-gpt-flux42-10301",
+    "flux-gpt-nofidelity42-10305",
+    "flux2-hiking-multiref",
+    "flux2-skiing-multiref",
+    "flux2-snowboard-multiref",
+    "flux2lora-hiker",
+    "flux2lora-moto",
+    "flux2lora-overlook",
+    "flux2lora-skier",
+    "flux2lora-snowboard",
+    "glove-moto-8001",
+    "glove-moto-8002",
+    "glove-moto-8003",
+    "glove-moto-8004",
+    "glove-moto-8005",
+    "goofy_snow_snow_s0_goofy_116",
+    "goofy_snow_snow_s0_goofy_117",
+    "goofy_snow_snow_s0_goofy_121",
+    "goofy_snow_snow_s1_goofy_118",
+    "goofy_snow_snow_s1_goofy_119",
+    "goofy_snow_snow_s1_goofy_120",
+    "gpt-coastal-v2-8501",
+    "gpt-coastal-v3-8502",
+    "gpt-desert-v2-8503",
+    "gpt-forest-8504",
+    "gpt-moto-alpine-8403",
+    "gpt-moto-coastal-8401",
+    "gpt-moto-desert-8402",
+    "gpt-moto-night-8404",
+    "kontext-flip",
+    "kontext-inpaint-8001",
+    "kontext-inpaint-8002",
+    "kontext-inpaint-8003",
+    "kontext-moto-big-str100-9005",
+    "kontext-mtb-str095-9001",
+    "kontext-mtb-str100-9002",
+    "kontext-origmoto-refC-9006",
+    "kontext-ski-big-str100-9003",
+    "kontext-snow-big-str100-9004",
+    "kontext-tron-skiing",
+    "kontext-v3-mtb-9101",
+    "kontext-v3-repro-9102",
+    "lora-v4b-hiker",
+    "lora-v4b-mtb",
+    "lora-v4b-runner",
+    "lora-v4b-skier",
+    "lora-v4b-snowboard",
+    "lorav5-hiker",
+    "lorav5-moto",
+    "lorav5-overlook",
+    "lorav5-skier",
+    "lorav5-snowboard",
+    "mask-alpine-clean-10703",
+    "mask-alpine-result-10704",
+    "mask-desert-clean-10701",
+    "mask-desert-result-10702",
+    "mask-inpaint-clean-10001",
+    "mask-inpaint-result-10002",
+    "micro-moto99-circles-10402",
+    "micro-moto99-oval-10403",
+    "micro-moto99-rect-10401",
+    "micro-ski100-circles-10405",
+    "micro-ski100-nbpro-10407",
+    "micro-ski100-oval-10406",
+    "micro-ski100-rect-10404",
+    "mikemoto-2587",
+    "mikemoto-2589",
+    "mikemoto-2590",
+    "mikemoto-2593",
+    "mikemoto-2595",
+    "mikemoto-2599",
+    "mikemoto-2601",
+    "mikemoto-2604",
+    "mikemoto-2607",
+    "mikemoto-2610",
+    "mikeref-1-s1100",
+    "mikeref-1-s1101",
+    "mikeref-2-s1102",
+    "mikeref-2-s1103",
+    "mikeref-3-s1104",
+    "mikeref-3-s1105",
+    "mir2_moto_moto_s0_124",
+    "mir2_moto_moto_s0_126",
+    "mir2_mtb_mtb_s0_125",
+    "mir2_ski_ski_s0_122",
+    "mir2_ski_ski_s1_127",
+    "mir2_snow_snow_s1_123",
+    "mirror_snow_snow_s0_112",
+    "mirror_snow_snow_s0_113",
+    "mirror_snow_snow_s0_114",
+    "mirror_snow_snow_s1_110",
+    "mirror_snow_snow_s1_111",
+    "mirror_snow_snow_s1_115",
+    "moto-alpine-8105",
+    "moto-cafe-8103",
+    "moto-canyon-8102",
+    "moto-coastal-8101",
+    "moto-desert-8104",
+    "moto-sunrise-8106",
+    "nb2-coastal-1-10201",
+    "nb2-coastal-2-10202",
+    "nb2-desert-1-10203",
+    "nb2-desert-2-10204",
+    "nb2-mtb-3-10603",
+    "nb2-mtb-4-10604",
+    "nb2-ski-1-10205",
+    "nb2-ski-2-10206",
+    "nb2-snow-3-10601",
+    "nb2-snow-4-10602",
+    "nbpro-coastal-a1-10101",
+    "nbpro-coastal-a2-10102",
+    "nbpro-coastal-b1-10103",
+    "nbpro-coastal-b2-10104",
+    "nbpro-desert-c1-10105",
+    "nbpro-desert-c2-10106",
+    "nbpro-mtb-1-10505",
+    "nbpro-mtb-2-10506",
+    "nbpro-ski-1-10501",
+    "nbpro-ski-2-10502",
+    "nbpro-snow-1-10503",
+    "nbpro-snow-2-10504",
+    "newgen-atv-s840",
+    "newgen-atv-s841",
+    "newgen-fish-s830",
+    "newgen-fish-s831",
+    "newgen-moto-s800",
+    "newgen-moto-s801",
+    "newgen-moto-s802",
+    "newgen-moto-s803",
+    "newgen-moto-s804",
+    "newgen-mtb-s810",
+    "newgen-mtb-s811",
+    "newgen-mtb-s812",
+    "newgen-run-s820",
+    "newgen-run-s821",
+    "newgen-run-s822",
+    "overlook2-1",
+    "overlook2-2",
+    "overlook2-3",
+    "overlook2-4",
+    "overlook2-5",
+    "pathB-moto-6001",
+    "pathB-ski-6002",
+    "pathB2-med-moto-7003",
+    "pathB2-med-ski-7004",
+    "pathB2-tight-moto-7001",
+    "pathB2-tight-mtb-7005",
+    "pathB2-tight-ski-7002",
+    "pathB2-tight-snow-7006",
+    "pathB3-moto-8001",
+    "pathB3-moto2-8005",
+    "pathB3-mtb-8003",
+    "pathB3-ski-8002",
+    "pathB3-ski2-8006",
+    "pathB3-snow-8004",
+    "pathC-base-5000",
+    "pathC-combined-5001",
+    "pipe-A-upscale-8705",
+    "pipe-B-inpaint-8701",
+    "pipe-C-composite-8703",
+    "pipe-D-direct-v1-8704",
+    "pipe-E-direct-8702",
+    "pipeA-festival",
+    "pipeA-hiker",
+    "pipeA-mtb",
+    "pipeA-snowboard",
+    "pipeB-festival",
+    "pipeB-hiker",
+    "pipeC-moto",
+    "pipeC-motoc",
+    "pipeC-mtb",
+    "pipeC-snowmo",
+    "pipeD-moto",
+    "pipeD-moto-coast",
+    "pipeD-moto-waist",
+    "pipeD-motoc",
+    "pipeD-mtb",
+    "pipeD-snowmo",
+    "pipeD2-coast1",
+    "pipeD2-coast2",
+    "pipeD2-coast3",
+    "pipeD2-coast4",
+    "pipeD2-coast5",
+    "pipeD2-over1",
+    "pipeD2-over2",
+    "pipeD2-over3",
+    "pipeE-motoc-hi",
+    "pipeE-motoc-lo",
+    "pipeE-motoc-mid",
+    "pipeF-moto",
+    "pipeF-moto-product",
+    "pipeF-mtb",
+    "pipeF-snowmo",
+    "pov-cycle-mountain-7002",
+    "pov-moto-coastal-7001",
+    "pov-moto-desert-7005",
+    "pov-mtb-forest-7003",
+    "r2-hiking-summit",
+    "r2-skiing-pov",
+    "r3m-hiker",
+    "r3m-mtb",
+    "r3m-runner",
+    "r3m-skier",
+    "r3m-snowboard",
+    "r4-hiker",
+    "r4-mtb",
+    "r4-skier",
+    "r4-snowboard",
+    "r5-festival",
+    "r5-hiker",
+    "r5-mtb",
+    "r5-skier",
+    "r5-snowboard",
+    "r6-hiker1",
+    "r6-hiker2",
+    "r6-mtb1",
+    "r6-mtb2",
+    "r6-mtb3",
+    "r6-skier1",
+    "r6-skier2",
+    "r6-skier3",
+    "r6-snow1",
+    "r6-snow2",
+    "r6-snow3",
+    "r7-festival",
+    "r7-hiker-full1",
+    "r7-hiker-full2",
+    "r7-mtb-action1",
+    "r7-mtb-action2",
+    "r7-runner",
+    "r7-skier-action1",
+    "r7-skier-action2",
+    "r7-skier-action3",
+    "r7-snow-action1",
+    "r7-snow-action2",
+    "r8-hiker1",
+    "r8-hiker2",
+    "r8-hiker3",
+    "r8-mtb1",
+    "r8-mtb2",
+    "r8-mtb3",
+    "r8-mtb4",
+    "r8-mtb5",
+    "r8-skier1",
+    "r8-skier2",
+    "r8-skier3",
+    "r8-snow1",
+    "r8-snow2",
+    "r8-snow3",
+    "ref-A1",
+    "ref-A2",
+    "ref-A3",
+    "ref-A4",
+    "ref-A5",
+    "ref-A6",
+    "ref-B1",
+    "ref-B2",
+    "ref-B3",
+    "ref-B4",
+    "ref-B5",
+    "ref-C1",
+    "ref-C2",
+    "ref-C3",
+    "ref-C4",
+    "ref-C5",
+    "ref-D1",
+    "ref-D2",
+    "ref-D3",
+    "ref-D4",
+    "ref-D5",
+    "refC-hike-s200",
+    "refC-hike-s201",
+    "refC-hike-s202",
+    "refC-hike-s203",
+    "refC-hike-s204",
+    "refC-moto-s100",
+    "refC-moto-s101",
+    "refC-moto-s102",
+    "refC-moto-s103",
+    "refC-moto-s104",
+    "refC-ski-s300",
+    "refC-ski-s301",
+    "refC-ski-s302",
+    "refC-ski-s303",
+    "refC-ski-s304",
+    "refC-snow-s400",
+    "refC-snow-s401",
+    "refC-snow-s402",
+    "refC-snow-s403",
+    "refC-snow-s404",
+    "refab-h1-moto-s0",
+    "refab-h1-moto-s1",
+    "refab-h1-mtb-s0",
+    "refab-h1-mtb-s1",
+    "refab-h2-moto-s0",
+    "refab-h2-moto-s1",
+    "refab-h2-mtb-s0",
+    "refab-h2-mtb-s1",
+    "refab-h3-moto-s0",
+    "refab-h3-moto-s1",
+    "refab-h3-mtb-s0",
+    "refab-h3-mtb-s1",
+    "refab-h4-moto-s0",
+    "refab-h4-moto-s1",
+    "refab-h4-mtb-s0",
+    "refab-h4-mtb-s1",
+    "refab-h5-moto-s0",
+    "refab-h5-moto-s1",
+    "refab-h5-mtb-s0",
+    "refab-h5-mtb-s1",
+    "refab-h6-moto-s0",
+    "refab-h6-moto-s1",
+    "refab-h6-mtb-s0",
+    "refab-h6-mtb-s1",
+    "refab-p1-moto-s0",
+    "refab-p1-moto-s1",
+    "refab-p1-mtb-s0",
+    "refab-p1-mtb-s1",
+    "refab-p2-moto-s0",
+    "refab-p2-moto-s1",
+    "refab-p2-mtb-s0",
+    "refab-p2-mtb-s1",
+    "refab-p3-moto-s0",
+    "refab-p3-moto-s1",
+    "refab-p3-mtb-s0",
+    "refab-p3-mtb-s1",
+    "refab-p4-moto-s0",
+    "refab-p4-moto-s1",
+    "refab-p4-mtb-s0",
+    "refab-p4-mtb-s1",
+    "refab-p5-moto-s0",
+    "refab-p5-moto-s1",
+    "refab-p5-mtb-s0",
+    "refab-p5-mtb-s1",
+    "refab-p6-moto-s0",
+    "refab-p6-moto-s1",
+    "refab-p6-mtb-s0",
+    "refab-p6-mtb-s1",
+    "refab-refc-moto-s0",
+    "refab-refc-moto-s1",
+    "refab-refc-mtb-s0",
+    "refab-refc-mtb-s1",
+    "rot_moto__0",
+    "rot_moto__10",
+    "rot_moto__12",
+    "rot_moto__15",
+    "rot_moto__17",
+    "rot_moto__20",
+    "rot_moto__22",
+    "rot_moto__25",
+    "rot_moto__26",
+    "rot_moto__29",
+    "rot_moto__3",
+    "rot_moto__31",
+    "rot_moto__33",
+    "rot_moto__35",
+    "rot_moto__36",
+    "rot_moto__37",
+    "rot_moto__41",
+    "rot_moto__42",
+    "rot_moto__45",
+    "rot_moto__46",
+    "rot_moto__47",
+    "rot_moto__5",
+    "rot_moto__7",
+    "rot_moto__8",
+    "rot_mtb__1",
+    "rot_mtb__11",
+    "rot_mtb__13",
+    "rot_mtb__14",
+    "rot_mtb__16",
+    "rot_mtb__18",
+    "rot_mtb__19",
+    "rot_mtb__2",
+    "rot_mtb__21",
+    "rot_mtb__23",
+    "rot_mtb__24",
+    "rot_mtb__27",
+    "rot_mtb__28",
+    "rot_mtb__30",
+    "rot_mtb__32",
+    "rot_mtb__34",
+    "rot_mtb__38",
+    "rot_mtb__39",
+    "rot_mtb__4",
+    "rot_mtb__40",
+    "rot_mtb__43",
+    "rot_mtb__44",
+    "rot_mtb__6",
+    "rot_mtb__9",
+    "samfix-motoS103",
+    "samfix-refA1",
+    "samfix-refC1",
+    "scene-moto-1300",
+    "scene-mtb-1302",
+    "sym-armclose-10805",
+    "sym-closeup-8602",
+    "sym-desert-8604",
+    "sym-dualref-10802",
+    "sym-explicit-8601",
+    "sym-flex-8606",
+    "sym-front-10806",
+    "sym-hires-10803",
+    "sym-medium-8605",
+    "sym-moto-coastal-8801",
+    "sym-moto-desert-8802",
+    "sym-moto-detail-8806",
+    "sym-mtb-trail-8805",
+    "sym-prompt-10801",
+    "sym-ski-alpine-8803",
+    "sym-snow-park-8804",
+    "sym-triple-10807",
+    "sym-trononly-10804",
+    "sym-twopass-8603",
+    "symfix-backcountry-20006",
+    "symfix-desert-20004",
+    "symfix-mtb-20003",
+    "symfix-night-20005",
+    "symfix-ski-20001",
+    "symfix-snow-20002",
+    "tahoe-b2b-moto-3001",
+    "tahoe-b2b-mtb-3003",
+    "tahoe-b2b-ski-3002",
+    "tahoe-b2b-snow-3004",
+    "tahoe-hike-1402",
+    "tahoe-hike-1403",
+    "tahoe-mtb-1404",
+    "tahoe-mtb-1405",
+    "tahoe-mtb-2001",
+    "tahoe-mtb-2002",
+    "tahoe-mtb-2003",
+    "tahoe-mtb-2004",
+    "tahoe-ski-1400",
+    "tahoe-ski-1401",
+    "tahoe-ski-2010",
+    "tahoe-ski-2011",
+    "twopass-alpine-earbuds-8202",
+    "twopass-flux-moto",
+    "twopass-flux-ski",
+    "twopass-kontext-moto",
+    "twopass-kontext-ski",
+    "twopass-sunrise-helmet-8201",
+    "v1_moto_moto_s0_48",
+    "v1_moto_moto_s0_57",
+    "v1_moto_moto_s0_62",
+    "v1_moto_moto_s0_68",
+    "v1_moto_moto_s1_58",
+    "v1_moto_moto_s1_63",
+    "v1_moto_moto_s1_69",
+    "v1_moto_moto_s1_77",
+    "v1_mtb_mtb_s0_51",
+    "v1_mtb_mtb_s0_56",
+    "v1_mtb_mtb_s0_61",
+    "v1_mtb_mtb_s0_71",
+    "v1_mtb_mtb_s1_53",
+    "v1_mtb_mtb_s1_55",
+    "v1_mtb_mtb_s1_70",
+    "v1_mtb_mtb_s1_72",
+    "v1_ski_ski_s0_52",
+    "v1_ski_ski_s0_59",
+    "v1_ski_ski_s0_64",
+    "v1_ski_ski_s0_74",
+    "v1_ski_ski_s1_50",
+    "v1_ski_ski_s1_60",
+    "v1_ski_ski_s1_66",
+    "v1_ski_ski_s1_78",
+    "v1_snow_snow_s0_49",
+    "v1_snow_snow_s0_67",
+    "v1_snow_snow_s0_73",
+    "v1_snow_snow_s0_75",
+    "v1_snow_snow_s1_54",
+    "v1_snow_snow_s1_65",
+    "v1_snow_snow_s1_76",
+    "v1_snow_snow_s1_79",
+    "v2-bc-30006",
+    "v2-desert-30004",
+    "v2-mtb-30003",
+    "v2-ski-30001",
+    "v2-snow-30002",
+    "v3-bc-40006",
+    "v3-desert-40004",
+    "v3-mtb-40003",
+    "v3-night-40005",
+    "v3-ski-40001",
+    "v3-snow-40002",
+    "v4-bc-50006",
+    "v4-desert-50004",
+    "v4-mtb-50003",
+    "v4-night-50005",
+    "v4-ski-50001",
+    "v4-snow-50002",
+    "vest-moto-4001",
+    "vest-moto-4002",
+    "vest-ski-4010",
+    "vest-ski-4011"
+  ],
+  "items": {
+    "refab-p2-mtb-s1": {
+      "filename": "refab-p2-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p2-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f2/xAzOnN_QM6ymIJoWkYQt-_wiSN9Mru.jpg",
+      "source": "corpus"
+    },
+    "refab-p2-mtb-s0": {
+      "filename": "refab-p2-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p2-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f2/oTpMucm4BzS4A4fRPgVdq_cztsmWdr.jpg",
+      "source": "corpus"
+    },
+    "refab-p2-moto-s1": {
+      "filename": "refab-p2-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p2-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f2/czWkQzNqMtuOisK01mQ2-_0JtJZXSE.jpg",
+      "source": "corpus"
+    },
+    "refab-p2-moto-s0": {
+      "filename": "refab-p2-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p2-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f2/C0znJV9S4-WjRit92lUGv_uc171ql6.jpg",
+      "source": "corpus"
+    },
+    "refab-p1-moto-s1": {
+      "filename": "refab-p1-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p1-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f2/wKGsFwf_aMpwSlj0XVens_2clAYdK0.jpg",
+      "source": "corpus"
+    },
+    "refab-p1-moto-s0": {
+      "filename": "refab-p1-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p1-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f2/CGRf1RJDYcGsvXryv7wCv_Y4hvJVcQ.jpg",
+      "source": "corpus"
+    },
+    "refab-p3-moto-s0": {
+      "filename": "refab-p3-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p3-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f4/isJ6FLTCKtnRzPZzq78_8_9jUnB8Me.jpg",
+      "source": "corpus"
+    },
+    "refab-p1-mtb-s1": {
+      "filename": "refab-p1-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p1-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f2/1bmrj8zniJ4_RIra38rxT_pYKHnJrJ.jpg",
+      "source": "corpus"
+    },
+    "refab-p4-moto-s0": {
+      "filename": "refab-p4-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p4-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f5/78nWRqP7HYoZifDHXK7ZS_kDZBIc1U.jpg",
+      "source": "corpus"
+    },
+    "refab-p3-moto-s1": {
+      "filename": "refab-p3-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p3-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f4/4L0xFYTMS5ZuewXSysU8n_iq9ReIKg.jpg",
+      "source": "corpus"
+    },
+    "refab-p3-mtb-s1": {
+      "filename": "refab-p3-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p3-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f5/QaHoxfEH-GjXitTCgWAg8_Pt4dlPPh.jpg",
+      "source": "corpus"
+    },
+    "refab-p4-mtb-s1": {
+      "filename": "refab-p4-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p4-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f7/p4geIDyZXEHvnpevYIhFX_jVz8YaNF.jpg",
+      "source": "corpus"
+    },
+    "refab-p3-mtb-s0": {
+      "filename": "refab-p3-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p3-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f4/VQWXmuV9L6VGeJXNVov4I_c1bhU70d.jpg",
+      "source": "corpus"
+    },
+    "refab-p5-moto-s0": {
+      "filename": "refab-p5-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p5-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f7/xFOGzKXotOIIW9z_oS9rW_z8juCK2S.jpg",
+      "source": "corpus"
+    },
+    "refab-p5-mtb-s0": {
+      "filename": "refab-p5-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p5-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f8/yr7C7_vjOg8rq8OP2WcGj_MUWxbb0W.jpg",
+      "source": "corpus"
+    },
+    "refab-p5-moto-s1": {
+      "filename": "refab-p5-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p5-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f8/w6TXW-KK9Mt00Qjeektoi_Ipcyc70l.jpg",
+      "source": "corpus"
+    },
+    "refab-p5-mtb-s1": {
+      "filename": "refab-p5-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p5-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f9/AhMxHFcmpBymD7NLeTVwg_6W8oYsfb.jpg",
+      "source": "corpus"
+    },
+    "refab-p4-moto-s1": {
+      "filename": "refab-p4-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p4-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f6/XvLYrqaepryNHR7UyiK6v_2XeigQQc.jpg",
+      "source": "corpus"
+    },
+    "refab-p6-moto-s1": {
+      "filename": "refab-p6-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p6-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573fa/6dpv6zjrFcUsiLrDh7VNS_xBewMhCQ.jpg",
+      "source": "corpus"
+    },
+    "refab-p6-moto-s0": {
+      "filename": "refab-p6-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p6-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f9/VF6KJE_edWXV0Cr-y7h5O_KYmFvDzv.jpg",
+      "source": "corpus"
+    },
+    "refab-p4-mtb-s0": {
+      "filename": "refab-p4-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p4-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f6/W2ArXQ6cYl-KKrI4U4AgP_AXxWxAFJ.jpg",
+      "source": "corpus"
+    },
+    "refab-h1-moto-s0": {
+      "filename": "refab-h1-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h1-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573fb/LxvGmkshCQ_kjGIijZkFM_LvegCBWs.jpg",
+      "source": "corpus"
+    },
+    "refab-h1-mtb-s0": {
+      "filename": "refab-h1-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h1-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573fc/XHbiYnvcdrtM9BeSYjmTI_kUVZYEuy.jpg",
+      "source": "corpus"
+    },
+    "refab-p6-mtb-s0": {
+      "filename": "refab-p6-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p6-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573fa/mgNsGMN7BouEWYTrj3zho_UZvhCTh9.jpg",
+      "source": "corpus"
+    },
+    "refab-h1-moto-s1": {
+      "filename": "refab-h1-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h1-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573fc/RiD4jixIRiAaSGAV9jTxV_3taz9PGh.jpg",
+      "source": "corpus"
+    },
+    "refab-h2-moto-s1": {
+      "filename": "refab-h2-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h2-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573fe/C3WFbfgOeYUZbIQHRHXFK_8kcFcjk5.jpg",
+      "source": "corpus"
+    },
+    "refab-h2-moto-s0": {
+      "filename": "refab-h2-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h2-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573fd/fIS1-X5SNMJOlKWhCqRKP_8UGokYwM.jpg",
+      "source": "corpus"
+    },
+    "refab-h2-mtb-s1": {
+      "filename": "refab-h2-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h2-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957400/rePA9BGc0_TQnRM1ZHfO6_L6XVgEYa.jpg",
+      "source": "corpus"
+    },
+    "refab-h2-mtb-s0": {
+      "filename": "refab-h2-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h2-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573ff/Y4ny1OrtzbUkEX18Tr9ad_Yproi4In.jpg",
+      "source": "corpus"
+    },
+    "refab-h3-mtb-s0": {
+      "filename": "refab-h3-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h3-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957401/EsndciIT4xagNCzL7B1Pa_9GemUTwu.jpg",
+      "source": "corpus"
+    },
+    "refab-h3-moto-s0": {
+      "filename": "refab-h3-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h3-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957400/U2I6hKwMIU7zy2uvJigwy_PkvgyKo6.jpg",
+      "source": "corpus"
+    },
+    "refab-h3-mtb-s1": {
+      "filename": "refab-h3-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h3-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957402/ee9oq6NdlT3siOrMjf7vv_kZivoM2a.jpg",
+      "source": "corpus"
+    },
+    "refab-h4-moto-s1": {
+      "filename": "refab-h4-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h4-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957403/DscidYXiMleLBz0JjmijX_0De0uHkf.jpg",
+      "source": "corpus"
+    },
+    "refab-h4-mtb-s0": {
+      "filename": "refab-h4-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h4-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957403/SP12SlfsMtttlcMgbL3oH_zmbQhfdG.jpg",
+      "source": "corpus"
+    },
+    "refab-p6-mtb-s1": {
+      "filename": "refab-p6-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p6-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573fa/4Na0wIbIKEGNuRk45grFQ_Y1TrFAWq.jpg",
+      "source": "corpus"
+    },
+    "refab-h4-mtb-s1": {
+      "filename": "refab-h4-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h4-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957404/6CrjxgLqcpjsSnujCXlkD_FbnhNQe1.jpg",
+      "source": "corpus"
+    },
+    "refab-h4-moto-s0": {
+      "filename": "refab-h4-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h4-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957403/4woCBPBBfQocWqj5LK2UY_e11rXw1h.jpg",
+      "source": "corpus"
+    },
+    "refab-h3-moto-s1": {
+      "filename": "refab-h3-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h3-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957400/nL1b0vNXn5RMr7m4aTrUJ_38erGEjW.jpg",
+      "source": "corpus"
+    },
+    "refab-h5-moto-s1": {
+      "filename": "refab-h5-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h5-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957406/MdqzQtR9Thv9BCz95AwxT_pOK916tL.jpg",
+      "source": "corpus"
+    },
+    "refab-h5-mtb-s0": {
+      "filename": "refab-h5-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h5-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957406/C3FZpemLdphawiQ11y55A_Xndtiid3.jpg",
+      "source": "corpus"
+    },
+    "refab-h5-mtb-s1": {
+      "filename": "refab-h5-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h5-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957407/0HUC2gnO1n1ETfA5PgVE1_LoaZe7Ip.jpg",
+      "source": "corpus"
+    },
+    "refab-h6-mtb-s1": {
+      "filename": "refab-h6-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h6-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957409/FYEOA_VgFtbLne_00nGgd_FGDGTjYu.jpg",
+      "source": "corpus"
+    },
+    "refab-h6-moto-s1": {
+      "filename": "refab-h6-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h6-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957408/GnKuhv85Jx1twzMDOcKam_bIJNDXJF.jpg",
+      "source": "corpus"
+    },
+    "refab-h5-moto-s0": {
+      "filename": "refab-h5-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h5-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957405/AaQzNnhCxhtjO95fR498N_yp6kaxdN.jpg",
+      "source": "corpus"
+    },
+    "refab-h6-mtb-s0": {
+      "filename": "refab-h6-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h6-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957408/xdpOfevDCm4kJAk89AxQP_H9JHdhfD.jpg",
+      "source": "corpus"
+    },
+    "refab-refc-mtb-s0": {
+      "filename": "refab-refc-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-refc-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95740b/05q__5tCOBsZwrxFYhz08_0HAA6HAJ.jpg",
+      "source": "corpus"
+    },
+    "refab-p1-mtb-s0": {
+      "filename": "refab-p1-mtb-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-p1-mtb-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9573f2/onR6t_6xtDO6lxhkLFKrA_yCmDihNh.jpg",
+      "source": "corpus"
+    },
+    "refab-refc-moto-s1": {
+      "filename": "refab-refc-moto-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-refc-moto-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95740b/KxBFT7pZ8mPwucIEomPbz_GLbISMFT.jpg",
+      "source": "corpus"
+    },
+    "refab-h6-moto-s0": {
+      "filename": "refab-h6-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h6-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957407/Z6e8FZxmoO3XS8lyErzqw_8GK5U9eV.jpg",
+      "source": "corpus"
+    },
+    "refab-refc-moto-s0": {
+      "filename": "refab-refc-moto-s0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-refc-moto-s0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957409/CCD1gNE42NoKbM8uBn4fa_JZ3Jdhl2.jpg",
+      "source": "corpus"
+    },
+    "refab-h1-mtb-s1": {
+      "filename": "refab-h1-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-h1-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957478/F16eWyoDdw1Iaj9lgOylS_EttLGQPe.jpg",
+      "source": "corpus"
+    },
+    "refab-refc-mtb-s1": {
+      "filename": "refab-refc-mtb-s1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refab-refc-mtb-s1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957478/MD06meEXIYmoTdAPQl2in_4NigUgVo.jpg",
+      "source": "corpus"
+    },
+    "flex7-moto-2000": {
+      "filename": "flex7-moto-2000.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-moto-2000.jpg",
+      "original": "https://files.catbox.moe/06c3md.jpg",
+      "source": "corpus"
+    },
+    "flex7-moto-2001": {
+      "filename": "flex7-moto-2001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-moto-2001.jpg",
+      "original": "https://files.catbox.moe/2qgcht.jpg",
+      "source": "corpus"
+    },
+    "flex7-moto-2002": {
+      "filename": "flex7-moto-2002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-moto-2002.jpg",
+      "original": "https://files.catbox.moe/iwgiqp.jpg",
+      "source": "corpus"
+    },
+    "flex7-moto-2003": {
+      "filename": "flex7-moto-2003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-moto-2003.jpg",
+      "original": "https://files.catbox.moe/750pv5.jpg",
+      "source": "corpus"
+    },
+    "flex7-moto-2004": {
+      "filename": "flex7-moto-2004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-moto-2004.jpg",
+      "original": "https://files.catbox.moe/xxb9b0.jpg",
+      "source": "corpus"
+    },
+    "flex7-ski-2010": {
+      "filename": "flex7-ski-2010.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-ski-2010.jpg",
+      "original": "https://files.catbox.moe/l61nfc.jpg",
+      "source": "corpus"
+    },
+    "flex7-ski-2011": {
+      "filename": "flex7-ski-2011.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-ski-2011.jpg",
+      "original": "https://files.catbox.moe/mtqxhz.jpg",
+      "source": "corpus"
+    },
+    "flex7-ski-2012": {
+      "filename": "flex7-ski-2012.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-ski-2012.jpg",
+      "original": "https://files.catbox.moe/j2uln8.jpg",
+      "source": "corpus"
+    },
+    "flex7-ski-2013": {
+      "filename": "flex7-ski-2013.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-ski-2013.jpg",
+      "original": "https://files.catbox.moe/ebq6gi.jpg",
+      "source": "corpus"
+    },
+    "flex7-ski-2014": {
+      "filename": "flex7-ski-2014.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-ski-2014.jpg",
+      "original": "https://files.catbox.moe/wthmzd.jpg",
+      "source": "corpus"
+    },
+    "flex7-snow-2020": {
+      "filename": "flex7-snow-2020.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-snow-2020.jpg",
+      "original": "https://files.catbox.moe/133741.jpg",
+      "source": "corpus"
+    },
+    "flex7-snow-2021": {
+      "filename": "flex7-snow-2021.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-snow-2021.jpg",
+      "original": "https://files.catbox.moe/x5dr1a.jpg",
+      "source": "corpus"
+    },
+    "flex7-snow-2022": {
+      "filename": "flex7-snow-2022.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-snow-2022.jpg",
+      "original": "https://files.catbox.moe/yfqwej.jpg",
+      "source": "corpus"
+    },
+    "flex7-snow-2023": {
+      "filename": "flex7-snow-2023.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-snow-2023.jpg",
+      "original": "https://files.catbox.moe/dbvfe8.jpg",
+      "source": "corpus"
+    },
+    "flex7-mtb-2030": {
+      "filename": "flex7-mtb-2030.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-mtb-2030.jpg",
+      "original": "https://files.catbox.moe/6ezzr8.jpg",
+      "source": "corpus"
+    },
+    "flex7-mtb-2031": {
+      "filename": "flex7-mtb-2031.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-mtb-2031.jpg",
+      "original": "https://files.catbox.moe/mph8v4.jpg",
+      "source": "corpus"
+    },
+    "flex7-mtb-2032": {
+      "filename": "flex7-mtb-2032.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-mtb-2032.jpg",
+      "original": "https://files.catbox.moe/jkq2xg.jpg",
+      "source": "corpus"
+    },
+    "flex7-mtb-2033": {
+      "filename": "flex7-mtb-2033.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-mtb-2033.jpg",
+      "original": "https://files.catbox.moe/zwizzg.jpg",
+      "source": "corpus"
+    },
+    "flex7-hike-2040": {
+      "filename": "flex7-hike-2040.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-hike-2040.jpg",
+      "original": "https://files.catbox.moe/px6h48.jpg",
+      "source": "corpus"
+    },
+    "flex7-hike-2041": {
+      "filename": "flex7-hike-2041.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex7-hike-2041.jpg",
+      "original": "https://files.catbox.moe/61i878.jpg",
+      "source": "corpus"
+    },
+    "tahoe-ski-1400": {
+      "filename": "tahoe-ski-1400.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-ski-1400.jpg",
+      "original": "https://files.catbox.moe/3kkm1y.jpg",
+      "source": "corpus"
+    },
+    "tahoe-ski-1401": {
+      "filename": "tahoe-ski-1401.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-ski-1401.jpg",
+      "original": "https://files.catbox.moe/zz8e2c.jpg",
+      "source": "corpus"
+    },
+    "tahoe-hike-1402": {
+      "filename": "tahoe-hike-1402.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-hike-1402.jpg",
+      "original": "https://files.catbox.moe/qrnhe1.jpg",
+      "source": "corpus"
+    },
+    "tahoe-hike-1403": {
+      "filename": "tahoe-hike-1403.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-hike-1403.jpg",
+      "original": "https://files.catbox.moe/wc5r97.jpg",
+      "source": "corpus"
+    },
+    "tahoe-mtb-1404": {
+      "filename": "tahoe-mtb-1404.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-mtb-1404.jpg",
+      "original": "https://files.catbox.moe/52tsmw.jpg",
+      "source": "corpus"
+    },
+    "tahoe-mtb-1405": {
+      "filename": "tahoe-mtb-1405.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-mtb-1405.jpg",
+      "original": "https://files.catbox.moe/7o53ih.jpg",
+      "source": "corpus"
+    },
+    "clothswap-moto-jacket": {
+      "filename": "clothswap-moto-jacket.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/clothswap-moto-jacket.jpg",
+      "original": "https://files.catbox.moe/dvhmyj.jpg",
+      "source": "corpus"
+    },
+    "clothswap-ski-gloves": {
+      "filename": "clothswap-ski-gloves.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/clothswap-ski-gloves.jpg",
+      "original": "https://files.catbox.moe/lzpgb3.jpg",
+      "source": "corpus"
+    },
+    "clothswap-snow-earbuds": {
+      "filename": "clothswap-snow-earbuds.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/clothswap-snow-earbuds.jpg",
+      "original": "https://files.catbox.moe/7zle0m.jpg",
+      "source": "corpus"
+    },
+    "mikeref-1-s1100": {
+      "filename": "mikeref-1-s1100.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikeref-1-s1100.jpg",
+      "original": "https://files.catbox.moe/swu7op.jpg",
+      "source": "corpus"
+    },
+    "mikeref-1-s1101": {
+      "filename": "mikeref-1-s1101.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikeref-1-s1101.jpg",
+      "original": "https://files.catbox.moe/6i8l0g.jpg",
+      "source": "corpus"
+    },
+    "mikeref-2-s1102": {
+      "filename": "mikeref-2-s1102.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikeref-2-s1102.jpg",
+      "original": "https://files.catbox.moe/uqknpx.jpg",
+      "source": "corpus"
+    },
+    "mikeref-2-s1103": {
+      "filename": "mikeref-2-s1103.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikeref-2-s1103.jpg",
+      "original": "https://files.catbox.moe/bwa53y.jpg",
+      "source": "corpus"
+    },
+    "mikeref-3-s1104": {
+      "filename": "mikeref-3-s1104.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikeref-3-s1104.jpg",
+      "original": "https://files.catbox.moe/4ry3n2.jpg",
+      "source": "corpus"
+    },
+    "mikeref-3-s1105": {
+      "filename": "mikeref-3-s1105.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikeref-3-s1105.jpg",
+      "original": "https://files.catbox.moe/ftmudo.jpg",
+      "source": "corpus"
+    },
+    "scene-moto-1300": {
+      "filename": "scene-moto-1300.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/scene-moto-1300.jpg",
+      "original": "https://files.catbox.moe/etmaj1.jpg",
+      "source": "corpus"
+    },
+    "cb2-moto-1300": {
+      "filename": "cb2-moto-1300.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cb2-moto-1300.jpg",
+      "original": "https://files.catbox.moe/83tz30.jpg",
+      "source": "corpus"
+    },
+    "cb2-ski-1301": {
+      "filename": "cb2-ski-1301.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cb2-ski-1301.jpg",
+      "original": "https://files.catbox.moe/o14jfe.jpg",
+      "source": "corpus"
+    },
+    "scene-mtb-1302": {
+      "filename": "scene-mtb-1302.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/scene-mtb-1302.jpg",
+      "original": "https://files.catbox.moe/84e9d7.jpg",
+      "source": "corpus"
+    },
+    "cb2-mtb-1302": {
+      "filename": "cb2-mtb-1302.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cb2-mtb-1302.jpg",
+      "original": "https://files.catbox.moe/rsa8ig.jpg",
+      "source": "corpus"
+    },
+    "flex-twopass-jacket": {
+      "filename": "flex-twopass-jacket.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex-twopass-jacket.jpg",
+      "original": "https://files.catbox.moe/ugkn7k.jpg",
+      "source": "corpus"
+    },
+    "flex-twopass-helmet": {
+      "filename": "flex-twopass-helmet.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex-twopass-helmet.jpg",
+      "original": "https://files.catbox.moe/6q32e6.jpg",
+      "source": "corpus"
+    },
+    "flex-twopass-goggles": {
+      "filename": "flex-twopass-goggles.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex-twopass-goggles.jpg",
+      "original": "https://files.catbox.moe/lrm0gm.jpg",
+      "source": "corpus"
+    },
+    "flex-twopass-neckguard": {
+      "filename": "flex-twopass-neckguard.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex-twopass-neckguard.jpg",
+      "original": "https://files.catbox.moe/p212yj.jpg",
+      "source": "corpus"
+    },
+    "flexmulti-moto-1600": {
+      "filename": "flexmulti-moto-1600.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flexmulti-moto-1600.jpg",
+      "original": "https://files.catbox.moe/mje3x2.jpg",
+      "source": "corpus"
+    },
+    "flexmulti-moto-1601": {
+      "filename": "flexmulti-moto-1601.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flexmulti-moto-1601.jpg",
+      "original": "https://files.catbox.moe/v6ppun.jpg",
+      "source": "corpus"
+    },
+    "flexmulti-moto-1602": {
+      "filename": "flexmulti-moto-1602.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flexmulti-moto-1602.jpg",
+      "original": "https://files.catbox.moe/lm5qu5.jpg",
+      "source": "corpus"
+    },
+    "flexmulti-ski-1603": {
+      "filename": "flexmulti-ski-1603.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flexmulti-ski-1603.jpg",
+      "original": "https://files.catbox.moe/j7nzuz.jpg",
+      "source": "corpus"
+    },
+    "flexmulti-ski-1604": {
+      "filename": "flexmulti-ski-1604.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flexmulti-ski-1604.jpg",
+      "original": "https://files.catbox.moe/z42o8p.jpg",
+      "source": "corpus"
+    },
+    "flexmulti-ski-1605": {
+      "filename": "flexmulti-ski-1605.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flexmulti-ski-1605.jpg",
+      "original": "https://files.catbox.moe/ticu3j.jpg",
+      "source": "corpus"
+    },
+    "flex-default": {
+      "filename": "flex-default.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex-default.jpg",
+      "original": "https://files.catbox.moe/xasfeb.jpg",
+      "source": "corpus"
+    },
+    "flex-highguide": {
+      "filename": "flex-highguide.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex-highguide.jpg",
+      "original": "https://files.catbox.moe/b80lk8.jpg",
+      "source": "corpus"
+    },
+    "flex-moresteps": {
+      "filename": "flex-moresteps.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex-moresteps.jpg",
+      "original": "https://files.catbox.moe/0tfsfw.jpg",
+      "source": "corpus"
+    },
+    "flex-highboth": {
+      "filename": "flex-highboth.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flex-highboth.jpg",
+      "original": "https://files.catbox.moe/ydxypo.jpg",
+      "source": "corpus"
+    },
+    "cw-control-s51": {
+      "filename": "cw-control-s51.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cw-control-s51.jpg",
+      "original": "https://files.catbox.moe/0y0dgp.jpg",
+      "source": "corpus"
+    },
+    "cw-hunter-s50": {
+      "filename": "cw-hunter-s50.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cw-hunter-s50.jpg",
+      "original": "https://files.catbox.moe/p5bwhb.jpg",
+      "source": "corpus"
+    },
+    "cw-hunter-s51": {
+      "filename": "cw-hunter-s51.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cw-hunter-s51.jpg",
+      "original": "https://files.catbox.moe/n2ba8y.jpg",
+      "source": "corpus"
+    },
+    "cw-patriot-s50": {
+      "filename": "cw-patriot-s50.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cw-patriot-s50.jpg",
+      "original": "https://files.catbox.moe/fsbsp3.jpg",
+      "source": "corpus"
+    },
+    "cw-patriot-s51": {
+      "filename": "cw-patriot-s51.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cw-patriot-s51.jpg",
+      "original": "https://files.catbox.moe/kq5y12.jpg",
+      "source": "corpus"
+    },
+    "cw-tron-s50": {
+      "filename": "cw-tron-s50.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cw-tron-s50.jpg",
+      "original": "https://files.catbox.moe/minyjl.jpg",
+      "source": "corpus"
+    },
+    "cw-tron-s51": {
+      "filename": "cw-tron-s51.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/cw-tron-s51.jpg",
+      "original": "https://files.catbox.moe/vfipni.jpg",
+      "source": "corpus"
+    },
+    "ab-old-moto": {
+      "filename": "ab-old-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ab-old-moto.jpg",
+      "original": "https://files.catbox.moe/rzptoc.jpg",
+      "source": "corpus"
+    },
+    "ab-new-moto": {
+      "filename": "ab-new-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ab-new-moto.jpg",
+      "original": "https://files.catbox.moe/iyz8ne.jpg",
+      "source": "corpus"
+    },
+    "ab-old-ski": {
+      "filename": "ab-old-ski.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ab-old-ski.jpg",
+      "original": "https://files.catbox.moe/53hq1t.jpg",
+      "source": "corpus"
+    },
+    "ab-new-ski": {
+      "filename": "ab-new-ski.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ab-new-ski.jpg",
+      "original": "https://files.catbox.moe/zp9sbs.jpg",
+      "source": "corpus"
+    },
+    "ab-old-mtb": {
+      "filename": "ab-old-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ab-old-mtb.jpg",
+      "original": "https://files.catbox.moe/pmd4xa.jpg",
+      "source": "corpus"
+    },
+    "ab-new-mtb": {
+      "filename": "ab-new-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ab-new-mtb.jpg",
+      "original": "https://files.catbox.moe/jgf1qi.jpg",
+      "source": "corpus"
+    },
+    "action-moto-s900": {
+      "filename": "action-moto-s900.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-moto-s900.jpg",
+      "original": "https://files.catbox.moe/xjl607.jpg",
+      "source": "corpus"
+    },
+    "action-moto-s901": {
+      "filename": "action-moto-s901.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-moto-s901.jpg",
+      "original": "https://files.catbox.moe/0fbqyo.jpg",
+      "source": "corpus"
+    },
+    "action-moto-s902": {
+      "filename": "action-moto-s902.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-moto-s902.jpg",
+      "original": "https://files.catbox.moe/fyo0l2.jpg",
+      "source": "corpus"
+    },
+    "action-moto-s903": {
+      "filename": "action-moto-s903.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-moto-s903.jpg",
+      "original": "https://files.catbox.moe/0ivrp2.jpg",
+      "source": "corpus"
+    },
+    "action-moto-s904": {
+      "filename": "action-moto-s904.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-moto-s904.jpg",
+      "original": "https://files.catbox.moe/63czqb.jpg",
+      "source": "corpus"
+    },
+    "action-ski-s910": {
+      "filename": "action-ski-s910.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-ski-s910.jpg",
+      "original": "https://files.catbox.moe/o0yz9w.jpg",
+      "source": "corpus"
+    },
+    "action-ski-s911": {
+      "filename": "action-ski-s911.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-ski-s911.jpg",
+      "original": "https://files.catbox.moe/2cxfml.jpg",
+      "source": "corpus"
+    },
+    "action-ski-s912": {
+      "filename": "action-ski-s912.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-ski-s912.jpg",
+      "original": "https://files.catbox.moe/32xvdt.jpg",
+      "source": "corpus"
+    },
+    "action-ski-s913": {
+      "filename": "action-ski-s913.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-ski-s913.jpg",
+      "original": "https://files.catbox.moe/6kk9bm.jpg",
+      "source": "corpus"
+    },
+    "action-snow-s920": {
+      "filename": "action-snow-s920.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-snow-s920.jpg",
+      "original": "https://files.catbox.moe/ace0fg.jpg",
+      "source": "corpus"
+    },
+    "action-snow-s921": {
+      "filename": "action-snow-s921.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-snow-s921.jpg",
+      "original": "https://files.catbox.moe/oqym14.jpg",
+      "source": "corpus"
+    },
+    "action-snow-s922": {
+      "filename": "action-snow-s922.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-snow-s922.jpg",
+      "original": "https://files.catbox.moe/wwrps2.jpg",
+      "source": "corpus"
+    },
+    "action-mtb-s930": {
+      "filename": "action-mtb-s930.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-mtb-s930.jpg",
+      "original": "https://files.catbox.moe/kgpl3d.jpg",
+      "source": "corpus"
+    },
+    "action-mtb-s931": {
+      "filename": "action-mtb-s931.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-mtb-s931.jpg",
+      "original": "https://files.catbox.moe/gzr2qk.jpg",
+      "source": "corpus"
+    },
+    "action-mtb-s932": {
+      "filename": "action-mtb-s932.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-mtb-s932.jpg",
+      "original": "https://files.catbox.moe/lwjinn.jpg",
+      "source": "corpus"
+    },
+    "action-mtb-s933": {
+      "filename": "action-mtb-s933.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-mtb-s933.jpg",
+      "original": "https://files.catbox.moe/27m51p.jpg",
+      "source": "corpus"
+    },
+    "action-hike-s940": {
+      "filename": "action-hike-s940.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-hike-s940.jpg",
+      "original": "https://files.catbox.moe/vhg3al.jpg",
+      "source": "corpus"
+    },
+    "action-run-s941": {
+      "filename": "action-run-s941.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-run-s941.jpg",
+      "original": "https://files.catbox.moe/bklljd.jpg",
+      "source": "corpus"
+    },
+    "action-fish-s950": {
+      "filename": "action-fish-s950.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-fish-s950.jpg",
+      "original": "https://files.catbox.moe/305k2r.jpg",
+      "source": "corpus"
+    },
+    "action-fish-s951": {
+      "filename": "action-fish-s951.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/action-fish-s951.jpg",
+      "original": "https://files.catbox.moe/wa23af.jpg",
+      "source": "corpus"
+    },
+    "twopass-flux-moto": {
+      "filename": "twopass-flux-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/twopass-flux-moto.jpg",
+      "original": "https://files.catbox.moe/op5aju.jpg",
+      "source": "corpus"
+    },
+    "twopass-kontext-moto": {
+      "filename": "twopass-kontext-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/twopass-kontext-moto.jpg",
+      "original": "https://files.catbox.moe/1lkfuw.jpg",
+      "source": "corpus"
+    },
+    "twopass-kontext-ski": {
+      "filename": "twopass-kontext-ski.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/twopass-kontext-ski.jpg",
+      "original": "https://files.catbox.moe/zcboii.jpg",
+      "source": "corpus"
+    },
+    "twopass-flux-ski": {
+      "filename": "twopass-flux-ski.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/twopass-flux-ski.jpg",
+      "original": "https://files.catbox.moe/mx6xxj.jpg",
+      "source": "corpus"
+    },
+    "newgen-moto-s800": {
+      "filename": "newgen-moto-s800.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-moto-s800.jpg",
+      "original": "https://files.catbox.moe/7ugeax.jpg",
+      "source": "corpus"
+    },
+    "newgen-moto-s801": {
+      "filename": "newgen-moto-s801.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-moto-s801.jpg",
+      "original": "https://files.catbox.moe/vmc2m9.jpg",
+      "source": "corpus"
+    },
+    "newgen-moto-s802": {
+      "filename": "newgen-moto-s802.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-moto-s802.jpg",
+      "original": "https://files.catbox.moe/43a0lv.jpg",
+      "source": "corpus"
+    },
+    "newgen-moto-s803": {
+      "filename": "newgen-moto-s803.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-moto-s803.jpg",
+      "original": "https://files.catbox.moe/rr0uph.jpg",
+      "source": "corpus"
+    },
+    "newgen-moto-s804": {
+      "filename": "newgen-moto-s804.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-moto-s804.jpg",
+      "original": "https://files.catbox.moe/lb66cp.jpg",
+      "source": "corpus"
+    },
+    "newgen-mtb-s810": {
+      "filename": "newgen-mtb-s810.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-mtb-s810.jpg",
+      "original": "https://files.catbox.moe/s2srqy.jpg",
+      "source": "corpus"
+    },
+    "newgen-mtb-s811": {
+      "filename": "newgen-mtb-s811.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-mtb-s811.jpg",
+      "original": "https://files.catbox.moe/jts9if.jpg",
+      "source": "corpus"
+    },
+    "newgen-mtb-s812": {
+      "filename": "newgen-mtb-s812.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-mtb-s812.jpg",
+      "original": "https://files.catbox.moe/fcqyz9.jpg",
+      "source": "corpus"
+    },
+    "newgen-run-s820": {
+      "filename": "newgen-run-s820.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-run-s820.jpg",
+      "original": "https://files.catbox.moe/mctpqa.jpg",
+      "source": "corpus"
+    },
+    "newgen-run-s821": {
+      "filename": "newgen-run-s821.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-run-s821.jpg",
+      "original": "https://files.catbox.moe/6fgffz.jpg",
+      "source": "corpus"
+    },
+    "newgen-run-s822": {
+      "filename": "newgen-run-s822.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-run-s822.jpg",
+      "original": "https://files.catbox.moe/wincdz.jpg",
+      "source": "corpus"
+    },
+    "newgen-fish-s830": {
+      "filename": "newgen-fish-s830.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-fish-s830.jpg",
+      "original": "https://files.catbox.moe/aryzii.jpg",
+      "source": "corpus"
+    },
+    "newgen-fish-s831": {
+      "filename": "newgen-fish-s831.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-fish-s831.jpg",
+      "original": "https://files.catbox.moe/ulbqms.jpg",
+      "source": "corpus"
+    },
+    "newgen-atv-s840": {
+      "filename": "newgen-atv-s840.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-atv-s840.jpg",
+      "original": "https://files.catbox.moe/z3unun.jpg",
+      "source": "corpus"
+    },
+    "newgen-atv-s841": {
+      "filename": "newgen-atv-s841.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/newgen-atv-s841.jpg",
+      "original": "https://files.catbox.moe/mji0rm.jpg",
+      "source": "corpus"
+    },
+    "samfix-refC1": {
+      "filename": "samfix-refC1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/samfix-refC1.jpg",
+      "original": "https://files.catbox.moe/kb21ox.jpg",
+      "source": "corpus"
+    },
+    "samfix-refA1": {
+      "filename": "samfix-refA1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/samfix-refA1.jpg",
+      "original": "https://files.catbox.moe/9ixnbr.jpg",
+      "source": "corpus"
+    },
+    "samfix-motoS103": {
+      "filename": "samfix-motoS103.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/samfix-motoS103.jpg",
+      "original": "https://files.catbox.moe/dyrw7t.jpg",
+      "source": "corpus"
+    },
+    "flux2lora-moto": {
+      "filename": "flux2lora-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux2lora-moto.jpg",
+      "original": "https://files.catbox.moe/uxmgav.jpg",
+      "source": "corpus"
+    },
+    "flux2lora-hiker": {
+      "filename": "flux2lora-hiker.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux2lora-hiker.jpg",
+      "original": "https://files.catbox.moe/aqxh5a.jpg",
+      "source": "corpus"
+    },
+    "flux2lora-skier": {
+      "filename": "flux2lora-skier.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux2lora-skier.jpg",
+      "original": "https://files.catbox.moe/uh86y6.jpg",
+      "source": "corpus"
+    },
+    "flux2lora-snowboard": {
+      "filename": "flux2lora-snowboard.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux2lora-snowboard.jpg",
+      "original": "https://files.catbox.moe/w31pz3.jpg",
+      "source": "corpus"
+    },
+    "flux2lora-overlook": {
+      "filename": "flux2lora-overlook.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux2lora-overlook.jpg",
+      "original": "https://files.catbox.moe/mmh1tm.jpg",
+      "source": "corpus"
+    },
+    "lorav5-moto": {
+      "filename": "lorav5-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lorav5-moto.jpg",
+      "original": "https://files.catbox.moe/s7ziqt.jpg",
+      "source": "corpus"
+    },
+    "lorav5-hiker": {
+      "filename": "lorav5-hiker.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lorav5-hiker.jpg",
+      "original": "https://files.catbox.moe/oxucn3.jpg",
+      "source": "corpus"
+    },
+    "lorav5-skier": {
+      "filename": "lorav5-skier.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lorav5-skier.jpg",
+      "original": "https://files.catbox.moe/rbre3n.jpg",
+      "source": "corpus"
+    },
+    "lorav5-snowboard": {
+      "filename": "lorav5-snowboard.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lorav5-snowboard.jpg",
+      "original": "https://files.catbox.moe/3abffd.jpg",
+      "source": "corpus"
+    },
+    "lorav5-overlook": {
+      "filename": "lorav5-overlook.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lorav5-overlook.jpg",
+      "original": "https://files.catbox.moe/rtc4a4.jpg",
+      "source": "corpus"
+    },
+    "refC-moto-s100": {
+      "filename": "refC-moto-s100.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-moto-s100.jpg",
+      "original": "https://files.catbox.moe/gngxze.jpg",
+      "source": "corpus"
+    },
+    "refC-moto-s101": {
+      "filename": "refC-moto-s101.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-moto-s101.jpg",
+      "original": "https://files.catbox.moe/4efklh.jpg",
+      "source": "corpus"
+    },
+    "refC-moto-s102": {
+      "filename": "refC-moto-s102.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-moto-s102.jpg",
+      "original": "https://files.catbox.moe/uepfc8.jpg",
+      "source": "corpus"
+    },
+    "refC-moto-s103": {
+      "filename": "refC-moto-s103.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-moto-s103.jpg",
+      "original": "https://files.catbox.moe/vo8wqn.jpg",
+      "source": "corpus"
+    },
+    "refC-moto-s104": {
+      "filename": "refC-moto-s104.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-moto-s104.jpg",
+      "original": "https://files.catbox.moe/pgsopt.jpg",
+      "source": "corpus"
+    },
+    "refC-hike-s200": {
+      "filename": "refC-hike-s200.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-hike-s200.jpg",
+      "original": "https://files.catbox.moe/h5zap1.jpg",
+      "source": "corpus"
+    },
+    "refC-hike-s201": {
+      "filename": "refC-hike-s201.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-hike-s201.jpg",
+      "original": "https://files.catbox.moe/ubk1ak.jpg",
+      "source": "corpus"
+    },
+    "refC-hike-s202": {
+      "filename": "refC-hike-s202.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-hike-s202.jpg",
+      "original": "https://files.catbox.moe/r9yabm.jpg",
+      "source": "corpus"
+    },
+    "refC-hike-s203": {
+      "filename": "refC-hike-s203.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-hike-s203.jpg",
+      "original": "https://files.catbox.moe/orx15l.jpg",
+      "source": "corpus"
+    },
+    "refC-hike-s204": {
+      "filename": "refC-hike-s204.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-hike-s204.jpg",
+      "original": "https://files.catbox.moe/3712gm.jpg",
+      "source": "corpus"
+    },
+    "refC-ski-s300": {
+      "filename": "refC-ski-s300.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-ski-s300.jpg",
+      "original": "https://files.catbox.moe/5zwa9j.jpg",
+      "source": "corpus"
+    },
+    "refC-ski-s301": {
+      "filename": "refC-ski-s301.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-ski-s301.jpg",
+      "original": "https://files.catbox.moe/4z3rh6.jpg",
+      "source": "corpus"
+    },
+    "refC-ski-s302": {
+      "filename": "refC-ski-s302.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-ski-s302.jpg",
+      "original": "https://files.catbox.moe/l5pjxq.jpg",
+      "source": "corpus"
+    },
+    "refC-ski-s303": {
+      "filename": "refC-ski-s303.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-ski-s303.jpg",
+      "original": "https://files.catbox.moe/ox24sk.jpg",
+      "source": "corpus"
+    },
+    "refC-ski-s304": {
+      "filename": "refC-ski-s304.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-ski-s304.jpg",
+      "original": "https://files.catbox.moe/vjlidz.jpg",
+      "source": "corpus"
+    },
+    "refC-snow-s400": {
+      "filename": "refC-snow-s400.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-snow-s400.jpg",
+      "original": "https://files.catbox.moe/xlrpkl.jpg",
+      "source": "corpus"
+    },
+    "refC-snow-s401": {
+      "filename": "refC-snow-s401.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-snow-s401.jpg",
+      "original": "https://files.catbox.moe/d89ma4.jpg",
+      "source": "corpus"
+    },
+    "refC-snow-s402": {
+      "filename": "refC-snow-s402.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-snow-s402.jpg",
+      "original": "https://files.catbox.moe/a8bm2b.jpg",
+      "source": "corpus"
+    },
+    "refC-snow-s403": {
+      "filename": "refC-snow-s403.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-snow-s403.jpg",
+      "original": "https://files.catbox.moe/k4k8m8.jpg",
+      "source": "corpus"
+    },
+    "refC-snow-s404": {
+      "filename": "refC-snow-s404.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/refC-snow-s404.jpg",
+      "original": "https://files.catbox.moe/8e71gp.jpg",
+      "source": "corpus"
+    },
+    "ref-A1": {
+      "filename": "ref-A1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-A1.jpg",
+      "original": "https://files.catbox.moe/gasx8y.jpg",
+      "source": "corpus"
+    },
+    "ref-A2": {
+      "filename": "ref-A2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-A2.jpg",
+      "original": "https://files.catbox.moe/2ao08m.jpg",
+      "source": "corpus"
+    },
+    "ref-A3": {
+      "filename": "ref-A3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-A3.jpg",
+      "original": "https://files.catbox.moe/vkmtt0.jpg",
+      "source": "corpus"
+    },
+    "ref-A4": {
+      "filename": "ref-A4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-A4.jpg",
+      "original": "https://files.catbox.moe/asr5a1.jpg",
+      "source": "corpus"
+    },
+    "ref-A5": {
+      "filename": "ref-A5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-A5.jpg",
+      "original": "https://files.catbox.moe/1esud0.jpg",
+      "source": "corpus"
+    },
+    "ref-A6": {
+      "filename": "ref-A6.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-A6.jpg",
+      "original": "https://files.catbox.moe/ls9164.jpg",
+      "source": "corpus"
+    },
+    "ref-B1": {
+      "filename": "ref-B1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-B1.jpg",
+      "original": "https://files.catbox.moe/ft8dv5.jpg",
+      "source": "corpus"
+    },
+    "ref-B2": {
+      "filename": "ref-B2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-B2.jpg",
+      "original": "https://files.catbox.moe/3gmr6h.jpg",
+      "source": "corpus"
+    },
+    "ref-B3": {
+      "filename": "ref-B3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-B3.jpg",
+      "original": "https://files.catbox.moe/vq0zj0.jpg",
+      "source": "corpus"
+    },
+    "ref-B4": {
+      "filename": "ref-B4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-B4.jpg",
+      "original": "https://files.catbox.moe/crepyb.jpg",
+      "source": "corpus"
+    },
+    "ref-B5": {
+      "filename": "ref-B5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-B5.jpg",
+      "original": "https://files.catbox.moe/qo9pfl.jpg",
+      "source": "corpus"
+    },
+    "ref-C1": {
+      "filename": "ref-C1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-C1.jpg",
+      "original": "https://files.catbox.moe/19gt6r.jpg",
+      "source": "corpus"
+    },
+    "ref-C2": {
+      "filename": "ref-C2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-C2.jpg",
+      "original": "https://files.catbox.moe/llwi3d.jpg",
+      "source": "corpus"
+    },
+    "ref-C3": {
+      "filename": "ref-C3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-C3.jpg",
+      "original": "https://files.catbox.moe/5awevk.jpg",
+      "source": "corpus"
+    },
+    "ref-C4": {
+      "filename": "ref-C4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-C4.jpg",
+      "original": "https://files.catbox.moe/yp5buw.jpg",
+      "source": "corpus"
+    },
+    "ref-C5": {
+      "filename": "ref-C5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-C5.jpg",
+      "original": "https://files.catbox.moe/z1qfov.jpg",
+      "source": "corpus"
+    },
+    "ref-D1": {
+      "filename": "ref-D1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-D1.jpg",
+      "original": "https://files.catbox.moe/lp1iu3.jpg",
+      "source": "corpus"
+    },
+    "ref-D2": {
+      "filename": "ref-D2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-D2.jpg",
+      "original": "https://files.catbox.moe/aq8cfi.jpg",
+      "source": "corpus"
+    },
+    "ref-D3": {
+      "filename": "ref-D3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-D3.jpg",
+      "original": "https://files.catbox.moe/pqatt1.jpg",
+      "source": "corpus"
+    },
+    "ref-D4": {
+      "filename": "ref-D4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-D4.jpg",
+      "original": "https://files.catbox.moe/kb3iuo.jpg",
+      "source": "corpus"
+    },
+    "ref-D5": {
+      "filename": "ref-D5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/ref-D5.jpg",
+      "original": "https://files.catbox.moe/0ygcz7.jpg",
+      "source": "corpus"
+    },
+    "bg-coast1": {
+      "filename": "bg-coast1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast1.jpg",
+      "original": "https://files.catbox.moe/c5n4ci.jpg",
+      "source": "corpus"
+    },
+    "bg-coast2": {
+      "filename": "bg-coast2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast2.jpg",
+      "original": "https://files.catbox.moe/4joby7.jpg",
+      "source": "corpus"
+    },
+    "bg-coast3": {
+      "filename": "bg-coast3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast3.jpg",
+      "original": "https://files.catbox.moe/chd65o.jpg",
+      "source": "corpus"
+    },
+    "bg-coast4": {
+      "filename": "bg-coast4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast4.jpg",
+      "original": "https://files.catbox.moe/lz2xin.jpg",
+      "source": "corpus"
+    },
+    "bg-coast5": {
+      "filename": "bg-coast5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast5.jpg",
+      "original": "https://files.catbox.moe/2f8r3l.jpg",
+      "source": "corpus"
+    },
+    "bg-coast6": {
+      "filename": "bg-coast6.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast6.jpg",
+      "original": "https://files.catbox.moe/cg97ei.jpg",
+      "source": "corpus"
+    },
+    "bg-coast7": {
+      "filename": "bg-coast7.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast7.jpg",
+      "original": "https://files.catbox.moe/ouk7fo.jpg",
+      "source": "corpus"
+    },
+    "bg-coast8": {
+      "filename": "bg-coast8.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast8.jpg",
+      "original": "https://files.catbox.moe/p2kn9n.jpg",
+      "source": "corpus"
+    },
+    "bg-coast9": {
+      "filename": "bg-coast9.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast9.jpg",
+      "original": "https://files.catbox.moe/wszass.jpg",
+      "source": "corpus"
+    },
+    "bg-coast10": {
+      "filename": "bg-coast10.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast10.jpg",
+      "original": "https://files.catbox.moe/tb14ar.jpg",
+      "source": "corpus"
+    },
+    "bg-coast11": {
+      "filename": "bg-coast11.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast11.jpg",
+      "original": "https://files.catbox.moe/8vie9c.jpg",
+      "source": "corpus"
+    },
+    "bg-coast14": {
+      "filename": "bg-coast14.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast14.jpg",
+      "original": "https://files.catbox.moe/l0ssuz.jpg",
+      "source": "corpus"
+    },
+    "bg-coast17": {
+      "filename": "bg-coast17.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast17.jpg",
+      "original": "https://files.catbox.moe/5wci35.jpg",
+      "source": "corpus"
+    },
+    "bg-coast19": {
+      "filename": "bg-coast19.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast19.jpg",
+      "original": "https://files.catbox.moe/p722cc.jpg",
+      "source": "corpus"
+    },
+    "bg-coast20": {
+      "filename": "bg-coast20.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-coast20.jpg",
+      "original": "https://files.catbox.moe/qpy7rl.jpg",
+      "source": "corpus"
+    },
+    "bg-over1": {
+      "filename": "bg-over1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over1.jpg",
+      "original": "https://files.catbox.moe/8h81qs.jpg",
+      "source": "corpus"
+    },
+    "bg-over2": {
+      "filename": "bg-over2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over2.jpg",
+      "original": "https://files.catbox.moe/tiuq1a.jpg",
+      "source": "corpus"
+    },
+    "bg-over3": {
+      "filename": "bg-over3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over3.jpg",
+      "original": "https://files.catbox.moe/awc5uj.jpg",
+      "source": "corpus"
+    },
+    "bg-over4": {
+      "filename": "bg-over4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over4.jpg",
+      "original": "https://files.catbox.moe/tlfo7o.jpg",
+      "source": "corpus"
+    },
+    "bg-over5": {
+      "filename": "bg-over5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over5.jpg",
+      "original": "https://files.catbox.moe/lrbz30.jpg",
+      "source": "corpus"
+    },
+    "bg-over6": {
+      "filename": "bg-over6.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over6.jpg",
+      "original": "https://files.catbox.moe/k18ux6.jpg",
+      "source": "corpus"
+    },
+    "bg-over7": {
+      "filename": "bg-over7.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over7.jpg",
+      "original": "https://files.catbox.moe/rk4i8n.jpg",
+      "source": "corpus"
+    },
+    "bg-over8": {
+      "filename": "bg-over8.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over8.jpg",
+      "original": "https://files.catbox.moe/fda83y.jpg",
+      "source": "corpus"
+    },
+    "bg-over9": {
+      "filename": "bg-over9.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over9.jpg",
+      "original": "https://files.catbox.moe/di398g.jpg",
+      "source": "corpus"
+    },
+    "bg-over10": {
+      "filename": "bg-over10.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-over10.jpg",
+      "original": "https://files.catbox.moe/7jt59j.jpg",
+      "source": "corpus"
+    },
+    "bg-mtb2": {
+      "filename": "bg-mtb2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-mtb2.jpg",
+      "original": "https://files.catbox.moe/ddgi7c.jpg",
+      "source": "corpus"
+    },
+    "bg-mtb3": {
+      "filename": "bg-mtb3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-mtb3.jpg",
+      "original": "https://files.catbox.moe/2bqxn1.jpg",
+      "source": "corpus"
+    },
+    "bg-mtb4": {
+      "filename": "bg-mtb4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-mtb4.jpg",
+      "original": "https://files.catbox.moe/11utcc.jpg",
+      "source": "corpus"
+    },
+    "bg-mtb5": {
+      "filename": "bg-mtb5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-mtb5.jpg",
+      "original": "https://files.catbox.moe/99exdq.jpg",
+      "source": "corpus"
+    },
+    "bg-snowmo1": {
+      "filename": "bg-snowmo1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-snowmo1.jpg",
+      "original": "https://files.catbox.moe/zjgn6d.jpg",
+      "source": "corpus"
+    },
+    "bg-snowmo2": {
+      "filename": "bg-snowmo2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-snowmo2.jpg",
+      "original": "https://files.catbox.moe/a3jp3b.jpg",
+      "source": "corpus"
+    },
+    "bg-snowmo3": {
+      "filename": "bg-snowmo3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-snowmo3.jpg",
+      "original": "https://files.catbox.moe/c8ze1q.jpg",
+      "source": "corpus"
+    },
+    "bg-snow1": {
+      "filename": "bg-snow1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-snow1.jpg",
+      "original": "https://files.catbox.moe/g8isjy.jpg",
+      "source": "corpus"
+    },
+    "bg-snow2": {
+      "filename": "bg-snow2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-snow2.jpg",
+      "original": "https://files.catbox.moe/l3uk6w.jpg",
+      "source": "corpus"
+    },
+    "bg-snow3": {
+      "filename": "bg-snow3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/bg-snow3.jpg",
+      "original": "https://files.catbox.moe/wvpxmc.jpg",
+      "source": "corpus"
+    },
+    "flip-coastal1": {
+      "filename": "flip-coastal1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip-coastal1.jpg",
+      "original": "https://files.catbox.moe/ucbqr9.jpg",
+      "source": "corpus"
+    },
+    "flip-coastal2": {
+      "filename": "flip-coastal2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip-coastal2.jpg",
+      "original": "https://files.catbox.moe/attshw.jpg",
+      "source": "corpus"
+    },
+    "flip-coastal3": {
+      "filename": "flip-coastal3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip-coastal3.jpg",
+      "original": "https://files.catbox.moe/wxi0vq.jpg",
+      "source": "corpus"
+    },
+    "flip-coastal4": {
+      "filename": "flip-coastal4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip-coastal4.jpg",
+      "original": "https://files.catbox.moe/2fpea3.jpg",
+      "source": "corpus"
+    },
+    "flip-coastal5": {
+      "filename": "flip-coastal5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip-coastal5.jpg",
+      "original": "https://files.catbox.moe/6xprfl.jpg",
+      "source": "corpus"
+    },
+    "kontext-flip": {
+      "filename": "kontext-flip.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-flip.jpg",
+      "original": "https://files.catbox.moe/vsfh8f.jpg",
+      "source": "corpus"
+    },
+    "overlook2-1": {
+      "filename": "overlook2-1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/overlook2-1.jpg",
+      "original": "https://files.catbox.moe/28k1mb.jpg",
+      "source": "corpus"
+    },
+    "overlook2-2": {
+      "filename": "overlook2-2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/overlook2-2.jpg",
+      "original": "https://files.catbox.moe/4k3eka.jpg",
+      "source": "corpus"
+    },
+    "overlook2-3": {
+      "filename": "overlook2-3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/overlook2-3.jpg",
+      "original": "https://files.catbox.moe/79bmdu.jpg",
+      "source": "corpus"
+    },
+    "overlook2-4": {
+      "filename": "overlook2-4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/overlook2-4.jpg",
+      "original": "https://files.catbox.moe/zramq8.jpg",
+      "source": "corpus"
+    },
+    "overlook2-5": {
+      "filename": "overlook2-5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/overlook2-5.jpg",
+      "original": "https://files.catbox.moe/0g4ill.jpg",
+      "source": "corpus"
+    },
+    "pipeF-moto": {
+      "filename": "pipeF-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeF-moto.jpg",
+      "original": "https://files.catbox.moe/tyvssy.jpg",
+      "source": "corpus"
+    },
+    "pipeF-mtb": {
+      "filename": "pipeF-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeF-mtb.jpg",
+      "original": "https://files.catbox.moe/op8i10.jpg",
+      "source": "corpus"
+    },
+    "pipeF-snowmo": {
+      "filename": "pipeF-snowmo.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeF-snowmo.jpg",
+      "original": "https://files.catbox.moe/up0g47.jpg",
+      "source": "corpus"
+    },
+    "pipeF-moto-product": {
+      "filename": "pipeF-moto-product.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeF-moto-product.jpg",
+      "original": "https://files.catbox.moe/vke9y5.jpg",
+      "source": "corpus"
+    },
+    "pipeD2-coast1": {
+      "filename": "pipeD2-coast1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD2-coast1.jpg",
+      "original": "https://files.catbox.moe/w92msh.jpg",
+      "source": "corpus"
+    },
+    "pipeD2-coast2": {
+      "filename": "pipeD2-coast2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD2-coast2.jpg",
+      "original": "https://files.catbox.moe/a58ygl.jpg",
+      "source": "corpus"
+    },
+    "pipeD2-coast3": {
+      "filename": "pipeD2-coast3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD2-coast3.jpg",
+      "original": "https://files.catbox.moe/jizk6s.jpg",
+      "source": "corpus"
+    },
+    "pipeD2-coast4": {
+      "filename": "pipeD2-coast4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD2-coast4.jpg",
+      "original": "https://files.catbox.moe/kdhmm9.jpg",
+      "source": "corpus"
+    },
+    "pipeD2-coast5": {
+      "filename": "pipeD2-coast5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD2-coast5.jpg",
+      "original": "https://files.catbox.moe/xojqml.jpg",
+      "source": "corpus"
+    },
+    "pipeD2-over1": {
+      "filename": "pipeD2-over1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD2-over1.jpg",
+      "original": "https://files.catbox.moe/d5ijol.jpg",
+      "source": "corpus"
+    },
+    "pipeD2-over2": {
+      "filename": "pipeD2-over2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD2-over2.jpg",
+      "original": "https://files.catbox.moe/jdx5ja.jpg",
+      "source": "corpus"
+    },
+    "pipeD2-over3": {
+      "filename": "pipeD2-over3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD2-over3.jpg",
+      "original": "https://files.catbox.moe/keclg7.jpg",
+      "source": "corpus"
+    },
+    "E2-r50-s80": {
+      "filename": "E2-r50-s80.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-r50-s80.jpg",
+      "original": "https://files.catbox.moe/inmwjr.jpg",
+      "source": "corpus"
+    },
+    "E2-r55-s75": {
+      "filename": "E2-r55-s75.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-r55-s75.jpg",
+      "original": "https://files.catbox.moe/2r9tve.jpg",
+      "source": "corpus"
+    },
+    "E2-r60-s70": {
+      "filename": "E2-r60-s70.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-r60-s70.jpg",
+      "original": "https://files.catbox.moe/1tou62.jpg",
+      "source": "corpus"
+    },
+    "E2-r60-s85": {
+      "filename": "E2-r60-s85.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-r60-s85.jpg",
+      "original": "https://files.catbox.moe/lcu811.jpg",
+      "source": "corpus"
+    },
+    "E2-r65-s75": {
+      "filename": "E2-r65-s75.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-r65-s75.jpg",
+      "original": "https://files.catbox.moe/ujgwni.jpg",
+      "source": "corpus"
+    },
+    "E2-r70-s70": {
+      "filename": "E2-r70-s70.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-r70-s70.jpg",
+      "original": "https://files.catbox.moe/2qxro5.jpg",
+      "source": "corpus"
+    },
+    "E2-r70-s80": {
+      "filename": "E2-r70-s80.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-r70-s80.jpg",
+      "original": "https://files.catbox.moe/725qts.jpg",
+      "source": "corpus"
+    },
+    "E2-moto-r65s75": {
+      "filename": "E2-moto-r65s75.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-moto-r65s75.jpg",
+      "original": "https://files.catbox.moe/ts18o1.jpg",
+      "source": "corpus"
+    },
+    "E2-snowmo-r65s75": {
+      "filename": "E2-snowmo-r65s75.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/E2-snowmo-r65s75.jpg",
+      "original": "https://files.catbox.moe/myb602.jpg",
+      "source": "corpus"
+    },
+    "pipeD-motoc": {
+      "filename": "pipeD-motoc.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD-motoc.jpg",
+      "original": "https://files.catbox.moe/h4fgq1.jpg",
+      "source": "corpus"
+    },
+    "pipeD-moto-waist": {
+      "filename": "pipeD-moto-waist.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD-moto-waist.jpg",
+      "original": "https://files.catbox.moe/5u22kr.jpg",
+      "source": "corpus"
+    },
+    "pipeD-moto": {
+      "filename": "pipeD-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD-moto.jpg",
+      "original": "https://files.catbox.moe/8ys7xe.jpg",
+      "source": "corpus"
+    },
+    "pipeD-moto-coast": {
+      "filename": "pipeD-moto-coast.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD-moto-coast.jpg",
+      "original": "https://files.catbox.moe/m3msjf.jpg",
+      "source": "corpus"
+    },
+    "pipeD-snowmo": {
+      "filename": "pipeD-snowmo.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD-snowmo.jpg",
+      "original": "https://files.catbox.moe/4ayvti.jpg",
+      "source": "corpus"
+    },
+    "pipeD-mtb": {
+      "filename": "pipeD-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeD-mtb.jpg",
+      "original": "https://files.catbox.moe/nt3pce.jpg",
+      "source": "corpus"
+    },
+    "pipeE-motoc-hi": {
+      "filename": "pipeE-motoc-hi.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeE-motoc-hi.jpg",
+      "original": "https://files.catbox.moe/frcfey.jpg",
+      "source": "corpus"
+    },
+    "pipeE-motoc-lo": {
+      "filename": "pipeE-motoc-lo.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeE-motoc-lo.jpg",
+      "original": "https://files.catbox.moe/ryw6zp.jpg",
+      "source": "corpus"
+    },
+    "pipeE-motoc-mid": {
+      "filename": "pipeE-motoc-mid.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeE-motoc-mid.jpg",
+      "original": "https://files.catbox.moe/4b1104.jpg",
+      "source": "corpus"
+    },
+    "pipeC-motoc": {
+      "filename": "pipeC-motoc.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeC-motoc.jpg",
+      "original": "https://files.catbox.moe/80fp1l.jpg",
+      "source": "corpus"
+    },
+    "pipeC-moto": {
+      "filename": "pipeC-moto.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeC-moto.jpg",
+      "original": "https://files.catbox.moe/16poqh.jpg",
+      "source": "corpus"
+    },
+    "pipeC-snowmo": {
+      "filename": "pipeC-snowmo.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeC-snowmo.jpg",
+      "original": "https://files.catbox.moe/uhwfmi.jpg",
+      "source": "corpus"
+    },
+    "pipeC-mtb": {
+      "filename": "pipeC-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeC-mtb.jpg",
+      "original": "https://files.catbox.moe/7289l0.jpg",
+      "source": "corpus"
+    },
+    "r8-mtb1": {
+      "filename": "r8-mtb1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-mtb1.jpg",
+      "original": "https://files.catbox.moe/dwquh6.jpg",
+      "source": "corpus"
+    },
+    "r8-mtb2": {
+      "filename": "r8-mtb2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-mtb2.jpg",
+      "original": "https://files.catbox.moe/xppvst.jpg",
+      "source": "corpus"
+    },
+    "r8-mtb3": {
+      "filename": "r8-mtb3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-mtb3.jpg",
+      "original": "https://files.catbox.moe/jjw4bm.jpg",
+      "source": "corpus"
+    },
+    "r8-mtb4": {
+      "filename": "r8-mtb4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-mtb4.jpg",
+      "original": "https://files.catbox.moe/67j1se.jpg",
+      "source": "corpus"
+    },
+    "r8-mtb5": {
+      "filename": "r8-mtb5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-mtb5.jpg",
+      "original": "https://files.catbox.moe/eb1izb.jpg",
+      "source": "corpus"
+    },
+    "r8-skier1": {
+      "filename": "r8-skier1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-skier1.jpg",
+      "original": "https://files.catbox.moe/z28tcm.jpg",
+      "source": "corpus"
+    },
+    "r8-skier2": {
+      "filename": "r8-skier2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-skier2.jpg",
+      "original": "https://files.catbox.moe/qlihtp.jpg",
+      "source": "corpus"
+    },
+    "r8-skier3": {
+      "filename": "r8-skier3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-skier3.jpg",
+      "original": "https://files.catbox.moe/br4i1k.jpg",
+      "source": "corpus"
+    },
+    "r8-snow1": {
+      "filename": "r8-snow1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-snow1.jpg",
+      "original": "https://files.catbox.moe/s0qcjr.jpg",
+      "source": "corpus"
+    },
+    "r8-snow2": {
+      "filename": "r8-snow2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-snow2.jpg",
+      "original": "https://files.catbox.moe/zh306f.jpg",
+      "source": "corpus"
+    },
+    "r8-snow3": {
+      "filename": "r8-snow3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-snow3.jpg",
+      "original": "https://files.catbox.moe/igaa2w.jpg",
+      "source": "corpus"
+    },
+    "r8-hiker1": {
+      "filename": "r8-hiker1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-hiker1.jpg",
+      "original": "https://files.catbox.moe/dqzvgd.jpg",
+      "source": "corpus"
+    },
+    "r8-hiker2": {
+      "filename": "r8-hiker2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-hiker2.jpg",
+      "original": "https://files.catbox.moe/fw7odz.jpg",
+      "source": "corpus"
+    },
+    "r8-hiker3": {
+      "filename": "r8-hiker3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r8-hiker3.jpg",
+      "original": "https://files.catbox.moe/fy5zsp.jpg",
+      "source": "corpus"
+    },
+    "pipeA-hiker": {
+      "filename": "pipeA-hiker.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeA-hiker.jpg",
+      "original": "https://files.catbox.moe/dm1219.jpg",
+      "source": "corpus"
+    },
+    "pipeA-mtb": {
+      "filename": "pipeA-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeA-mtb.jpg",
+      "original": "https://files.catbox.moe/l91i71.jpg",
+      "source": "corpus"
+    },
+    "pipeA-snowboard": {
+      "filename": "pipeA-snowboard.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeA-snowboard.jpg",
+      "original": "https://files.catbox.moe/djh1o2.jpg",
+      "source": "corpus"
+    },
+    "pipeA-festival": {
+      "filename": "pipeA-festival.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeA-festival.jpg",
+      "original": "https://files.catbox.moe/savr6w.jpg",
+      "source": "corpus"
+    },
+    "pipeB-festival": {
+      "filename": "pipeB-festival.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeB-festival.jpg",
+      "original": "https://files.catbox.moe/2egr9n.jpg",
+      "source": "corpus"
+    },
+    "pipeB-hiker": {
+      "filename": "pipeB-hiker.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipeB-hiker.jpg",
+      "original": "https://files.catbox.moe/y6j9wl.jpg",
+      "source": "corpus"
+    },
+    "r7-skier-action1": {
+      "filename": "r7-skier-action1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-skier-action1.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1pqmzz6CIh0fBd4_e1HdinPGm3jhF7cVC&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-skier-action2": {
+      "filename": "r7-skier-action2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-skier-action2.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1aFMMYncjbwJIZLG5P_0i7D_rKADn0ugu&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-skier-action3": {
+      "filename": "r7-skier-action3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-skier-action3.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1kfn8UDZyyBKNBY-qmXf9rNYsVsO-rws5&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-snow-action1": {
+      "filename": "r7-snow-action1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-snow-action1.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1iTPwemy8anApsiEhUwXozq-07kPPWUfa&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-snow-action2": {
+      "filename": "r7-snow-action2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-snow-action2.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1fpP0c6AjoknfoUnEBn1mQBXFcg8yUAk3&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-hiker-full1": {
+      "filename": "r7-hiker-full1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-hiker-full1.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1lGLMByTxdVpU4GXy7gFCNrobUsuyMk55&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-hiker-full2": {
+      "filename": "r7-hiker-full2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-hiker-full2.jpg",
+      "original": "https://drive.google.com/thumbnail?id=109PF_uO23u6hW_4I4puXrXnbkKZk8YNd&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-mtb-action1": {
+      "filename": "r7-mtb-action1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-mtb-action1.jpg",
+      "original": "https://drive.google.com/thumbnail?id=193OGYD1BbURS1JEoJqn9im1JEKg6lrl1&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-mtb-action2": {
+      "filename": "r7-mtb-action2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-mtb-action2.jpg",
+      "original": "https://drive.google.com/thumbnail?id=17lnbcau_ycMix9YF7o8btWBCNLRbaP_m&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-festival": {
+      "filename": "r7-festival.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-festival.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1NBL9rGiubGhrR-NFSZPgZQfW7fi2dv4E&sz=w1200",
+      "source": "corpus"
+    },
+    "r7-runner": {
+      "filename": "r7-runner.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r7-runner.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1tXtTp_a2CLNCVTswsUU1vrzqLnvnSwTj&sz=w1200",
+      "source": "corpus"
+    },
+    "r6-hiker1": {
+      "filename": "r6-hiker1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-hiker1.jpg",
+      "original": "https://files.catbox.moe/qdsl6x.jpg",
+      "source": "corpus"
+    },
+    "r6-hiker2": {
+      "filename": "r6-hiker2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-hiker2.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1IMF89VqtHPQBFBLF3Z9tZfTnfxrxNe3r&sz=w1200",
+      "source": "corpus"
+    },
+    "r6-skier1": {
+      "filename": "r6-skier1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-skier1.jpg",
+      "original": "https://files.catbox.moe/jo84r6.jpg",
+      "source": "corpus"
+    },
+    "r6-skier2": {
+      "filename": "r6-skier2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-skier2.jpg",
+      "original": "https://drive.google.com/thumbnail?id=16kT-1nrQAqCXQ_7Cgt5Gkp-O6vDL3utz&sz=w1200",
+      "source": "corpus"
+    },
+    "r6-skier3": {
+      "filename": "r6-skier3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-skier3.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1UWHPCeJ9Lv5HBIO7mvOiV3o5B6Pki05A&sz=w1200",
+      "source": "corpus"
+    },
+    "r6-mtb1": {
+      "filename": "r6-mtb1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-mtb1.jpg",
+      "original": "https://files.catbox.moe/7kqr2m.jpg",
+      "source": "corpus"
+    },
+    "r6-mtb2": {
+      "filename": "r6-mtb2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-mtb2.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1leeind2i1_6uOFt4j5Pw51fOahUZ2E2Y&sz=w1200",
+      "source": "corpus"
+    },
+    "r6-mtb3": {
+      "filename": "r6-mtb3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-mtb3.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1WghIY5veIeSWMWzMm5o9onpqgWHiMrnH&sz=w1200",
+      "source": "corpus"
+    },
+    "r6-snow1": {
+      "filename": "r6-snow1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-snow1.jpg",
+      "original": "https://files.catbox.moe/38zfzr.jpg",
+      "source": "corpus"
+    },
+    "r6-snow2": {
+      "filename": "r6-snow2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-snow2.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1WJs-vJ0ckVYdbd5_Udy6AB12rgbxjsvb&sz=w1200",
+      "source": "corpus"
+    },
+    "r6-snow3": {
+      "filename": "r6-snow3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r6-snow3.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1zToWWgdsW49tcgbTOcyb4Rw-eJfZcDHz&sz=w1200",
+      "source": "corpus"
+    },
+    "combo-editorial": {
+      "filename": "combo-editorial.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-editorial.jpg",
+      "original": "https://files.catbox.moe/hnulh4.jpg",
+      "source": "corpus"
+    },
+    "combo-anatomical": {
+      "filename": "combo-anatomical.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-anatomical.jpg",
+      "original": "https://files.catbox.moe/slvawu.jpg",
+      "source": "corpus"
+    },
+    "combo-negative": {
+      "filename": "combo-negative.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-negative.jpg",
+      "original": "https://files.catbox.moe/e9v5wh.jpg",
+      "source": "corpus"
+    },
+    "combo-twopass-base": {
+      "filename": "combo-twopass-base.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-twopass-base.jpg",
+      "original": "https://files.catbox.moe/wgqdqv.jpg",
+      "source": "corpus"
+    },
+    "combo-twopass-refined": {
+      "filename": "combo-twopass-refined.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-twopass-refined.jpg",
+      "original": "https://files.catbox.moe/vxtc21.jpg",
+      "source": "corpus"
+    },
+    "combo-seed1": {
+      "filename": "combo-seed1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-seed1.jpg",
+      "original": "https://files.catbox.moe/x7g3jp.jpg",
+      "source": "corpus"
+    },
+    "combo-seed2": {
+      "filename": "combo-seed2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-seed2.jpg",
+      "original": "https://files.catbox.moe/9knsrn.jpg",
+      "source": "corpus"
+    },
+    "combo-seed3": {
+      "filename": "combo-seed3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-seed3.jpg",
+      "original": "https://files.catbox.moe/6p4k03.jpg",
+      "source": "corpus"
+    },
+    "combo-seed4": {
+      "filename": "combo-seed4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-seed4.jpg",
+      "original": "https://files.catbox.moe/ux8ep4.jpg",
+      "source": "corpus"
+    },
+    "combo-seed5": {
+      "filename": "combo-seed5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-seed5.jpg",
+      "original": "https://files.catbox.moe/a97dxy.jpg",
+      "source": "corpus"
+    },
+    "lora-v4b-hiker": {
+      "filename": "lora-v4b-hiker.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lora-v4b-hiker.jpg",
+      "original": "https://files.catbox.moe/obdhqf.jpg",
+      "source": "corpus"
+    },
+    "lora-v4b-skier": {
+      "filename": "lora-v4b-skier.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lora-v4b-skier.jpg",
+      "original": "https://files.catbox.moe/twtjj9.jpg",
+      "source": "corpus"
+    },
+    "lora-v4b-mtb": {
+      "filename": "lora-v4b-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lora-v4b-mtb.jpg",
+      "original": "https://files.catbox.moe/pho0yb.jpg",
+      "source": "corpus"
+    },
+    "lora-v4b-snowboard": {
+      "filename": "lora-v4b-snowboard.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lora-v4b-snowboard.jpg",
+      "original": "https://files.catbox.moe/bhr32u.jpg",
+      "source": "corpus"
+    },
+    "lora-v4b-runner": {
+      "filename": "lora-v4b-runner.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/lora-v4b-runner.jpg",
+      "original": "https://files.catbox.moe/zompfm.jpg",
+      "source": "corpus"
+    },
+    "r5-hiker": {
+      "filename": "r5-hiker.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r5-hiker.jpg",
+      "original": "https://files.catbox.moe/ny3zg1.jpg",
+      "source": "corpus"
+    },
+    "r5-mtb": {
+      "filename": "r5-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r5-mtb.jpg",
+      "original": "https://files.catbox.moe/4uqszy.jpg",
+      "source": "corpus"
+    },
+    "r5-snowboard": {
+      "filename": "r5-snowboard.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r5-snowboard.jpg",
+      "original": "https://files.catbox.moe/lzjy9c.jpg",
+      "source": "corpus"
+    },
+    "r5-skier": {
+      "filename": "r5-skier.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r5-skier.jpg",
+      "original": "https://files.catbox.moe/wbumgt.jpg",
+      "source": "corpus"
+    },
+    "r5-festival": {
+      "filename": "r5-festival.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r5-festival.jpg",
+      "original": "https://files.catbox.moe/2g5bgv.jpg",
+      "source": "corpus"
+    },
+    "r4-hiker": {
+      "filename": "r4-hiker.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r4-hiker.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1SKqdW2-IG_wIT1mXhpZlrxMGAwaFiiAZ&sz=w1200",
+      "source": "corpus"
+    },
+    "r4-skier": {
+      "filename": "r4-skier.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r4-skier.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1dw1Ac3VZms1hazlTa11xp3Au9gWm_iwa&sz=w1200",
+      "source": "corpus"
+    },
+    "r4-mtb": {
+      "filename": "r4-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r4-mtb.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1MaHVFBwrhMH6fOlhtR7FEsedw9ed957D&sz=w1200",
+      "source": "corpus"
+    },
+    "r4-snowboard": {
+      "filename": "r4-snowboard.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r4-snowboard.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1bd71TfrC7dJPPvXrhiob9sPBKkLnVfNj&sz=w1200",
+      "source": "corpus"
+    },
+    "r3m-hiker": {
+      "filename": "r3m-hiker.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r3m-hiker.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1BxuJ2cbcjabyw84iAURt-bJ95OlxuHIE&sz=w1200",
+      "source": "corpus"
+    },
+    "r3m-mtb": {
+      "filename": "r3m-mtb.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r3m-mtb.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1jjeHvhEuyZdLykDJ8MDfYMWdpnowjvMr&sz=w1200",
+      "source": "corpus"
+    },
+    "r3m-skier": {
+      "filename": "r3m-skier.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r3m-skier.jpg",
+      "original": "https://drive.google.com/thumbnail?id=18ok5ZBJSD8mHPsR8t5vGEBzD8zLbU3nm&sz=w1200",
+      "source": "corpus"
+    },
+    "r3m-runner": {
+      "filename": "r3m-runner.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r3m-runner.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1vePZlpyrIfMsVz1jTl5hCymnB_4G4Ybp&sz=w1200",
+      "source": "corpus"
+    },
+    "r3m-snowboard": {
+      "filename": "r3m-snowboard.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r3m-snowboard.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1MZYtDBuKNjRzSPrg0u2Hj3eOzXzO3zRE&sz=w1200",
+      "source": "corpus"
+    },
+    "r2-skiing-pov": {
+      "filename": "r2-skiing-pov.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r2-skiing-pov.jpg",
+      "original": "https://files.catbox.moe/9jmhu5.jpg",
+      "source": "corpus"
+    },
+    "r2-hiking-summit": {
+      "filename": "r2-hiking-summit.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/r2-hiking-summit.jpg",
+      "original": "https://files.catbox.moe/1vxain.jpg",
+      "source": "corpus"
+    },
+    "flux2-hiking-multiref": {
+      "filename": "flux2-hiking-multiref.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux2-hiking-multiref.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1sM-uTeeyOj9WT4MkRL5qi9yHIFqFVZNR&sz=w1200",
+      "source": "corpus"
+    },
+    "flux2-skiing-multiref": {
+      "filename": "flux2-skiing-multiref.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux2-skiing-multiref.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1dqZqusgZ8cF4fFzJ3RwzRlHt0mV35suy&sz=w1200",
+      "source": "corpus"
+    },
+    "flux2-snowboard-multiref": {
+      "filename": "flux2-snowboard-multiref.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux2-snowboard-multiref.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1Uk9cRPiQdmH5-6SjRE-epdtBWJjZCtpf&sz=w1200",
+      "source": "corpus"
+    },
+    "kontext-tron-skiing": {
+      "filename": "kontext-tron-skiing.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-tron-skiing.jpg",
+      "original": "https://drive.google.com/thumbnail?id=1s8665XAZ460CdIDwoMkf7REAsEDOlWHF&sz=w1200",
+      "source": "corpus"
+    },
+    "tahoe-mtb-2001": {
+      "filename": "tahoe-mtb-2001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-mtb-2001.jpg",
+      "original": "https://files.catbox.moe/62ndcq.jpg",
+      "source": "corpus"
+    },
+    "tahoe-mtb-2002": {
+      "filename": "tahoe-mtb-2002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-mtb-2002.jpg",
+      "original": "https://files.catbox.moe/75ob2f.jpg",
+      "source": "corpus"
+    },
+    "tahoe-mtb-2003": {
+      "filename": "tahoe-mtb-2003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-mtb-2003.jpg",
+      "original": "https://files.catbox.moe/vg5ory.jpg",
+      "source": "corpus"
+    },
+    "tahoe-mtb-2004": {
+      "filename": "tahoe-mtb-2004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-mtb-2004.jpg",
+      "original": "https://files.catbox.moe/womftd.jpg",
+      "source": "corpus"
+    },
+    "tahoe-ski-2010": {
+      "filename": "tahoe-ski-2010.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-ski-2010.jpg",
+      "original": "https://files.catbox.moe/o1u68m.jpg",
+      "source": "corpus"
+    },
+    "tahoe-ski-2011": {
+      "filename": "tahoe-ski-2011.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-ski-2011.jpg",
+      "original": "https://files.catbox.moe/b734em.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2587": {
+      "filename": "mikemoto-2587.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2587.jpg",
+      "original": "https://files.catbox.moe/u1g5qu.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2589": {
+      "filename": "mikemoto-2589.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2589.jpg",
+      "original": "https://files.catbox.moe/97nt96.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2590": {
+      "filename": "mikemoto-2590.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2590.jpg",
+      "original": "https://files.catbox.moe/lk4vv7.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2593": {
+      "filename": "mikemoto-2593.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2593.jpg",
+      "original": "https://files.catbox.moe/0f600t.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2595": {
+      "filename": "mikemoto-2595.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2595.jpg",
+      "original": "https://files.catbox.moe/be4h3c.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2599": {
+      "filename": "mikemoto-2599.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2599.jpg",
+      "original": "https://files.catbox.moe/ksrj76.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2601": {
+      "filename": "mikemoto-2601.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2601.jpg",
+      "original": "https://files.catbox.moe/bbjf8h.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2604": {
+      "filename": "mikemoto-2604.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2604.jpg",
+      "original": "https://files.catbox.moe/mcf6qi.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2607": {
+      "filename": "mikemoto-2607.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2607.jpg",
+      "original": "https://files.catbox.moe/sfxjvv.jpg",
+      "source": "corpus"
+    },
+    "mikemoto-2610": {
+      "filename": "mikemoto-2610.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mikemoto-2610.jpg",
+      "original": "https://files.catbox.moe/3tj7f6.jpg",
+      "source": "corpus"
+    },
+    "tahoe-b2b-moto-3001": {
+      "filename": "tahoe-b2b-moto-3001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-b2b-moto-3001.jpg",
+      "original": "https://files.catbox.moe/vk52vz.jpg",
+      "source": "corpus"
+    },
+    "tahoe-b2b-ski-3002": {
+      "filename": "tahoe-b2b-ski-3002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-b2b-ski-3002.jpg",
+      "original": "https://files.catbox.moe/7rk0um.jpg",
+      "source": "corpus"
+    },
+    "tahoe-b2b-mtb-3003": {
+      "filename": "tahoe-b2b-mtb-3003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-b2b-mtb-3003.jpg",
+      "original": "https://files.catbox.moe/012sxt.jpg",
+      "source": "corpus"
+    },
+    "tahoe-b2b-snow-3004": {
+      "filename": "tahoe-b2b-snow-3004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/tahoe-b2b-snow-3004.jpg",
+      "original": "https://files.catbox.moe/qtyqew.jpg",
+      "source": "corpus"
+    },
+    "vest-moto-4001": {
+      "filename": "vest-moto-4001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/vest-moto-4001.jpg",
+      "original": "https://files.catbox.moe/w396pb.jpg",
+      "source": "corpus"
+    },
+    "vest-moto-4002": {
+      "filename": "vest-moto-4002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/vest-moto-4002.jpg",
+      "original": "https://files.catbox.moe/2jujqk.jpg",
+      "source": "corpus"
+    },
+    "vest-ski-4010": {
+      "filename": "vest-ski-4010.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/vest-ski-4010.jpg",
+      "original": "https://files.catbox.moe/7a8ju1.jpg",
+      "source": "corpus"
+    },
+    "vest-ski-4011": {
+      "filename": "vest-ski-4011.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/vest-ski-4011.jpg",
+      "original": "https://files.catbox.moe/aj87mc.jpg",
+      "source": "corpus"
+    },
+    "pathB-moto-6001": {
+      "filename": "pathB-moto-6001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB-moto-6001.jpg",
+      "original": "https://files.catbox.moe/ahhien.jpg",
+      "source": "corpus"
+    },
+    "pathB-ski-6002": {
+      "filename": "pathB-ski-6002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB-ski-6002.jpg",
+      "original": "https://files.catbox.moe/ywsfr9.jpg",
+      "source": "corpus"
+    },
+    "pathC-base-5000": {
+      "filename": "pathC-base-5000.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathC-base-5000.jpg",
+      "original": "https://files.catbox.moe/3wv1cj.jpg",
+      "source": "corpus"
+    },
+    "pathC-combined-5001": {
+      "filename": "pathC-combined-5001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathC-combined-5001.jpg",
+      "original": "https://files.catbox.moe/elzaic.jpg",
+      "source": "corpus"
+    },
+    "pathB2-tight-moto-7001": {
+      "filename": "pathB2-tight-moto-7001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB2-tight-moto-7001.jpg",
+      "original": "https://files.catbox.moe/qr2mep.jpg",
+      "source": "corpus"
+    },
+    "pathB2-tight-ski-7002": {
+      "filename": "pathB2-tight-ski-7002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB2-tight-ski-7002.jpg",
+      "original": "https://files.catbox.moe/63pdn1.jpg",
+      "source": "corpus"
+    },
+    "pathB2-med-moto-7003": {
+      "filename": "pathB2-med-moto-7003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB2-med-moto-7003.jpg",
+      "original": "https://files.catbox.moe/nky325.jpg",
+      "source": "corpus"
+    },
+    "pathB2-med-ski-7004": {
+      "filename": "pathB2-med-ski-7004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB2-med-ski-7004.jpg",
+      "original": "https://files.catbox.moe/8ure0e.jpg",
+      "source": "corpus"
+    },
+    "pathB2-tight-mtb-7005": {
+      "filename": "pathB2-tight-mtb-7005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB2-tight-mtb-7005.jpg",
+      "original": "https://files.catbox.moe/nakl8l.jpg",
+      "source": "corpus"
+    },
+    "pathB2-tight-snow-7006": {
+      "filename": "pathB2-tight-snow-7006.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB2-tight-snow-7006.jpg",
+      "original": "https://files.catbox.moe/as928g.jpg",
+      "source": "corpus"
+    },
+    "pathB3-moto-8001": {
+      "filename": "pathB3-moto-8001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB3-moto-8001.jpg",
+      "original": "https://files.catbox.moe/bq4k9p.jpg",
+      "source": "corpus"
+    },
+    "pathB3-ski-8002": {
+      "filename": "pathB3-ski-8002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB3-ski-8002.jpg",
+      "original": "https://files.catbox.moe/02uf9n.jpg",
+      "source": "corpus"
+    },
+    "pathB3-mtb-8003": {
+      "filename": "pathB3-mtb-8003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB3-mtb-8003.jpg",
+      "original": "https://files.catbox.moe/dm5kje.jpg",
+      "source": "corpus"
+    },
+    "pathB3-snow-8004": {
+      "filename": "pathB3-snow-8004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB3-snow-8004.jpg",
+      "original": "https://files.catbox.moe/ccwz54.jpg",
+      "source": "corpus"
+    },
+    "pathB3-moto2-8005": {
+      "filename": "pathB3-moto2-8005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB3-moto2-8005.jpg",
+      "original": "https://files.catbox.moe/fseea1.jpg",
+      "source": "corpus"
+    },
+    "pathB3-ski2-8006": {
+      "filename": "pathB3-ski2-8006.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pathB3-ski2-8006.jpg",
+      "original": "https://files.catbox.moe/6vrw34.jpg",
+      "source": "corpus"
+    },
+    "kontext-inpaint-8001": {
+      "filename": "kontext-inpaint-8001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-inpaint-8001.jpg",
+      "original": "https://files.catbox.moe/pyn6g6.jpg",
+      "source": "corpus"
+    },
+    "kontext-inpaint-8002": {
+      "filename": "kontext-inpaint-8002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-inpaint-8002.jpg",
+      "original": "https://files.catbox.moe/dfj7rz.jpg",
+      "source": "corpus"
+    },
+    "kontext-inpaint-8003": {
+      "filename": "kontext-inpaint-8003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-inpaint-8003.jpg",
+      "original": "https://files.catbox.moe/q1gb2p.jpg",
+      "source": "corpus"
+    },
+    "kontext-mtb-str095-9001": {
+      "filename": "kontext-mtb-str095-9001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-mtb-str095-9001.jpg",
+      "original": "https://files.catbox.moe/yff5w3.jpg",
+      "source": "corpus"
+    },
+    "kontext-mtb-str100-9002": {
+      "filename": "kontext-mtb-str100-9002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-mtb-str100-9002.jpg",
+      "original": "https://files.catbox.moe/1cqv7s.jpg",
+      "source": "corpus"
+    },
+    "kontext-ski-big-str100-9003": {
+      "filename": "kontext-ski-big-str100-9003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-ski-big-str100-9003.jpg",
+      "original": "https://files.catbox.moe/6nlsex.jpg",
+      "source": "corpus"
+    },
+    "kontext-snow-big-str100-9004": {
+      "filename": "kontext-snow-big-str100-9004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-snow-big-str100-9004.jpg",
+      "original": "https://files.catbox.moe/wlite9.jpg",
+      "source": "corpus"
+    },
+    "kontext-moto-big-str100-9005": {
+      "filename": "kontext-moto-big-str100-9005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-moto-big-str100-9005.jpg",
+      "original": "https://files.catbox.moe/eknt3h.jpg",
+      "source": "corpus"
+    },
+    "kontext-origmoto-refC-9006": {
+      "filename": "kontext-origmoto-refC-9006.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-origmoto-refC-9006.jpg",
+      "original": "https://files.catbox.moe/lwqaqg.jpg",
+      "source": "corpus"
+    },
+    "kontext-v3-mtb-9101": {
+      "filename": "kontext-v3-mtb-9101.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-v3-mtb-9101.jpg",
+      "original": "https://files.catbox.moe/j39b42.jpg",
+      "source": "corpus"
+    },
+    "kontext-v3-repro-9102": {
+      "filename": "kontext-v3-repro-9102.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/kontext-v3-repro-9102.jpg",
+      "original": "https://files.catbox.moe/sofoxb.jpg",
+      "source": "corpus"
+    },
+    "pov-moto-coastal-7001": {
+      "filename": "pov-moto-coastal-7001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pov-moto-coastal-7001.jpg",
+      "original": "https://files.catbox.moe/jzgqm8.jpg",
+      "source": "corpus"
+    },
+    "pov-cycle-mountain-7002": {
+      "filename": "pov-cycle-mountain-7002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pov-cycle-mountain-7002.jpg",
+      "original": "https://files.catbox.moe/7d3ouc.jpg",
+      "source": "corpus"
+    },
+    "pov-mtb-forest-7003": {
+      "filename": "pov-mtb-forest-7003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pov-mtb-forest-7003.jpg",
+      "original": "https://files.catbox.moe/a9lbtv.jpg",
+      "source": "corpus"
+    },
+    "agg-moto-lean-7004": {
+      "filename": "agg-moto-lean-7004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/agg-moto-lean-7004.jpg",
+      "original": "https://files.catbox.moe/n09wt3.jpg",
+      "source": "corpus"
+    },
+    "pov-moto-desert-7005": {
+      "filename": "pov-moto-desert-7005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pov-moto-desert-7005.jpg",
+      "original": "https://files.catbox.moe/mqdzl0.jpg",
+      "source": "corpus"
+    },
+    "agg-cycle-climb-7006": {
+      "filename": "agg-cycle-climb-7006.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/agg-cycle-climb-7006.jpg",
+      "original": "https://files.catbox.moe/v6q6c9.jpg",
+      "source": "corpus"
+    },
+    "moto-coastal-8101": {
+      "filename": "moto-coastal-8101.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/moto-coastal-8101.jpg",
+      "original": "https://files.catbox.moe/wucdoq.jpg",
+      "source": "corpus"
+    },
+    "moto-canyon-8102": {
+      "filename": "moto-canyon-8102.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/moto-canyon-8102.jpg",
+      "original": "https://files.catbox.moe/pv909v.jpg",
+      "source": "corpus"
+    },
+    "moto-cafe-8103": {
+      "filename": "moto-cafe-8103.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/moto-cafe-8103.jpg",
+      "original": "https://files.catbox.moe/m4udi1.jpg",
+      "source": "corpus"
+    },
+    "moto-desert-8104": {
+      "filename": "moto-desert-8104.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/moto-desert-8104.jpg",
+      "original": "https://files.catbox.moe/9wcmxs.jpg",
+      "source": "corpus"
+    },
+    "moto-alpine-8105": {
+      "filename": "moto-alpine-8105.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/moto-alpine-8105.jpg",
+      "original": "https://files.catbox.moe/hfokrb.jpg",
+      "source": "corpus"
+    },
+    "moto-sunrise-8106": {
+      "filename": "moto-sunrise-8106.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/moto-sunrise-8106.jpg",
+      "original": "https://files.catbox.moe/811mvc.jpg",
+      "source": "corpus"
+    },
+    "twopass-sunrise-helmet-8201": {
+      "filename": "twopass-sunrise-helmet-8201.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/twopass-sunrise-helmet-8201.jpg",
+      "original": "https://files.catbox.moe/23hd7x.jpg",
+      "source": "corpus"
+    },
+    "twopass-alpine-earbuds-8202": {
+      "filename": "twopass-alpine-earbuds-8202.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/twopass-alpine-earbuds-8202.jpg",
+      "original": "https://files.catbox.moe/vdd80x.jpg",
+      "source": "corpus"
+    },
+    "compare-flex-8301": {
+      "filename": "compare-flex-8301.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/compare-flex-8301.jpg",
+      "original": "https://files.catbox.moe/c3970k.jpg",
+      "source": "corpus"
+    },
+    "compare-pro-8301": {
+      "filename": "compare-pro-8301.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/compare-pro-8301.jpg",
+      "original": "https://files.catbox.moe/cepgk7.jpg",
+      "source": "corpus"
+    },
+    "compare-max-8301": {
+      "filename": "compare-max-8301.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/compare-max-8301.jpg",
+      "original": "https://files.catbox.moe/fm3owa.jpg",
+      "source": "corpus"
+    },
+    "compare-gpt-8301": {
+      "filename": "compare-gpt-8301.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/compare-gpt-8301.jpg",
+      "original": "https://files.catbox.moe/guzo5i.png",
+      "source": "corpus"
+    },
+    "gpt-moto-coastal-8401": {
+      "filename": "gpt-moto-coastal-8401.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/gpt-moto-coastal-8401.jpg",
+      "original": "https://files.catbox.moe/80gg3a.png",
+      "source": "corpus"
+    },
+    "gpt-moto-desert-8402": {
+      "filename": "gpt-moto-desert-8402.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/gpt-moto-desert-8402.jpg",
+      "original": "https://files.catbox.moe/uo05hr.png",
+      "source": "corpus"
+    },
+    "gpt-moto-alpine-8403": {
+      "filename": "gpt-moto-alpine-8403.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/gpt-moto-alpine-8403.jpg",
+      "original": "https://files.catbox.moe/i1ynjt.png",
+      "source": "corpus"
+    },
+    "gpt-moto-night-8404": {
+      "filename": "gpt-moto-night-8404.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/gpt-moto-night-8404.jpg",
+      "original": "https://files.catbox.moe/mg7v7a.png",
+      "source": "corpus"
+    },
+    "gpt-coastal-v2-8501": {
+      "filename": "gpt-coastal-v2-8501.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/gpt-coastal-v2-8501.jpg",
+      "original": "https://files.catbox.moe/vidx2b.png",
+      "source": "corpus"
+    },
+    "gpt-coastal-v3-8502": {
+      "filename": "gpt-coastal-v3-8502.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/gpt-coastal-v3-8502.jpg",
+      "original": "https://files.catbox.moe/9k2qid.png",
+      "source": "corpus"
+    },
+    "gpt-desert-v2-8503": {
+      "filename": "gpt-desert-v2-8503.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/gpt-desert-v2-8503.jpg",
+      "original": "https://files.catbox.moe/sbgszd.png",
+      "source": "corpus"
+    },
+    "gpt-forest-8504": {
+      "filename": "gpt-forest-8504.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/gpt-forest-8504.jpg",
+      "original": "https://files.catbox.moe/nil1sn.png",
+      "source": "corpus"
+    },
+    "sym-explicit-8601": {
+      "filename": "sym-explicit-8601.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-explicit-8601.jpg",
+      "original": "https://files.catbox.moe/mf981f.png",
+      "source": "corpus"
+    },
+    "sym-closeup-8602": {
+      "filename": "sym-closeup-8602.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-closeup-8602.jpg",
+      "original": "https://files.catbox.moe/gxd0ph.png",
+      "source": "corpus"
+    },
+    "sym-twopass-8603": {
+      "filename": "sym-twopass-8603.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-twopass-8603.jpg",
+      "original": "https://files.catbox.moe/vs3m6g.png",
+      "source": "corpus"
+    },
+    "sym-desert-8604": {
+      "filename": "sym-desert-8604.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-desert-8604.jpg",
+      "original": "https://files.catbox.moe/kfsf8f.png",
+      "source": "corpus"
+    },
+    "sym-medium-8605": {
+      "filename": "sym-medium-8605.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-medium-8605.jpg",
+      "original": "https://files.catbox.moe/so9fkz.png",
+      "source": "corpus"
+    },
+    "sym-flex-8606": {
+      "filename": "sym-flex-8606.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-flex-8606.jpg",
+      "original": "https://files.catbox.moe/i9twq0.jpg",
+      "source": "corpus"
+    },
+    "pipe-B-inpaint-8701": {
+      "filename": "pipe-B-inpaint-8701.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipe-B-inpaint-8701.jpg",
+      "original": "https://files.catbox.moe/hj2uoj.png",
+      "source": "corpus"
+    },
+    "pipe-E-direct-8702": {
+      "filename": "pipe-E-direct-8702.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipe-E-direct-8702.jpg",
+      "original": "https://files.catbox.moe/9m3kdd.png",
+      "source": "corpus"
+    },
+    "pipe-C-composite-8703": {
+      "filename": "pipe-C-composite-8703.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipe-C-composite-8703.jpg",
+      "original": "https://files.catbox.moe/fwqioy.png",
+      "source": "corpus"
+    },
+    "pipe-D-direct-v1-8704": {
+      "filename": "pipe-D-direct-v1-8704.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipe-D-direct-v1-8704.jpg",
+      "original": "https://files.catbox.moe/n1zlgm.png",
+      "source": "corpus"
+    },
+    "pipe-A-upscale-8705": {
+      "filename": "pipe-A-upscale-8705.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/pipe-A-upscale-8705.jpg",
+      "original": "https://files.catbox.moe/zsxh2g.png",
+      "source": "corpus"
+    },
+    "sym-moto-coastal-8801": {
+      "filename": "sym-moto-coastal-8801.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-moto-coastal-8801.jpg",
+      "original": "https://files.catbox.moe/4541nw.png",
+      "source": "corpus"
+    },
+    "sym-moto-desert-8802": {
+      "filename": "sym-moto-desert-8802.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-moto-desert-8802.jpg",
+      "original": "https://files.catbox.moe/cki20t.png",
+      "source": "corpus"
+    },
+    "sym-ski-alpine-8803": {
+      "filename": "sym-ski-alpine-8803.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-ski-alpine-8803.jpg",
+      "original": "https://files.catbox.moe/folhk4.png",
+      "source": "corpus"
+    },
+    "sym-snow-park-8804": {
+      "filename": "sym-snow-park-8804.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-snow-park-8804.jpg",
+      "original": "https://files.catbox.moe/fdj77a.png",
+      "source": "corpus"
+    },
+    "sym-mtb-trail-8805": {
+      "filename": "sym-mtb-trail-8805.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-mtb-trail-8805.jpg",
+      "original": "https://files.catbox.moe/4bzjwq.png",
+      "source": "corpus"
+    },
+    "sym-moto-detail-8806": {
+      "filename": "sym-moto-detail-8806.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-moto-detail-8806.jpg",
+      "original": "https://files.catbox.moe/9v3ujv.png",
+      "source": "corpus"
+    },
+    "dualref-hunter-moto-8901": {
+      "filename": "dualref-hunter-moto-8901.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dualref-hunter-moto-8901.jpg",
+      "original": "https://files.catbox.moe/bp7bvw.png",
+      "source": "corpus"
+    },
+    "dualref-patriot-moto-8902": {
+      "filename": "dualref-patriot-moto-8902.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dualref-patriot-moto-8902.jpg",
+      "original": "https://files.catbox.moe/ty8zyu.png",
+      "source": "corpus"
+    },
+    "dualref-tron-ski-8903": {
+      "filename": "dualref-tron-ski-8903.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dualref-tron-ski-8903.jpg",
+      "original": "https://files.catbox.moe/m6wq2x.png",
+      "source": "corpus"
+    },
+    "combo-patriot-moto-9001": {
+      "filename": "combo-patriot-moto-9001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-patriot-moto-9001.jpg",
+      "original": "https://files.catbox.moe/b3jbsy.png",
+      "source": "corpus"
+    },
+    "combo-patriot-moto-med-9002": {
+      "filename": "combo-patriot-moto-med-9002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-patriot-moto-med-9002.jpg",
+      "original": "https://files.catbox.moe/pzbj1n.png",
+      "source": "corpus"
+    },
+    "combo-tron-ski-9003": {
+      "filename": "combo-tron-ski-9003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-tron-ski-9003.jpg",
+      "original": "https://files.catbox.moe/u1s9s4.png",
+      "source": "corpus"
+    },
+    "combo-patriot-snow-9004": {
+      "filename": "combo-patriot-snow-9004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/combo-patriot-snow-9004.jpg",
+      "original": "https://files.catbox.moe/00igx1.png",
+      "source": "corpus"
+    },
+    "mask-inpaint-clean-10001": {
+      "filename": "mask-inpaint-clean-10001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mask-inpaint-clean-10001.jpg",
+      "original": "https://files.catbox.moe/yrmvtk.png",
+      "source": "corpus"
+    },
+    "mask-inpaint-result-10002": {
+      "filename": "mask-inpaint-result-10002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mask-inpaint-result-10002.jpg",
+      "original": "https://files.catbox.moe/pxcfo9.png",
+      "source": "corpus"
+    },
+    "nbpro-coastal-a1-10101": {
+      "filename": "nbpro-coastal-a1-10101.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-coastal-a1-10101.jpg",
+      "original": "https://files.catbox.moe/6qjymp.png",
+      "source": "corpus"
+    },
+    "nbpro-coastal-a2-10102": {
+      "filename": "nbpro-coastal-a2-10102.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-coastal-a2-10102.jpg",
+      "original": "https://files.catbox.moe/1eriuv.png",
+      "source": "corpus"
+    },
+    "nbpro-coastal-b1-10103": {
+      "filename": "nbpro-coastal-b1-10103.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-coastal-b1-10103.jpg",
+      "original": "https://files.catbox.moe/dsnpe5.png",
+      "source": "corpus"
+    },
+    "nbpro-coastal-b2-10104": {
+      "filename": "nbpro-coastal-b2-10104.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-coastal-b2-10104.jpg",
+      "original": "https://files.catbox.moe/wd9gde.png",
+      "source": "corpus"
+    },
+    "nbpro-desert-c1-10105": {
+      "filename": "nbpro-desert-c1-10105.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-desert-c1-10105.jpg",
+      "original": "https://files.catbox.moe/unisfk.png",
+      "source": "corpus"
+    },
+    "nbpro-desert-c2-10106": {
+      "filename": "nbpro-desert-c2-10106.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-desert-c2-10106.jpg",
+      "original": "https://files.catbox.moe/iipj7q.png",
+      "source": "corpus"
+    },
+    "nb2-coastal-1-10201": {
+      "filename": "nb2-coastal-1-10201.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-coastal-1-10201.jpg",
+      "original": "https://files.catbox.moe/0i09c3.png",
+      "source": "corpus"
+    },
+    "nb2-coastal-2-10202": {
+      "filename": "nb2-coastal-2-10202.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-coastal-2-10202.jpg",
+      "original": "https://files.catbox.moe/xnhkad.png",
+      "source": "corpus"
+    },
+    "nb2-desert-1-10203": {
+      "filename": "nb2-desert-1-10203.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-desert-1-10203.jpg",
+      "original": "https://files.catbox.moe/y174e6.png",
+      "source": "corpus"
+    },
+    "nb2-desert-2-10204": {
+      "filename": "nb2-desert-2-10204.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-desert-2-10204.jpg",
+      "original": "https://files.catbox.moe/a6ycye.png",
+      "source": "corpus"
+    },
+    "nb2-ski-1-10205": {
+      "filename": "nb2-ski-1-10205.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-ski-1-10205.jpg",
+      "original": "https://files.catbox.moe/qsu0b3.png",
+      "source": "corpus"
+    },
+    "nb2-ski-2-10206": {
+      "filename": "nb2-ski-2-10206.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-ski-2-10206.jpg",
+      "original": "https://files.catbox.moe/b96yvr.png",
+      "source": "corpus"
+    },
+    "flux-gpt-flux42-10301": {
+      "filename": "flux-gpt-flux42-10301.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux-gpt-flux42-10301.jpg",
+      "original": "https://files.catbox.moe/jvgcpf.jpg",
+      "source": "corpus"
+    },
+    "flux-gpt-flux1337-10302": {
+      "filename": "flux-gpt-flux1337-10302.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux-gpt-flux1337-10302.jpg",
+      "original": "https://files.catbox.moe/lekdj4.jpg",
+      "source": "corpus"
+    },
+    "flux-gpt-enhanced42-10303": {
+      "filename": "flux-gpt-enhanced42-10303.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux-gpt-enhanced42-10303.jpg",
+      "original": "https://files.catbox.moe/cieh4f.png",
+      "source": "corpus"
+    },
+    "flux-gpt-enhanced1337-10304": {
+      "filename": "flux-gpt-enhanced1337-10304.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux-gpt-enhanced1337-10304.jpg",
+      "original": "https://files.catbox.moe/1t38lm.png",
+      "source": "corpus"
+    },
+    "flux-gpt-nofidelity42-10305": {
+      "filename": "flux-gpt-nofidelity42-10305.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flux-gpt-nofidelity42-10305.jpg",
+      "original": "https://files.catbox.moe/xl1li9.png",
+      "source": "corpus"
+    },
+    "micro-moto99-rect-10401": {
+      "filename": "micro-moto99-rect-10401.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/micro-moto99-rect-10401.jpg",
+      "original": "https://files.catbox.moe/9uvztj.png",
+      "source": "corpus"
+    },
+    "micro-moto99-circles-10402": {
+      "filename": "micro-moto99-circles-10402.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/micro-moto99-circles-10402.jpg",
+      "original": "https://files.catbox.moe/imxart.png",
+      "source": "corpus"
+    },
+    "micro-moto99-oval-10403": {
+      "filename": "micro-moto99-oval-10403.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/micro-moto99-oval-10403.jpg",
+      "original": "https://files.catbox.moe/ucauxx.png",
+      "source": "corpus"
+    },
+    "micro-ski100-rect-10404": {
+      "filename": "micro-ski100-rect-10404.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/micro-ski100-rect-10404.jpg",
+      "original": "https://files.catbox.moe/yw6h14.png",
+      "source": "corpus"
+    },
+    "micro-ski100-circles-10405": {
+      "filename": "micro-ski100-circles-10405.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/micro-ski100-circles-10405.jpg",
+      "original": "https://files.catbox.moe/04ybkr.png",
+      "source": "corpus"
+    },
+    "micro-ski100-oval-10406": {
+      "filename": "micro-ski100-oval-10406.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/micro-ski100-oval-10406.jpg",
+      "original": "https://files.catbox.moe/er3clp.png",
+      "source": "corpus"
+    },
+    "micro-ski100-nbpro-10407": {
+      "filename": "micro-ski100-nbpro-10407.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/micro-ski100-nbpro-10407.jpg",
+      "original": "https://files.catbox.moe/9pfttq.png",
+      "source": "corpus"
+    },
+    "nbpro-ski-1-10501": {
+      "filename": "nbpro-ski-1-10501.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-ski-1-10501.jpg",
+      "original": "https://files.catbox.moe/8qzgwi.png",
+      "source": "corpus"
+    },
+    "nbpro-ski-2-10502": {
+      "filename": "nbpro-ski-2-10502.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-ski-2-10502.jpg",
+      "original": "https://files.catbox.moe/vxqxbh.png",
+      "source": "corpus"
+    },
+    "nbpro-snow-1-10503": {
+      "filename": "nbpro-snow-1-10503.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-snow-1-10503.jpg",
+      "original": "https://files.catbox.moe/8nv4if.png",
+      "source": "corpus"
+    },
+    "nbpro-snow-2-10504": {
+      "filename": "nbpro-snow-2-10504.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-snow-2-10504.jpg",
+      "original": "https://files.catbox.moe/751ktb.png",
+      "source": "corpus"
+    },
+    "nbpro-mtb-1-10505": {
+      "filename": "nbpro-mtb-1-10505.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-mtb-1-10505.jpg",
+      "original": "https://files.catbox.moe/2c1rkn.png",
+      "source": "corpus"
+    },
+    "nbpro-mtb-2-10506": {
+      "filename": "nbpro-mtb-2-10506.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nbpro-mtb-2-10506.jpg",
+      "original": "https://files.catbox.moe/5wkd2m.png",
+      "source": "corpus"
+    },
+    "nb2-snow-3-10601": {
+      "filename": "nb2-snow-3-10601.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-snow-3-10601.jpg",
+      "original": "https://files.catbox.moe/u2oefr.png",
+      "source": "corpus"
+    },
+    "nb2-snow-4-10602": {
+      "filename": "nb2-snow-4-10602.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-snow-4-10602.jpg",
+      "original": "https://files.catbox.moe/pxduuy.png",
+      "source": "corpus"
+    },
+    "nb2-mtb-3-10603": {
+      "filename": "nb2-mtb-3-10603.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-mtb-3-10603.jpg",
+      "original": "https://files.catbox.moe/irmd14.png",
+      "source": "corpus"
+    },
+    "nb2-mtb-4-10604": {
+      "filename": "nb2-mtb-4-10604.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/nb2-mtb-4-10604.jpg",
+      "original": "https://files.catbox.moe/ovobup.png",
+      "source": "corpus"
+    },
+    "mask-desert-clean-10701": {
+      "filename": "mask-desert-clean-10701.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mask-desert-clean-10701.jpg",
+      "original": "https://files.catbox.moe/v94vvi.png",
+      "source": "corpus"
+    },
+    "mask-desert-result-10702": {
+      "filename": "mask-desert-result-10702.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mask-desert-result-10702.jpg",
+      "original": "https://files.catbox.moe/lslkc1.png",
+      "source": "corpus"
+    },
+    "mask-alpine-clean-10703": {
+      "filename": "mask-alpine-clean-10703.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mask-alpine-clean-10703.jpg",
+      "original": "https://files.catbox.moe/thmktm.png",
+      "source": "corpus"
+    },
+    "mask-alpine-result-10704": {
+      "filename": "mask-alpine-result-10704.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mask-alpine-result-10704.jpg",
+      "original": "https://files.catbox.moe/a6ufo9.png",
+      "source": "corpus"
+    },
+    "sym-prompt-10801": {
+      "filename": "sym-prompt-10801.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-prompt-10801.jpg",
+      "original": "https://files.catbox.moe/ptg4rp.jpg",
+      "source": "corpus"
+    },
+    "sym-dualref-10802": {
+      "filename": "sym-dualref-10802.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-dualref-10802.jpg",
+      "original": "https://files.catbox.moe/318cxi.jpg",
+      "source": "corpus"
+    },
+    "sym-hires-10803": {
+      "filename": "sym-hires-10803.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-hires-10803.jpg",
+      "original": "https://files.catbox.moe/vhplc3.jpg",
+      "source": "corpus"
+    },
+    "sym-trononly-10804": {
+      "filename": "sym-trononly-10804.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-trononly-10804.jpg",
+      "original": "https://files.catbox.moe/4dlmuy.jpg",
+      "source": "corpus"
+    },
+    "sym-armclose-10805": {
+      "filename": "sym-armclose-10805.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-armclose-10805.jpg",
+      "original": "https://files.catbox.moe/ygbvrl.jpg",
+      "source": "corpus"
+    },
+    "sym-front-10806": {
+      "filename": "sym-front-10806.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-front-10806.jpg",
+      "original": "https://files.catbox.moe/em76h9.jpg",
+      "source": "corpus"
+    },
+    "sym-triple-10807": {
+      "filename": "sym-triple-10807.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/sym-triple-10807.jpg",
+      "original": "https://files.catbox.moe/u0olux.jpg",
+      "source": "corpus"
+    },
+    "symfix-ski-20001": {
+      "filename": "symfix-ski-20001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/symfix-ski-20001.jpg",
+      "original": "https://files.catbox.moe/cndu2y.jpg",
+      "source": "corpus"
+    },
+    "symfix-snow-20002": {
+      "filename": "symfix-snow-20002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/symfix-snow-20002.jpg",
+      "original": "https://files.catbox.moe/ciy4nk.jpg",
+      "source": "corpus"
+    },
+    "symfix-mtb-20003": {
+      "filename": "symfix-mtb-20003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/symfix-mtb-20003.jpg",
+      "original": "https://files.catbox.moe/xopi1g.jpg",
+      "source": "corpus"
+    },
+    "symfix-desert-20004": {
+      "filename": "symfix-desert-20004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/symfix-desert-20004.jpg",
+      "original": "https://files.catbox.moe/b652jm.jpg",
+      "source": "corpus"
+    },
+    "symfix-night-20005": {
+      "filename": "symfix-night-20005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/symfix-night-20005.jpg",
+      "original": "https://files.catbox.moe/13tuk4.jpg",
+      "source": "corpus"
+    },
+    "symfix-backcountry-20006": {
+      "filename": "symfix-backcountry-20006.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/symfix-backcountry-20006.jpg",
+      "original": "https://files.catbox.moe/llafvv.jpg",
+      "source": "corpus"
+    },
+    "v2-ski-30001": {
+      "filename": "v2-ski-30001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v2-ski-30001.jpg",
+      "original": "https://files.catbox.moe/uue6kn.jpg",
+      "source": "corpus"
+    },
+    "v2-snow-30002": {
+      "filename": "v2-snow-30002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v2-snow-30002.jpg",
+      "original": "https://files.catbox.moe/egqurz.jpg",
+      "source": "corpus"
+    },
+    "v2-mtb-30003": {
+      "filename": "v2-mtb-30003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v2-mtb-30003.jpg",
+      "original": "https://files.catbox.moe/sc294w.jpg",
+      "source": "corpus"
+    },
+    "v2-desert-30004": {
+      "filename": "v2-desert-30004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v2-desert-30004.jpg",
+      "original": "https://files.catbox.moe/kpymxq.jpg",
+      "source": "corpus"
+    },
+    "v2-bc-30006": {
+      "filename": "v2-bc-30006.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v2-bc-30006.jpg",
+      "original": "https://files.catbox.moe/t8gqas.jpg",
+      "source": "corpus"
+    },
+    "v3-ski-40001": {
+      "filename": "v3-ski-40001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v3-ski-40001.jpg",
+      "original": "https://files.catbox.moe/16e8f6.jpg",
+      "source": "corpus"
+    },
+    "v3-snow-40002": {
+      "filename": "v3-snow-40002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v3-snow-40002.jpg",
+      "original": "https://files.catbox.moe/emwmny.jpg",
+      "source": "corpus"
+    },
+    "v3-mtb-40003": {
+      "filename": "v3-mtb-40003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v3-mtb-40003.jpg",
+      "original": "https://files.catbox.moe/orj6vw.jpg",
+      "source": "corpus"
+    },
+    "v3-desert-40004": {
+      "filename": "v3-desert-40004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v3-desert-40004.jpg",
+      "original": "https://files.catbox.moe/ef3hag.jpg",
+      "source": "corpus"
+    },
+    "v3-night-40005": {
+      "filename": "v3-night-40005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v3-night-40005.jpg",
+      "original": "https://files.catbox.moe/s04rk8.jpg",
+      "source": "corpus"
+    },
+    "v3-bc-40006": {
+      "filename": "v3-bc-40006.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v3-bc-40006.jpg",
+      "original": "https://files.catbox.moe/5n6bh8.jpg",
+      "source": "corpus"
+    },
+    "v4-ski-50001": {
+      "filename": "v4-ski-50001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v4-ski-50001.jpg",
+      "original": "https://files.catbox.moe/ahp2xb.jpg",
+      "source": "corpus"
+    },
+    "v4-snow-50002": {
+      "filename": "v4-snow-50002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v4-snow-50002.jpg",
+      "original": "https://files.catbox.moe/o8hlgf.jpg",
+      "source": "corpus"
+    },
+    "v4-mtb-50003": {
+      "filename": "v4-mtb-50003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v4-mtb-50003.jpg",
+      "original": "https://files.catbox.moe/fuljs1.jpg",
+      "source": "corpus"
+    },
+    "v4-desert-50004": {
+      "filename": "v4-desert-50004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v4-desert-50004.jpg",
+      "original": "https://files.catbox.moe/0nb5x0.jpg",
+      "source": "corpus"
+    },
+    "v4-night-50005": {
+      "filename": "v4-night-50005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v4-night-50005.jpg",
+      "original": "https://files.catbox.moe/53c59z.jpg",
+      "source": "corpus"
+    },
+    "v4-bc-50006": {
+      "filename": "v4-bc-50006.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v4-bc-50006.jpg",
+      "original": "https://files.catbox.moe/kneafp.jpg",
+      "source": "corpus"
+    },
+    "act-ski-7001": {
+      "filename": "act-ski-7001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-ski-7001.jpg",
+      "original": "https://files.catbox.moe/x3z66n.jpg",
+      "source": "corpus"
+    },
+    "act-ski-7002": {
+      "filename": "act-ski-7002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-ski-7002.jpg",
+      "original": "https://files.catbox.moe/mks7jd.jpg",
+      "source": "corpus"
+    },
+    "act-ski-7003": {
+      "filename": "act-ski-7003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-ski-7003.jpg",
+      "original": "https://files.catbox.moe/ymh78a.jpg",
+      "source": "corpus"
+    },
+    "act-ski-7004": {
+      "filename": "act-ski-7004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-ski-7004.jpg",
+      "original": "https://files.catbox.moe/b2cr39.jpg",
+      "source": "corpus"
+    },
+    "act-ski-7005": {
+      "filename": "act-ski-7005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-ski-7005.jpg",
+      "original": "https://files.catbox.moe/3gvo8k.jpg",
+      "source": "corpus"
+    },
+    "act-sled-7001": {
+      "filename": "act-sled-7001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-sled-7001.jpg",
+      "original": "https://files.catbox.moe/gta1bc.jpg",
+      "source": "corpus"
+    },
+    "act-sled-7002": {
+      "filename": "act-sled-7002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-sled-7002.jpg",
+      "original": "https://files.catbox.moe/si480h.jpg",
+      "source": "corpus"
+    },
+    "act-sled-7003": {
+      "filename": "act-sled-7003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-sled-7003.jpg",
+      "original": "https://files.catbox.moe/qwsg6g.jpg",
+      "source": "corpus"
+    },
+    "act-sled-7004": {
+      "filename": "act-sled-7004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-sled-7004.jpg",
+      "original": "https://files.catbox.moe/21glms.jpg",
+      "source": "corpus"
+    },
+    "act-sled-7005": {
+      "filename": "act-sled-7005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-sled-7005.jpg",
+      "original": "https://files.catbox.moe/23r6y9.jpg",
+      "source": "corpus"
+    },
+    "act-moto-7001": {
+      "filename": "act-moto-7001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-moto-7001.jpg",
+      "original": "https://files.catbox.moe/tlwzit.jpg",
+      "source": "corpus"
+    },
+    "act-moto-7002": {
+      "filename": "act-moto-7002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-moto-7002.jpg",
+      "original": "https://files.catbox.moe/td4i3v.jpg",
+      "source": "corpus"
+    },
+    "act-moto-7003": {
+      "filename": "act-moto-7003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-moto-7003.jpg",
+      "original": "https://files.catbox.moe/5wm0nt.jpg",
+      "source": "corpus"
+    },
+    "act-moto-7004": {
+      "filename": "act-moto-7004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-moto-7004.jpg",
+      "original": "https://files.catbox.moe/pbivpt.jpg",
+      "source": "corpus"
+    },
+    "act-moto-7005": {
+      "filename": "act-moto-7005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-moto-7005.jpg",
+      "original": "https://files.catbox.moe/fcqi76.jpg",
+      "source": "corpus"
+    },
+    "act-mtb-7001": {
+      "filename": "act-mtb-7001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-mtb-7001.jpg",
+      "original": "https://files.catbox.moe/5e6j50.jpg",
+      "source": "corpus"
+    },
+    "act-mtb-7002": {
+      "filename": "act-mtb-7002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-mtb-7002.jpg",
+      "original": "https://files.catbox.moe/cvnqdq.jpg",
+      "source": "corpus"
+    },
+    "act-mtb-7003": {
+      "filename": "act-mtb-7003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-mtb-7003.jpg",
+      "original": "https://files.catbox.moe/nd68l8.jpg",
+      "source": "corpus"
+    },
+    "act-mtb-7004": {
+      "filename": "act-mtb-7004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-mtb-7004.jpg",
+      "original": "https://files.catbox.moe/dy7hji.jpg",
+      "source": "corpus"
+    },
+    "act-mtb-7005": {
+      "filename": "act-mtb-7005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/act-mtb-7005.jpg",
+      "original": "https://files.catbox.moe/e9dqdq.jpg",
+      "source": "corpus"
+    },
+    "glove-moto-8001": {
+      "filename": "glove-moto-8001.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/glove-moto-8001.jpg",
+      "original": "https://files.catbox.moe/h2g3pj.jpg",
+      "source": "corpus"
+    },
+    "glove-moto-8002": {
+      "filename": "glove-moto-8002.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/glove-moto-8002.jpg",
+      "original": "https://files.catbox.moe/xgs4g9.jpg",
+      "source": "corpus"
+    },
+    "glove-moto-8003": {
+      "filename": "glove-moto-8003.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/glove-moto-8003.jpg",
+      "original": "https://files.catbox.moe/u1nxbu.jpg",
+      "source": "corpus"
+    },
+    "glove-moto-8004": {
+      "filename": "glove-moto-8004.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/glove-moto-8004.jpg",
+      "original": "https://files.catbox.moe/tr1ls2.jpg",
+      "source": "corpus"
+    },
+    "glove-moto-8005": {
+      "filename": "glove-moto-8005.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/glove-moto-8005.jpg",
+      "original": "https://files.catbox.moe/d1wh2z.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__0": {
+      "filename": "rot_moto__0.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__0.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95760e/0Y8Ft5hAZNmoit0KBBIJy_Qh7Ds8o3.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__1": {
+      "filename": "rot_mtb__1.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__1.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95760e/zT45I91Awjtqv9tLVxsZy_KUHUTA7m.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__2": {
+      "filename": "rot_mtb__2.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__2.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95760e/rSFNiRU7jfHcCU84w5wrA_Our1YXgg.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__3": {
+      "filename": "rot_moto__3.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__3.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95760e/fzvDh9K3AyFaVmQfVEZFi_Iga5kIwB.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__4": {
+      "filename": "rot_mtb__4.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__4.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95760e/OI08x4ydr3TOtATDastEg_Kz5WJwx0.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__5": {
+      "filename": "rot_moto__5.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__5.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95760e/fn2Uc4EH4uZpFUAYN2PsR_8BFtVHph.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__6": {
+      "filename": "rot_mtb__6.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__6.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957611/N0EHhJc9BYcqHOwfhd4WY_sJLjvCuk.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__7": {
+      "filename": "rot_moto__7.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__7.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957611/bPjZ-vEdVHzpWUCAS390O_CFyGqgk5.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__8": {
+      "filename": "rot_moto__8.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__8.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957611/3H4MD_vHn0zM7iBOm-MuN_zTPpxJZ1.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__9": {
+      "filename": "rot_mtb__9.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__9.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957611/x1MPgYFsKXMXGdCXh3K63_K2HHfFEw.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__10": {
+      "filename": "rot_moto__10.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__10.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957612/r9DatQNaI1qkUhR1V89yb_BGSCDF97.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__11": {
+      "filename": "rot_mtb__11.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__11.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957613/qZ5d7usK5zZQq2PR_-SLH_sLyckHVg.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__12": {
+      "filename": "rot_moto__12.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__12.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957614/33N9oLOGIbX4sLxZofClt_OjdyxUJ4.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__13": {
+      "filename": "rot_mtb__13.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__13.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957615/v9xue7d6rR8aEjy0tR7R6_NcxGYqXK.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__14": {
+      "filename": "rot_mtb__14.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__14.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957613/C04geGrHl4IJawOkfUVV4_6sPYxZhL.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__15": {
+      "filename": "rot_moto__15.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__15.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95760e/QH3icDgFI0P6e3QJtAqBC_4UmExPB7.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__16": {
+      "filename": "rot_mtb__16.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__16.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95760e/UGjWx9-GMQMPyjEKa-fet_ciArcHnh.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__17": {
+      "filename": "rot_moto__17.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__17.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957617/7d653XcBXjcxpFfmgRZ0O_a7qbmaHp.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__18": {
+      "filename": "rot_mtb__18.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__18.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957616/cEt54iUYqGyTGGN5jU5C9_UT72bEWF.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__19": {
+      "filename": "rot_mtb__19.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__19.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957618/EJoyWvmGWQUzNvreF5Xbu_RLyRmJzv.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__20": {
+      "filename": "rot_moto__20.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__20.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957617/3BF0S_Tm0N6gEUnaWeiwh_JF04THNh.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__21": {
+      "filename": "rot_mtb__21.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__21.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957618/nUyfrb_e88l0NkE1eilh7_XLnpwZc9.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__22": {
+      "filename": "rot_moto__22.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__22.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957618/UtFyCzTo2yo_WxO2RuIxy_qohLU27B.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__23": {
+      "filename": "rot_mtb__23.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__23.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957619/SXXGt-VzDaeu3RkgaX_j__ljLILVXZ.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__24": {
+      "filename": "rot_mtb__24.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__24.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761a/9XWx8_shrN11p70SDTdrN_J7jvf9Em.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__25": {
+      "filename": "rot_moto__25.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__25.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761a/P40-1VntckfOx4Sv1yYiU_b0dMvnAN.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__26": {
+      "filename": "rot_moto__26.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__26.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761a/UkCPbjORLXoeQDuPZVGxu_wMrYpJ6x.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__27": {
+      "filename": "rot_mtb__27.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__27.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761a/EGPmbx2wigTUlsgqSV1fr_VliBEVsA.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__28": {
+      "filename": "rot_mtb__28.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__28.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761b/ZkKR9QvBqGOwc7_DN10ma_OTfLu9UD.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__29": {
+      "filename": "rot_moto__29.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__29.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761c/98s8x5_b9SRHWrjorME2y_y4CUi6pL.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__30": {
+      "filename": "rot_mtb__30.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__30.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761c/lpGLKDjC8b3Fxu52Lp_nt_G7cJ3Gg6.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__31": {
+      "filename": "rot_moto__31.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__31.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761d/hGOfk02XYbz8curMLjSvZ_LFLdDrij.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__32": {
+      "filename": "rot_mtb__32.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__32.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761d/5c0ekFrHlIlUo0ARZy4mE_68UXt5QA.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__33": {
+      "filename": "rot_moto__33.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__33.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761c/aT26PJ16FEPXVuS-WWh86_D4alUKgL.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__34": {
+      "filename": "rot_mtb__34.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__34.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761f/RvYEXsOrAcKILi-p6G8HV_Ktxoevtt.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__35": {
+      "filename": "rot_moto__35.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__35.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957620/GzSwUIb8J7czzV2KdlSRx_NtF8YioP.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__36": {
+      "filename": "rot_moto__36.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__36.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95761f/DWYHavSdAVKeLOWGdHpe7_gUPWLyBJ.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__37": {
+      "filename": "rot_moto__37.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__37.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957620/OZFjSSQVpKTGd-dwQJWnE_G776ha32.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__38": {
+      "filename": "rot_mtb__38.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__38.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957622/uHMf--gH_i3GwunyjA-tM_txuGKQ5T.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__39": {
+      "filename": "rot_mtb__39.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__39.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957620/866kBrtde3CG9_tB2GaG6_EfBJpmzA.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__40": {
+      "filename": "rot_mtb__40.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__40.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957622/lgmup31tZssl_L2QC62Xr_KK7xi26a.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__41": {
+      "filename": "rot_moto__41.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__41.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957623/ge6VEJtXmo3mt3EwyB6e2_bxFPZryv.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__42": {
+      "filename": "rot_moto__42.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__42.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957623/zkee0h53UiX9XYP3EOeqR_XZ0IdQJP.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__43": {
+      "filename": "rot_mtb__43.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__43.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957624/PFQJiCUU4XN1xzRiqcIrc_dMJTVVhm.jpg",
+      "source": "corpus"
+    },
+    "rot_mtb__44": {
+      "filename": "rot_mtb__44.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_mtb__44.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957624/I9ji-0kXaAfwsctULjf1r_bkudAQzz.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__45": {
+      "filename": "rot_moto__45.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__45.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957611/Tro4GEUQmnIMtsqh25JEa_O5lV5DwL.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__46": {
+      "filename": "rot_moto__46.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__46.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957619/rin66_fBKaLzUBoMk5qmb_VTXVtw2F.jpg",
+      "source": "corpus"
+    },
+    "rot_moto__47": {
+      "filename": "rot_moto__47.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/rot_moto__47.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957653/J6bZ5nl8WkhDELzO8GwBT_GLgFKnER.jpg",
+      "source": "corpus"
+    },
+    "v1_moto_moto_s0_48": {
+      "filename": "v1_moto_moto_s0_48.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_moto_moto_s0_48.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e5/5FiSNwhQExvJ4dU0bNoO3_7wjlzGxI.jpg",
+      "source": "corpus"
+    },
+    "v1_snow_snow_s0_49": {
+      "filename": "v1_snow_snow_s0_49.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_snow_snow_s0_49.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e5/cNrYU_JGUwbLR_jMq-LvA_cMAotBoD.jpg",
+      "source": "corpus"
+    },
+    "v1_ski_ski_s1_50": {
+      "filename": "v1_ski_ski_s1_50.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_ski_ski_s1_50.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e5/O76RlcBGkgACopi-PmKqn_xk3WiF4v.jpg",
+      "source": "corpus"
+    },
+    "v1_mtb_mtb_s0_51": {
+      "filename": "v1_mtb_mtb_s0_51.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_mtb_mtb_s0_51.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e5/yGrY440QfANH7gmdEbtjs_89eCfYaZ.jpg",
+      "source": "corpus"
+    },
+    "v1_ski_ski_s0_52": {
+      "filename": "v1_ski_ski_s0_52.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_ski_ski_s0_52.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e5/KA--43aes4b4Z-8LctBzE_gG1geBD8.jpg",
+      "source": "corpus"
+    },
+    "v1_mtb_mtb_s1_53": {
+      "filename": "v1_mtb_mtb_s1_53.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_mtb_mtb_s1_53.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e5/_6-ng0U4RxifF4DUBII_w_7Ddwllhg.jpg",
+      "source": "corpus"
+    },
+    "v1_snow_snow_s1_54": {
+      "filename": "v1_snow_snow_s1_54.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_snow_snow_s1_54.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e5/fHiqQYbCLi4xbQqm1UbCz_XQ2nSVj2.jpg",
+      "source": "corpus"
+    },
+    "v1_mtb_mtb_s1_55": {
+      "filename": "v1_mtb_mtb_s1_55.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_mtb_mtb_s1_55.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e8/c2Dt32hDk3ixTOVwwJV-q_2xGjIaYV.jpg",
+      "source": "corpus"
+    },
+    "v1_mtb_mtb_s0_56": {
+      "filename": "v1_mtb_mtb_s0_56.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_mtb_mtb_s0_56.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e7/MDllnhK46wnYzvSwKE5P7_XKMxFh0v.jpg",
+      "source": "corpus"
+    },
+    "v1_moto_moto_s0_57": {
+      "filename": "v1_moto_moto_s0_57.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_moto_moto_s0_57.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e7/TUEOq8WM3lFm4DlvnmMZH_YAfUTHcq.jpg",
+      "source": "corpus"
+    },
+    "v1_moto_moto_s1_58": {
+      "filename": "v1_moto_moto_s1_58.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_moto_moto_s1_58.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e7/tqrooOj9UBfxktD7R5Ufv_AoHuXPBj.jpg",
+      "source": "corpus"
+    },
+    "v1_ski_ski_s0_59": {
+      "filename": "v1_ski_ski_s0_59.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_ski_ski_s0_59.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e8/B1Y3KQHJD0FJL9gflg2bl_cc5DhJIr.jpg",
+      "source": "corpus"
+    },
+    "v1_ski_ski_s1_60": {
+      "filename": "v1_ski_ski_s1_60.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_ski_ski_s1_60.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e9/3aZPSMlaxp6nauZY4ocgF_QhugsaIv.jpg",
+      "source": "corpus"
+    },
+    "v1_mtb_mtb_s0_61": {
+      "filename": "v1_mtb_mtb_s0_61.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_mtb_mtb_s0_61.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ea/s9V40Y9m6O2FPdoJJseeP_yzRmXFm6.jpg",
+      "source": "corpus"
+    },
+    "v1_moto_moto_s0_62": {
+      "filename": "v1_moto_moto_s0_62.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_moto_moto_s0_62.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ea/em2m3MQxcbj_FRbBj9xIf_IGmDdYoe.jpg",
+      "source": "corpus"
+    },
+    "v1_moto_moto_s1_63": {
+      "filename": "v1_moto_moto_s1_63.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_moto_moto_s1_63.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ea/WttMqvG2HnO2FpqdAYrfk_vumDm7qI.jpg",
+      "source": "corpus"
+    },
+    "v1_ski_ski_s0_64": {
+      "filename": "v1_ski_ski_s0_64.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_ski_ski_s0_64.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576eb/y780v4X7ZfbpzDb9IZnLF_LNH3HCX7.jpg",
+      "source": "corpus"
+    },
+    "v1_snow_snow_s1_65": {
+      "filename": "v1_snow_snow_s1_65.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_snow_snow_s1_65.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ec/rtXI0p1Y_8vD7VqF6ZCqF_IJpAZxYT.jpg",
+      "source": "corpus"
+    },
+    "v1_ski_ski_s1_66": {
+      "filename": "v1_ski_ski_s1_66.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_ski_ski_s1_66.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ec/yyTAmZFItSMIsqvj09DlW_MMnSoRu0.jpg",
+      "source": "corpus"
+    },
+    "v1_snow_snow_s0_67": {
+      "filename": "v1_snow_snow_s0_67.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_snow_snow_s0_67.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ec/mSZHUiHONdE6c6e0ncT7u_Nee5vJXs.jpg",
+      "source": "corpus"
+    },
+    "v1_moto_moto_s0_68": {
+      "filename": "v1_moto_moto_s0_68.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_moto_moto_s0_68.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ed/dDPA24L3CHESIqhgNUrYd_IfaOZW2N.jpg",
+      "source": "corpus"
+    },
+    "v1_moto_moto_s1_69": {
+      "filename": "v1_moto_moto_s1_69.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_moto_moto_s1_69.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ee/I4sPAsexnK3IUlo_HQY_l_w67PcLPr.jpg",
+      "source": "corpus"
+    },
+    "v1_mtb_mtb_s1_70": {
+      "filename": "v1_mtb_mtb_s1_70.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_mtb_mtb_s1_70.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ee/2RQ7RVI7hvP1Ar0olvuyr_663gW5DH.jpg",
+      "source": "corpus"
+    },
+    "v1_mtb_mtb_s0_71": {
+      "filename": "v1_mtb_mtb_s0_71.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_mtb_mtb_s0_71.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ee/zDxeYmmwVKdB8woiueURL_qPNmEnFZ.jpg",
+      "source": "corpus"
+    },
+    "v1_mtb_mtb_s1_72": {
+      "filename": "v1_mtb_mtb_s1_72.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_mtb_mtb_s1_72.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ea/cedHYRGZpr5V9zpgcQLF1_VnV1GNoy.jpg",
+      "source": "corpus"
+    },
+    "v1_snow_snow_s0_73": {
+      "filename": "v1_snow_snow_s0_73.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_snow_snow_s0_73.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e9/DXwOivNtNwezUZHuUd2YB_N6axDL99.jpg",
+      "source": "corpus"
+    },
+    "v1_ski_ski_s0_74": {
+      "filename": "v1_ski_ski_s0_74.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_ski_ski_s0_74.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ef/Sa_2siuZnPEbej6em8j2D_aHiu7N9q.jpg",
+      "source": "corpus"
+    },
+    "v1_snow_snow_s0_75": {
+      "filename": "v1_snow_snow_s0_75.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_snow_snow_s0_75.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576f0/-ZPfGR4YjFukISYiMQuWQ_4Lr9wbLA.jpg",
+      "source": "corpus"
+    },
+    "v1_snow_snow_s1_76": {
+      "filename": "v1_snow_snow_s1_76.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_snow_snow_s1_76.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576f0/RTHZUiIm74DqIYjh76Q3X_2UYw3ejH.jpg",
+      "source": "corpus"
+    },
+    "v1_moto_moto_s1_77": {
+      "filename": "v1_moto_moto_s1_77.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_moto_moto_s1_77.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576e5/Kx_OhUQHzVY7bLArNarDS_YzMIOyuk.jpg",
+      "source": "corpus"
+    },
+    "v1_ski_ski_s1_78": {
+      "filename": "v1_ski_ski_s1_78.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_ski_ski_s1_78.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576f0/e8o8iZPtrH7WmKGtk-_JI_pNOwVYP9.jpg",
+      "source": "corpus"
+    },
+    "v1_snow_snow_s1_79": {
+      "filename": "v1_snow_snow_s1_79.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/v1_snow_snow_s1_79.jpg",
+      "original": "https://v3b.fal.media/files/b/0a9576ea/WGj1jQxGEe39bEG0eXkAg_5DeK01h6.jpg",
+      "source": "corpus"
+    },
+    "dual_ski_ski_s1_80": {
+      "filename": "dual_ski_ski_s1_80.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_ski_ski_s1_80.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957771/HydRq01KLiMJAMGXy5kQg_Il3tuPB8.jpg",
+      "source": "corpus"
+    },
+    "dual_snow_snow_s1_81": {
+      "filename": "dual_snow_snow_s1_81.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_snow_snow_s1_81.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957771/siROpNGpyCnFB6Jx4TuZl_4jOHasG5.jpg",
+      "source": "corpus"
+    },
+    "dual_snow_snow_s0_82": {
+      "filename": "dual_snow_snow_s0_82.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_snow_snow_s0_82.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957771/JrauH3lzdrC4QDejtmlm2_mvALLX8v.jpg",
+      "source": "corpus"
+    },
+    "dual_mtb_mtb_s0_83": {
+      "filename": "dual_mtb_mtb_s0_83.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_mtb_mtb_s0_83.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957771/eBkFoiELA1AdCzgprpwsQ_8ID7PmCV.jpg",
+      "source": "corpus"
+    },
+    "dual_moto_moto_s1_84": {
+      "filename": "dual_moto_moto_s1_84.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_moto_moto_s1_84.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957771/6tIHlS5KOC3M9MHlE2KG7_9eYF0oWM.jpg",
+      "source": "corpus"
+    },
+    "dual_ski_ski_s0_85": {
+      "filename": "dual_ski_ski_s0_85.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_ski_ski_s0_85.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957771/D_QuR3COpIk0Sz8T8AWPH_ANbTHxn4.jpg",
+      "source": "corpus"
+    },
+    "dual_mtb_mtb_s1_86": {
+      "filename": "dual_mtb_mtb_s1_86.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_mtb_mtb_s1_86.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957771/K74qKbisIMS9jaWropFfW_XC6QL9GF.jpg",
+      "source": "corpus"
+    },
+    "dual_moto_moto_s0_87": {
+      "filename": "dual_moto_moto_s0_87.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_moto_moto_s0_87.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957771/IMTQCcm56_Mdz76-kuMI__JWlMxm2j.jpg",
+      "source": "corpus"
+    },
+    "dual_mtb_mtb_s1_88": {
+      "filename": "dual_mtb_mtb_s1_88.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_mtb_mtb_s1_88.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957773/G1QAz23UwvkRPElxzTzLu_BLiySnFD.jpg",
+      "source": "corpus"
+    },
+    "dual_moto_moto_s0_89": {
+      "filename": "dual_moto_moto_s0_89.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_moto_moto_s0_89.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957773/TQQMrGslYGQyq_PeQkNSU_TrZxpkNJ.jpg",
+      "source": "corpus"
+    },
+    "dual_snow_snow_s0_90": {
+      "filename": "dual_snow_snow_s0_90.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_snow_snow_s0_90.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957774/xvYm71FebuQM8N7oGqCgu_453I7qvW.jpg",
+      "source": "corpus"
+    },
+    "dual_snow_snow_s1_91": {
+      "filename": "dual_snow_snow_s1_91.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_snow_snow_s1_91.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957774/MCyw4XnXLvdYrQPPptl-u_RkhKVNa9.jpg",
+      "source": "corpus"
+    },
+    "dual_moto_moto_s1_92": {
+      "filename": "dual_moto_moto_s1_92.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_moto_moto_s1_92.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957773/THvH4BQf69feNtiZPStih_HKRk7tB2.jpg",
+      "source": "corpus"
+    },
+    "dual_ski_ski_s0_93": {
+      "filename": "dual_ski_ski_s0_93.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_ski_ski_s0_93.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957774/xdA29wgeGu19MUy-MKQAN_VlsicveX.jpg",
+      "source": "corpus"
+    },
+    "dual_mtb_mtb_s0_94": {
+      "filename": "dual_mtb_mtb_s0_94.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_mtb_mtb_s0_94.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957773/NwpAjHjhbVOf-MVKuvnHN_1Rm2NkOF.jpg",
+      "source": "corpus"
+    },
+    "dual_ski_ski_s1_95": {
+      "filename": "dual_ski_ski_s1_95.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_ski_ski_s1_95.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957774/YPWnlPmLJJGjjqhHczM3G_bOLn1l3k.jpg",
+      "source": "corpus"
+    },
+    "dual_mtb_mtb_s0_96": {
+      "filename": "dual_mtb_mtb_s0_96.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_mtb_mtb_s0_96.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957776/CU_U8pyNl_nmBgzK9XrrX_3Sw4zVfM.jpg",
+      "source": "corpus"
+    },
+    "dual_ski_ski_s0_97": {
+      "filename": "dual_ski_ski_s0_97.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_ski_ski_s0_97.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957777/X7C27BywXyzcxfxQPjpxi_oEqLXs9w.jpg",
+      "source": "corpus"
+    },
+    "dual_mtb_mtb_s1_98": {
+      "filename": "dual_mtb_mtb_s1_98.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_mtb_mtb_s1_98.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957777/dyOlCeAuPIgCzNaiEKEsG_abUXso7Z.jpg",
+      "source": "corpus"
+    },
+    "dual_snow_snow_s0_99": {
+      "filename": "dual_snow_snow_s0_99.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_snow_snow_s0_99.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957778/D5uKDewduPkCMBo-AB5-j_8M0zFGrp.jpg",
+      "source": "corpus"
+    },
+    "dual_moto_moto_s0_100": {
+      "filename": "dual_moto_moto_s0_100.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_moto_moto_s0_100.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957776/3R1x7zi2zxA1burhqjdA__anuKvKj6.jpg",
+      "source": "corpus"
+    },
+    "dual_moto_moto_s1_101": {
+      "filename": "dual_moto_moto_s1_101.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_moto_moto_s1_101.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957776/pSVJ8HUNoVgOztcr4Trco_bPD6wz0g.jpg",
+      "source": "corpus"
+    },
+    "dual_ski_ski_s1_102": {
+      "filename": "dual_ski_ski_s1_102.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_ski_ski_s1_102.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957777/-9z7HP3_cKSzEsIIrbV3X_YFdsHmvl.jpg",
+      "source": "corpus"
+    },
+    "dual_snow_snow_s1_103": {
+      "filename": "dual_snow_snow_s1_103.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/dual_snow_snow_s1_103.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957778/rs3Dxn7onmlT8gRNwzzVU_tA90Iqtm.jpg",
+      "source": "corpus"
+    },
+    "flip_snow_snow_s0_104": {
+      "filename": "flip_snow_snow_s0_104.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip_snow_snow_s0_104.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957770/1djetfUydRIiEFqwYDza9_4F86SfEK.jpg",
+      "source": "corpus"
+    },
+    "flip_snow_snow_s0_105": {
+      "filename": "flip_snow_snow_s0_105.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip_snow_snow_s0_105.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957770/EQcNPuAefQhTM8eUF-Ure_9v2ZuvYU.jpg",
+      "source": "corpus"
+    },
+    "flip_snow_snow_s1_106": {
+      "filename": "flip_snow_snow_s1_106.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip_snow_snow_s1_106.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957770/h6c4WaKnne54oefge_39Q_XDkGu7IW.jpg",
+      "source": "corpus"
+    },
+    "flip_snow_snow_s1_107": {
+      "filename": "flip_snow_snow_s1_107.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip_snow_snow_s1_107.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957770/aJKPQBR3wSlJpr_O9V7EG_Jiwzmpfq.jpg",
+      "source": "corpus"
+    },
+    "flip_snow_snow_s0_108": {
+      "filename": "flip_snow_snow_s0_108.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip_snow_snow_s0_108.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957770/sATF6gmx0SjHUqZLi8AkM_S10aXiK9.jpg",
+      "source": "corpus"
+    },
+    "flip_snow_snow_s1_109": {
+      "filename": "flip_snow_snow_s1_109.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/flip_snow_snow_s1_109.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957770/OqVDBPOLW1j5tqchLxhr__siEaxg2j.jpg",
+      "source": "corpus"
+    },
+    "mirror_snow_snow_s1_110": {
+      "filename": "mirror_snow_snow_s1_110.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mirror_snow_snow_s1_110.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95785f/_h5NVJsPUsOt4dH3jdVar_MpKeG8rQ.jpg",
+      "source": "corpus"
+    },
+    "mirror_snow_snow_s1_111": {
+      "filename": "mirror_snow_snow_s1_111.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mirror_snow_snow_s1_111.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95785f/Irp48WT2yNKxw80MTSWet_zeuph3jz.jpg",
+      "source": "corpus"
+    },
+    "mirror_snow_snow_s0_112": {
+      "filename": "mirror_snow_snow_s0_112.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mirror_snow_snow_s0_112.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95785f/uUI9MAxpnZD_PTMgWEYHM_p6M4SV0r.jpg",
+      "source": "corpus"
+    },
+    "mirror_snow_snow_s0_113": {
+      "filename": "mirror_snow_snow_s0_113.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mirror_snow_snow_s0_113.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95785f/eG4wp3lKiPKVyUHvfXt_A_Xr9QqqgA.jpg",
+      "source": "corpus"
+    },
+    "mirror_snow_snow_s0_114": {
+      "filename": "mirror_snow_snow_s0_114.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mirror_snow_snow_s0_114.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95785f/OM_QifaX9O8aEPC6kA2hT_uPblDAQb.jpg",
+      "source": "corpus"
+    },
+    "mirror_snow_snow_s1_115": {
+      "filename": "mirror_snow_snow_s1_115.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mirror_snow_snow_s1_115.jpg",
+      "original": "https://v3b.fal.media/files/b/0a95785f/6e_VDeZpUpk2PIsHbjL0Y_K3RP83KX.jpg",
+      "source": "corpus"
+    },
+    "goofy_snow_snow_s0_goofy_116": {
+      "filename": "goofy_snow_snow_s0_goofy_116.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/goofy_snow_snow_s0_goofy_116.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957955/FPSMllVXtlo4_UhdPg7Sr_BNOhlJEt.jpg",
+      "source": "corpus"
+    },
+    "goofy_snow_snow_s0_goofy_117": {
+      "filename": "goofy_snow_snow_s0_goofy_117.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/goofy_snow_snow_s0_goofy_117.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957955/FgCuR_a40BeSR1ZtAz2Bc_lCDpIg7h.jpg",
+      "source": "corpus"
+    },
+    "goofy_snow_snow_s1_goofy_118": {
+      "filename": "goofy_snow_snow_s1_goofy_118.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/goofy_snow_snow_s1_goofy_118.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957955/93XmT3FJD1TdR7vcWB7OD_3Vl4pW5E.jpg",
+      "source": "corpus"
+    },
+    "goofy_snow_snow_s1_goofy_119": {
+      "filename": "goofy_snow_snow_s1_goofy_119.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/goofy_snow_snow_s1_goofy_119.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957955/YXVNIg8gnTQBGcfBaBUyJ_px13Bt8g.jpg",
+      "source": "corpus"
+    },
+    "goofy_snow_snow_s1_goofy_120": {
+      "filename": "goofy_snow_snow_s1_goofy_120.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/goofy_snow_snow_s1_goofy_120.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957955/LqBWIUUbpEkzpF5378Pv0_j8j6l7ru.jpg",
+      "source": "corpus"
+    },
+    "goofy_snow_snow_s0_goofy_121": {
+      "filename": "goofy_snow_snow_s0_goofy_121.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/goofy_snow_snow_s0_goofy_121.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957955/jrsqJdbfJzGdRY2Do89_C_c3UipzlL.jpg",
+      "source": "corpus"
+    },
+    "mir2_ski_ski_s0_122": {
+      "filename": "mir2_ski_ski_s0_122.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mir2_ski_ski_s0_122.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957ac2/FrkRUa5dibM_dawyyC-Dd_V9hmlfdM.jpg",
+      "source": "corpus"
+    },
+    "mir2_snow_snow_s1_123": {
+      "filename": "mir2_snow_snow_s1_123.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mir2_snow_snow_s1_123.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957ac2/YeZo4PdDG1N_sybOkmcvR_hK5ZcXP4.jpg",
+      "source": "corpus"
+    },
+    "mir2_moto_moto_s0_124": {
+      "filename": "mir2_moto_moto_s0_124.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mir2_moto_moto_s0_124.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957ac2/ftcw9h1a_UGileNaxtWZ7_rtOeNtWI.jpg",
+      "source": "corpus"
+    },
+    "mir2_mtb_mtb_s0_125": {
+      "filename": "mir2_mtb_mtb_s0_125.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mir2_mtb_mtb_s0_125.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957ac2/UAJnUDA4pmUIec9I6vh9z_ko3MNpqI.jpg",
+      "source": "corpus"
+    },
+    "mir2_moto_moto_s0_126": {
+      "filename": "mir2_moto_moto_s0_126.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mir2_moto_moto_s0_126.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957ac2/WNKweO5SWSIMsmTud4gpk_XH03Dpoc.jpg",
+      "source": "corpus"
+    },
+    "mir2_ski_ski_s1_127": {
+      "filename": "mir2_ski_ski_s1_127.jpg",
+      "url": "https://jbarad424.github.io/ideas/winners/mir2_ski_ski_s1_127.jpg",
+      "original": "https://v3b.fal.media/files/b/0a957ac2/nH9OGjT_2daOnaqOjWOks_gkktwQfK.jpg",
+      "source": "corpus"
+    }
+  },
   "video_ids": [
     "vid-gen45-moto",
     "vid-gen45-snow",
