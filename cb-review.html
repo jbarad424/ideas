@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v10.4</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v10.5</span></div>
 </div>
 
 <div class="tabs">
@@ -2803,25 +2803,8 @@ function galOpen(id){
     :'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
       +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
       +'<a class="gal-dl" href="'+dlHref+'" download target="_blank">Download Full Resolution</a>'
-      +'<button class="gal-vidlab" onclick="galSendToVideoLab(\''+img.id+'\')">Send to Video Lab</button>'
-      +'<button class="gal-mm" onclick="galToggleMM(\''+img.id+'\')">Make More Like This</button>'
-      +'</div>'
-      +'<div id="mmPanel-'+img.id+'" class="mm-panel" style="display:none">'
-      +'<div style="font-size:.6rem;color:#a855f7;margin-bottom:.3rem">Using: '+mmDetectModel(img.model).name+'</div>'
-      +'<input id="mmText-'+img.id+'" type="text" placeholder="Optional: more snow, change to sunset, zoom closer...">'
-      +'<div class="mm-btns">'
-      +'<button class="mm-btn-close" onclick="galGenerate(\''+img.id+'\',\'high\')">Close Variation</button>'
-      +'<button class="mm-btn-creative" onclick="galGenerate(\''+img.id+'\',\'low\')">Creative Variation</button>'
-      +'</div>'
-      +'<div style="margin-top:.4rem;padding-top:.4rem;border-top:1px solid #222">'
-      +'<div style="font-size:.55rem;color:#888;margin-bottom:.3rem">Same pose, different colorway:</div>'
-      +'<div style="display:flex;gap:.3rem;flex-wrap:wrap">'
-      +'<button onclick="galColorwaySwap(\''+img.id+'\',\'Hunter\')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #365314;background:transparent;color:#fde047;font-size:.6rem;cursor:pointer;font-weight:600">Hunter</button>'
-      +'<button onclick="galColorwaySwap(\''+img.id+'\',\'Patriot\')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #1e3a5f;background:transparent;color:#93c5fd;font-size:.6rem;cursor:pointer;font-weight:600">Patriot</button>'
-      +'<button onclick="galColorwaySwap(\''+img.id+'\',\'Tron\')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #155e75;background:transparent;color:#06b6d4;font-size:.6rem;cursor:pointer;font-weight:600">Tron</button>'
-      +'</div></div>'
-      +'<div id="mmStatus-'+img.id+'" class="mm-status"></div>'
-      +'<div id="mmResults-'+img.id+'" class="mm-results"></div>'
+      +'<button class="gal-vidlab" onclick="galSendToVideoLab(\''+img.id+'\')">Make Video</button>'
+      +'<button class="gal-mm" onclick="galSendToCreate(\''+img.id+'\')">Make More Stills</button>'
       +'</div>';
   ov.innerHTML='<button class="gal-close" onclick="pauseAllVideos();this.parentElement.remove()">&times;</button>'
     +mediaTag
@@ -2876,9 +2859,49 @@ function galSendToVideoLab(id){
   showToast('Photo loaded — add direction and pick a platform');
 }
 
-function galToggleMM(id){
-  const p=document.getElementById('mmPanel-'+id);
-  p.style.display=p.style.display==='none'?'block':'none';
+// galSendToCreate — routes a Gallery image to the CREATE tab's Twist flow.
+// Same UX as clicking "Make More Like This" on a recipe card — opens the
+// New Scene form pre-populated with the image's sport/model/prompt, so
+// Justin can tweak the scene and generate more like it. Replaces the old
+// inline Make More panel that had a different UI and was confusing.
+function galSendToCreate(id){
+  const img=ALL_IMAGES.find(i=>i.id===id);if(!img)return;
+  const ov=document.querySelector('.gal-overlay');if(ov)ov.remove();
+  // Detect sport from the image
+  const sport=galDetectSport(img);
+  const sportMap={motorcycle:'moto',skiing:'ski',snowboard:'snow',snowmobile:'sled',mtb:'mtb'};
+  const formSport=sportMap[sport]||sport||'moto';
+  // Detect colorway from the image context/label if possible
+  const ctx=(img.label+' '+img.context+' '+(img.prompt||'')).toLowerCase();
+  let colorway=localStorage.getItem('cb2_last_colorway')||'Hunter';
+  if(/patriot/.test(ctx))colorway='Patriot';
+  else if(/tron/.test(ctx))colorway='Tron';
+  else if(/hunter/.test(ctx))colorway='Hunter';
+  // Detect model
+  const mdl=mmDetectModel(img.model);
+  const endpoint=mdl.endpoint;
+  setTab('create');
+  setTimeout(()=>{
+    CR.showNewScene();
+    CR.newScene.sport=formSport;
+    CR.newScene.colorway=colorway;
+    CR.newScene.gear=CR.GEAR[formSport]||'';
+    // Pre-fill the scene from the image's prompt (strip the CB2 block + camera suffix)
+    const rawPrompt=img.prompt||'';
+    const sceneEnd=rawPrompt.indexOf('. motorcycle rider')||rawPrompt.indexOf('. skier')||rawPrompt.indexOf('. snowboarder')||rawPrompt.indexOf('. mountain biker')||rawPrompt.indexOf(', the compact wearable');
+    CR.newScene.scene=(sceneEnd>20?rawPrompt.slice(0,sceneEnd):rawPrompt.slice(0,200)).trim();
+    CR.newScene.twistingFrom=id;
+    CR.newScene.twistingFromPrompt=rawPrompt;
+    CR.newScene.twistingFromThumb=img.url;
+    CR.newScene.twistingFromPreferredEndpoint=endpoint;
+    CR.view='newscene';
+    CR.render();
+    setTimeout(()=>{
+      const sel=document.getElementById('crModelSelect');
+      if(sel)sel.value=endpoint;
+    },50);
+    showToast('Loaded in CREATE \u2014 tweak the scene and generate!');
+  },600);
 }
 
 // galColorwaySwap — re-runs the same prompt but swaps the reference photo to a
@@ -3537,8 +3560,7 @@ const CR={
         '<div class="cr-card-title">'+this.esc(title)+'</div>'+
         '<div class="cr-card-meta"><span class="cr-sport">'+sportIcon+' '+r.sport+'</span>'+(r.examples.length>1?'<span>\u2022</span><span>'+r.examples.length+' keepers</span>':'')+'</div>'+
         '<div class="cr-card-btns">'+
-          '<button class="cr-make-btn" onclick="event.stopPropagation();CR.startBatch(\''+r.id+'\',6)">Make 6 more like this</button>'+
-          '<button class="cr-twist-btn" onclick="event.stopPropagation();CR.twistRecipe(\''+r.id+'\')" title="Keep the sport/model/ref/arm, write a new scene">\uD83C\uDFA8 Twist</button>'+
+          '<button class="cr-make-btn" onclick="event.stopPropagation();CR.twistRecipe(\''+r.id+'\')">Make More Like This</button>'+
         '</div>'+
       '</div>'+
     '</div>';
