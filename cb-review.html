@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.4</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.5</span></div>
 </div>
 
 <div class="tabs">
@@ -3546,7 +3546,9 @@ const CR={
     const header='<div class="cr-header">'+
       '<div class="cr-header-btns">'+
         '<button class="cr-hdr-btn" onclick="CR.showNewScene()">+ New Scene</button>'+
-        '<button class="cr-hdr-btn" onclick="CR.toggleDryRun()" id="crDryBtn">'+(this.isDryRun()?'\uD83E\uDDEA Dry-run ON':'\uD83E\uDDEA Dry-run OFF')+'</button>'+
+        // Dry-run button removed from UI — developer tool, confusing for users.
+        // isDryRun() still works via localStorage for dev testing if needed.
+        ''+
         hiddenToggle+
       '</div>'+
       '<div class="cr-cost">Pool: <strong>'+clustered.length+'</strong> clusters + <strong>'+singletons.length+'</strong> one-offs'+dryrun+'</div>'+
