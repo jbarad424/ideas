@@ -1983,9 +1983,13 @@ async function vidLabGenerate(platform){
     // gating form — first call may return 403. If so, file the request and
     // retry. Cost is computed live by fal: $0.3024/sec at 720p std,
     // $0.2419/sec at 720p fast (+ $0.0112/1K tokens).
-    seedance:{name:'Seedance 2.0',endpoint:'fal-ai/bytedance/seedance-2.0/image-to-video',cost:'~$1.51 (5s)',
+    // Per fal docs (fal.ai/models/bytedance/seedance-2.0/image-to-video) the
+    // endpoint is bytedance/seedance-2.0/... — NO fal-ai/ prefix. This is
+    // unlike v1 which lives at fal-ai/bytedance/seedance/v1/... — fal moved
+    // to a flatter namespace for v2.
+    seedance:{name:'Seedance 2.0',endpoint:'bytedance/seedance-2.0/image-to-video',cost:'~$1.51 (5s)',
       body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16'}},
-    'seedance-fast':{name:'Seedance 2.0 Fast',endpoint:'fal-ai/bytedance/seedance-2.0/fast/image-to-video',cost:'~$1.21 (5s)',
+    'seedance-fast':{name:'Seedance 2.0 Fast',endpoint:'bytedance/seedance-2.0/fast/image-to-video',cost:'~$1.21 (5s)',
       body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16'}},
     kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',cost:'~$1.50',
       body:{image_url:src.url,prompt:prompt,duration:'10',aspect_ratio:'9:16'}},
