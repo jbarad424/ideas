@@ -240,15 +240,13 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v12.2</div>
+  <div class="sub" style="color:#555;font-size:.75em">v12.3</div>
 </div>
 
 <div class="tabs">
   <div class="tab active" onclick="setTab('gallery')">GALLERY</div>
-  <div class="tab" onclick="setTab('create')">CREATE</div>
-  <div class="tab" onclick="setTab('videos')">VIDEO LAB</div>
-  <div class="tab" onclick="setTab('discover')">DISCOVER</div>
   <div class="tab" onclick="setTab('lab')">LAB</div>
+  <div class="tab" onclick="setTab('discover')">DISCOVER</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -402,107 +400,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div id="galGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem"></div>
 </div>
 
-<!-- VIDEO LAB TAB -->
-<div id="videosArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
-  <!-- Empty state — shown when no source image is loaded -->
-  <div id="vidLabEmpty" style="display:none;text-align:center;padding:1rem;margin-bottom:.8rem">
-    <div style="font-size:1.2rem;margin-bottom:.5rem">&#127909;</div>
-    <div style="font-size:.85rem;font-weight:700;color:#06b6d4;margin-bottom:.3rem">Video Lab</div>
-    <div style="font-size:.7rem;color:#888;line-height:1.5;max-width:320px;margin:0 auto">Pick a still from the <a href="#" onclick="setTab('gallery');return false" style="color:#a855f7;text-decoration:underline">Gallery</a> and click <strong>Send to Video Lab</strong> to animate it into a video.</div>
-    <div id="vidLabLastVideo"></div>
-  </div>
-  <div id="vidLabSource" style="display:none;background:#0a1a2a;border:2px solid #06b6d4;border-radius:12px;padding:.8rem;margin-bottom:.8rem">
-    <div style="font-size:.8rem;font-weight:700;color:#06b6d4;margin-bottom:.5rem">Video Lab</div>
-    <div style="display:flex;gap:.6rem;align-items:flex-start">
-      <img id="vidLabImg" src="" style="width:140px;border-radius:8px;flex-shrink:0">
-      <div style="flex:1">
-        <div id="vidLabLabel" style="font-size:.75rem;color:#fff;font-weight:600;margin-bottom:.2rem"></div>
-        <div id="vidLabMeta" style="font-size:.6rem;color:#888;margin-bottom:.5rem"></div>
-        <div style="font-size:.65rem;color:#ccc;font-weight:600;margin-bottom:.3rem">Direction (optional):</div>
-        <textarea id="vidLabDirection" placeholder="e.g. slow pan right, rider speeds away into sunset, dramatic camera shake, dust flying..." style="width:100%;min-height:50px;background:#111;border:1px solid #333;border-radius:6px;color:#fff;font-size:.7rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box"></textarea>
-        <div style="display:flex;gap:.3rem;margin-top:.3rem;align-items:center;flex-wrap:wrap">
-          <button onclick="vidLabRefine()" id="vidLabRefineBtn" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #d97757;background:transparent;color:#d97757;font-size:.65rem;cursor:pointer;font-weight:600">✨ Refine with Claude</button>
-          <select id="vidLabRefineTarget" onchange="localStorage.setItem('cb2_videolab_refine_target',this.value||'');" style="padding:.25rem .4rem;border-radius:5px;border:1px solid #444;background:#111;color:#d97757;font-size:.6rem;cursor:pointer">
-            <option value="">Universal rules</option>
-            <option value="Seedance 2.0">For Seedance 2.0</option>
-            <option value="Kling 3.0 Pro">For Kling 3.0 Pro</option>
-            <option value="Veo 3.1 Lite">For Veo 3.1 Lite</option>
-            <option value="Sora 2 Pro">For Sora 2 Pro</option>
-            <option value="Runway Gen-4T">For Runway Gen-4T</option>
-          </select>
-          <div id="vidLabRefineStatus" style="font-size:.55rem;color:#888"></div>
-        </div>
-        <div id="vidLabRefinedBox" style="display:none;margin-top:.4rem;background:#1a1410;border:1px solid #d97757;border-radius:6px;padding:.5rem">
-          <div style="font-size:.55rem;color:#d97757;font-weight:700;margin-bottom:.2rem">CLAUDE'S REFINED PROMPT:</div>
-          <div id="vidLabRefinedText" style="font-size:.7rem;color:#fff;line-height:1.4;white-space:pre-wrap"></div>
-          <div style="display:flex;gap:.3rem;margin-top:.4rem">
-            <button onclick="vidLabApplyRefined()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Use This</button>
-            <button onclick="vidLabRefine()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.6rem;cursor:pointer">Try Again</button>
-          </div>
-        </div>
-        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.4rem 0 .3rem">
-          <!-- Platform -->
-          <div style="flex:1;min-width:180px">
-            <div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Platform</div>
-            <select id="vidLabPlatformSelect" onchange="vidLabUpdateOptions()" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">
-              <option value="seedance">Seedance 2.0 ⭐</option>
-              <option value="seedance-fast">Seedance Fast</option>
-              <option value="kling" selected>Kling 3.0 Pro</option>
-              <option value="veo-lite">Veo 3.1 Lite</option>
-              <option value="sora">Sora 2 Pro</option>
-              <option value="runway">Runway Gen-4T</option>
-            </select>
-          </div>
-          <!-- Duration -->
-          <div style="min-width:90px">
-            <div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Duration</div>
-            <select id="vidLabDuration" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">
-              <option value="5">5s</option>
-              <option value="8">8s</option>
-              <option value="10" selected>10s</option>
-              <option value="15">15s</option>
-            </select>
-          </div>
-          <!-- Aspect Ratio -->
-          <div style="min-width:100px">
-            <div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Aspect Ratio</div>
-            <select id="vidLabAspect" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">
-              <option value="9:16" selected>9:16 Reels/TikTok</option>
-              <option value="16:9">16:9 Landscape</option>
-              <option value="1:1">1:1 Square</option>
-              <option value="4:3">4:3 Classic</option>
-            </select>
-          </div>
-        </div>
-        <!-- End image (Seedance only) -->
-        <div id="vidLabEndImageRow" style="display:none;margin:.3rem 0">
-          <div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">End Frame <span style="color:#888;font-weight:400">(optional — Seedance only, video transitions to this image)</span></div>
-          <input id="vidLabEndImage" type="text" placeholder="Paste an image URL for the final frame..." style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;box-sizing:border-box">
-        </div>
-        <!-- Cost + Generate -->
-        <div style="display:flex;gap:.3rem;align-items:center;margin-top:.3rem" id="vidLabPlatforms">
-          <div id="vidLabCostEstimate" style="font-size:.6rem;color:#888;flex:1"></div>
-          <button onclick="vidLabGenerate(document.getElementById('vidLabPlatformSelect').value)" style="padding:.45rem .9rem;border-radius:6px;border:none;background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;font-size:.7rem;cursor:pointer;font-weight:700;white-space:nowrap">Create Video</button>
-        </div>
-        <div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.4rem"></div>
-      </div>
-    </div>
-    <button onclick="vidLabDismiss()" style="margin-top:.5rem;padding:.25rem .6rem;border-radius:6px;border:1px solid #333;background:transparent;color:#666;font-size:.6rem;cursor:pointer">Dismiss Source Image</button>
-  </div>
-  <!-- Job History -->
-  <div id="vidJobHistory" style="display:none;background:#111;border:1px solid #222;border-radius:10px;padding:.6rem;margin-bottom:.6rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
-      <div style="font-size:.7rem;font-weight:700;color:#f59e0b">Recent Video Jobs</div>
-      <button onclick="vidJobRefreshAll()" style="padding:.2rem .5rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.55rem;cursor:pointer;font-weight:600">Refresh All</button>
-    </div>
-    <div id="vidJobList" style="font-size:.6rem"></div>
-  </div>
-  <!-- Simplified video review: Keep/Archive toggle on each video in Job History.
-       Old To Review / Reviewed / Comment system removed 2026-04-10 per Justin's
-       request. Videos are expensive so there won't be hundreds; a simple keep/archive
-       toggle in the Job History panel is enough. Keepers show in the Gallery Videos
-       tab; archived ones are hidden unless "show archived" is toggled. -->
-</div>
+<!-- VIDEO LAB TAB removed in v12.2 — merged into LAB tab -->
 
 
 <!-- LAB TAB — unified stills + video funnel (replaces CREATE + VIDEO LAB) -->
@@ -526,8 +424,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   </div>
 </div>
 
-<!-- CREATE TAB -->
-<div id="createArea" style="display:none"></div>
+<!-- CREATE TAB removed in v12.2 — merged into LAB tab -->
 <div class="cr-lb" id="crLB" onclick="CR.closeLB()"><img id="crLBImg" alt=""></div>
 
 <!-- DISCOVER TAB — explore new scenes before committing to full CB2 generations -->
@@ -1620,16 +1517,16 @@ function setTab(t){
   // Pause all <video> elements + tear down any open overlays
   if(typeof closeGalleryOverlay==='function')closeGalleryOverlay();
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['gallery','create','videos','discover','lab'][i]===t)?' active':'');
+    // Migrate old tab names to new ones
+    if(t==='create'||t==='videos')t='lab';
+    el.className='tab'+((['gallery','lab','discover'][i]===t)?' active':'');
   });
   const hide=id=>{const e=document.getElementById(id);if(e)e.style.display='none';};
   const show=id=>{const e=document.getElementById(id);if(e)e.style.display='block';};
   hide('gridToggle');hide('gridArea');hide('reviewArea');hide('progressArea');
-  hide('galleryArea');hide('videosArea');hide('aiscoreArea');hide('createArea');
+  hide('galleryArea');hide('aiscoreArea');
   hide('discoverArea');hide('labArea');hide('emptyState');
   if(t==='gallery'){show('galleryArea');renderGallery();}
-  else if(t==='create'){show('createArea');CR.open();}
-  else if(t==='videos'){show('videosArea');if(typeof vidLabCheck==='function')vidLabCheck();}
   else if(t==='discover'){show('discoverArea');if(typeof discoverInit==='function')discoverInit();}
   else if(t==='lab'){show('labArea');if(typeof labInit==='function')labInit();}
 }
