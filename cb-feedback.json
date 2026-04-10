@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:43:23.052Z",
+  "syncedAt": "2026-04-10T19:43:37.771Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17299,6 +17299,11 @@
           "text": "I know what's happening here. The remote look is above his arms. It really wasn't one of the good ones that you're using here and it also looks like it's kind of being regenerated as every frame. It's good for the first couple frames and then it kind of degenerates a little bit.",
           "time": "2026-04-06T18:21:23.555Z",
           "num": 2
+        },
+        {
+          "num": 3,
+          "text": "rejected — archived from Gallery",
+          "time": "2026-04-10T19:43:36.979Z"
         }
       ]
     },
