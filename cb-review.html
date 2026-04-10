@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v12.4</div>
+  <div class="sub" style="color:#555;font-size:.75em">v12.5</div>
 </div>
 
 <div class="tabs">
@@ -543,7 +543,8 @@ async function proxyCall(target,body){
   try{data=await resp.json();}
   catch(e){throw new Error('Proxy returned non-JSON: '+resp.status);}
   if(!resp.ok){
-    const msg=(data&&(data.error||data.detail))||('HTTP '+resp.status);
+    const rawErr=data&&(data.error||data.detail);
+    const msg=(typeof rawErr==='string'?rawErr:rawErr?JSON.stringify(rawErr):null)||('HTTP '+resp.status);
     const up=data&&data.upstreamStatus?' (upstream '+data.upstreamStatus+')':'';
     const body=data&&data.bodyPreview?' — '+String(data.bodyPreview).slice(0,160):'';
     throw new Error('Proxy error: '+msg+up+body);
