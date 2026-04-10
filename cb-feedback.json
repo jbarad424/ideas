@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T20:38:15.725Z",
+  "syncedAt": "2026-04-10T22:00:39.931Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17254,6 +17254,66 @@
           "num": 1,
           "text": "Final score: 20 (CREATE reject)",
           "time": "2026-04-10T20:38:15.150Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260410215938_eryrai-0",
+      "url": "https://v3b.fal.media/files/b/0a95beae/KROMUtAkIEWcP6ttchmOB_mdR1spIg.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "label": "LAB keeper: moto_9101",
+      "context": "LAB batch 20260410215938_eryrai · recipe moto_9101 · keeper_rate 50%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (LAB keeper)",
+          "time": "2026-04-10T22:00:39.387Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260410215938_eryrai-1",
+      "url": "https://v3b.fal.media/files/b/0a95beae/AN4wbc39os7Q5TvCVqDyc_ZbJrRM0I.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "label": "LAB keeper: moto_9101",
+      "context": "LAB batch 20260410215938_eryrai · recipe moto_9101 · keeper_rate 50%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (LAB keeper)",
+          "time": "2026-04-10T22:00:39.387Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260410215938_eryrai-2",
+      "url": "https://v3b.fal.media/files/b/0a95beae/Qb6owJomAr1FNOs3d4VtL_DYMV2J9e.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "label": "LAB reject: moto_9101",
+      "context": "LAB batch 20260410215938_eryrai · recipe moto_9101 · keeper_rate 50%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (LAB reject)",
+          "time": "2026-04-10T22:00:39.387Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260410215938_eryrai-3",
+      "url": "https://v3b.fal.media/files/b/0a95beae/lBONgdKXvOfHH1wv22IfQ_LIVwcGaS.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
+      "label": "LAB reject: moto_9101",
+      "context": "LAB batch 20260410215938_eryrai · recipe moto_9101 · keeper_rate 50%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (LAB reject)",
+          "time": "2026-04-10T22:00:39.387Z"
         }
       ]
     },
