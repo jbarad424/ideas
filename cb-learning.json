@@ -210,6 +210,28 @@
       "cost_usd": 0.6,
       "is_novel": false,
       "at": "2026-04-10T22:00:39.385Z"
+    },
+    {
+      "batch_id": "20260410220240_xulp5d",
+      "recipe_id": "lab_twist_mntgc2ry",
+      "recipe_prompt": "A female rider carves through fog-draped asphalt lined with gnarled, skeletal trees under overcast twilight skies. Shot with a 35mm lens at f/2.8, natural low light captures the eerie atmosphere—mist swirling in her wake, dead leaves scattering across cracked pavement. Panning motion blur at 1/250s follows her through the haunting corridor. Desaturated color grade emphasizes charcoal clouds and amber underglow from distant jack-o'-lanterns dotting the roadside, creating cinematic tension in this shadowy, spine-chilling ride.. female motorcycle rider, wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "ref_id": "p4",
+      "model": "fal-ai/nano-banana-pro/edit",
+      "sport": "moto",
+      "generated": 4,
+      "kept_urls": [
+        "https://v3b.fal.media/files/b/0a95bec0/6cMSePIM5nFEHP3sbYjbI_A4v0lGkJ.jpg"
+      ],
+      "rejected_urls": [
+        "https://v3b.fal.media/files/b/0a95bec0/L2oW4f_h0rDS7MFS3wLbt_0Q63HziJ.jpg",
+        "https://v3b.fal.media/files/b/0a95bec0/BPlsRDNdQ5k3qZ70ckugg_38BC77Tn.jpg",
+        "https://v3b.fal.media/files/b/0a95bec0/ralvyyj_cidxBUUtRiky5_pXQ5cxf8.jpg"
+      ],
+      "failed": [],
+      "keeper_rate": 0.25,
+      "cost_usd": 0.6,
+      "is_novel": true,
+      "at": "2026-04-10T22:04:32.988Z"
     }
   ],
   "recipes": {
@@ -261,6 +283,13 @@
       "total_generated": 4,
       "total_kept": 2,
       "last_batch_at": "2026-04-10T22:00:39.385Z"
+    },
+    "lab_twist_mntgc2ry": {
+      "keeper_rate": 0.25,
+      "batches_run": 1,
+      "total_generated": 4,
+      "total_kept": 1,
+      "last_batch_at": "2026-04-10T22:04:32.988Z"
     }
   },
   "refs": {
@@ -296,8 +325,8 @@
     },
     "p4": {
       "overall": {
-        "keeper_rate": 0.46499999999999997,
-        "batches_run": 3
+        "keeper_rate": 0.40049999999999997,
+        "batches_run": 4
       },
       "by_recipe": {
         "mtb_9201": {
@@ -313,6 +342,13 @@
           "total_generated": 6,
           "total_kept": 2,
           "last_batch_at": "2026-04-10T18:32:21.239Z"
+        },
+        "lab_twist_mntgc2ry": {
+          "keeper_rate": 0.25,
+          "batches_run": 1,
+          "total_generated": 4,
+          "total_kept": 1,
+          "last_batch_at": "2026-04-10T22:04:32.988Z"
         }
       }
     },
@@ -396,11 +432,11 @@
         "last_batch_at": "2026-04-10T12:54:23.093Z"
       },
       "fal-ai/nano-banana-pro/edit": {
-        "keeper_rate": 0.6749999999999999,
-        "batches_run": 2,
-        "total_generated": 8,
-        "total_kept": 5,
-        "last_batch_at": "2026-04-10T22:00:39.385Z"
+        "keeper_rate": 0.5474999999999999,
+        "batches_run": 3,
+        "total_generated": 12,
+        "total_kept": 6,
+        "last_batch_at": "2026-04-10T22:04:32.988Z"
       }
     }
   }
