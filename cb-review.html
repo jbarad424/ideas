@@ -399,10 +399,11 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <!-- VIDEO LAB TAB -->
 <div id="videosArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
   <!-- Empty state — shown when no source image is loaded -->
-  <div id="vidLabEmpty" style="display:none;text-align:center;padding:2rem 1rem;margin-bottom:.8rem">
+  <div id="vidLabEmpty" style="display:none;text-align:center;padding:1rem;margin-bottom:.8rem">
     <div style="font-size:1.2rem;margin-bottom:.5rem">&#127909;</div>
     <div style="font-size:.85rem;font-weight:700;color:#06b6d4;margin-bottom:.3rem">Video Lab</div>
     <div style="font-size:.7rem;color:#888;line-height:1.5;max-width:320px;margin:0 auto">Pick a still from the <a href="#" onclick="setTab('gallery');return false" style="color:#a855f7;text-decoration:underline">Gallery</a> and click <strong>Send to Video Lab</strong> to animate it into a video.</div>
+    <div id="vidLabLastVideo"></div>
   </div>
   <div id="vidLabSource" style="display:none;background:#0a1a2a;border:2px solid #06b6d4;border-radius:12px;padding:.8rem;margin-bottom:.8rem">
     <div style="font-size:.8rem;font-weight:700;color:#06b6d4;margin-bottom:.5rem">Video Lab</div>
@@ -458,21 +459,11 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     </div>
     <div id="vidJobList" style="font-size:.6rem"></div>
   </div>
-  <div style="display:flex;gap:.3rem;justify-content:center;margin-bottom:.5rem">
-    <button id="vidTabNew" class="active" onclick="vidSetTab('new')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">To Review (<span id="vidCntNew">0</span>)</button>
-    <button id="vidTabDone" onclick="vidSetTab('done')" style="background:#111;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer">Reviewed (<span id="vidCntDone">0</span>)</button>
-  </div>
-  <div id="vidPlayer"></div>
-  <div class="context-box" id="vidCtxBox" style="display:none"><div class="context-inner" id="vidCtxInner"></div></div>
-  <div class="comment-trail" id="vidTrail"></div>
-  <div class="feedback-area">
-    <textarea id="vidFb" placeholder="What do you think of this video? Does the CB2 stay consistent?"></textarea>
-    <div class="submit-row"><button class="submit-btn" onclick="vidSubmit()">Submit Comment</button></div>
-  </div>
-  <div class="nav">
-    <button id="vidPrevBtn" onclick="vidGo(-1)">&larr; Prev</button>
-    <button id="vidNextBtn" onclick="vidGo(1)">Next &rarr;</button>
-  </div>
+  <!-- Simplified video review: Keep/Archive toggle on each video in Job History.
+       Old To Review / Reviewed / Comment system removed 2026-04-10 per Justin's
+       request. Videos are expensive so there won't be hundreds; a simple keep/archive
+       toggle in the Job History panel is enough. Keepers show in the Gallery Videos
+       tab; archived ones are hidden unless "show archived" is toggled. -->
 </div>
 
 
@@ -1846,8 +1837,25 @@ function vidLabCheck(){
   const emptyEl=document.getElementById('vidLabEmpty');
   if(!src){
     document.getElementById('vidLabSource').style.display='none';
-    // Show the empty-state prompt instead of a blank page
-    if(emptyEl)emptyEl.style.display='block';
+    // Show the empty-state prompt + most recent completed video (if any)
+    if(emptyEl){
+      emptyEl.style.display='block';
+      const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+      const lastCompleted=jobs.find(j=>j.status==='COMPLETED'&&j.videoUrl);
+      const lastVidEl=document.getElementById('vidLabLastVideo');
+      if(lastCompleted&&lastVidEl){
+        const age=Math.round((Date.now()-new Date(lastCompleted.submitted).getTime())/60000);
+        const ageStr=age<60?age+'m ago':Math.round(age/60)+'h ago';
+        lastVidEl.innerHTML='<div style="margin-top:.8rem;background:#111;border:1px solid #222;border-radius:10px;padding:.6rem">'
+          +'<div style="font-size:.7rem;font-weight:700;color:#06b6d4;margin-bottom:.4rem">Last Video — '+lastCompleted.platform+' ('+ageStr+')</div>'
+          +'<video controls playsinline loop muted style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+lastCompleted.videoUrl+'" type="video/mp4"></video>'
+          +'<div style="display:flex;gap:.3rem;margin-top:.4rem;justify-content:center">'
+          +'<button onclick="vidLabRetryLast()" style="padding:.3rem .7rem;border-radius:6px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.65rem;cursor:pointer;font-weight:600">\uD83D\uDD01 Create again with same still</button>'
+          +'</div></div>';
+      }else if(lastVidEl){
+        lastVidEl.innerHTML='';
+      }
+    }
     return;
   }
   if(emptyEl)emptyEl.style.display='none';
@@ -1902,12 +1910,19 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
         const res=await proxyCall('fal-get',{url:resultUrl});
         const vidUrl=res?.video?.url||res?.output?.video?.url;
         if(vidUrl){
-          prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done!</span> Video ready below.';
+          prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done!</span>';
           const preview=document.createElement('div');
           preview.style.cssText='margin-top:.5rem';
-          preview.innerHTML='<video controls playsinline autoplay loop style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
-            +'<div style="font-size:.55rem;color:#888;margin-top:.2rem;word-break:break-all">'+vidUrl+'</div>';
+          preview.innerHTML='<video controls playsinline autoplay loop muted style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
+            +'<div style="display:flex;gap:.4rem;justify-content:center;margin-top:.5rem;flex-wrap:wrap">'
+            +'<button onclick="vidLabKeep(\''+requestId+'\')" style="padding:.4rem .8rem;border-radius:6px;border:2px solid #22c55e;background:transparent;color:#22c55e;font-size:.7rem;cursor:pointer;font-weight:700">\u2665 Keep</button>'
+            +'<button onclick="vidLabArchive(\''+requestId+'\')" style="padding:.4rem .8rem;border-radius:6px;border:1px solid #444;background:transparent;color:#888;font-size:.7rem;cursor:pointer">Archive</button>'
+            +'<a href="'+vidUrl+'" download target="_blank" style="padding:.4rem .8rem;border-radius:6px;border:1px solid #333;color:#666;font-size:.65rem;text-decoration:none;display:flex;align-items:center">\u2B07 Download</a>'
+            +'</div>'
+            +'<button onclick="vidLabCreateAgain()" style="margin-top:.4rem;padding:.3rem .7rem;border-radius:6px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.65rem;cursor:pointer;font-weight:600;width:100%">\uD83D\uDD01 Create again (tweak prompt &amp; retry)</button>';
           if(st)st.appendChild(preview);
+          // Re-enable platform buttons so user can create another
+          document.querySelectorAll('#vidLabPlatforms button,#vidLabPlatforms select').forEach(b=>{b.disabled=false;b.style.opacity='1';});
           showToast('Video ready! '+platformName+' completed');
         }else{
           prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found.</span>';
@@ -1930,6 +1945,40 @@ function vidLabDismiss(){
   localStorage.removeItem('cb2_videolab_source');
   localStorage.removeItem('cb2_videolab_job');
   document.getElementById('vidLabSource').style.display='none';
+  const emptyEl=document.getElementById('vidLabEmpty');
+  if(emptyEl)emptyEl.style.display='block';
+  vidLabCheck(); // refresh to show last completed video if any
+}
+// Keep/Archive — simple verdict system for videos (replaces comment box)
+function vidLabKeep(requestId){
+  vidJobUpdate(requestId,{verdict:'keep'});
+  showToast('\u2665 Kept!');
+}
+function vidLabArchive(requestId){
+  vidJobUpdate(requestId,{verdict:'archive'});
+  showToast('Archived');
+}
+// Create again — clears the status area so user can tweak the direction and
+// pick a platform again, using the same source image. The source stays loaded.
+function vidLabCreateAgain(){
+  const st=document.getElementById('vidLabStatus');
+  if(st)st.innerHTML='';
+  localStorage.removeItem('cb2_videolab_job');
+  document.querySelectorAll('#vidLabPlatforms button,#vidLabPlatforms select').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+  showToast('Ready — tweak the direction and create another video');
+}
+// Retry from empty state — re-loads the source image from the last completed
+// job so the user can create another video from the same still.
+function vidLabRetryLast(){
+  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const last=jobs.find(j=>j.status==='COMPLETED'&&j.sourceUrl);
+  if(!last){showToast('No previous job found');return;}
+  localStorage.setItem('cb2_videolab_source',JSON.stringify({
+    id:'retry-'+Date.now(),url:last.sourceUrl,label:last.label||'Retry',
+    model:last.model||'unknown',score:0
+  }));
+  vidLabCheck();
+  showToast('Source reloaded — tweak direction and create again');
 }
 // === Job History — persists across reloads, nothing gets lost ===
 function vidJobLog(job){
@@ -2585,6 +2634,13 @@ function galOpen(id){
       +'<button class="mm-btn-close" onclick="galGenerate(\''+img.id+'\',\'high\')">Close Variation</button>'
       +'<button class="mm-btn-creative" onclick="galGenerate(\''+img.id+'\',\'low\')">Creative Variation</button>'
       +'</div>'
+      +'<div style="margin-top:.4rem;padding-top:.4rem;border-top:1px solid #222">'
+      +'<div style="font-size:.55rem;color:#888;margin-bottom:.3rem">Same pose, different colorway:</div>'
+      +'<div style="display:flex;gap:.3rem;flex-wrap:wrap">'
+      +'<button onclick="galColorwaySwap(\''+img.id+'\',\'Hunter\')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #365314;background:transparent;color:#fde047;font-size:.6rem;cursor:pointer;font-weight:600">Hunter</button>'
+      +'<button onclick="galColorwaySwap(\''+img.id+'\',\'Patriot\')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #1e3a5f;background:transparent;color:#93c5fd;font-size:.6rem;cursor:pointer;font-weight:600">Patriot</button>'
+      +'<button onclick="galColorwaySwap(\''+img.id+'\',\'Tron\')" style="padding:.25rem .5rem;border-radius:5px;border:1px solid #155e75;background:transparent;color:#06b6d4;font-size:.6rem;cursor:pointer;font-weight:600">Tron</button>'
+      +'</div></div>'
       +'<div id="mmStatus-'+img.id+'" class="mm-status"></div>'
       +'<div id="mmResults-'+img.id+'" class="mm-results"></div>'
       +'</div>';
@@ -2644,6 +2700,60 @@ function galSendToVideoLab(id){
 function galToggleMM(id){
   const p=document.getElementById('mmPanel-'+id);
   p.style.display=p.style.display==='none'?'block':'none';
+}
+
+// galColorwaySwap — re-runs the same prompt but swaps the reference photo to a
+// different colorway. Picks a random ref from the target colorway's pool. The
+// scene, pose, and composition should stay similar because the prompt is identical;
+// only the device appearance changes (Hunter green vs Patriot blue vs Tron cyan).
+async function galColorwaySwap(id,targetColorway){
+  const img=ALL_IMAGES.find(i=>i.id===id);if(!img)return;
+  // Get refs for target colorway (uses CR.REFS + CR.KILLED_REFS from the CREATE tab)
+  const refs=Object.values(CR.REFS).filter(r=>r.colorway===targetColorway&&!CR.KILLED_REFS.includes(r.id));
+  if(!refs.length){showToast('No refs for '+targetColorway);return;}
+  const ref=refs[Math.floor(Math.random()*refs.length)];
+  const mdl=mmDetectModel(img.model);
+  const prompt=img.prompt||'Create a variation of image 1. Preserve the wearable remote from image 2 on the LEFT forearm.';
+  function setStatus(msg){
+    const s=document.getElementById('mmStatus-'+id);
+    if(s)s.innerHTML=msg;
+    mmNotify(msg);
+  }
+  setStatus('Swapping to '+targetColorway+' (ref '+ref.id+') via '+mdl.name+'...');
+  try{
+    let allImgs=[];
+    if(mdl.type==='gpt'){
+      allImgs=await mmGen(mdl.endpoint,{image_urls:[img.url,ref.url],prompt:'Recreate image 1 exactly but replace the wearable remote with the one from image 2 ('+targetColorway+' colorway). Keep the same pose, scene, lighting, and composition.',size:'1024x1536',quality:'high',input_fidelity:'high',num_images:1});
+    }else{
+      const seed=Math.floor(Math.random()*100000);
+      const p={image_urls:[img.url,ref.url],prompt:'Recreate image 1 exactly but with the wearable device from image 2 ('+targetColorway+' colorway). Same pose, same scene.',seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
+      if(mdl.type==='flex'){p.guidance_scale=5.0;p.num_inference_steps=28;}
+      allImgs=await mmGen(mdl.endpoint,p);
+    }
+    if(!allImgs.length){setStatus('No images returned.');return;}
+    setStatus('Saving '+targetColorway+' swap...');
+    const permUrls=await Promise.all(allImgs.map(im=>mmUploadCatbox(im.url).catch(()=>im.url)));
+    const ts=Date.now();
+    const added=[];
+    permUrls.forEach((url,idx)=>{
+      const vid='cw-'+id+'-'+targetColorway.toLowerCase()+'-'+ts+'-'+idx;
+      if(!ALL_IMAGES.find(i=>i.id===vid)){
+        const entry={id:vid,url,model:mdl.name+' ('+targetColorway+' swap)',
+          prompt:'Colorway swap from '+id+' to '+targetColorway+' via ref '+ref.id,
+          label:'CW SWAP: '+targetColorway+' \u2190 '+(img.label||id),
+          context:'Colorway swap: '+targetColorway+' ref '+ref.id+'. Source: '+id+'. Model: '+mdl.name};
+        ALL_IMAGES.push(entry);
+        added.push(entry);
+      }
+    });
+    mmSaveVariations(added);
+    counts();
+    setStatus(targetColorway+' swap done! Added to gallery.');
+    const r=document.getElementById('mmResults-'+id);
+    if(r)r.innerHTML=permUrls.map(url=>'<img src="'+url+'" alt="'+targetColorway+' swap" style="border:2px solid #06b6d4">').join('');
+  }catch(e){
+    setStatus('Error: '+e.message);
+  }
 }
 
 function mmDetectModel(model){
