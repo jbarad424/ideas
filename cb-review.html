@@ -2731,6 +2731,9 @@ function renderGallery(){
 
   const sportIcon={motorcycle:'&#127949;',skiing:'&#9975;',snowboard:'&#127938;',snowmobile:'&#128757;',mtb:'&#128692;',other:'&#127918;'};
 
+  // Reset grid columns (grouped mode may have changed them)
+  g.style.gridTemplateColumns='repeat(3,1fr)';
+
   // === GROUPED MODE: show recipe cards instead of flat grid ===
   if(galGrouped&&!isVideoMode){
     (async()=>{
@@ -4829,6 +4832,11 @@ const LAB={
 
   async ensureData(){
     if(!CR.learning)await CR.loadLearning();
+    // Defensive: ensure learning has required arrays
+    if(CR.learning&&!CR.learning.batches)CR.learning.batches=[];
+    if(CR.learning&&!CR.learning.recipes)CR.learning.recipes={};
+    if(CR.learning&&!CR.learning.refs)CR.learning.refs={};
+    if(CR.learning&&!CR.learning.models_by_sport)CR.learning.models_by_sport={};
     if(!CR.keepers){await CR.loadKeepers();CR.buildRecipes();}
     if(CR.recipes.length)CR.scoreRecipes();
   },
@@ -4938,7 +4946,14 @@ const LAB={
   },
 
   chooseStills(){this.mode='stills';this.render();},
-  chooseVideo(){this.mode='video';this.render();},
+  chooseVideo(){
+    this.mode='video';
+    // Bridge: write source to old key so vidLabGenerate() reads it
+    if(this.source){
+      localStorage.setItem('cb2_videolab_source',JSON.stringify({id:this.source.id,url:this.source.url,label:this.source.label,model:this.source.model,score:this.source.score||0}));
+    }
+    this.render();
+  },
   clearSource(){
     this.source=null;this.mode=null;this.stillsMode=null;this.batch=null;this.newScene=null;
     localStorage.removeItem('cb2_lab_source');
@@ -5330,8 +5345,6 @@ const LAB={
   // === VIDEO FUNNEL ===
   renderVideoFunnel(){
     const s=this.source;if(!s)return '';
-    // Write source to old localStorage key so vidLabGenerate() can read it
-    localStorage.setItem('cb2_videolab_source',JSON.stringify({id:s.id,url:s.url,label:s.label,model:s.model,score:s.score||0}));
     let h='<div style="background:#0a1a2a;border:1px solid #06b6d4;border-radius:10px;padding:.8rem;margin-bottom:.8rem">'
       +'<div style="font-size:.7rem;font-weight:700;color:#06b6d4;margin-bottom:.5rem">Video Lab</div>';
     // Direction
