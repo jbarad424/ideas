@@ -4920,7 +4920,10 @@ const LAB={
     const r=CR.recipes.find(x=>x.id===recipeId);
     if(!r||!r.examples||!r.examples[0])return;
     const ex=r.examples[0];
-    this.source={id:ex.id,url:ex.url,label:ex.label||(r.prompt||'').slice(0,60),model:r.model,prompt:r.prompt,score:0,sport:r.sport,recipeId:r.id};
+    // Skip verdict labels ("yes","super","no") — use sport+seed or prompt slice instead
+    const skipLabels=['yes','no','super','maybe','pending'];
+    const label=(ex.label&&!skipLabels.includes(ex.label.toLowerCase()))?ex.label:(r.sport||'recipe')+' #'+(r.seed||r.id.slice(-6));
+    this.source={id:ex.id,url:ex.url,label,model:r.model,prompt:r.prompt,score:0,sport:r.sport,recipeId:r.id};
     localStorage.setItem('cb2_lab_source',JSON.stringify(this.source));
     this.mode=null;this.stillsMode=null;this.batch=null;
     this.render();
@@ -5077,8 +5080,11 @@ const LAB={
       +'<div style="font-size:.7rem;font-weight:700;color:#f59e0b;margin-bottom:.5rem">Twist It \u2014 new scene, same product</div>';
     // Original prompt banner if twisting from recipe
     if(ns.twistingFromPrompt){
-      h+='<details style="margin-bottom:.5rem"><summary style="font-size:.6rem;color:#888;cursor:pointer">Original prompt</summary>'
-        +'<div style="font-size:.6rem;color:#666;background:#0a0a0a;padding:.4rem;border-radius:6px;margin-top:.2rem;max-height:100px;overflow-y:auto">'+CR.esc(ns.twistingFromPrompt)+'</div></details>';
+      const isShortMeta=ns.twistingFromPrompt.length<100&&/\bref\b.*\bseed\b/i.test(ns.twistingFromPrompt);
+      h+='<details style="margin-bottom:.5rem"'+(isShortMeta?'':' open')+'><summary style="font-size:.6rem;color:#888;cursor:pointer">Original prompt</summary>'
+        +'<div style="font-size:.6rem;color:#666;background:#0a0a0a;padding:.4rem;border-radius:6px;margin-top:.2rem;max-height:100px;overflow-y:auto">'+CR.esc(ns.twistingFromPrompt)+'</div>'
+        +(isShortMeta?'<div style="font-size:.55rem;color:#f59e0b;margin-top:.2rem">This is a short reference label. Write a full scene description below, then Refine or Assemble.</div>':'')
+        +'</details>';
     }
     // Dropdowns row
     h+='<div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.4rem">';
