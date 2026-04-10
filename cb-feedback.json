@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:42:13.410Z",
+  "syncedAt": "2026-04-10T19:43:06.485Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17034,6 +17034,21 @@
           "text": "I don't know what's going on here but it's just a bunch of stills and it's really bad does not pass",
           "time": "2026-04-08T02:17:58.143Z",
           "num": 1
+        }
+      ]
+    },
+    {
+      "id": "vid-kling3-v4desert",
+      "url": "https://files.catbox.moe/xhbk3p.mp4",
+      "model": "Kling 3.0 Pro (fal.ai)",
+      "prompt": "Cinematic motorcycle rider cruising through red rock desert canyon, camera slowly tracking alongside, warm golden light, dust particles floating in air, leather jacket rippling in wind",
+      "label": "VIDEO: Kling 3.0 Pro — V4 Moto Desert",
+      "context": "V4 DESERT MOTO animated with Kling 3.0 Pro. Source scored 100 with correct PLUS-at-wrist orientation. 10s, 9:16, ~$1.50.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] marked super-like in Gallery",
+          "time": "2026-04-10T19:43:05.714Z"
         }
       ]
     },
