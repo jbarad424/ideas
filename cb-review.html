@@ -1435,11 +1435,11 @@ async function loadSharedFeedback(){
     S(local);
     feedbackLoaded=true;
     counts();
-    if(tab==='gallery')renderGallery();
+    if(tab==='gallery')renderGalleryDebounced();
     else if(tab==='new'||tab==='done'){upFilt();renderView();}
     // Also refresh video tab in case video comments were loaded from another device
     if(tab==='videos'){vidUpFilt();vidRender();}
-    console.log('Loaded '+merged+' image reviews from shared feedback');
+    console.log('Loaded '+merged+' image reviews from shared feedback (hydrated +'+hydrated+')');
   }catch(e){
     console.log('Could not load shared feedback:',e);
     // Fall back to seed comments
@@ -2303,6 +2303,16 @@ function galFilter(mode){
   renderGallery();
 }
 
+// Debounce wrapper — loadSharedFeedback, loadCorpus, and loadArchiveManifest
+// all call renderGallery() within milliseconds of each other on page load.
+// Without debouncing, the grid rebuilds 3x in rapid succession which causes
+// a visible flicker (thumbnails blank out then reappear). 150ms debounce
+// coalesces all three into a single render.
+let _galRenderTimer=null;
+function renderGalleryDebounced(){
+  if(_galRenderTimer)clearTimeout(_galRenderTimer);
+  _galRenderTimer=setTimeout(renderGallery,150);
+}
 function renderGallery(){
   const g=document.getElementById('galGrid');
 
@@ -2482,11 +2492,15 @@ function renderGallery(){
 // curated videos). Returns {item, isVideo} or null. Used by galOpen so the
 // overlay handles photos and videos uniformly.
 function galFindItem(id){
-  const img=ALL_IMAGES.find(i=>i.id===id);
-  if(img)return {item:img,isVideo:false};
+  // Check videos FIRST — a vid- or live- ID should always resolve as video
+  // even if it somehow leaked into ALL_IMAGES (pre-fix hydration, cached state).
+  // This prevents the bug where video overlays show photo-only buttons
+  // (Send to Video Lab, Make More Like This, editable score).
   const liveVideos=(typeof vidLiveVideos==='function')?vidLiveVideos():[];
   const vid=[...liveVideos,...ALL_VIDEOS].find(v=>v.id===id);
   if(vid)return {item:vid,isVideo:true};
+  const img=ALL_IMAGES.find(i=>i.id===id);
+  if(img)return {item:img,isVideo:false};
   return null;
 }
 
@@ -2524,11 +2538,12 @@ function galOpen(id){
   const scoreLine=isVideo
     ?'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+'</div>'
     :'<div style="font-size:.7rem;color:#888;margin-bottom:.4rem">'+img.model+' — Score: <strong class="gal-score-edit" onclick="galEditScore(\''+img.id+'\',this)" style="color:'+(s>=90?'#22c55e':s>=70?'#f59e0b':s>=50?'#3b82f6':'#ef4444')+'">'+Math.round(s)+'/100</strong> <span style="font-size:.55rem;color:#555">(click to edit)</span></div>';
-  // Action row — videos get super-like + download only. Photos get the full set.
+  // Action row — videos: prominent super-like + secondary download beneath.
+  // Photos: full action set (super-like, download, send to video lab, make more).
   const actionRow=isVideo
-    ?'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
-      +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
-      +'<a class="gal-dl" href="'+dlHref+'" download target="_blank">Download Video</a>'
+    ?'<div style="display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-top:.5rem">'
+      +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.55rem 1.2rem;border-radius:8px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.8rem;cursor:pointer;font-weight:700;min-width:180px">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
+      +'<a href="'+dlHref+'" download target="_blank" style="font-size:.65rem;color:#888;text-decoration:underline">\u2B07 Download video file</a>'
       +'</div>'
     :'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
       +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
@@ -3529,6 +3544,7 @@ const CR={
       batchSize:6,
       scene:'',
       gear:this.GEAR.moto, // pre-fill from sport's defaults; editable in form
+      gender:'any', // any | male | female
       refined:'',
       refinedAccepted:false,
       finalPrompt:'',
@@ -3559,6 +3575,7 @@ const CR={
       batchSize:6,
       scene:'',
       gear:this.GEAR[formSport]||this.GEAR.moto,
+      gender:'any',
       refined:'',
       refinedAccepted:false,
       finalPrompt:'',
@@ -3624,13 +3641,16 @@ const CR={
         '</select>'+
         (s.colorway==='Tron'&&!colorwayRefs.length?'<div class="cr-tron-hint">\uD83E\uDD41 Waiting for Tron reference photos \u2014 drop shots into rotated-refs/ as t1.jpg, t2.jpg, ...</div>':'')+
       '</div>'+
+      // Reference row hidden from UI — auto-pick still runs in fireNewScene().
+      // Justin said "I don't really know what P4 jacket or P6 jacket means" and
+      // the auto blurb was still confusing. The system picks the best ref silently.
+      (colorwayRefs.length?'':'<div class="cr-form-row"><div style="font-size:.65rem;color:#ef4444;padding:.4rem .6rem;background:#1a0a0a;border:1px solid #422;border-radius:6px">\u26A0\uFE0F No refs for '+s.colorway+' — switch colorway or enable dry-run.</div></div>')+
+      // Model moved above scene so the refiner knows which platform to optimize for.
       '<div class="cr-form-row">'+
-        '<div class="cr-form-label">Reference</div>'+
-        '<div style="font-size:.65rem;color:#888;line-height:1.4;padding:.4rem .6rem;background:#0a0a0a;border:1px solid #222;border-radius:6px">'+
-          (colorwayRefs.length
-            ?'\uD83C\uDFB2 Auto \u2014 picks one of <strong style="color:#a855f7">'+colorwayRefs.length+'</strong> '+s.colorway+' refs by weighted-random (best performers chosen more often).'
-            :'\u26A0\uFE0F No refs for '+s.colorway+' \u2014 enable dry-run or switch colorway.')+
-        '</div>'+
+        '<div class="cr-form-label">Model</div>'+
+        '<select class="cr-select" id="crModelSelect" onchange="CR.updateForm(\'model\',this.value)">'+
+          Object.keys(this.MODEL_LABELS).map(ep=>'<option value="'+ep+'"'+(ep===defaultEndpoint?' selected':'')+'>'+this.MODEL_LABELS[ep]+' \u00b7 ~$'+this.MODEL_COST[ep].toFixed(2)+'</option>').join('')+
+        '</select>'+
       '</div>'+
       '<div class="cr-form-row">'+
         '<div class="cr-form-label">Vibe</div>'+
@@ -3639,8 +3659,16 @@ const CR={
         '</select>'+
       '</div>'+
       '<div class="cr-form-row">'+
+        '<div class="cr-form-label">Subject</div>'+
+        '<select class="cr-select" onchange="CR.updateForm(\'gender\',this.value)">'+
+          '<option value="any"'+((s.gender||'any')==='any'?' selected':'')+'>Any (model decides)</option>'+
+          '<option value="male"'+(s.gender==='male'?' selected':'')+'>Male</option>'+
+          '<option value="female"'+(s.gender==='female'?' selected':'')+'>Female</option>'+
+        '</select>'+
+      '</div>'+
+      '<div class="cr-form-row">'+
         '<div class="cr-form-label">Scene description</div>'+
-        '<textarea class="create-prompt" id="crSceneInput" placeholder="Redwood forest, late afternoon, misty, descending steep switchbacks\u2026" oninput="CR.updateForm(\'scene\',this.value)">'+this.esc(s.scene)+'</textarea>'+
+        '<textarea class="create-prompt" id="crSceneInput" placeholder="Brooklyn rooftop at sunset, urban skyline behind, gritty textures\u2026" oninput="CR.updateForm(\'scene\',this.value)">'+this.esc(s.scene)+'</textarea>'+
         '<button class="cr-refine-btn" id="crRefineBtn" onclick="CR.refineWithSonnet()">\u2728 Refine with Sonnet</button>'+
         '<div class="cr-refine-status" id="crRefineStatus"></div>'+
         (s.refined?'<div class="cr-refined"><div class="cr-refined-label">Refined by Sonnet</div>'+this.esc(s.refined)+'<div class="cr-refined-actions"><button class="'+(s.refinedAccepted?'on':'')+'" onclick="CR.acceptRefined()">Use refined</button><button onclick="CR.rejectRefined()">Use original</button></div></div>':'')+
@@ -3659,12 +3687,6 @@ const CR={
         '<select class="cr-select" onchange="CR.updateForm(\'batchSize\',parseInt(this.value))">'+
           '<option value="4"'+(s.batchSize===4?' selected':'')+'>4 (\u223c$'+((this.MODEL_COST[defaultEndpoint]||0.12)*4).toFixed(2)+')</option>'+
           '<option value="6"'+(s.batchSize===6?' selected':'')+'>6 (\u223c$'+((this.MODEL_COST[defaultEndpoint]||0.12)*6).toFixed(2)+')</option>'+
-        '</select>'+
-      '</div>'+
-      '<div class="cr-form-row">'+
-        '<div class="cr-form-label">Model</div>'+
-        '<select class="cr-select" id="crModelSelect">'+
-          Object.keys(this.MODEL_LABELS).map(ep=>'<option value="'+ep+'"'+(ep===defaultEndpoint?' selected':'')+'>'+this.MODEL_LABELS[ep]+' \u00b7 ~$'+this.MODEL_COST[ep].toFixed(2)+'</option>').join('')+
         '</select>'+
       '</div>'+
       '<button class="gen-btn" onclick="CR.fireNewScene()">Generate '+s.batchSize+' images</button>'+
@@ -3709,30 +3731,45 @@ const CR={
     // for Ski came back as an urban scene because Sonnet had no idea it was
     // supposed to be on snow. (Justin reported this 2026-04-09.)
     const sportMeta={
-      moto:{label:'motorcycle',environment:'an open road, highway, canyon, coastal route, or desert \u2014 anywhere a motorcycle would actually ride',subject:'motorcycle rider on a motorcycle'},
-      ski:{label:'alpine skiing',environment:'a snowy mountain, ski slope, alpine ridge, deep powder, or groomed run \u2014 it MUST be set on snow in winter',subject:'skier in motion'},
-      snow:{label:'snowboarding',environment:'a snowy mountain, terrain park, half-pipe, or backcountry powder run \u2014 it MUST be set on snow in winter',subject:'snowboarder'},
-      mtb:{label:'mountain biking',environment:'a forest trail, alpine ridge, technical singletrack, or downhill descent \u2014 it MUST be set on a mountain bike trail',subject:'mountain biker on a mountain bike'},
+      moto:{label:'motorcycle',environment:'an open road, highway, canyon, coastal route, desert, city street, bridge, or urban backdrop \u2014 anywhere a motorcycle would actually ride (including urban environments if the user describes one)',subject:'motorcycle rider on a motorcycle'},
+      ski:{label:'alpine skiing',environment:'a snowy mountain, ski slope, alpine ridge, deep powder, groomed run, or any snow-covered setting \u2014 it MUST involve snow, but the backdrop can be urban/resort/backcountry per the user\u2019s scene',subject:'skier in motion'},
+      snow:{label:'snowboarding',environment:'a snowy mountain, terrain park, half-pipe, backcountry powder, or snow-covered setting \u2014 it MUST involve snow',subject:'snowboarder'},
+      mtb:{label:'mountain biking',environment:'a forest trail, alpine ridge, technical singletrack, downhill descent, or urban freeride course \u2014 anywhere a mountain bike would go',subject:'mountain biker on a mountain bike'},
       sled:{label:'snowmobiling',environment:'a snowy backcountry, frozen lake, alpine bowl, or snowmobile trail \u2014 it MUST be set on snow in winter',subject:'snowmobile rider on a snowmobile'},
     }[s.sport]||{label:s.sport,environment:'the sport-appropriate location',subject:'an athlete'};
+    // Gender-aware subject line
+    const genderPrefix={male:'male ',female:'female ','any':''}[s.gender||'any']||'';
+    const subjectLine=genderPrefix+sportMeta.subject;
     const vibeNote={
-      editorial:'Lean editorial \u2014 controlled, intentional composition.',
-      documentary:'Lean documentary \u2014 raw, candid, "caught in the moment" feel.',
-      'golden hour':'Use warm golden-hour backlight, long shadows, glowing rim light.',
-      'harsh midday':'Use harsh overhead midday sun with sharp shadows and high contrast.',
-      'moody night':'Use moody low-light night ambience with practical lights and deep shadows.',
+      editorial:'Editorial style \u2014 controlled, intentional composition. The user may set this in ANY location (urban, nature, studio) \u2014 preserve their chosen setting, just apply editorial framing and lens choices.',
+      documentary:'Documentary style \u2014 raw, candid, "caught in the moment" feel. Adapt the lighting description to wherever the user set the scene.',
+      'golden hour':'Golden-hour feel \u2014 warm backlight, long shadows, glowing rim light. BUT if the user explicitly sets the scene in an urban/night/indoor environment, adapt the warmth to that setting (e.g. warm streetlight glow on a Brooklyn rooftop at sunset, golden light between buildings). Do NOT override the user\u2019s location to force a nature scene.',
+      'harsh midday':'Harsh midday \u2014 overhead sun, sharp shadows, high contrast. Can work in any setting (desert, city, coastline).',
+      'moody night':'Moody night \u2014 low-light ambience, practical lights, deep shadows. Urban or wilderness.',
     }[s.vibe]||'';
-    const sys="You are a photography director for an action-sports marketing brand. The user has selected a SPORT and VIBE \u2014 you MUST anchor the scene to those constraints, even if their description sounds like it could be set anywhere.\n\n"+
-      "SPORT: "+sportMeta.label+" \u2014 the scene must take place in "+sportMeta.environment+".\n"+
-      "SUBJECT: "+sportMeta.subject+" (anchor any character/persona the user describes onto this subject).\n"+
+    // Model-aware prompting tips (what works best per generation model)
+    const selectedModel=document.getElementById('crModelSelect')?.value||defaultEndpoint;
+    const modelLabel=this.MODEL_LABELS[selectedModel]||selectedModel;
+    const modelTips={
+      'fal-ai/gpt-image-1.5/edit':'TARGET MODEL: GPT Image 1.5. Best practices: use specific camera+lens (e.g. "Sony A7R IV 85mm f/2.0"), add imperfection cues ("film grain, slight lens vignetting, chromatic aberration"), avoid generic quality boosters ("4K", "hyperrealistic") which trigger over-polished CGI look. Scene-first structure works best \u2014 describe the environment before the subject.',
+      'fal-ai/nano-banana-pro/edit':'TARGET MODEL: Nano Banana Pro (Gemini 3 Pro). Best practices: this is a reasoning model that excels at complex compositions. Detailed scene descriptions work well. Include spatial relationships and action dynamics. Camera language helps but the model also responds well to cinematic/narrative prompts.',
+      'fal-ai/nano-banana-2/edit':'TARGET MODEL: Nano Banana 2 (Gemini 3.1 Flash). Best practices: similar to NB Pro but faster/cheaper. Strong at dynamic action compositions. Simpler prompts can work well \u2014 don\u2019t over-engineer.',
+      'fal-ai/flux-2-flex/edit':'TARGET MODEL: FLUX 2 Flex. Best practices: keep prompts concise and descriptive. FLUX responds to specific photographic language (lens, aperture, film stock). Avoid narrative/story elements \u2014 describe the FRAME, not a sequence.',
+    }[selectedModel]||'TARGET MODEL: '+modelLabel+'. Use industry-standard photographic language.';
+    const sys="You are a photography director for an action-sports marketing brand. The user has selected settings below. Your job: rewrite their scene description into a prompt optimized for the target image generation model.\n\n"+
+      "SPORT: "+sportMeta.label+" \u2014 the scene must involve "+sportMeta.environment+".\n"+
+      "SUBJECT: "+subjectLine+". Anchor any character/persona the user describes onto this subject.\n"+
       "VIBE: "+(s.vibe||'editorial')+" \u2014 "+vibeNote+"\n"+
-      "COLORWAY: "+(s.colorway||'Hunter')+" (informational only \u2014 don't mention colors in the rewrite).\n\n"+
-      "Rewrite the user's scene description into industry-standard photographic language that would produce exceptional marketing photos. Preserve 100% of the user's creative intent (characters, narrative, mood, action) but TRANSPLANT it into the sport's environment. Use specific camera/lens terminology (e.g. 'shot on Sony A7R IV 85mm f/2.0'), concrete lighting vocabulary, evocative setting detail, and atmospheric descriptors.\n\n"+
-      "Example of correct sport-anchoring: if the user says 'James Bond character escaping a heist' and the sport is SKI, the rewrite should be a Bond-style chase happening on a ski slope (carving down powder while pursued, jumping a cornice, evading on skis) \u2014 NOT a Bond chase in an urban alley.\n\n"+
-      "Do NOT add wardrobe, helmet, gloves, or product description \u2014 those are added separately. Output only the rewritten scene paragraph, no preamble.";
+      modelTips+"\n\n"+
+      "CRITICAL RULES:\n"+
+      "1. PRESERVE the user\u2019s scene/location. If they say \u2018Brooklyn\u2019 or \u2018urban environment\u2019, keep it urban \u2014 do NOT replace it with a nature scene. The sport and vibe should adapt TO the location, not override it.\n"+
+      "2. Use specific camera/lens terminology, concrete lighting vocabulary, and atmospheric descriptors appropriate to both the vibe AND the user\u2019s setting.\n"+
+      "3. Do NOT add wardrobe, helmet, gloves, or product description \u2014 those are added separately.\n"+
+      "4. Output only the rewritten scene paragraph, no preamble or explanation.\n\n"+
+      "Example: sport=SKI, vibe=golden hour, scene='James Bond escaping a heist' \u2192 Bond-style chase on a ski slope at golden hour (NOT an urban heist).\n"+
+      "Example: sport=MOTO, vibe=golden hour, scene='Brooklyn urban environment' \u2192 motorcycle cruising across the BQE with the Manhattan skyline catching golden-hour light (urban setting PRESERVED).\n";
     try{
-      // 2026-04-09: routed through CF Worker (proxyAnthropic) — no client-side Anthropic key.
-      const d=await proxyAnthropic({model:'claude-sonnet-4-5',max_tokens:500,system:sys,messages:[{role:'user',content:'Sport: '+sportMeta.label+'\nVibe: '+s.vibe+'\nUser scene:\n'+raw}]});
+      const d=await proxyAnthropic({model:'claude-sonnet-4-5',max_tokens:500,system:sys,messages:[{role:'user',content:'Sport: '+sportMeta.label+'\nVibe: '+s.vibe+'\nModel: '+modelLabel+'\nSubject: '+subjectLine+'\nUser scene:\n'+raw}]});
       if(d.error){
         status.textContent='Error: '+(d.error.message||'unknown');
         btn.disabled=false;btn.style.opacity='1';
@@ -3764,16 +3801,23 @@ const CR={
     s.gear=liveGear;
     const sceneText=(s.refinedAccepted&&s.refined)?s.refined:liveScene;
     if(!sceneText.trim()){showToast('Type or refine a scene first');return;}
-    const subject={moto:'motorcycle rider',ski:'skier',snow:'snowboarder',mtb:'mountain biker',sled:'snowmobile rider'}[s.sport]||'athlete';
+    // Gender-aware subject: "female motorcycle rider" / "motorcycle rider" / etc.
+    const baseSubject={moto:'motorcycle rider',ski:'skier',snow:'snowboarder',mtb:'mountain biker',sled:'snowmobile rider'}[s.sport]||'athlete';
+    const genderPrefix={male:'male ',female:'female ','any':''}[s.gender||'any']||'';
+    const subject=genderPrefix+baseSubject;
     const gear=liveGear.trim();
     const cb2=this.CB2_BLOCK[s.arm]||this.CB2_BLOCK.LEFT;
+    // Vibe camera string — a suggestion, not the whole identity of the image.
+    // If the Sonnet refine was used, it already baked the vibe into the scene
+    // text with proper camera language. We still append a short camera tag as
+    // a fallback for un-refined prompts.
     const vibeCam={
-      editorial:'Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain, editorial photography',
-      documentary:'Shot on Nikon Z9 70mm f/2.8, documentary photography, slight lens vignetting',
-      'golden hour':'Shot on Sony A7R IV 85mm f/1.4, golden-hour backlight, warm rim light, film grain',
-      'harsh midday':'Shot on Nikon Z9 50mm f/4.0, harsh overhead sun, sharp shadows, documentary photography',
-      'moody night':'Shot on Sony A7S III 35mm f/1.4, moody night exposure, ambient streetlight, film grain',
-    }[s.vibe]||'Shot on Sony A7R IV 85mm f/2.0, film grain';
+      editorial:'Shot on Sony A7R IV 85mm f/2.0, natural light, film grain',
+      documentary:'Shot on Nikon Z9 70mm f/2.8, documentary feel, slight vignetting',
+      'golden hour':'warm golden-hour light, film grain',
+      'harsh midday':'harsh midday sun, sharp shadows',
+      'moody night':'moody night exposure, ambient streetlight, film grain',
+    }[s.vibe]||'film grain';
     // Gear is optional now (editable). If empty, skip the "wearing X" clause.
     const subjectClause=gear?(subject+' wearing '+gear):subject;
     const full=sceneText.trim()+'. '+subjectClause+', '+cb2+', waist-up, '+vibeCam+'.';
@@ -3959,7 +4003,7 @@ async function loadArchiveManifest(){
     ARCHIVED_VIDEO_IDS=new Set(data.video_ids||[]);
     ARCHIVED_VIDEOS=data.videos||{};
     console.log('[archive] loaded',ARCHIVED_IDS.size,'photos +',ARCHIVED_VIDEO_IDS.size,'videos from cb-archived.json');
-    if(typeof renderGallery==='function')renderGallery();
+    if(typeof renderGalleryDebounced==='function')renderGalleryDebounced();
   }catch(e){/* no manifest yet — fall through, images still use original URLs */}
 }
 
@@ -3999,7 +4043,7 @@ async function loadCorpus(){
       added++;
     }
     console.log('[corpus] hydrated +'+added+' items, ALL_IMAGES now '+ALL_IMAGES.length);
-    if(typeof renderGallery==='function')renderGallery();
+    if(typeof renderGalleryDebounced==='function')renderGalleryDebounced();
   }catch(e){console.log('[corpus] load failed:',e);}
 }
 
