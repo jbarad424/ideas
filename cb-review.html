@@ -2019,10 +2019,8 @@ async function vidLabGenerate(platform){
   const dir=(document.getElementById('vidLabDirection')?.value||'').trim();
   const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
   const prompt=dir?dir+'. '+basePrompt:basePrompt;
-  // Seedance access gate warning
-  if(platform==='seedance'||platform==='seedance-fast'){
-    if(!confirm('Seedance 2.0 requires access approval from fal.ai.\n\nIf you haven\'t requested access yet, this will fail and you may still be charged.\n\nRequest access at: fal.ai/models/bytedance/seedance-2.0/image-to-video\n\nProceed anyway?'))return;
-  }
+  // Seedance is live and open (verified 2026-04-10 from fal.ai page — badges
+  // show Inference + Commercial use + Partner, no access gate).
   const info={
     // Seedance 2.0 — ByteDance, currently #1 on Artificial Analysis Elo (1269,
     // beats Veo 3, Sora 2, Gen-4.5). Same fal queue API contract as Kling.
@@ -2034,10 +2032,15 @@ async function vidLabGenerate(platform){
     // endpoint is bytedance/seedance-2.0/... — NO fal-ai/ prefix. This is
     // unlike v1 which lives at fal-ai/bytedance/seedance/v1/... — fal moved
     // to a flatter namespace for v2.
+    // Seedance 2.0 — verified live on fal.ai (no access gate). Schema from
+    // fal.ai/models/bytedance/seedance-2.0/image-to-video/api:
+    // Required: prompt (string), image_url (string)
+    // Optional: duration (auto|4-15), resolution (480p|720p), aspect_ratio (auto|16:9|9:16|...),
+    //           generate_audio (bool, default true), seed (int), end_image_url (string)
     seedance:{name:'Seedance 2.0',endpoint:'bytedance/seedance-2.0/image-to-video',cost:'~$1.51 (5s)',
-      body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16'}},
+      body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16',generate_audio:true}},
     'seedance-fast':{name:'Seedance 2.0 Fast',endpoint:'bytedance/seedance-2.0/fast/image-to-video',cost:'~$1.21 (5s)',
-      body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16'}},
+      body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16',generate_audio:true}},
     kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',cost:'~$1.50',
       body:{image_url:src.url,prompt:prompt,duration:'10',aspect_ratio:'9:16'}},
     'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',cost:'~$0.40',
@@ -2070,8 +2073,12 @@ async function vidLabGenerate(platform){
       return;
     }
     const rid=d.request_id;
-    const statusUrl=d.status_url||('https://queue.fal.run/'+p.endpoint.replace(/\/[^/]+$/,'')+'/requests/'+rid+'/status');
-    const resultUrl=d.response_url||('https://queue.fal.run/'+p.endpoint.replace(/\/[^/]+$/,'')+'/requests/'+rid);
+    // Use fal-returned URLs when available (preferred). Fallback uses the FULL
+    // endpoint path — Seedance needs /image-to-video in the status URL unlike
+    // Kling which strips its suffix. The old code stripped the last segment
+    // which broke Seedance polling.
+    const statusUrl=d.status_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid+'/status');
+    const resultUrl=d.response_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid);
     // Save job state so it survives page reloads
     localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,submitted:new Date().toISOString()}));
     // Log to Job History so it's never lost
