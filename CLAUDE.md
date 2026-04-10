@@ -396,16 +396,55 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 - "Wireless earbuds" / "AirPods" removed from all prompts permanently (float on face, look Photoshopped)
 - MANDATORY per-sport gear list added to CLAUDE.md
 
-### Next Session Priorities (updated 2026-04-09 EOD)
-1. **Cloudflare Worker deployment** (PLAN Part 0.1) — CRITICAL path blocker for CREATE tab. Waiting on Justin to create a CF account + provide a shared team password + rotate the leaked fal.ai key. Worker code ready to deploy. See `scripts/cf-worker/` (written but not deployed).
-2. **SYNC_URL webhook fix** (PLAN Part 0.2) — waiting on Justin to update Make.com scenario 4654266 to accept a dynamic `filename` field.
-3. **Build CREATE tab** (PLAN Parts 1-4) — data layer + recipe cards + keeper grid + learning loop. Partially scaffolded in `scripts/create-tab/` (data layer can ship before the Worker; UI wiring waits for Worker).
-4. **Hunter/Patriot reshoot** — Justin will do this next week when products arrive. Single highest-EV shot: t18-clone (vertical standalone on wood table, PLUS at top, warm light). Replaces h3/p4 if results beat existing.
-5. **Scale production across all 4 validated models + 3 validated colorways** — GPT Image 1.5, Nano Banana Pro, Nano Banana 2, FLUX 2 Flex × Hunter, Patriot, Tron. Tron unlocked as of 2026-04-09.
-6. **Use GPT masked inpainting on best GPT-generated scenes** — apply the 99-scoring pipeline to new GPT scenes to fix above-elbow placement.
-7. **Permanent archival pipeline** — script to download every super/yes URL from `_rate_corpus.json` → `winners/` on GitHub Pages + rewrite URLs. Source data identified (`_rate_corpus.json` has 694 items with URL field). Script design pending.
-8. **Scale video production** — animate approved stills with Kling 3.0 Pro and Gen-4 Turbo.
-9. **Cancel Recraft subscription** ($25/mo, never used).
+### April 10 Session Summary (35+ commits)
+
+**Gallery overhaul:**
+- Videos merged into gallery as Photos/Videos toggle (separate content types, no mixing)
+- 37 super-liked images fixed and properly tracked
+- Video thumbnails display inline — no more blank video cards
+- Filter bar reorganized into clean rows for mobile: Show/Sport/Model
+- Sort by date added
+- Debounced gallery rendering for performance
+
+**CREATE tab — full production workflow:**
+- Model-aware Sonnet prompt refiner (optimizes per model: GPT Image 1.5, NB Pro, NB2, FLUX)
+- Sport-aware vibe system (scene descriptions match sport environment)
+- Gender dropdown for male/female subject selection
+- Reference photo auto-pick based on past performance data
+- Model badge on generated cards
+- Bigger text for readability
+- Colorway swap button: same pose, different colorway (Hunter/Patriot/Tron)
+
+**Video Lab — permanent tab with full controls:**
+- Duration slider, aspect ratio presets (9:16/16:9/1:1), end-frame controls
+- Seedance 2.0 integration with polling fix deployed
+- Keep/Archive workflow for reviewing completed videos
+- "Create again" button for re-generating with different settings
+- Auto-archive to catbox for permanent video URLs
+- Confirmation modals before every generation (cost transparency)
+- Refiner translates button-press descriptions to environmental camera effects
+
+**Discover tab (new):**
+- CB2-free "sketch" photo generation (~$0.05 each) — athletes in action without product
+- Inspiration upload with Claude Vision analysis (upload any photo, get recreation suggestions)
+
+**Archive and infrastructure:**
+- Safety guard on archival operations
+- .nojekyll deployed for GitHub Pages compatibility
+- Corpus hydration for permanent URLs
+- Video auto-archive pipeline
+- Tab persistence (remembers last active tab)
+- Batch persistence for CREATE operations
+- Deployed Worker source code saved to repo
+
+**Business case PDF generated** — full market analysis for cofounder presentation (separate document)
+
+### Next Session Priorities (updated 2026-04-10 EOD)
+1. **Verify fal.ai pricing** against actual billing dashboard — confirm $0.08-$0.30/image cost assumptions.
+2. **Test Seedance 2.0 end-to-end** — polling fix deployed but untested with real CB2 stills.
+3. **Try cluster-test.html** — visual clustering experiment groups similar photos by AI vision analysis.
+4. **Video Lab cross-device sync** — jobs are currently per-browser localStorage, need shared state.
+5. **Hunter/Patriot product reshoot** when products arrive — t18-clone (vertical standalone on wood table, PLUS at top, warm light).
 
 ### Key Resources
 | Resource | Location |
