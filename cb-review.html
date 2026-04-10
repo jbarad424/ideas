@@ -365,14 +365,16 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
       <button class="gal-filter gal-sport-f" onclick="galToggleSport('motorcycle')" data-sp="motorcycle" style="padding:.3rem .6rem;font-size:.65rem">Moto</button>
       <button class="gal-filter gal-sport-f" onclick="galToggleSport('skiing')" data-sp="skiing" style="padding:.3rem .6rem;font-size:.65rem">Ski</button>
       <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowboard')" data-sp="snowboard" style="padding:.3rem .6rem;font-size:.65rem">Snow</button>
-      <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowmobile')" data-sp="snowmobile" style="padding:.3rem .6rem;font-size:.65rem">Sled</button>
+      <button class="gal-filter gal-sport-f" onclick="galToggleSport('snowmobile')" data-sp="snowmobile" style="padding:.3rem .6rem;font-size:.65rem">Snowmobile</button>
       <button class="gal-filter gal-sport-f" onclick="galToggleSport('mtb')" data-sp="mtb" style="padding:.3rem .6rem;font-size:.65rem">MTB</button>
+      <button class="gal-filter gal-sport-f" onclick="galToggleSport('other')" data-sp="other" style="padding:.3rem .6rem;font-size:.65rem" title="Items whose sport couldn't be auto-detected from the prompt">Other</button>
       <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
       <!-- Model (multi-select) -->
       <button class="gal-filter gal-model-f" onclick="galToggleModel('gpt')" data-md="gpt" style="padding:.3rem .6rem;font-size:.65rem">GPT</button>
       <button class="gal-filter gal-model-f" onclick="galToggleModel('flex')" data-md="flex" style="padding:.3rem .6rem;font-size:.65rem">FLUX</button>
       <button class="gal-filter gal-model-f" onclick="galToggleModel('nbpro')" data-md="nbpro" style="padding:.3rem .6rem;font-size:.65rem">NB Pro</button>
       <button class="gal-filter gal-model-f" onclick="galToggleModel('nb2')" data-md="nb2" style="padding:.3rem .6rem;font-size:.65rem">NB2</button>
+      <button class="gal-filter gal-model-f" onclick="galToggleModel('other-model')" data-md="other-model" style="padding:.3rem .6rem;font-size:.65rem" title="Items whose model couldn't be auto-detected (LoRA, Kontext, two-pass, video models, etc.)">Other</button>
       <div style="width:1px;height:18px;background:#333;margin:0 .1rem"></div>
       <button class="gal-filter" onclick="galClearFilters()" style="padding:.3rem .6rem;font-size:.65rem">Reset</button>
     </div>
@@ -1365,10 +1367,32 @@ async function loadSharedFeedback(){
     const remoteImages=remote.images||[];
     const local=D();
     let merged=0;
+    // ID set of items already hardcoded into ALL_IMAGES — anything not in
+    // here that has feedback comments needs to be hydrated into ALL_IMAGES
+    // so the Gallery can render it. Older batch IDs (rot_*, dual_*, v1_*)
+    // were never added to ALL_IMAGES but exist in cb-feedback.json because
+    // Justin reviewed them in earlier sessions.
+    const allImagesIdSet=new Set(ALL_IMAGES.map(i=>i.id));
+    let hydrated=0;
     for(const img of remoteImages){
       const id=img.id;
       const remoteComments=img.comments||[];
       if(!remoteComments.length)continue;
+      // HYDRATE: if this reviewed image isn't in ALL_IMAGES yet, inject it
+      // so the Gallery can find it. Feedback entries already carry every
+      // field (id/url/model/prompt/label/context) the Gallery needs.
+      if(!allImagesIdSet.has(id)&&img.url){
+        ALL_IMAGES.push({
+          id,
+          url:img.url,
+          model:img.model||'unknown',
+          prompt:img.prompt||'',
+          label:img.label||id,
+          context:img.context||'',
+        });
+        allImagesIdSet.add(id);
+        hydrated++;
+      }
       if(!local[id])local[id]={comments:[],label:img.label||''};
       // Merge: keep all remote comments, add any local-only comments on top
       // Use timestamp to detect new local comments not yet synced
@@ -1380,6 +1404,7 @@ async function loadSharedFeedback(){
       local[id].label=img.label||local[id].label;
       merged++;
     }
+    if(hydrated)console.log('[hydrate] injected '+hydrated+' feedback-only images into ALL_IMAGES');
     // Also seed from SEED_COMMENTS for any images not in remote
     for(const[id,comments]of Object.entries(SEED_COMMENTS)){
       if(!local[id]||!local[id].comments.length){
@@ -2319,12 +2344,12 @@ function renderGallery(){
   setBtn(document.getElementById('galLikesToggle'),'Likes',verdictCounts.like||0,galShowLikes);
   setBtn(document.getElementById('galSuperToggle'),'⭐ Super',verdictCounts.super||0,galShowSuper);
   setBtn(document.getElementById('galRejToggle'),'Rejects',verdictCounts.reject||0,galShowRejects);
-  const sportLabels={motorcycle:'Moto',skiing:'Ski',snowboard:'Snow',snowmobile:'Sled',mtb:'MTB'};
+  const sportLabels={motorcycle:'Moto',skiing:'Ski',snowboard:'Snow',snowmobile:'Snowmobile',mtb:'MTB',other:'Other'};
   document.querySelectorAll('.gal-sport-f').forEach(b=>{
     const sp=b.dataset.sp;
     setBtn(b,sportLabels[sp]||sp,sportCounts[sp]||0,galSportSet.has(sp));
   });
-  const modelLabels={gpt:'GPT',flex:'FLUX',nbpro:'NB Pro',nb2:'NB2'};
+  const modelLabels={gpt:'GPT',flex:'FLUX',nbpro:'NB Pro',nb2:'NB2','other-model':'Other'};
   document.querySelectorAll('.gal-model-f').forEach(b=>{
     const md=b.dataset.md;
     setBtn(b,modelLabels[md]||md,modelCounts[md]||0,galModelSet.has(md));
@@ -2351,7 +2376,13 @@ function renderGallery(){
       const primarySrc=archivedVideoUrl(img.url,img.id);
       const fallbackSrc=img.url;
       const onErr=(primarySrc!==fallbackSrc?' onerror="this.onerror=null;this.src=\''+fallbackSrc+'\'"':'');
-      mediaTag='<video src="'+primarySrc+'" preload="metadata" muted playsinline'+onErr+'></video>';
+      // preload="metadata" only fetches the first chunk; most browsers won't
+      // paint a visible frame until the video seeks. Force a 0.1s seek on
+      // loadedmetadata so the browser renders the first real frame as a
+      // de-facto poster image. Without this trick, every card stays black.
+      mediaTag='<video src="'+primarySrc+'#t=0.1" preload="metadata" muted playsinline'
+        +' onloadedmetadata="try{this.currentTime=0.1}catch(e){}"'
+        +onErr+'></video>';
       vidBadge='<div class="gal-vid-badge">&#9654; VIDEO</div>';
     }else{
       const primarySrc=archivedUrl(img.url,img.id);
@@ -3700,6 +3731,44 @@ async function loadArchiveManifest(){
   }catch(e){/* no manifest yet — fall through, images still use original URLs */}
 }
 
+// loadCorpus — pulls _rate_corpus.json from Pages and hydrates ALL_IMAGES
+// with any IDs that aren't already there. Fixes the "37 super-likes shown
+// as 15" bug: 22 super-marked stub IDs in cb-feedback.json had no URL/model/
+// prompt because they were migrated from cb-rate.html state, but the corpus
+// holds the full metadata for all 694 reviewed items. After hydration the
+// gallery sees the complete picture.
+async function loadCorpus(){
+  try{
+    // Use a relative URL so it works in both local-dev (python http.server)
+    // and on Pages. The fetch falls back to the absolute Pages URL if the
+    // relative one 404s (e.g. running cb-review.html from a different host).
+    let r=await fetch('_rate_corpus.json?t='+Date.now(),{cache:'no-store'});
+    if(!r.ok){
+      r=await fetch('https://jbarad424.github.io/ideas/_rate_corpus.json?t='+Date.now(),{cache:'no-store'});
+    }
+    if(!r.ok){console.log('[corpus] not available ('+r.status+')');return;}
+    const corpus=await r.json();
+    if(!Array.isArray(corpus)){console.log('[corpus] unexpected shape');return;}
+    const have=new Set(ALL_IMAGES.map(i=>i.id));
+    let added=0;
+    for(const item of corpus){
+      if(!item.id||have.has(item.id))continue;
+      ALL_IMAGES.push({
+        id:item.id,
+        url:item.url||'',
+        model:item.model||'unknown',
+        prompt:item.prompt||'',
+        label:item.label||item.id,
+        context:item.context||'',
+      });
+      have.add(item.id);
+      added++;
+    }
+    console.log('[corpus] hydrated +'+added+' items, ALL_IMAGES now '+ALL_IMAGES.length);
+    if(typeof renderGallery==='function')renderGallery();
+  }catch(e){console.log('[corpus] load failed:',e);}
+}
+
 // Init: load any Make More Like This variations from localStorage
 mmLoadVariations();
 // Seed from local first (instant), then load shared feedback (async merge)
@@ -3713,6 +3782,8 @@ setTab('gallery');
 loadSharedFeedback();
 // Load permanent archive manifest (cb-archived.json) → rewrite image URLs
 loadArchiveManifest();
+// Load full 694-item corpus → hydrate ALL_IMAGES with anything not hardcoded
+loadCorpus();
 
 </script>
 </body></html>
