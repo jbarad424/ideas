@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Clustering — Moto Super-likes</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;padding:20px}
+h1{font-size:1.4em;margin-bottom:4px}
+.sub{color:#888;font-size:.85em;margin-bottom:20px}
+#status{background:#111;border:1px solid #222;border-radius:8px;padding:16px;margin-bottom:20px;min-height:60px}
+.step{margin:6px 0;color:#aaa}.step.active{color:#4fc3f7}.step.done{color:#66bb6a}
+.step .check{display:none}.step.done .check{display:inline}
+.progress-bar{background:#222;border-radius:4px;height:6px;margin:8px 0;overflow:hidden}
+.progress-fill{background:#4fc3f7;height:100%;width:0;transition:width .3s}
+button{background:#222;color:#e0e0e0;border:1px solid #444;border-radius:6px;padding:8px 16px;cursor:pointer;font-size:.85em;margin:4px}
+button:hover{background:#333}
+.cluster{background:#111;border:1px solid #222;border-radius:8px;margin:12px 0;overflow:hidden}
+.cluster-hdr{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.cluster-hdr:hover{background:#181818}
+.cluster-hdr h3{font-size:.95em;font-weight:500}
+.cluster-tags{color:#888;font-size:.8em;margin-top:2px}
+.cluster-body{display:flex;overflow-x:auto;gap:8px;padding:8px 16px 16px;scrollbar-width:thin}
+.cluster-body.collapsed{display:none}
+.thumb-wrap{flex-shrink:0;cursor:pointer;position:relative}
+.thumb-wrap img{height:150px;width:auto;border-radius:4px;display:block}
+.thumb-id{position:absolute;bottom:2px;left:2px;background:rgba(0,0,0,.7);color:#ccc;font-size:.6em;padding:1px 4px;border-radius:2px}
+.lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);display:none;justify-content:center;align-items:center;z-index:100;cursor:pointer}
+.lightbox img{max-width:92vw;max-height:92vh;border-radius:6px}
+.lightbox .lb-id{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#aaa;font-size:.8em}
+#matrix-section{margin-top:24px}
+#matrix-section h2{font-size:1.1em;margin-bottom:10px}
+.matrix-wrap{overflow-x:auto}
+table{border-collapse:collapse;font-size:.75em}
+th,td{border:1px solid #222;padding:4px 6px;text-align:center;white-space:nowrap}
+th{background:#181818;position:sticky;top:0}
+td.check-cell{color:#4fc3f7}
+.matrix-thumb{height:36px;width:auto;border-radius:2px;vertical-align:middle;margin-right:4px}
+#controls{margin-bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.count-badge{background:#333;padding:2px 8px;border-radius:10px;font-size:.8em;color:#4fc3f7}
+</style>
+</head>
+<body>
+<h1>Visual Clustering Experiment — Moto Super-likes</h1>
+<p class="sub">Groups super-liked motorcycle stills by visual similarity using Claude Vision tagging + Jaccard clustering</p>
+<div id="controls">
+  <button onclick="clearAndRerun()">Clear Cache &amp; Re-analyze</button>
+  <button onclick="runFromCache()" id="btn-cache" style="display:none">Re-cluster (cached tags)</button>
+  <span id="img-count" class="count-badge"></span>
+</div>
+<div id="status"></div>
+<div id="clusters"></div>
+<div id="matrix-section" style="display:none"><h2>Tag Matrix</h2><div class="matrix-wrap"><table id="matrix"></table></div></div>
+<div class="lightbox" id="lb" onclick="this.style.display='none'"><img id="lb-img"><div class="lb-id" id="lb-id"></div></div>
+<script>
+const FEEDBACK_URL='https://jbarad424.github.io/ideas/cb-feedback.json';
+const ARCHIVE_URL='https://jbarad424.github.io/ideas/cb-archived.json';
+const WORKER_URL='https://cb2-proxy.chubbybuttons.workers.dev';
+const CACHE_KEY='cb2_cluster_cache';
+const MOTO_RE=/moto|motorcycle|highway|rider|riding|cruising|handlebars|biker|desert.highway|pch|coastal.highway/i;
+const CONCURRENCY=3;
+const MERGE_THRESHOLD=0.3;
+
+let allImages=[], archivedIds=new Set(), tagMap={}, pw=null;
+
+function $(id){return document.getElementById(id)}
+function setStatus(html){$('status').innerHTML=html}
+
+function resolveUrl(img){
+  if(archivedIds.has(img.id)) return 'https://jbarad424.github.io/ideas/winners/'+img.id+'.jpg';
+  return img.url;
+}
+
+function stepHtml(steps){
+  return steps.map(s=>`<div class="step ${s.state}">${s.state==='done'?'<span class="check">&#10003; </span>':''}${s.text}</div>`).join('')
+    + (steps.find(s=>s.progress!==undefined)?`<div class="progress-bar"><div class="progress-fill" style="width:${steps.find(s=>s.progress!==undefined).progress}%"></div></div>`:'');
+}
+
+async function loadData(){
+  const steps=[{text:'Loading super-liked moto stills...',state:'active'}];
+  setStatus(stepHtml(steps));
+  const [fbRes, arRes]=await Promise.all([fetch(FEEDBACK_URL),fetch(ARCHIVE_URL)]);
+  const fb=await fbRes.json(), ar=await arRes.json();
+  archivedIds=new Set(ar.ids||[]);
+  const imgs=fb.images||[];
+  allImages=imgs.filter(i=>{
+    const comments=i.comments||[];
+    let isSuper=false;
+    if(Array.isArray(comments)){
+      for(const c of comments){
+        const t=typeof c==='string'?c:(c&&c.text)||'';
+        if(t.toLowerCase().includes('[super]')||t.toLowerCase().includes('super-like')){isSuper=true;break;}
+      }
+    }
+    if(!isSuper) return false;
+    const s=[i.id,i.label,i.prompt,i.context].join(' ');
+    return MOTO_RE.test(s);
+  });
+  steps[0].state='done';steps[0].text=`Loaded ${allImages.length} super-liked moto stills`;
+  setStatus(stepHtml(steps));
+  $('img-count').textContent=allImages.length+' images';
+  return steps;
+}
+
+function getPw(){
+  if(pw) return pw;
+  pw=localStorage.getItem('cb2_team_pw');
+  if(!pw){pw=prompt('Team password for Claude Vision proxy:');if(pw) localStorage.setItem('cb2_team_pw',pw);}
+  return pw;
+}
+
+async function analyzeOne(img){
+  const url=resolveUrl(img);
+  const body={model:'claude-sonnet-4-5',max_tokens:200,messages:[{role:'user',content:[
+    {type:'image',source:{type:'url',url:url}},
+    {type:'text',text:'Describe this action sports marketing photo in exactly 5 comma-separated tags. Focus on: setting/location, lighting/time-of-day, camera-angle, rider-pose, background-type. Example: "coastal highway, golden hour, side angle, hands on bars, ocean background". Output ONLY the 5 tags, nothing else.'}
+  ]}]};
+  const password=getPw();
+  if(!password) throw new Error('No password');
+  const resp=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Team-Password':password,'X-Proxy-Target':'anthropic'},body:JSON.stringify(body)});
+  if(!resp.ok){const e=await resp.text();throw new Error('API '+resp.status+': '+e);}
+  const data=await resp.json();
+  if(data.error) throw new Error(data.error.message||JSON.stringify(data.error));
+  const txt=(data.content&&data.content[0]&&data.content[0].text)||'';
+  return txt.split(',').map(t=>t.trim().toLowerCase()).filter(t=>t.length>0).slice(0,5);
+}
+
+async function analyzeAll(steps){
+  const cached=JSON.parse(localStorage.getItem(CACHE_KEY)||'{}');
+  const todo=allImages.filter(i=>!cached[i.id]);
+  if(todo.length===0){
+    tagMap=cached;
+    steps.push({text:`All ${allImages.length} images already cached`,state:'done'});
+    setStatus(stepHtml(steps));
+    return steps;
+  }
+  steps.push({text:`Analyzing ${todo.length} images with Claude Vision (${allImages.length-todo.length} cached)...`,state:'active',progress:0});
+  setStatus(stepHtml(steps));
+  let done=0;
+  const q=[...todo];
+  async function worker(){
+    while(q.length){
+      const img=q.shift();
+      try{
+        const tags=await analyzeOne(img);
+        cached[img.id]=tags;
+        localStorage.setItem(CACHE_KEY,JSON.stringify(cached));
+      }catch(e){
+        console.error('Failed',img.id,e);
+        cached[img.id]=['unknown'];
+        localStorage.setItem(CACHE_KEY,JSON.stringify(cached));
+      }
+      done++;
+      steps[steps.length-1].progress=Math.round(done/todo.length*100);
+      steps[steps.length-1].text=`Analyzing ${todo.length} images... (${done}/${todo.length})`;
+      setStatus(stepHtml(steps));
+    }
+  }
+  const workers=[];
+  for(let i=0;i<CONCURRENCY;i++) workers.push(worker());
+  await Promise.all(workers);
+  tagMap=cached;
+  steps[steps.length-1].state='done';
+  steps[steps.length-1].text=`Analyzed ${todo.length} images (${allImages.length} total)`;
+  delete steps[steps.length-1].progress;
+  setStatus(stepHtml(steps));
+  return steps;
+}
+
+function jaccard(a,b){
+  const sa=new Set(a),sb=new Set(b);
+  let inter=0;
+  for(const x of sa) if(sb.has(x)) inter++;
+  return inter/(sa.size+sb.size-inter);
+}
+
+function cluster(){
+  const ids=allImages.map(i=>i.id);
+  // init: each image is its own cluster
+  let clusters=ids.map(id=>[id]);
+  function maxSim(c1,c2){
+    let best=0;
+    for(const a of c1) for(const b of c2){
+      const s=jaccard(tagMap[a]||[],tagMap[b]||[]);
+      if(s>best) best=s;
+    }
+    return best;
+  }
+  // single-linkage agglomerative
+  let merged=true;
+  while(merged){
+    merged=false;
+    let bestI=-1,bestJ=-1,bestS=0;
+    for(let i=0;i<clusters.length;i++){
+      for(let j=i+1;j<clusters.length;j++){
+        const s=maxSim(clusters[i],clusters[j]);
+        if(s>bestS){bestS=s;bestI=i;bestJ=j;}
+      }
+    }
+    if(bestS>=MERGE_THRESHOLD&&bestI>=0){
+      clusters[bestI]=clusters[bestI].concat(clusters[bestJ]);
+      clusters.splice(bestJ,1);
+      merged=true;
+    }
+  }
+  // sort: largest first
+  clusters.sort((a,b)=>b.length-a.length);
+  return clusters;
+}
+
+function commonTags(ids){
+  if(!ids.length) return[];
+  const counts={};
+  for(const id of ids) for(const t of (tagMap[id]||[])){counts[t]=(counts[t]||0)+1;}
+  return Object.entries(counts).filter(([,c])=>c>=Math.ceil(ids.length/2)).sort((a,b)=>b[1]-a[1]).map(([t])=>t);
+}
+
+function imgById(id){return allImages.find(i=>i.id===id);}
+
+function renderClusters(clusters){
+  const el=$('clusters');
+  el.innerHTML='';
+  clusters.forEach((ids,ci)=>{
+    const ct=commonTags(ids);
+    const div=document.createElement('div');div.className='cluster';
+    div.innerHTML=`<div class="cluster-hdr" onclick="this.nextElementSibling.classList.toggle('collapsed')">
+      <div><h3>Cluster ${ci+1} (${ids.length} image${ids.length>1?'s':''})</h3>
+      <div class="cluster-tags">Common: ${ct.length?ct.join(', '):'(none)'}</div></div>
+      <span style="color:#666;font-size:.8em">&#9660;</span></div>
+      <div class="cluster-body">${ids.map(id=>{
+        const img=imgById(id);
+        const url=img?resolveUrl(img):'';
+        return `<div class="thumb-wrap" onclick="showLb('${url}','${id}')"><img src="${url}" loading="lazy"><div class="thumb-id">${id}</div></div>`;
+      }).join('')}</div>`;
+    el.appendChild(div);
+  });
+}
+
+function renderMatrix(){
+  const allTags=new Set();
+  for(const id of allImages.map(i=>i.id)) for(const t of (tagMap[id]||[])) allTags.add(t);
+  const tagArr=[...allTags].sort();
+  if(!tagArr.length) return;
+  $('matrix-section').style.display='';
+  let html='<tr><th>Image</th>'+tagArr.map(t=>`<th>${t}</th>`).join('')+'</tr>';
+  for(const img of allImages){
+    const url=resolveUrl(img);
+    const ts=new Set(tagMap[img.id]||[]);
+    html+=`<tr><td style="text-align:left"><img class="matrix-thumb" src="${url}"> ${img.id}</td>`
+      +tagArr.map(t=>ts.has(t)?'<td class="check-cell">&#10003;</td>':'<td></td>').join('')+'</tr>';
+  }
+  $('matrix').innerHTML=html;
+}
+
+function showLb(url,id){
+  $('lb').style.display='flex';$('lb-img').src=url;$('lb-id').textContent=id;
+}
+
+async function run(){
+  $('clusters').innerHTML='';$('matrix-section').style.display='none';
+  const steps=await loadData();
+  if(!allImages.length){setStatus('No super-liked moto images found.');return;}
+  $('btn-cache').style.display=Object.keys(JSON.parse(localStorage.getItem(CACHE_KEY)||'{}')).length?'':'none';
+  await analyzeAll(steps);
+  steps.push({text:'Clustering by visual similarity...',state:'active'});
+  setStatus(stepHtml(steps));
+  const cls=cluster();
+  steps[steps.length-1].state='done';
+  steps[steps.length-1].text=`Found ${cls.length} cluster${cls.length>1?'s':''}`;
+  setStatus(stepHtml(steps));
+  renderClusters(cls);
+  renderMatrix();
+}
+
+function clearAndRerun(){
+  localStorage.removeItem(CACHE_KEY);
+  tagMap={};
+  run();
+}
+
+function runFromCache(){
+  tagMap=JSON.parse(localStorage.getItem(CACHE_KEY)||'{}');
+  loadData().then(steps=>{
+    if(!allImages.length) return;
+    steps.push({text:'Using cached tags',state:'done'});
+    const cls=cluster();
+    steps.push({text:`Found ${cls.length} cluster${cls.length>1?'s':''}`,state:'done'});
+    setStatus(stepHtml(steps));
+    renderClusters(cls);
+    renderMatrix();
+  });
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('lb').style.display='none';});
+run();
+</script>
+</body>
+</html>
