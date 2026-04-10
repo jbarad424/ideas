@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v10.7</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v10.8</span></div>
 </div>
 
 <div class="tabs">
@@ -3577,7 +3577,8 @@ const CR={
         '<div class="cr-card-title">'+this.esc(title)+'</div>'+
         '<div class="cr-card-meta"><span class="cr-sport">'+sportIcon+' '+r.sport+'</span>'+(r.examples.length>1?'<span>\u2022</span><span>'+r.examples.length+' keepers</span>':'')+'</div>'+
         '<div class="cr-card-btns">'+
-          '<button class="cr-make-btn" onclick="event.stopPropagation();CR.twistRecipe(\''+r.id+'\')">Make More Like This</button>'+
+          '<button class="cr-make-btn" onclick="event.stopPropagation();CR.startBatch(\''+r.id+'\',4)" title="Same prompt, same refs, new seeds \u2014 safest option">Run Again (4)</button>'+
+          '<button class="cr-twist-btn" onclick="event.stopPropagation();CR.twistRecipe(\''+r.id+'\')" title="Keep sport/model/ref, write a new scene">\uD83C\uDFA8 Twist</button>'+
         '</div>'+
       '</div>'+
     '</div>';
@@ -4023,7 +4024,7 @@ const CR={
          '<div class="cr-twist-banner-body">'+
            '<div class="cr-twist-banner-label">Twisting: <strong>'+this.esc(s.twistingFrom)+'</strong></div>'+
            '<div class="cr-twist-banner-hint">Sport, model, ref, and arm are inherited from this recipe. Just write a new scene below and click Assemble.</div>'+
-           '<details class="cr-twist-orig"><summary>View original prompt</summary><div class="cr-twist-orig-body">'+this.esc((s.twistingFromPrompt||'').slice(0,400))+(s.twistingFromPrompt&&s.twistingFromPrompt.length>400?'\u2026':'')+'</div></details>'+
+           '<details class="cr-twist-orig"><summary>View full original prompt</summary><div class="cr-twist-orig-body" style="max-height:300px;overflow-y:auto;white-space:pre-wrap;word-break:break-word">'+this.esc(s.twistingFromPrompt||'')+'</div></details>'+
          '</div>'+
        '</div>'
       :'';
