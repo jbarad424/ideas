@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v10.5</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v10.6</span></div>
 </div>
 
 <div class="tabs">
@@ -1471,7 +1471,11 @@ function renderView(){
 }
 
 function D(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch{return {}}}
-function S(d){localStorage.setItem(LS,JSON.stringify(d))}
+function S(d){
+  localStorage.setItem(LS,JSON.stringify(d));
+  // Bump feedback version so gallery cache invalidates on next render
+  localStorage.setItem('cb2_fb_ver',String(Date.now()));
+}
 
 // Load shared feedback from GitHub Pages JSON + merge with localStorage
 // This makes reviews visible to ALL users (Justin, Jordan, anyone with the link)
@@ -2553,32 +2557,45 @@ function renderGalleryDebounced(){
   if(_galRenderTimer)clearTimeout(_galRenderTimer);
   _galRenderTimer=setTimeout(renderGallery,150);
 }
+// PERF: cache computed gallery item properties so filter toggles don't
+// recompute galScore/galDetectSport/galDetectModel/galIsAccepted/galIsSuper
+// for 700+ items on every click. Cache invalidates when the source set changes
+// (media type switch, feedback load, corpus hydration) via _galCacheKey.
+let _galCache=null;
+let _galCacheKey='';
 function renderGallery(){
   const g=document.getElementById('galGrid');
-
-  // Source switching: photos use ALL_IMAGES filtered by isR (must have a comment).
-  // Videos use ALL_VIDEOS + any live Video Lab jobs from localStorage. Videos
-  // default to "like" verdict even with no comments because they're expensive
-  // and Justin wants to keep them all unless explicitly rejected.
   const isVideoMode=galMediaType==='video';
-  let sourceItems;
-  if(isVideoMode){
-    const liveVideos=(typeof vidLiveVideos==='function')?vidLiveVideos():[];
-    sourceItems=[...liveVideos,...ALL_VIDEOS];
-  }else{
-    sourceItems=ALL_IMAGES.filter(i=>isR(i));
-  }
 
-  const scored=sourceItems.map(i=>({
-    ...i,
-    score:galScore(i.id),
-    bucket:galBucket(galScore(i.id)),
-    sport:galDetectSport(i),
-    modelCat:galDetectModel(i),
-    accepted:galIsAccepted(i),
-    isSuper:galIsSuper(i),
-    isVideo:isVideoMode,
-  }));
+  // Build cache key from source set identity + feedback version
+  const feedbackVer=localStorage.getItem('cb2_fb_ver')||'0';
+  const cacheKey=isVideoMode?'v'+ALL_VIDEOS.length+feedbackVer:'p'+ALL_IMAGES.length+feedbackVer;
+
+  let scored;
+  if(_galCache&&_galCacheKey===cacheKey){
+    scored=_galCache;
+  }else{
+    let sourceItems;
+    if(isVideoMode){
+      const liveVideos=(typeof vidLiveVideos==='function')?vidLiveVideos():[];
+      sourceItems=[...liveVideos,...ALL_VIDEOS];
+    }else{
+      sourceItems=ALL_IMAGES.filter(i=>isR(i));
+    }
+    scored=sourceItems.map(i=>({
+      ...i,
+      score:galScore(i.id),
+      bucket:galBucket(galScore(i.id)),
+      sport:galDetectSport(i),
+      modelCat:galDetectModel(i),
+      accepted:galIsAccepted(i),
+      isSuper:galIsSuper(i),
+      isVideo:isVideoMode,
+    }));
+    _galCache=scored;
+    _galCacheKey=cacheKey;
+    console.log('[perf] gallery cache rebuilt:',scored.length,'items');
+  }
   // Sort: supers first, then by most-recently-commented (newest at top).
   // Uses the timestamp of the latest comment as the recency signal.
   // Falls back to score for items without timestamps.
