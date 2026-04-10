@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:39:29.704Z",
+  "syncedAt": "2026-04-10T19:39:36.547Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17149,6 +17149,11 @@
           "text": "This is cool. The CB is preserved the guys on the bike is wind is blowing through his face. I would like to see a helmet and earbuds.",
           "time": "2026-04-06T22:00:00Z",
           "num": 2
+        },
+        {
+          "num": 3,
+          "text": "rejected — archived from Gallery",
+          "time": "2026-04-10T19:39:35.825Z"
         }
       ]
     },
