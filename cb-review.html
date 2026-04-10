@@ -2,6 +2,8 @@
 <title>CB2 Creative Lab</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+/* Prevent iOS auto-zoom on input focus (requires >=16px font-size) */
+input,textarea,select{font-size:16px!important}
 body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center}
 .header{padding:1rem;text-align:center;width:100%}
 .header h1{font-size:1.1rem;color:#a855f7;margin-bottom:.2rem}
@@ -170,6 +172,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .cr-rate-badge{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.75);color:#22c55e;font-size:.55rem;font-weight:700;padding:.12rem .35rem;border-radius:3px;z-index:2}
 .cr-hide-btn{position:absolute;top:6px;left:6px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:.72rem;font-weight:700;cursor:pointer;padding:0;line-height:1;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s,background .15s;z-index:3}
 .cr-card:hover .cr-hide-btn,.cr-unhide-btn{opacity:1}
+@media(hover:none){.cr-hide-btn{opacity:.35}}
 .cr-hide-btn:hover{background:#ef4444}
 .cr-unhide-btn{background:rgba(168,85,247,.8)}
 .cr-card.cr-card-hidden{opacity:.4;border-color:#7f1d1d}
@@ -1948,7 +1951,7 @@ function vidIsR(v){return getC(v.id).length>0;}
 // Pull completed Video Lab jobs out of localStorage and shape them like ALL_VIDEOS entries
 // so the review UI (TO REVIEW / REVIEWED, comment trail, counts) picks them up automatically.
 function vidLiveVideos(){
-  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const jobs=vidJobsRead();
   return jobs
     .filter(j=>j.status==='COMPLETED'&&j.videoUrl)
     .map(j=>({
@@ -1982,7 +1985,7 @@ function vidLabCheck(){
     // Show the empty-state prompt + most recent completed video (if any)
     if(emptyEl){
       emptyEl.style.display='block';
-      const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+      const jobs=vidJobsRead();
       const lastCompleted=jobs.find(j=>j.status==='COMPLETED'&&j.videoUrl);
       const lastVidEl=document.getElementById('vidLabLastVideo');
       if(lastCompleted&&lastVidEl){
@@ -2141,7 +2144,7 @@ function vidLabCreateAgain(){
 // Retry from empty state — re-loads the source image from the last completed
 // job so the user can create another video from the same still.
 function vidLabRetryLast(){
-  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const jobs=vidJobsRead();
   const last=jobs.find(j=>j.status==='COMPLETED'&&j.sourceUrl);
   if(!last){showToast('No previous job found');return;}
   localStorage.setItem('cb2_videolab_source',JSON.stringify({
@@ -2152,15 +2155,16 @@ function vidLabRetryLast(){
   showToast('Source reloaded — tweak direction and create again');
 }
 // === Job History — persists across reloads, nothing gets lost ===
+function vidJobsRead(){try{return vidJobsRead();}catch(e){return [];}}
 function vidJobLog(job){
-  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const jobs=vidJobsRead();
   jobs.unshift(job);
   if(jobs.length>20)jobs.length=20; // keep last 20
   localStorage.setItem('cb2_video_jobs',JSON.stringify(jobs));
   vidJobRender();
 }
 function vidJobUpdate(requestId,updates){
-  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const jobs=vidJobsRead();
   const j=jobs.find(j=>j.requestId===requestId);
   if(j)Object.assign(j,updates);
   localStorage.setItem('cb2_video_jobs',JSON.stringify(jobs));
@@ -2176,7 +2180,7 @@ function vidJobUpdate(requestId,updates){
   }catch(e){}
 }
 function vidJobRender(){
-  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const jobs=vidJobsRead();
   // Auto-expire stuck jobs: any IN_QUEUE job older than 60 minutes is almost
   // certainly dead (fal timed out or the polling URL was wrong). Mark as FAILED
   // so they don't clutter the list with false "pending" status forever.
@@ -2215,7 +2219,7 @@ function vidJobRender(){
 // Refresh pending Video Lab jobs by polling the Worker's fal-get target.
 // Re-enabled 2026-04-09.
 async function vidJobRefreshAll(){
-  const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  const jobs=vidJobsRead();
   const pending=jobs.filter(j=>j.status!=='COMPLETED'&&j.status!=='FAILED');
   if(!pending.length){showToast('All jobs already finished');return;}
   showToast('Checking '+pending.length+' pending job(s)\u2026');
@@ -3316,6 +3320,10 @@ const CR={
       try{
         const saved=JSON.parse(localStorage.getItem('cb2_create_batch')||'null');
         if(saved&&saved.tiles&&saved.tiles.some(t=>t.status==='done')){
+          // Reset tiles interrupted by reload
+          saved.tiles.forEach(t=>{
+            if(t.status==='generating'||t.status==='queued'){t.status='failed';t.error='interrupted by reload';}
+          });
           this.currentBatch=saved;
           this.view='batch';
           console.log('[create] restored batch '+saved.batch_id+' from localStorage');
@@ -4820,6 +4828,11 @@ const LAB={
       try{
         const saved=JSON.parse(localStorage.getItem('cb2_lab_batch')||'null');
         if(saved&&saved.tiles&&saved.tiles.some(t=>t.status==='done')){
+          // Reset tiles interrupted by reload — they'll never finish
+          saved.tiles.forEach(t=>{
+            if(t.status==='generating'){t.status='failed';t.error='interrupted by reload';}
+            if(t.status==='queued'){t.status='failed';t.error='interrupted by reload';}
+          });
           this.batch=saved;
           this.mode='stills';
           this.stillsMode=saved.is_novel?'twist':'again';
@@ -4899,7 +4912,7 @@ const LAB={
       if(list&&oldList)list.innerHTML=oldList.innerHTML;
       else if(list&&typeof vidJobRender==='function'){
         // Render jobs into Lab's container
-        const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+        const jobs=vidJobsRead();
         if(!jobs.length){list.innerHTML='<div style="color:#555">No jobs yet</div>';return;}
         list.innerHTML=jobs.slice(0,10).map(j=>{
           const age=Math.round((Date.now()-new Date(j.submitted).getTime())/60000);
