@@ -245,6 +245,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div class="tab" onclick="setTab('create')">CREATE</div>
   <div class="tab" onclick="setTab('videos')">VIDEO LAB</div>
   <div class="tab" onclick="setTab('discover')">DISCOVER</div>
+  <div class="tab" onclick="setTab('lab')">LAB</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -371,6 +372,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
         <button class="gal-filter gal-vf" id="galLikesToggle" onclick="galToggleLikes()">Likes</button>
         <button class="gal-filter gal-vf" id="galSuperToggle" onclick="galToggleSuperFilter()">Super</button>
         <button class="gal-filter gal-vf" id="galRejToggle" onclick="galToggleRejects()">Rejects</button>
+        <button class="gal-filter" id="galGroupedToggle" onclick="galToggleGrouped()" style="margin-left:.3rem;font-size:.55rem;padding:.2rem .5rem;border:1px solid #a855f7;color:#a855f7">Grouped</button>
         <button class="gal-filter" onclick="galClearFilters()" style="margin-left:auto;font-size:.55rem;padding:.2rem .4rem;opacity:.6">Reset</button>
       </div>
       <!-- Row 2: Sport -->
@@ -499,6 +501,9 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
        tab; archived ones are hidden unless "show archived" is toggled. -->
 </div>
 
+
+<!-- LAB TAB — unified stills + video funnel (replaces CREATE + VIDEO LAB) -->
+<div id="labArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem"></div>
 
 <!-- AI SCORING TAB -->
 <div id="aiscoreArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
@@ -1612,17 +1617,18 @@ function setTab(t){
   // Pause all <video> elements + tear down any open overlays
   if(typeof closeGalleryOverlay==='function')closeGalleryOverlay();
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['gallery','create','videos','discover'][i]===t)?' active':'');
+    el.className='tab'+((['gallery','create','videos','discover','lab'][i]===t)?' active':'');
   });
   const hide=id=>{const e=document.getElementById(id);if(e)e.style.display='none';};
   const show=id=>{const e=document.getElementById(id);if(e)e.style.display='block';};
   hide('gridToggle');hide('gridArea');hide('reviewArea');hide('progressArea');
   hide('galleryArea');hide('videosArea');hide('aiscoreArea');hide('createArea');
-  hide('discoverArea');hide('emptyState');
+  hide('discoverArea');hide('labArea');hide('emptyState');
   if(t==='gallery'){show('galleryArea');renderGallery();}
   else if(t==='create'){show('createArea');CR.open();}
   else if(t==='videos'){show('videosArea');if(typeof vidLabCheck==='function')vidLabCheck();}
   else if(t==='discover'){show('discoverArea');if(typeof discoverInit==='function')discoverInit();}
+  else if(t==='lab'){show('labArea');if(typeof labInit==='function')labInit();}
 }
 
 function upFilt(){
@@ -1768,6 +1774,14 @@ let galShowRejects=false;
 // Multi-select sport + model filters — Sets. Empty = show all.
 let galSportSet=new Set();
 let galModelSet=new Set();
+// Grouped mode — when ON, gallery shows recipe cards instead of flat grid
+let galGrouped=false;
+function galToggleGrouped(){
+  galGrouped=!galGrouped;
+  const btn=document.getElementById('galGroupedToggle');
+  if(btn){btn.style.background=galGrouped?'#a855f7':'transparent';btn.style.color=galGrouped?'#000':'#a855f7';}
+  renderGallery();
+}
 
 function galDetectSport(img){
   const t=(img.id+' '+img.label+' '+img.prompt+' '+(img.context||'')).toLowerCase();
@@ -2716,6 +2730,35 @@ function renderGallery(){
   const visible=filtered.slice(0,visibleCount);
 
   const sportIcon={motorcycle:'&#127949;',skiing:'&#9975;',snowboard:'&#127938;',snowmobile:'&#128757;',mtb:'&#128692;',other:'&#127918;'};
+
+  // === GROUPED MODE: show recipe cards instead of flat grid ===
+  if(galGrouped&&!isVideoMode){
+    (async()=>{
+      if(!CR.keepers){await CR.loadKeepers();CR.buildRecipes();}
+      if(CR.recipes.length)CR.scoreRecipes();
+      let recipes=CR.recipes.filter(r=>!r.fade&&r.examples&&r.examples.length>=1);
+      // Apply sport + model filters to recipes
+      if(galSportSet.size)recipes=recipes.filter(r=>galSportSet.has(r.sport));
+      if(galModelSet.size)recipes=recipes.filter(r=>{const mc=galDetectModel({model:r.model||'',id:'',label:'',prompt:''});return galModelSet.has(mc);});
+      const html=recipes.map(r=>{
+        const thumb=(r.examples[0]&&r.examples[0].url)?archivedUrl(r.examples[0].url,r.examples[0].id):'';
+        const modelShort=(r.model||'').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT').replace('FLUX 2 Flex g7.0','FLUX');
+        const kr=CR.learning&&CR.learning.recipes&&CR.learning.recipes[r.id];
+        const keepRate=kr?Math.round(kr.keeper_rate*100)+'%':'';
+        return '<div style="background:#111;border:1px solid #222;border-radius:10px;padding:.5rem;cursor:pointer" onclick="LAB.loadRecipe(\''+r.id+'\');setTab(\'lab\')">'
+          +'<img src="'+thumb+'" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px;margin-bottom:.3rem">'
+          +'<div style="font-size:.6rem;font-weight:700;color:#fff">'+(sportIcon[r.sport]||'')+' '+CR.esc(r.sport||'')+'</div>'
+          +'<div style="font-size:.5rem;color:#888">'+modelShort+' \u00b7 '+r.examples.length+' img'+(keepRate?' \u00b7 '+keepRate:'')+'</div>'
+          +'<div style="font-size:.5rem;color:#eab308;margin-top:.1rem">'+r.super_count+'\u2B50</div>'
+          +'</div>';
+      }).join('');
+      g.style.gridTemplateColumns='repeat(3,1fr)';
+      g.innerHTML=html||'<div style="grid-column:1/-1;text-align:center;color:#888;font-size:.7rem;padding:1rem">No recipes yet. Generate images in the Lab first.</div>';
+      document.getElementById('counter').innerHTML=recipes.length+' recipes';
+    })();
+    return;
+  }
+
   g.innerHTML=visible.map(img=>{
     const short=img.label.replace(/^(REF TEST |REF C: |BATCH: |FLIP FIX: |PIPE [A-Z]: |LoRA V5: |FLUX 2 LoRA: |FLEX g7: |NB PRO: |NB2: |FLUX-GPT: |MASK INPAINT: |MICRO: |COMBO: |DUALREF: |VIDEO[^:]*:\s*)/,'');
     // Verdict badge in top-right (score badge removed per 2026-04-09 UX feedback)
@@ -2831,8 +2874,7 @@ function galOpen(id){
     :'<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">'
       +(function(){const isS=galIsSuper(img);return '<button id="galSuperBtn-'+img.id+'" onclick="galToggleSuper(\''+img.id+'\')" style="padding:.45rem .9rem;border-radius:6px;border:2px solid #eab308;background:'+(isS?'#eab308':'transparent')+';color:'+(isS?'#000':'#eab308')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(isS?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>';})()
       +'<a class="gal-dl" href="'+dlHref+'" download target="_blank">Download Full Resolution</a>'
-      +'<button class="gal-vidlab" onclick="galSendToVideoLab(\''+img.id+'\')">Make Video</button>'
-      +'<button class="gal-mm" onclick="galSendToCreate(\''+img.id+'\')">Make More Stills</button>'
+      +'<button style="padding:.45rem .9rem;border-radius:6px;border:2px solid #a855f7;background:transparent;color:#a855f7;font-size:.7rem;cursor:pointer;font-weight:700" onclick="galBringToLab(\''+img.id+'\')">Bring to Lab \u2192</button>'
       +'</div>';
   ov.innerHTML='<button class="gal-close" onclick="pauseAllVideos();this.parentElement.remove()">&times;</button>'
     +mediaTag
@@ -2874,6 +2916,17 @@ function galEditScore(id,el){
   }
   inp.addEventListener('keydown',e=>{if(e.key==='Enter')save();if(e.key==='Escape'){inp.remove();el.style.display='';if(hint)hint.style.display='';}});
   inp.addEventListener('blur',save);
+}
+
+function galBringToLab(id){
+  const img=ALL_IMAGES.find(i=>i.id===id)||ALL_VIDEOS.find(i=>i.id===id);if(!img)return;
+  const ov=document.querySelector('.gal-overlay');if(ov)ov.remove();
+  const sport=galDetectSport(img);
+  const score=galScore(img.id);
+  const src={id:img.id,url:img.url,label:img.label,model:img.model,prompt:img.prompt||'',score,sport};
+  localStorage.setItem('cb2_lab_source',JSON.stringify(src));
+  setTab('lab');
+  showToast('Loaded in Lab \u2014 choose Make Stills or Make Video');
 }
 
 function galSendToVideoLab(id){
@@ -4741,6 +4794,609 @@ function discoverUseAnalysis(){
     showToast('Inspiration loaded ('+lastColorway+') \u2014 check sport + colorway and generate!');
   },600);
 }
+
+// =====================================================================
+// LAB TAB — unified stills + video funnel (Steps 2-6 of consolidation)
+// =====================================================================
+const LAB={
+  source:null,       // {id, url, label, model, prompt, score, sport, recipeId?}
+  mode:null,         // null | 'stills' | 'video'
+  stillsMode:null,   // null | 'again' | 'twist'
+  batch:null,        // current stills batch (same shape as CR.currentBatch)
+  newScene:null,     // twist form state
+  _batchSize:6,
+
+  async init(){
+    // Load source from localStorage (read both old and new keys for compat)
+    if(!this.source){
+      const raw=localStorage.getItem('cb2_lab_source')||localStorage.getItem('cb2_videolab_source');
+      if(raw)try{this.source=JSON.parse(raw);}catch(e){}
+    }
+    // Restore in-progress batch
+    if(!this.batch){
+      try{
+        const saved=JSON.parse(localStorage.getItem('cb2_lab_batch')||'null');
+        if(saved&&saved.tiles&&saved.tiles.some(t=>t.status==='done')){
+          this.batch=saved;
+          this.mode='stills';
+          this.stillsMode=saved.is_novel?'twist':'again';
+        }
+      }catch(e){}
+    }
+    await this.ensureData();
+    this.render();
+  },
+
+  async ensureData(){
+    if(!CR.learning)await CR.loadLearning();
+    if(!CR.keepers){await CR.loadKeepers();CR.buildRecipes();}
+    if(CR.recipes.length)CR.scoreRecipes();
+  },
+
+  render(){
+    const el=document.getElementById('labArea');if(!el)return;
+    if(!this.source&&!this.batch){
+      el.innerHTML=this.renderEmpty();
+    }else{
+      el.innerHTML=this.renderSource()+this.renderFunnel();
+    }
+    // Update grouped toggle state in gallery filter bar
+    const gBtn=document.getElementById('galGroupedToggle');
+    if(gBtn){gBtn.style.background=galGrouped?'#a855f7':'transparent';gBtn.style.color=galGrouped?'#000':'#a855f7';}
+  },
+
+  // === STATE 0: Empty — Hit Parade + Job History ===
+  renderEmpty(){
+    let h='<div style="text-align:center;padding:1rem;margin-bottom:.8rem">'
+      +'<div style="font-size:1rem;font-weight:700;color:#a855f7;margin-bottom:.3rem">Lab</div>'
+      +'<div style="font-size:.7rem;color:#888;line-height:1.5">Pick an image from '
+      +'<a href="#" onclick="setTab(\'gallery\');return false" style="color:#a855f7;text-decoration:underline">Gallery</a> or '
+      +'<a href="#" onclick="setTab(\'discover\');return false" style="color:#f59e0b;text-decoration:underline">Discover</a>, or start from a proven recipe below.</div>'
+      +'</div>';
+    // Hit Parade quick-pick cards
+    if(CR.recipes&&CR.recipes.length){
+      const top=CR.recipes.filter(r=>!r.is_singleton&&r.examples&&r.examples.length>=2&&!r.fade).slice(0,8);
+      if(top.length){
+        h+='<div style="font-size:.7rem;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem">Top Recipes</div>';
+        h+='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;margin-bottom:.8rem">';
+        top.forEach(r=>{
+          const thumb=(r.examples[0]&&r.examples[0].url)?archivedUrl(r.examples[0].url,r.examples[0].id):'';
+          const sportIcons={motorcycle:'\u{1F3CD}',skiing:'\u26F7',snowboard:'\u{1F3C2}',snowmobile:'\u{1F6F5}',mtb:'\u{1F6B4}'};
+          const modelShort=(r.model||'').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT').replace('FLUX 2 Flex g7.0','FLUX');
+          const kr=CR.learning&&CR.learning.recipes&&CR.learning.recipes[r.id];
+          const keepRate=kr?Math.round(kr.keeper_rate*100)+'%':'';
+          h+='<div onclick="LAB.loadRecipe(\''+r.id+'\')" style="background:#111;border:1px solid #222;border-radius:8px;padding:.4rem;cursor:pointer;display:flex;gap:.4rem;align-items:center">'
+            +'<img src="'+thumb+'" style="width:50px;height:50px;object-fit:cover;border-radius:6px;flex-shrink:0">'
+            +'<div style="flex:1;min-width:0">'
+            +'<div style="font-size:.6rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(sportIcons[r.sport]||'')+' '+CR.esc(r.sport||'')+'</div>'
+            +'<div style="font-size:.5rem;color:#888">'+modelShort+' \u00b7 '+r.examples.length+' keepers'+(keepRate?' \u00b7 '+keepRate:'')+'</div>'
+            +'<div style="font-size:.5rem;color:#a855f7;margin-top:.1rem">'+r.super_count+'\u2B50 super</div>'
+            +'</div></div>';
+        });
+        h+='</div>';
+      }
+    }
+    // Job History
+    h+='<div id="labJobHistory" style="background:#111;border:1px solid #222;border-radius:10px;padding:.6rem;margin-bottom:.6rem">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">'
+      +'<div style="font-size:.7rem;font-weight:700;color:#f59e0b">Recent Video Jobs</div>'
+      +'<button onclick="vidJobRefreshAll()" style="padding:.2rem .5rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.55rem;cursor:pointer;font-weight:600">Refresh All</button>'
+      +'</div>'
+      +'<div id="labJobList" style="font-size:.6rem"></div>'
+      +'</div>';
+    // Render job list after DOM insertion
+    setTimeout(()=>{
+      const list=document.getElementById('labJobList');
+      const oldList=document.getElementById('vidJobList');
+      if(list&&oldList)list.innerHTML=oldList.innerHTML;
+      else if(list&&typeof vidJobRender==='function'){
+        // Render jobs into Lab's container
+        const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+        if(!jobs.length){list.innerHTML='<div style="color:#555">No jobs yet</div>';return;}
+        list.innerHTML=jobs.slice(0,10).map(j=>{
+          const age=Math.round((Date.now()-new Date(j.submitted).getTime())/60000);
+          const ageStr=age<60?age+'m ago':Math.round(age/60)+'h ago';
+          const stColor=j.status==='COMPLETED'?'#22c55e':j.status==='FAILED'?'#ef4444':'#f59e0b';
+          return '<div style="display:flex;justify-content:space-between;align-items:center;padding:.25rem 0;border-bottom:1px solid #1a1a1a">'
+            +'<div><span style="color:#06b6d4;font-weight:600">'+(j.platform||'Video')+'</span> <span style="color:#888">'+(j.label||'').slice(0,30)+'</span></div>'
+            +'<div><span style="color:'+stColor+';font-weight:600">'+j.status+'</span> <span style="color:#555">'+ageStr+'</span>'
+            +(j.videoUrl?' <a href="'+j.videoUrl+'" target="_blank" style="color:#a855f7;text-decoration:underline;margin-left:.3rem">Watch</a>':'')
+            +'</div></div>';
+        }).join('');
+      }
+    },50);
+    return h;
+  },
+
+  loadRecipe(recipeId){
+    const r=CR.recipes.find(x=>x.id===recipeId);
+    if(!r||!r.examples||!r.examples[0])return;
+    const ex=r.examples[0];
+    this.source={id:ex.id,url:ex.url,label:ex.label||(r.prompt||'').slice(0,60),model:r.model,prompt:r.prompt,score:0,sport:r.sport,recipeId:r.id};
+    localStorage.setItem('cb2_lab_source',JSON.stringify(this.source));
+    this.mode=null;this.stillsMode=null;this.batch=null;
+    this.render();
+  },
+
+  // === STATE 1: Source loaded ===
+  renderSource(){
+    if(!this.source)return '';
+    const s=this.source;
+    const imgUrl=(typeof archivedUrl==='function')?archivedUrl(s.url,s.id):s.url;
+    return '<div style="background:#0f0f1a;border:2px solid #a855f7;border-radius:12px;padding:.8rem;margin-bottom:.8rem">'
+      +'<div style="display:flex;gap:.6rem;align-items:flex-start">'
+      +(imgUrl?'<img src="'+imgUrl+'" alt="" style="width:140px;border-radius:8px;flex-shrink:0">':'')
+      +'<div style="flex:1">'
+      +'<div style="font-size:.8rem;font-weight:700;color:#fff;margin-bottom:.2rem">'+CR.esc(s.label||'')+'</div>'
+      +'<div style="font-size:.6rem;color:#888;margin-bottom:.5rem">'+CR.esc(s.model||'')+' \u00b7 Score: '+Math.round(s.score||0)+'</div>'
+      +'<div style="display:flex;gap:.4rem;flex-wrap:wrap">'
+      +'<button onclick="LAB.chooseStills()" style="flex:1;padding:.5rem;border-radius:8px;border:none;background:linear-gradient(135deg,#a855f7,#6d28d9);color:#fff;font-size:.75rem;font-weight:700;cursor:pointer'+(this.mode==='stills'?';opacity:.5':'')+'">Make Stills</button>'
+      +'<button onclick="LAB.chooseVideo()" style="flex:1;padding:.5rem;border-radius:8px;border:none;background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;font-size:.75rem;font-weight:700;cursor:pointer'+(this.mode==='video'?';opacity:.5':'')+'">Make Video</button>'
+      +'</div>'
+      +'<button onclick="LAB.clearSource()" style="margin-top:.4rem;padding:.25rem .6rem;border-radius:6px;border:1px solid #333;background:transparent;color:#666;font-size:.6rem;cursor:pointer">Dismiss</button>'
+      +'</div></div></div>';
+  },
+
+  chooseStills(){this.mode='stills';this.render();},
+  chooseVideo(){this.mode='video';this.render();},
+  clearSource(){
+    this.source=null;this.mode=null;this.stillsMode=null;this.batch=null;this.newScene=null;
+    localStorage.removeItem('cb2_lab_source');
+    this.render();
+  },
+
+  // === STATE 2: Funnel dispatcher ===
+  renderFunnel(){
+    if(this.mode==='stills')return this.renderStillsFunnel();
+    if(this.mode==='video')return this.renderVideoFunnel();
+    return '';
+  },
+
+  // === STILLS FUNNEL ===
+  renderStillsFunnel(){
+    let h='';
+    if(!this.stillsMode&&!this.batch){
+      h+='<div style="display:flex;gap:.4rem;margin-bottom:.8rem">'
+        +'<button onclick="LAB.chooseRunAgain()" style="flex:1;padding:.6rem;border-radius:8px;border:2px solid #a855f7;background:transparent;color:#a855f7;font-size:.75rem;font-weight:700;cursor:pointer">Run Again</button>'
+        +'<button onclick="LAB.chooseTwist()" style="flex:1;padding:.6rem;border-radius:8px;border:2px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.75rem;font-weight:700;cursor:pointer">Twist It</button>'
+        +'</div>';
+      return h;
+    }
+    if(this.stillsMode==='again')h+=this.renderRunAgain();
+    else if(this.stillsMode==='twist')h+=this.renderTwistForm();
+    if(this.batch)h+=this.renderBatchGrid();
+    return h;
+  },
+
+  chooseRunAgain(){this.stillsMode='again';this.render();},
+  chooseTwist(){
+    this.stillsMode='twist';
+    const s=this.source;
+    const recipe=s.recipeId?CR.recipes.find(r=>r.id===s.recipeId):null;
+    const sport=recipe?recipe.sport:(s.sport||'moto');
+    const sportMap={motorcycle:'moto',skiing:'ski',snowboard:'snow',snowmobile:'sled'};
+    const formSport=sportMap[sport]||sport||'moto';
+    const colorway=localStorage.getItem('cb2_last_colorway')||'Hunter';
+    const endpoint=recipe?CR.modelEndpoint(recipe.model):(CR.DEFAULT_MODEL[formSport]||'fal-ai/nano-banana-pro/edit');
+    this.newScene={
+      sport:formSport,colorway,vibe:'editorial',arm:recipe?.arm||'LEFT',
+      batchSize:6,scene:'',gear:CR.GEAR[formSport]||'',gender:'any',
+      refined:'',refinedAccepted:false,finalPrompt:'',
+      twistingFrom:recipe?.id||null,twistingFromPrompt:s.prompt||'',
+      twistingFromThumb:s.url||'',twistingFromPreferredEndpoint:endpoint,
+    };
+    this.render();
+  },
+
+  // === RUN AGAIN ===
+  renderRunAgain(){
+    const s=this.source;
+    const prompt=s.prompt||'(No prompt available)';
+    const recipe=s.recipeId?CR.recipes.find(r=>r.id===s.recipeId):null;
+    const endpoint=recipe?CR.modelEndpoint(recipe.model):(CR.DEFAULT_MODEL[s.sport]||'fal-ai/nano-banana-pro/edit');
+    const cost4=((CR.MODEL_COST[endpoint]||0.12)*4).toFixed(2);
+    const cost6=((CR.MODEL_COST[endpoint]||0.12)*6).toFixed(2);
+    return '<div style="background:#0f0f1a;border:1px solid #222;border-radius:10px;padding:.8rem;margin-bottom:.8rem">'
+      +'<div style="font-size:.7rem;font-weight:700;color:#a855f7;margin-bottom:.4rem">Run Again \u2014 same prompt, new seeds</div>'
+      +'<details class="cr-prompt-details"><summary><strong>Prompt</strong> <span style="color:#888;font-weight:400;font-size:.6rem">\u00b7 click to expand</span></summary>'
+      +'<div class="cr-prompt-full">'+CR.esc(prompt)+'</div></details>'
+      +'<div style="display:flex;gap:.4rem;margin:.5rem 0;align-items:center">'
+      +'<span style="font-size:.65rem;color:#888">Batch:</span>'
+      +'<button class="cr-btn'+(this._batchSize===4?' active':'')+'" onclick="LAB._batchSize=4;LAB.render()">4 (~$'+cost4+')</button>'
+      +'<button class="cr-btn'+((this._batchSize||6)===6?' active':'')+'" onclick="LAB._batchSize=6;LAB.render()">6 (~$'+cost6+')</button>'
+      +'</div>'
+      +'<button class="gen-btn" onclick="LAB.fireRunAgain()">Generate \u2192</button>'
+      +'</div>';
+  },
+
+  fireRunAgain(){
+    const s=this.source;
+    const recipe=s.recipeId?CR.recipes.find(r=>r.id===s.recipeId):null;
+    const prompt=s.prompt||'';
+    if(!prompt){showToast('No prompt available');return;}
+    const model=recipe?recipe.model:(s.model||'Nano Banana Pro');
+    const endpoint=CR.modelEndpoint(model);
+    const n=this._batchSize||6;
+    const cost=(CR.MODEL_COST[endpoint]||0.12)*n;
+    const seed=recipe&&recipe.seed?recipe.seed:Math.floor(Math.random()*100000);
+    const ref=recipe&&recipe.ref?recipe.ref:CR.pickRefAuto('Hunter');
+    if(!confirm('Generate '+n+' images via '+(CR.MODEL_LABELS[endpoint]||model)+'?\nEstimated cost: $'+cost.toFixed(2)+(CR.isDryRun()?'\n\nDRY-RUN mode is ON':'')))return;
+    this.batch={
+      batch_id:new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)+'_'+Math.random().toString(36).slice(2,8),
+      recipe_id:recipe?recipe.id:('lab_'+Date.now().toString(36)),
+      recipe_prompt:cleanPrompt(prompt),
+      seed,model,endpoint,ref,
+      sport:s.sport||'moto',arm:'LEFT',
+      is_novel:false,cost_usd:cost,
+      started_at:new Date().toISOString(),
+      tiles:Array.from({length:n},(_,i)=>({i,status:'queued',url:null,kept:false,error:null})),
+    };
+    this.render();
+    this.fireBatch();
+  },
+
+  // === TWIST FORM ===
+  renderTwistForm(){
+    const ns=this.newScene;if(!ns)return '';
+    const endpoints=[
+      ['fal-ai/gpt-image-1.5/edit','GPT Image 1.5 (~$0.15)'],
+      ['fal-ai/nano-banana-pro/edit','Nano Banana Pro (~$0.15)'],
+      ['fal-ai/nano-banana-2/edit','Nano Banana 2 (~$0.08)'],
+      ['fal-ai/flux-2-flex/edit','FLUX 2 Flex (~$0.05)'],
+    ];
+    const vibes=['editorial','documentary','golden hour','harsh midday','moody night'];
+    let h='<div style="background:#0f0f1a;border:1px solid #333;border-radius:10px;padding:.8rem;margin-bottom:.8rem">'
+      +'<div style="font-size:.7rem;font-weight:700;color:#f59e0b;margin-bottom:.5rem">Twist It \u2014 new scene, same product</div>';
+    // Original prompt banner if twisting from recipe
+    if(ns.twistingFromPrompt){
+      h+='<details style="margin-bottom:.5rem"><summary style="font-size:.6rem;color:#888;cursor:pointer">Original prompt</summary>'
+        +'<div style="font-size:.6rem;color:#666;background:#0a0a0a;padding:.4rem;border-radius:6px;margin-top:.2rem;max-height:100px;overflow-y:auto">'+CR.esc(ns.twistingFromPrompt)+'</div></details>';
+    }
+    // Dropdowns row
+    h+='<div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.4rem">';
+    h+='<div style="flex:1;min-width:80px"><div style="font-size:.5rem;color:#888;margin-bottom:.15rem">Sport</div>'
+      +'<select id="labSport" onchange="LAB.updateForm(\'sport\',this.value)" style="width:100%;padding:.3rem;border-radius:5px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem">'
+      +['moto','ski','snow','mtb','sled'].map(s=>'<option value="'+s+'"'+(ns.sport===s?' selected':'')+'>'+s+'</option>').join('')
+      +'</select></div>';
+    h+='<div style="flex:1;min-width:80px"><div style="font-size:.5rem;color:#888;margin-bottom:.15rem">Colorway</div>'
+      +'<select id="labColorway" onchange="LAB.updateForm(\'colorway\',this.value)" style="width:100%;padding:.3rem;border-radius:5px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem">'
+      +['Hunter','Patriot','Tron'].map(c=>'<option'+(ns.colorway===c?' selected':'')+'>'+c+'</option>').join('')
+      +'</select></div>';
+    h+='<div style="flex:1;min-width:100px"><div style="font-size:.5rem;color:#888;margin-bottom:.15rem">Model</div>'
+      +'<select id="labModel" onchange="LAB.updateForm(\'model\',this.value)" style="width:100%;padding:.3rem;border-radius:5px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem">'
+      +endpoints.map(([ep,lb])=>'<option value="'+ep+'"'+(ns.twistingFromPreferredEndpoint===ep?' selected':'')+'>'+lb+'</option>').join('')
+      +'</select></div>';
+    h+='</div>';
+    h+='<div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.4rem">';
+    h+='<div style="flex:1;min-width:80px"><div style="font-size:.5rem;color:#888;margin-bottom:.15rem">Vibe</div>'
+      +'<select id="labVibe" onchange="LAB.updateForm(\'vibe\',this.value)" style="width:100%;padding:.3rem;border-radius:5px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem">'
+      +vibes.map(v=>'<option'+(ns.vibe===v?' selected':'')+'>'+v+'</option>').join('')
+      +'</select></div>';
+    h+='<div style="flex:1;min-width:80px"><div style="font-size:.5rem;color:#888;margin-bottom:.15rem">Subject</div>'
+      +'<select id="labGender" onchange="LAB.updateForm(\'gender\',this.value)" style="width:100%;padding:.3rem;border-radius:5px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem">'
+      +['any','male','female'].map(g=>'<option'+(ns.gender===g?' selected':'')+'>'+g+'</option>').join('')
+      +'</select></div>';
+    h+='<div style="flex:1;min-width:50px"><div style="font-size:.5rem;color:#888;margin-bottom:.15rem">Batch</div>'
+      +'<select id="labBatchSize" onchange="LAB.newScene.batchSize=+this.value" style="width:100%;padding:.3rem;border-radius:5px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem">'
+      +'<option value="4"'+(ns.batchSize===4?' selected':'')+'>4</option><option value="6"'+(ns.batchSize===6?' selected':'')+'>6</option>'
+      +'</select></div>';
+    h+='</div>';
+    // Scene + Gear
+    h+='<div style="font-size:.5rem;color:#888;margin-bottom:.15rem">Scene</div>'
+      +'<textarea id="labScene" oninput="LAB.newScene.scene=this.value" placeholder="Describe the scene..." style="width:100%;min-height:50px;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#fff;font-size:.65rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box">'+(ns.scene||'')+'</textarea>';
+    h+='<div style="font-size:.5rem;color:#888;margin:.3rem 0 .15rem">Gear</div>'
+      +'<textarea id="labGear" oninput="LAB.newScene.gear=this.value" style="width:100%;min-height:30px;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#fff;font-size:.6rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box">'+(ns.gear||'')+'</textarea>';
+    // Refine + Assemble buttons
+    h+='<div style="display:flex;gap:.3rem;margin:.4rem 0">'
+      +'<button onclick="LAB.refineWithSonnet()" style="padding:.35rem .6rem;border-radius:6px;border:2px solid #d97757;background:transparent;color:#d97757;font-size:.65rem;cursor:pointer;font-weight:600">\u2728 Refine with Claude</button>'
+      +'<button onclick="LAB.assemblePrompt()" style="padding:.35rem .6rem;border-radius:6px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.65rem;cursor:pointer;font-weight:600">Assemble Prompt</button>'
+      +'</div>';
+    h+='<div id="labRefineStatus" style="font-size:.55rem;color:#888;margin-bottom:.3rem"></div>';
+    // Refined box
+    if(ns.refined){
+      h+='<div style="background:#1a1410;border:1px solid #d97757;border-radius:6px;padding:.5rem;margin-bottom:.4rem">'
+        +'<div style="font-size:.55rem;color:#d97757;font-weight:700;margin-bottom:.2rem">REFINED SCENE:</div>'
+        +'<div style="font-size:.65rem;color:#fff;line-height:1.4;white-space:pre-wrap">'+CR.esc(ns.refined)+'</div>'
+        +'<div style="display:flex;gap:.3rem;margin-top:.3rem">'
+        +'<button onclick="LAB.newScene.refinedAccepted=true;LAB.assemblePrompt()" style="padding:.2rem .5rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.55rem;cursor:pointer;font-weight:600">Use \u2192 Assemble</button>'
+        +'<button onclick="LAB.refineWithSonnet()" style="padding:.2rem .5rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.55rem;cursor:pointer">Try Again</button>'
+        +'</div></div>';
+    }
+    // Final prompt
+    h+='<div style="font-size:.5rem;color:#888;margin-bottom:.15rem">Final Prompt</div>'
+      +'<textarea id="labFinalPrompt" style="width:100%;min-height:60px;background:#0a0a0a;border:1px solid #444;border-radius:6px;color:#fff;font-size:.6rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box" readonly>'+(ns.finalPrompt||'')+'</textarea>';
+    // Generate button
+    h+='<button class="gen-btn" onclick="LAB.fireTwist()" style="margin-top:.4rem"'+(ns.finalPrompt?'':' disabled')+'>Generate \u2192</button>';
+    h+='</div>';
+    return h;
+  },
+
+  updateForm(key,val){
+    if(!this.newScene)return;
+    this.newScene[key]=val;
+    if(key==='sport'){this.newScene.gear=CR.GEAR[val]||'';this.render();}
+    if(key==='colorway')localStorage.setItem('cb2_last_colorway',val);
+  },
+
+  async refineWithSonnet(){
+    const ns=this.newScene;if(!ns)return;
+    const raw=document.getElementById('labScene')?.value||ns.scene||'';
+    if(!raw.trim()){showToast('Write a scene description first');return;}
+    ns.scene=raw;
+    const statusEl=document.getElementById('labRefineStatus');
+    if(statusEl)statusEl.textContent='Refining with Claude\u2026';
+    const sportMeta={moto:{label:'Motorcycle',env:'highway, desert, mountain pass'},ski:{label:'Skiing',env:'snow-covered mountain, powder, groomed slope'},snow:{label:'Snowboard',env:'terrain park, half-pipe, backcountry'},mtb:{label:'Mountain Bike',env:'forest trail, alpine ridge, downhill'},sled:{label:'Snowmobile',env:'open snow field, groomed trail, mountain powder'}};
+    const sm=sportMeta[ns.sport]||sportMeta.moto;
+    const genderPrefix=ns.gender==='male'?'male ':ns.gender==='female'?'female ':'';
+    const modelLabel=CR.MODEL_LABELS[ns.twistingFromPreferredEndpoint||document.getElementById('labModel')?.value]||'';
+    const sys='You are a creative director for action sports marketing photography.\n'
+      +'Sport: '+sm.label+' \u2014 environment: '+sm.env+'.\n'
+      +'Subject: '+genderPrefix+(sm.label.toLowerCase()+' athlete')+' in motion.\n'
+      +'Vibe: '+ns.vibe+'.\n'
+      +'Model: '+modelLabel+'.\n'
+      +'Rules: preserve the user\'s location/setting. Use concrete camera language (lens, f-stop, lighting). Do NOT mention the product, wardrobe, or gear. Keep to 60\u201380 words. Output ONLY the scene prompt, nothing else.';
+    try{
+      const d=await proxyAnthropic({model:'claude-sonnet-4-5',max_tokens:500,system:sys,messages:[{role:'user',content:'Sport: '+sm.label+'\nVibe: '+ns.vibe+'\nSubject: '+genderPrefix+'athlete\nUser scene:\n'+raw}]});
+      ns.refined=d?.content?.[0]?.text||'';
+      ns.refinedAccepted=false;
+      if(statusEl)statusEl.textContent='Refined \u2714';
+    }catch(e){
+      if(statusEl)statusEl.textContent='Refine error: '+e.message;
+    }
+    this.render();
+  },
+
+  assemblePrompt(){
+    const ns=this.newScene;if(!ns)return;
+    // Read live values from DOM
+    ns.scene=document.getElementById('labScene')?.value||ns.scene||'';
+    ns.gear=document.getElementById('labGear')?.value||ns.gear||'';
+    const scene=(ns.refinedAccepted&&ns.refined)?ns.refined:ns.scene;
+    if(!scene.trim()){showToast('Write a scene first');return;}
+    const genderPrefix=ns.gender==='male'?'male ':ns.gender==='female'?'female ':'';
+    const subjectWords={moto:'motorcycle rider',ski:'skier',snow:'snowboarder',mtb:'mountain biker',sled:'snowmobile rider'};
+    const subject=genderPrefix+(subjectWords[ns.sport]||'athlete');
+    const subjectClause=subject+(ns.gear?', wearing '+ns.gear:'');
+    const cb2=CR.CB2_BLOCK[ns.arm||'LEFT'];
+    const vibeCamera={editorial:'Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain',documentary:'Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light','golden hour':'Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones, film grain','harsh midday':'Shot on Leica Q3 28mm, harsh desert sun, deep shadows, documentary','moody night':'Shot on Sony A7S III 50mm f/1.4, neon-lit, rain-slicked, cinematic grain'};
+    const cam=vibeCamera[ns.vibe]||vibeCamera.editorial;
+    // Scene splitting for long prompts (>80 words)
+    const words=scene.split(/\s+/);
+    let final;
+    if(words.length>80){
+      const mid=Math.floor(words.length/2);
+      const p1=words.slice(0,mid).join(' ');
+      const p2=words.slice(mid).join(' ');
+      final=p1+'. '+subjectClause+', '+cb2+', waist-up, '+cam+'. '+p2;
+    }else{
+      final=scene+'. '+subjectClause+', '+cb2+', waist-up, '+cam;
+    }
+    ns.finalPrompt=final;
+    this.render();
+    showToast('Prompt assembled \u2014 '+final.split(/\s+/).length+' words');
+  },
+
+  fireTwist(){
+    const ns=this.newScene;if(!ns||!ns.finalPrompt){showToast('Assemble the prompt first');return;}
+    const endpoint=document.getElementById('labModel')?.value||ns.twistingFromPreferredEndpoint||CR.DEFAULT_MODEL[ns.sport]||'fal-ai/nano-banana-pro/edit';
+    const n=ns.batchSize||6;
+    const cost=(CR.MODEL_COST[endpoint]||0.12)*n;
+    const colorway=ns.colorway||'Hunter';
+    const ref=CR.pickRefAuto(colorway);
+    if(!confirm('Generate '+n+' images via '+(CR.MODEL_LABELS[endpoint]||endpoint)+'?\nEstimated cost: $'+cost.toFixed(2)+(CR.isDryRun()?'\n\nDRY-RUN mode is ON':'')))return;
+    this.batch={
+      batch_id:new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)+'_'+Math.random().toString(36).slice(2,8),
+      recipe_id:'lab_twist_'+Date.now().toString(36),
+      recipe_prompt:cleanPrompt(ns.finalPrompt),
+      seed:Math.floor(Math.random()*100000),
+      model:CR.MODEL_LABELS[endpoint]||'',endpoint,ref,
+      sport:ns.sport||'moto',arm:ns.arm||'LEFT',
+      vibe:ns.vibe,
+      is_novel:true,cost_usd:cost,
+      started_at:new Date().toISOString(),
+      _origScene:ns.scene,_origGear:ns.gear,_origRefined:ns.refined,
+      tiles:Array.from({length:n},(_,i)=>({i,status:'queued',url:null,kept:false,error:null})),
+    };
+    this.render();
+    this.fireBatch();
+  },
+
+  // === BATCH ENGINE (shared by Run Again + Twist) ===
+  async fireBatch(){
+    const b=this.batch;
+    for(let i=0;i<b.tiles.length;i++){this.fireOne(i);}
+  },
+
+  async fireOne(i){
+    const b=this.batch;const t=b.tiles[i];
+    t.status='generating';this.refreshGrid();
+    try{
+      let url;
+      if(CR.isDryRun()){
+        await new Promise(r=>setTimeout(r,800+Math.random()*2500));
+        url='https://picsum.photos/seed/lab'+b.batch_id+i+'/512/768';
+      }else{
+        const payload=CR.buildPayload(b,i);
+        const imgs=await mmGen(b.endpoint,payload);
+        if(!imgs||!imgs.length)throw new Error('no images returned');
+        url=imgs[0].url;
+      }
+      t.url=url;t.status='done';
+    }catch(e){
+      t.status='failed';t.error=(e&&e.message||'err').slice(0,80);
+    }
+    this.refreshGrid();
+    try{localStorage.setItem('cb2_lab_batch',JSON.stringify(this.batch));}catch(e){}
+  },
+
+  renderBatchGrid(){
+    const b=this.batch;if(!b)return '';
+    const title=CR.MODEL_LABELS[b.endpoint]||b.model;
+    const refLabel=b.ref?(b.ref.id+' \u00b7 '+(b.ref.colorway||'')):'auto';
+    let h='<div style="background:#0f0f1a;border:1px solid #222;border-radius:10px;padding:.8rem;margin-bottom:.8rem">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">'
+      +'<div style="font-size:.7rem;font-weight:700;color:#a855f7">'+CR.esc(title)+' \u00b7 '+b.tiles.length+' tiles \u00b7 ~$'+b.cost_usd.toFixed(2)+'</div>'
+      +'<span style="font-size:.5rem;color:#888">ref: '+CR.esc(refLabel)+'</span></div>';
+    // Prompt (collapsed)
+    h+='<details class="cr-prompt-details" style="margin-bottom:.4rem"><summary><strong>Prompt</strong></summary>'
+      +'<div class="cr-prompt-full">'+CR.esc(b.recipe_prompt||'')+'</div></details>';
+    // Tile grid
+    h+='<div id="labGrid" class="cr-grid">'+b.tiles.map((t,i)=>this.renderTile(t,i)).join('')+'</div>';
+    // Save bar
+    h+='<div id="labSaveBar">'+this.renderSaveBar()+'</div>';
+    h+='</div>';
+    return h;
+  },
+
+  renderTile(t,i){
+    if(t.status==='queued')return '<div class="cr-tile cr-skel">Queued\u2026</div>';
+    if(t.status==='generating')return '<div class="cr-tile cr-skel">Generating\u2026</div>';
+    if(t.status==='failed')return '<div class="cr-tile cr-fail"><div>Failed</div><div style="font-size:.5rem;color:#888">'+CR.esc(t.error||'')+'</div><button onclick="LAB.retryTile('+i+')">Retry</button></div>';
+    return '<div class="cr-tile'+(t.kept?' kept':'')+'"><img src="'+t.url+'" alt="" onclick="CR.openLB(\''+t.url+'\')"><button class="cr-heart" onclick="LAB.toggleKeeper('+i+')">'+(t.kept?'\u2665':'\u2661')+'</button></div>';
+  },
+
+  renderSaveBar(){
+    const b=this.batch;if(!b)return '';
+    const kept=b.tiles.filter(t=>t.kept).length;
+    const done=b.tiles.filter(t=>t.status==='done').length;
+    const failed=b.tiles.filter(t=>t.status==='failed').length;
+    const allTerm=(done+failed)===b.tiles.length;
+    const saveBtn=kept>0
+      ?'<button class="gen-btn" '+(allTerm?'':'disabled')+' onclick="LAB.saveBatch()">Save '+kept+' keeper'+(kept>1?'s':'')+'</button>'
+      :'<button class="gen-btn" style="background:linear-gradient(135deg,#666,#444)" '+(allTerm?'':'disabled')+' onclick="LAB.saveBatch()">Archive all &amp; continue</button>';
+    return '<div class="cr-save-bar"><span class="cr-count">'+kept+' of '+done+(kept?'':' \u2014 none kept')+(failed?' \u00b7 '+failed+' failed':'')+'</span>'+saveBtn+'</div>';
+  },
+
+  refreshGrid(){
+    const g=document.getElementById('labGrid');if(g)g.innerHTML=this.batch.tiles.map((t,i)=>this.renderTile(t,i)).join('');
+    const s=document.getElementById('labSaveBar');if(s)s.innerHTML=this.renderSaveBar();
+    if(this.batch)try{localStorage.setItem('cb2_lab_batch',JSON.stringify(this.batch));}catch(e){}
+  },
+
+  toggleKeeper(i){
+    const t=this.batch.tiles[i];if(t.status!=='done')return;
+    t.kept=!t.kept;this.refreshGrid();
+  },
+
+  retryTile(i){
+    const t=this.batch.tiles[i];
+    t.status='queued';t.error=null;t.url=null;
+    this.refreshGrid();this.fireOne(i);
+  },
+
+  saveBatch(){
+    const b=this.batch;if(!b)return;
+    const kept=b.tiles.filter(t=>t.kept&&t.url).map(t=>t.url);
+    const rejected=b.tiles.filter(t=>!t.kept&&t.status==='done').map(t=>t.url);
+    const failed=b.tiles.filter(t=>t.status==='failed').map(t=>({i:t.i,error:t.error}));
+    const generated=b.tiles.filter(t=>t.status==='done').length;
+    const keeper_rate=generated?kept.length/generated:0;
+    const rec={
+      batch_id:b.batch_id,recipe_id:b.recipe_id,recipe_prompt:b.recipe_prompt,
+      ref_id:b.ref?.id||null,model:b.endpoint,sport:b.sport,
+      generated,kept_urls:kept,rejected_urls:rejected,failed,keeper_rate,
+      cost_usd:b.cost_usd,is_novel:b.is_novel||false,at:new Date().toISOString(),
+    };
+    CR.learning.batches.push(rec);
+    CR.updateCounters(rec);
+    CR.saveLearning();
+    // Snapshot into ALL_IMAGES + inject verdict comments (same logic as CR.saveBatch)
+    const d=D();
+    const snapshotEntry=(url,idx,verdict)=>{
+      const vid='lab-'+b.batch_id+'-'+idx;
+      if(ALL_IMAGES.find(i=>i.id===vid))return;
+      const modelLabel=CR.MODEL_LABELS[b.endpoint]||b.model;
+      ALL_IMAGES.push({id:vid,url,model:modelLabel,prompt:b.recipe_prompt,
+        label:(verdict==='kept'?'LAB keeper: ':'LAB reject: ')+(b.recipe_id||'scene'),
+        context:'LAB batch '+b.batch_id+' \u00b7 recipe '+b.recipe_id+' \u00b7 keeper_rate '+Math.round(keeper_rate*100)+'%'});
+      if(!d[vid])d[vid]={comments:[]};
+      d[vid].comments.push({num:1,text:verdict==='kept'?'Final score: 85 (LAB keeper)':'Final score: 20 (LAB reject)',time:new Date().toISOString()});
+    };
+    kept.forEach((url,idx)=>snapshotEntry(url,idx,'kept'));
+    rejected.forEach((url,idx)=>snapshotEntry(url,kept.length+idx,'rejected'));
+    try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
+    // Invalidate gallery cache so new items show up
+    _galCache=null;_galCacheKey='';
+    counts();
+    try{if(typeof syncFeedback==='function')setTimeout(syncFeedback,500);}catch(e){}
+    showToast('Saved \u00b7 '+kept.length+' keepers \u00b7 '+Math.round(keeper_rate*100)+'% rate');
+    this.batch=null;
+    try{localStorage.removeItem('cb2_lab_batch');}catch(e){}
+    CR.scoreRecipes();
+    this.mode=null;this.stillsMode=null;
+    this.render();
+  },
+
+  // === VIDEO FUNNEL ===
+  renderVideoFunnel(){
+    const s=this.source;if(!s)return '';
+    // Write source to old localStorage key so vidLabGenerate() can read it
+    localStorage.setItem('cb2_videolab_source',JSON.stringify({id:s.id,url:s.url,label:s.label,model:s.model,score:s.score||0}));
+    let h='<div style="background:#0a1a2a;border:1px solid #06b6d4;border-radius:10px;padding:.8rem;margin-bottom:.8rem">'
+      +'<div style="font-size:.7rem;font-weight:700;color:#06b6d4;margin-bottom:.5rem">Video Lab</div>';
+    // Direction
+    h+='<div style="font-size:.55rem;color:#ccc;font-weight:600;margin-bottom:.2rem">Direction (optional):</div>'
+      +'<textarea id="vidLabDirection" placeholder="e.g. slow pan right, rider speeds away\u2026" style="width:100%;min-height:50px;background:#111;border:1px solid #333;border-radius:6px;color:#fff;font-size:.7rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box"></textarea>';
+    // Refine button
+    h+='<div style="display:flex;gap:.3rem;margin-top:.3rem;align-items:center;flex-wrap:wrap">'
+      +'<button onclick="vidLabRefine()" id="vidLabRefineBtn" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #d97757;background:transparent;color:#d97757;font-size:.65rem;cursor:pointer;font-weight:600">\u2728 Refine with Claude</button>'
+      +'<select id="vidLabRefineTarget" onchange="localStorage.setItem(\'cb2_videolab_refine_target\',this.value||\'\')" style="padding:.25rem .4rem;border-radius:5px;border:1px solid #444;background:#111;color:#d97757;font-size:.6rem;cursor:pointer">'
+      +'<option value="">Universal rules</option><option value="Seedance 2.0">For Seedance</option><option value="Kling 3.0 Pro">For Kling</option><option value="Veo 3.1 Lite">For Veo</option><option value="Sora 2 Pro">For Sora</option><option value="Runway Gen-4T">For Runway</option></select>'
+      +'<div id="vidLabRefineStatus" style="font-size:.55rem;color:#888"></div></div>';
+    h+='<div id="vidLabRefinedBox" style="display:none;margin-top:.4rem;background:#1a1410;border:1px solid #d97757;border-radius:6px;padding:.5rem">'
+      +'<div style="font-size:.55rem;color:#d97757;font-weight:700;margin-bottom:.2rem">CLAUDE\'S REFINED PROMPT:</div>'
+      +'<div id="vidLabRefinedText" style="font-size:.7rem;color:#fff;line-height:1.4;white-space:pre-wrap"></div>'
+      +'<div style="display:flex;gap:.3rem;margin-top:.4rem">'
+      +'<button onclick="vidLabApplyRefined()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Use This</button>'
+      +'<button onclick="vidLabRefine()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.6rem;cursor:pointer">Try Again</button></div></div>';
+    // Platform / Duration / Aspect
+    h+='<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.4rem 0 .3rem">'
+      +'<div style="flex:1;min-width:180px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Platform</div>'
+      +'<select id="vidLabPlatformSelect" onchange="vidLabUpdateOptions()" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
+      +'<option value="seedance">Seedance 2.0 \u2B50</option><option value="seedance-fast">Seedance Fast</option><option value="kling" selected>Kling 3.0 Pro</option><option value="veo-lite">Veo 3.1 Lite</option><option value="sora">Sora 2 Pro</option><option value="runway">Runway Gen-4T</option></select></div>'
+      +'<div style="min-width:90px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Duration</div>'
+      +'<select id="vidLabDuration" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
+      +'<option value="5">5s</option><option value="8">8s</option><option value="10" selected>10s</option><option value="15">15s</option></select></div>'
+      +'<div style="min-width:100px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Aspect Ratio</div>'
+      +'<select id="vidLabAspect" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
+      +'<option value="9:16" selected>9:16 Reels</option><option value="16:9">16:9 Landscape</option><option value="1:1">1:1 Square</option></select></div></div>';
+    // End image (Seedance only)
+    h+='<div id="vidLabEndImageRow" style="display:none;margin:.3rem 0">'
+      +'<div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">End Frame <span style="color:#888;font-weight:400">(Seedance only)</span></div>'
+      +'<input id="vidLabEndImage" type="text" placeholder="Paste end frame URL\u2026" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;box-sizing:border-box"></div>';
+    // Cost + Generate
+    h+='<div style="display:flex;gap:.3rem;align-items:center;margin-top:.3rem" id="vidLabPlatforms">'
+      +'<div id="vidLabCostEstimate" style="font-size:.6rem;color:#888;flex:1"></div>'
+      +'<button onclick="vidLabGenerate(document.getElementById(\'vidLabPlatformSelect\').value)" style="padding:.45rem .9rem;border-radius:6px;border:none;background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;font-size:.7rem;cursor:pointer;font-weight:700;white-space:nowrap">Create Video</button></div>';
+    h+='<div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.4rem"></div>';
+    h+='</div>';
+    // Job History
+    h+='<div id="vidJobHistory" style="background:#111;border:1px solid #222;border-radius:10px;padding:.6rem;margin-bottom:.6rem">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">'
+      +'<div style="font-size:.7rem;font-weight:700;color:#f59e0b">Recent Video Jobs</div>'
+      +'<button onclick="vidJobRefreshAll()" style="padding:.2rem .5rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.55rem;cursor:pointer;font-weight:600">Refresh All</button></div>'
+      +'<div id="vidJobList" style="font-size:.6rem"></div></div>';
+    // After DOM renders, init platform options and job history
+    setTimeout(()=>{
+      if(typeof vidLabUpdateOptions==='function')vidLabUpdateOptions();
+      if(typeof vidJobRender==='function')vidJobRender();
+      // Restore refine target
+      const rt=localStorage.getItem('cb2_videolab_refine_target');
+      const sel=document.getElementById('vidLabRefineTarget');
+      if(rt&&sel)sel.value=rt;
+      // Check for active video job and resume polling
+      try{
+        const job=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');
+        if(job&&job.statusUrl&&job.resultUrl){
+          vidLabResumePoll(job.statusUrl,job.resultUrl,job.platform||'Video',job.requestId);
+        }
+      }catch(e){}
+    },100);
+    return h;
+  },
+};
+
+function labInit(){LAB.init();}
 
 // Init: load any Make More Like This variations from localStorage
 mmLoadVariations();
