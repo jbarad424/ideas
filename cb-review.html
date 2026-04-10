@@ -162,8 +162,9 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .cr-sport-bar button:hover{border-color:#a855f7;color:#fff}
 .cr-sport-bar button.on{border-color:#a855f7;color:#a855f7;background:#1a1030}
 .cr-card-body{padding:.45rem .55rem}
-.cr-card-title{font-size:.68rem;font-weight:600;color:#ccc;line-height:1.3;margin-bottom:.25rem;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.cr-card-meta{display:flex;align-items:center;gap:.3rem;font-size:.55rem;color:#666;margin-bottom:.4rem;flex-wrap:wrap}
+.cr-card-title{font-size:.8rem;font-weight:600;color:#ccc;line-height:1.3;margin-bottom:.25rem;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.cr-card-meta{display:flex;align-items:center;gap:.3rem;font-size:.7rem;color:#888;margin-bottom:.4rem;flex-wrap:wrap}
+.cr-model-badge{position:absolute;bottom:0;left:0;right:0;font-size:.5rem;padding:.15rem .35rem;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#06b6d4;font-weight:600;z-index:2;text-align:left;pointer-events:none}
 .cr-sport{color:#84cc16}
 .cr-super-badge{position:absolute;top:6px;left:32px;background:#eab308;color:#000;font-size:.55rem;font-weight:800;padding:.12rem .35rem;border-radius:3px;z-index:2}
 .cr-rate-badge{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.75);color:#22c55e;font-size:.55rem;font-weight:700;padding:.12rem .35rem;border-radius:3px;z-index:2}
@@ -242,6 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 <div class="tabs">
   <div class="tab active" onclick="setTab('gallery')">GALLERY</div>
   <div class="tab" onclick="setTab('create')">CREATE</div>
+  <div class="tab" onclick="setTab('videos')">VIDEO LAB</div>
 </div>
 
 <div class="counter" id="counter">-</div>
@@ -389,8 +391,14 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
   <div id="galGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem"></div>
 </div>
 
-<!-- VIDEOS TAB -->
+<!-- VIDEO LAB TAB -->
 <div id="videosArea" style="display:none;width:100%;max-width:600px;margin:0 auto;padding:0 .5rem">
+  <!-- Empty state — shown when no source image is loaded -->
+  <div id="vidLabEmpty" style="display:none;text-align:center;padding:2rem 1rem;margin-bottom:.8rem">
+    <div style="font-size:1.2rem;margin-bottom:.5rem">&#127909;</div>
+    <div style="font-size:.85rem;font-weight:700;color:#06b6d4;margin-bottom:.3rem">Video Lab</div>
+    <div style="font-size:.7rem;color:#888;line-height:1.5;max-width:320px;margin:0 auto">Pick a still from the <a href="#" onclick="setTab('gallery');return false" style="color:#a855f7;text-decoration:underline">Gallery</a> and click <strong>Send to Video Lab</strong> to animate it into a video.</div>
+  </div>
   <div id="vidLabSource" style="display:none;background:#0a1a2a;border:2px solid #06b6d4;border-radius:12px;padding:.8rem;margin-bottom:.8rem">
     <div style="font-size:.8rem;font-weight:700;color:#06b6d4;margin-bottom:.5rem">Video Lab</div>
     <div style="display:flex;gap:.6rem;align-items:flex-start">
@@ -1390,7 +1398,10 @@ async function loadSharedFeedback(){
       // HYDRATE: if this reviewed image isn't in ALL_IMAGES yet, inject it
       // so the Gallery can find it. Feedback entries already carry every
       // field (id/url/model/prompt/label/context) the Gallery needs.
-      if(!allImagesIdSet.has(id)&&img.url){
+      // Skip video entries (vid-* / live-*) — they belong in ALL_VIDEOS, not
+      // ALL_IMAGES. Without this guard, .mp4 URLs from cb-feedback.json leak
+      // into the Photos gallery and auto-play as clips (Justin caught 2026-04-10).
+      if(!allImagesIdSet.has(id)&&img.url&&!/^(vid-|live-)/.test(id)){
         ALL_IMAGES.push({
           id,
           url:img.url,
@@ -1487,7 +1498,7 @@ function setTab(t){
   // changes — fixes the audio-keeps-playing-after-tab-switch bug.
   if(typeof closeGalleryOverlay==='function')closeGalleryOverlay();
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.className='tab'+((['gallery','create'][i]===t)?' active':'');
+    el.className='tab'+((['gallery','create','videos'][i]===t)?' active':'');
   });
   const hide=id=>{const e=document.getElementById(id);if(e)e.style.display='none';};
   const show=id=>{const e=document.getElementById(id);if(e)e.style.display='block';};
@@ -1824,7 +1835,14 @@ function vidLabCheck(){
   const tgt=document.getElementById('vidLabRefineTarget');
   if(tgt){const saved=localStorage.getItem('cb2_videolab_refine_target')||'';tgt.value=saved;}
   const src=localStorage.getItem('cb2_videolab_source');
-  if(!src){document.getElementById('vidLabSource').style.display='none';return;}
+  const emptyEl=document.getElementById('vidLabEmpty');
+  if(!src){
+    document.getElementById('vidLabSource').style.display='none';
+    // Show the empty-state prompt instead of a blank page
+    if(emptyEl)emptyEl.style.display='block';
+    return;
+  }
+  if(emptyEl)emptyEl.style.display='none';
   try{
     const img=JSON.parse(src);
     const panel=document.getElementById('vidLabSource');
@@ -1931,9 +1949,26 @@ function vidJobUpdate(requestId,updates){
 }
 function vidJobRender(){
   const jobs=JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');
+  // Auto-expire stuck jobs: any IN_QUEUE job older than 60 minutes is almost
+  // certainly dead (fal timed out or the polling URL was wrong). Mark as FAILED
+  // so they don't clutter the list with false "pending" status forever.
+  // The Seedance 2.0 endpoint bug (d43c5d4) left 2 jobs stuck for 7+ hours.
+  let expired=0;
+  const now=Date.now();
+  for(const j of jobs){
+    if((j.status==='IN_QUEUE'||j.status==='PENDING')&&j.submitted){
+      const age=now-new Date(j.submitted).getTime();
+      if(age>3600000){j.status='FAILED';j.error='Timed out after 1 hour';expired++;}
+    }
+  }
+  if(expired){localStorage.setItem('cb2_video_jobs',JSON.stringify(jobs));}
   const panel=document.getElementById('vidJobHistory');
   const list=document.getElementById('vidJobList');
-  if(!jobs.length){panel.style.display='none';return;}
+  if(!jobs.length){
+    // Still show the panel container in Video Lab tab, just with an empty message
+    if(panel){panel.style.display='block';list.innerHTML='<div style="color:#666;font-size:.6rem;text-align:center;padding:.3rem">No video jobs yet. Send a still from the Gallery to get started.</div>';}
+    return;
+  }
   panel.style.display='block';
   list.innerHTML=jobs.map(j=>{
     const age=Math.round((Date.now()-new Date(j.submitted).getTime())/60000);
@@ -2294,7 +2329,22 @@ function renderGallery(){
     isSuper:galIsSuper(i),
     isVideo:isVideoMode,
   }));
-  scored.sort((a,b)=>b.score-a.score);
+  // Sort: supers first, then by most-recently-commented (newest at top).
+  // Uses the timestamp of the latest comment as the recency signal.
+  // Falls back to score for items without timestamps.
+  scored.forEach(i=>{
+    const cs=getC(i.id);
+    const latest=cs.length?Math.max(...cs.map(c=>new Date(c.time||0).getTime())):0;
+    i._recency=latest;
+  });
+  scored.sort((a,b)=>{
+    // Supers float to top
+    const sa=galIsSuper(a)?1:0,sb=galIsSuper(b)?1:0;
+    if(sa!==sb)return sb-sa;
+    // Then by recency (newest first). If no timestamp, fall back to score.
+    if(a._recency||b._recency)return(b._recency||0)-(a._recency||0);
+    return b.score-a.score;
+  });
 
   // Bucket each item into exactly one verdict category.
   //   super   → galIsSuper === true
@@ -3121,12 +3171,14 @@ const CR={
     const hideBtn=isHidden
       ?'<button class="cr-hide-btn cr-unhide-btn" onclick="event.stopPropagation();CR.unhideRecipe(\''+r.id+'\')" title="Un-hide this recipe">\u21BA</button>'
       :'<button class="cr-hide-btn" onclick="event.stopPropagation();CR.hideRecipe(\''+r.id+'\')" title="Don\'t suggest this one anymore">\u2715</button>';
+    // Model badge sits on the image (gradient overlay at bottom of the img area)
+    const modelBadge='<div class="cr-model-badge">'+this.esc(modelShort)+'</div>';
     return '<div class="cr-card'+(r.fade?' fade':'')+(isHidden?' cr-card-hidden':'')+'" onclick="CR.openRecipe(\''+r.id+'\')">'+
-      imgTag+
+      '<div style="position:relative">'+imgTag+modelBadge+'</div>'+
       hideBtn+superBadge+rateBadge+
       '<div class="cr-card-body">'+
         '<div class="cr-card-title">'+this.esc(title)+'</div>'+
-        '<div class="cr-card-meta"><span class="cr-sport">'+sportIcon+' '+r.sport+'</span><span>\u2022</span><span>'+this.esc(modelShort)+'</span><span>\u2022</span><span>seed '+(r.seed!=null?r.seed:'\u2014')+'</span></div>'+
+        '<div class="cr-card-meta"><span class="cr-sport">'+sportIcon+' '+r.sport+'</span>'+(r.examples.length>1?'<span>\u2022</span><span>'+r.examples.length+' keepers</span>':'')+'</div>'+
         '<div class="cr-card-btns">'+
           '<button class="cr-make-btn" onclick="event.stopPropagation();CR.startBatch(\''+r.id+'\',6)">Make 6 more like this</button>'+
           '<button class="cr-twist-btn" onclick="event.stopPropagation();CR.twistRecipe(\''+r.id+'\')" title="Keep the sport/model/ref/arm, write a new scene">\uD83C\uDFA8 Twist</button>'+
@@ -3933,6 +3985,8 @@ async function loadCorpus(){
     let added=0;
     for(const item of corpus){
       if(!item.id||have.has(item.id))continue;
+      // Skip video IDs — they belong in ALL_VIDEOS, not ALL_IMAGES
+      if(/^(vid-|live-)/.test(item.id))continue;
       ALL_IMAGES.push({
         id:item.id,
         url:item.url||'',
