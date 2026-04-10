@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.0</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.1</span></div>
 </div>
 
 <div class="tabs">
@@ -3002,7 +3002,7 @@ async function galGenerate(id,fidelity){
   if(resultsEl)resultsEl.innerHTML='';
 
   // Fal key removed 2026-04-09 — all calls go through CF Worker proxyCall().
-  const REF='https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w1600';
+  const REF='https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800';
   const mdl=mmDetectModel(img.model);
 
   // Use the unified CB2 block from CR (same one CREATE uses). The old galGenerate
@@ -3174,11 +3174,7 @@ const CR={
     h6:{id:'h6',colorway:'Hunter',type:'product',url:'https://jbarad424.github.io/ideas/rotated-refs/h6.jpg'},
     p4:{id:'p4',colorway:'Patriot',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/p4.jpg'},
     p6:{id:'p6',colorway:'Patriot',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/p6.jpg'},
-    // Ref C moved from Hunter to Patriot — the symbols on Ref C are Tron-era
-    // (bright, correct) but the Hunter unit in the photo has old/faded symbols.
-    // h3/h5/h6 all have correct Hunter symbols so Ref C is redundant for Hunter
-    // but valuable as Patriot's only dual-ref (no Patriot product shots exist yet).
-    refc:{id:'refc',colorway:'Patriot',type:'dual',url:'https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w1600'},
+    refc:{id:'refc',colorway:'Hunter',type:'dual',url:'https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800'},
     // Tron — Justin shot 20 raw refs 2026-04-09, A/B locked these as winners.
     // t18 is the only "pure pure gold" (4×5 score, 0 flags). t01/t03/t11 are
     // Tier 1 (cosmetic rot180 flags only). t05/t09/t17 are Tier 2.
@@ -3793,23 +3789,23 @@ const CR={
   // Without image 2, the model renders "something that looks like a remote" but
   // gets the buttons wrong. This was the root cause of Justin's "they don't look
   // like chubby buttons" complaint on 2026-04-10.
-  // buildPayload — REVERTED to the single-ref format that produced scores of
-  // 95-100. The dual-ref experiment (sending 2 images in image_urls) caused
-  // NB Pro to return stock photos. DO NOT add a second image_urls entry
-  // without testing first. The working format is: one ref, the prompt with
-  // the full CB2 block, seed jitter, and standard params.
+  // buildPayload — RESTORED to exact pre-session state (commit 54b0f58).
+  // Dual-ref WAS working. The stock photo bug was caused by image_size + w=2400,
+  // NOT by dual-ref. Single-ref revert was a misdiagnosis.
   buildPayload(b,i){
     const refUrl=(b.ref&&b.ref.url)||this.REFS.refc.url;
+    const productShots={
+      Hunter:this.REFS.h6?.url,
+      Tron:this.REFS.t18?.url,
+      Patriot:null,
+    };
+    const refColorway=(b.ref&&b.ref.colorway)||'Hunter';
+    const productRef=productShots[refColorway]||this.REFS.refc.url;
     const seed=(b.seed||0)+i*1000+1;
     if(b.endpoint.includes('gpt-image')){
-      // GPT Image 1.5 handles dual-ref correctly (proven in production)
-      const productShots={Hunter:this.REFS.h6?.url,Tron:this.REFS.t18?.url,Patriot:null};
-      const refColorway=(b.ref&&b.ref.colorway)||'Hunter';
-      const productRef=productShots[refColorway]||this.REFS.refc.url;
       return {image_urls:[refUrl,productRef],prompt:b.recipe_prompt,size:'1024x1536',quality:'high',input_fidelity:'high'};
     }
-    // NB Pro, NB2, FLUX Flex — SINGLE REF ONLY. Dual-ref breaks NB Pro.
-    const body={image_urls:[refUrl],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
+    const body={image_urls:[refUrl,productRef],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
     if(b.endpoint.includes('flux-2-flex')){
       body.guidance_scale=7.0;body.num_inference_steps=28;
     }
