@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T22:00:39.931Z",
+  "syncedAt": "2026-04-10T22:04:33.555Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17314,6 +17314,66 @@
           "num": 1,
           "text": "Final score: 20 (LAB reject)",
           "time": "2026-04-10T22:00:39.387Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260410220240_xulp5d-0",
+      "url": "https://v3b.fal.media/files/b/0a95bec0/6cMSePIM5nFEHP3sbYjbI_A4v0lGkJ.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female rider carves through fog-draped asphalt lined with gnarled, skeletal trees under overcast twilight skies. Shot with a 35mm lens at f/2.8, natural low light captures the eerie atmosphere—mist swirling in her wake, dead leaves scattering across cracked pavement. Panning motion blur at 1/250s follows her through the haunting corridor. Desaturated color grade emphasizes charcoal clouds and amber underglow from distant jack-o'-lanterns dotting the roadside, creating cinematic tension in this shadowy, spine-chilling ride.. female motorcycle rider, wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "LAB keeper: lab_twist_mntgc2ry",
+      "context": "LAB batch 20260410220240_xulp5d · recipe lab_twist_mntgc2ry · keeper_rate 25%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (LAB keeper)",
+          "time": "2026-04-10T22:04:32.989Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260410220240_xulp5d-1",
+      "url": "https://v3b.fal.media/files/b/0a95bec0/L2oW4f_h0rDS7MFS3wLbt_0Q63HziJ.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female rider carves through fog-draped asphalt lined with gnarled, skeletal trees under overcast twilight skies. Shot with a 35mm lens at f/2.8, natural low light captures the eerie atmosphere—mist swirling in her wake, dead leaves scattering across cracked pavement. Panning motion blur at 1/250s follows her through the haunting corridor. Desaturated color grade emphasizes charcoal clouds and amber underglow from distant jack-o'-lanterns dotting the roadside, creating cinematic tension in this shadowy, spine-chilling ride.. female motorcycle rider, wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "LAB reject: lab_twist_mntgc2ry",
+      "context": "LAB batch 20260410220240_xulp5d · recipe lab_twist_mntgc2ry · keeper_rate 25%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (LAB reject)",
+          "time": "2026-04-10T22:04:32.989Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260410220240_xulp5d-2",
+      "url": "https://v3b.fal.media/files/b/0a95bec0/BPlsRDNdQ5k3qZ70ckugg_38BC77Tn.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female rider carves through fog-draped asphalt lined with gnarled, skeletal trees under overcast twilight skies. Shot with a 35mm lens at f/2.8, natural low light captures the eerie atmosphere—mist swirling in her wake, dead leaves scattering across cracked pavement. Panning motion blur at 1/250s follows her through the haunting corridor. Desaturated color grade emphasizes charcoal clouds and amber underglow from distant jack-o'-lanterns dotting the roadside, creating cinematic tension in this shadowy, spine-chilling ride.. female motorcycle rider, wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "LAB reject: lab_twist_mntgc2ry",
+      "context": "LAB batch 20260410220240_xulp5d · recipe lab_twist_mntgc2ry · keeper_rate 25%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (LAB reject)",
+          "time": "2026-04-10T22:04:32.990Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260410220240_xulp5d-3",
+      "url": "https://v3b.fal.media/files/b/0a95bec0/ralvyyj_cidxBUUtRiky5_pXQ5cxf8.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female rider carves through fog-draped asphalt lined with gnarled, skeletal trees under overcast twilight skies. Shot with a 35mm lens at f/2.8, natural low light captures the eerie atmosphere—mist swirling in her wake, dead leaves scattering across cracked pavement. Panning motion blur at 1/250s follows her through the haunting corridor. Desaturated color grade emphasizes charcoal clouds and amber underglow from distant jack-o'-lanterns dotting the roadside, creating cinematic tension in this shadowy, spine-chilling ride.. female motorcycle rider, wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "LAB reject: lab_twist_mntgc2ry",
+      "context": "LAB batch 20260410220240_xulp5d · recipe lab_twist_mntgc2ry · keeper_rate 25%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (LAB reject)",
+          "time": "2026-04-10T22:04:32.990Z"
         }
       ]
     },
