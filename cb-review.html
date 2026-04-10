@@ -2936,12 +2936,14 @@ async function galGenerate(id,fidelity){
   if(resultsEl)resultsEl.innerHTML='';
 
   // Fal key removed 2026-04-09 — all calls go through CF Worker proxyCall().
-  const REF='https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800';
+  const REF='https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w1600';
   const mdl=mmDetectModel(img.model);
 
-  const CB2_GPT='the wearable remote from image 2 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, volume-up button closest to wrist, five round tactile buttons: PLUS sign, REWIND (two left triangles with bar), PLAY/PAUSE (triangle next to two vertical bars), FAST-FORWARD (two right triangles with bar), MINUS sign';
-  const CB2_FLUX='wearing the wearable remote from image 2 on their LEFT forearm, volume-up button closest to wrist';
-  const cb2=mdl.type==='gpt'?CB2_GPT:CB2_FLUX;
+  // Use the unified CB2 block from CR (same one CREATE uses). The old galGenerate
+  // had its own shorter version which produced worse symbol accuracy. Note: we say
+  // "image 2" here (not "image 1") because in Make More Like This, image 1 is the
+  // SOURCE image being varied, and image 2 is the CB2 ref.
+  const cb2=CR.CB2_BLOCK.LEFT.replace(/from image 1/g,'from image 2');
   const fullPrompt=modifier
     ?'Create a variation of image 1: '+modifier+'. Preserve '+cb2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.'
     :'Create a unique variation of image 1 with a fresh angle and composition. Preserve '+cb2+'. Shot on Sony A7R IV 85mm f/2.0, film grain.';
@@ -3108,7 +3110,7 @@ const CR={
     // (bright, correct) but the Hunter unit in the photo has old/faded symbols.
     // h3/h5/h6 all have correct Hunter symbols so Ref C is redundant for Hunter
     // but valuable as Patriot's only dual-ref (no Patriot product shots exist yet).
-    refc:{id:'refc',colorway:'Patriot',type:'dual',url:'https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800'},
+    refc:{id:'refc',colorway:'Patriot',type:'dual',url:'https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w1600'},
     // Tron — Justin shot 20 raw refs 2026-04-09, A/B locked these as winners.
     // t18 is the only "pure pure gold" (4×5 score, 0 flags). t01/t03/t11 are
     // Tier 1 (cosmetic rot180 flags only). t05/t09/t17 are Tier 2.
@@ -3148,9 +3150,15 @@ const CR={
     'fal-ai/nano-banana-2/edit':0.08,
     'fal-ai/flux-2-flex/edit':0.05,
   },
+  // CB2_BLOCK — the locked product description. MUST match the CLAUDE.md production
+  // spec exactly. The key differences from the old version that scored lower:
+  //   1. Explicit dimensions (108mm x 39mm) — prevents oversized/undersized renders
+  //   2. All 5 button symbols named explicitly (PLUS, FF, PLAY/PAUSE, REW, MINUS)
+  //   3. "button symbols matching the product in image 2" — anchors to the dual-ref
+  //   4. "OVER the jacket sleeve" not just "OVER the sleeve" — prevents bare skin
   CB2_BLOCK:{
-    LEFT:'the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (\u2212) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular',
-    RIGHT:'the wearable remote from image 1 with its velcro strap wrapped fully around the RIGHT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, MINUS (\u2212) button closest to WRIST, PLUS (+) button closest to elbow, LED window closest to elbow, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular',
+    LEFT:'the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols matching the product in image 2, device parallel to the forearm not perpendicular',
+    RIGHT:'the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to ELBOW, MINUS button closest to wrist, PLUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols matching the product in image 2, device parallel to the forearm not perpendicular',
   },
 
   // ---- entry point ----
@@ -3732,7 +3740,10 @@ const CR={
     if(b.endpoint.includes('gpt-image')){
       return {image_urls:[refUrl,productRef],prompt:b.recipe_prompt,size:'1024x1536',quality:'high',input_fidelity:'high'};
     }
-    const body={image_urls:[refUrl,productRef],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
+    // All non-GPT models get explicit portrait size + the dual-ref. The production
+    // batches that scored 95-100 were 1024x1536. Without explicit size, NB Pro/NB2
+    // may default to square, producing different compositions than the winners.
+    const body={image_urls:[refUrl,productRef],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5,image_size:{width:1024,height:1536}};
     if(b.endpoint.includes('flux-2-flex')){
       body.guidance_scale=7.0;body.num_inference_steps=28;
     }
@@ -4037,6 +4048,8 @@ const CR={
       }
       this.render();
     }else if(key==='colorway'){
+      // Persist so Discover→CREATE handoff remembers the last choice
+      try{localStorage.setItem('cb2_last_colorway',val);}catch(e){}
       this.render();
     }
   },
@@ -4490,16 +4503,21 @@ function discoverSendToCreate(idx){
   const sceneOnly=prompt.split('. '+subj)[0]||prompt.split(', waist-up')[0]||prompt;
   // Switch to CREATE tab first (CR.open() loads keepers + sets view=parade),
   // then override to newScene after a tick so the form renders with our data.
+  // Preserve the last-used colorway so Discover→CREATE doesn't silently reset
+  // to Hunter (the default). This was the root cause of the "Patriot batch used
+  // Hunter refs" bug — the form always defaulted to Hunter.
+  const lastColorway=localStorage.getItem('cb2_last_colorway')||'Hunter';
   setTab('create');
   setTimeout(()=>{
     CR.showNewScene();
     CR.newScene.sport=sport;
     CR.newScene.gender=gender;
+    CR.newScene.colorway=lastColorway;
     CR.newScene.scene=sceneOnly;
     CR.newScene.gear=CR.GEAR[sport]||'';
     CR.view='newscene';
     CR.render();
-    showToast('Scene loaded \u2014 pick colorway + model and hit Refine or Assemble!');
+    showToast('Scene loaded (' +lastColorway+') \u2014 check colorway, then Refine or Assemble!');
   },600);
 }
 
@@ -4533,16 +4551,17 @@ async function discoverAnalyze(){
 
 function discoverUseAnalysis(){
   const text=window._discoverAnalysisText||'';
-  // Extract the last paragraph (usually the ready-to-use prompt)
   const paragraphs=text.split(/\n\n+/).filter(p=>p.trim());
   const scenePrompt=paragraphs[paragraphs.length-1]||text.slice(0,200);
+  const lastColorway=localStorage.getItem('cb2_last_colorway')||'Hunter';
   setTab('create');
   setTimeout(()=>{
     CR.showNewScene();
     CR.newScene.scene=scenePrompt;
+    CR.newScene.colorway=lastColorway;
     CR.view='newscene';
     CR.render();
-    showToast('Inspiration loaded \u2014 pick sport + colorway and generate!');
+    showToast('Inspiration loaded ('+lastColorway+') \u2014 check sport + colorway and generate!');
   },600);
 }
 
