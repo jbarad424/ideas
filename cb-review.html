@@ -3111,7 +3111,19 @@ const CR={
       this.buildRecipes();
     }
     document.getElementById('counter').textContent='CREATE \u2014 generate with proven recipes';
-    this.view='parade';
+    // Restore an in-progress batch if one was saved (survives tab switches + reloads)
+    if(!this.currentBatch){
+      try{
+        const saved=JSON.parse(localStorage.getItem('cb2_create_batch')||'null');
+        if(saved&&saved.tiles&&saved.tiles.some(t=>t.status==='done')){
+          this.currentBatch=saved;
+          this.view='batch';
+          console.log('[create] restored batch '+saved.batch_id+' from localStorage');
+        }
+      }catch(e){}
+    }
+    if(this.currentBatch&&this.view==='batch'){/* keep batch view */}
+    else{this.view='parade';}
     this.render();
   },
 
@@ -3527,14 +3539,20 @@ const CR={
     const failed=b.tiles.filter(t=>t.status==='failed').length;
     const terminal=done+failed;
     const allTerm=terminal===b.tiles.length;
+    // Show "Save keepers" when some are kept, or "Archive all & continue" when none are
+    const saveBtn=kept>0
+      ?'<button class="gen-btn" '+(allTerm?'':'disabled')+' onclick="CR.saveBatch()">Save '+kept+' keeper'+(kept>1?'s':'')+'</button>'
+      :'<button class="gen-btn" style="background:linear-gradient(135deg,#666,#444)" '+(allTerm?'':'disabled')+' onclick="CR.saveBatch()">Archive all &amp; continue</button>';
     return '<div class="cr-save-bar">'+
-      '<span class="cr-count">'+kept+' of '+done+' keepers'+(failed?' \u00b7 '+failed+' failed':'')+'</span>'+
-      '<button class="gen-btn" '+(allTerm?'':'disabled')+' onclick="CR.saveBatch()">Save batch</button>'+
+      '<span class="cr-count">'+kept+' of '+done+(kept?'':' \u2014 none kept')+(failed?' \u00b7 '+failed+' failed':'')+'</span>'+
+      saveBtn+
     '</div>';
   },
 
   refreshGrid(){
     const g=document.getElementById('crGrid');if(g)g.innerHTML=this.renderGridInner();
+    // Persist batch state so results survive accidental navigation
+    if(this.currentBatch)try{localStorage.setItem('cb2_create_batch',JSON.stringify(this.currentBatch));}catch(e){}
     const s=document.getElementById('crSaveBar');if(s)s.innerHTML=this.renderSaveBar();
   },
 
@@ -3557,6 +3575,7 @@ const CR={
       if(!confirm('Leave without saving? Unsaved keepers will be lost.'))return;
     }
     this.currentBatch=null;
+    try{localStorage.removeItem('cb2_create_batch');}catch(e){}
     this.view='parade';
     this.render();
   },
@@ -3639,13 +3658,28 @@ const CR={
   },
 
   // Build a fal.ai payload. Seed jittered per tile so the 6 aren't identical.
+  // DUAL-REF: the production pipeline uses TWO reference images:
+  //   image 1 = colorway-specific ref (h3, t18, etc.) — shows placement + colorway
+  //   image 2 = product close-up — shows exact button symbols + LED window
+  // Without image 2, the model renders "something that looks like a remote" but
+  // gets the buttons wrong. This was the root cause of Justin's "they don't look
+  // like chubby buttons" complaint on 2026-04-10.
   buildPayload(b,i){
     const refUrl=(b.ref&&b.ref.url)||this.REFS.refc.url;
+    // Product close-up per colorway (for image 2 / dual-ref):
+    // Use the best product shot for each colorway, fall back to Ref C.
+    const productShots={
+      Hunter:this.REFS.h6?.url,   // Hunter product close-up
+      Tron:this.REFS.t18?.url,    // Tron product on wood table (pure gold)
+      Patriot:null,               // No Patriot product shot yet — use Ref C
+    };
+    const refColorway=(b.ref&&b.ref.colorway)||'Hunter';
+    const productRef=productShots[refColorway]||this.REFS.refc.url;
     const seed=(b.seed||0)+i*1000+1;
-    const body={image_urls:[refUrl],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
     if(b.endpoint.includes('gpt-image')){
-      return {image_urls:[refUrl],prompt:b.recipe_prompt,size:'1024x1536',quality:'high',input_fidelity:'high'};
+      return {image_urls:[refUrl,productRef],prompt:b.recipe_prompt,size:'1024x1536',quality:'high',input_fidelity:'high'};
     }
+    const body={image_urls:[refUrl,productRef],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
     if(b.endpoint.includes('flux-2-flex')){
       body.guidance_scale=7.0;body.num_inference_steps=28;
     }
@@ -3737,6 +3771,7 @@ const CR={
     counts();
     showToast('Saved \u00b7 '+kept.length+' keepers \u00b7 '+Math.round(keeper_rate*100)+'% rate');
     this.currentBatch=null;
+    try{localStorage.removeItem('cb2_create_batch');}catch(e){}
     this.scoreRecipes();
     this.view='parade';
     this.render();
