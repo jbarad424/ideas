@@ -90,13 +90,26 @@ function render(){
     html+='</div></div>';
   }
 
-  // Killed refs section
+  // Killed refs section — show actual images where URLs are known
+  const killedUrls={
+    h1:'https://jbarad424.github.io/ideas/rotated-refs/h1.jpg',
+    h4:'https://jbarad424.github.io/ideas/rotated-refs/h4.jpg',
+    p1:'https://jbarad424.github.io/ideas/rotated-refs/p1.jpg',
+    p5:'https://jbarad424.github.io/ideas/rotated-refs/p5.jpg',
+    t10:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t10.jpeg',
+    t16:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t16.jpeg',
+  };
   html+='<div class="section">';
   html+='<div class="section-title">Killed Refs <span class="cw killed">'+killedRefs.length+' retired</span></div>';
   html+='<div class="grid">';
   for(const k of killedRefs){
-    html+='<div class="card killed-card">';
-    html+='<div style="aspect-ratio:3/4;background:#1a0a0a;display:flex;align-items:center;justify-content:center;font-size:.7em;color:#ef4444;padding:8px;text-align:center">'+k.id+'</div>';
+    const kUrl=killedUrls[k.id];
+    html+='<div class="card killed-card"'+(kUrl?' onclick="openLB(\''+kUrl+'\')"':'')+'>';
+    if(kUrl){
+      html+='<img src="'+kUrl+'" alt="'+k.id+'" loading="lazy">';
+    }else{
+      html+='<div style="aspect-ratio:3/4;background:#1a0a0a;display:flex;align-items:center;justify-content:center;font-size:.7em;color:#ef4444;padding:8px;text-align:center">'+k.id+' (no image)</div>';
+    }
     html+='<div class="kill-badge">KILLED</div>';
     html+='<div class="info"><div class="id">'+k.id+' ('+k.colorway+')</div>'+k.reason+'</div>';
     html+='</div>';
