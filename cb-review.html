@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.2</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.3</span></div>
 </div>
 
 <div class="tabs">
@@ -3798,19 +3798,31 @@ const CR={
     // pool. This fixes the bug where Patriot recipes fell back to Ref C
     // (which shows Tron) because the keeper data had no ref.
     let refUrl;
-    if(b.ref&&b.ref.url){
-      refUrl=b.ref.url;
+    // Ref objects from different batch eras have different URL fields:
+    //   Newer refs: {url: '...'}
+    //   Dual-ref batches: {img1_url: '...', img2_url: '...'}
+    //   Rotation A/B refs: {rotated_url: '...'}
+    //   Old refs: no URL at all (just file_id for Google Drive)
+    if(b.ref&&(b.ref.url||b.ref.img1_url||b.ref.rotated_url)){
+      refUrl=b.ref.url||b.ref.img1_url||b.ref.rotated_url;
     }else{
-      // Detect colorway from the batch's sport/prompt context
-      const ctx=(b.recipe_prompt||'').toLowerCase();
-      let cw='Hunter'; // default
-      if(b.ref&&b.ref.colorway)cw=b.ref.colorway;
-      else if(/patriot/.test(ctx))cw='Patriot';
-      else if(/tron/.test(ctx))cw='Tron';
-      // Pick from the colorway pool
+      // Detect colorway from ALL available signals — recipe ID, prompt, label,
+      // and the ref object's colorway field. Most old keepers have no ref URL
+      // and no colorway in the prompt text, but the recipe ID often contains
+      // it (e.g. "cw-patriot-s51" or labels like "CW SWAP: Patriot").
+      const signals=[
+        b.recipe_id||'',
+        b.recipe_prompt||'',
+        b.ref?.colorway||'',
+        // Also check the recipe object if we can find it
+        ...(this.recipes||[]).filter(r=>r.id===b.recipe_id).map(r=>(r.prompt||'')+' '+(r.id||'')+' '+r.examples.map(e=>e.id+' '+(e.label||'')).join(' ')),
+      ].join(' ').toLowerCase();
+      let cw='Hunter'; // safe default — Hunter has the most/best refs
+      if(/patriot/.test(signals))cw='Patriot';
+      else if(/tron/.test(signals))cw='Tron';
       const pool=this.refsForColorway(cw);
       refUrl=pool.length?pool[Math.floor(Math.random()*pool.length)].url:this.REFS.refc.url;
-      console.log('[buildPayload] no ref URL on recipe, auto-picked',cw,'ref from pool of',pool.length);
+      console.log('[buildPayload] no ref URL, detected colorway='+cw+' from signals, picked from pool of '+pool.length);
     }
     const productShots={
       Hunter:this.REFS.h6?.url,
