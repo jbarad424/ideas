@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:41:08.702Z",
+  "syncedAt": "2026-04-10T19:41:59.916Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17059,6 +17059,11 @@
           "num": 3,
           "text": "rejected — archived from Gallery",
           "time": "2026-04-10T19:39:29.008Z"
+        },
+        {
+          "num": 4,
+          "text": "rejected — archived from Gallery",
+          "time": "2026-04-10T19:41:59.143Z"
         }
       ]
     },
