@@ -2013,6 +2013,19 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
           prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found.</span>';
         }
         if(requestId)vidJobUpdate(requestId,{status:'COMPLETED',videoUrl:vidUrl||''});
+        // Auto-archive to catbox.moe for permanent hosting (fal URLs expire)
+        if(vidUrl){
+          try{
+            const permUrl=await vidUploadCatbox(vidUrl);
+            if(permUrl&&requestId){
+              vidJobUpdate(requestId,{videoUrl:permUrl,permanentUrl:permUrl});
+              // Update the download link in the preview if still visible
+              const dlLinks=st?.querySelectorAll('a[download]');
+              if(dlLinks)dlLinks.forEach(a=>{a.href=permUrl;});
+              console.log('[video-archive] permanent URL:',permUrl);
+            }
+          }catch(e){console.log('[video-archive] catbox upload failed:',e.message);}
+        }
       }else if(s.status==='FAILED'||s.status==='ERROR'){
         clearInterval(poller);
         localStorage.removeItem('cb2_videolab_job');
@@ -2042,6 +2055,22 @@ function vidLabKeep(requestId){
 function vidLabArchive(requestId){
   vidJobUpdate(requestId,{verdict:'archive'});
   showToast('Archived');
+}
+// vidUploadCatbox — uploads a video to catbox.moe for permanent hosting.
+// Same as mmUploadCatbox but with .mp4 filename so catbox serves it correctly.
+// Called automatically after a video job completes so the fal URL (which expires)
+// gets replaced with a permanent catbox URL.
+async function vidUploadCatbox(falUrl){
+  const resp=await fetch(falUrl);
+  if(!resp.ok)throw new Error('fetch failed: '+resp.status);
+  const blob=await resp.blob();
+  const fd=new FormData();
+  fd.append('reqtype','fileupload');
+  fd.append('fileToUpload',blob,'video.mp4');
+  const up=await fetch('https://catbox.moe/user/api.php',{method:'POST',body:fd});
+  const url=await up.text();
+  if(url.startsWith('https://'))return url.trim();
+  throw new Error('Catbox upload failed: '+url);
 }
 // Create again — clears the status area so user can tweak the direction and
 // pick a platform again, using the same source image. The source stays loaded.
