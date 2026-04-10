@@ -2019,6 +2019,10 @@ async function vidLabGenerate(platform){
   const dir=(document.getElementById('vidLabDirection')?.value||'').trim();
   const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
   const prompt=dir?dir+'. '+basePrompt:basePrompt;
+  // Seedance access gate warning
+  if(platform==='seedance'||platform==='seedance-fast'){
+    if(!confirm('Seedance 2.0 requires access approval from fal.ai.\n\nIf you haven\'t requested access yet, this will fail and you may still be charged.\n\nRequest access at: fal.ai/models/bytedance/seedance-2.0/image-to-video\n\nProceed anyway?'))return;
+  }
   const info={
     // Seedance 2.0 — ByteDance, currently #1 on Artificial Analysis Elo (1269,
     // beats Veo 3, Sora 2, Gen-4.5). Same fal queue API contract as Kling.
@@ -2043,6 +2047,10 @@ async function vidLabGenerate(platform){
     runway:{name:'Runway Gen-4T',endpoint:null,cost:'~$0.50',body:null}
   };
   const p=info[platform]||info.kling;
+  // Confirmation modal — videos are expensive, prevent accidental clicks
+  if(platform!=='seedance'&&platform!=='seedance-fast'){ // Seedance already has its own confirm above
+    if(!confirm('Create a video with '+p.name+'?\n\nEstimated cost: '+p.cost+'\nThis will animate your selected still into a short marketing video.'))return;
+  }
   if(!p.endpoint){
     document.getElementById('vidLabStatus').innerHTML='<div style="color:#f59e0b;font-size:.65rem;margin-top:.3rem">Runway requires direct API \u2014 tell Claude Code: <strong>"animate '+src.label+' with Runway Gen-4 Turbo"</strong></div>';
     return;
@@ -2107,7 +2115,11 @@ TARGET MODEL: ${platform||'(unspecified — use universal best practices)'}
 CRITICAL RULES for this product (CB2 wearable remote on forearm):
 - The CB2 must stay perfectly stationary on the forearm. NEVER describe hands touching, pressing, or reaching for it. Describing "he hits the button" causes models to hallucinate extra hands coming from off-screen.
 - The rider's existing pose (both hands on handlebars/poles/handlebar grip) is the right pose. Keep it.
-- If the user wants "music starts playing" or "he activates the remote," reframe it as environmental/ambient change: the camera moves, the rider's expression shifts, dust/wind/light changes — NOT a hand motion.
+- IMPORTANT — TRANSLATE button interactions, don't DELETE them. If the user describes pressing a button and music starting, KEEP the cause-and-effect narrative but express the CAUSE through subtle body language (a barely perceptible thumb motion, a slight shift in posture) and the EFFECT through environmental changes (music swelling on the soundtrack, the rider's energy shifting, engine revving). The SEQUENCE matters — if the user says "presses play THEN music starts THEN speeds off," preserve that temporal order. Example:
+  User: "finger presses the play button, music starts, then he speeds off"
+  Good: "The rider's thumb twitches against the device. A beat later, driving rock music surges on the soundtrack. The rider's posture shifts forward with new energy as the motorcycle accelerates, pulling away down the highway."
+  Bad: (just deleting the button press entirely)
+  Bad: "The rider presses the center button" (causes phantom hand hallucination)
 
 UNIVERSAL BEST PRACTICES (apply to all models):
 - ONE primary action or camera movement. Do not chain multiple events.
@@ -3677,9 +3689,9 @@ const CR={
       '<div class="cr-form-row">'+
         '<div class="cr-form-label">Scene description</div>'+
         '<textarea class="create-prompt" id="crSceneInput" placeholder="Brooklyn rooftop at sunset, urban skyline behind, gritty textures\u2026" oninput="CR.updateForm(\'scene\',this.value)">'+this.esc(s.scene)+'</textarea>'+
-        '<button class="cr-refine-btn" id="crRefineBtn" onclick="CR.refineWithSonnet()">\u2728 Refine with Sonnet</button>'+
+        '<button class="cr-refine-btn" id="crRefineBtn" onclick="CR.refineWithSonnet()">\u2728 Refine with Claude</button>'+
         '<div class="cr-refine-status" id="crRefineStatus"></div>'+
-        (s.refined?'<div class="cr-refined"><div class="cr-refined-label">Refined by Sonnet</div>'+this.esc(s.refined)+'<div class="cr-refined-actions"><button class="'+(s.refinedAccepted?'on':'')+'" onclick="CR.acceptRefined()">Use refined</button><button onclick="CR.rejectRefined()">Use original</button></div></div>':'')+
+        (s.refined?'<div class="cr-refined"><div class="cr-refined-label">Refined by Claude</div>'+this.esc(s.refined)+'<div class="cr-refined-actions"><button class="'+(s.refinedAccepted?'on':'')+'" onclick="CR.acceptRefined()">Use refined</button><button onclick="CR.rejectRefined()">Use original</button></div></div>':'')+
       '</div>'+
       '<div class="cr-form-row">'+
         '<div class="cr-form-label">Gear <span style="font-weight:400;color:#888;font-size:.6rem">(pre-filled from sport \u2014 edit freely)</span></div>'+
