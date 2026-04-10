@@ -434,16 +434,48 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
             <button onclick="vidLabRefine()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.6rem;cursor:pointer">Try Again</button>
           </div>
         </div>
-        <div style="font-size:.65rem;color:#06b6d4;font-weight:600;margin:.4rem 0 .3rem">Platform</div>
-        <div style="display:flex;gap:.3rem;align-items:center;flex-wrap:wrap" id="vidLabPlatforms">
-          <select id="vidLabPlatformSelect" style="flex:1;min-width:200px;padding:.4rem .5rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.7rem;cursor:pointer">
-            <option value="seedance">Seedance 2.0 — 5s · ~$1.51</option>
-            <option value="seedance-fast">Seedance Fast — 5s · ~$1.21</option>
-            <option value="kling" selected>Kling 3.0 Pro — 10s · ~$1.50</option>
-            <option value="veo-lite">Veo 3.1 Lite — 8s · ~$0.40</option>
-            <option value="sora">Sora 2 Pro — 16s · ~$5.00</option>
-            <option value="runway">Runway Gen-4T — 10s · ~$0.50</option>
-          </select>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.4rem 0 .3rem">
+          <!-- Platform -->
+          <div style="flex:1;min-width:180px">
+            <div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Platform</div>
+            <select id="vidLabPlatformSelect" onchange="vidLabUpdateOptions()" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">
+              <option value="seedance">Seedance 2.0 ⭐</option>
+              <option value="seedance-fast">Seedance Fast</option>
+              <option value="kling" selected>Kling 3.0 Pro</option>
+              <option value="veo-lite">Veo 3.1 Lite</option>
+              <option value="sora">Sora 2 Pro</option>
+              <option value="runway">Runway Gen-4T</option>
+            </select>
+          </div>
+          <!-- Duration -->
+          <div style="min-width:90px">
+            <div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Duration</div>
+            <select id="vidLabDuration" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">
+              <option value="5">5s</option>
+              <option value="8">8s</option>
+              <option value="10" selected>10s</option>
+              <option value="15">15s</option>
+            </select>
+          </div>
+          <!-- Aspect Ratio -->
+          <div style="min-width:100px">
+            <div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Aspect Ratio</div>
+            <select id="vidLabAspect" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">
+              <option value="9:16" selected>9:16 Reels/TikTok</option>
+              <option value="16:9">16:9 Landscape</option>
+              <option value="1:1">1:1 Square</option>
+              <option value="4:3">4:3 Classic</option>
+            </select>
+          </div>
+        </div>
+        <!-- End image (Seedance only) -->
+        <div id="vidLabEndImageRow" style="display:none;margin:.3rem 0">
+          <div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">End Frame <span style="color:#888;font-weight:400">(optional — Seedance only, video transitions to this image)</span></div>
+          <input id="vidLabEndImage" type="text" placeholder="Paste an image URL for the final frame..." style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;box-sizing:border-box">
+        </div>
+        <!-- Cost + Generate -->
+        <div style="display:flex;gap:.3rem;align-items:center;margin-top:.3rem" id="vidLabPlatforms">
+          <div id="vidLabCostEstimate" style="font-size:.6rem;color:#888;flex:1"></div>
           <button onclick="vidLabGenerate(document.getElementById('vidLabPlatformSelect').value)" style="padding:.45rem .9rem;border-radius:6px;border:none;background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;font-size:.7rem;cursor:pointer;font-weight:700;white-space:nowrap">Create Video</button>
         </div>
         <div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.4rem"></div>
@@ -1830,6 +1862,8 @@ function vidUpFilt(){
 
 function vidLabCheck(){
   vidJobRender(); // Always render job history on tab load
+  // Initialize platform-aware controls (duration options, cost estimate)
+  if(typeof vidLabUpdateOptions==='function')vidLabUpdateOptions();
   // Restore refiner target dropdown from localStorage
   const tgt=document.getElementById('vidLabRefineTarget');
   if(tgt){const saved=localStorage.getItem('cb2_videolab_refine_target')||'';tgt.value=saved;}
@@ -2059,6 +2093,35 @@ async function vidJobRefreshAll(){
     }catch(e){/* skip failures, user can retry */}
   }
 }
+// vidLabUpdateOptions — adjusts duration choices, shows/hides end-image field,
+// and updates cost estimate when the platform or duration changes.
+function vidLabUpdateOptions(){
+  const plat=document.getElementById('vidLabPlatformSelect')?.value||'kling';
+  const durSel=document.getElementById('vidLabDuration');
+  const endRow=document.getElementById('vidLabEndImageRow');
+  const costEl=document.getElementById('vidLabCostEstimate');
+  // Duration options per platform
+  const durOpts={
+    seedance:[4,5,6,7,8,9,10,11,12,13,14,15],
+    'seedance-fast':[4,5,6,7,8,9,10,11,12,13,14,15],
+    kling:[5,10],
+    'veo-lite':[5,6,7,8],
+    sora:[5,10,15,20],
+    runway:[5,10],
+  }[plat]||[5,10];
+  const defaults={seedance:5,'seedance-fast':5,kling:10,'veo-lite':8,sora:10,runway:10};
+  const prevDur=parseInt(durSel?.value)||10;
+  if(durSel){
+    durSel.innerHTML=durOpts.map(d=>'<option value="'+d+'"'+(d===(durOpts.includes(prevDur)?prevDur:defaults[plat])?' selected':'')+'>'+d+'s</option>').join('');
+  }
+  // End image (Seedance only)
+  if(endRow)endRow.style.display=(plat==='seedance'||plat==='seedance-fast')?'block':'none';
+  // Cost estimate
+  const dur=parseInt(durSel?.value)||defaults[plat]||10;
+  const costPerSec={seedance:0.3024,'seedance-fast':0.2419,kling:0.15,'veo-lite':0.05,sora:0.33,runway:0.05};
+  const est=(costPerSec[plat]||0.15)*dur;
+  if(costEl)costEl.textContent='Est. ~$'+est.toFixed(2)+' for '+dur+'s';
+}
 // Video Lab — re-enabled 2026-04-09 using Worker fal-submit + fal-get targets.
 // Client-side polling via vidLabResumePoll() every 15s (same UX as the original
 // direct-to-fal.media flow, just with the Worker injecting the FAL_KEY in the middle).
@@ -2068,41 +2131,31 @@ async function vidLabGenerate(platform){
   const dir=(document.getElementById('vidLabDirection')?.value||'').trim();
   const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
   const prompt=dir?dir+'. '+basePrompt:basePrompt;
-  // Seedance is live and open (verified 2026-04-10 from fal.ai page — badges
-  // show Inference + Commercial use + Partner, no access gate).
+  // Read user-selected duration + aspect ratio from the form controls
+  const userDur=document.getElementById('vidLabDuration')?.value||'10';
+  const userAspect=document.getElementById('vidLabAspect')?.value||'9:16';
+  const endImageUrl=(document.getElementById('vidLabEndImage')?.value||'').trim();
+  // Build platform-specific request bodies using the form values.
+  // Seedance supports end_image_url for start→end frame transitions.
+  const seedanceBody={image_url:src.url,prompt,duration:userDur,resolution:'720p',aspect_ratio:userAspect,generate_audio:true};
+  if(endImageUrl&&(platform==='seedance'||platform==='seedance-fast'))seedanceBody.end_image_url=endImageUrl;
   const info={
-    // Seedance 2.0 — ByteDance, currently #1 on Artificial Analysis Elo (1269,
-    // beats Veo 3, Sora 2, Gen-4.5). Same fal queue API contract as Kling.
-    // 2026-04-09: added after Justin asked about it. fal page mentions a
-    // gating form — first call may return 403. If so, file the request and
-    // retry. Cost is computed live by fal: $0.3024/sec at 720p std,
-    // $0.2419/sec at 720p fast (+ $0.0112/1K tokens).
-    // Per fal docs (fal.ai/models/bytedance/seedance-2.0/image-to-video) the
-    // endpoint is bytedance/seedance-2.0/... — NO fal-ai/ prefix. This is
-    // unlike v1 which lives at fal-ai/bytedance/seedance/v1/... — fal moved
-    // to a flatter namespace for v2.
-    // Seedance 2.0 — verified live on fal.ai (no access gate). Schema from
-    // fal.ai/models/bytedance/seedance-2.0/image-to-video/api:
-    // Required: prompt (string), image_url (string)
-    // Optional: duration (auto|4-15), resolution (480p|720p), aspect_ratio (auto|16:9|9:16|...),
-    //           generate_audio (bool, default true), seed (int), end_image_url (string)
-    seedance:{name:'Seedance 2.0',endpoint:'bytedance/seedance-2.0/image-to-video',cost:'~$1.51 (5s)',
-      body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16',generate_audio:true}},
-    'seedance-fast':{name:'Seedance 2.0 Fast',endpoint:'bytedance/seedance-2.0/fast/image-to-video',cost:'~$1.21 (5s)',
-      body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16',generate_audio:true}},
-    kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',cost:'~$1.50',
-      body:{image_url:src.url,prompt:prompt,duration:'10',aspect_ratio:'9:16'}},
-    'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',cost:'~$0.40',
-      body:{image_url:src.url,prompt:prompt,duration:'8s',aspect_ratio:'9:16'}},
-    sora:{name:'Sora 2 Pro',endpoint:'fal-ai/sora-2/image-to-video/pro',cost:'~$5.00',
-      body:{image_url:src.url,prompt:prompt,duration:16,aspect_ratio:'9:16'}},
-    runway:{name:'Runway Gen-4T',endpoint:null,cost:'~$0.50',body:null}
+    seedance:{name:'Seedance 2.0',endpoint:'bytedance/seedance-2.0/image-to-video',body:seedanceBody},
+    'seedance-fast':{name:'Seedance 2.0 Fast',endpoint:'bytedance/seedance-2.0/fast/image-to-video',body:{...seedanceBody}},
+    kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',
+      body:{image_url:src.url,prompt,duration:userDur,aspect_ratio:userAspect}},
+    'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',
+      body:{image_url:src.url,prompt,duration:userDur+'s',aspect_ratio:userAspect}},
+    sora:{name:'Sora 2 Pro',endpoint:'fal-ai/sora-2/image-to-video/pro',
+      body:{image_url:src.url,prompt,duration:parseInt(userDur),aspect_ratio:userAspect}},
+    runway:{name:'Runway Gen-4T',endpoint:null,body:null}
   };
   const p=info[platform]||info.kling;
+  // Dynamic cost estimate from the form
+  const costPerSec={seedance:0.3024,'seedance-fast':0.2419,kling:0.15,'veo-lite':0.05,sora:0.33,runway:0.05};
+  const estCost=((costPerSec[platform]||0.15)*parseInt(userDur)).toFixed(2);
   // Confirmation modal — videos are expensive, prevent accidental clicks
-  if(platform!=='seedance'&&platform!=='seedance-fast'){ // Seedance already has its own confirm above
-    if(!confirm('Create a video with '+p.name+'?\n\nEstimated cost: '+p.cost+'\nThis will animate your selected still into a short marketing video.'))return;
-  }
+  if(!confirm('Create a '+userDur+'s video with '+p.name+'?\n\nEstimated cost: ~$'+estCost+'\nAspect: '+userAspect+(endImageUrl?' (with end frame)':'')+'\n\nThis will animate your selected still into a marketing video.'))return;
   if(!p.endpoint){
     document.getElementById('vidLabStatus').innerHTML='<div style="color:#f59e0b;font-size:.65rem;margin-top:.3rem">Runway requires direct API \u2014 tell Claude Code: <strong>"animate '+src.label+' with Runway Gen-4 Turbo"</strong></div>';
     return;
