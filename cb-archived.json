@@ -1,8 +1,9 @@
 {
   "meta": {
-    "generated": "2026-04-09T19:23:31Z",
+    "generated": "2026-04-10T01:23:01Z",
     "count": 693,
-    "note": "Archived from fal.media / catbox.moe to permanent GitHub Pages storage."
+    "video_count": 17,
+    "note": "Archived from fal.media / catbox.moe to permanent GitHub Pages storage. Photos under /winners/, videos under /winners/videos/."
   },
   "ids": [
     "E2-moto-r65s75",
@@ -4857,6 +4858,163 @@
       "url": "https://jbarad424.github.io/ideas/winners/mir2_ski_ski_s1_127.jpg",
       "original": "https://v3b.fal.media/files/b/0a957ac2/nH9OGjT_2daOnaqOjWOks_gkktwQfK.jpg",
       "source": "corpus"
+    }
+  },
+  "video_ids": [
+    "vid-gen45-moto",
+    "vid-gen45-snow",
+    "vid-gen4t-moto",
+    "vid-gen4t-snow",
+    "vid-hailuo-rep",
+    "vid-kling-fal",
+    "vid-kling-rep",
+    "vid-kling3-moto",
+    "vid-kling3-snow",
+    "vid-kling3-v4desert",
+    "vid-kling3v2-moto99",
+    "vid-minimax",
+    "vid-sora2pro-moto99",
+    "vid-veo2",
+    "vid-veo31-moto",
+    "vid-veo31-snow",
+    "vid-veo31lite-moto99"
+  ],
+  "videos": {
+    "vid-kling3v2-moto99": {
+      "filename": "vid-kling3v2-moto99.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-kling3v2-moto99.mp4",
+      "original": "https://files.catbox.moe/69wczk.mp4",
+      "source": "all_videos",
+      "model": "Kling 3.0 Pro (v2)",
+      "label": "VIDEO R4: Kling 3.0 Pro \u2014 Moto 99"
+    },
+    "vid-veo31lite-moto99": {
+      "filename": "vid-veo31lite-moto99.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-veo31lite-moto99.mp4",
+      "original": "https://files.catbox.moe/qmw0re.mp4",
+      "source": "all_videos",
+      "model": "Veo 3.1 Lite (Google)",
+      "label": "VIDEO R4: Veo 3.1 Lite \u2014 Moto 99"
+    },
+    "vid-sora2pro-moto99": {
+      "filename": "vid-sora2pro-moto99.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-sora2pro-moto99.mp4",
+      "original": "https://files.catbox.moe/rh8jr6.mp4",
+      "source": "all_videos",
+      "model": "Sora 2 Pro (OpenAI)",
+      "label": "VIDEO R4: Sora 2 Pro \u2014 Moto 99"
+    },
+    "vid-kling3-v4desert": {
+      "filename": "vid-kling3-v4desert.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-kling3-v4desert.mp4",
+      "original": "https://files.catbox.moe/xhbk3p.mp4",
+      "source": "all_videos",
+      "model": "Kling 3.0 Pro (fal.ai)",
+      "label": "VIDEO: Kling 3.0 Pro \u2014 V4 Moto Desert"
+    },
+    "vid-kling3-moto": {
+      "filename": "vid-kling3-moto.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-kling3-moto.mp4",
+      "original": "https://files.catbox.moe/nr34vc.mp4",
+      "source": "all_videos",
+      "model": "Kling 3.0 Pro (fal.ai)",
+      "label": "VIDEO R3: Kling 3.0 Pro \u2014 Moto"
+    },
+    "vid-kling3-snow": {
+      "filename": "vid-kling3-snow.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-kling3-snow.mp4",
+      "original": "https://files.catbox.moe/hk0xoh.mp4",
+      "source": "all_videos",
+      "model": "Kling 3.0 Pro (fal.ai)",
+      "label": "VIDEO R3: Kling 3.0 Pro \u2014 Snowboard"
+    },
+    "vid-gen4t-moto": {
+      "filename": "vid-gen4t-moto.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-gen4t-moto.mp4",
+      "original": "https://files.catbox.moe/d3ugv3.mp4",
+      "source": "all_videos",
+      "model": "Runway Gen-4 Turbo",
+      "label": "VIDEO: Gen-4 Turbo \u2014 Moto"
+    },
+    "vid-gen4t-snow": {
+      "filename": "vid-gen4t-snow.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-gen4t-snow.mp4",
+      "original": "https://files.catbox.moe/rzxknn.mp4",
+      "source": "all_videos",
+      "model": "Runway Gen-4 Turbo",
+      "label": "VIDEO: Gen-4 Turbo \u2014 Snowboard"
+    },
+    "vid-gen45-moto": {
+      "filename": "vid-gen45-moto.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-gen45-moto.mp4",
+      "original": "https://files.catbox.moe/bkeese.mp4",
+      "source": "all_videos",
+      "model": "Runway Gen-4.5",
+      "label": "VIDEO: Gen-4.5 \u2014 Moto"
+    },
+    "vid-gen45-snow": {
+      "filename": "vid-gen45-snow.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-gen45-snow.mp4",
+      "original": "https://files.catbox.moe/y9z0qm.mp4",
+      "source": "all_videos",
+      "model": "Runway Gen-4.5",
+      "label": "VIDEO: Gen-4.5 \u2014 Snowboard"
+    },
+    "vid-veo31-moto": {
+      "filename": "vid-veo31-moto.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-veo31-moto.mp4",
+      "original": "https://files.catbox.moe/xs9o5n.mp4",
+      "source": "all_videos",
+      "model": "Veo 3.1 (Google)",
+      "label": "VIDEO: Veo 3.1 \u2014 Moto"
+    },
+    "vid-veo31-snow": {
+      "filename": "vid-veo31-snow.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-veo31-snow.mp4",
+      "original": "https://files.catbox.moe/ajo9l3.mp4",
+      "source": "all_videos",
+      "model": "Veo 3.1 (Google)",
+      "label": "VIDEO: Veo 3.1 \u2014 Snowboard"
+    },
+    "vid-kling-fal": {
+      "filename": "vid-kling-fal.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-kling-fal.mp4",
+      "original": "https://files.catbox.moe/kdvkgf.mp4",
+      "source": "all_videos",
+      "model": "Kling v2.1 (fal.ai)",
+      "label": "VIDEO R1: Kling v2.1 (fal)"
+    },
+    "vid-veo2": {
+      "filename": "vid-veo2.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-veo2.mp4",
+      "original": "https://files.catbox.moe/m39e5c.mp4",
+      "source": "all_videos",
+      "model": "Veo 2 (fal.ai)",
+      "label": "VIDEO R1: Veo 2"
+    },
+    "vid-minimax": {
+      "filename": "vid-minimax.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-minimax.mp4",
+      "original": "https://files.catbox.moe/we3ggf.mp4",
+      "source": "all_videos",
+      "model": "MiniMax/Hailuo (fal.ai)",
+      "label": "VIDEO R1: MiniMax"
+    },
+    "vid-hailuo-rep": {
+      "filename": "vid-hailuo-rep.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-hailuo-rep.mp4",
+      "original": "https://files.catbox.moe/vplv0d.mp4",
+      "source": "all_videos",
+      "model": "Hailuo 2.3 (Replicate)",
+      "label": "VIDEO R1: Hailuo 2.3"
+    },
+    "vid-kling-rep": {
+      "filename": "vid-kling-rep.mp4",
+      "url": "https://jbarad424.github.io/ideas/winners/videos/vid-kling-rep.mp4",
+      "original": "https://files.catbox.moe/z56lx3.mp4",
+      "source": "all_videos",
+      "model": "Kling v2.1 (Replicate)",
+      "label": "VIDEO R1: Kling v2.1 (Rep)"
     }
   }
 }
