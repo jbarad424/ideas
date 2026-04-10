@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v10.6</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v10.7</span></div>
 </div>
 
 <div class="tabs">
@@ -3807,10 +3807,11 @@ const CR={
     if(b.endpoint.includes('gpt-image')){
       return {image_urls:[refUrl,productRef],prompt:b.recipe_prompt,size:'1024x1536',quality:'high',input_fidelity:'high'};
     }
-    // All non-GPT models get explicit portrait size + the dual-ref. The production
-    // batches that scored 95-100 were 1024x1536. Without explicit size, NB Pro/NB2
-    // may default to square, producing different compositions than the winners.
-    const body={image_urls:[refUrl,productRef],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5,image_size:{width:1024,height:1536}};
+    // EDIT endpoints (NB Pro, NB2, FLUX Flex) infer output size from the reference
+    // images. Do NOT pass image_size — it's not a recognized parameter on /edit
+    // endpoints and causes NB Pro to return garbage (stock photo fallbacks).
+    // The image_size field was added in the quality fix commit but broke NB Pro.
+    const body={image_urls:[refUrl,productRef],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
     if(b.endpoint.includes('flux-2-flex')){
       body.guidance_scale=7.0;body.num_inference_steps=28;
     }
