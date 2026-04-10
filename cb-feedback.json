@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:39:36.547Z",
+  "syncedAt": "2026-04-10T19:39:43.763Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17194,6 +17194,11 @@
           "text": "Cool noises in the background the remote is staying still the way it should be. Cool again would like to see earbuds and a helmet.",
           "time": "2026-04-06T22:00:00Z",
           "num": 2
+        },
+        {
+          "num": 3,
+          "text": "rejected — archived from Gallery",
+          "time": "2026-04-10T19:39:43.041Z"
         }
       ]
     },
