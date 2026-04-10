@@ -188,8 +188,14 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .cr-twist-orig-body{margin-top:.3rem;padding:.35rem .5rem;background:#0a0a15;border-radius:4px;color:#ccc;font-family:ui-monospace,Menlo,monospace;line-height:1.4;max-height:180px;overflow-y:auto}
 /* Batch + keeper grid */
 .cr-batch-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;gap:.5rem}
-.cr-back{background:none;border:1px solid #333;color:#888;padding:.4rem .7rem;border-radius:6px;font-size:.65rem;cursor:pointer}
+.cr-back{background:none;border:1px solid #333;color:#888;padding:.4rem .7rem;border-radius:6px;font-size:.65rem;cursor:pointer;white-space:nowrap}
 .cr-back:hover{border-color:#a855f7;color:#a855f7}
+.cr-prompt-details{background:#0d1117;border:1px solid #1a3a2a;border-radius:8px;padding:.6rem .8rem;margin-top:.5rem;font-size:.7rem;color:#8b949e}
+.cr-prompt-details summary{cursor:pointer;color:#22c55e;font-size:.65rem;list-style:none;outline:none}
+.cr-prompt-details summary::-webkit-details-marker{display:none}
+.cr-prompt-details summary::before{content:'\25B6';display:inline-block;margin-right:.3rem;font-size:.55rem;transition:transform .15s}
+.cr-prompt-details[open] summary::before{transform:rotate(90deg)}
+.cr-prompt-full{margin-top:.5rem;line-height:1.5;color:#c9d1d9;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow-y:auto;padding:.5rem;background:#0a0a0a;border-radius:6px;font-size:.7rem}
 .cr-batch-title{font-size:.75rem;color:#ccc;font-weight:600;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;margin-top:.4rem}
 .cr-tile{position:relative;aspect-ratio:2/3;background:#0a0a0a;border-radius:8px;overflow:hidden;border:2px solid #222}
@@ -2715,7 +2721,9 @@ const CR={
   currentBatch:null,
   newScene:null,
   lightboxInit:false,
-  // REFS (from CLAUDE.md, 2026-04-08 lock). Rotated images hosted on GH Pages.
+  // REFS (from CLAUDE.md, 2026-04-09 lock — Tron added after Justin's shoot).
+  // Hunter/Patriot use rotated-refs (sips -r 180 versions). Tron uses raw
+  // multi-orientation captures Justin took directly with the right framing.
   REFS:{
     h3:{id:'h3',colorway:'Hunter',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/h3.jpg'},
     h5:{id:'h5',colorway:'Hunter',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/h5.jpg'},
@@ -2723,9 +2731,18 @@ const CR={
     p4:{id:'p4',colorway:'Patriot',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/p4.jpg'},
     p6:{id:'p6',colorway:'Patriot',type:'jacket',url:'https://jbarad424.github.io/ideas/rotated-refs/p6.jpg'},
     refc:{id:'refc',colorway:'Hunter',type:'dual',url:'https://lh3.googleusercontent.com/d/1qfm8HT8vpD0wh8K9q8vZw6zYK7ohPsq7=w800'},
-    // Tron refs drop in as t1,t2,... once Justin shoots them.
+    // Tron — Justin shot 20 raw refs 2026-04-09, A/B locked these as winners.
+    // t18 is the only "pure pure gold" (4×5 score, 0 flags). t01/t03/t11 are
+    // Tier 1 (cosmetic rot180 flags only). t05/t09/t17 are Tier 2.
+    t18:{id:'t18',colorway:'Tron',type:'product',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t18.jpeg'},
+    t01:{id:'t01',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t01.jpeg'},
+    t03:{id:'t03',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t03.jpeg'},
+    t11:{id:'t11',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t11.jpeg'},
+    t05:{id:'t05',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t05.jpeg'},
+    t09:{id:'t09',colorway:'Tron',type:'jacket',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t09.jpeg'},
+    t17:{id:'t17',colorway:'Tron',type:'product',url:'https://jbarad424.github.io/ideas/ref-library/tron-raw/t17.jpeg'},
   },
-  KILLED_REFS:['p1','h1','h4','p5'],
+  KILLED_REFS:['p1','h1','h4','p5','t10','t16'],
   // Mandatory gear per sport (CLAUDE.md)
   GEAR:{
     moto:'full-face helmet, leather riding jacket with armor, thick leather riding gloves',
@@ -3138,12 +3155,24 @@ const CR={
     const b=this.currentBatch;
     if(!b)return '<div style="padding:1rem;color:#888">No active batch.</div>';
     const title=this.MODEL_LABELS[b.endpoint]||b.model;
+    // Reference label — show the human-readable ref id (e.g. "h3 jacket") so
+    // Justin knows what was picked even though he didn't pick it himself.
+    const refLabel=b.ref?(b.ref.id+(b.ref.type?' \u00b7 '+b.ref.type:'')+(b.ref.colorway?' \u00b7 '+b.ref.colorway:'')):'(no ref)';
     return '<div class="cr-batch-head">'+
       '<button class="cr-back" onclick="CR.backToParade()">\u2190 Parade</button>'+
       '<div class="cr-batch-title">'+this.esc(title)+' \u00b7 '+b.tiles.length+' tiles \u00b7 ~$'+b.cost_usd.toFixed(2)+'</div>'+
-      '<div style="width:72px"></div>'+
+      '<button class="cr-back" onclick="CR.tryAgain()" title="Edit this prompt and run another batch">\uD83D\uDD01 Try again</button>'+
     '</div>'+
-    '<div class="preview-box"><strong>Prompt</strong>'+this.esc((b.recipe_prompt||'').slice(0,260))+(b.recipe_prompt.length>260?'\u2026':'')+'</div>'+
+    // Full prompt is collapsed by default but expandable on click. Click the
+    // header to toggle. Replaces the old 260-char hard truncation that hid
+    // half the prompt every time.
+    '<details class="cr-prompt-details">'+
+      '<summary><strong>Prompt</strong> <span style="color:#888;font-weight:400;font-size:.6rem">'+
+        '\u00b7 ref: '+this.esc(refLabel)+
+        ' \u00b7 click to expand'+
+      '</span></summary>'+
+      '<div class="cr-prompt-full">'+this.esc(b.recipe_prompt||'')+'</div>'+
+    '</details>'+
     '<div id="crGrid">'+this.renderGridInner()+'</div>'+
     '<div id="crSaveBar">'+this.renderSaveBar()+'</div>';
   },
@@ -3203,6 +3232,44 @@ const CR={
     this.currentBatch=null;
     this.view='parade';
     this.render();
+  },
+
+  // tryAgain — restore the New Scene form with EVERYTHING that produced the
+  // current batch (sport, colorway, vibe, gear, scene text, refined version,
+  // assembled final prompt, batch size, model). User can tweak any field and
+  // re-fire. Fixes the "I went back and lost everything" complaint.
+  tryAgain(){
+    const b=this.currentBatch;
+    if(!b){this.showNewScene();return;}
+    if(b.tiles.some(t=>t.status==='done'||t.status==='failed')){
+      if(!confirm('Reopen this batch in the form? Unsaved keepers will still be lost \u2014 save first if you want to keep them.'))return;
+    }
+    // Reconstruct the form state from the batch metadata
+    const sportMap={motorcycle:'moto',moto:'moto',skiing:'ski',ski:'ski',snowboard:'snow',snow:'snow',snowmobile:'sled',sled:'sled',mtb:'mtb'};
+    const formSport=sportMap[b.sport]||b.sport||'moto';
+    this.newScene={
+      sport:formSport,
+      colorway:(b.ref&&b.ref.colorway)||'Hunter',
+      vibe:b.vibe||'editorial',
+      arm:b.arm||'LEFT',
+      batchSize:b.tiles.length,
+      scene:b._origScene||'',
+      gear:b._origGear||this.GEAR[formSport]||'',
+      refined:b._origRefined||'',
+      refinedAccepted:!!b._origRefined,
+      finalPrompt:b.recipe_prompt||'',
+      twistingFrom:null,
+      twistingFromPrompt:'',
+      twistingFromPreferredEndpoint:b.endpoint,
+    };
+    this.currentBatch=null;
+    this.view='newscene';
+    this.render();
+    // Restore the model dropdown after the DOM renders
+    setTimeout(()=>{
+      const sel=document.getElementById('crModelSelect');
+      if(sel&&this.newScene.twistingFromPreferredEndpoint)sel.value=this.newScene.twistingFromPreferredEndpoint;
+    },50);
   },
 
   async fireBatch(){
@@ -3390,6 +3457,7 @@ const CR={
       arm:'LEFT',
       batchSize:6,
       scene:'',
+      gear:this.GEAR.moto, // pre-fill from sport's defaults; editable in form
       refined:'',
       refinedAccepted:false,
       finalPrompt:'',
@@ -3419,6 +3487,7 @@ const CR={
       arm:r.arm||'LEFT',
       batchSize:6,
       scene:'',
+      gear:this.GEAR[formSport]||this.GEAR.moto,
       refined:'',
       refinedAccepted:false,
       finalPrompt:'',
@@ -3486,7 +3555,11 @@ const CR={
       '</div>'+
       '<div class="cr-form-row">'+
         '<div class="cr-form-label">Reference</div>'+
-        '<select class="cr-select" '+(colorwayRefs.length?'':'disabled')+'>'+refOptions+'</select>'+
+        '<div style="font-size:.65rem;color:#888;line-height:1.4;padding:.4rem .6rem;background:#0a0a0a;border:1px solid #222;border-radius:6px">'+
+          (colorwayRefs.length
+            ?'\uD83C\uDFB2 Auto \u2014 picks one of <strong style="color:#a855f7">'+colorwayRefs.length+'</strong> '+s.colorway+' refs by weighted-random (best performers chosen more often).'
+            :'\u26A0\uFE0F No refs for '+s.colorway+' \u2014 enable dry-run or switch colorway.')+
+        '</div>'+
       '</div>'+
       '<div class="cr-form-row">'+
         '<div class="cr-form-label">Vibe</div>'+
@@ -3502,8 +3575,8 @@ const CR={
         (s.refined?'<div class="cr-refined"><div class="cr-refined-label">Refined by Sonnet</div>'+this.esc(s.refined)+'<div class="cr-refined-actions"><button class="'+(s.refinedAccepted?'on':'')+'" onclick="CR.acceptRefined()">Use refined</button><button onclick="CR.rejectRefined()">Use original</button></div></div>':'')+
       '</div>'+
       '<div class="cr-form-row">'+
-        '<div class="cr-form-label">Mandatory gear (auto)</div>'+
-        '<div class="preview-box">'+this.esc(gearStr)+'</div>'+
+        '<div class="cr-form-label">Gear <span style="font-weight:400;color:#888;font-size:.6rem">(pre-filled from sport \u2014 edit freely)</span></div>'+
+        '<textarea class="create-prompt" id="crGearInput" style="min-height:48px" oninput="CR.updateForm(\'gear\',this.value)">'+this.esc(s.gear||gearStr)+'</textarea>'+
       '</div>'+
       '<div class="cr-form-row">'+
         '<div class="cr-form-label">Final prompt</div>'+
@@ -3530,7 +3603,20 @@ const CR={
 
   updateForm(key,val){
     this.newScene[key]=val;
-    if(key==='sport'||key==='colorway'){this.render();}
+    // When sport changes, refill the gear field with that sport's defaults
+    // (only if the user hasn't customized it from a non-default value).
+    if(key==='sport'){
+      const allDefaults=Object.values(this.GEAR);
+      const currentGear=(this.newScene.gear||'').trim();
+      // If current gear matches any other sport's default OR is empty, refill.
+      // If user typed something custom, leave it alone.
+      if(!currentGear||allDefaults.includes(currentGear)){
+        this.newScene.gear=this.GEAR[val]||'';
+      }
+      this.render();
+    }else if(key==='colorway'){
+      this.render();
+    }
   },
 
   refsForColorway(cw){
@@ -3546,10 +3632,36 @@ const CR={
     const status=document.getElementById('crRefineStatus');
     btn.disabled=true;btn.style.opacity='.5';
     status.textContent='Refining\u2026';
-    const sys="You are a photography director for an action-sports marketing brand. Rewrite the user's scene description into industry-standard photographic language that would produce exceptional marketing photos \u2014 but preserve 100% of the user's creative intent. Use specific camera/lens terminology (e.g. 'shot on Sony A7R IV 85mm f/2.0'), concrete lighting vocabulary (e.g. 'raking sidelight', 'golden-hour backlight'), evocative setting detail, and atmospheric descriptors. Do NOT add a product description, subject description, wardrobe, or framing \u2014 those are added separately. Output only the rewritten scene paragraph, no preamble.";
+    // SPORT-AWARE refine — inject the user's selected sport, vibe, colorway,
+    // and subject into the system prompt so Sonnet anchors the rewrite to
+    // the correct environment. Without this, "James Bond escaping a heist"
+    // for Ski came back as an urban scene because Sonnet had no idea it was
+    // supposed to be on snow. (Justin reported this 2026-04-09.)
+    const sportMeta={
+      moto:{label:'motorcycle',environment:'an open road, highway, canyon, coastal route, or desert \u2014 anywhere a motorcycle would actually ride',subject:'motorcycle rider on a motorcycle'},
+      ski:{label:'alpine skiing',environment:'a snowy mountain, ski slope, alpine ridge, deep powder, or groomed run \u2014 it MUST be set on snow in winter',subject:'skier in motion'},
+      snow:{label:'snowboarding',environment:'a snowy mountain, terrain park, half-pipe, or backcountry powder run \u2014 it MUST be set on snow in winter',subject:'snowboarder'},
+      mtb:{label:'mountain biking',environment:'a forest trail, alpine ridge, technical singletrack, or downhill descent \u2014 it MUST be set on a mountain bike trail',subject:'mountain biker on a mountain bike'},
+      sled:{label:'snowmobiling',environment:'a snowy backcountry, frozen lake, alpine bowl, or snowmobile trail \u2014 it MUST be set on snow in winter',subject:'snowmobile rider on a snowmobile'},
+    }[s.sport]||{label:s.sport,environment:'the sport-appropriate location',subject:'an athlete'};
+    const vibeNote={
+      editorial:'Lean editorial \u2014 controlled, intentional composition.',
+      documentary:'Lean documentary \u2014 raw, candid, "caught in the moment" feel.',
+      'golden hour':'Use warm golden-hour backlight, long shadows, glowing rim light.',
+      'harsh midday':'Use harsh overhead midday sun with sharp shadows and high contrast.',
+      'moody night':'Use moody low-light night ambience with practical lights and deep shadows.',
+    }[s.vibe]||'';
+    const sys="You are a photography director for an action-sports marketing brand. The user has selected a SPORT and VIBE \u2014 you MUST anchor the scene to those constraints, even if their description sounds like it could be set anywhere.\n\n"+
+      "SPORT: "+sportMeta.label+" \u2014 the scene must take place in "+sportMeta.environment+".\n"+
+      "SUBJECT: "+sportMeta.subject+" (anchor any character/persona the user describes onto this subject).\n"+
+      "VIBE: "+(s.vibe||'editorial')+" \u2014 "+vibeNote+"\n"+
+      "COLORWAY: "+(s.colorway||'Hunter')+" (informational only \u2014 don't mention colors in the rewrite).\n\n"+
+      "Rewrite the user's scene description into industry-standard photographic language that would produce exceptional marketing photos. Preserve 100% of the user's creative intent (characters, narrative, mood, action) but TRANSPLANT it into the sport's environment. Use specific camera/lens terminology (e.g. 'shot on Sony A7R IV 85mm f/2.0'), concrete lighting vocabulary, evocative setting detail, and atmospheric descriptors.\n\n"+
+      "Example of correct sport-anchoring: if the user says 'James Bond character escaping a heist' and the sport is SKI, the rewrite should be a Bond-style chase happening on a ski slope (carving down powder while pursued, jumping a cornice, evading on skis) \u2014 NOT a Bond chase in an urban alley.\n\n"+
+      "Do NOT add wardrobe, helmet, gloves, or product description \u2014 those are added separately. Output only the rewritten scene paragraph, no preamble.";
     try{
       // 2026-04-09: routed through CF Worker (proxyAnthropic) — no client-side Anthropic key.
-      const d=await proxyAnthropic({model:'claude-sonnet-4-5',max_tokens:500,system:sys,messages:[{role:'user',content:'Scene:\n'+raw}]});
+      const d=await proxyAnthropic({model:'claude-sonnet-4-5',max_tokens:500,system:sys,messages:[{role:'user',content:'Sport: '+sportMeta.label+'\nVibe: '+s.vibe+'\nUser scene:\n'+raw}]});
       if(d.error){
         status.textContent='Error: '+(d.error.message||'unknown');
         btn.disabled=false;btn.style.opacity='1';
@@ -3576,10 +3688,13 @@ const CR={
     // Pull scene from live textarea in case user edited without blur
     const liveScene=document.getElementById('crSceneInput')?.value||s.scene;
     s.scene=liveScene;
+    // Pull gear from live textarea too — user may have customized it
+    const liveGear=document.getElementById('crGearInput')?.value||s.gear||this.GEAR[s.sport]||'';
+    s.gear=liveGear;
     const sceneText=(s.refinedAccepted&&s.refined)?s.refined:liveScene;
     if(!sceneText.trim()){showToast('Type or refine a scene first');return;}
     const subject={moto:'motorcycle rider',ski:'skier',snow:'snowboarder',mtb:'mountain biker',sled:'snowmobile rider'}[s.sport]||'athlete';
-    const gear=this.GEAR[s.sport]||'';
+    const gear=liveGear.trim();
     const cb2=this.CB2_BLOCK[s.arm]||this.CB2_BLOCK.LEFT;
     const vibeCam={
       editorial:'Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain, editorial photography',
@@ -3588,10 +3703,45 @@ const CR={
       'harsh midday':'Shot on Nikon Z9 50mm f/4.0, harsh overhead sun, sharp shadows, documentary photography',
       'moody night':'Shot on Sony A7S III 35mm f/1.4, moody night exposure, ambient streetlight, film grain',
     }[s.vibe]||'Shot on Sony A7R IV 85mm f/2.0, film grain';
-    const full=sceneText.trim()+'. '+subject+' wearing '+gear+', '+cb2+', waist-up, '+vibeCam+'.';
+    // Gear is optional now (editable). If empty, skip the "wearing X" clause.
+    const subjectClause=gear?(subject+' wearing '+gear):subject;
+    const full=sceneText.trim()+'. '+subjectClause+', '+cb2+', waist-up, '+vibeCam+'.';
     s.finalPrompt=full;
     const ta=document.getElementById('crFinalPrompt');if(ta)ta.value=full;
     showToast('Assembled \u2014 edit inline if needed');
+  },
+
+  // pickRefAuto — weighted-random over the available refs for a colorway,
+  // weighted by each ref's keeper_rate from cb-learning.json. Refs the system
+  // has never seen still get picked occasionally (baseline weight) so the
+  // learning loop discovers new ones. Replaces the old refs[0] greedy pick
+  // and lets Justin stop hand-choosing P4 vs P6.
+  pickRefAuto(colorway){
+    const refs=this.refsForColorway(colorway);
+    if(!refs.length)return null;
+    if(refs.length===1)return refs[0];
+    const learningRefs=(this.learning&&this.learning.refs)||{};
+    // Build weights: keeper_rate * 100 (scale to ~0-100), with a baseline of
+    // 20 for any ref that hasn't been measured yet (so unknowns get a chance).
+    const BASELINE=20;
+    const weights=refs.map(r=>{
+      const stats=learningRefs[r.id]&&learningRefs[r.id].overall;
+      if(!stats||stats.batches_run<1)return BASELINE;
+      // Convert keeper_rate (0-1) to a weight; clamp to [10, 100] so even
+      // a 0% ref still has some chance and a 100% ref doesn't dominate.
+      return Math.max(10,Math.min(100,Math.round(stats.keeper_rate*100)));
+    });
+    const total=weights.reduce((a,b)=>a+b,0);
+    if(total===0)return refs[Math.floor(Math.random()*refs.length)];
+    let roll=Math.random()*total;
+    for(let i=0;i<refs.length;i++){
+      roll-=weights[i];
+      if(roll<=0){
+        console.log('[ref-auto] picked',refs[i].id,'(weight',weights[i],'of',total+')');
+        return refs[i];
+      }
+    }
+    return refs[refs.length-1];
   },
 
   fireNewScene(){
@@ -3601,7 +3751,11 @@ const CR={
     const endpoint=document.getElementById('crModelSelect')?.value||this.DEFAULT_MODEL[s.sport];
     const refs=this.refsForColorway(s.colorway);
     if(!refs.length&&!this.isDryRun()){showToast('No refs for '+s.colorway+' \u2014 turn on dry-run or switch colorway');return;}
-    const ref=refs[0]||null;
+    // AUTO-PICK the reference photo via weighted random over the colorway's
+    // refs, biased by historical keeper_rate. Justin doesn't have to know what
+    // P4 vs P6 means anymore — the system picks and the result page shows
+    // which one got used.
+    const ref=this.pickRefAuto(s.colorway);
     const sceneKey=s.sport+'_novel_'+Date.now().toString(36);
     // Create an ad-hoc recipe for this novel scene so the learning loop can track it
     const recipe={
@@ -3630,10 +3784,17 @@ const CR={
       endpoint,
       ref,
       sport:s.sport,
+      arm:s.arm,
+      vibe:s.vibe,
       is_novel:true,
       cost_usd:(this.MODEL_COST[endpoint]||0.12)*s.batchSize,
       started_at:new Date().toISOString(),
       tiles:Array.from({length:s.batchSize},(_,i)=>({i,status:'queued',url:null,kept:false,error:null})),
+      // Original form state — used by tryAgain() to restore the form so Justin
+      // can tweak any field and re-run without re-typing everything.
+      _origScene:s.scene||'',
+      _origGear:s.gear||'',
+      _origRefined:s.refined||'',
     };
     this.view='batch';
     this.render();
