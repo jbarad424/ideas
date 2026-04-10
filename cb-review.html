@@ -2308,7 +2308,7 @@ async function vidLabGenerate(platform){
   const st=document.getElementById('vidLabStatus');
   if(st)st.innerHTML='<div style="background:#1a1030;border:2px solid #a855f7;border-radius:8px;padding:.6rem;text-align:center">'
     +'<div style="font-size:.8rem;color:#a855f7;font-weight:700">Submitting to '+p.name+'\u2026</div>'
-    +'<div style="font-size:.6rem;color:#888;margin-top:.2rem">~$'+estCost.toFixed(2)+' estimated</div></div>';
+    +'<div style="font-size:.6rem;color:#888;margin-top:.2rem">~$'+estCost+' estimated</div></div>';
 
   try{
     // Submit via Worker fal-submit (returns immediately with request_id + URLs)
