@@ -74,6 +74,30 @@
       "cost_usd": 0.8999999999999999,
       "is_novel": false,
       "at": "2026-04-10T14:52:14.845Z"
+    },
+    {
+      "batch_id": "20260410183000_l0hl0l",
+      "recipe_id": "mtb_novel_mnt8qllh",
+      "recipe_prompt": "A mountain biker tears through dense forest singletrack, glancing back over their shoulder as decaying zombies lurch through the underbrush in pursuit. Overhead sun slices through the canopy creating stark pools of light and deep shadow pockets across the trail. The rider navigates exposed roots and tight tree corridors while supernatural pursuers emerge from the darker recesses of the woods. Harsh midday light creates extreme contrast between sunlit trail sections and shadowed forest depths, with dust particles and displaced leaves hanging in the bright rays. The scene captures the mountain biker mid-flight over a log obstacle, zombies reaching from both sides of the trail, their forms partially silhouetted against bright background clearings. Gnarled branches create a claustrophobic frame while the relentless overhead sun bleaches exposed trail patches to near-white, leaving rotting pursuers half-visible in the contrasting shadows. The composition balances the clean technical lines of the bike and rider against the chaotic, deteriorating forms of the undead, all unified by the unforgiving midday lighting that refuses to hide any detail of either chase participant or the challenging terrain between them.. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2, device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "ref_id": "p4",
+      "model": "fal-ai/nano-banana-pro/edit",
+      "sport": "mtb",
+      "generated": 6,
+      "kept_urls": [
+        "https://v3b.fal.media/files/b/0a95b9c4/6dA_osofBeNvA_aTM4XJL_qJQn9xNN.jpg",
+        "https://v3b.fal.media/files/b/0a95b9c4/jdlHX6lWXqwY00PMNarnQ_Gbvn014u.jpg"
+      ],
+      "rejected_urls": [
+        "https://v3b.fal.media/files/b/0a95b9c4/p7uYOCzyjx87MkEpkGwyK_12PgGbbk.jpg",
+        "https://v3b.fal.media/files/b/0a95b9c4/jMTzg_TFCbrpcP4Iys48a_p3Nik0N0.jpg",
+        "https://v3b.fal.media/files/b/0a95b9c4/UfN5FPBr2Dl--heaEXI7o_1GZrog6I.jpg",
+        "https://v3b.fal.media/files/b/0a95b9c4/M2oK9D91moxosL8VUYc9m_4WqJJA7g.jpg"
+      ],
+      "failed": [],
+      "keeper_rate": 0.3333333333333333,
+      "cost_usd": 0.8999999999999999,
+      "is_novel": true,
+      "at": "2026-04-10T18:32:21.239Z"
     }
   ],
   "recipes": {
@@ -90,6 +114,13 @@
       "total_generated": 4,
       "total_kept": 0,
       "last_batch_at": "2026-04-10T12:54:23.093Z"
+    },
+    "mtb_novel_mnt8qllh": {
+      "keeper_rate": 0.3333333333333333,
+      "batches_run": 1,
+      "total_generated": 6,
+      "total_kept": 2,
+      "last_batch_at": "2026-04-10T18:32:21.239Z"
     }
   },
   "refs": {
@@ -125,8 +156,8 @@
     },
     "p4": {
       "overall": {
-        "keeper_rate": 0.5,
-        "batches_run": 1
+        "keeper_rate": 0.44999999999999996,
+        "batches_run": 2
       },
       "by_recipe": {
         "mtb_9201": {
@@ -135,6 +166,13 @@
           "total_generated": 6,
           "total_kept": 3,
           "last_batch_at": "2026-04-10T14:52:14.845Z"
+        },
+        "mtb_novel_mnt8qllh": {
+          "keeper_rate": 0.3333333333333333,
+          "batches_run": 1,
+          "total_generated": 6,
+          "total_kept": 2,
+          "last_batch_at": "2026-04-10T18:32:21.239Z"
         }
       }
     }
@@ -142,11 +180,11 @@
   "models_by_sport": {
     "mtb": {
       "fal-ai/nano-banana-pro/edit": {
-        "keeper_rate": 0.26666666666666666,
-        "batches_run": 2,
-        "total_generated": 12,
-        "total_kept": 4,
-        "last_batch_at": "2026-04-10T14:52:14.845Z"
+        "keeper_rate": 0.2866666666666666,
+        "batches_run": 3,
+        "total_generated": 18,
+        "total_kept": 6,
+        "last_batch_at": "2026-04-10T18:32:21.239Z"
       }
     },
     "moto": {
