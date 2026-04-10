@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:39:20.335Z",
+  "syncedAt": "2026-04-10T19:39:29.704Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17049,6 +17049,11 @@
           "text": "The guy is just kind of sitting there not really moving yet although it is interesting. He looks like he is ready to go.",
           "time": "2026-04-06T22:00:00Z",
           "num": 2
+        },
+        {
+          "num": 3,
+          "text": "rejected — archived from Gallery",
+          "time": "2026-04-10T19:39:29.008Z"
         }
       ]
     },
