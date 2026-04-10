@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:44:32.034Z",
+  "syncedAt": "2026-04-10T19:49:08.542Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -16984,6 +16984,66 @@
           "num": 1,
           "text": "Final score: 20 (CREATE reject)",
           "time": "2026-04-10T18:32:21.243Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-0",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/VPMKgGvTn7Ygma1-90PQf_w2EnsvdT.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov · recipe moto_9102 · keeper_rate 75%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-1",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/VJ4mkzCuPH_XF5n3vWFb6_xCLqXFqf.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov · recipe moto_9102 · keeper_rate 75%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-2",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/c38YAZALxOD-S_OhYknz8_jBKu81SO.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov · recipe moto_9102 · keeper_rate 75%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-3",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/OYnEuJxiRJwP0F0hfMIxA_LlToKlu3.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE reject: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov · recipe moto_9102 · keeper_rate 75%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T19:49:07.963Z"
         }
       ]
     },
