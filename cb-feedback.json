@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T14:52:15.574Z",
+  "syncedAt": "2026-04-10T18:32:21.808Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -16894,6 +16894,96 @@
           "num": 1,
           "text": "Final score: 20 (CREATE reject)",
           "time": "2026-04-10T14:52:14.858Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410183000_l0hl0l-0",
+      "url": "https://v3b.fal.media/files/b/0a95b9c4/6dA_osofBeNvA_aTM4XJL_qJQn9xNN.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A mountain biker tears through dense forest singletrack, glancing back over their shoulder as decaying zombies lurch through the underbrush in pursuit. Overhead sun slices through the canopy creating stark pools of light and deep shadow pockets across the trail. The rider navigates exposed roots and tight tree corridors while supernatural pursuers emerge from the darker recesses of the woods. Harsh midday light creates extreme contrast between sunlit trail sections and shadowed forest depths, with dust particles and displaced leaves hanging in the bright rays. The scene captures the mountain biker mid-flight over a log obstacle, zombies reaching from both sides of the trail, their forms partially silhouetted against bright background clearings. Gnarled branches create a claustrophobic frame while the relentless overhead sun bleaches exposed trail patches to near-white, leaving rotting pursuers half-visible in the contrasting shadows. The composition balances the clean technical lines of the bike and rider against the chaotic, deteriorating forms of the undead, all unified by the unforgiving midday lighting that refuses to hide any detail of either chase participant or the challenging terrain between them.. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2, device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE keeper: mtb_novel_mnt8qllh",
+      "context": "CREATE batch 20260410183000_l0hl0l · recipe mtb_novel_mnt8qllh · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T18:32:21.243Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410183000_l0hl0l-1",
+      "url": "https://v3b.fal.media/files/b/0a95b9c4/jdlHX6lWXqwY00PMNarnQ_Gbvn014u.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A mountain biker tears through dense forest singletrack, glancing back over their shoulder as decaying zombies lurch through the underbrush in pursuit. Overhead sun slices through the canopy creating stark pools of light and deep shadow pockets across the trail. The rider navigates exposed roots and tight tree corridors while supernatural pursuers emerge from the darker recesses of the woods. Harsh midday light creates extreme contrast between sunlit trail sections and shadowed forest depths, with dust particles and displaced leaves hanging in the bright rays. The scene captures the mountain biker mid-flight over a log obstacle, zombies reaching from both sides of the trail, their forms partially silhouetted against bright background clearings. Gnarled branches create a claustrophobic frame while the relentless overhead sun bleaches exposed trail patches to near-white, leaving rotting pursuers half-visible in the contrasting shadows. The composition balances the clean technical lines of the bike and rider against the chaotic, deteriorating forms of the undead, all unified by the unforgiving midday lighting that refuses to hide any detail of either chase participant or the challenging terrain between them.. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2, device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE keeper: mtb_novel_mnt8qllh",
+      "context": "CREATE batch 20260410183000_l0hl0l · recipe mtb_novel_mnt8qllh · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T18:32:21.243Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410183000_l0hl0l-2",
+      "url": "https://v3b.fal.media/files/b/0a95b9c4/p7uYOCzyjx87MkEpkGwyK_12PgGbbk.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A mountain biker tears through dense forest singletrack, glancing back over their shoulder as decaying zombies lurch through the underbrush in pursuit. Overhead sun slices through the canopy creating stark pools of light and deep shadow pockets across the trail. The rider navigates exposed roots and tight tree corridors while supernatural pursuers emerge from the darker recesses of the woods. Harsh midday light creates extreme contrast between sunlit trail sections and shadowed forest depths, with dust particles and displaced leaves hanging in the bright rays. The scene captures the mountain biker mid-flight over a log obstacle, zombies reaching from both sides of the trail, their forms partially silhouetted against bright background clearings. Gnarled branches create a claustrophobic frame while the relentless overhead sun bleaches exposed trail patches to near-white, leaving rotting pursuers half-visible in the contrasting shadows. The composition balances the clean technical lines of the bike and rider against the chaotic, deteriorating forms of the undead, all unified by the unforgiving midday lighting that refuses to hide any detail of either chase participant or the challenging terrain between them.. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2, device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE reject: mtb_novel_mnt8qllh",
+      "context": "CREATE batch 20260410183000_l0hl0l · recipe mtb_novel_mnt8qllh · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T18:32:21.243Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410183000_l0hl0l-3",
+      "url": "https://v3b.fal.media/files/b/0a95b9c4/jMTzg_TFCbrpcP4Iys48a_p3Nik0N0.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A mountain biker tears through dense forest singletrack, glancing back over their shoulder as decaying zombies lurch through the underbrush in pursuit. Overhead sun slices through the canopy creating stark pools of light and deep shadow pockets across the trail. The rider navigates exposed roots and tight tree corridors while supernatural pursuers emerge from the darker recesses of the woods. Harsh midday light creates extreme contrast between sunlit trail sections and shadowed forest depths, with dust particles and displaced leaves hanging in the bright rays. The scene captures the mountain biker mid-flight over a log obstacle, zombies reaching from both sides of the trail, their forms partially silhouetted against bright background clearings. Gnarled branches create a claustrophobic frame while the relentless overhead sun bleaches exposed trail patches to near-white, leaving rotting pursuers half-visible in the contrasting shadows. The composition balances the clean technical lines of the bike and rider against the chaotic, deteriorating forms of the undead, all unified by the unforgiving midday lighting that refuses to hide any detail of either chase participant or the challenging terrain between them.. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2, device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE reject: mtb_novel_mnt8qllh",
+      "context": "CREATE batch 20260410183000_l0hl0l · recipe mtb_novel_mnt8qllh · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T18:32:21.243Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410183000_l0hl0l-4",
+      "url": "https://v3b.fal.media/files/b/0a95b9c4/UfN5FPBr2Dl--heaEXI7o_1GZrog6I.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A mountain biker tears through dense forest singletrack, glancing back over their shoulder as decaying zombies lurch through the underbrush in pursuit. Overhead sun slices through the canopy creating stark pools of light and deep shadow pockets across the trail. The rider navigates exposed roots and tight tree corridors while supernatural pursuers emerge from the darker recesses of the woods. Harsh midday light creates extreme contrast between sunlit trail sections and shadowed forest depths, with dust particles and displaced leaves hanging in the bright rays. The scene captures the mountain biker mid-flight over a log obstacle, zombies reaching from both sides of the trail, their forms partially silhouetted against bright background clearings. Gnarled branches create a claustrophobic frame while the relentless overhead sun bleaches exposed trail patches to near-white, leaving rotting pursuers half-visible in the contrasting shadows. The composition balances the clean technical lines of the bike and rider against the chaotic, deteriorating forms of the undead, all unified by the unforgiving midday lighting that refuses to hide any detail of either chase participant or the challenging terrain between them.. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2, device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE reject: mtb_novel_mnt8qllh",
+      "context": "CREATE batch 20260410183000_l0hl0l · recipe mtb_novel_mnt8qllh · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T18:32:21.243Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410183000_l0hl0l-5",
+      "url": "https://v3b.fal.media/files/b/0a95b9c4/M2oK9D91moxosL8VUYc9m_4WqJJA7g.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A mountain biker tears through dense forest singletrack, glancing back over their shoulder as decaying zombies lurch through the underbrush in pursuit. Overhead sun slices through the canopy creating stark pools of light and deep shadow pockets across the trail. The rider navigates exposed roots and tight tree corridors while supernatural pursuers emerge from the darker recesses of the woods. Harsh midday light creates extreme contrast between sunlit trail sections and shadowed forest depths, with dust particles and displaced leaves hanging in the bright rays. The scene captures the mountain biker mid-flight over a log obstacle, zombies reaching from both sides of the trail, their forms partially silhouetted against bright background clearings. Gnarled branches create a claustrophobic frame while the relentless overhead sun bleaches exposed trail patches to near-white, leaving rotting pursuers half-visible in the contrasting shadows. The composition balances the clean technical lines of the bike and rider against the chaotic, deteriorating forms of the undead, all unified by the unforgiving midday lighting that refuses to hide any detail of either chase participant or the challenging terrain between them.. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols matching the product in image 2, device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE reject: mtb_novel_mnt8qllh",
+      "context": "CREATE batch 20260410183000_l0hl0l · recipe mtb_novel_mnt8qllh · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T18:32:21.243Z"
         }
       ]
     },
