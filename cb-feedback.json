@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-10T19:49:08.542Z",
+  "syncedAt": "2026-04-10T20:22:45.491Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -17044,6 +17044,156 @@
           "num": 1,
           "text": "Final score: 20 (CREATE reject)",
           "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410200447_uq6ry1-0",
+      "url": "https://v3b.fal.media/files/b/0a95bbfc/VVW5RzN2pl6y2FNYLFi4p_EP6mnlBo.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female mountain biker launches off a dirt jump on a foggy forest trail under pale moonlight, catching air mid-trick as decaying zombies emerge from the shadows below, arms outstretched in pursuit. Atmospheric haze diffuses practical moonlight through twisted branches, creating deep pools of shadow and eerie backlit silhouettes that amplify the Halloween chase tension.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, moody night exposure, ambient streetlight, film grain.",
+      "label": "CREATE keeper: mtb_novel_mntc4hli",
+      "context": "CREATE batch 20260410200447_uq6ry1 · recipe mtb_novel_mntc4hli · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T20:15:28.967Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410200447_uq6ry1-1",
+      "url": "https://v3b.fal.media/files/b/0a95bbfc/pie4c0kQG-qcFxOAhLYL-_9BmdoNgv.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female mountain biker launches off a dirt jump on a foggy forest trail under pale moonlight, catching air mid-trick as decaying zombies emerge from the shadows below, arms outstretched in pursuit. Atmospheric haze diffuses practical moonlight through twisted branches, creating deep pools of shadow and eerie backlit silhouettes that amplify the Halloween chase tension.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, moody night exposure, ambient streetlight, film grain.",
+      "label": "CREATE keeper: mtb_novel_mntc4hli",
+      "context": "CREATE batch 20260410200447_uq6ry1 · recipe mtb_novel_mntc4hli · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T20:15:28.967Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410200447_uq6ry1-2",
+      "url": "https://v3b.fal.media/files/b/0a95bbfc/CgV1gTpn0pVQqoiS8azm5_SNoPI6UU.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female mountain biker launches off a dirt jump on a foggy forest trail under pale moonlight, catching air mid-trick as decaying zombies emerge from the shadows below, arms outstretched in pursuit. Atmospheric haze diffuses practical moonlight through twisted branches, creating deep pools of shadow and eerie backlit silhouettes that amplify the Halloween chase tension.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, moody night exposure, ambient streetlight, film grain.",
+      "label": "CREATE reject: mtb_novel_mntc4hli",
+      "context": "CREATE batch 20260410200447_uq6ry1 · recipe mtb_novel_mntc4hli · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T20:15:28.967Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410200447_uq6ry1-3",
+      "url": "https://v3b.fal.media/files/b/0a95bbfc/wyYJyt_uiSFgjLGu3PUwI_t1Pws0JU.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female mountain biker launches off a dirt jump on a foggy forest trail under pale moonlight, catching air mid-trick as decaying zombies emerge from the shadows below, arms outstretched in pursuit. Atmospheric haze diffuses practical moonlight through twisted branches, creating deep pools of shadow and eerie backlit silhouettes that amplify the Halloween chase tension.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, moody night exposure, ambient streetlight, film grain.",
+      "label": "CREATE reject: mtb_novel_mntc4hli",
+      "context": "CREATE batch 20260410200447_uq6ry1 · recipe mtb_novel_mntc4hli · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T20:15:28.967Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410200447_uq6ry1-4",
+      "url": "https://v3b.fal.media/files/b/0a95bbfc/KaW1krzUysW-RmjIerwTy_UhPhsAk9.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female mountain biker launches off a dirt jump on a foggy forest trail under pale moonlight, catching air mid-trick as decaying zombies emerge from the shadows below, arms outstretched in pursuit. Atmospheric haze diffuses practical moonlight through twisted branches, creating deep pools of shadow and eerie backlit silhouettes that amplify the Halloween chase tension.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, moody night exposure, ambient streetlight, film grain.",
+      "label": "CREATE reject: mtb_novel_mntc4hli",
+      "context": "CREATE batch 20260410200447_uq6ry1 · recipe mtb_novel_mntc4hli · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T20:15:28.967Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410200447_uq6ry1-5",
+      "url": "https://v3b.fal.media/files/b/0a95bbfc/ddyDftdpolMrgSgAoVZKx_jOkf99k6.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "A female mountain biker launches off a dirt jump on a foggy forest trail under pale moonlight, catching air mid-trick as decaying zombies emerge from the shadows below, arms outstretched in pursuit. Atmospheric haze diffuses practical moonlight through twisted branches, creating deep pools of shadow and eerie backlit silhouettes that amplify the Halloween chase tension.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, moody night exposure, ambient streetlight, film grain.",
+      "label": "CREATE reject: mtb_novel_mntc4hli",
+      "context": "CREATE batch 20260410200447_uq6ry1 · recipe mtb_novel_mntc4hli · keeper_rate 33%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T20:15:28.967Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410202106_ealwnu-0",
+      "url": "https://v3b.fal.media/files/b/0a95bc5e/e-Db4D31xhl_jIb9DZVu2_Eef2Mwsj.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Female mountain biker launches off a gnarled root jump in a fog-choked forest, overhead sun piercing through dead branches creating stark, skeletal shadows across the trail. Mid-air, decomposed zombies in tattered clothing lunge from both sides of the singletrack below, their outstretched arms frozen in the harsh midday contrast as she clears the undead gauntlet.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE keeper: mtb_novel_mntcpgg9",
+      "context": "CREATE batch 20260410202106_ealwnu · recipe mtb_novel_mntcpgg9 · keeper_rate 25%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T20:22:44.926Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410202106_ealwnu-1",
+      "url": "https://v3b.fal.media/files/b/0a95bc5e/Mt7Ig1Aode535XrRqOUAx_vdwmLSaM.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Female mountain biker launches off a gnarled root jump in a fog-choked forest, overhead sun piercing through dead branches creating stark, skeletal shadows across the trail. Mid-air, decomposed zombies in tattered clothing lunge from both sides of the singletrack below, their outstretched arms frozen in the harsh midday contrast as she clears the undead gauntlet.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE reject: mtb_novel_mntcpgg9",
+      "context": "CREATE batch 20260410202106_ealwnu · recipe mtb_novel_mntcpgg9 · keeper_rate 25%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T20:22:44.926Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410202106_ealwnu-2",
+      "url": "https://v3b.fal.media/files/b/0a95bc5e/FYs69S9CuYvsmZNNIBSeK_I7LqnJrU.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Female mountain biker launches off a gnarled root jump in a fog-choked forest, overhead sun piercing through dead branches creating stark, skeletal shadows across the trail. Mid-air, decomposed zombies in tattered clothing lunge from both sides of the singletrack below, their outstretched arms frozen in the harsh midday contrast as she clears the undead gauntlet.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE reject: mtb_novel_mntcpgg9",
+      "context": "CREATE batch 20260410202106_ealwnu · recipe mtb_novel_mntcpgg9 · keeper_rate 25%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T20:22:44.926Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410202106_ealwnu-3",
+      "url": "https://v3b.fal.media/files/b/0a95bc5e/XzzuANZXUO71FxX8hIIYm_WpnhOIFM.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Female mountain biker launches off a gnarled root jump in a fog-choked forest, overhead sun piercing through dead branches creating stark, skeletal shadows across the trail. Mid-air, decomposed zombies in tattered clothing lunge from both sides of the singletrack below, their outstretched arms frozen in the harsh midday contrast as she clears the undead gauntlet.. female mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, harsh midday sun, sharp shadows.",
+      "label": "CREATE reject: mtb_novel_mntcpgg9",
+      "context": "CREATE batch 20260410202106_ealwnu · recipe mtb_novel_mntcpgg9 · keeper_rate 25%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T20:22:44.926Z"
         }
       ]
     },
