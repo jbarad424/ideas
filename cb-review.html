@@ -2052,7 +2052,7 @@ function vidLabRetryLast(){
   showToast('Source reloaded — tweak direction and create again');
 }
 // === Job History — persists across reloads, nothing gets lost ===
-function vidJobsRead(){try{return vidJobsRead();}catch(e){return [];}}
+function vidJobsRead(){try{return JSON.parse(localStorage.getItem('cb2_video_jobs')||'[]');}catch(e){return [];}}
 function vidJobLog(job){
   const jobs=vidJobsRead();
   jobs.unshift(job);
