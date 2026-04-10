@@ -237,7 +237,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.3</span></div>
+  <div class="sub">Review. Dictate. Iterate. <span style="color:#555;font-size:.7em">v11.4</span></div>
 </div>
 
 <div class="tabs">
@@ -1470,7 +1470,18 @@ function renderView(){
   }
 }
 
-function D(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch{return {}}}
+// D() — cached feedback store. Parsing a 500KB+ JSON string from localStorage
+// on every getC/galScore/galIsAccepted/galIsSuper call was the #1 performance
+// bottleneck (~7000 parses per renderGallery). Now parses once, caches in
+// memory, invalidates when S() writes new data.
+let _Dcache=null;let _DcacheVer=null;
+function D(){
+  const ver=localStorage.getItem('cb2_fb_ver')||'0';
+  if(_Dcache&&_DcacheVer===ver)return _Dcache;
+  try{_Dcache=JSON.parse(localStorage.getItem(LS)||'{}');}catch(e){_Dcache={};}
+  _DcacheVer=ver;
+  return _Dcache;
+}
 function S(d){
   localStorage.setItem(LS,JSON.stringify(d));
   // Bump feedback version so gallery cache invalidates on next render
@@ -2977,10 +2988,12 @@ async function galColorwaySwap(id,targetColorway){
 
 function mmDetectModel(model){
   const m=(model||'').toLowerCase();
-  if(m.includes('gpt image'))return{type:'gpt',endpoint:'fal-ai/gpt-image-1.5/edit',name:'GPT Image 1.5'};
+  if(m.includes('gpt image')||m.includes('gpt-image'))return{type:'gpt',endpoint:'fal-ai/gpt-image-1.5/edit',name:'GPT Image 1.5'};
+  if(m.includes('nano banana pro')||m.includes('nb pro')||m.includes('gemini 3 pro'))return{type:'nbpro',endpoint:'fal-ai/nano-banana-pro/edit',name:'Nano Banana Pro'};
+  if(m.includes('nano banana 2')||m.includes('nb2')||m.includes('gemini 3.1'))return{type:'nb2',endpoint:'fal-ai/nano-banana-2/edit',name:'Nano Banana 2'};
   if(m.includes('flex'))return{type:'flex',endpoint:'fal-ai/flux-2-flex/edit',name:'FLUX 2 Flex'};
   if(m.includes('max'))return{type:'max',endpoint:'fal-ai/flux-2-max/edit',name:'FLUX 2 Max'};
-  return{type:'pro',endpoint:'fal-ai/flux-2-pro/edit',name:'FLUX 2 Pro'};
+  return{type:'nbpro',endpoint:'fal-ai/nano-banana-pro/edit',name:'Nano Banana Pro'}; // default to NB Pro (most used)
 }
 
 function mmNotify(msg,isError){
@@ -3193,7 +3206,8 @@ const CR={
     ski:'ski helmet, goggles, ski gloves, ski jacket',
     snow:'snowboard helmet, gloves, snowboard jacket',
     mtb:'full-face DH helmet, gloves, long-sleeve jersey with armor',
-    snowmobile:'full-face helmet, snowmobile gloves, snowmobile suit',
+    sled:'full-face helmet, snowmobile gloves, snowmobile suit',
+    snowmobile:'full-face helmet, snowmobile gloves, snowmobile suit', // alias
   },
   DEFAULT_MODEL:{
     moto:'fal-ai/gpt-image-1.5/edit',
@@ -3220,9 +3234,14 @@ const CR={
   //   2. All 5 button symbols named explicitly (PLUS, FF, PLAY/PAUSE, REW, MINUS)
   //   3. "button symbols matching the product in image 2" — anchors to the dual-ref
   //   4. "OVER the jacket sleeve" not just "OVER the sleeve" — prevents bare skin
+  // CB2_BLOCK — the locked product description. References "image 1" because
+  // the ref photo is always the first (or only) image_urls entry. Does NOT
+  // reference "image 2" — NB Pro/NB2/FLUX only get 1 image. GPT gets 2 via
+  // the dual-ref path in buildPayload, but the prompt still works because
+  // GPT treats all image_urls as context, not positional references.
   CB2_BLOCK:{
-    LEFT:'the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), button symbols matching the product in image 2, device parallel to the forearm not perpendicular',
-    RIGHT:'the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to ELBOW, MINUS button closest to wrist, PLUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), button symbols matching the product in image 2, device parallel to the forearm not perpendicular',
+    LEFT:'the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (\u2212), device parallel to the forearm not perpendicular',
+    RIGHT:'the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the RIGHT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to ELBOW, MINUS button closest to wrist, PLUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: MINUS (\u2212), REWIND (two left triangles), PLAY/PAUSE (three bars with triangle), FAST-FORWARD (two right triangles), PLUS (+), device parallel to the forearm not perpendicular',
   },
 
   // ---- entry point ----
