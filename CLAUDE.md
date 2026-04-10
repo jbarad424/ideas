@@ -203,7 +203,8 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 ### Step 4 (for winners): Video
 - Take approved stills → animate with Runway Gen-4 Turbo (scored 97) or Gen-4.5 (scored 94)
 - Runway API key stored in memory files
-- Also available via fal.ai: Kling 3.0 Pro, Veo 3.1
+- Also available via fal.ai: **Seedance 2.0** (added 2026-04-09, currently #1 on Artificial Analysis Elo at 1269 — beats Veo 3, Sora 2, Gen-4.5), Kling 3.0 Pro, Veo 3.1, Sora 2 Pro
+- **Seedance 2.0** — `fal-ai/bytedance/seedance-2.0/image-to-video` ($0.3024/sec at 720p std, $0.2419/sec at 720p fast). Multimodal (up to 9 ref images), 4–15s clips, native audio. fal page mentions a gating form — first call may return 403; if so, file the access request and retry. Wired into Video Lab as "Seedance 2.0" + "Seedance Fast" buttons. UNTESTED on CB2 stills as of 2026-04-09 — Justin to smoke test.
 - Workflow: stills first → Justin picks winners → animate only approved images
 
 ### Key Stats (April 7, 2026 — end of third session)

@@ -404,6 +404,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
           <button onclick="vidLabRefine()" id="vidLabRefineBtn" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #d97757;background:transparent;color:#d97757;font-size:.65rem;cursor:pointer;font-weight:600">✨ Refine with Claude</button>
           <select id="vidLabRefineTarget" onchange="localStorage.setItem('cb2_videolab_refine_target',this.value||'');" style="padding:.25rem .4rem;border-radius:5px;border:1px solid #444;background:#111;color:#d97757;font-size:.6rem;cursor:pointer">
             <option value="">Universal rules</option>
+            <option value="Seedance 2.0">For Seedance 2.0</option>
             <option value="Kling 3.0 Pro">For Kling 3.0 Pro</option>
             <option value="Veo 3.1 Lite">For Veo 3.1 Lite</option>
             <option value="Sora 2 Pro">For Sora 2 Pro</option>
@@ -421,6 +422,8 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
         </div>
         <div style="font-size:.65rem;color:#06b6d4;font-weight:600;margin:.4rem 0 .3rem">Pick a platform to generate:</div>
         <div style="display:flex;gap:.3rem;flex-wrap:wrap" id="vidLabPlatforms">
+          <button onclick="vidLabGenerate('seedance')" title="ByteDance Seedance 2.0 — current Elo leaderboard leader (1269) for video gen, beats Veo/Sora/Gen-4.5" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #06b6d4;background:transparent;color:#06b6d4;font-size:.65rem;cursor:pointer;font-weight:600">Seedance 2.0 &#11088;<br><span style="color:#888;font-weight:400;font-size:.5rem">5s · $1.51</span></button>
+          <button onclick="vidLabGenerate('seedance-fast')" title="Seedance 2.0 fast — same model, ~20% cheaper, ~30% faster" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #06b6d4;background:transparent;color:#06b6d4;font-size:.65rem;cursor:pointer;font-weight:600">Seedance Fast<br><span style="color:#888;font-weight:400;font-size:.5rem">5s · $1.21</span></button>
           <button onclick="vidLabGenerate('kling')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #22c55e;background:transparent;color:#22c55e;font-size:.65rem;cursor:pointer;font-weight:600">Kling 3.0 Pro<br><span style="color:#888;font-weight:400;font-size:.5rem">10s · $1.50</span></button>
           <button onclick="vidLabGenerate('veo-lite')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.65rem;cursor:pointer;font-weight:600">Veo 3.1 Lite<br><span style="color:#888;font-weight:400;font-size:.5rem">8s · $0.40</span></button>
           <button onclick="vidLabGenerate('sora')" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #ec4899;background:transparent;color:#ec4899;font-size:.65rem;cursor:pointer;font-weight:600">Sora 2 Pro<br><span style="color:#888;font-weight:400;font-size:.5rem">16s · $5.00</span></button>
@@ -1974,6 +1977,16 @@ async function vidLabGenerate(platform){
   const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
   const prompt=dir?dir+'. '+basePrompt:basePrompt;
   const info={
+    // Seedance 2.0 — ByteDance, currently #1 on Artificial Analysis Elo (1269,
+    // beats Veo 3, Sora 2, Gen-4.5). Same fal queue API contract as Kling.
+    // 2026-04-09: added after Justin asked about it. fal page mentions a
+    // gating form — first call may return 403. If so, file the request and
+    // retry. Cost is computed live by fal: $0.3024/sec at 720p std,
+    // $0.2419/sec at 720p fast (+ $0.0112/1K tokens).
+    seedance:{name:'Seedance 2.0',endpoint:'fal-ai/bytedance/seedance-2.0/image-to-video',cost:'~$1.51 (5s)',
+      body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16'}},
+    'seedance-fast':{name:'Seedance 2.0 Fast',endpoint:'fal-ai/bytedance/seedance-2.0/fast/image-to-video',cost:'~$1.21 (5s)',
+      body:{image_url:src.url,prompt:prompt,duration:'5',resolution:'720p',aspect_ratio:'9:16'}},
     kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',cost:'~$1.50',
       body:{image_url:src.url,prompt:prompt,duration:'10',aspect_ratio:'9:16'}},
     'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',cost:'~$0.40',
@@ -2032,6 +2045,8 @@ function vidLabGetAnthKey(){
 function vidLabRefineSystemPrompt(platform){
   // Platform-specific length caps — Kling truncates hardest, Sora/Veo handle more.
   const lenByPlatform={
+    'Seedance 2.0':'Up to ~150 words. Seedance handles long detailed prompts well, especially physical scene descriptions and camera moves. Multimodal model (handles up to 9 reference images natively).',
+    'Seedance 2.0 Fast':'Up to ~150 words. Same model as standard, ~30% faster. Same prompting rules.',
     'Kling 3.0 Pro':'Keep under ~100 words — Kling truncates longer prompts.',
     'Veo 3.1 Lite':'Keep under ~150 words — Veo handles moderate length well.',
     'Sora 2 Pro':'Up to ~200 words is fine — Sora handles narrative beats and longer descriptions.',
