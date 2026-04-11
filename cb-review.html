@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v13.1</div>
+  <div class="sub" style="color:#555;font-size:.75em">v13.2</div>
 </div>
 
 <div class="tabs">
@@ -2111,7 +2111,10 @@ function vidJobRender(){
     return;
   }
   panel.style.display='block';
-  list.innerHTML=jobs.map(j=>{
+  const PAGE=window._vidJobPage||0;
+  const PER_PAGE=7;
+  const visible=jobs.slice(0,PER_PAGE*(PAGE+1));
+  const renderJob=j=>{
     const age=Math.round((Date.now()-new Date(j.submitted).getTime())/60000);
     const ageStr=age<60?age+'m ago':Math.round(age/60)+'h ago';
     const statusColor=j.status==='COMPLETED'?'#22c55e':j.status==='FAILED'?'#ef4444':'#f59e0b';
@@ -2120,10 +2123,12 @@ function vidJobRender(){
        +'<a href="'+j.videoUrl+'" download style="color:#888;margin-left:.3rem;font-size:.5rem">\u2B07</a>'
       :'';
     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;border-bottom:1px solid #1a1a1a">'
-      +'<div><span style="color:#ccc">'+j.platform+'</span> <span style="color:#666">— '+(j.label||'unknown')+'</span></div>'
+      +'<div><span style="color:#ccc">'+j.platform+'</span> <span style="color:#666">— '+(j.label||'unknown').slice(0,30)+'</span></div>'
       +'<div><span style="color:'+statusColor+';font-weight:600">'+(j.status||'PENDING')+'</span> <span style="color:#555">'+ageStr+'</span>'+videoLink+'</div>'
       +'</div>';
-  }).join('');
+  };
+  list.innerHTML=visible.map(renderJob).join('')
+    +(jobs.length>visible.length?'<div style="text-align:center;padding:.4rem"><button onclick="window._vidJobPage=(window._vidJobPage||0)+1;vidJobRender()" style="padding:.25rem .8rem;border-radius:5px;border:1px solid #f59e0b;background:transparent;color:#f59e0b;font-size:.55rem;cursor:pointer">Show more ('+visible.length+' of '+jobs.length+')</button></div>':'');
 }
 // Refresh pending Video Lab jobs by polling the Worker's fal-get target.
 // Re-enabled 2026-04-09.
