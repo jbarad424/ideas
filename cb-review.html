@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v13.0</div>
+  <div class="sub" style="color:#555;font-size:.75em">v13.1</div>
 </div>
 
 <div class="tabs">
@@ -2301,9 +2301,10 @@ OUTPUT FORMAT: Return ONLY the refined prompt text — no preamble, no explanati
 async function vidLabRefine(){
   const raw=(document.getElementById('vidLabDirection')?.value||'').trim();
   if(!raw){showToast('Type some cues first');return;}
-  // Read the platform the user has selected (if any) — stored in a data attribute
-  // on the refine button when a platform button is clicked, or null for universal rules.
-  const platform=localStorage.getItem('cb2_videolab_refine_target')||null;
+  // Read platform from the dropdown (moved above direction field in v13.1)
+  const platformSelect=document.getElementById('vidLabPlatformSelect');
+  const platformNames={seedance:'Seedance 2.0','seedance-fast':'Seedance 2.0 Fast',kling:'Kling 3.0 Pro','veo-lite':'Veo 3.1 Lite',sora:'Sora 2 Pro',runway:'Runway Gen-4T'};
+  const platform=platformNames[platformSelect?.value]||null;
   const btn=document.getElementById('vidLabRefineBtn');
   const status=document.getElementById('vidLabRefineStatus');
   btn.disabled=true;btn.style.opacity='.5';
@@ -5296,14 +5297,23 @@ const LAB={
     const s=this.source;if(!s)return '';
     let h='<div style="background:#0a1a2a;border:1px solid #06b6d4;border-radius:10px;padding:.8rem;margin-bottom:.8rem">'
       +'<div style="font-size:.7rem;font-weight:700;color:#06b6d4;margin-bottom:.5rem">Video Lab</div>';
+    // Platform / Duration / Aspect — FIRST so refiner knows which platform
+    h+='<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem">'
+      +'<div style="flex:1;min-width:180px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Platform</div>'
+      +'<select id="vidLabPlatformSelect" onchange="vidLabUpdateOptions()" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
+      +'<option value="kling" selected>Kling 3.0 Pro \u2B50</option><option value="seedance">Seedance 2.0</option><option value="seedance-fast">Seedance Fast</option><option value="veo-lite">Veo 3.1 Lite</option><option value="sora">Sora 2 Pro</option><option value="runway">Runway Gen-4T</option></select></div>'
+      +'<div style="min-width:90px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Duration</div>'
+      +'<select id="vidLabDuration" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
+      +'<option value="5">5s</option><option value="8">8s</option><option value="10" selected>10s</option><option value="15">15s</option></select></div>'
+      +'<div style="min-width:100px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Aspect Ratio</div>'
+      +'<select id="vidLabAspect" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
+      +'<option value="9:16" selected>9:16 Reels</option><option value="16:9">16:9 Landscape</option><option value="1:1">1:1 Square</option></select></div></div>';
     // Direction
     h+='<div style="font-size:.55rem;color:#ccc;font-weight:600;margin-bottom:.2rem">Direction (optional):</div>'
       +'<textarea id="vidLabDirection" placeholder="e.g. slow pan right, rider speeds away\u2026" style="width:100%;min-height:50px;background:#111;border:1px solid #333;border-radius:6px;color:#fff;font-size:.7rem;padding:.4rem;resize:vertical;font-family:inherit;box-sizing:border-box"></textarea>';
-    // Refine button
+    // Refine button — reads platform from dropdown above (no separate refine target needed)
     h+='<div style="display:flex;gap:.3rem;margin-top:.3rem;align-items:center;flex-wrap:wrap">'
       +'<button onclick="vidLabRefine()" id="vidLabRefineBtn" style="padding:.3rem .6rem;border-radius:6px;border:2px solid #d97757;background:transparent;color:#d97757;font-size:.65rem;cursor:pointer;font-weight:600">\u2728 Refine with Claude</button>'
-      +'<select id="vidLabRefineTarget" onchange="localStorage.setItem(\'cb2_videolab_refine_target\',this.value||\'\')" style="padding:.25rem .4rem;border-radius:5px;border:1px solid #444;background:#111;color:#d97757;font-size:.6rem;cursor:pointer">'
-      +'<option value="">Universal rules</option><option value="Seedance 2.0">For Seedance</option><option value="Kling 3.0 Pro">For Kling</option><option value="Veo 3.1 Lite">For Veo</option><option value="Sora 2 Pro">For Sora</option><option value="Runway Gen-4T">For Runway</option></select>'
       +'<div id="vidLabRefineStatus" style="font-size:.55rem;color:#888"></div></div>';
     h+='<div id="vidLabRefinedBox" style="display:none;margin-top:.4rem;background:#1a1410;border:1px solid #d97757;border-radius:6px;padding:.5rem">'
       +'<div style="font-size:.55rem;color:#d97757;font-weight:700;margin-bottom:.2rem">CLAUDE\'S REFINED PROMPT:</div>'
@@ -5311,17 +5321,6 @@ const LAB={
       +'<div style="display:flex;gap:.3rem;margin-top:.4rem">'
       +'<button onclick="vidLabApplyRefined()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Use This</button>'
       +'<button onclick="vidLabRefine()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.6rem;cursor:pointer">Try Again</button></div></div>';
-    // Platform / Duration / Aspect
-    h+='<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.4rem 0 .3rem">'
-      +'<div style="flex:1;min-width:180px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Platform</div>'
-      +'<select id="vidLabPlatformSelect" onchange="vidLabUpdateOptions()" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
-      +'<option value="seedance">Seedance 2.0 (strict face filter)</option><option value="seedance-fast">Seedance Fast (strict face filter)</option><option value="kling" selected>Kling 3.0 Pro \u2B50</option><option value="veo-lite">Veo 3.1 Lite</option><option value="sora">Sora 2 Pro</option><option value="runway">Runway Gen-4T</option></select></div>'
-      +'<div style="min-width:90px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Duration</div>'
-      +'<select id="vidLabDuration" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
-      +'<option value="5">5s</option><option value="8">8s</option><option value="10" selected>10s</option><option value="15">15s</option></select></div>'
-      +'<div style="min-width:100px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Aspect Ratio</div>'
-      +'<select id="vidLabAspect" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
-      +'<option value="9:16" selected>9:16 Reels</option><option value="16:9">16:9 Landscape</option><option value="1:1">1:1 Square</option></select></div></div>';
     // End image (Seedance only)
     h+='<div id="vidLabEndImageRow" style="display:none;margin:.3rem 0">'
       +'<div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">End Frame <span style="color:#888;font-weight:400">(Seedance only)</span></div>'
