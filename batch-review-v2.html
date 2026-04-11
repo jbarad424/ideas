@@ -18,6 +18,8 @@ h1{text-align:center;color:#a855f7;font-size:1.2rem;margin-bottom:.2rem}
 .card .badge .model{color:#f59e0b}
 .card .badge .sport-icon{font-size:.7rem}
 .card .score-badge{position:absolute;top:4px;right:4px;padding:.1rem .3rem;border-radius:4px;font-size:.6rem;font-weight:700}
+.card-actions{position:absolute;top:4px;left:4px;display:flex;gap:.2rem}
+.card-actions button{width:28px;height:28px;border:none;border-radius:6px;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.92);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem}
 .overlay img{max-width:95%;max-height:60vh;border-radius:8px;margin-bottom:.5rem}
 .overlay .info{text-align:center;max-width:500px}
@@ -90,9 +92,14 @@ function renderGrid(){
     const r=RATINGS[d.id]||{};
     const cls=r.wrongShape?'card rated':r.wrongColor?'card rated':r.super?'card super':r.score?'card rated':'card';
     const scoreBadge=r.wrongShape?'<div class="score-badge" style="background:rgba(239,68,68,.9)">\u2717</div>':r.wrongColor?'<div class="score-badge" style="background:rgba(245,158,11,.9)">\uD83C\uDFA8</div>':r.score?'<div class="score-badge" style="background:'+(r.score>=4?'rgba(34,197,94,.9)':r.score>=3?'rgba(245,158,11,.9)':'rgba(239,68,68,.9)')+'">'+r.score+'/5</div>':'';
-    return '<div class="'+cls+'" onclick="openCard(\''+d.id+'\')">'
-      +'<img src="'+d.url+'" loading="lazy" alt="">'
+    return '<div class="'+cls+'" style="position:relative">'
+      +'<img src="'+d.url+'" loading="lazy" alt="" onclick="openCard(\''+d.id+'\')">'
       +scoreBadge
+      +'<div class="card-actions">'
+      +'<button onclick="event.stopPropagation();quickRate(\''+d.id+'\',5)" title="Super" style="background:'+(r.super?'#eab308':'rgba(0,0,0,.6)')+';color:'+(r.super?'#000':'#eab308')+'">\u2B50</button>'
+      +'<button onclick="event.stopPropagation();flagIssue(\''+d.id+'\',\'wrongShape\')" title="Bad Remote" style="background:'+(r.wrongShape?'#ef4444':'rgba(0,0,0,.6)')+';color:'+(r.wrongShape?'#fff':'#ef4444')+'">\u2717</button>'
+      +'<button onclick="event.stopPropagation();flagIssue(\''+d.id+'\',\'wrongColor\')" title="Wrong Color" style="background:'+(r.wrongColor?'#f59e0b':'rgba(0,0,0,.6)')+';color:'+(r.wrongColor?'#000':'#f59e0b')+'">\uD83C\uDFA8</button>'
+      +'</div>'
       +'<div class="badge">'
       +'<span class="sport-icon">'+(icons[d.sport]||'')+'</span> '
       +'<span class="ref">'+d.ref+' ('+d.colorway+')</span> '
@@ -145,6 +152,15 @@ function toggleSuper(id){
   save();
   openCard(id);
   renderGrid();
+}
+
+function quickRate(id,score){
+  if(!RATINGS[id])RATINGS[id]={score:0,super:false};
+  RATINGS[id].super=!RATINGS[id].super;
+  if(RATINGS[id].super){RATINGS[id].score=5;}
+  else if(RATINGS[id].score===5){RATINGS[id].score=0;}
+  RATINGS[id].rated_at=new Date().toISOString();
+  save();renderGrid();
 }
 
 function flagIssue(id,type){
