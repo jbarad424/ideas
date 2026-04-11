@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v12.5</div>
+  <div class="sub" style="color:#555;font-size:.75em">v12.6</div>
 </div>
 
 <div class="tabs">
@@ -567,6 +567,8 @@ async function proxyAnthropic(body){
 
 // === VIDEO ENTRIES (shown when mediaType toggle is 'video') ===
 const ALL_VIDEOS=[
+  // === LAB TAB TEST: First video generated through the new Lab workflow ===
+  {id:'vid-lab-kling3-moto-desert',url:'https://files.catbox.moe/wj4cpk.mp4',model:'Kling 3.0 Pro',prompt:'Camera slowly orbits the rider, dust particles in golden light. Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent',label:'LAB: Kling 3.0 Pro — Moto desert orbit',context:'First video generated through the Lab tab (v12.3). Source: REF-AB P3 Patriot jacket moto s2. 5s, 9:16. Direction: Camera slowly orbits the rider, dust particles in golden light.'},
   // === ROUND 3: Kling 3.0 Pro (reportedly best quality, fal.ai) ===
   // === ROUND 4: Head-to-head comparison on 99-scored masked inpaint moto ===
   {id:'vid-kling3v2-moto99',url:'https://files.catbox.moe/69wczk.mp4',model:'Kling 3.0 Pro (v2)',prompt:'Motorcycle rider cruising coastal highway at golden hour, slight camera tracking from side, wind ripples in jacket, natural subtle head movement, cinematic motion blur on road',label:'VIDEO R4: Kling 3.0 Pro — Moto 99',context:'HEAD-TO-HEAD COMPARISON: All 4 platforms animated the SAME 99-scoring masked inpaint motorcycle still. Kling 3.0 Pro: 10s, 9:16, 60fps. ~$1.50. BEST physics simulation, Element binding for CB2 consistency. Does the CB2 survive animation?'},
