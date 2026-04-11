@@ -34,7 +34,7 @@ input,textarea,select{font-size:16px!important}
 </style>
 </head><body>
 <h1>CB2 Production Batch v2</h1>
-<div class="sub">56 images — 5 sports, 3 colorways, 3 models — rate from your phone</div>
+<div class="sub">131 images — 5 sports, 3 colorways, 3 models — <button onclick="exportRatings()" style="background:#a855f7;color:#fff;border:none;border-radius:4px;padding:.2rem .5rem;font-size:.65rem;cursor:pointer">Export Ratings</button></div>
 <div class="summary" id="summary">Loading...</div>
 <div class="filters" id="filters"></div>
 <div class="grid" id="grid"></div>
@@ -188,6 +188,16 @@ function updateSummary(){
   const validRated=Object.values(RATINGS).filter(r=>r.score>0&&!r.wrongShape);
   const avg=validRated.length?validRated.reduce((a,r)=>a+r.score,0)/validRated.length:0;
   document.getElementById('summary').innerHTML=rated+'/'+total+' rated \u00b7 '+supers+' \u2B50 \u00b7 '+badRemote+' \u2717 bad remote \u00b7 '+wrongColor+' \uD83C\uDFA8 wrong color \u00b7 avg '+avg.toFixed(1)+'/5';
+}
+
+function exportRatings(){
+  const data=JSON.stringify(RATINGS);
+  navigator.clipboard.writeText(data).then(()=>{
+    document.getElementById('summary').innerHTML+=' — <span style="color:#22c55e">Copied to clipboard!</span>';
+  }).catch(()=>{
+    // Fallback: show in a prompt
+    prompt('Copy this:',data);
+  });
 }
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOverlay();});
