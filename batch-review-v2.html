@@ -88,8 +88,8 @@ function renderGrid(){
   const modelShort=m=>(m||'').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT');
   g.innerHTML=items.map(d=>{
     const r=RATINGS[d.id]||{};
-    const cls=r.super?'card super':r.score?'card rated':'card';
-    const scoreBadge=r.score?'<div class="score-badge" style="background:'+(r.score>=4?'rgba(34,197,94,.9)':r.score>=3?'rgba(245,158,11,.9)':'rgba(239,68,68,.9)')+'">'+r.score+'/5</div>':'';
+    const cls=r.wrongRemote?'card rated':r.super?'card super':r.score?'card rated':'card';
+    const scoreBadge=r.wrongRemote?'<div class="score-badge" style="background:rgba(239,68,68,.9)">\u2717</div>':r.score?'<div class="score-badge" style="background:'+(r.score>=4?'rgba(34,197,94,.9)':r.score>=3?'rgba(245,158,11,.9)':'rgba(239,68,68,.9)')+'">'+r.score+'/5</div>':'';
     return '<div class="'+cls+'" onclick="openCard(\''+d.id+'\')">'
       +'<img src="'+d.url+'" loading="lazy" alt="">'
       +scoreBadge
@@ -117,7 +117,10 @@ function openCard(id){
     +'<div class="stars">'
     +[1,2,3,4,5].map(s=>'<button class="'+(s<=r.score?'lit':'')+'" onclick="rate(\''+id+'\','+s+')">\u2605</button>').join('')
     +'</div>'
+    +'<div style="display:flex;gap:.4rem;justify-content:center;margin-top:.3rem">'
     +'<button class="super-btn'+(r.super?' on':'')+'" onclick="toggleSuper(\''+id+'\')">'+(r.super?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>'
+    +'<button onclick="flagWrongRemote(\''+id+'\')" style="padding:.4rem .8rem;border-radius:6px;border:2px solid #ef4444;background:'+(r.wrongRemote?'#ef4444':'transparent')+';color:'+(r.wrongRemote?'#fff':'#ef4444')+';font-size:.7rem;cursor:pointer;font-weight:700">'+(r.wrongRemote?'\u2717 Wrong Remote':'\u2717 Wrong Remote')+'</button>'
+    +'</div>'
     +'<div style="margin-top:.4rem"><a href="'+d.url+'" download target="_blank" style="color:#666;font-size:.6rem">\u2B07 Download</a></div>'
     +'</div></div>';
 }
@@ -143,6 +146,16 @@ function toggleSuper(id){
   renderGrid();
 }
 
+function flagWrongRemote(id){
+  if(!RATINGS[id])RATINGS[id]={score:0,super:false};
+  RATINGS[id].wrongRemote=!RATINGS[id].wrongRemote;
+  if(RATINGS[id].wrongRemote){RATINGS[id].score=1;RATINGS[id].super=false;}
+  RATINGS[id].rated_at=new Date().toISOString();
+  save();
+  openCard(id);
+  renderGrid();
+}
+
 function save(){
   localStorage.setItem(LS_KEY,JSON.stringify(RATINGS));
 }
@@ -151,8 +164,10 @@ function updateSummary(){
   const total=DATA.length;
   const rated=Object.keys(RATINGS).filter(k=>RATINGS[k].score>0).length;
   const supers=Object.keys(RATINGS).filter(k=>RATINGS[k].super).length;
-  const avg=rated?Object.values(RATINGS).filter(r=>r.score>0).reduce((a,r)=>a+r.score,0)/rated:0;
-  document.getElementById('summary').innerHTML=rated+'/'+total+' rated \u00b7 '+supers+' \u2B50 super \u00b7 avg '+avg.toFixed(1)+'/5';
+  const wrong=Object.keys(RATINGS).filter(k=>RATINGS[k].wrongRemote).length;
+  const validRated=Object.values(RATINGS).filter(r=>r.score>0&&!r.wrongRemote);
+  const avg=validRated.length?validRated.reduce((a,r)=>a+r.score,0)/validRated.length:0;
+  document.getElementById('summary').innerHTML=rated+'/'+total+' rated \u00b7 '+supers+' \u2B50 super \u00b7 '+wrong+' \u2717 wrong remote \u00b7 avg '+avg.toFixed(1)+'/5';
 }
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOverlay();});
