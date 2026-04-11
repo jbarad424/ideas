@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v13.2</div>
+  <div class="sub" style="color:#555;font-size:.75em">v13.3</div>
 </div>
 
 <div class="tabs">
@@ -3835,15 +3835,17 @@ const CR={
     const productShots={
       Hunter:this.REFS.h6?.url,
       Tron:this.REFS.t18?.url,
-      Patriot:null,
+      Patriot:null, // Patriot uses SINGLE-REF only — dual-ref with h6 causes wrong colorway
     };
     const refColorway=(b.ref&&b.ref.colorway)||'Hunter';
-    const productRef=productShots[refColorway]||this.REFS.refc.url;
+    const productRef=productShots[refColorway];
+    // Patriot: single-ref (just the jacket ref, no product shot). Batch v2 proved dual-ref bleeds Hunter.
+    const imageUrls=productRef?[refUrl,productRef]:[refUrl];
     const seed=(b.seed||0)+i*1000+1;
     if(b.endpoint.includes('gpt-image')){
-      return {image_urls:[refUrl,productRef],prompt:b.recipe_prompt,size:'1024x1536',quality:'high',input_fidelity:'high'};
+      return {image_urls:imageUrls,prompt:b.recipe_prompt,size:'1024x1536',quality:'high',input_fidelity:'high'};
     }
-    const body={image_urls:[refUrl,productRef],prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
+    const body={image_urls:imageUrls,prompt:b.recipe_prompt,seed,num_images:1,output_format:'jpeg',safety_tolerance:5};
     if(b.endpoint.includes('flux-2-flex')){
       body.guidance_scale=7.0;body.num_inference_steps=28;
     }
@@ -4508,6 +4510,43 @@ async function loadCorpus(){
     console.log('[corpus] hydrated +'+added+' items, ALL_IMAGES now '+ALL_IMAGES.length);
     if(typeof renderGalleryDebounced==='function')renderGalleryDebounced();
   }catch(e){console.log('[corpus] load failed:',e);}
+}
+
+// loadBatchV2 — pulls batch-v2-corpus.json and hydrates winners into Gallery
+async function loadBatchV2(){
+  try{
+    let r=await fetch('https://jbarad424.github.io/ideas/batch-v2-corpus.json?t='+Date.now(),{cache:'no-store'});
+    if(!r.ok)return;
+    const corpus=await r.json();
+    if(!Array.isArray(corpus))return;
+    const have=new Set(ALL_IMAGES.map(i=>i.id));
+    const d=D();
+    let added=0;
+    for(const item of corpus){
+      if(!item.id||have.has(item.id))continue;
+      ALL_IMAGES.push({id:item.id,url:item.url||'',model:item.model||'',prompt:item.prompt||'',label:item.label||item.id,context:item.context||''});
+      have.add(item.id);
+      added++;
+    }
+    // Also load feedback so scores show up
+    try{
+      const fr=await fetch('https://jbarad424.github.io/ideas/batch-v2-feedback.json?t='+Date.now(),{cache:'no-store'});
+      if(fr.ok){
+        const fb=await fr.json();
+        for(const entry of fb){
+          if(!d[entry.id]||!d[entry.id].comments||!d[entry.id].comments.length){
+            d[entry.id]={comments:entry.comments||[]};
+          }
+        }
+        S(d);
+      }
+    }catch(e){}
+    if(added){
+      _galCache=null;_galCacheKey='';
+      console.log('[batch-v2] hydrated +'+added+' winners into Gallery');
+      if(typeof renderGalleryDebounced==='function')renderGalleryDebounced();
+    }
+  }catch(e){}
 }
 
 // === DISCOVER TAB — cheap CB2-free scene exploration ========================
@@ -5379,6 +5418,8 @@ loadSharedFeedback();
 loadArchiveManifest();
 // Load full 694-item corpus → hydrate ALL_IMAGES with anything not hardcoded
 loadCorpus();
+// Load batch v2 winners (67 images, 39 super-likes from Apr 11 production batch)
+loadBatchV2();
 
 </script>
 </body></html>
