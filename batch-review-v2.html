@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CB2 Batch Review v2</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:.5rem}
+h1{text-align:center;color:#a855f7;font-size:1.2rem;margin-bottom:.2rem}
+.sub{text-align:center;color:#555;font-size:.7rem;margin-bottom:.8rem}
+.filters{display:flex;gap:.3rem;justify-content:center;flex-wrap:wrap;margin-bottom:.6rem}
+.filters button{padding:.3rem .6rem;border-radius:6px;border:1px solid #333;background:transparent;color:#888;font-size:.65rem;cursor:pointer}
+.filters button.on{border-color:#a855f7;color:#a855f7;background:#1a1030}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem}
+.card{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid #222;transition:border-color .15s}
+.card.rated{border-color:#22c55e}
+.card.super{border-color:#eab308;box-shadow:0 0 8px rgba(234,179,8,.3)}
+.card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block}
+.card .badge{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));padding:.3rem .4rem .2rem;font-size:.5rem}
+.card .badge .ref{color:#06b6d4}
+.card .badge .model{color:#f59e0b}
+.card .badge .sport-icon{font-size:.7rem}
+.card .score-badge{position:absolute;top:4px;right:4px;padding:.1rem .3rem;border-radius:4px;font-size:.6rem;font-weight:700}
+.overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.92);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem}
+.overlay img{max-width:95%;max-height:60vh;border-radius:8px;margin-bottom:.5rem}
+.overlay .info{text-align:center;max-width:500px}
+.overlay .close{position:absolute;top:10px;right:15px;font-size:1.5rem;color:#fff;cursor:pointer;background:none;border:none}
+.stars{display:flex;gap:.3rem;justify-content:center;margin:.4rem 0}
+.stars button{font-size:1.5rem;background:none;border:none;cursor:pointer;color:#333;transition:color .1s}
+.stars button.lit{color:#eab308}
+.super-btn{padding:.4rem .8rem;border-radius:6px;border:2px solid #eab308;background:transparent;color:#eab308;font-size:.75rem;cursor:pointer;font-weight:700;margin-top:.3rem}
+.super-btn.on{background:#eab308;color:#000}
+.summary{text-align:center;padding:.5rem;font-size:.7rem;color:#888;margin-bottom:.5rem}
+input,textarea,select{font-size:16px!important}
+</style>
+</head><body>
+<h1>CB2 Production Batch v2</h1>
+<div class="sub">56 images — 5 sports, 3 colorways, 3 models — rate from your phone</div>
+<div class="summary" id="summary">Loading...</div>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+<div id="overlay"></div>
+
+<script>
+let DATA=[];
+let RATINGS={};
+const LS_KEY='cb2_batch_v2_ratings';
+let sportFilter='';
+let colorwayFilter='';
+
+async function init(){
+  // Load batch results
+  try{
+    const r=await fetch('batch-v2-results.json?t='+Date.now());
+    const d=await r.json();
+    DATA=d.results.filter(r=>r.status==='COMPLETED'&&r.url);
+  }catch(e){
+    document.getElementById('summary').textContent='Error loading results: '+e.message;
+    return;
+  }
+  // Load saved ratings
+  try{RATINGS=JSON.parse(localStorage.getItem(LS_KEY)||'{}');}catch(e){}
+  renderFilters();
+  renderGrid();
+  updateSummary();
+}
+
+function renderFilters(){
+  const sports=[...new Set(DATA.map(d=>d.sport))];
+  const colorways=[...new Set(DATA.map(d=>d.colorway))];
+  const f=document.getElementById('filters');
+  let h='<button class="'+(sportFilter?'':'on')+'" onclick="sportFilter=\'\';colorwayFilter=\'\';renderFilters();renderGrid()">All</button>';
+  sports.forEach(s=>{
+    const icons={moto:'\u{1F3CD}',ski:'\u26F7',snow:'\u{1F3C2}',mtb:'\u{1F6B4}',sled:'\u{1F6F5}'};
+    h+='<button class="'+(sportFilter===s?'on':'')+'" onclick="sportFilter=\''+s+'\';renderFilters();renderGrid()">'+(icons[s]||'')+' '+s+'</button>';
+  });
+  h+=' | ';
+  colorways.forEach(c=>{
+    const colors={Hunter:'#22c55e',Patriot:'#3b82f6',Tron:'#f59e0b'};
+    h+='<button class="'+(colorwayFilter===c?'on':'')+'" onclick="colorwayFilter=\''+c+'\';renderFilters();renderGrid()" style="border-color:'+(colorwayFilter===c?colors[c]:'#333')+';color:'+(colorwayFilter===c?colors[c]:'#888')+'">'+c+'</button>';
+  });
+  f.innerHTML=h;
+}
+
+function renderGrid(){
+  let items=DATA;
+  if(sportFilter)items=items.filter(d=>d.sport===sportFilter);
+  if(colorwayFilter)items=items.filter(d=>d.colorway===colorwayFilter);
+  const g=document.getElementById('grid');
+  const icons={moto:'\u{1F3CD}',ski:'\u26F7',snow:'\u{1F3C2}',mtb:'\u{1F6B4}',sled:'\u{1F6F5}'};
+  const modelShort=m=>(m||'').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT');
+  g.innerHTML=items.map(d=>{
+    const r=RATINGS[d.id]||{};
+    const cls=r.super?'card super':r.score?'card rated':'card';
+    const scoreBadge=r.score?'<div class="score-badge" style="background:'+(r.score>=4?'rgba(34,197,94,.9)':r.score>=3?'rgba(245,158,11,.9)':'rgba(239,68,68,.9)')+'">'+r.score+'/5</div>':'';
+    return '<div class="'+cls+'" onclick="openCard(\''+d.id+'\')">'
+      +'<img src="'+d.url+'" loading="lazy" alt="">'
+      +scoreBadge
+      +'<div class="badge">'
+      +'<span class="sport-icon">'+(icons[d.sport]||'')+'</span> '
+      +'<span class="ref">'+d.ref+' ('+d.colorway+')</span> '
+      +'<span class="model">'+modelShort(d.model)+'</span>'
+      +'</div></div>';
+  }).join('');
+  updateSummary();
+}
+
+function openCard(id){
+  const d=DATA.find(x=>x.id===id);if(!d)return;
+  const r=RATINGS[id]||{score:0,super:false};
+  const ov=document.getElementById('overlay');
+  const icons={moto:'\u{1F3CD}',ski:'\u26F7',snow:'\u{1F3C2}',mtb:'\u{1F6B4}',sled:'\u{1F6F5}'};
+  const modelShort=(d.model||'').replace('Nano Banana Pro','NB Pro').replace('Nano Banana 2','NB2').replace('GPT Image 1.5','GPT');
+  ov.innerHTML='<div class="overlay" onclick="if(event.target===this)closeOverlay()">'
+    +'<button class="close" onclick="closeOverlay()">&times;</button>'
+    +'<img src="'+d.url+'" alt="">'
+    +'<div class="info">'
+    +'<div style="font-size:.8rem;font-weight:700;margin-bottom:.2rem">'+(icons[d.sport]||'')+' '+d.sport+' \u00b7 '+d.ref+' ('+d.colorway+') \u00b7 '+modelShort+'</div>'
+    +'<div style="font-size:.6rem;color:#888;margin-bottom:.3rem">Seed: '+d.seed+'</div>'
+    +'<div class="stars">'
+    +[1,2,3,4,5].map(s=>'<button class="'+(s<=r.score?'lit':'')+'" onclick="rate(\''+id+'\','+s+')">\u2605</button>').join('')
+    +'</div>'
+    +'<button class="super-btn'+(r.super?' on':'')+'" onclick="toggleSuper(\''+id+'\')">'+(r.super?'\u2B50 Super-liked':'\u2606 Super-like')+'</button>'
+    +'<div style="margin-top:.4rem"><a href="'+d.url+'" download target="_blank" style="color:#666;font-size:.6rem">\u2B07 Download</a></div>'
+    +'</div></div>';
+}
+
+function closeOverlay(){document.getElementById('overlay').innerHTML='';}
+
+function rate(id,score){
+  if(!RATINGS[id])RATINGS[id]={score:0,super:false};
+  RATINGS[id].score=score;
+  RATINGS[id].rated_at=new Date().toISOString();
+  save();
+  openCard(id);// refresh stars
+  renderGrid();
+}
+
+function toggleSuper(id){
+  if(!RATINGS[id])RATINGS[id]={score:0,super:false};
+  RATINGS[id].super=!RATINGS[id].super;
+  if(RATINGS[id].super&&!RATINGS[id].score)RATINGS[id].score=5;
+  RATINGS[id].rated_at=new Date().toISOString();
+  save();
+  openCard(id);
+  renderGrid();
+}
+
+function save(){
+  localStorage.setItem(LS_KEY,JSON.stringify(RATINGS));
+}
+
+function updateSummary(){
+  const total=DATA.length;
+  const rated=Object.keys(RATINGS).filter(k=>RATINGS[k].score>0).length;
+  const supers=Object.keys(RATINGS).filter(k=>RATINGS[k].super).length;
+  const avg=rated?Object.values(RATINGS).filter(r=>r.score>0).reduce((a,r)=>a+r.score,0)/rated:0;
+  document.getElementById('summary').innerHTML=rated+'/'+total+' rated \u00b7 '+supers+' \u2B50 super \u00b7 avg '+avg.toFixed(1)+'/5';
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOverlay();});
+init();
+</script>
+</body></html>
