@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v12.9</div>
+  <div class="sub" style="color:#555;font-size:.75em">v13.0</div>
 </div>
 
 <div class="tabs">
@@ -2228,11 +2228,12 @@ async function vidLabGenerate(platform){
       return;
     }
     const rid=d.request_id;
-    // Construct status/result URLs by stripping the last path segment from the
-    // endpoint (e.g. bytedance/seedance-2.0/image-to-video → bytedance/seedance-2.0).
-    // This matches exactly what the worker's blocking 'fal' target does (line 82).
-    // fal's returned status_url uses a different shortened path that doesn't work.
-    const base=p.endpoint.replace(/\/[^/]+$/,'');
+    // Construct status/result URLs by stripping the operation suffix from the endpoint.
+    // Strip /image-to-video (and optional /fast/ tier prefix before it) to get the model base.
+    // bytedance/seedance-2.0/image-to-video → bytedance/seedance-2.0
+    // bytedance/seedance-2.0/fast/image-to-video → bytedance/seedance-2.0
+    // fal-ai/kling-video/v3/pro/image-to-video → fal-ai/kling-video/v3/pro
+    const base=p.endpoint.replace(/\/(fast\/)?image-to-video.*$/,'');
     const statusUrl='https://queue.fal.run/'+base+'/requests/'+rid+'/status';
     const resultUrl='https://queue.fal.run/'+base+'/requests/'+rid;
     // Save job state so it survives page reloads
