@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v12.7</div>
+  <div class="sub" style="color:#555;font-size:.75em">v12.8</div>
 </div>
 
 <div class="tabs">
@@ -2228,12 +2228,13 @@ async function vidLabGenerate(platform){
       return;
     }
     const rid=d.request_id;
-    // Use fal-returned URLs when available (preferred). Fallback uses the FULL
-    // endpoint path — Seedance needs /image-to-video in the status URL unlike
-    // Kling which strips its suffix. The old code stripped the last segment
-    // which broke Seedance polling.
-    const statusUrl=d.status_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid+'/status');
-    const resultUrl=d.response_url||('https://queue.fal.run/'+p.endpoint+'/requests/'+rid);
+    // ALWAYS construct our own status/result URLs using the FULL endpoint path.
+    // fal's returned status_url/response_url use a SHORTENED path
+    // (e.g. fal-ai/bytedance/requests/{id}/status) that doesn't resolve correctly
+    // for Seedance. The correct path must include the full model path
+    // (e.g. bytedance/seedance-2.0/requests/{id}/status).
+    const statusUrl='https://queue.fal.run/'+p.endpoint+'/requests/'+rid+'/status';
+    const resultUrl='https://queue.fal.run/'+p.endpoint+'/requests/'+rid;
     // Save job state so it survives page reloads
     localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,submitted:new Date().toISOString()}));
     // Log to Job History so it's never lost
