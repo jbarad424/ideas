@@ -232,6 +232,28 @@
       "cost_usd": 0.6,
       "is_novel": true,
       "at": "2026-04-10T22:04:32.988Z"
+    },
+    {
+      "batch_id": "20260411212244_fe8sdh",
+      "recipe_id": "one_act-moto-7004",
+      "recipe_prompt": "Motorcycle rider leaning hard into canyon curve at speed, leather racing suit, full-face helmet, CB2 LEFT forearm PLUS at wrist",
+      "ref_id": "h6",
+      "model": "fal-ai/nano-banana-pro/edit",
+      "sport": "moto",
+      "generated": 4,
+      "kept_urls": [
+        "https://v3b.fal.media/files/b/0a95df90/IIDv9g1GWf3FR4K4VgHKH_xZyAXWI0.jpg",
+        "https://v3b.fal.media/files/b/0a95df90/dxGjhY1wPwN36kdGDjiBX_LZhOV82Y.jpg"
+      ],
+      "rejected_urls": [
+        "https://v3b.fal.media/files/b/0a95df90/6e3JuLIj8ELflAKfmQ-v1_zvH5BtSO.jpg",
+        "https://v3b.fal.media/files/b/0a95df90/J4qSTR-LXg2IKsl2usw4J_PtCSQsMN.jpg"
+      ],
+      "failed": [],
+      "keeper_rate": 0.5,
+      "cost_usd": 0.6,
+      "is_novel": false,
+      "at": "2026-04-11T21:24:27.805Z"
     }
   ],
   "recipes": {
@@ -290,6 +312,13 @@
       "total_generated": 4,
       "total_kept": 1,
       "last_batch_at": "2026-04-10T22:04:32.988Z"
+    },
+    "one_act-moto-7004": {
+      "keeper_rate": 0.5,
+      "batches_run": 1,
+      "total_generated": 4,
+      "total_kept": 2,
+      "last_batch_at": "2026-04-11T21:24:27.805Z"
     }
   },
   "refs": {
@@ -369,8 +398,8 @@
     },
     "h6": {
       "overall": {
-        "keeper_rate": 0.3333333333333333,
-        "batches_run": 1
+        "keeper_rate": 0.3833333333333333,
+        "batches_run": 2
       },
       "by_recipe": {
         "mtb_novel_mntc4hli": {
@@ -379,6 +408,13 @@
           "total_generated": 6,
           "total_kept": 2,
           "last_batch_at": "2026-04-10T20:15:28.964Z"
+        },
+        "one_act-moto-7004": {
+          "keeper_rate": 0.5,
+          "batches_run": 1,
+          "total_generated": 4,
+          "total_kept": 2,
+          "last_batch_at": "2026-04-11T21:24:27.805Z"
         }
       }
     },
@@ -432,11 +468,11 @@
         "last_batch_at": "2026-04-10T12:54:23.093Z"
       },
       "fal-ai/nano-banana-pro/edit": {
-        "keeper_rate": 0.5474999999999999,
-        "batches_run": 3,
-        "total_generated": 12,
-        "total_kept": 6,
-        "last_batch_at": "2026-04-10T22:04:32.988Z"
+        "keeper_rate": 0.5332499999999999,
+        "batches_run": 4,
+        "total_generated": 16,
+        "total_kept": 8,
+        "last_batch_at": "2026-04-11T21:24:27.805Z"
       }
     }
   }
