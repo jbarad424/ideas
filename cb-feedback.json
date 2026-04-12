@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-12T11:05:55.303Z",
+  "syncedAt": "2026-04-12T12:55:33.300Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -13983,242 +13983,92 @@
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589419542-0",
-      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "excellent, 90",
-          "time": "2026-04-07T19:20:37.937Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589419542-1",
-      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:47.636Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589531515-0",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:56.418Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589531515-1",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "nice. 85",
-          "time": "2026-04-07T19:21:13.486Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589559647-0",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
-          "time": "2026-04-07T19:21:34.619Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589559647-1",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
-          "time": "2026-04-07T19:21:47.035Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589600635-0",
-      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "This is cool yeah I really like this one great 95",
-          "time": "2026-04-07T19:22:10.501Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589600635-1",
-      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
-          "time": "2026-04-07T19:22:36.702Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-0",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/80G-XJirJRRSKk5TZ9nOO_I12az3Az.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.095Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-1",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/wxePZ7YT6EOkQlfBXGAhP_Gh7XO82s.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.095Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-2",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/d-9UMfKrGodI_prVb9Sqq_QSuR4Nat.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.096Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-3",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/JWkzRFt8jnQglCwbHQYdB_lYIfzjlp.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.096Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410194641_84hnov-0",
-      "url": "https://v3b.fal.media/files/b/0a95bb90/VPMKgGvTn7Ygma1-90PQf_w2EnsvdT.jpg",
+      "id": "cr-20260410144847_qxd6qw-0",
+      "url": "https://v3b.fal.media/files/b/0a95b494/hh6JT3JQYow0_BQTFcioP_tqm876bx.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
-      "label": "CREATE keeper: moto_9102",
-      "context": "CREATE batch 20260410194641_84hnov",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "label": "CREATE keeper: mtb_9201",
+      "context": "CREATE batch 20260410144847_qxd6qw",
       "comments": [
         {
           "num": 1,
           "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T19:49:07.963Z"
+          "time": "2026-04-10T14:52:14.857Z"
         }
       ]
     },
     {
-      "id": "cr-20260410194641_84hnov-1",
-      "url": "https://v3b.fal.media/files/b/0a95bb90/VJ4mkzCuPH_XF5n3vWFb6_xCLqXFqf.jpg",
+      "id": "cr-20260410144847_qxd6qw-1",
+      "url": "https://v3b.fal.media/files/b/0a95b494/pOL3-Gtd7s0BdBJdMqJ0i_v7Jev886.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
-      "label": "CREATE keeper: moto_9102",
-      "context": "CREATE batch 20260410194641_84hnov",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "label": "CREATE keeper: mtb_9201",
+      "context": "CREATE batch 20260410144847_qxd6qw",
       "comments": [
         {
           "num": 1,
           "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T19:49:07.963Z"
+          "time": "2026-04-10T14:52:14.858Z"
         }
       ]
     },
     {
-      "id": "cr-20260410194641_84hnov-2",
-      "url": "https://v3b.fal.media/files/b/0a95bb90/c38YAZALxOD-S_OhYknz8_jBKu81SO.jpg",
+      "id": "cr-20260410144847_qxd6qw-2",
+      "url": "https://v3b.fal.media/files/b/0a95b494/MOKj921ATuLEx4TAu-R-c_GbxjyB5n.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
-      "label": "CREATE keeper: moto_9102",
-      "context": "CREATE batch 20260410194641_84hnov",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "label": "CREATE keeper: mtb_9201",
+      "context": "CREATE batch 20260410144847_qxd6qw",
       "comments": [
         {
           "num": 1,
           "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T19:49:07.963Z"
+          "time": "2026-04-10T14:52:14.858Z"
         }
       ]
     },
     {
-      "id": "cr-20260410194641_84hnov-3",
-      "url": "https://v3b.fal.media/files/b/0a95bb90/OYnEuJxiRJwP0F0hfMIxA_LlToKlu3.jpg",
+      "id": "cr-20260410144847_qxd6qw-3",
+      "url": "https://v3b.fal.media/files/b/0a95b494/6crhbTlpyauPCbQpoEa_E_Jn17MnaM.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
-      "label": "CREATE reject: moto_9102",
-      "context": "CREATE batch 20260410194641_84hnov",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "label": "CREATE reject: mtb_9201",
+      "context": "CREATE batch 20260410144847_qxd6qw",
       "comments": [
         {
           "num": 1,
           "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T19:49:07.963Z"
+          "time": "2026-04-10T14:52:14.858Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410144847_qxd6qw-4",
+      "url": "https://v3b.fal.media/files/b/0a95b494/NPy1_utx4fQcAqUEFL55T_el2ZaC1M.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "label": "CREATE reject: mtb_9201",
+      "context": "CREATE batch 20260410144847_qxd6qw",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T14:52:14.858Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410144847_qxd6qw-5",
+      "url": "https://v3b.fal.media/files/b/0a95b494/xcsB4f-KoRXl91MFdMlNL_bGBWCkD6.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
+      "label": "CREATE reject: mtb_9201",
+      "context": "CREATE batch 20260410144847_qxd6qw",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T14:52:14.858Z"
         }
       ]
     },
@@ -15419,96 +15269,6 @@
           "num": 1,
           "text": "Final score: 80 (batch v2 rating 4/5)",
           "time": ""
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410144847_qxd6qw-0",
-      "url": "https://v3b.fal.media/files/b/0a95b494/hh6JT3JQYow0_BQTFcioP_tqm876bx.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
-      "label": "CREATE keeper: mtb_9201",
-      "context": "CREATE batch 20260410144847_qxd6qw",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T14:52:14.857Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410144847_qxd6qw-1",
-      "url": "https://v3b.fal.media/files/b/0a95b494/pOL3-Gtd7s0BdBJdMqJ0i_v7Jev886.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
-      "label": "CREATE keeper: mtb_9201",
-      "context": "CREATE batch 20260410144847_qxd6qw",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T14:52:14.858Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410144847_qxd6qw-2",
-      "url": "https://v3b.fal.media/files/b/0a95b494/MOKj921ATuLEx4TAu-R-c_GbxjyB5n.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
-      "label": "CREATE keeper: mtb_9201",
-      "context": "CREATE batch 20260410144847_qxd6qw",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T14:52:14.858Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410144847_qxd6qw-3",
-      "url": "https://v3b.fal.media/files/b/0a95b494/6crhbTlpyauPCbQpoEa_E_Jn17MnaM.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
-      "label": "CREATE reject: mtb_9201",
-      "context": "CREATE batch 20260410144847_qxd6qw",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T14:52:14.858Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410144847_qxd6qw-4",
-      "url": "https://v3b.fal.media/files/b/0a95b494/NPy1_utx4fQcAqUEFL55T_el2ZaC1M.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
-      "label": "CREATE reject: mtb_9201",
-      "context": "CREATE batch 20260410144847_qxd6qw",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T14:52:14.858Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410144847_qxd6qw-5",
-      "url": "https://v3b.fal.media/files/b/0a95b494/xcsB4f-KoRXl91MFdMlNL_bGBWCkD6.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
-      "label": "CREATE reject: mtb_9201",
-      "context": "CREATE batch 20260410144847_qxd6qw",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T14:52:14.858Z"
         }
       ]
     },
@@ -18069,6 +17829,246 @@
           "num": 2,
           "text": "Final score: 20 (rejected in hot-or-not)",
           "time": "2026-04-10T00:33:22.046Z"
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-0",
+      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "excellent, 90",
+          "time": "2026-04-07T19:20:37.937Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-1",
+      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:47.636Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-0",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:56.418Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-1",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "nice. 85",
+          "time": "2026-04-07T19:21:13.486Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-0",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
+          "time": "2026-04-07T19:21:34.619Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-1",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
+          "time": "2026-04-07T19:21:47.035Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-0",
+      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "This is cool yeah I really like this one great 95",
+          "time": "2026-04-07T19:22:10.501Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-1",
+      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
+          "time": "2026-04-07T19:22:36.702Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-0",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/80G-XJirJRRSKk5TZ9nOO_I12az3Az.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.095Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-1",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/wxePZ7YT6EOkQlfBXGAhP_Gh7XO82s.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.095Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-2",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/d-9UMfKrGodI_prVb9Sqq_QSuR4Nat.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.096Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-3",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/JWkzRFt8jnQglCwbHQYdB_lYIfzjlp.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.096Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-0",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/VPMKgGvTn7Ygma1-90PQf_w2EnsvdT.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-1",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/VJ4mkzCuPH_XF5n3vWFb6_xCLqXFqf.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-2",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/c38YAZALxOD-S_OhYknz8_jBKu81SO.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-3",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/OYnEuJxiRJwP0F0hfMIxA_LlToKlu3.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE reject: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T19:49:07.963Z"
         }
       ]
     },
