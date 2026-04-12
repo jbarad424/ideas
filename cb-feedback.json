@@ -1,6 +1,6 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-12T10:13:47.188Z",
+  "syncedAt": "2026-04-12T11:05:55.303Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
@@ -18609,6 +18609,11 @@
           "num": 1,
           "text": "Final score: 85 (LAB keeper)",
           "time": "2026-04-11T21:24:27.812Z"
+        },
+        {
+          "num": 2,
+          "text": "[super] marked super-like in Gallery",
+          "time": "2026-04-12T11:05:54.936Z"
         }
       ]
     },
