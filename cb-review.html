@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v14.3</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.4</div>
 </div>
 
 <div class="tabs">
@@ -2013,7 +2013,9 @@ function vidLabCheck(){
 // Re-enabled 2026-04-09 after Worker gained fal-submit + fal-get targets.
 function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
   // Resolve requestId from localStorage if not passed (backward compat for resume-on-reload)
-  if(!requestId){const j=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');if(j)requestId=j.requestId;}
+  const _job=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');
+  if(!requestId&&_job)requestId=_job.requestId;
+  const estCost=_job?.estCost||null; // saved by vidLabGenerate for completion display
   let polls=0;
   const MAX_POLLS=40; // 40 × 15s = 10 minutes max
   const POLL_SEC=15;
@@ -2058,7 +2060,7 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
           return;
         }
         if(vidUrl){
-          prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done! Video ready.</span>';
+          prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done! Video ready.</span>'+(estCost?' <span style="color:#f59e0b;font-size:.6rem;font-weight:600">~$'+estCost+' spent</span>':'');
           const preview=document.createElement('div');
           preview.style.cssText='margin-top:.5rem';
           preview.innerHTML='<video controls playsinline autoplay loop muted style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
@@ -2302,7 +2304,7 @@ function vidLabUpdateOptions(){
   const dur=parseInt(durSel?.value)||defaults[plat]||10;
   const costPerSec={seedance:0.3024,'seedance-fast':0.2419,kling:0.15,'veo-lite':0.05,sora:0.33,runway:0.05};
   const est=(costPerSec[plat]||0.15)*dur;
-  if(costEl)costEl.textContent='Est. ~$'+est.toFixed(2)+' for '+dur+'s';
+  if(costEl)costEl.textContent='Cost: ~$'+est.toFixed(2)+' for '+dur+'s';
 }
 // Video Lab — re-enabled 2026-04-09 using Worker fal-submit + fal-get targets.
 // Client-side polling via vidLabResumePoll() every 15s (same UX as the original
@@ -2366,7 +2368,7 @@ async function vidLabGenerate(platform){
     const statusUrl='https://queue.fal.run/'+base+'/requests/'+rid+'/status';
     const resultUrl='https://queue.fal.run/'+base+'/requests/'+rid;
     // Save job state so it survives page reloads
-    localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,submitted:new Date().toISOString()}));
+    localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,estCost:estCost,submitted:new Date().toISOString()}));
     // Log to Job History so it's never lost
     vidJobLog({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,label:src.label,model:src.model,sourceUrl:src.url,prompt:prompt,status:'IN_QUEUE',submitted:new Date().toISOString()});
     if(st)st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
@@ -5574,7 +5576,7 @@ const LAB={
       +'<input id="vidLabEndImage" type="text" placeholder="Paste end frame URL\u2026" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;box-sizing:border-box"></div>';
     // Cost + Generate
     h+='<div style="display:flex;gap:.3rem;align-items:center;margin-top:.3rem" id="vidLabPlatforms">'
-      +'<div id="vidLabCostEstimate" style="font-size:.6rem;color:#888;flex:1"></div>'
+      +'<div id="vidLabCostEstimate" style="font-size:.7rem;color:#f59e0b;font-weight:700;flex:1"></div>'
       +'<button onclick="vidLabGenerate(document.getElementById(\'vidLabPlatformSelect\').value)" style="padding:.45rem .9rem;border-radius:6px;border:none;background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;font-size:.7rem;cursor:pointer;font-weight:700;white-space:nowrap">Create Video</button></div>';
     h+='<div id="vidLabStatus" style="font-size:.6rem;color:#888;margin-top:.4rem"></div>';
     h+='</div>';
