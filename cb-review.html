@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v14.0</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.1</div>
 </div>
 
 <div class="tabs">
@@ -1691,12 +1691,13 @@ function galToggleGrouped(){
 
 function galDetectSport(img){
   const t=(img.id+' '+img.label+' '+img.prompt+' '+(img.context||'')).toLowerCase();
+  // MTB MUST come before motorcycle — "mountain biker" contains "biker" which triggers moto
+  if(/mtb|mountain bik|singletrack|enduro|downhill/.test(t))return 'mtb';
   if(/moto|motorcycle|highway|rider|riding|cruising|handlebars|biker|desert highway|pch|coastal highway/.test(t))return 'motorcycle';
   if(/ski(?!p)|skiing|powder|slalom|slope|mountain slope|ski poles/.test(t))return 'skiing';
   if(/snowboard|terrain park|half-?pipe|snow.*board/.test(t))return 'snowboard';
   if(/snowmobile|sled|snow machine/.test(t))return 'snowmobile';
-  if(/mtb|mountain bik|trail|enduro|downhill/.test(t))return 'mtb';
-  if(/hik|run|fish|atv|casual/.test(t))return 'other';
+  if(/hik|run|fish|atv|casual|trail/.test(t))return 'other';
   return 'other';
 }
 
