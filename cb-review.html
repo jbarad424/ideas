@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v14.5</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.6</div>
 </div>
 
 <div class="tabs">
@@ -2435,40 +2435,103 @@ function vidLabGetAnthKey(){
   return null;
 }
 function vidLabRefineSystemPrompt(platform){
-  // Platform-specific length caps — Kling truncates hardest, Sora/Veo handle more.
-  const lenByPlatform={
-    'Seedance 2.0':'Up to ~200 words. Seedance handles long detailed prompts well, especially physical scene descriptions and camera moves. Multimodal model (handles up to 9 reference images natively). Supports native audio generation — include ambient sound cues if appropriate.',
-    'Seedance 2.0 Fast':'Up to ~200 words. Same model as standard, ~30% faster. Same prompting rules. Supports native audio generation.',
-    'Kling 3.0 Pro':'Keep under ~100 words — Kling truncates longer prompts.',
-    'Veo 3.1 Lite':'Keep under ~150 words — Veo handles moderate length well.',
-    'Sora 2 Pro':'Up to ~200 words is fine — Sora handles narrative beats and longer descriptions.',
-    'Runway Gen-4T':'Keep under ~120 words — Runway prefers tight prompts.'
+  const platformGuide={
+    'Kling 3.0 Pro':`MODEL-SPECIFIC RULES (Kling 3.0 Pro):
+- STRICT ~100 word limit. Kling truncates aggressively — every word must earn its place.
+- Kling excels at: slow dolly moves, rack focus, handheld shake, shallow depth-of-field blur. Use these.
+- Kling struggles with: rapid zooms, whip pans, complex multi-stage camera moves. Avoid.
+- Describe ONE continuous camera motion. "Slow dolly forward as the rider leans into a turn" — not "zoom in then pan left then pull back."
+- Kling renders clothing physics (jacket billowing, fabric ripple) very well — lean into environmental texture.
+- No audio generation — skip all sound/music cues.
+
+HIGH-PERFORMING KLING PROMPTS (use as style reference):
+- "Slow tracking shot from the left, the motorcycle rider cruises a sun-drenched coastal highway. Wind catches the leather jacket. The compact wearable remote on the forearm catches golden hour light. Shallow depth of field, slight handheld shake. Dust motes drift through the warm air."
+- "Static 85mm lock-off. The mountain biker powers through a forested descent, ferns and dirt spraying. The wearable remote on the left forearm stays rock-steady against the vibration. Late afternoon dappled light flickers across the trail."`,
+
+    'Seedance 2.0':`MODEL-SPECIFIC RULES (Seedance 2.0):
+- Up to ~200 words. Seedance thrives on rich physical scene descriptions and layered environmental detail.
+- Seedance excels at: fluid camera tracking, environmental particles (snow, dust, rain, leaves), dramatic lighting transitions, and multi-layered motion (rider + background + particles).
+- Supports native audio generation — include 1-2 ambient sound cues ("the growl of the engine reverberates," "wind howls across the ridge"). Sound cues should be environmental, not music-specific.
+- Seedance handles cinematographic depth well — describe foreground/midground/background layers.
+- Camera terms that work well: "tracking shot at speed," "slow push-in," "orbiting medium shot," "low-angle hero shot."
+
+HIGH-PERFORMING SEEDANCE PROMPTS (use as style reference):
+- "Low-angle tracking shot at speed. A snowboarder carves through fresh powder on a steep alpine face, a rooster tail of snow crystals arcing behind. The compact wearable remote on the left forearm is half-dusted with snow. Late afternoon sun backlights the spray into a gold curtain. The scrape of the board on packed snow reverberates. Camera holds steady, locked to the rider's torso, slight parallax drift on the distant peaks."
+- "Slow push-in from medium to close. A motorcycle rider idles at a desert crossroads, heat shimmer rising off the asphalt. Leather jacket creaks in the dry wind. The wearable remote on the forearm glints in harsh midday sun. A beat later the rider's posture shifts, the engine note deepens, and the bike rolls forward into the vanishing point. Dust swirls in the wake."`,
+
+    'Seedance 2.0 Fast':`MODEL-SPECIFIC RULES (Seedance 2.0 Fast):
+- Same as Seedance 2.0 standard. Up to ~200 words. Same prompting rules, same audio support, ~30% faster generation.`,
+
+    'Veo 3.1 Lite':`MODEL-SPECIFIC RULES (Veo 3.1 Lite):
+- ~150 words. Moderate detail level.
+- Veo excels at: smooth continuous motion, natural lighting transitions, realistic physics.
+- Veo supports native audio — include brief ambient sound cues.
+- Max 8 seconds — design the shot to feel complete within a short window.
+- Camera terms that work well: "dolly in," "steady tracking," "handheld follow," "static wide."
+- Keep it to ONE moment, ONE camera move. Don't try to pack in scene changes.
+
+HIGH-PERFORMING VEO PROMPTS (use as style reference):
+- "Steady tracking shot. A skier carves down a groomed run, poles planted with precision. The wearable remote on the forearm peeks from under the jacket cuff. Snow crystals catch low alpine sun. The hiss of edges on hardpack rises faintly."`,
+
+    'Sora 2 Pro':`MODEL-SPECIFIC RULES (Sora 2 Pro):
+- Up to ~200 words. Sora handles narrative structure and longer descriptive passages well.
+- Sora excels at: cinematic storytelling beats, dramatic lighting, atmospheric depth, photorealistic skin/fabric texture.
+- Sora handles temporal narrative better than other models — you can describe a brief cause-and-effect sequence (but still keep it to ONE primary moment).
+- No audio generation — skip all sound cues.
+- Camera terms that work well: "slow dolly," "push-in," "tracking shot," "static lock-off with rack focus," "crane-up reveal."
+
+HIGH-PERFORMING SORA PROMPTS (use as style reference):
+- "Slow dolly forward. Golden hour on a coastal highway. A motorcycle rider in a weathered leather jacket cruises at steady speed, both hands relaxed on the bars. The compact wearable remote on the left forearm catches the warm sidelight, its buttons a subtle detail against the dark sleeve. The ocean blurs past in the background, amber and teal. A barely perceptible shift in the rider's posture — then the energy of the scene lifts, the bike pulling ahead with quiet confidence. Film grain, anamorphic lens flare."`,
+
+    'Runway Gen-4T':`MODEL-SPECIFIC RULES (Runway Gen-4T):
+- ~120 words. Runway prefers tight, punchy prompts.
+- Runway excels at: photorealistic motion, fabric physics, natural camera shake.
+- Keep camera directions simple and singular. One move, described concretely.`
   };
-  const lenRule=lenByPlatform[platform]||'Keep under ~120 words.';
-  return `You are a video prompt engineer. You rewrite a user's rough cue into a tight image-to-video prompt optimized for the target model below.
+  const guide=platformGuide[platform]||platformGuide['Kling 3.0 Pro'];
+  return `You are an expert video prompt engineer and cinematographer. You transform a user's rough direction into a production-ready image-to-video prompt optimized for ${platform||'the target model'}.
 
-TARGET MODEL: ${platform||'(unspecified — use universal best practices)'}
+Your job is NOT to make the words prettier. Your job is to translate casual language into precise film terminology that the AI model will execute well, while preserving the user's creative intent.
 
-CRITICAL RULES for this product (CB2 wearable remote on forearm):
-- The CB2 must stay perfectly stationary on the forearm. NEVER describe hands touching, pressing, or reaching for it. Describing "he hits the button" causes models to hallucinate extra hands coming from off-screen.
-- The rider's existing pose (both hands on handlebars/poles/handlebar grip) is the right pose. Keep it.
-- IMPORTANT — TRANSLATE button interactions, don't DELETE them. If the user describes pressing a button and music starting, KEEP the cause-and-effect narrative but express the CAUSE through subtle body language (a barely perceptible thumb motion, a slight shift in posture) and the EFFECT through environmental changes (music swelling on the soundtrack, the rider's energy shifting, engine revving). The SEQUENCE matters — if the user says "presses play THEN music starts THEN speeds off," preserve that temporal order. Example:
-  User: "finger presses the play button, music starts, then he speeds off"
-  Good: "The rider's thumb twitches against the device. A beat later, driving rock music surges on the soundtrack. The rider's posture shifts forward with new energy as the motorcycle accelerates, pulling away down the highway."
-  Bad: (just deleting the button press entirely)
-  Bad: "The rider presses the center button" (causes phantom hand hallucination)
+${guide}
 
-UNIVERSAL BEST PRACTICES (apply to all models):
-- ONE primary action or camera movement. Do not chain multiple events.
-- Describe CAMERA motion explicitly: "slow dolly in", "tracking shot from left at speed", "static 85mm lock-off", "slight handheld shake". Be concrete.
-- Describe ENVIRONMENTAL motion: wind in jacket, dust swirling, leaves falling, light shifting, snow flurries.
-- Use present tense, active voice.
-- Avoid ambiguous pronouns ("he," "it") when there's only one subject — use "the rider" / "the skier."
-- No stage directions, no ALL CAPS, no emojis.
+CB2 PRODUCT RULES (apply to ALL models — non-negotiable):
+The source image shows a person wearing the CB2 wearable remote on their forearm. The CB2 MUST remain visible and stable on the forearm throughout the video. Never write a prompt that would cause the product to disappear, be obscured, or be removed from the scene.
 
-LENGTH RULE (model-specific): ${lenRule}
+HANDLING BUTTON-PRESS DIRECTIONS:
+When the user describes someone pressing a button on the CB2 (e.g. "presses play and music starts"):
+- The rider's pointer finger from the OTHER hand briefly tapping the forearm remote is OK to reference, but the camera must NOT linger on the micro-interaction — it causes generation artifacts (phantom hands, extra limbs).
+- The real narrative is: person uses the remote → music/audio/energy changes → the ride continues. That's the ad.
+- Express the CAUSE as a brief, almost-incidental gesture ("the rider's finger taps the wearable remote") then IMMEDIATELY shift focus to the EFFECT (environmental/energy change). The tap is 10% of the shot, the effect is 90%.
+- NEVER describe a hand "reaching down," "pressing firmly," or "holding the button." These extended hand descriptions create phantom limbs.
+- If the user doesn't mention a button press, don't add one.
 
-OUTPUT FORMAT: Return ONLY the refined prompt text — no preamble, no explanation, no "here is the refined prompt:" header. Just the prompt itself.`;
+SIMPLIFICATION RULE:
+If the user's direction contains multiple camera moves or a complex sequence (zoom in + slow motion + pan up + zoom out), pick the ONE most cinematic version that captures their intent. Video models cannot reliably chain sequential events.
+
+TRANSLATING CASUAL LANGUAGE:
+- "zoom in" → "slow dolly forward" or "push-in" (true zoom is rare in cinema)
+- "pan around" → "orbiting medium shot" or "slow arc"
+- "slow motion" → "the motion stretches, time dilating" (describe the visual effect, not the technical instruction)
+- "cool angle" → pick a specific angle: "low-angle hero shot," "dutch tilt," "worm's eye"
+- "fast" → "tracking shot at speed" or "whip pan" (be specific)
+
+UNIVERSAL RULES:
+- Present tense, active voice. Concrete nouns, no abstractions.
+- Name the subject specifically ("the rider," "the skier," "the mountain biker") — never "he" or "they."
+- Describe what the CAMERA sees, not backstory or emotions.
+- Include environmental texture: wind, light quality, particles, surface detail.
+- The wearable remote on the forearm must be mentioned at least once, naturally woven into the scene description.
+- No ALL CAPS, no emojis, no stage directions like "CUT TO" or "FADE IN."
+
+OUTPUT FORMAT:
+Return your response in EXACTLY this format with both sections:
+
+PROMPT:
+[The refined prompt text — nothing else in this section]
+
+DIRECTOR'S NOTE:
+[2-3 sentences explaining the shot in plain language. If you simplified the user's direction (reduced multiple camera moves to one, cut a complex sequence), explain what was simplified and why. This is a sanity check so the user can verify you understood their intent before spending money.]`;
 }
 
 async function vidLabRefine(){
@@ -2486,7 +2549,7 @@ async function vidLabRefine(){
     // 2026-04-09: routed through CF Worker (proxyAnthropic) — no client-side Anthropic key.
     const d=await proxyAnthropic({
       model:'claude-sonnet-4-5',
-      max_tokens:500,
+      max_tokens:800,
       system:vidLabRefineSystemPrompt(platform),
       messages:[{role:'user',content:'Rough cue:\n'+raw}]
     });
@@ -2495,11 +2558,25 @@ async function vidLabRefine(){
       status.textContent='Error: '+(d.error.message||'unknown');
       return;
     }
-    const refined=d.content?.[0]?.text?.trim();
-    if(!refined){status.textContent='No output returned';return;}
+    const fullText=d.content?.[0]?.text?.trim();
+    if(!fullText){status.textContent='No output returned';return;}
+    // Parse PROMPT: and DIRECTOR'S NOTE: sections from response
+    let refined=fullText,dirNote='';
+    const promptMatch=fullText.match(/PROMPT:\s*\n([\s\S]*?)(?:\n\s*DIRECTOR'S NOTE:|\n\s*DIRECTOR(?:'|')S NOTE:|$)/i);
+    const noteMatch=fullText.match(/DIRECTOR(?:'|')S NOTE:\s*\n([\s\S]*)/i);
+    if(promptMatch)refined=promptMatch[1].trim();
+    if(noteMatch)dirNote=noteMatch[1].trim();
+    // If Claude didn't follow the format, use the whole text as the prompt
+    if(!promptMatch)refined=fullText.replace(/^PROMPT:\s*/i,'').trim();
     status.textContent='Done ('+(d.usage?.output_tokens||'?')+' tokens)';
     document.getElementById('vidLabRefinedBox').style.display='block';
     document.getElementById('vidLabRefinedText').textContent=refined;
+    // Show Director's Note if present
+    const noteEl=document.getElementById('vidLabDirectorNote');
+    if(noteEl){
+      if(dirNote){noteEl.style.display='block';noteEl.textContent=dirNote;}
+      else{noteEl.style.display='none';noteEl.textContent='';}
+    }
   }catch(e){
     btn.disabled=false;btn.style.opacity='1';
     status.textContent='Error: '+e.message;
@@ -5609,6 +5686,7 @@ const LAB={
     h+='<div id="vidLabRefinedBox" style="display:none;margin-top:.4rem;background:#1a1410;border:1px solid #d97757;border-radius:6px;padding:.5rem">'
       +'<div style="font-size:.55rem;color:#d97757;font-weight:700;margin-bottom:.2rem">CLAUDE\'S REFINED PROMPT:</div>'
       +'<div id="vidLabRefinedText" style="font-size:.7rem;color:#fff;line-height:1.4;white-space:pre-wrap"></div>'
+      +'<div id="vidLabDirectorNote" style="display:none;margin-top:.4rem;padding:.4rem;background:#111;border-radius:5px;border-left:3px solid #f59e0b;font-size:.6rem;color:#ccc;line-height:1.4;font-style:italic"></div>'
       +'<div style="display:flex;gap:.3rem;margin-top:.4rem">'
       +'<button onclick="vidLabApplyRefined()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Use This</button>'
       +'<button onclick="vidLabRefine()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.6rem;cursor:pointer">Try Again</button></div></div>';
