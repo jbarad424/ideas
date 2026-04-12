@@ -196,7 +196,7 @@ Every prompt follows this skeleton. The **middle is locked** (never change the C
 
 ### Step 3: Review
 - **Review page:** `https://jbarad424.github.io/ideas/cb-review.html`
-- 7 tabs: TO REVIEW, REVIEWED, PROGRESS, GALLERY, VIDEOS, CREATE (under construction), AI SCORING
+- 3 tabs: GALLERY | LAB | DISCOVER (consolidated April 11-12, 2026)
 - Feedback syncs to `cb-feedback.json` on GitHub via Make.com webhook
 - Cross-device sync merges (doesn't overwrite) via fetch-before-push
 
@@ -274,6 +274,12 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 15. Before suggesting any approach, check the "What's Been Tried and Failed" section above. If it's listed there, do NOT re-suggest it unless you have a specific, concrete reason why the previous failure doesn't apply (new model released, different implementation, etc.). State that reason explicitly.
 16. When updating this file, never remove entries from the failed section. Only add to it. The failed section is append-only — it's the project's scar tissue and it prevents us from repeating mistakes.
 
+**Lab consolidation (April 11-12, 2026):**
+17. The app is now 3 tabs: GALLERY | LAB | DISCOVER. The old CREATE and VIDEO LAB tabs were deleted in v12.3. Lab is a unified sequential funnel: empty state → source loaded → Make Stills (Run Again / Twist It) or Make Video. All CR.* data functions are still alive; Lab calls them directly.
+18. Prompt lookup priority when loading images into Lab: CR.keepers (cb-keepers.json) → cb-prompts.json → ALL_IMAGES inline metadata. Never show a short metadata prompt as the "original prompt" without checking keepers first.
+19. cb-keepers.json auto-syncs on every super-like and Lab keeper save (via Make.com webhook). No prompt should ever be lost again. Current count: 284 items, 198 with full prompts.
+20. Batch v2 ref performance data: t18 best overall (avg 3.7), p6 best Patriot (avg 3.8, single-ref only), h3 high-variance (great moto/snow, bad ski/mtb), GPT Image 1.5 dead for dual-ref (0/4 usable). Full ratings in batch-v2-feedback.json.
+
 ## 5. Current Status and Next Steps
 
 ### What's Validated and Production-Ready
@@ -297,7 +303,7 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 - **Button count accuracy:** GPT Image 1.5 night scene generated 7-8 buttons instead of 5. Adding "five round tactile buttons" helps but not always.
 - **Colorway control:** No reliable way to specify Hunter/Tron/Patriot from prompt alone. Fix requires colorway-specific reference photos.
 - **Hunter symbol fidelity:** All existing Hunter reference photos have old/faded symbol outlines and missing LED plastic.
-- **Patriot coverage:** Zero third-person Patriot photos exist anywhere.
+- **Patriot coverage:** Patriot refs p4 and p6 are production-ready (single-ref only, never dual-ref with h6). Batch v2 avg 4.2 with single-ref, 1.8 with dual-ref h6 bleed.
 - **GPT masked inpainting model dependency:** Only works on GPT-generated base images. NB2 and other model bases cause catastrophic mode collapse.
 
 ### April 7 Session Results (Combined — Two Sessions)
@@ -381,7 +387,7 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 - Submit: POST to `queue.fal.run/{endpoint}` — returns `request_id`, `status_url`, `response_url`
 - Status check: GET (not POST!) to `status_url` — POST re-queues the job
 - Result: GET to `response_url` — returns video URL in `res.video.url` or `res.output.video.url`
-- Status URLs use a SHORTER base path than submit URL (e.g., `/fal-ai/kling-video/requests/{id}/status` not `/fal-ai/kling-video/v3/pro/image-to-video/requests/{id}/status`). Always use the URLs returned by the API.
+- Status URLs use a SHORTER base path than submit URL (e.g., `/fal-ai/kling-video/requests/{id}/status` not `/fal-ai/kling-video/v3/pro/image-to-video/requests/{id}/status`). NEVER use the URLs returned by the API. Construct your own: strip /image-to-video, /fast/, etc. from the endpoint, then append /requests/{id}/status. fal returns shortened paths that 404 or 405.
 - Jobs complete and charge even if the UI loses track. Job History solves this visibility problem.
 
 **New Images Generated (25 total, awaiting Justin's review):**
