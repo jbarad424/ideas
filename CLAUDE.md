@@ -445,12 +445,26 @@ Every entry here was properly tested with real API calls and real images. Do NOT
 
 **Business case PDF generated** — full market analysis for cofounder presentation (separate document)
 
-### Next Session Priorities (updated 2026-04-10 EOD)
-1. **Verify fal.ai pricing** against actual billing dashboard — confirm $0.08-$0.30/image cost assumptions.
-2. **Test Seedance 2.0 end-to-end** — polling fix deployed but untested with real CB2 stills.
-3. **Try cluster-test.html** — visual clustering experiment groups similar photos by AI vision analysis.
-4. **Video Lab cross-device sync** — jobs are currently per-browser localStorage, need shared state.
-5. **Hunter/Patriot product reshoot** when products arrive — t18-clone (vertical standalone on wood table, PLUS at top, warm light).
+### April 12 Session #2 — UX Polish (v13.7 → v14.1)
+
+**Lab super-like (v13.8):** Star button added next to heart on Lab result tiles. Three states: super (gold star+heart+border), kept (heart only), neither (archive/reject). Save bar shows "N keepers (M ★)". Super-liked tiles get `[super]` marker in comments and `label:'super'` in cb-keepers.json.
+
+**Solid filter buttons (v13.9):** All gallery filter buttons now use solid purple background (#a855f7) with black text when active. Grouped button uses `.on` class instead of inline style overrides. Consistent across all filter types.
+
+**Dynamic gallery filters (v14.0):** Switching to Videos tab swaps filter rows:
+- Show row: "Keepers" + "Archived" (two buttons) instead of Likes/Super/Rejects/Grouped
+- Model row: Kling/Runway/Veo/Sora/Other instead of GPT/FLUX/NB Pro/NB2/Other
+- Keepers combines like+super video buckets. Filter state resets on switch.
+
+**MTB sport detection fix (v14.1):** "Mountain biker" was matching "biker" in motorcycle regex before MTB check ran. Moved MTB regex before motorcycle. Added "singletrack" as MTB keyword.
+
+### Next Session Priorities (updated 2026-04-12)
+1. **Twist It form broken on mobile** — scene textarea unreachable below viewport in Lab.
+2. **Gallery overlay should be position:fixed** — currently scrolls with page.
+3. **Verify fal.ai pricing** against actual billing dashboard — confirm $0.08-$0.30/image cost assumptions.
+4. **Test Seedance 2.0 end-to-end** — polling fix deployed but untested with real CB2 stills.
+5. **Video Lab cross-device sync** — jobs are currently per-browser localStorage, need shared state.
+6. **Hunter/Patriot product reshoot** when products arrive — t18-clone (vertical standalone on wood table, PLUS at top, warm light).
 
 ### Key Resources
 | Resource | Location |
