@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v13.6</div>
+  <div class="sub" style="color:#555;font-size:.75em">v13.7</div>
 </div>
 
 <div class="tabs">
@@ -1754,6 +1754,25 @@ function galToggleSuper(id){
     btn.textContent=nowSuper?'\u2B50 Super-liked':'\u2606 Super-like';
     btn.style.background=nowSuper?'#eab308':'transparent';
     btn.style.color=nowSuper?'#000':'#eab308';
+  }
+  // Auto-save to keepers so super-likes are never lost
+  if(!isSuperNow){
+    const img=ALL_IMAGES.find(i=>i.id===id);
+    if(img&&CR.keepers&&CR.keepers.items){
+      // Look up full prompt from keepers first, fall back to ALL_IMAGES
+      let prompt=img.prompt||'';
+      for(const url in CR.keepers.items){
+        const k=CR.keepers.items[url];
+        if(k.id===id&&k.prompt&&k.prompt.length>prompt.length){prompt=k.prompt;break;}
+      }
+      if(!CR.keepers.items[img.url]){
+        CR.keepers.items[img.url]={id:img.id,url:img.url,model:img.model,prompt,sport:galDetectSport(img),label:'super',source:'gallery_super'};
+      }else{
+        CR.keepers.items[img.url].label='super';
+      }
+      // Fire-and-forget sync to GitHub
+      fetch(SYNC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonContent:JSON.stringify(CR.keepers,null,2),filename:'cb-keepers.json',commitMessage:'Super-like: '+id+' ('+new Date().toLocaleString()+')'})}).catch(()=>{});
+    }
   }
   // Update the gallery card badge
   renderGallery();
@@ -5363,6 +5382,20 @@ const LAB={
     _galCache=null;_galCacheKey='';
     counts();
     try{if(typeof syncFeedback==='function')setTimeout(syncFeedback,500);}catch(e){}
+    // Auto-save keepers to cb-keepers.json so prompts are NEVER lost
+    if(kept.length){
+      try{
+        const modelLabel=CR.MODEL_LABELS[b.endpoint]||b.model;
+        kept.forEach((url,idx)=>{
+          const kid='lab-'+b.batch_id+'-'+idx;
+          if(CR.keepers&&CR.keepers.items&&!CR.keepers.items[url]){
+            CR.keepers.items[url]={id:kid,url,model:modelLabel,prompt:b.recipe_prompt,sport:b.sport,label:'yes',seed:b.seed,ref:b.ref?{id:b.ref.id,colorway:b.ref.colorway}:null,source:'lab_auto'};
+          }
+        });
+        // Sync keepers to GitHub via Make.com webhook
+        fetch(SYNC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonContent:JSON.stringify(CR.keepers,null,2),filename:'cb-keepers.json',commitMessage:'Auto-save '+kept.length+' Lab keepers ('+new Date().toLocaleString()+')'})}).catch(()=>{});
+      }catch(e){console.log('[keepers-sync] error:',e);}
+    }
     showToast('Saved \u00b7 '+kept.length+' keepers \u00b7 '+Math.round(keeper_rate*100)+'% rate');
     this.batch=null;
     try{localStorage.removeItem('cb2_lab_batch');}catch(e){}
