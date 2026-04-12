@@ -254,6 +254,27 @@
       "cost_usd": 0.6,
       "is_novel": false,
       "at": "2026-04-11T21:24:27.805Z"
+    },
+    {
+      "batch_id": "20260412002919_ut7n9l",
+      "recipe_id": "lab_mnv10j0u",
+      "recipe_prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "ref_id": "h3",
+      "model": "fal-ai/nano-banana-pro/edit",
+      "sport": "motorcycle",
+      "generated": 4,
+      "kept_urls": [
+        "https://v3b.fal.media/files/b/0a95e3f0/of74BfGvzl7JCpxdk7Kfw_upzmy8NA.jpg",
+        "https://v3b.fal.media/files/b/0a95e3f0/poWoVj3P7ZU10CxKfhcZv_4CS28b3R.jpg",
+        "https://v3b.fal.media/files/b/0a95e3f0/F3fYq63Ksf7RHlHH3HXyH_3dkdjr6B.jpg",
+        "https://v3b.fal.media/files/b/0a95e3f0/aj-2eVwdmKc3Wa8JG6WLY_PBvR3imB.jpg"
+      ],
+      "rejected_urls": [],
+      "failed": [],
+      "keeper_rate": 1,
+      "cost_usd": 0.6,
+      "is_novel": false,
+      "at": "2026-04-12T10:13:46.615Z"
     }
   ],
   "recipes": {
@@ -319,6 +340,13 @@
       "total_generated": 4,
       "total_kept": 2,
       "last_batch_at": "2026-04-11T21:24:27.805Z"
+    },
+    "lab_mnv10j0u": {
+      "keeper_rate": 1,
+      "batches_run": 1,
+      "total_generated": 4,
+      "total_kept": 4,
+      "last_batch_at": "2026-04-12T10:13:46.615Z"
     }
   },
   "refs": {
@@ -420,8 +448,8 @@
     },
     "h3": {
       "overall": {
-        "keeper_rate": 0.25,
-        "batches_run": 1
+        "keeper_rate": 0.475,
+        "batches_run": 2
       },
       "by_recipe": {
         "mtb_novel_mntcpgg9": {
@@ -430,6 +458,13 @@
           "total_generated": 4,
           "total_kept": 1,
           "last_batch_at": "2026-04-10T20:22:44.923Z"
+        },
+        "lab_mnv10j0u": {
+          "keeper_rate": 1,
+          "batches_run": 1,
+          "total_generated": 4,
+          "total_kept": 4,
+          "last_batch_at": "2026-04-12T10:13:46.615Z"
         }
       }
     },
@@ -473,6 +508,15 @@
         "total_generated": 16,
         "total_kept": 8,
         "last_batch_at": "2026-04-11T21:24:27.805Z"
+      }
+    },
+    "motorcycle": {
+      "fal-ai/nano-banana-pro/edit": {
+        "keeper_rate": 1,
+        "batches_run": 1,
+        "total_generated": 4,
+        "total_kept": 4,
+        "last_batch_at": "2026-04-12T10:13:46.615Z"
       }
     }
   }
