@@ -64,7 +64,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 /* Grid view for REVIEWED tab */
 .grid-toggle{display:none;text-align:center;margin:.5rem 0}
 .grid-toggle button{background:none;border:1px solid #333;color:#888;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;cursor:pointer;margin:0 .2rem}
-.grid-toggle button.active{border-color:#a855f7;color:#a855f7;background:#1a1030}
+.grid-toggle button.active{border-color:#a855f7;color:#000;background:#a855f7;font-weight:700}
 .grid-wrap{width:100%;max-width:620px;margin:0 auto;padding:.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem}
 .grid-card{background:#111;border:1px solid #222;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;transition:border-color .15s}
 .grid-card:hover{border-color:#a855f7}
@@ -72,7 +72,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .grid-card .grid-label{font-size:.5rem;padding:.2rem .3rem;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gal-filter{padding:.25rem .5rem;border-radius:6px;border:1.5px solid #333;background:#111;color:#888;font-size:.6rem;font-weight:600;cursor:pointer}
 .gal-filter:hover{border-color:#a855f7;color:#fff}
-.gal-filter.on{border-color:#a855f7;color:#a855f7;background:#1a1030}
+.gal-filter.on{border-color:#a855f7;color:#000;background:#a855f7;font-weight:700}
 .gal-card{background:#111;border:1px solid #222;border-radius:8px;overflow:hidden;cursor:pointer;position:relative}
 .gal-card.gal-super{border:2px solid #eab308;box-shadow:0 0 12px rgba(234,179,8,.4)}
 .gal-card img,.gal-card video{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#000}
@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v13.8</div>
+  <div class="sub" style="color:#555;font-size:.75em">v13.9</div>
 </div>
 
 <div class="tabs">
@@ -376,7 +376,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
         <button class="gal-filter gal-vf" id="galLikesToggle" onclick="galToggleLikes()">Likes</button>
         <button class="gal-filter gal-vf" id="galSuperToggle" onclick="galToggleSuperFilter()">Super</button>
         <button class="gal-filter gal-vf" id="galRejToggle" onclick="galToggleRejects()">Rejects</button>
-        <button class="gal-filter" id="galGroupedToggle" onclick="galToggleGrouped()" style="margin-left:.3rem;font-size:.55rem;padding:.2rem .5rem;border:1px solid #a855f7;color:#a855f7">Grouped</button>
+        <button class="gal-filter" id="galGroupedToggle" onclick="galToggleGrouped()" style="margin-left:.3rem;font-size:.55rem;padding:.2rem .5rem">Grouped</button>
         <button class="gal-filter" onclick="galClearFilters()" style="margin-left:auto;font-size:.55rem;padding:.2rem .4rem;opacity:.6">Reset</button>
       </div>
       <!-- Row 2: Sport -->
@@ -1685,7 +1685,7 @@ let galGrouped=false;
 function galToggleGrouped(){
   galGrouped=!galGrouped;
   const btn=document.getElementById('galGroupedToggle');
-  if(btn){btn.style.background=galGrouped?'#a855f7':'transparent';btn.style.color=galGrouped?'#000':'#a855f7';}
+  if(btn){btn.className='gal-filter'+(galGrouped?' on':'');}
   renderGallery();
 }
 
