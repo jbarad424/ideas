@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v13.9</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.0</div>
 </div>
 
 <div class="tabs">
@@ -371,7 +371,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
     <!-- Filter bar — organized into labeled rows so mobile doesn't get cluttered -->
     <div id="galFilterBar" style="background:#111;border-radius:10px;border:1px solid #222;padding:.5rem .6rem;display:flex;flex-direction:column;gap:.35rem">
       <!-- Row 1: Verdict -->
-      <div style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
+      <div id="galVerdictRow" style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
         <span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Show</span>
         <button class="gal-filter gal-vf" id="galLikesToggle" onclick="galToggleLikes()">Likes</button>
         <button class="gal-filter gal-vf" id="galSuperToggle" onclick="galToggleSuperFilter()">Super</button>
@@ -380,7 +380,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
         <button class="gal-filter" onclick="galClearFilters()" style="margin-left:auto;font-size:.55rem;padding:.2rem .4rem;opacity:.6">Reset</button>
       </div>
       <!-- Row 2: Sport -->
-      <div style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
+      <div id="galSportRow" style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
         <span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Sport</span>
         <button class="gal-filter gal-sport-f" onclick="galToggleSport('motorcycle')" data-sp="motorcycle">Moto</button>
         <button class="gal-filter gal-sport-f" onclick="galToggleSport('skiing')" data-sp="skiing">Ski</button>
@@ -390,7 +390,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
         <button class="gal-filter gal-sport-f" onclick="galToggleSport('other')" data-sp="other">Other</button>
       </div>
       <!-- Row 3: Model -->
-      <div style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
+      <div id="galModelRow" style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap">
         <span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Model</span>
         <button class="gal-filter gal-model-f" onclick="galToggleModel('gpt')" data-md="gpt">GPT</button>
         <button class="gal-filter gal-model-f" onclick="galToggleModel('flex')" data-md="flex">FLUX</button>
@@ -1712,6 +1712,16 @@ function galDetectModel(img){
   if(m.includes('flex')||m.includes('flux')||m.includes('kontext')||m.includes('two-pass')||m.includes('sam rotation'))return 'flex';
   return 'other-model';
 }
+function galDetectVideoModel(vid){
+  const m=(vid.model||'').toLowerCase();
+  if(m.includes('kling'))return 'kling';
+  if(m.includes('seedance'))return 'seedance';
+  if(m.includes('runway')||m.includes('gen-4'))return 'runway';
+  if(m.includes('veo'))return 'veo';
+  if(m.includes('sora'))return 'sora';
+  if(m.includes('minimax')||m.includes('hailuo'))return 'hailuo';
+  return 'other-vid';
+}
 
 function galIsAccepted(img){
   const cs=getC(img.id);if(!cs.length)return null;
@@ -1844,7 +1854,49 @@ function galSetMediaType(t){
       photoBtn.style.background='#111';photoBtn.style.color='#888';photoBtn.style.borderColor='#333';
     }
   }
+  galRebuildFilters();
   renderGallery();
+}
+
+// galRebuildFilters — swap verdict row and model row buttons based on galMediaType.
+// Photos: Likes / Super / Rejects + Grouped + Reset | GPT / FLUX / NB Pro / NB2 / Other
+// Videos: Keepers / Archived + Reset                | Kling / Runway / Veo / Sora / Other
+function galRebuildFilters(){
+  const vRow=document.getElementById('galVerdictRow');
+  const mRow=document.getElementById('galModelRow');
+  if(!vRow||!mRow)return;
+  // Reset filter state on switch
+  galShowLikes=true;galShowSuper=true;galShowRejects=false;
+  galModelSet.clear();
+  if(galMediaType==='video'){
+    // Videos: Keepers (= likes+super) + Archived (= rejects)
+    vRow.innerHTML='<span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Show</span>'
+      +'<button class="gal-filter gal-vf" id="galLikesToggle" onclick="galToggleLikes()">Keepers</button>'
+      +'<button class="gal-filter gal-vf" id="galRejToggle" onclick="galToggleRejects()">Archived</button>'
+      +'<button class="gal-filter" onclick="galClearFilters()" style="margin-left:auto;font-size:.55rem;padding:.2rem .4rem;opacity:.6">Reset</button>';
+    // Video models
+    mRow.innerHTML='<span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Model</span>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'kling\')" data-md="kling">Kling</button>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'runway\')" data-md="runway">Runway</button>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'veo\')" data-md="veo">Veo</button>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'sora\')" data-md="sora">Sora</button>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'other-vid\')" data-md="other-vid">Other</button>';
+  }else{
+    // Photos: Likes / Super / Rejects + Grouped + Reset
+    vRow.innerHTML='<span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Show</span>'
+      +'<button class="gal-filter gal-vf" id="galLikesToggle" onclick="galToggleLikes()">Likes</button>'
+      +'<button class="gal-filter gal-vf" id="galSuperToggle" onclick="galToggleSuperFilter()">Super</button>'
+      +'<button class="gal-filter gal-vf" id="galRejToggle" onclick="galToggleRejects()">Rejects</button>'
+      +'<button class="gal-filter" id="galGroupedToggle" onclick="galToggleGrouped()" style="margin-left:.3rem;font-size:.55rem;padding:.2rem .5rem">Grouped</button>'
+      +'<button class="gal-filter" onclick="galClearFilters()" style="margin-left:auto;font-size:.55rem;padding:.2rem .4rem;opacity:.6">Reset</button>';
+    // Photo models
+    mRow.innerHTML='<span style="font-size:.55rem;color:#555;font-weight:600;min-width:42px">Model</span>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'gpt\')" data-md="gpt">GPT</button>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'flex\')" data-md="flex">FLUX</button>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'nbpro\')" data-md="nbpro">NB Pro</button>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'nb2\')" data-md="nb2">NB2</button>'
+      +'<button class="gal-filter gal-model-f" onclick="galToggleModel(\'other-model\')" data-md="other-model">Other</button>';
+  }
 }
 
 // pauseAllVideos — guards against the "audio keeps playing after I switch tabs"
@@ -2555,7 +2607,7 @@ function renderGallery(){
       score:sc,
       bucket:galBucket(sc),
       sport:galDetectSport(i),
-      modelCat:galDetectModel(i),
+      modelCat:isVideoMode?galDetectVideoModel(i):galDetectModel(i),
       accepted:galIsAccepted(i),
       isSuper:galIsSuper(i),
       isVideo:isVideoMode,
@@ -2602,8 +2654,9 @@ function renderGallery(){
 
   let filtered=scored;
   // Verdict filters: show images whose bucket is in the active set
+  // For videos, "Keepers" = likes+super combined, so super follows galShowLikes
   filtered=filtered.filter(i=>{
-    if(i.verdictBucket==='super')return galShowSuper;
+    if(i.verdictBucket==='super')return isVideoMode?galShowLikes:galShowSuper;
     if(i.verdictBucket==='reject')return galShowRejects;
     return galShowLikes;
   });
@@ -2617,7 +2670,7 @@ function renderGallery(){
   // "Moto" narrows the "Likes N" count to "likes that are also moto".
   // Industry-standard pattern (Amazon-style filter menus).
   const passVerdict=(i)=>{
-    if(i.verdictBucket==='super')return galShowSuper;
+    if(i.verdictBucket==='super')return isVideoMode?galShowLikes:galShowSuper;
     if(i.verdictBucket==='reject')return galShowRejects;
     return galShowLikes;
   };
@@ -2651,15 +2704,24 @@ function renderGallery(){
     else if(el.dataset.md)el.className+=' gal-model-f';
     el.innerHTML=label+' <span style="opacity:.7;font-weight:400">'+count+'</span>';
   };
-  setBtn(document.getElementById('galLikesToggle'),'Likes',verdictCounts.like||0,galShowLikes);
-  setBtn(document.getElementById('galSuperToggle'),'⭐ Super',verdictCounts.super||0,galShowSuper);
-  setBtn(document.getElementById('galRejToggle'),'Rejects',verdictCounts.reject||0,galShowRejects);
+  if(isVideoMode){
+    // Videos: "Keepers" combines like+super counts, "Archived" = rejects
+    const keepersCount=(verdictCounts.like||0)+(verdictCounts.super||0);
+    setBtn(document.getElementById('galLikesToggle'),'Keepers',keepersCount,galShowLikes);
+    setBtn(document.getElementById('galRejToggle'),'Archived',verdictCounts.reject||0,galShowRejects);
+  }else{
+    setBtn(document.getElementById('galLikesToggle'),'Likes',verdictCounts.like||0,galShowLikes);
+    setBtn(document.getElementById('galSuperToggle'),'\u2b50 Super',verdictCounts.super||0,galShowSuper);
+    setBtn(document.getElementById('galRejToggle'),'Rejects',verdictCounts.reject||0,galShowRejects);
+  }
   const sportLabels={motorcycle:'Moto',skiing:'Ski',snowboard:'Snow',snowmobile:'Snowmobile',mtb:'MTB',other:'Other'};
   document.querySelectorAll('.gal-sport-f').forEach(b=>{
     const sp=b.dataset.sp;
     setBtn(b,sportLabels[sp]||sp,sportCounts[sp]||0,galSportSet.has(sp));
   });
-  const modelLabels={gpt:'GPT',flex:'FLUX',nbpro:'NB Pro',nb2:'NB2','other-model':'Other'};
+  const modelLabels=isVideoMode
+    ?{kling:'Kling',seedance:'Seedance',runway:'Runway',veo:'Veo',sora:'Sora',hailuo:'Hailuo','other-vid':'Other'}
+    :{gpt:'GPT',flex:'FLUX',nbpro:'NB Pro',nb2:'NB2','other-model':'Other'};
   document.querySelectorAll('.gal-model-f').forEach(b=>{
     const md=b.dataset.md;
     setBtn(b,modelLabels[md]||md,modelCounts[md]||0,galModelSet.has(md));
