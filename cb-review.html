@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v14.6</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.7</div>
 </div>
 
 <div class="tabs">
@@ -2570,7 +2570,7 @@ async function vidLabRefine(){
     if(!promptMatch)refined=fullText.replace(/^PROMPT:\s*/i,'').trim();
     status.textContent='Done ('+(d.usage?.output_tokens||'?')+' tokens)';
     document.getElementById('vidLabRefinedBox').style.display='block';
-    document.getElementById('vidLabRefinedText').textContent=refined;
+    document.getElementById('vidLabRefinedText').value=refined;
     // Show Director's Note if present
     const noteEl=document.getElementById('vidLabDirectorNote');
     if(noteEl){
@@ -2583,7 +2583,7 @@ async function vidLabRefine(){
   }
 }
 function vidLabApplyRefined(){
-  const refined=document.getElementById('vidLabRefinedText').textContent;
+  const refined=document.getElementById('vidLabRefinedText').value;
   if(!refined)return;
   document.getElementById('vidLabDirection').value=refined;
   document.getElementById('vidLabRefinedBox').style.display='none';
@@ -5685,7 +5685,7 @@ const LAB={
       +'<div id="vidLabRefineStatus" style="font-size:.55rem;color:#888"></div></div>';
     h+='<div id="vidLabRefinedBox" style="display:none;margin-top:.4rem;background:#1a1410;border:1px solid #d97757;border-radius:6px;padding:.5rem">'
       +'<div style="font-size:.55rem;color:#d97757;font-weight:700;margin-bottom:.2rem">CLAUDE\'S REFINED PROMPT:</div>'
-      +'<div id="vidLabRefinedText" style="font-size:.7rem;color:#fff;line-height:1.4;white-space:pre-wrap"></div>'
+      +'<textarea id="vidLabRefinedText" style="width:100%;min-height:80px;font-size:.7rem;color:#fff;line-height:1.4;background:transparent;border:1px solid #333;border-radius:4px;padding:.3rem;resize:vertical;font-family:inherit;box-sizing:border-box"></textarea>'
       +'<div id="vidLabDirectorNote" style="display:none;margin-top:.4rem;padding:.4rem;background:#111;border-radius:5px;border-left:3px solid #f59e0b;font-size:.6rem;color:#ccc;line-height:1.4;font-style:italic"></div>'
       +'<div style="display:flex;gap:.3rem;margin-top:.4rem">'
       +'<button onclick="vidLabApplyRefined()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Use This</button>'
