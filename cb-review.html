@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v14.1</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.2</div>
 </div>
 
 <div class="tabs">
@@ -2015,22 +2015,50 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
   // Resolve requestId from localStorage if not passed (backward compat for resume-on-reload)
   if(!requestId){const j=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');if(j)requestId=j.requestId;}
   let polls=0;
+  const MAX_POLLS=40; // 40 × 15s = 10 minutes max
+  const POLL_SEC=15;
   const st=document.getElementById('vidLabStatus');
+  // Helper: re-enable platform buttons after any terminal state
+  const reenableButtons=()=>{document.querySelectorAll('#vidLabPlatforms button,#vidLabPlatforms select').forEach(b=>{b.disabled=false;b.style.opacity='1';});};
+  // Helper: extract readable error message from fal error (can be string or object)
+  const readableError=(err)=>{
+    if(!err)return 'unknown error';
+    if(typeof err==='string')return err;
+    if(err.message)return err.message;
+    if(err.msg)return err.msg;
+    try{const s=JSON.stringify(err);return s.length>200?s.slice(0,200)+'…':s;}catch(e){return 'unknown error';}
+  };
+  // Helper: detect Seedance content policy in any string
+  const isContentPolicy=(text)=>text&&(text.includes('content_policy_violation')||text.includes('likenesses of real people')||text.includes('content policy')||text.includes('ContentPolicyViolation'));
   const poller=setInterval(async()=>{
     polls++;
     try{
       const s=await proxyCall('fal-get',{url:statusUrl});
       const prog=document.getElementById('vidLabProgress');
       if(!prog){clearInterval(poller);return;}
-      prog.textContent='Status: '+(s.status||'checking')+' — poll #'+polls;
+      // Progress message with time estimate
+      const remaining=Math.max(0,(MAX_POLLS-polls)*POLL_SEC);
+      const remStr=remaining>=60?Math.round(remaining/60)+'m '+remaining%60+'s':remaining+'s';
+      if(s.status!=='COMPLETED'&&s.status!=='FAILED'&&s.status!=='ERROR'){
+        prog.textContent='Generating\u2026 poll #'+polls+' of '+MAX_POLLS+' (~'+remStr+' remaining)';
+      }
       if(s.status==='COMPLETED'){
         clearInterval(poller);
         localStorage.removeItem('cb2_videolab_job');
         prog.innerHTML='<span style="color:#22c55e;font-weight:700">COMPLETED!</span> Fetching video\u2026';
         const res=await proxyCall('fal-get',{url:resultUrl});
         const vidUrl=res?.video?.url||res?.output?.video?.url;
+        // Check for content policy rejection in result body (Seedance completes in 2-3s with this)
+        const resStr=JSON.stringify(res||{});
+        if(isContentPolicy(resStr)){
+          prog.innerHTML='<span style="color:#ef4444;font-weight:700">Content Policy Rejected</span>'
+            +'<div style="font-size:.55rem;color:#888;margin-top:.2rem">Seedance flagged this image (content filter). Try <strong>Kling 3.0 Pro</strong> instead \u2014 it has no face restrictions.</div>';
+          if(requestId)vidJobUpdate(requestId,{status:'FAILED',error:'Content policy rejection'});
+          reenableButtons();
+          return;
+        }
         if(vidUrl){
-          prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done!</span>';
+          prog.innerHTML='<span style="color:#22c55e;font-weight:700">Done! Video ready.</span>';
           const preview=document.createElement('div');
           preview.style.cssText='margin-top:.5rem';
           preview.innerHTML='<video controls playsinline autoplay loop muted style="width:100%;max-height:300px;border-radius:8px;background:#000"><source src="'+vidUrl+'" type="video/mp4"></video>'
@@ -2041,11 +2069,13 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
             +'</div>'
             +'<button onclick="vidLabCreateAgain()" style="margin-top:.4rem;padding:.3rem .7rem;border-radius:6px;border:1px solid #a855f7;background:transparent;color:#a855f7;font-size:.65rem;cursor:pointer;font-weight:600;width:100%">\uD83D\uDD01 Create again (tweak prompt &amp; retry)</button>';
           if(st)st.appendChild(preview);
-          // Re-enable platform buttons so user can create another
-          document.querySelectorAll('#vidLabPlatforms button,#vidLabPlatforms select').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+          reenableButtons();
           showToast('Video ready! '+platformName+' completed');
         }else{
-          prog.innerHTML='<span style="color:#f59e0b">Completed but no video URL found.</span>';
+          // COMPLETED but genuinely no video \u2014 generation failed silently
+          prog.innerHTML='<span style="color:#ef4444;font-weight:700">Generation failed</span>'
+            +'<div style="font-size:.55rem;color:#888;margin-top:.2rem">Job completed but no video was returned. This sometimes happens with overloaded queues. Try again or switch platforms.</div>';
+          reenableButtons();
         }
         if(requestId)vidJobUpdate(requestId,{status:'COMPLETED',videoUrl:vidUrl||''});
         // Auto-archive to catbox.moe for permanent hosting (fal URLs expire)
@@ -2054,7 +2084,6 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
             const permUrl=await vidUploadCatbox(vidUrl);
             if(permUrl&&requestId){
               vidJobUpdate(requestId,{videoUrl:permUrl,permanentUrl:permUrl});
-              // Update the download link in the preview if still visible
               const dlLinks=st?.querySelectorAll('a[download]');
               if(dlLinks)dlLinks.forEach(a=>{a.href=permUrl;});
               console.log('[video-archive] permanent URL:',permUrl);
@@ -2064,22 +2093,42 @@ function vidLabResumePoll(statusUrl,resultUrl,platformName,requestId){
       }else if(s.status==='FAILED'||s.status==='ERROR'){
         clearInterval(poller);
         localStorage.removeItem('cb2_videolab_job');
-        prog.innerHTML='<span style="color:#ef4444;font-weight:700">FAILED</span> \u2014 '+(s.error||'unknown error');
-        if(requestId)vidJobUpdate(requestId,{status:'FAILED'});
+        const errText=readableError(s.error||s.detail);
+        // Check for content policy in the error
+        if(isContentPolicy(errText)){
+          prog.innerHTML='<span style="color:#ef4444;font-weight:700">Content Policy Rejected</span>'
+            +'<div style="font-size:.55rem;color:#888;margin-top:.2rem">Seedance flagged this image (content filter). Try <strong>Kling 3.0 Pro</strong> instead \u2014 it has no face restrictions.</div>';
+          if(requestId)vidJobUpdate(requestId,{status:'FAILED',error:'Content policy rejection'});
+        }else{
+          prog.innerHTML='<span style="color:#ef4444;font-weight:700">FAILED</span> \u2014 '+errText;
+          if(requestId)vidJobUpdate(requestId,{status:'FAILED',error:errText});
+        }
+        reenableButtons();
+      }
+      // Max poll safety \u2014 give up after 10 minutes
+      if(polls>=MAX_POLLS){
+        clearInterval(poller);
+        localStorage.removeItem('cb2_videolab_job');
+        const prog2=document.getElementById('vidLabProgress');
+        if(prog2)prog2.innerHTML='<span style="color:#f59e0b;font-weight:700">Timed out</span>'
+          +'<div style="font-size:.55rem;color:#888;margin-top:.2rem">Still generating after '+Math.round(MAX_POLLS*POLL_SEC/60)+' minutes. Check Job History \u2014 it may finish later. Use \u201CRefresh All\u201D to check.</div>';
+        if(requestId)vidJobUpdate(requestId,{status:'TIMEOUT'});
+        reenableButtons();
       }
     }catch(e){
       const prog=document.getElementById('vidLabProgress');
-      const errMsg=e?.message||JSON.stringify(e)||'unknown';
-      // Detect Seedance content policy rejection — don't retry, it won't resolve
-      if(errMsg.includes('content_policy_violation')||errMsg.includes('likenesses of real people')){
+      const errMsg=e?.message||'unknown error';
+      // Detect Seedance content policy rejection in proxy error \u2014 don\u2019t retry
+      if(isContentPolicy(errMsg)){
         clearInterval(poller);
         localStorage.removeItem('cb2_videolab_job');
-        if(prog)prog.innerHTML='<span style="color:#ef4444;font-weight:700">Content Policy Rejected</span><div style="font-size:.55rem;color:#888;margin-top:.2rem">Seedance flagged this image as containing a real person\'s likeness. Try <strong>Kling 3.0 Pro</strong> instead \u2014 it has no face restrictions.</div>';
-        if(requestId)vidJobUpdate(requestId,{status:'FAILED',error:'Content policy: real person likeness'});
-        document.querySelectorAll('#vidLabPlatforms button,#vidLabPlatforms select').forEach(b=>{b.disabled=false;b.style.opacity='1';});
+        if(prog)prog.innerHTML='<span style="color:#ef4444;font-weight:700">Content Policy Rejected</span>'
+          +'<div style="font-size:.55rem;color:#888;margin-top:.2rem">Seedance flagged this image (content filter). Try <strong>Kling 3.0 Pro</strong> instead \u2014 it has no face restrictions.</div>';
+        if(requestId)vidJobUpdate(requestId,{status:'FAILED',error:'Content policy rejection'});
+        reenableButtons();
         return;
       }
-      if(prog)prog.textContent='Poll error (will retry): '+errMsg.slice(0,120);
+      if(prog)prog.textContent='Poll error (will retry): '+errMsg.slice(0,120)+' \u2014 poll #'+polls+'/'+MAX_POLLS;
     }
   },15000);
 }
