@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v14.4</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.5</div>
 </div>
 
 <div class="tabs">
@@ -2277,33 +2277,74 @@ async function vidJobRefreshAll(){
     }catch(e){/* skip failures, user can retry */}
   }
 }
-// vidLabUpdateOptions — adjusts duration choices, shows/hides end-image field,
-// and updates cost estimate when the platform or duration changes.
+// Platform specs — single source of truth for the entire Video Lab.
+// Derived from fal.ai API docs 2026-04-12.
+const VID_PLATFORMS={
+  kling:{name:'Kling 3.0 Pro',durations:[3,4,5,6,7,8,9,10,11,12,13,14,15],defaultDur:5,
+    aspects:null, // inferred from input image — hide dropdown
+    audio:true,endFrame:true,costPerSec:0.15,
+    endpoint:'fal-ai/kling-video/v3/pro/image-to-video',audioHint:'Chinese + English voice'},
+  seedance:{name:'Seedance 2.0',durations:[4,5,6,7,8,9,10,11,12,13,14,15],defaultDur:5,
+    aspects:['9:16','16:9','1:1','4:3','3:4','21:9'],
+    audio:true,endFrame:true,costPerSec:0.3024,
+    endpoint:'bytedance/seedance-2.0/image-to-video',audioHint:'ambient/environmental'},
+  'seedance-fast':{name:'Seedance Fast',durations:[4,5,6,7,8,9,10,11,12,13,14,15],defaultDur:5,
+    aspects:['9:16','16:9','1:1','4:3','3:4','21:9'],
+    audio:true,endFrame:true,costPerSec:0.2419,
+    endpoint:'bytedance/seedance-2.0/fast/image-to-video',audioHint:'ambient/environmental'},
+  'veo-lite':{name:'Veo 3.1 Lite',durations:[4,6,8],defaultDur:8,
+    aspects:['16:9','9:16'],
+    audio:true,endFrame:false,costPerSec:0.05,
+    endpoint:'fal-ai/veo3.1/lite/image-to-video',audioHint:''},
+  sora:{name:'Sora 2 Pro',durations:[4,8,12,16,20],defaultDur:4,
+    aspects:['9:16','16:9'],
+    audio:false,endFrame:false,costPerSec:0.33,
+    endpoint:'fal-ai/sora-2/image-to-video/pro',audioHint:''},
+  runway:{name:'Runway Gen-4T',durations:[5,10],defaultDur:10,
+    aspects:['9:16','16:9','1:1'],
+    audio:false,endFrame:false,costPerSec:0.05,
+    endpoint:null,audioHint:''},
+};
+const VID_ASPECT_LABELS={'9:16':'9:16 Reels','16:9':'16:9 Landscape','1:1':'1:1 Square','4:3':'4:3 Standard','3:4':'3:4 Portrait','21:9':'21:9 Ultrawide'};
+// vidLabUpdateOptions — rebuilds duration, aspect ratio, audio toggle, end-frame,
+// and cost estimate when the platform or duration changes.
 function vidLabUpdateOptions(){
   const plat=document.getElementById('vidLabPlatformSelect')?.value||'kling';
+  const cfg=VID_PLATFORMS[plat]||VID_PLATFORMS.kling;
   const durSel=document.getElementById('vidLabDuration');
+  const aspSel=document.getElementById('vidLabAspect');
+  const aspRow=aspSel?.parentElement;
   const endRow=document.getElementById('vidLabEndImageRow');
+  const endHint=document.getElementById('vidLabEndImageHint');
+  const audioRow=document.getElementById('vidLabAudioRow');
+  const audioHint=document.getElementById('vidLabAudioHint');
   const costEl=document.getElementById('vidLabCostEstimate');
-  // Duration options per platform
-  const durOpts={
-    seedance:[4,5,6,7,8,9,10,11,12,13,14,15],
-    'seedance-fast':[4,5,6,7,8,9,10,11,12,13,14,15],
-    kling:[5,10],
-    'veo-lite':[5,6,7,8],
-    sora:[5,10,15,20],
-    runway:[5,10],
-  }[plat]||[5,10];
-  const defaults={seedance:5,'seedance-fast':5,kling:10,'veo-lite':8,sora:10,runway:10};
-  const prevDur=parseInt(durSel?.value)||10;
+  // Duration dropdown
+  const prevDur=parseInt(durSel?.value)||cfg.defaultDur;
   if(durSel){
-    durSel.innerHTML=durOpts.map(d=>'<option value="'+d+'"'+(d===(durOpts.includes(prevDur)?prevDur:defaults[plat])?' selected':'')+'>'+d+'s</option>').join('');
+    durSel.innerHTML=cfg.durations.map(d=>'<option value="'+d+'"'+(d===(cfg.durations.includes(prevDur)?prevDur:cfg.defaultDur)?' selected':'')+'>'+d+'s</option>').join('');
   }
-  // End image (Seedance only)
-  if(endRow)endRow.style.display=(plat==='seedance'||plat==='seedance-fast')?'block':'none';
+  // Aspect ratio dropdown — hide if platform infers from input image
+  if(aspRow){
+    if(!cfg.aspects){
+      aspRow.style.display='none';
+    }else{
+      aspRow.style.display='';
+      const prevAsp=aspSel?.value||'9:16';
+      aspSel.innerHTML=cfg.aspects.map(a=>'<option value="'+a+'"'+(a===(cfg.aspects.includes(prevAsp)?prevAsp:cfg.aspects[0])?' selected':'')+'>'+(VID_ASPECT_LABELS[a]||a)+'</option>').join('');
+    }
+  }
+  // Audio toggle
+  if(audioRow){
+    audioRow.style.display=cfg.audio?'block':'none';
+    if(audioHint)audioHint.textContent=cfg.audioHint?' ('+cfg.audioHint+')':'';
+  }
+  // End frame
+  if(endRow)endRow.style.display=cfg.endFrame?'block':'none';
+  if(endHint)endHint.textContent=cfg.endFrame?'('+cfg.name+')':'';
   // Cost estimate
-  const dur=parseInt(durSel?.value)||defaults[plat]||10;
-  const costPerSec={seedance:0.3024,'seedance-fast':0.2419,kling:0.15,'veo-lite':0.05,sora:0.33,runway:0.05};
-  const est=(costPerSec[plat]||0.15)*dur;
+  const dur=parseInt(durSel?.value)||cfg.defaultDur;
+  const est=cfg.costPerSec*dur;
   if(costEl)costEl.textContent='Cost: ~$'+est.toFixed(2)+' for '+dur+'s';
 }
 // Video Lab — re-enabled 2026-04-09 using Worker fal-submit + fal-get targets.
@@ -2315,44 +2356,45 @@ async function vidLabGenerate(platform){
   const dir=(document.getElementById('vidLabDirection')?.value||'').trim();
   const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
   const prompt=dir?dir+'. '+basePrompt:basePrompt;
-  // Read user-selected duration + aspect ratio from the form controls
-  const userDur=document.getElementById('vidLabDuration')?.value||'10';
+  // Read form controls
+  const cfg=VID_PLATFORMS[platform]||VID_PLATFORMS.kling;
+  const userDur=document.getElementById('vidLabDuration')?.value||String(cfg.defaultDur);
   const userAspect=document.getElementById('vidLabAspect')?.value||'9:16';
   const endImageUrl=(document.getElementById('vidLabEndImage')?.value||'').trim();
-  // Build platform-specific request bodies using the form values.
-  // Seedance supports end_image_url for start→end frame transitions.
-  const seedanceBody={image_url:src.url,prompt,duration:userDur,resolution:'720p',aspect_ratio:userAspect,generate_audio:true};
-  if(endImageUrl&&(platform==='seedance'||platform==='seedance-fast'))seedanceBody.end_image_url=endImageUrl;
-  const info={
-    seedance:{name:'Seedance 2.0',endpoint:'bytedance/seedance-2.0/image-to-video',body:seedanceBody},
-    'seedance-fast':{name:'Seedance 2.0 Fast',endpoint:'bytedance/seedance-2.0/fast/image-to-video',body:{...seedanceBody}},
-    kling:{name:'Kling 3.0 Pro',endpoint:'fal-ai/kling-video/v3/pro/image-to-video',
-      body:{image_url:src.url,prompt,duration:userDur,aspect_ratio:userAspect}},
-    'veo-lite':{name:'Veo 3.1 Lite',endpoint:'fal-ai/veo3.1/lite/image-to-video',
-      body:{image_url:src.url,prompt,duration:userDur+'s',aspect_ratio:userAspect}},
-    sora:{name:'Sora 2 Pro',endpoint:'fal-ai/sora-2/image-to-video/pro',
-      body:{image_url:src.url,prompt,duration:parseInt(userDur),aspect_ratio:userAspect}},
-    runway:{name:'Runway Gen-4T',endpoint:null,body:null}
-  };
-  const p=info[platform]||info.kling;
-  // Dynamic cost estimate from the form
-  const costPerSec={seedance:0.3024,'seedance-fast':0.2419,kling:0.15,'veo-lite':0.05,sora:0.33,runway:0.05};
-  const estCost=((costPerSec[platform]||0.15)*parseInt(userDur)).toFixed(2);
-  // Confirmation modal — videos are expensive, prevent accidental clicks
-  if(!confirm('Create a '+userDur+'s video with '+p.name+'?\n\nEstimated cost: ~$'+estCost+'\nAspect: '+userAspect+(endImageUrl?' (with end frame)':'')+'\n\nThis will animate your selected still into a marketing video.'))return;
-  if(!p.endpoint){
+  const audioOn=document.getElementById('vidLabAudio')?.checked!==false;
+  // Build platform-specific request body using VID_PLATFORMS config
+  const body={image_url:src.url,prompt};
+  // Duration format differs per platform
+  if(platform==='veo-lite')body.duration=userDur+'s'; // Veo wants "8s" not "8"
+  else if(platform==='sora')body.duration=parseInt(userDur); // Sora wants integer
+  else body.duration=userDur; // Seedance/Kling want string "5"
+  // Aspect ratio (skip for Kling — inferred from input image)
+  if(cfg.aspects)body.aspect_ratio=userAspect;
+  // Audio generation
+  if(cfg.audio)body.generate_audio=audioOn;
+  // Seedance-specific: resolution + end frame
+  if(platform==='seedance'||platform==='seedance-fast'){
+    body.resolution='720p';
+    if(endImageUrl)body.end_image_url=endImageUrl;
+  }
+  // Kling-specific: end frame
+  if(platform==='kling'&&endImageUrl)body.end_image_url=endImageUrl;
+  const estCost=(cfg.costPerSec*parseInt(userDur)).toFixed(2);
+  // Confirmation modal
+  if(!confirm('Create a '+userDur+'s video with '+cfg.name+'?\n\nEstimated cost: ~$'+estCost+'\nAspect: '+(cfg.aspects?userAspect:'from input image')+(endImageUrl&&cfg.endFrame?' (with end frame)':'')+(cfg.audio&&audioOn?' + audio':'')+'\n\nThis will animate your selected still into a marketing video.'))return;
+  if(!cfg.endpoint){
     document.getElementById('vidLabStatus').innerHTML='<div style="color:#f59e0b;font-size:.65rem;margin-top:.3rem">Runway requires direct API \u2014 tell Claude Code: <strong>"animate '+src.label+' with Runway Gen-4 Turbo"</strong></div>';
     return;
   }
   document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=true;b.style.opacity='.4';});
   const st=document.getElementById('vidLabStatus');
   if(st)st.innerHTML='<div style="background:#1a1030;border:2px solid #a855f7;border-radius:8px;padding:.6rem;text-align:center">'
-    +'<div style="font-size:.8rem;color:#a855f7;font-weight:700">Submitting to '+p.name+'\u2026</div>'
+    +'<div style="font-size:.8rem;color:#a855f7;font-weight:700">Submitting to '+cfg.name+'\u2026</div>'
     +'<div style="font-size:.6rem;color:#888;margin-top:.2rem">~$'+estCost+' estimated</div></div>';
 
   try{
     // Submit via Worker fal-submit (returns immediately with request_id + URLs)
-    const d=await proxyCall('fal-submit',{endpoint:p.endpoint,input:p.body});
+    const d=await proxyCall('fal-submit',{endpoint:cfg.endpoint,input:body});
     if(!d.request_id){
       if(st)st.innerHTML='<div style="color:#ef4444">Error: '+JSON.stringify(d).slice(0,200)+'</div>';
       document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
@@ -2364,18 +2406,18 @@ async function vidLabGenerate(platform){
     // bytedance/seedance-2.0/image-to-video → bytedance/seedance-2.0
     // bytedance/seedance-2.0/fast/image-to-video → bytedance/seedance-2.0
     // fal-ai/kling-video/v3/pro/image-to-video → fal-ai/kling-video/v3/pro
-    const base=p.endpoint.replace(/\/(fast\/)?image-to-video.*$/,'');
+    const base=cfg.endpoint.replace(/\/(fast\/)?image-to-video.*$/,'');
     const statusUrl='https://queue.fal.run/'+base+'/requests/'+rid+'/status';
     const resultUrl='https://queue.fal.run/'+base+'/requests/'+rid;
     // Save job state so it survives page reloads
-    localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,estCost:estCost,submitted:new Date().toISOString()}));
+    localStorage.setItem('cb2_videolab_job',JSON.stringify({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:cfg.name,estCost:estCost,submitted:new Date().toISOString()}));
     // Log to Job History so it's never lost
-    vidJobLog({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:p.name,label:src.label,model:src.model,sourceUrl:src.url,prompt:prompt,status:'IN_QUEUE',submitted:new Date().toISOString()});
+    vidJobLog({requestId:rid,statusUrl:statusUrl,resultUrl:resultUrl,platform:cfg.name,label:src.label,model:src.model,sourceUrl:src.url,prompt:prompt,status:'IN_QUEUE',submitted:new Date().toISOString()});
     if(st)st.innerHTML='<div style="background:#0a2010;border:2px solid #22c55e;border-radius:8px;padding:.6rem;text-align:center">'
       +'<div style="font-size:.8rem;color:#22c55e;font-weight:700;margin-bottom:.2rem">Job Submitted!</div>'
       +'<div id="vidLabProgress" style="font-size:.65rem;color:#ccc">Status: IN_QUEUE \u2014 checking every 15s\u2026</div>'
       +'<div style="font-size:.5rem;color:#666;margin-top:.3rem">Request: '+rid.slice(0,18)+'\u2026</div></div>';
-    vidLabResumePoll(statusUrl,resultUrl,p.name,rid);
+    vidLabResumePoll(statusUrl,resultUrl,cfg.name,rid);
   }catch(e){
     if(st)st.innerHTML='<div style="color:#ef4444">Error: '+(e.message||'unknown').slice(0,200)+'</div>';
     document.querySelectorAll('#vidLabPlatforms button').forEach(b=>{b.disabled=false;b.style.opacity='1';});
@@ -5552,7 +5594,7 @@ const LAB={
       +'<select id="vidLabPlatformSelect" onchange="vidLabUpdateOptions()" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
       +'<option value="kling" selected>Kling 3.0 Pro \u2B50</option><option value="seedance">Seedance 2.0</option><option value="seedance-fast">Seedance Fast</option><option value="veo-lite">Veo 3.1 Lite</option><option value="sora">Sora 2 Pro</option><option value="runway">Runway Gen-4T</option></select></div>'
       +'<div style="min-width:90px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Duration</div>'
-      +'<select id="vidLabDuration" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
+      +'<select id="vidLabDuration" onchange="vidLabUpdateOptions()" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
       +'<option value="5">5s</option><option value="8">8s</option><option value="10" selected>10s</option><option value="15">15s</option></select></div>'
       +'<div style="min-width:100px"><div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">Aspect Ratio</div>'
       +'<select id="vidLabAspect" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;cursor:pointer">'
@@ -5570,9 +5612,16 @@ const LAB={
       +'<div style="display:flex;gap:.3rem;margin-top:.4rem">'
       +'<button onclick="vidLabApplyRefined()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #22c55e;background:transparent;color:#22c55e;font-size:.6rem;cursor:pointer;font-weight:600">Use This</button>'
       +'<button onclick="vidLabRefine()" style="padding:.25rem .6rem;border-radius:5px;border:1px solid #666;background:transparent;color:#ccc;font-size:.6rem;cursor:pointer">Try Again</button></div></div>';
-    // End image (Seedance only)
+    // Audio toggle (platforms with native audio generation)
+    h+='<div id="vidLabAudioRow" style="display:none;margin:.3rem 0">'
+      +'<label style="display:flex;align-items:center;gap:.3rem;cursor:pointer">'
+      +'<input type="checkbox" id="vidLabAudio" checked style="accent-color:#06b6d4">'
+      +'<span style="font-size:.55rem;color:#06b6d4;font-weight:600">Generate audio</span>'
+      +'<span id="vidLabAudioHint" style="font-size:.5rem;color:#666"></span>'
+      +'</label></div>';
+    // End image (platforms that support end-frame)
     h+='<div id="vidLabEndImageRow" style="display:none;margin:.3rem 0">'
-      +'<div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">End Frame <span style="color:#888;font-weight:400">(Seedance only)</span></div>'
+      +'<div style="font-size:.55rem;color:#06b6d4;font-weight:600;margin-bottom:.2rem">End Frame <span id="vidLabEndImageHint" style="color:#888;font-weight:400"></span></div>'
       +'<input id="vidLabEndImage" type="text" placeholder="Paste end frame URL\u2026" style="width:100%;padding:.35rem .4rem;border-radius:6px;border:1px solid #333;background:#111;color:#fff;font-size:.65rem;box-sizing:border-box"></div>';
     // Cost + Generate
     h+='<div style="display:flex;gap:.3rem;align-items:center;margin-top:.3rem" id="vidLabPlatforms">'
