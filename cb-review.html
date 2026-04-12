@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v14.7</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.8</div>
 </div>
 
 <div class="tabs">
@@ -2356,6 +2356,9 @@ async function vidLabGenerate(platform){
   const dir=(document.getElementById('vidLabDirection')?.value||'').trim();
   const basePrompt='Cinematic video of action sports athlete, smooth camera movement, photorealistic, the wearable remote on forearm stays perfectly stable and consistent';
   const prompt=dir?dir+'. '+basePrompt:basePrompt;
+  // Persist direction + platform so they survive re-renders and tab switches
+  if(dir)localStorage.setItem('cb2_videolab_direction',dir);
+  localStorage.setItem('cb2_videolab_platform',platform);
   // Read form controls
   const cfg=VID_PLATFORMS[platform]||VID_PLATFORMS.kling;
   const userDur=document.getElementById('vidLabDuration')?.value||String(cfg.defaultDur);
@@ -2586,6 +2589,7 @@ function vidLabApplyRefined(){
   const refined=document.getElementById('vidLabRefinedText').value;
   if(!refined)return;
   document.getElementById('vidLabDirection').value=refined;
+  localStorage.setItem('cb2_videolab_direction',refined);
   document.getElementById('vidLabRefinedBox').style.display='none';
   document.getElementById('vidLabRefineStatus').textContent='Applied ✓';
   showToast('Refined prompt applied');
@@ -5715,12 +5719,19 @@ const LAB={
       +'<div id="vidJobList" style="font-size:.6rem"></div></div>';
     // After DOM renders, init platform options and job history
     setTimeout(()=>{
+      // Restore persisted platform selection
+      const savedPlat=localStorage.getItem('cb2_videolab_platform');
+      const platSel=document.getElementById('vidLabPlatformSelect');
+      if(savedPlat&&platSel){
+        const opts=[...platSel.options].map(o=>o.value);
+        if(opts.includes(savedPlat))platSel.value=savedPlat;
+      }
       if(typeof vidLabUpdateOptions==='function')vidLabUpdateOptions();
       if(typeof vidJobRender==='function')vidJobRender();
-      // Restore refine target
-      const rt=localStorage.getItem('cb2_videolab_refine_target');
-      const sel=document.getElementById('vidLabRefineTarget');
-      if(rt&&sel)sel.value=rt;
+      // Restore persisted direction (survives re-renders and tab switches)
+      const savedDir=localStorage.getItem('cb2_videolab_direction');
+      const dirField=document.getElementById('vidLabDirection');
+      if(savedDir&&dirField&&!dirField.value)dirField.value=savedDir;
       // Check for active video job and resume polling
       try{
         const job=JSON.parse(localStorage.getItem('cb2_videolab_job')||'null');
