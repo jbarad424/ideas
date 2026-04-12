@@ -240,7 +240,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v13.5a</div>
+  <div class="sub" style="color:#555;font-size:.75em">v13.6</div>
 </div>
 
 <div class="tabs">
@@ -2847,7 +2847,21 @@ function galBringToLab(id){
   const ov=document.querySelector('.gal-overlay');if(ov)ov.remove();
   const sport=galDetectSport(img);
   const score=galScore(img.id);
-  const src={id:img.id,url:img.url,label:img.label,model:img.model,prompt:img.prompt||'',score,sport};
+  // Look up full prompt from CR.keepers (has real generation prompts) instead of ALL_IMAGES (has short metadata)
+  let prompt=img.prompt||'';
+  if(CR.keepers&&CR.keepers.items){
+    // Search by URL match (keepers are keyed by URL)
+    const keeper=CR.keepers.items[img.url];
+    if(keeper&&keeper.prompt&&keeper.prompt.length>prompt.length)prompt=keeper.prompt;
+    // Also search by ID match across all keepers
+    if(prompt.length<200){
+      for(const url in CR.keepers.items){
+        const k=CR.keepers.items[url];
+        if(k.id===img.id&&k.prompt&&k.prompt.length>prompt.length){prompt=k.prompt;break;}
+      }
+    }
+  }
+  const src={id:img.id,url:img.url,label:img.label,model:img.model,prompt,score,sport};
   // Set LAB state directly (not just localStorage) so init() uses the new source
   LAB.source=src;
   LAB.mode=null;
