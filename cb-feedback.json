@@ -1,12 +1,12 @@
 {
   "type": "feedback_sync",
-  "syncedAt": "2026-04-11T21:24:28.486Z",
+  "syncedAt": "2026-04-12T10:13:47.188Z",
   "images": [
     {
       "id": "refab-p2-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f2/xAzOnN_QM6ymIJoWkYQt-_wiSN9Mru.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0517_Patriot_Product_B, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: P2 Patriot product · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0517_Patriot_Product_B (Patriot, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -26,7 +26,7 @@
       "id": "refab-p2-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f2/oTpMucm4BzS4A4fRPgVdq_cztsmWdr.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0517_Patriot_Product_B, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: P2 Patriot product · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0517_Patriot_Product_B (Patriot, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -46,7 +46,7 @@
       "id": "refab-p2-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f2/czWkQzNqMtuOisK01mQ2-_0JtJZXSE.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0517_Patriot_Product_B, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: P2 Patriot product · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0517_Patriot_Product_B (Patriot, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -66,7 +66,7 @@
       "id": "refab-p2-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f2/C0znJV9S4-WjRit92lUGv_uc171ql6.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0517_Patriot_Product_B, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: P2 Patriot product · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0517_Patriot_Product_B (Patriot, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -86,7 +86,7 @@
       "id": "refab-p1-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f2/wKGsFwf_aMpwSlj0XVens_2clAYdK0.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0513_Patriot_Product_A, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: P1 Patriot product · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0513_Patriot_Product_A (Patriot, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -106,7 +106,7 @@
       "id": "refab-p1-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f2/CGRf1RJDYcGsvXryv7wCv_Y4hvJVcQ.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0513_Patriot_Product_A, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: P1 Patriot product · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0513_Patriot_Product_A (Patriot, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -126,7 +126,7 @@
       "id": "refab-p3-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f4/isJ6FLTCKtnRzPZzq78_8_9jUnB8Me.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0546_Patriot_Jacket_A, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: P3 Patriot jacket · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0546_Patriot_Jacket_A (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -146,7 +146,7 @@
       "id": "refab-p1-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f2/1bmrj8zniJ4_RIra38rxT_pYKHnJrJ.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0513_Patriot_Product_A, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: P1 Patriot product · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0513_Patriot_Product_A (Patriot, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -166,7 +166,7 @@
       "id": "refab-p4-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f5/78nWRqP7HYoZifDHXK7ZS_kDZBIc1U.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0550_Patriot_Jacket_B, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: P4 Patriot jacket · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0550_Patriot_Jacket_B (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -186,7 +186,7 @@
       "id": "refab-p3-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f4/4L0xFYTMS5ZuewXSysU8n_iq9ReIKg.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0546_Patriot_Jacket_A, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: P3 Patriot jacket · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0546_Patriot_Jacket_A (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -199,6 +199,11 @@
           "num": 2,
           "text": "[super] migrated from hot-or-not",
           "time": "2026-04-10T00:33:22.046Z"
+        },
+        {
+          "num": 3,
+          "text": "Final score: 100",
+          "time": "2026-04-11T17:32:26.939Z"
         }
       ]
     },
@@ -206,7 +211,7 @@
       "id": "refab-p3-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f5/QaHoxfEH-GjXitTCgWAg8_Pt4dlPPh.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0546_Patriot_Jacket_A, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: P3 Patriot jacket · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0546_Patriot_Jacket_A (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -226,7 +231,7 @@
       "id": "refab-p4-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f7/p4geIDyZXEHvnpevYIhFX_jVz8YaNF.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0550_Patriot_Jacket_B, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: P4 Patriot jacket · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0550_Patriot_Jacket_B (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -246,7 +251,7 @@
       "id": "refab-p3-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f4/VQWXmuV9L6VGeJXNVov4I_c1bhU70d.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0546_Patriot_Jacket_A, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: P3 Patriot jacket · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0546_Patriot_Jacket_A (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -266,7 +271,7 @@
       "id": "refab-p5-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f7/xFOGzKXotOIIW9z_oS9rW_z8juCK2S.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0556_Patriot_Jacket_C, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: P5 Patriot jacket · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0556_Patriot_Jacket_C (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -286,7 +291,7 @@
       "id": "refab-p5-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f8/yr7C7_vjOg8rq8OP2WcGj_MUWxbb0W.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0556_Patriot_Jacket_C, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: P5 Patriot jacket · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0556_Patriot_Jacket_C (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -306,7 +311,7 @@
       "id": "refab-p5-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f8/w6TXW-KK9Mt00Qjeektoi_Ipcyc70l.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0556_Patriot_Jacket_C, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: P5 Patriot jacket · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0556_Patriot_Jacket_C (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -326,7 +331,7 @@
       "id": "refab-p5-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f9/AhMxHFcmpBymD7NLeTVwg_6W8oYsfb.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0556_Patriot_Jacket_C, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: P5 Patriot jacket · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0556_Patriot_Jacket_C (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -346,7 +351,7 @@
       "id": "refab-p4-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a9573f6/XvLYrqaepryNHR7UyiK6v_2XeigQQc.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0550_Patriot_Jacket_B, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: P4 Patriot jacket · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0550_Patriot_Jacket_B (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -366,7 +371,7 @@
       "id": "refab-p6-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a9573fa/6dpv6zjrFcUsiLrDh7VNS_xBewMhCQ.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0560_Patriot_Jacket_D, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: P6 Patriot jacket · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0560_Patriot_Jacket_D (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -386,7 +391,7 @@
       "id": "refab-p6-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f9/VF6KJE_edWXV0Cr-y7h5O_KYmFvDzv.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0560_Patriot_Jacket_D, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: P6 Patriot jacket · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0560_Patriot_Jacket_D (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -406,7 +411,7 @@
       "id": "refab-p4-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f6/W2ArXQ6cYl-KKrI4U4AgP_AXxWxAFJ.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0550_Patriot_Jacket_B, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: P4 Patriot jacket · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0550_Patriot_Jacket_B (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -426,7 +431,7 @@
       "id": "refab-h1-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a9573fb/LxvGmkshCQ_kjGIijZkFM_LvegCBWs.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0525_Hunter_Product_A, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: H1 Hunter product · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0525_Hunter_Product_A (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -446,7 +451,7 @@
       "id": "refab-h1-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a9573fc/XHbiYnvcdrtM9BeSYjmTI_kUVZYEuy.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0525_Hunter_Product_A, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: H1 Hunter product · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0525_Hunter_Product_A (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -466,7 +471,7 @@
       "id": "refab-p6-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a9573fa/mgNsGMN7BouEWYTrj3zho_UZvhCTh9.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0560_Patriot_Jacket_D, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: P6 Patriot jacket · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0560_Patriot_Jacket_D (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -486,7 +491,7 @@
       "id": "refab-h1-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a9573fc/RiD4jixIRiAaSGAV9jTxV_3taz9PGh.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0525_Hunter_Product_A, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: H1 Hunter product · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0525_Hunter_Product_A (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -506,7 +511,7 @@
       "id": "refab-h2-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a9573fe/C3WFbfgOeYUZbIQHRHXFK_8kcFcjk5.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0529_Hunter_Product_B, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: H2 Hunter product · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0529_Hunter_Product_B (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -526,7 +531,7 @@
       "id": "refab-h2-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a9573fd/fIS1-X5SNMJOlKWhCqRKP_8UGokYwM.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0529_Hunter_Product_B, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: H2 Hunter product · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0529_Hunter_Product_B (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -546,7 +551,7 @@
       "id": "refab-h2-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a957400/rePA9BGc0_TQnRM1ZHfO6_L6XVgEYa.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0529_Hunter_Product_B, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: H2 Hunter product · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0529_Hunter_Product_B (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -566,7 +571,7 @@
       "id": "refab-h2-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a9573ff/Y4ny1OrtzbUkEX18Tr9ad_Yproi4In.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0529_Hunter_Product_B, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: H2 Hunter product · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0529_Hunter_Product_B (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -586,7 +591,7 @@
       "id": "refab-h3-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a957401/EsndciIT4xagNCzL7B1Pa_9GemUTwu.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0534_Hunter_Jacket_A, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: H3 Hunter jacket · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0534_Hunter_Jacket_A (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -606,7 +611,7 @@
       "id": "refab-h3-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a957400/U2I6hKwMIU7zy2uvJigwy_PkvgyKo6.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0534_Hunter_Jacket_A, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: H3 Hunter jacket · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0534_Hunter_Jacket_A (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -626,7 +631,7 @@
       "id": "refab-h3-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a957402/ee9oq6NdlT3siOrMjf7vv_kZivoM2a.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0534_Hunter_Jacket_A, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: H3 Hunter jacket · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0534_Hunter_Jacket_A (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -646,7 +651,7 @@
       "id": "refab-h4-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a957403/DscidYXiMleLBz0JjmijX_0De0uHkf.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0541_Hunter_Jacket_B, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: H4 Hunter jacket · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0541_Hunter_Jacket_B (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -666,7 +671,7 @@
       "id": "refab-h4-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a957403/SP12SlfsMtttlcMgbL3oH_zmbQhfdG.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0541_Hunter_Jacket_B, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: H4 Hunter jacket · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0541_Hunter_Jacket_B (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -686,7 +691,7 @@
       "id": "refab-p6-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a9573fa/4Na0wIbIKEGNuRk45grFQ_Y1TrFAWq.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0560_Patriot_Jacket_D, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: P6 Patriot jacket · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0560_Patriot_Jacket_D (Patriot, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -706,7 +711,7 @@
       "id": "refab-h4-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a957404/6CrjxgLqcpjsSnujCXlkD_FbnhNQe1.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0541_Hunter_Jacket_B, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: H4 Hunter jacket · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0541_Hunter_Jacket_B (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -726,7 +731,7 @@
       "id": "refab-h4-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a957403/4woCBPBBfQocWqj5LK2UY_e11rXw1h.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0541_Hunter_Jacket_B, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: H4 Hunter jacket · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0541_Hunter_Jacket_B (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -746,7 +751,7 @@
       "id": "refab-h3-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a957400/nL1b0vNXn5RMr7m4aTrUJ_38erGEjW.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0534_Hunter_Jacket_A, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: H3 Hunter jacket · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0534_Hunter_Jacket_A (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -766,7 +771,7 @@
       "id": "refab-h5-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a957406/MdqzQtR9Thv9BCz95AwxT_pOK916tL.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0542_Hunter_Jacket_C, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: H5 Hunter jacket · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0542_Hunter_Jacket_C (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -786,7 +791,7 @@
       "id": "refab-h5-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a957406/C3FZpemLdphawiQ11y55A_Xndtiid3.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0542_Hunter_Jacket_C, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: H5 Hunter jacket · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0542_Hunter_Jacket_C (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -806,7 +811,7 @@
       "id": "refab-h5-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a957407/0HUC2gnO1n1ETfA5PgVE1_LoaZe7Ip.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0542_Hunter_Jacket_C, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: H5 Hunter jacket · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0542_Hunter_Jacket_C (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -826,7 +831,7 @@
       "id": "refab-h6-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a957409/FYEOA_VgFtbLne_00nGgd_FGDGTjYu.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0566_Hunter_Product_C, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: H6 Hunter product · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0566_Hunter_Product_C (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -846,7 +851,7 @@
       "id": "refab-h6-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a957408/GnKuhv85Jx1twzMDOcKam_bIJNDXJF.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0566_Hunter_Product_C, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: H6 Hunter product · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0566_Hunter_Product_C (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -866,7 +871,7 @@
       "id": "refab-h5-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a957405/AaQzNnhCxhtjO95fR498N_yp6kaxdN.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0542_Hunter_Jacket_C, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: H5 Hunter jacket · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0542_Hunter_Jacket_C (Hunter, jacket). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -886,7 +891,7 @@
       "id": "refab-h6-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a957408/xdpOfevDCm4kJAk89AxQP_H9JHdhfD.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0566_Hunter_Product_C, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: H6 Hunter product · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0566_Hunter_Product_C (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -906,7 +911,7 @@
       "id": "refab-refc-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a95740b/05q__5tCOBsZwrxFYhz08_0HAA6HAJ.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref RefC_JMike_Dual_BASELINE, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: REFC Hunter (2 people) baseline · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: RefC_JMike_Dual_BASELINE (Hunter (2 people), baseline). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -926,7 +931,7 @@
       "id": "refab-p1-mtb-s0",
       "url": "https://v3b.fal.media/files/b/0a9573f2/onR6t_6xtDO6lxhkLFKrA_yCmDihNh.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0513_Patriot_Product_A, mtb scene 1, seed auto",
+      "prompt": "Mountain biker descending a rocky forest trail, wearing full-face downhill helmet, protective gloves, and jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, both hands on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, dappled forest light, film grain",
       "label": "REF-AB: P1 Patriot product · mtb s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0513_Patriot_Product_A (Patriot, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -946,7 +951,7 @@
       "id": "refab-refc-moto-s1",
       "url": "https://v3b.fal.media/files/b/0a95740b/KxBFT7pZ8mPwucIEomPbz_GLbISMFT.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref RefC_JMike_Dual_BASELINE, moto scene 2, seed auto",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
       "label": "REF-AB: REFC Hunter (2 people) baseline · moto s2",
       "context": "Reference A/B test (Apr 8). Reference: RefC_JMike_Dual_BASELINE (Hunter (2 people), baseline). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -966,7 +971,7 @@
       "id": "refab-h6-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a957407/Z6e8FZxmoO3XS8lyErzqw_8GK5U9eV.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0566_Hunter_Product_C, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: H6 Hunter product · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0566_Hunter_Product_C (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -986,7 +991,7 @@
       "id": "refab-refc-moto-s0",
       "url": "https://v3b.fal.media/files/b/0a957409/CCD1gNE42NoKbM8uBn4fa_JZ3Jdhl2.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref RefC_JMike_Dual_BASELINE, moto scene 1, seed auto",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, wearing leather riding jacket, thick leather riding gloves, and full-face helmet, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, both arms relaxed on handlebars, waist-up, Shot on Sony A7R IV 85mm f/2.0, warm natural light, film grain",
       "label": "REF-AB: REFC Hunter (2 people) baseline · moto s1",
       "context": "Reference A/B test (Apr 8). Reference: RefC_JMike_Dual_BASELINE (Hunter (2 people), baseline). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -1006,7 +1011,7 @@
       "id": "refab-h1-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a957478/F16eWyoDdw1Iaj9lgOylS_EttLGQPe.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref IMG_0525_Hunter_Product_A, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: H1 Hunter product · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: IMG_0525_Hunter_Product_A (Hunter, product). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -1026,7 +1031,7 @@
       "id": "refab-refc-mtb-s1",
       "url": "https://v3b.fal.media/files/b/0a957478/MD06meEXIYmoTdAPQl2in_4NigUgVo.jpg",
       "model": "Nano Banana Pro",
-      "prompt": "Nano Banana Pro, ref RefC_JMike_Dual_BASELINE, mtb scene 2, seed auto",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jersey sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
       "label": "REF-AB: REFC Hunter (2 people) baseline · mtb s2",
       "context": "Reference A/B test (Apr 8). Reference: RefC_JMike_Dual_BASELINE (Hunter (2 people), baseline). Goal: find out if any of 12 candidate references beat production Ref C.",
       "comments": [
@@ -4731,7 +4736,7 @@
       "id": "ref-A1",
       "url": "https://files.catbox.moe/gasx8y.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Motorcycle coastal + exact layout spec",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST A: Hunter Arm Outside 1/6",
       "context": "REFERENCE PHOTO TEST: Using \"Hunter Arm Outside.jpg\" found on Google Drive as the @image reference instead of the standing product shot. This is a THIRD-PERSON photo of the CB2 on someone's forearm, photographed by another person from the outside. Research predicted this would fix the 180° orientation flip.",
       "comments": [
@@ -4756,7 +4761,7 @@
       "id": "ref-A2",
       "url": "https://files.catbox.moe/2ao08m.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same coastal prompt",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST A: Hunter Arm Outside 2/6",
       "context": "Same third-person arm reference (Hunter Arm Outside.jpg), different seed.",
       "comments": [
@@ -4781,7 +4786,7 @@
       "id": "ref-A3",
       "url": "https://files.catbox.moe/vkmtt0.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST A: Hunter Arm Outside 3/6",
       "context": "Same third-person arm reference, different seed.",
       "comments": [
@@ -4806,7 +4811,7 @@
       "id": "ref-A4",
       "url": "https://files.catbox.moe/asr5a1.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST A: Hunter Arm Outside 4/6",
       "context": "Same third-person arm reference, different seed.",
       "comments": [
@@ -4831,7 +4836,7 @@
       "id": "ref-A5",
       "url": "https://files.catbox.moe/1esud0.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST A: Hunter Arm Outside 5/6",
       "context": "Same third-person arm reference, different seed.",
       "comments": [
@@ -4856,7 +4861,7 @@
       "id": "ref-A6",
       "url": "https://files.catbox.moe/ls9164.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST A: Hunter Arm Outside 6/6",
       "context": "Same third-person arm reference, different seed.",
       "comments": [
@@ -4881,7 +4886,7 @@
       "id": "ref-B1",
       "url": "https://files.catbox.moe/ft8dv5.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Motorcycle coastal + exact layout spec",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST B: Moto Close Up 1/5",
       "context": "REFERENCE PHOTO TEST: Using \"Motorcycle Close Up.jpg\" from Drive — a real photo of a motorcycle rider with CB2 on forearm gripping handlebars. Sport-specific third-person reference.",
       "comments": [
@@ -4906,7 +4911,7 @@
       "id": "ref-B2",
       "url": "https://files.catbox.moe/3gmr6h.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST B: Moto Close Up 2/5",
       "context": "Same motorcycle reference, different seed.",
       "comments": [
@@ -4931,7 +4936,7 @@
       "id": "ref-B3",
       "url": "https://files.catbox.moe/vq0zj0.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST B: Moto Close Up 3/5",
       "context": "Same motorcycle reference, different seed.",
       "comments": [
@@ -4956,7 +4961,7 @@
       "id": "ref-B4",
       "url": "https://files.catbox.moe/crepyb.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST B: Moto Close Up 4/5",
       "context": "Same motorcycle reference, different seed.",
       "comments": [
@@ -4981,7 +4986,7 @@
       "id": "ref-B5",
       "url": "https://files.catbox.moe/qo9pfl.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST B: Moto Close Up 5/5",
       "context": "Same motorcycle reference, different seed.",
       "comments": [
@@ -5006,7 +5011,7 @@
       "id": "ref-C1",
       "url": "https://files.catbox.moe/19gt6r.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Motorcycle coastal + exact layout spec",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST C: J&Mike Dual 1/5",
       "context": "REFERENCE PHOTO TEST: Using \"Hunter and Tron - J and Mike.png\" — two people standing side by side, each wearing a CB2 (Hunter and Tron colorways), photographed from the front.",
       "comments": [
@@ -5031,7 +5036,7 @@
       "id": "ref-C2",
       "url": "https://files.catbox.moe/llwi3d.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST C: J&Mike Dual 2/5",
       "context": "Same dual-person reference, different seed.",
       "comments": [
@@ -5056,7 +5061,7 @@
       "id": "ref-C3",
       "url": "https://files.catbox.moe/5awevk.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST C: J&Mike Dual 3/5",
       "context": "Same dual-person reference, different seed.",
       "comments": [
@@ -5081,7 +5086,7 @@
       "id": "ref-C4",
       "url": "https://files.catbox.moe/yp5buw.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST C: J&Mike Dual 4/5",
       "context": "Same dual-person reference, different seed.",
       "comments": [
@@ -5106,7 +5111,7 @@
       "id": "ref-C5",
       "url": "https://files.catbox.moe/z1qfov.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST C: J&Mike Dual 5/5",
       "context": "Same dual-person reference, different seed.",
       "comments": [
@@ -5131,7 +5136,7 @@
       "id": "ref-D1",
       "url": "https://files.catbox.moe/lp1iu3.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Motorcycle coastal + exact layout spec",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST D: Original Product (CONTROL) 1/5",
       "context": "CONTROL GROUP: Same standing product-front reference we always use. Same prompt and seeds as A/B/C batches so orientation differences are PURELY from the reference photo change.",
       "comments": [
@@ -5156,7 +5161,7 @@
       "id": "ref-D2",
       "url": "https://files.catbox.moe/aq8cfi.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST D: Original Product (CONTROL) 2/5",
       "context": "Control group — original product reference, different seed.",
       "comments": [
@@ -5181,7 +5186,7 @@
       "id": "ref-D3",
       "url": "https://files.catbox.moe/pqatt1.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST D: Original Product (CONTROL) 3/5",
       "context": "Control group — original product reference, different seed.",
       "comments": [
@@ -5206,7 +5211,7 @@
       "id": "ref-D4",
       "url": "https://files.catbox.moe/kb3iuo.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST D: Original Product (CONTROL) 4/5",
       "context": "Control group — original product reference, different seed.",
       "comments": [
@@ -5231,7 +5236,7 @@
       "id": "ref-D5",
       "url": "https://files.catbox.moe/0ygcz7.jpg",
       "model": "flux2-pro @image",
-      "prompt": "Same",
+      "prompt": "Motorcycle rider cruising on a coastal highway, wearing a leather jacket, the product from image 1 is strapped flush against the riders lower forearm over the jacket sleeve. The plus/volume-up button is closest to the wrist, minus closest to the elbow, play/pause in the center. LED indicator and CB logo face outward. Ocean and cliffs, warm spring sunlight, editorial motorcycle photography",
       "label": "REF TEST D: Original Product (CONTROL) 5/5",
       "context": "Control group — original product reference, different seed.",
       "comments": [
@@ -13978,6 +13983,1446 @@
       ]
     },
     {
+      "id": "mm-bg-coast3-1775589419542-0",
+      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "excellent, 90",
+          "time": "2026-04-07T19:20:37.937Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589419542-1",
+      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:47.636Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-0",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "Rejected",
+          "time": "2026-04-07T19:20:56.418Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-bg-coast3-1775589531515-1",
+      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
+      "label": "VAR: BATCH: Moto Coastal 3/15",
+      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
+      "comments": [
+        {
+          "text": "nice. 85",
+          "time": "2026-04-07T19:21:13.486Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-0",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
+          "time": "2026-04-07T19:21:34.619Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589559647-1",
+      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
+          "time": "2026-04-07T19:21:47.035Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-0",
+      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "This is cool yeah I really like this one great 95",
+          "time": "2026-04-07T19:22:10.501Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "mm-refC-snow-s404-1775589600635-1",
+      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
+      "model": "FLUX 2 Pro (variation)",
+      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
+      "label": "VAR: REF C: Snowboard 5/5",
+      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
+      "comments": [
+        {
+          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
+          "time": "2026-04-07T19:22:36.702Z",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-0",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/80G-XJirJRRSKk5TZ9nOO_I12az3Az.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.095Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-1",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/wxePZ7YT6EOkQlfBXGAhP_Gh7XO82s.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.095Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-2",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/d-9UMfKrGodI_prVb9Sqq_QSuR4Nat.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.096Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410125010_g5v0de-3",
+      "url": "https://v3b.fal.media/files/b/0a95b1cd/JWkzRFt8jnQglCwbHQYdB_lYIfzjlp.png",
+      "model": "GPT Image 1.5",
+      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
+      "label": "CREATE reject: moto_novel_mnswlk6w",
+      "context": "CREATE batch 20260410125010_g5v0de",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T12:54:23.096Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-0",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/VPMKgGvTn7Ygma1-90PQf_w2EnsvdT.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-1",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/VJ4mkzCuPH_XF5n3vWFb6_xCLqXFqf.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-2",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/c38YAZALxOD-S_OhYknz8_jBKu81SO.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE keeper: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (CREATE keeper)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "cr-20260410194641_84hnov-3",
+      "url": "https://v3b.fal.media/files/b/0a95bb90/OYnEuJxiRJwP0F0hfMIxA_LlToKlu3.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
+      "label": "CREATE reject: moto_9102",
+      "context": "CREATE batch 20260410194641_84hnov",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 20 (CREATE reject)",
+          "time": "2026-04-10T19:49:07.963Z"
+        }
+      ]
+    },
+    {
+      "id": "batch2-moto-h3-nano-banana-pro-s94180",
+      "url": "https://v3b.fal.media/files/b/0a95d242/hls9ELJ7WY3xaSwYCRT6P_aHMlaIi8.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, ocean cliffs in background, warm light on leather jacket. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: moto · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 94180.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-moto-h3-nano-banana-pro-s34814",
+      "url": "https://v3b.fal.media/files/b/0a95d246/Q80_agzLZe2AF0MntN-oI_UlF2nyhn.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider on desert highway through red rock canyon, adventure bike, harsh midday sun. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones, film grain",
+      "label": "BATCH2: moto · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 34814.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-moto-h5-nano-banana-pro-s14019",
+      "url": "https://v3b.fal.media/files/b/0a95d248/2C5KzlUR2Ki9_iKz8O9HK_TboEZVh6.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, ocean cliffs in background, warm light on leather jacket. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh natural sun, deep shadows, documentary",
+      "label": "BATCH2: moto · h5 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h5 (Hunter). Model: Nano Banana Pro. Seed: 14019.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-moto-h5-nano-banana-pro-s31011",
+      "url": "https://v3b.fal.media/files/b/0a95d24c/1BwXhpyltsh1p79kted7X_jkrZabNy.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider on desert highway through red rock canyon, adventure bike, harsh midday sun. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: moto · h5 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h5 (Hunter). Model: Nano Banana Pro. Seed: 31011.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-snow-h3-nano-banana-pro-s60337",
+      "url": "https://v3b.fal.media/files/b/0a95d2af/CbHYi54JLycPOU7GMenUU_jkUW1NFV.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, mountain backdrop, soft diffused light. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: snow · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 60337.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-snow-h3-nano-banana-pro-s75436",
+      "url": "https://v3b.fal.media/files/b/0a95d2b2/8aV4itg87xCh0NaNYdml7_ht5d97Zo.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder making a deep powder turn with spray, misty forest trail, ethereal morning light. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones, film grain",
+      "label": "BATCH2: snow · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 75436.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-snow-h3-nano-banana-2-s65458",
+      "url": "https://v3b.fal.media/files/b/0a95d2c7/vx-x1mC9X-lvv3bCqP_e9_wAcVPfEt.jpg",
+      "model": "Nano Banana 2",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, mountain backdrop, soft diffused light. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: snow · h3 (Hunter)",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana 2. Seed: 65458.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-snow-h3-nano-banana-2-s39884",
+      "url": "https://v3b.fal.media/files/b/0a95d2cc/0-xYsdphYMT5Et4cazI6d_1Gfb7S5q.jpg",
+      "model": "Nano Banana 2",
+      "prompt": "Snowboarder making a deep powder turn with spray, misty forest trail, ethereal morning light. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones, film grain",
+      "label": "BATCH2: snow · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana 2. Seed: 39884.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-mtb-h5-nano-banana-pro-s65277",
+      "url": "https://v3b.fal.media/files/b/0a95d2d5/rsBuuLc1WFA-0xMAfh2be_8Jfo5nvJ.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker descending steep alpine singletrack, wildflowers on slope edges, dramatic valley below. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: mtb · h5 (Hunter)",
+      "context": "Production batch v2 (Apr 11). Ref: h5 (Hunter). Model: Nano Banana Pro. Seed: 65277.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-sled-h3-nano-banana-pro-s29030",
+      "url": "https://v3b.fal.media/files/b/0a95d2fb/gXLzpyJ9keEUKT73evhXx_GGP5ugWM.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider blasting through backcountry powder, snow-laden trees, bright winter sun. snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: sled · h3 (Hunter)",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 29030.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-moto-h3-s49468",
+      "url": "https://v3b.fal.media/files/b/0a95d374/rhkoTad5ZiZfAoVIvscnz_hj1cvbf8.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, ocean cliffs in background. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: moto · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 49468.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-moto-h3-s20405",
+      "url": "https://v3b.fal.media/files/b/0a95d37b/saskPR6oXPpPI2LS8w34C_2qjPQlYb.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider on wet city street at night, neon reflections on pavement. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones",
+      "label": "BATCH2: moto · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 20405.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-ski-h3-s77362",
+      "url": "https://v3b.fal.media/files/b/0a95d393/lG8u-EUGizDDCWrTYUHSt_ioDLyIR1.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier descending through forest glade, dappled sunlight on fresh powder. skier wearing ski helmet, goggles, ski gloves, ski jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: ski · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 77362.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-snow-h3-s74357",
+      "url": "https://v3b.fal.media/files/b/0a95d3a9/_62ExjuPD01W-8ctNU_Fy_og5ejgmi.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, mountain backdrop. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh sun, deep shadows, documentary",
+      "label": "BATCH2: snow · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 74357.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-snow-h3-s82143",
+      "url": "https://v3b.fal.media/files/b/0a95d3af/YIpar1gejGKhsBuQQiRk6_ONtE451w.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder in misty forest, ethereal morning light filtering through trees. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: snow · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 82143.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-mtb-h3-s80301",
+      "url": "https://v3b.fal.media/files/b/0a95d3c3/beZIchElsJHUvLvnkiGBG_T4UAiJL5.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker descending steep alpine singletrack, wildflowers on slope edges. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones",
+      "label": "BATCH2: mtb · h3 (Hunter)",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 80301.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-mtb-h3-s72764",
+      "url": "https://v3b.fal.media/files/b/0a95d3c6/FoZ96MIHZZHqsxEYX6bFu_iLOgi1L1.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on Pacific Northwest rainforest trail, technical roots, canopy light. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh sun, deep shadows, documentary",
+      "label": "BATCH2: mtb · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 72764.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-sled-h3-s66981",
+      "url": "https://v3b.fal.media/files/b/0a95d3e2/zCO-1Vm1VCqChaM5sJMwj_4NyOnlMU.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider crossing frozen alpine meadow, mountains reflected in ice. snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: sled · h3 (Hunter) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 66981.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-sled-h3-s54517",
+      "url": "https://v3b.fal.media/files/b/0a95d3e6/OMgvvgp7CxEImRt3OxAXq_yPJk1lAD.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider blasting through backcountry powder, snow-laden trees, bright sun. snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones",
+      "label": "BATCH2: sled · h3 (Hunter)",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 54517.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-sled-h3-s55696",
+      "url": "https://v3b.fal.media/files/b/0a95d3ea/gXZfIeem0-kadmzDnpOQ5_VGOLu1Ap.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider crossing frozen alpine meadow, mountains reflected in ice. snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh sun, deep shadows, documentary",
+      "label": "BATCH2: sled · h3 (Hunter)",
+      "context": "Production batch v2 (Apr 11). Ref: h3 (Hunter). Model: Nano Banana Pro. Seed: 55696.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-moto-p4-s59444",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/6xCYlYMrG8GiJsMERA9dH_4opyGzQ3.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, warm natural light, motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: moto · p4 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 59444.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-moto-p6-s97670",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/BKFP4EJvKRq24W8BTyOsV_HVfFPXs1.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, warm natural light, motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7R IV 85mm f/2.0, film grain",
+      "label": "BATCH2: moto · p6 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 97670.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-ski-p4-s85808",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/UhAyw3uG0gznEJp58zJc4_DMsqLK9U.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier carving through powder bowl under bluebird sky, skier wearing ski helmet, goggles, ski gloves, ski jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: ski · p4 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 85808.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-ski-p6-s21571",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/up1KjfWm7uppzvcwTuiCz_nW1Ochhu.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier carving through powder bowl under bluebird sky, skier wearing ski helmet, goggles, ski gloves, ski jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7R IV 85mm f/2.0, film grain",
+      "label": "BATCH2: ski · p6 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 21571.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-ski-p6-s11626",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/i8Qv-b8quvIlAgnxHK4Ys_Mhhztnou.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier descending forest glade, dappled sunlight, skier wearing ski helmet, goggles, ski gloves, ski jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary",
+      "label": "BATCH2: ski · p6 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 11626.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-ski-p6-s21501",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/tvQ4DMQ8Vnaliorn2PEW__sIQuHOXC.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier carving through powder bowl under bluebird sky, skier wearing ski helmet, goggles, ski gloves, ski jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: ski · p6 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 21501.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-snow-p4-s91355",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/klPvolFVSl0hVgf6bkHqz_rIac6tHk.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder on powder day in deep snow, regular stance, snowboarder wearing snowboard helmet, gloves, snowboard jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7R IV 85mm f/2.0, film grain",
+      "label": "BATCH2: snow · p4 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 91355.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-snow-p4-s71217",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/lYeSquTkosTI-rVup0z8-_dT6JHWBx.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder on powder day in deep snow, regular stance, snowboarder wearing snowboard helmet, gloves, snowboard jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: snow · p4 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 71217.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-snow-p6-s35632",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/jPtQV-a46mdHDUgJ9EFlR_fy6xQTxr.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder on powder day in deep snow, regular stance, snowboarder wearing snowboard helmet, gloves, snowboard jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7R IV 85mm f/2.0, film grain",
+      "label": "BATCH2: snow · p6 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 35632.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-snow-p6-s90238",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/qcUUreFjSZqXwFt2oKRP2_NwvshrV6.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder making deep carve, mountain village below, snowboarder wearing snowboard helmet, gloves, snowboard jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary",
+      "label": "BATCH2: snow · p6 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 90238.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-snow-p6-s79534",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/RRw9ytb_hJ87M2w6Czh2D_rQ3enpvC.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder on powder day in deep snow, regular stance, snowboarder wearing snowboard helmet, gloves, snowboard jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: snow · p6 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 79534.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-moto-p4-s16518",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/vLk5UL9CwN5FPNkumWL6P_66mepJO1.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, warm natural light, motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7R IV 85mm f/2.0, film grain",
+      "label": "BATCH2: moto · p4 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 16518.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-moto-p6-s89078",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/uGNUcxgxwNUEV_4JyGxA3_YdHQIAvL.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on desert canyon road, harsh midday sun, motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary",
+      "label": "BATCH2: moto · p6 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 89078.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-moto-p6-s47722",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/QCcTgVCMh3z44lgNGJFOg_MHJlCNIK.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising coastal highway at golden hour, warm natural light, motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: moto · p6 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 47722.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-ski-p4-s27938",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/wpnLWC5g07CmKEdfjLx5e_yYgw22yc.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier carving through powder bowl under bluebird sky, skier wearing ski helmet, goggles, ski gloves, ski jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7R IV 85mm f/2.0, film grain",
+      "label": "BATCH2: ski · p4 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 27938.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-ski-p4-s57047",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/f5NpkhlJqP_4qgMhoKiSa_5Owie78y.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier descending forest glade, dappled sunlight, skier wearing ski helmet, goggles, ski gloves, ski jacket, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary",
+      "label": "BATCH2: ski · p4 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 57047.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-mtb-p6-s82517",
+      "url": "https://v3b.fal.media/files/b/0a95da3f/f-vmV4gqvOZulROHa-nbn_Fif7kYEm.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker descending steep alpine singletrack, wildflowers, mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: mtb · p6 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 82517.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-mtb-p4-s56136",
+      "url": "https://v3b.fal.media/files/b/0a95da3d/Sb0T8ZixeG1yJRU51zw5T_OpdTQuVp.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker descending steep alpine singletrack, wildflowers, mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7R IV 85mm f/2.0, film grain",
+      "label": "BATCH2: mtb · p4 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 56136.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-mtb-p4-s89266",
+      "url": "https://v3b.fal.media/files/b/0a95da40/CLflNDK7g6nbClmBRePTa_MbrZqiWR.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker descending steep alpine singletrack, wildflowers, mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: mtb · p4 (Patriot) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 89266.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-sled-p4-s38817",
+      "url": "https://v3b.fal.media/files/b/0a95da3f/GyXM8DTL_UEn6Is8AAGId_Mbv32mHh.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider crossing frozen alpine meadow, reflected mountains, snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: sled · p4 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 38817.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-sled-p6-s72538",
+      "url": "https://v3b.fal.media/files/b/0a95da40/86V86Xr8Em_qxBtgWBVuf_ujOvqCXM.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider crossing frozen alpine meadow, reflected mountains, snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour, warm tones",
+      "label": "BATCH2: sled · p6 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 72538.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-mtb-p4-s18246",
+      "url": "https://v3b.fal.media/files/b/0a95da40/iD-uDRwYUDoYUQhzbnCjZ_60s3QJGl.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on Pacific Northwest rainforest trail, canopy light, mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary",
+      "label": "BATCH2: mtb · p4 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 18246.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-sled-p4-s92287",
+      "url": "https://v3b.fal.media/files/b/0a95da40/jDgEGBTpFlbaGCI-nRHEx_YFdB4br1.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider in backcountry powder, snow-laden trees, snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary",
+      "label": "BATCH2: sled · p4 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p4 (Patriot). Model: Nano Banana Pro. Seed: 92287.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-sled-p6-s24014",
+      "url": "https://v3b.fal.media/files/b/0a95da40/qLV3OgkuetUA_V-7cXYNN_S6nsl9R9.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider crossing frozen alpine meadow, reflected mountains, snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Sony A7R IV 85mm f/2.0, film grain",
+      "label": "BATCH2: sled · p6 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 24014.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "patriot-fix-mtb-p6-s10247",
+      "url": "https://v3b.fal.media/files/b/0a95da40/1KyNJkugXh5uy538kUt_b_9c4X25zH.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on Pacific Northwest rainforest trail, canopy light, mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, PLUS button closest to wrist, LED window closest to wrist, five round tactile buttons, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary",
+      "label": "BATCH2: mtb · p6 (Patriot)",
+      "context": "Production batch v2 (Apr 11). Ref: p6 (Patriot). Model: Nano Banana Pro. Seed: 10247.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-moto-t01-nano-banana-pro-s35658",
+      "url": "https://v3b.fal.media/files/b/0a95d25d/09LYkw5ZpUJ7DtfPdEM38_JLqy3la7.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, ocean cliffs in background, warm light on leather jacket. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: moto · t01 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t01 (Tron). Model: Nano Banana Pro. Seed: 35658.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-moto-t01-nano-banana-pro-s73212",
+      "url": "https://v3b.fal.media/files/b/0a95d260/9FhhE3gALx_dCUffVKjUj_I4gDTAfV.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider on desert highway through red rock canyon, adventure bike, harsh midday sun. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones, film grain",
+      "label": "BATCH2: moto · t01 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t01 (Tron). Model: Nano Banana Pro. Seed: 73212.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-moto-t03-nano-banana-pro-s16955",
+      "url": "https://v3b.fal.media/files/b/0a95d263/R22myBYf8ntuNBigzoXHx_oFSasMsE.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, ocean cliffs in background, warm light on leather jacket. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh natural sun, deep shadows, documentary",
+      "label": "BATCH2: moto · t03 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t03 (Tron). Model: Nano Banana Pro. Seed: 16955.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-moto-t03-nano-banana-pro-s68420",
+      "url": "https://v3b.fal.media/files/b/0a95d266/ojbnkWpadrEZlH_uOWPA2_4GAoxoek.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider on desert highway through red rock canyon, adventure bike, harsh midday sun. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: moto · t03 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t03 (Tron). Model: Nano Banana Pro. Seed: 68420.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-ski-t18-nano-banana-pro-s77462",
+      "url": "https://v3b.fal.media/files/b/0a95d2aa/wTGWrn0RwoGwUSO9jL-uV_KtgcknLb.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier carving through a powder bowl under bluebird sky, snow spray catching sunlight. skier wearing ski helmet, goggles, ski gloves, ski jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh natural sun, deep shadows, documentary",
+      "label": "BATCH2: ski · t18 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 77462.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-snow-t03-nano-banana-pro-s44451",
+      "url": "https://v3b.fal.media/files/b/0a95d2c0/bU384UhJ7aMQAQQdKXWrw_D1oAESMK.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, mountain backdrop, soft diffused light. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh natural sun, deep shadows, documentary",
+      "label": "BATCH2: snow · t03 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t03 (Tron). Model: Nano Banana Pro. Seed: 44451.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-snow-t03-nano-banana-pro-s14949",
+      "url": "https://v3b.fal.media/files/b/0a95d2c3/05SBAej6AITqkF_oMfKQu_oRRpyYyV.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder making a deep powder turn with spray, misty forest trail, ethereal morning light. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: snow · t03 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t03 (Tron). Model: Nano Banana Pro. Seed: 14949.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-mtb-t01-nano-banana-pro-s98840",
+      "url": "https://v3b.fal.media/files/b/0a95d2e2/IqAL2QQCZ17dY0bTkX4MZ_Xk82lZqx.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on Pacific Northwest rainforest trail, technical roots and rocks, canopy light. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones, film grain",
+      "label": "BATCH2: mtb · t01 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t01 (Tron). Model: Nano Banana Pro. Seed: 98840.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "batch2-sled-t01-nano-banana-pro-s27132",
+      "url": "https://v3b.fal.media/files/b/0a95d2ff/XDtd2SnNLUzS5FV8B4tQ__RYTbdZAO.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider crossing a frozen alpine meadow, mountains reflected in ice, powder spray behind. snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: sled · t01 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t01 (Tron). Model: Nano Banana Pro. Seed: 27132.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-moto-t18-s64136",
+      "url": "https://v3b.fal.media/files/b/0a95d37e/u8n2Y6IhGlrdH_nRQvjkg_p62Rf0d8.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider cruising Pacific Coast Highway at golden hour, ocean cliffs in background. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh sun, deep shadows, documentary",
+      "label": "BATCH2: moto · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 64136.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-moto-t18-s92146",
+      "url": "https://v3b.fal.media/files/b/0a95d380/fCO0t3OVOPBhvjhI9G9in_EHSCu96B.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Adventure motorcycle rider on mountain pass road, snow-capped peaks, crisp morning air. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Canon R5 70-200mm f/2.8, compressed perspective, cinematic",
+      "label": "BATCH2: moto · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 92146.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-moto-t18-s10958",
+      "url": "https://v3b.fal.media/files/b/0a95d383/wIsCrgLRooBO8-y90YbEf_0Maijpy6.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Motorcycle rider on wet city street at night, neon reflections on pavement. motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: moto · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 10958.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-ski-t18-s29319",
+      "url": "https://v3b.fal.media/files/b/0a95d399/pO-F8ntai07HLi1ULVD6Z_tZUq0w5B.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier carving through a powder bowl under bluebird sky, snow spray catching sunlight. skier wearing ski helmet, goggles, ski gloves, ski jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones",
+      "label": "BATCH2: ski · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 29319.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-ski-t18-s16681",
+      "url": "https://v3b.fal.media/files/b/0a95d39b/ujMVtQq9qmkTIEwcLq87d_34jQZPq6.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier descending through forest glade, dappled sunlight on fresh powder. skier wearing ski helmet, goggles, ski gloves, ski jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Leica Q3 28mm, harsh sun, deep shadows, documentary",
+      "label": "BATCH2: ski · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 16681.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-ski-t18-s41270",
+      "url": "https://v3b.fal.media/files/b/0a95d39f/MfC2KnCBXavUd7CBswbDP_PY5f9aod.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Skier on summit ridge with panoramic vista, clouds below. skier wearing ski helmet, goggles, ski gloves, ski jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Canon R5 70-200mm f/2.8, compressed perspective, cinematic",
+      "label": "BATCH2: ski · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 41270.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-snow-t18-s52318",
+      "url": "https://v3b.fal.media/files/b/0a95d3b2/KDXgkiTlZYCmvJng69krr_W3JxQf0l.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder on a powder day in deep snow, regular stance, mountain backdrop. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: snow · t18 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 52318.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-snow-t18-s21422",
+      "url": "https://v3b.fal.media/files/b/0a95d3b5/Mkw0Wo07exhxSq2AM97iT_HEf1zDeG.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowboarder making a deep carve on groomed slope, mountain village below. snowboarder wearing snowboard helmet, gloves, snowboard jacket, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7IV 85mm f/1.8, golden hour backlight, warm tones",
+      "label": "BATCH2: snow · t18 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 21422.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-mtb-t18-s12353",
+      "url": "https://v3b.fal.media/files/b/0a95d3ce/yJJFd-IM6g_5ES3DT90Jl_gUrJBTyj.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker descending steep alpine singletrack, wildflowers on slope edges. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: mtb · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 12353.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-mtb-t18-s58237",
+      "url": "https://v3b.fal.media/files/b/0a95d3d3/_4lbYA5ylGRjHiu6qWWE5_brrIRR2h.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on Pacific Northwest rainforest trail, technical roots, canopy light. mountain biker wearing full-face DH helmet, gloves, long-sleeve jersey with armor, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: mtb · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 58237.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-sled-t18-s59979",
+      "url": "https://v3b.fal.media/files/b/0a95d3ed/96EMvHfKrdAYpVrHHgy2A_c6mDtEs1.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider crossing frozen alpine meadow, mountains reflected in ice. snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Canon R5 70-200mm f/2.8, compressed perspective, cinematic",
+      "label": "BATCH2: sled · t18 (Tron) ⭐",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 59979.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "[super] Production batch v2 super-like",
+          "time": ""
+        },
+        {
+          "num": 2,
+          "text": "Final score: 100 (batch v2 rating 5/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-sled-t18-s55559",
+      "url": "https://v3b.fal.media/files/b/0a95d3f1/ScokRXc9etCd_YGq0qoFy_FwerDW9f.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider blasting through backcountry powder, snow-laden trees, bright sun. snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Sony A7R IV 85mm f/2.0, editorial photography, film grain",
+      "label": "BATCH2: sled · t18 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 55559.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
+      "id": "focused-sled-t18-s33677",
+      "url": "https://v3b.fal.media/files/b/0a95d3f4/qvpkYsAxyvr5_c_gBTlUS_YDJn8J1E.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Snowmobile rider crossing frozen alpine meadow, mountains reflected in ice. snowmobile rider wearing full-face helmet, snowmobile gloves, snowmobile suit, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the jacket sleeve, positioned halfway between wrist and elbow, LED window closest to WRIST, PLUS button closest to wrist, MINUS button closest to elbow, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, documentary photography, natural light",
+      "label": "BATCH2: sled · t18 (Tron)",
+      "context": "Production batch v2 (Apr 11). Ref: t18 (Tron). Model: Nano Banana Pro. Seed: 33677.",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 80 (batch v2 rating 4/5)",
+          "time": ""
+        }
+      ]
+    },
+    {
       "id": "cr-20260410144847_qxd6qw-0",
       "url": "https://v3b.fal.media/files/b/0a95b494/hh6JT3JQYow0_BQTFcioP_tqm876bx.jpg",
       "model": "Nano Banana Pro",
@@ -16778,186 +18223,6 @@
       ]
     },
     {
-      "id": "mm-bg-coast3-1775589419542-0",
-      "url": "https://v3b.fal.media/files/b/0a95559d/aFHDuTEN0GWJLUQTUFq-M_OZHmKo0f.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "excellent, 90",
-          "time": "2026-04-07T19:20:37.937Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589419542-1",
-      "url": "https://v3b.fal.media/files/b/0a95559d/dkIVS77a33BeQEWVhc2s__yZdmC4p0.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:47.636Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589531515-0",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/-zl_vFP7DY_Opp0eRDUS1_37Cjx1gJ.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "Rejected",
-          "time": "2026-04-07T19:20:56.418Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-bg-coast3-1775589531515-1",
-      "url": "https://v3b.fal.media/files/b/0a9555a8/nIA4Ulq7kUY-Wf1y9gRm6_hNP9qfqS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Driver is driving down the highway on a bad ass motorcycle point of view from the writer, maybe from within his visor, looking down in his arms of bg-coast3",
-      "label": "VAR: BATCH: Moto Coastal 3/15",
-      "context": "Make More Like This from bg-coast3. FLUX 2 Pro, fidelity=low.",
-      "comments": [
-        {
-          "text": "nice. 85",
-          "time": "2026-04-07T19:21:13.486Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589559647-0",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/MdnF9tPguxuc8Yj72-fTZ_VYWUny7N.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "The strap is not fully around the body, and you can't see the chubby buttons",
-          "time": "2026-04-07T19:21:34.619Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589559647-1",
-      "url": "https://v3b.fal.media/files/b/0a9555ab/FeuPwvUquuQhY9kqpL2IL_UAyktKOx.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "I can't really see the chubby buttons in the strap is not fully around the arm",
-          "time": "2026-04-07T19:21:47.035Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589600635-0",
-      "url": "https://v3b.fal.media/files/b/0a9555af/jws4gQRtqJtOcjpz3sXyl_E7B11OTS.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "This is cool yeah I really like this one great 95",
-          "time": "2026-04-07T19:22:10.501Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "mm-refC-snow-s404-1775589600635-1",
-      "url": "https://v3b.fal.media/files/b/0a9555af/VjpCniKwwRun-8ZsOOf3t_seDO4Z1y.jpg",
-      "model": "FLUX 2 Pro (variation)",
-      "prompt": "Can the skier be in the middle of doing a cool trick on her snowboard similar angle? of refC-snow-s404",
-      "label": "VAR: REF C: Snowboard 5/5",
-      "context": "Make More Like This from refC-snow-s404. FLUX 2 Pro, fidelity=high.",
-      "comments": [
-        {
-          "text": "Fantastic this is great. I don't know if that's an accurate looking snowboard, but I like the way the chubby buttons looks give it a 90.",
-          "time": "2026-04-07T19:22:36.702Z",
-          "num": 1
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-0",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/80G-XJirJRRSKk5TZ9nOO_I12az3Az.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.095Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-1",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/wxePZ7YT6EOkQlfBXGAhP_Gh7XO82s.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.095Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-2",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/d-9UMfKrGodI_prVb9Sqq_QSuR4Nat.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.096Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410125010_g5v0de-3",
-      "url": "https://v3b.fal.media/files/b/0a95b1cd/JWkzRFt8jnQglCwbHQYdB_lYIfzjlp.png",
-      "model": "GPT Image 1.5",
-      "prompt": "Female motorcycle rider threading through traffic on a suspension bridge at golden hour, downtown skyline rising behind her catching warm amber light. Waist-up framing captured on Sony A7R IV with 85mm f/2.0 lens, shallow depth of field isolating the rider against softly blurred traffic and glowing city towers. Rim light wraps around her silhouette from the low sun, creating a golden halo effect. Bridge cables slice through the frame diagonally, leading the eye toward the backlit urban skyline. Warm streetlight glow beginning to compete with natural sunset tones. Film grain texture, photorealistic rendering with dynamic motion blur on passing vehicles, asphalt reflecting streaks of orange and gold.. female motorcycle rider wearing full-face helmet, leather riding jacket with armor, thick leather riding gloves, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, warm golden-hour light, film grain.",
-      "label": "CREATE reject: moto_novel_mnswlk6w",
-      "context": "CREATE batch 20260410125010_g5v0de",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T12:54:23.096Z"
-        }
-      ]
-    },
-    {
       "id": "cr-20260409194302_prv955-0",
       "url": "https://v3b.fal.media/files/b/0a9599ba/HNf7hS22zwuWPjJvdtOIN_OUcJNCTM.jpg",
       "model": "Nano Banana Pro",
@@ -17134,66 +18399,6 @@
           "num": 1,
           "text": "Final score: 20 (CREATE reject)",
           "time": "2026-04-10T18:32:21.243Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410194641_84hnov-0",
-      "url": "https://v3b.fal.media/files/b/0a95bb90/VPMKgGvTn7Ygma1-90PQf_w2EnsvdT.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
-      "label": "CREATE keeper: moto_9102",
-      "context": "CREATE batch 20260410194641_84hnov · recipe moto_9102 · keeper_rate 75%",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T19:49:07.963Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410194641_84hnov-1",
-      "url": "https://v3b.fal.media/files/b/0a95bb90/VJ4mkzCuPH_XF5n3vWFb6_xCLqXFqf.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
-      "label": "CREATE keeper: moto_9102",
-      "context": "CREATE batch 20260410194641_84hnov · recipe moto_9102 · keeper_rate 75%",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T19:49:07.963Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410194641_84hnov-2",
-      "url": "https://v3b.fal.media/files/b/0a95bb90/c38YAZALxOD-S_OhYknz8_jBKu81SO.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
-      "label": "CREATE keeper: moto_9102",
-      "context": "CREATE batch 20260410194641_84hnov · recipe moto_9102 · keeper_rate 75%",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 85 (CREATE keeper)",
-          "time": "2026-04-10T19:49:07.963Z"
-        }
-      ]
-    },
-    {
-      "id": "cr-20260410194641_84hnov-3",
-      "url": "https://v3b.fal.media/files/b/0a95bb90/OYnEuJxiRJwP0F0hfMIxA_LlToKlu3.jpg",
-      "model": "Nano Banana Pro",
-      "prompt": "Adventure motorcycle rider on desert canyon road, wearing textile riding jacket, leather riding gloves, and full-face helmet, the compact wearable remote from image 1 (108mm long, 39mm wide) with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row reading from wrist to elbow: PLUS (+), FAST-FORWARD (two right triangles), PLAY/PAUSE (three bars with triangle), REWIND (two left triangles), MINUS (−), button symbols and shapes matching the product close-up in image 2, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, harsh desert sun, documentary photography",
-      "label": "CREATE reject: moto_9102",
-      "context": "CREATE batch 20260410194641_84hnov · recipe moto_9102 · keeper_rate 75%",
-      "comments": [
-        {
-          "num": 1,
-          "text": "Final score: 20 (CREATE reject)",
-          "time": "2026-04-10T19:49:07.963Z"
         }
       ]
     },
@@ -17434,6 +18639,66 @@
           "num": 1,
           "text": "Final score: 20 (LAB reject)",
           "time": "2026-04-11T21:24:27.812Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260412002919_ut7n9l-0",
+      "url": "https://v3b.fal.media/files/b/0a95e3f0/of74BfGvzl7JCpxdk7Kfw_upzmy8NA.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "label": "LAB keeper: lab_mnv10j0u",
+      "context": "LAB batch 20260412002919_ut7n9l · recipe lab_mnv10j0u · keeper_rate 100%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (LAB keeper)",
+          "time": "2026-04-12T10:13:46.617Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260412002919_ut7n9l-1",
+      "url": "https://v3b.fal.media/files/b/0a95e3f0/poWoVj3P7ZU10CxKfhcZv_4CS28b3R.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "label": "LAB keeper: lab_mnv10j0u",
+      "context": "LAB batch 20260412002919_ut7n9l · recipe lab_mnv10j0u · keeper_rate 100%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (LAB keeper)",
+          "time": "2026-04-12T10:13:46.617Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260412002919_ut7n9l-2",
+      "url": "https://v3b.fal.media/files/b/0a95e3f0/F3fYq63Ksf7RHlHH3HXyH_3dkdjr6B.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "label": "LAB keeper: lab_mnv10j0u",
+      "context": "LAB batch 20260412002919_ut7n9l · recipe lab_mnv10j0u · keeper_rate 100%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (LAB keeper)",
+          "time": "2026-04-12T10:13:46.617Z"
+        }
+      ]
+    },
+    {
+      "id": "lab-20260412002919_ut7n9l-3",
+      "url": "https://v3b.fal.media/files/b/0a95e3f0/aj-2eVwdmKc3Wa8JG6WLY_PBvR3imB.jpg",
+      "model": "Nano Banana Pro",
+      "prompt": "Mountain biker on alpine ridge singletrack, wearing full-face downhill helmet, protective gloves, and long-sleeve jersey, the wearable remote from image 1 with its velcro strap wrapped fully around the LEFT lower forearm OVER the sleeve, positioned halfway between wrist and elbow, PLUS (+) button closest to WRIST, MINUS (−) button closest to elbow, LED window closest to wrist, five round tactile buttons in a vertical row, device parallel to the forearm not perpendicular, waist-up, Shot on Nikon Z9 70mm f/2.8, mountain landscape, documentary photography",
+      "label": "LAB keeper: lab_mnv10j0u",
+      "context": "LAB batch 20260412002919_ut7n9l · recipe lab_mnv10j0u · keeper_rate 100%",
+      "comments": [
+        {
+          "num": 1,
+          "text": "Final score: 85 (LAB keeper)",
+          "time": "2026-04-12T10:13:46.617Z"
         }
       ]
     },
