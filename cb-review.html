@@ -211,6 +211,9 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 .cr-fail button{background:transparent;border:1px solid #ef4444;color:#ef4444;padding:.25rem .5rem;border-radius:4px;font-size:.55rem;cursor:pointer}
 .cr-heart{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.65);border:none;color:#fff;font-size:1.2rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
 .cr-tile.kept .cr-heart{color:#eab308}
+.cr-star{position:absolute;top:6px;right:42px;background:rgba(0,0,0,.65);border:none;color:#fff;font-size:1.1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
+.cr-tile.super .cr-star{color:#eab308}
+.cr-tile.super{border-color:#eab308;box-shadow:0 0 0 2px rgba(234,179,8,.5)}
 .cr-save-bar{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-top:.6rem;padding:.5rem .7rem;background:#0f0f1a;border:1px solid #222;border-radius:10px;position:sticky;bottom:.5rem}
 .cr-save-bar .cr-count{font-size:.75rem;color:#ccc;font-weight:600}
 .cr-save-bar .gen-btn{flex:1;max-width:200px;margin-top:0;padding:.55rem}
@@ -240,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v13.7</div>
+  <div class="sub" style="color:#555;font-size:.75em">v13.8</div>
 </div>
 
 <div class="tabs">
@@ -5315,17 +5318,22 @@ const LAB={
     if(t.status==='queued')return '<div class="cr-tile cr-skel">Queued\u2026</div>';
     if(t.status==='generating')return '<div class="cr-tile cr-skel">Generating\u2026</div>';
     if(t.status==='failed')return '<div class="cr-tile cr-fail"><div>Failed</div><div style="font-size:.5rem;color:#888">'+CR.esc(t.error||'')+'</div><button onclick="LAB.retryTile('+i+')">Retry</button></div>';
-    return '<div class="cr-tile'+(t.kept?' kept':'')+'"><img src="'+t.url+'" alt="" onclick="CR.openLB(\''+t.url+'\')"><button class="cr-heart" onclick="LAB.toggleKeeper('+i+')">'+(t.kept?'\u2665':'\u2661')+'</button></div>';
+    const cls='cr-tile'+(t.super?' super':(t.kept?' kept':''));
+    return '<div class="'+cls+'"><img src="'+t.url+'" alt="" onclick="CR.openLB(\''+t.url+'\')">'
+      +'<button class="cr-star" onclick="LAB.toggleSuper('+i+')">'+(t.super?'\u2605':'\u2606')+'</button>'
+      +'<button class="cr-heart" onclick="LAB.toggleKeeper('+i+')">'+(t.kept||t.super?'\u2665':'\u2661')+'</button></div>';
   },
 
   renderSaveBar(){
     const b=this.batch;if(!b)return '';
     const kept=b.tiles.filter(t=>t.kept).length;
+    const supers=b.tiles.filter(t=>t.super).length;
     const done=b.tiles.filter(t=>t.status==='done').length;
     const failed=b.tiles.filter(t=>t.status==='failed').length;
     const allTerm=(done+failed)===b.tiles.length;
+    const kLabel=kept+' keeper'+(kept>1?'s':'')+(supers?' ('+supers+' \u2605)':'');
     const saveBtn=kept>0
-      ?'<button class="gen-btn" '+(allTerm?'':'disabled')+' onclick="LAB.saveBatch()">Save '+kept+' keeper'+(kept>1?'s':'')+'</button>'
+      ?'<button class="gen-btn" '+(allTerm?'':'disabled')+' onclick="LAB.saveBatch()">Save '+kLabel+'</button>'
       :'<button class="gen-btn" style="background:linear-gradient(135deg,#666,#444)" '+(allTerm?'':'disabled')+' onclick="LAB.saveBatch()">Archive all &amp; continue</button>';
     return '<div class="cr-save-bar"><span class="cr-count">'+kept+' of '+done+(kept?'':' \u2014 none kept')+(failed?' \u00b7 '+failed+' failed':'')+'</span>'+saveBtn+'</div>';
   },
@@ -5338,7 +5346,17 @@ const LAB={
 
   toggleKeeper(i){
     const t=this.batch.tiles[i];if(t.status!=='done')return;
-    t.kept=!t.kept;this.refreshGrid();
+    if(t.super){t.super=false;t.kept=false;}  // super → off
+    else{t.kept=!t.kept;}
+    this.refreshGrid();
+  },
+
+  toggleSuper(i){
+    const t=this.batch.tiles[i];if(t.status!=='done')return;
+    t.super=!t.super;
+    if(t.super)t.kept=true;  // super implies kept
+    else t.kept=false;        // un-super removes kept too
+    this.refreshGrid();
   },
 
   retryTile(i){
@@ -5350,6 +5368,7 @@ const LAB={
   saveBatch(){
     const b=this.batch;if(!b)return;
     const kept=b.tiles.filter(t=>t.kept&&t.url).map(t=>t.url);
+    const superUrls=new Set(b.tiles.filter(t=>t.super&&t.url).map(t=>t.url));
     const rejected=b.tiles.filter(t=>!t.kept&&t.status==='done').map(t=>t.url);
     const failed=b.tiles.filter(t=>t.status==='failed').map(t=>({i:t.i,error:t.error}));
     const generated=b.tiles.filter(t=>t.status==='done').length;
@@ -5369,11 +5388,14 @@ const LAB={
       const vid='lab-'+b.batch_id+'-'+idx;
       if(ALL_IMAGES.find(i=>i.id===vid))return;
       const modelLabel=CR.MODEL_LABELS[b.endpoint]||b.model;
+      const isS=superUrls.has(url);
+      const lbl=isS?'LAB super: ':(verdict==='kept'?'LAB keeper: ':'LAB reject: ');
       ALL_IMAGES.push({id:vid,url,model:modelLabel,prompt:b.recipe_prompt,
-        label:(verdict==='kept'?'LAB keeper: ':'LAB reject: ')+(b.recipe_id||'scene'),
+        label:lbl+(b.recipe_id||'scene'),
         context:'LAB batch '+b.batch_id+' \u00b7 recipe '+b.recipe_id+' \u00b7 keeper_rate '+Math.round(keeper_rate*100)+'%'});
       if(!d[vid])d[vid]={comments:[]};
-      d[vid].comments.push({num:1,text:verdict==='kept'?'Final score: 85 (LAB keeper)':'Final score: 20 (LAB reject)',time:new Date().toISOString()});
+      const scoreText=isS?'Final score: 95 [super] (LAB super-like)':(verdict==='kept'?'Final score: 85 (LAB keeper)':'Final score: 20 (LAB reject)');
+      d[vid].comments.push({num:1,text:scoreText,time:new Date().toISOString()});
     };
     kept.forEach((url,idx)=>snapshotEntry(url,idx,'kept'));
     rejected.forEach((url,idx)=>snapshotEntry(url,kept.length+idx,'rejected'));
@@ -5389,14 +5411,15 @@ const LAB={
         kept.forEach((url,idx)=>{
           const kid='lab-'+b.batch_id+'-'+idx;
           if(CR.keepers&&CR.keepers.items&&!CR.keepers.items[url]){
-            CR.keepers.items[url]={id:kid,url,model:modelLabel,prompt:b.recipe_prompt,sport:b.sport,label:'yes',seed:b.seed,ref:b.ref?{id:b.ref.id,colorway:b.ref.colorway}:null,source:'lab_auto'};
+            CR.keepers.items[url]={id:kid,url,model:modelLabel,prompt:b.recipe_prompt,sport:b.sport,label:superUrls.has(url)?'super':'yes',seed:b.seed,ref:b.ref?{id:b.ref.id,colorway:b.ref.colorway}:null,source:'lab_auto'};
           }
         });
         // Sync keepers to GitHub via Make.com webhook
         fetch(SYNC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonContent:JSON.stringify(CR.keepers,null,2),filename:'cb-keepers.json',commitMessage:'Auto-save '+kept.length+' Lab keepers ('+new Date().toLocaleString()+')'})}).catch(()=>{});
       }catch(e){console.log('[keepers-sync] error:',e);}
     }
-    showToast('Saved \u00b7 '+kept.length+' keepers \u00b7 '+Math.round(keeper_rate*100)+'% rate');
+    const _sc=superUrls.size;
+    showToast('Saved \u00b7 '+kept.length+' keepers'+(_sc?' ('+_sc+' \u2605)':'')+' \u00b7 '+Math.round(keeper_rate*100)+'% rate');
     this.batch=null;
     try{localStorage.removeItem('cb2_lab_batch');}catch(e){}
     CR.scoreRecipes();
