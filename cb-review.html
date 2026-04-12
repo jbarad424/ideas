@@ -243,7 +243,7 @@ body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,
 
 <div class="header">
   <h1>CB2 Creative Lab</h1>
-  <div class="sub" style="color:#555;font-size:.75em">v14.2</div>
+  <div class="sub" style="color:#555;font-size:.75em">v14.3</div>
 </div>
 
 <div class="tabs">
@@ -2393,15 +2393,15 @@ function vidLabGetAnthKey(){
 function vidLabRefineSystemPrompt(platform){
   // Platform-specific length caps — Kling truncates hardest, Sora/Veo handle more.
   const lenByPlatform={
-    'Seedance 2.0':'Up to ~150 words. Seedance handles long detailed prompts well, especially physical scene descriptions and camera moves. Multimodal model (handles up to 9 reference images natively).',
-    'Seedance 2.0 Fast':'Up to ~150 words. Same model as standard, ~30% faster. Same prompting rules.',
+    'Seedance 2.0':'Up to ~200 words. Seedance handles long detailed prompts well, especially physical scene descriptions and camera moves. Multimodal model (handles up to 9 reference images natively). Supports native audio generation — include ambient sound cues if appropriate.',
+    'Seedance 2.0 Fast':'Up to ~200 words. Same model as standard, ~30% faster. Same prompting rules. Supports native audio generation.',
     'Kling 3.0 Pro':'Keep under ~100 words — Kling truncates longer prompts.',
     'Veo 3.1 Lite':'Keep under ~150 words — Veo handles moderate length well.',
     'Sora 2 Pro':'Up to ~200 words is fine — Sora handles narrative beats and longer descriptions.',
     'Runway Gen-4T':'Keep under ~120 words — Runway prefers tight prompts.'
   };
   const lenRule=lenByPlatform[platform]||'Keep under ~120 words.';
-  return `You are a video prompt engineer for Kling 3.0 Pro, Veo 3.1, and Sora 2. You rewrite a user's rough cue into a tight image-to-video prompt that follows proven best practices.
+  return `You are a video prompt engineer. You rewrite a user's rough cue into a tight image-to-video prompt optimized for the target model below.
 
 TARGET MODEL: ${platform||'(unspecified — use universal best practices)'}
 
